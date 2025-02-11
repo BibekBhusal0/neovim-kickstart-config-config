@@ -13,20 +13,19 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Set up plugins
 require('lazy').setup {
-    require 'plugins.nvim-tree',        -- File explorer for Neovim
+    require 'plugins.lazygit',          -- Git GUI for Neovim
+    require 'plugins.treesitter',       -- syntax highlighting
     require 'plugins.colortheme',       -- Color scheme setup
+    require 'plugins.telescope',        -- Fuzzy finder for searching
+    require 'plugins.neotree',        -- File explorer for Neovim
     require 'plugins.bufferline',       -- Buffer management Neovim
     require 'plugins.lualine',          -- Statusline
-    require 'plugins.treesitter',       -- syntax highlighting
-    require 'plugins.telescope',        -- Fuzzy finder for searching
-    require 'plugins.lsp',              -- Language Server Protocol setup
-    require 'plugins.autocompletion',   -- Autocompletion for code
-    require 'plugins.none-ls',          -- External tools integration (formatters, linters)
-    require 'plugins.gitsigns',         -- Git status in the gutter
-    require 'plugins.lazygit',          -- Git GUI for Neovim
-    require 'plugins.alpha',            -- Customizable dashboard screen
+    -- require 'plugins.lsp',              -- Language Server Protocol setup
+    -- require 'plugins.autocompletion',   -- Autocompletion for code
+    -- require 'plugins.none-ls',          -- External tools integration (formatters, linters)
+    -- require 'plugins.gitsigns',         -- Git status in the gutter
+    -- require 'plugins.alpha',            -- Customizable dashboard screen
     require 'plugins.indent-blankline', -- Indent lines for better code structure visibility
     require 'plugins.misc',             -- Miscellaneous utility plugins
     require 'plugins.comment',          -- Easy commenting for code
