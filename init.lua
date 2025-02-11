@@ -25,9 +25,9 @@ require('lazy').setup {
     require 'plugins.autocompletion',   -- Autocompletion for code
     require 'plugins.none-ls',          -- External tools integration (formatters, linters)
     require 'plugins.gitsigns',         -- Git status in the gutter
+    require 'plugins.lazygit',          -- Git GUI for Neovim
     require 'plugins.alpha',            -- Customizable dashboard screen
     require 'plugins.indent-blankline', -- Indent lines for better code structure visibility
     require 'plugins.misc',             -- Miscellaneous utility plugins
     require 'plugins.comment',          -- Easy commenting for code
   }
-
