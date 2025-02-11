@@ -84,9 +84,6 @@ map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message
 map('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- cheat sheet
-map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
-
 -- line numbers
 map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
