@@ -15,7 +15,7 @@ return {
     require('nord').set()
 
     -- Toggle background transparency
-    local bg_transparent = true
+    local bg_transparent = false
 
     local toggle_transparency = function()
       bg_transparent = not bg_transparent
