@@ -27,13 +27,13 @@ return {
             glyphs = {
               default = "󰈚",
               folder = {
-                default = "",
-                empty = "",
-                empty_open = "",
-                open = "",
+                default = "",
+                empty = "󰉖",
+                empty_open = "󱞞",
+                open = "",
                 symlink = "",
               },
-              git = { unmerged = "" },
+              git = { unmerged = ""},
             },
           },
         },
