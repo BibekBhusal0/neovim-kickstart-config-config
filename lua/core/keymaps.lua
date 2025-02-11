@@ -3,6 +3,15 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 local map = vim.keymap.set
 
+-- navigation in insert mode
+map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
+map("i", "<C-e>", "<End>", { desc = "move end of line" })
+map("i", "<C-h>", "<Left>", { desc = "move left" })
+map("i", "<C-l>", "<Right>", { desc = "move right" })
+map("i", "<C-j>", "<Down>", { desc = "move down" })
+map("i", "<C-k>", "<Up>", { desc = "move up" })
+map("i", "jj", "<ESC>")
+
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
@@ -75,6 +84,9 @@ map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message
 map('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-
 -- cheat sheet
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
+
+-- line numbers
+map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
+map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })

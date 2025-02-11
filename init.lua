@@ -1,6 +1,6 @@
-require 'core.options' -- Load general options
-require 'core.keymaps' -- Load general keymaps
-require 'core.snippets' -- Custom code snippets
+require 'core.options'
+require 'core.keymaps'
+require 'core.snippets'
 
 -- Set up the Lazy plugin manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -15,21 +15,22 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Set up plugins
 require('lazy').setup {
-  require 'plugins.neotree',
-  require 'plugins.colortheme',
-  require 'plugins.bufferline',
-  require 'plugins.lualine',
-  require 'plugins.treesitter',
-  require 'plugins.telescope',
-  require 'plugins.lsp',
-  require 'plugins.autocompletion',
-  require 'plugins.none-ls',
-  require 'plugins.gitsigns',
-  require 'plugins.alpha',
-  require 'plugins.indent-blankline',
-  require 'plugins.misc',
-  require 'plugins.comment',
-}
+    require 'plugins.nvim-tree',        -- File explorer for Neovim
+    require 'plugins.colortheme',       -- Color scheme setup
+    require 'plugins.bufferline',       -- Buffer management Neovim
+    require 'plugins.lualine',          -- Statusline
+    require 'plugins.treesitter',       -- syntax highlighting
+    require 'plugins.telescope',        -- Fuzzy finder for searching
+    require 'plugins.lsp',              -- Language Server Protocol setup
+    require 'plugins.autocompletion',   -- Autocompletion for code
+    require 'plugins.none-ls',          -- External tools integration (formatters, linters)
+    require 'plugins.gitsigns',         -- Git status in the gutter
+    require 'plugins.alpha',            -- Customizable dashboard screen
+    require 'plugins.indent-blankline', -- Indent lines for better code structure visibility
+    require 'plugins.misc',             -- Miscellaneous utility plugins
+    require 'plugins.comment',          -- Easy commenting for code
+  }
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
