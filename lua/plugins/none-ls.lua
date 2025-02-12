@@ -14,20 +14,17 @@ return {
       ensure_installed = {
         'prettierd', -- ts/js formatter
         'eslint_d', -- ts/js linter
-        'shfmt', -- Shell formatter
-        'ruff', -- Python linter and formatter
+        'black', -- Python formatter
+        'flake8', -- Python linter
       },
       automatic_installation = true,
     }
 
     local sources = {
       formatting.prettierd,
-      formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
-      diagnostics.ruff,  -- Python linter (ruff)
-      formatting.ruff,   -- Python formatter (ruff)
-      require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-      require 'none-ls.formatting.ruff_format',
+      diagnostics.flake8,
+      formatting.black
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
