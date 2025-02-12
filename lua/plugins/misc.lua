@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 return {
   {
     'christoomey/vim-tmux-navigator',  -- Tmux & split window navigation
@@ -15,7 +17,17 @@ return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts ={
+        signs = false,
+        keywards ={
+            COPIED_FROM = { icon = " ", color = "hint", alt = { "COPY", "COPIED", "CREDIT" } },
+        }
+    },
+    config = function()
+        map('n', '<leader>sc', '<cmd>TodoTelescope<CR>', { desc = 'Search Todo'})
+        map('n', '<leader>ll', '<cmd>TodoLocList<CR>', { desc = 'Todo Loc List'}) )
+    --   require('todo-comments')
+    end
   },   -- Highlight todo, notes, etc in comments
   {
     'norcalli/nvim-colorizer.lua',
@@ -28,10 +40,10 @@ return {
     lazy = false,
     config = function()
       require('auto-session').setup {
-        vim.keymap.set('n', '<leader>ssf', '<cmd>SessionSearch<CR>', { desc = 'Search Session' }),
-        vim.keymap.set('n', '<leader>sss', '<cmd>SessionSave<CR>', { desc = 'Save Session' }),
-        vim.keymap.set('n', '<leader>ssr', '<cmd>SessionRestore<CR>', { desc = 'Restore Session' }),
-        vim.keymap.set('n', '<leader>ssR', '<cmd>SessionDisableAutoSave<CR>', { desc = 'Toggle Session Autosave' }),
+        map('n', '<leader>ssf', '<cmd>SessionSearch<CR>', { desc = 'Search Session' }),
+        map('n', '<leader>sss', '<cmd>SessionSave<CR>', { desc = 'Save Session' }),
+        map('n', '<leader>ssr', '<cmd>SessionRestore<CR>', { desc = 'Restore Session' }),
+        map('n', '<leader>ssR', '<cmd>SessionDisableAutoSave<CR>', { desc = 'Toggle Session Autosave' }),
       }
     end
 
