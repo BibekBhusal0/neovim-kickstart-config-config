@@ -57,11 +57,16 @@ return {
     map('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     map('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     map('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    map('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
     map('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     map('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     map('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     map('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    map('n', '<leader>sgg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+    map('n', '<leader>sgb', builtin.git_branches, { desc = '[S]earch [G]it [B]ranches' })
+    map('n', '<leader>sgc', builtin.git_commits, { desc = '[S]earch [G]it [C]ommits' })
+    map('n', '<leader>sgC', builtin.git_bcommits, { desc = '[S]earch [G]it [B]commits' })
+    map('n', '<leader>sgs', builtin.git_stash, { desc = '[S]earch [G]it [S]tash' })
+    map('n', '<leader>sgS', builtin.git_status, { desc = '[S]earch [G]it [S]tatus' })
 
     -- Slightly advanced example of overriding default behavior and theme
     map('n', '<leader>/', function()
