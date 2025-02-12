@@ -70,13 +70,11 @@ return {
             expander_highlight = 'NeoTreeExpander',
           },
           icon = {
-                default = "",
-                folder_empty = "󰉖",
-                folder_empty_open = "󱞞",
-                folder_open = "",
-                fodler_symlink = "",
-            --   },
-
+            default = "",
+            folder_empty = "󰉖",
+            folder_empty_open = "󱞞",
+            folder_open = "",
+            fodler_symlink = "",
             highlight = 'NeoTreeFileIcon',
           },
           modified = {
