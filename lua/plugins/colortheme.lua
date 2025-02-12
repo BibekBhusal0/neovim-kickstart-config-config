@@ -1,4 +1,4 @@
-local bg_transparent = false 
+local bg_transparent = true 
 
 return {
   'olimorris/onedarkpro.nvim',

@@ -66,7 +66,7 @@ return {
     map('n', '<leader>sgc', builtin.git_commits, { desc = '[S]earch [G]it [C]ommits' })
     map('n', '<leader>sgC', builtin.git_bcommits, { desc = '[S]earch [G]it [B]commits' })
     map('n', '<leader>sgs', builtin.git_stash, { desc = '[S]earch [G]it [S]tash' })
-    map('n', '<leader>sgS', builtin.git_status, { desc = '[S]earch [G]it [S]tatus' })
+    map('n', '<leader>sgf', builtin.git_files, { desc = '[S]earch [G]it [F]iles' })
 
     -- Slightly advanced example of overriding default behavior and theme
     map('n', '<leader>/', function()

@@ -12,7 +12,7 @@ return {
     -- Formatters & linters for mason to install
     require('mason-null-ls').setup {
       ensure_installed = {
-        'prettier', -- ts/js formatter
+        'prettierd', -- ts/js formatter
         'eslint_d', -- ts/js linter
         'shfmt', -- Shell formatter
         'ruff', -- Python linter and formatter
@@ -21,7 +21,7 @@ return {
     }
 
     local sources = {
-      formatting.prettier,
+      formatting.prettierd,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
       diagnostics.ruff,  -- Python linter (ruff)
