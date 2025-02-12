@@ -37,6 +37,16 @@ return {
       cond = hide_in_width,
     }
 
+    local codeium_status = {
+        function()
+          local status = vim.fn['codeium#GetStatusString']()
+          local icon = '󰘦 '
+          return icon .. (status )
+        end,
+        cond = hide_in_width,
+    }
+
+
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -52,7 +62,7 @@ return {
         lualine_b = { 'branch' },
         lualine_c = { filename },
         lualine_x = { diagnostics, diff, { 'filetype', cond = hide_in_width } },
-        lualine_y = { 'location' },
+        lualine_y = { 'location', codeium_status },
         lualine_z = { 'progress' },
       },
       inactive_sections = {

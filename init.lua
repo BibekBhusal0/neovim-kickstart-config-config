@@ -29,4 +29,5 @@ require('lazy').setup {
     require 'plugins.indent-blankline', -- Indent lines for better code structure visibility
     require 'plugins.misc',             -- Miscellaneous utility plugins
     require 'plugins.comment',          -- Easy commenting for code
-  }
+    require 'plugins.codeium'
+}
