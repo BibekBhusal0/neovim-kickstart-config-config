@@ -77,11 +77,6 @@ return {
                 fodler_symlink = "",
             --   },
 
-            -- folder_closed = '',
-            -- folder_open = '',
-            -- folder_empty = "󰉖",
-            -- -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-            -- -- then these will never be used.
             highlight = 'NeoTreeFileIcon',
           },
           modified = {
@@ -319,6 +314,6 @@ return {
       vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
       vim.keymap.set('n', '<leader>e', ':Neotree toggle position=left<CR>', { noremap = true, silent = true }) -- focus file explorer
       vim.keymap.set('n', '<C-b>', ':Neotree toggle position=left<CR>', { noremap = true, silent = true }) -- focus file explorer
-      vim.keymap.set('n', '<leader>ngs', ':Neotree float git_status<CR>', { noremap = true, silent = true }) -- open git status window
+      vim.keymap.set('n', '<leader>gc', ':Neotree float git_status<CR>', { noremap = true, silent = true }) -- open git status window
     end,
   }
