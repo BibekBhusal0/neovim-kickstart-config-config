@@ -15,14 +15,16 @@ return {
 
 
     dashboard.section.header.val = {
-      [[                                                    ]],
-      [[ ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
-      [[ ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
-      [[ ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
-      [[ ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
-      [[ ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
-      [[ ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
-      [[                                                    ]],
+      [[                                                                     ]],
+      [[       ████ ██████           █████      ██                     ]],
+      [[      ███████████             █████                             ]],
+      [[      █████████ ███████████████████ ███   ███████████   ]],
+      [[     █████████  ███    █████████████ █████ ██████████████   ]],
+      [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+      [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+      [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+      [[                                                                       ]],
+      [[                                                                       ]],
     }
 
     -- https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1309233
@@ -37,7 +39,15 @@ return {
         dashboard.button( "q", "󰅙  > Quit", ":qa<CR>"),
     }
 
-    dashboard.section.footer.val = "There are two ways to write error free programs, only the third one works.  -Fireship"
+    dashboard.section.footer.val = {
+        [[                                                      ]],
+        [[                                                      ]],
+        string.format('  %s plugins loaded', get_plugin_count()),
+        [[                                                      ]],
+        [[ There are only two ways to write error free programs,]],
+        [[ and the third one works.                             ]],
+        [[                                             -Fireship]],
+    }
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)
