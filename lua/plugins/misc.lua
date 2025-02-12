@@ -2,7 +2,6 @@ return {
   {
     'christoomey/vim-tmux-navigator',  -- Tmux & split window navigation
     'tpope/vim-sleuth',                -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-fugitive',              -- Powerful Git integration for Vim
     'tpope/vim-rhubarb',               -- GitHub integration for vim-fugitive
     'folke/which-key.nvim',            -- Hints keybinds
   },
