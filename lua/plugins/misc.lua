@@ -23,5 +23,17 @@ return {
       require('colorizer').setup()
     end,
   },   -- High-performance color highlighter
+  {
+    'rmagatti/auto-session',
+    lazy = false,
+    config = function()
+      require('auto-session').setup {
+        vim.keymap.set('n', '<leader>ssf', '<cmd>SessionSearch<CR>', { desc = 'Search Session' })
+        vim.keymap.set('n', '<leader>sss', '<cmd>SessionSave<CR>', { desc = 'Save Session' })
+        vim.keymap.set('n', '<leader>ssr', '<cmd>SessionSearch<CR>', { desc = 'Restore Session' })
+        vim.keymap.set('n', '<leader>ssr', '<cmd>SessionToggleAutosave<CR>', { desc = 'Tuggle Session Autosave' })
+      }
+    end
 
+  }  -- session manager
 }
