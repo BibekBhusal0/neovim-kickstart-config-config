@@ -2,7 +2,7 @@ return {
   'nvimtools/none-ls.nvim',
   dependencies = {
     'nvimtools/none-ls-extras.nvim',
-    'jayp0521/mason-null-ls.nvim', -- ensure dependencies are installed
+    'jayp0521/mason-null-ls.nvim',
   },
   config = function()
     local null_ls = require 'null-ls'
@@ -15,17 +15,17 @@ return {
         'prettier', -- ts/js formatter
         'eslint_d', -- ts/js linter
         'shfmt', -- Shell formatter
-        'checkmake', -- linter for Makefiles
         'ruff', -- Python linter and formatter
       },
       automatic_installation = true,
     }
 
     local sources = {
-      diagnostics.checkmake,
-      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown' } },
+      formatting.prettier,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
+      diagnostics.ruff,  -- Python linter (ruff)
+      formatting.ruff,   -- Python formatter (ruff)
       require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
       require 'none-ls.formatting.ruff_format',
     }
@@ -45,6 +45,10 @@ return {
               vim.lsp.buf.format { async = false }
             end,
           })
+
+          vim.keymap.set('n', '<leader>f', function()
+            vim.lsp.buf.format({ async = true })
+          end, { desc = "Format file using LSP" })
         end
       end,
     }

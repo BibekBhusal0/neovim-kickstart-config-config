@@ -18,7 +18,7 @@ require('lazy').setup {
     require 'plugins.treesitter',       -- syntax highlighting
     require 'plugins.colortheme',       -- Color scheme setup
     require 'plugins.telescope',        -- Fuzzy finder for searching
-    require 'plugins.neotree',        -- File explorer for Neovim
+    require 'plugins.neotree',          -- File explorer for Neovim
     require 'plugins.bufferline',       -- Buffer management Neovim
     require 'plugins.lualine',          -- Statusline
     require 'plugins.lsp',              -- Language Server Protocol setup
