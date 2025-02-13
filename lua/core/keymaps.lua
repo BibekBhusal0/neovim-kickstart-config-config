@@ -11,6 +11,8 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 map("i", "jj", "<ESC>")
+map("i", "<C-O>", "<Esc>o", { desc = "move to new line" })
+map("i", "<C-]>", "<Esc>dbi", { desc = "delete word" })
 
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -77,6 +79,9 @@ map('v', '>', '>gv', opts)
 
 -- Keep last yanked when pasting
 map('v', 'p', '"_dP', opts)
+
+-- Cheatsheet
+map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
 -- Diagnostic keymaps
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })

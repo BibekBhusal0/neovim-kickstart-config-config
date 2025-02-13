@@ -10,7 +10,7 @@ return {
     {
       'rktjmp/playtime.nvim',
       config = function()
-        map('n', '<leader>zp', '<cmd>Playtime' , {desc = 'More games'})
+        map('n', '<leader>zp', '<cmd>Playtime<CR>' , {desc = 'More games'})
       end
     },
     {
