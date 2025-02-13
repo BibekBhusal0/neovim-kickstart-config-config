@@ -25,7 +25,7 @@ return {
     },
     config = function()
         map('n', '<leader>sc', '<cmd>TodoTelescope<CR>', { desc = 'Search Todo'})
-        map('n', '<leader>ll', '<cmd>TodoLocList<CR>', { desc = 'Todo Loc List'}) )
+        map('n', '<leader>ll', '<cmd>TodoLocList<CR>', { desc = 'Todo Loc List'})
     --   require('todo-comments')
     end
   },   -- Highlight todo, notes, etc in comments

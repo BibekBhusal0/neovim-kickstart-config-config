@@ -29,5 +29,6 @@ require('lazy').setup {
     require 'plugins.indent-blankline', -- Indent lines for better code structure visibility
     require 'plugins.misc',             -- Miscellaneous utility plugins
     require 'plugins.comment',          -- Easy commenting for code
-    require 'plugins.codeium'
+    require 'plugins.codeium',          -- AI completion and chat (not working for now)
+    require 'plugins.games'             -- Fun games
 }

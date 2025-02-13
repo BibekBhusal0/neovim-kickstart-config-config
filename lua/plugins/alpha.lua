@@ -57,4 +57,5 @@ return {
         autocmd FileType alpha setlocal nofoldenable
     ]])
     end,
+    vim.keymap.set('n', '<leader>a' , '<cmd>Alpha<CR>', { noremap = true, silent = true , desc = "Alpha Dashboard" })
 }
