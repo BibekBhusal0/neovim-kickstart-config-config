@@ -30,8 +30,8 @@ local function getCheatSheet()
     end
 
     local gr = {
-        { type = "text",     val = "Press <leader>ct to go home", opts = { position = "center" } },
-        { type = "padding",  val = 3 },
+        { type = "text",    val = "Press <leader>ct to go home", opts = { position = "center" } },
+        { type = "padding", val = 3 },
     }
     for _, grid_block in ipairs(cheat_sheet) do
         for _, column in ipairs(grid_block) do
@@ -55,7 +55,7 @@ end
 
 
 local maxChar = 25
-local function prettifyFooterText(icon ,text)
+local function prettifyFooterText(icon, text)
     local str = icon .. "   " .. text
     if #str > maxChar then
         return str:sub(1, maxChar)

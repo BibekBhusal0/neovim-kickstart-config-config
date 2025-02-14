@@ -49,13 +49,13 @@ map('n', '<Right>', ':vertical resize +2<CR>', opts)
 -- Buffers
 map('n', '<Tab>', ':bnext<CR>', opts)
 map('n', '<S-Tab>', ':bprevious<CR>', opts)
-map('n', '<leader>x', ':bdelete!<CR>', opts) -- close buffer
+map('n', '<leader>x', ':bdelete!<CR>', opts)   -- close buffer
 map('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer
 
 -- Window management
-map('n', '<leader>v', '<C-w>v', opts) -- split window vertically
-map('n', '<leader>h', '<C-w>s', opts) -- split window horizontally
-map('n', '<leader>se', '<C-w>=', opts) -- make split windows equal width & height
+map('n', '<leader>v', '<C-w>v', opts)      -- split window vertically
+map('n', '<leader>h', '<C-w>s', opts)      -- split window horizontally
+map('n', '<leader>se', '<C-w>=', opts)     -- make split windows equal width & height
 map('n', '<leader>xs', ':close<CR>', opts) -- close current split window
 
 -- Navigate between splits
@@ -65,10 +65,10 @@ map('n', '<C-h>', ':wincmd h<CR>', opts)
 map('n', '<C-l>', ':wincmd l<CR>', opts)
 
 -- Tabs
-map('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
+map('n', '<leader>to', ':tabnew<CR>', opts)   -- open new tab
 map('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-map('n', '<leader>tn', ':tabn<CR>', opts) --  go to next tab
-map('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
+map('n', '<leader>tn', ':tabn<CR>', opts)     --  go to next tab
+map('n', '<leader>tp', ':tabp<CR>', opts)     --  go to previous tab
 
 -- Toggle line wrapping
 map('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
