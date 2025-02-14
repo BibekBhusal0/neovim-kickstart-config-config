@@ -54,6 +54,16 @@ local function getCheatSheet()
 end
 
 
+local maxChar = 25
+local function prettifyFooterText(icon ,text)
+    local str = icon .. "   " .. text
+    if #str > maxChar then
+        return str:sub(1, maxChar)
+    else
+        return str .. string.rep(" ", maxChar - #str)
+    end
+end
+
 
 local function render()
     local alpha = require 'alpha'
@@ -91,11 +101,13 @@ local function render()
 
     -- https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1309233
     -- Set menu
+    local buttons_divider = { type = "text", val = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', opts = { position = "center" } }
     local buttons = {
         dashboard.button("f", "  > Find file", ":Telescope find_files<CR>"),
-        dashboard.button("a", "  > Sessions", '<cmd>SessionSearch<CR>'),
         dashboard.button("r", "  > Recent Files", ":Telescope oldfiles<CR>"),
         dashboard.button("n", "  > New file", ":ene <BAR> startinsert <CR>"),
+        dashboard.button("a", "  > Sessions", '<cmd>SessionSearch<CR>'),
+        buttons_divider,
         dashboard.button("p", "󰐱  > Plugins", ":Lazy<CR>"),
         dashboard.button("c", "  > Cheat sheet", ':AlphaShowCheatSheet<CR>'),
         dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
@@ -116,7 +128,7 @@ local function render()
     }
 
     dashboard.config.layout = {
-        { type = "padding", val = 3 },
+        { type = "padding", val = 1 },
         {
             type = "text",
             val = header,
@@ -131,14 +143,19 @@ local function render()
         { type = "padding", val = 3 },
         {
             type = "text",
-            val = string.format('  %s plugins loaded', get_plugin_count()),
-            opts = { position = "center", hl = "Comment" }
+            val = prettifyFooterText('', string.format('%s plugins loaded', get_plugin_count())),
+            opts = { position = "center", hl = "AlphaFooter" }
+        },
+        {
+            type = "text",
+            val = prettifyFooterText('', string.format('Today: %s', os.date("%Y-%m-%d"))),
+            opts = { position = "center", hl = "AlphaFooter" }
         },
         { type = "padding", val = 1 },
         {
             type = "text",
             val = footer,
-            opts = { position = "center", hl = "Comment" }
+            opts = { position = "center", hl = "AlphaFooter" }
         },
     }
 
