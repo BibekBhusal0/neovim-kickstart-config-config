@@ -2,15 +2,6 @@ require 'core.options'
 require 'core.keymaps'
 require 'core.snippets'
 
-vim.api.nvim_create_user_command("NvCheatsheet", function()
-  if vim.g.nvcheatsheet_displayed then
-    vim.cmd "bw"
-  else
-    require("core.cheatsheet.simple" )()
-  end
-end, {})
-
-
 -- Set up the Lazy plugin manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
