@@ -13,6 +13,13 @@ return {
         config = true,
     }, -- Autoclose parentheses, brackets, quotes, etc.
     {
+        'windwp/nvim-ts-autotag',
+        event = 'InsertEnter',
+        config = function ()
+            require('nvim-ts-autotag').setup()
+        end,
+    }, -- Autoclose HTML tags -- not working don't konw why
+    {
         'folke/todo-comments.nvim',
         event = 'VimEnter',
         dependencies = { 'nvim-lua/plenary.nvim' },
@@ -46,5 +53,61 @@ return {
             }
         end
 
-    } -- session manager
+    }, -- session manager
+    {
+        'numToStr/Comment.nvim',
+        opts = {},
+        config = function()
+            local opts = { noremap = true, silent = true }
+            map('n', '<C-_>', require('Comment.api').toggle.linewise.current, opts)
+            map('n', '<C-c>', require('Comment.api').toggle.linewise.current, opts)
+            map('n', '<C-/>', require('Comment.api').toggle.linewise.current, opts)
+            map('v', '<C-_>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
+            map('v', '<C-c>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
+            map('v', '<C-/>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
+        end,
+    }, -- Easily comment visual regions/lines
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        opts = {
+            indent = {
+                char = '▏',
+            },
+            scope = {
+                show_start = false,
+                show_end = false,
+                show_exact_scope = false,
+            },
+            exclude = {
+                filetypes = {
+                    'help',
+                    'startify',
+                    'dashboard',
+                    'packer',
+                    'neogitstatus',
+                    'NvimTree',
+                    'Trouble',
+                },
+            },
+        },
+    }, -- Better indentations
+    {
+        "kdheepak/lazygit.nvim",
+        lazy = true,
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        dependencies = { "nvim-lua/plenary.nvim" },
+        keys = {
+            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+        }
+    }, -- Git integration (only works if lazy git installed in system)
+
+
+
 }

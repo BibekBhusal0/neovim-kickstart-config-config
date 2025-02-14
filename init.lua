@@ -14,7 +14,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-    require 'plugins.lazygit',          -- Git GUI for Neovim
     require 'plugins.treesitter',       -- syntax highlighting
     require 'plugins.colortheme',       -- Color scheme setup
     require 'plugins.telescope',        -- Fuzzy finder for searching
@@ -26,9 +25,7 @@ require('lazy').setup {
     require 'plugins.none-ls',          -- External tools integration (formatters, linters)
     require 'plugins.gitsigns',         -- Git status in the gutter
     require 'plugins.alpha',            -- Customizable dashboard screen
-    require 'plugins.indent-blankline', -- Indent lines for better code structure visibility
     require 'plugins.misc',             -- Miscellaneous utility plugins
-    require 'plugins.comment',          -- Easy commenting for code
     require 'plugins.codeium',          -- AI completion and chat (not working for now)
     require 'plugins.games'             -- Fun games
 }
