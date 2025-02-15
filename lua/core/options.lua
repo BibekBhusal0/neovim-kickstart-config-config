@@ -19,7 +19,8 @@ vim.o.splitright = true                              -- Force all vertical split
 vim.o.hlsearch = false                               -- Set highlight on search (default: true)
 vim.o.showmode = false                               -- We don't need to see things like -- INSERT -- anymore (default: true)
 vim.opt.termguicolors = true                         -- Set termguicolors to enable highlight groups (default: false)
-vim.o.whichwrap = 'bs<>[]hl'                         -- Which "horizontal" keys are allowed to travel to prev/next line (default: 'b,s')
+vim.o.whichwrap =
+'bs<>[]hl'                                           -- Which "horizontal" keys are allowed to travel to prev/next line (default: 'b,s')
 vim.o.numberwidth = 4                                -- Set number column width to 2 {default 4} (default: 4)
 vim.o.swapfile = false                               -- Creates a swapfile (default: true)
 vim.o.smartindent = true                             -- Make indenting smarter again (default: false)
@@ -42,3 +43,11 @@ vim.opt.shortmess:append 'c'                         -- Don't give |ins-completi
 vim.opt.iskeyword:append '-'                         -- Hyphenated words recognized by searches (default: does not include '-')
 vim.opt.formatoptions:remove { 'c', 'r', 'o' }       -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
+
+-- folding
+
+vim.o.foldcolumn = '1'                 -- '0' is not bad
+vim.o.foldlevel = 99                   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.opt.fillchars = {fold = ' ', eob = ' ' , foldopen = '', foldsep = ' ', foldclose = '' , }

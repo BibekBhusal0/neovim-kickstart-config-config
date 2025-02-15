@@ -2,7 +2,6 @@ local map = vim.keymap.set
 
 return {
     {
-        'christoomey/vim-tmux-navigator', -- Tmux & split window navigation
         'tpope/vim-sleuth',               -- Detect tabstop and shiftwidth automatically
         'tpope/vim-rhubarb',              -- GitHub integration for vim-fugitive
         'folke/which-key.nvim',           -- Hints keybinds
@@ -14,26 +13,25 @@ return {
     }, -- Autoclose parentheses, brackets, quotes, etc.
     {
         'windwp/nvim-ts-autotag',
-        event = 'InsertEnter',
-        config = function ()
-            require('nvim-ts-autotag').setup()
-        end,
-    }, -- Autoclose HTML tags -- not working don't konw why
+        -- event = 'InsertEnter',
+        -- config = function ()
+        --     require('nvim-ts-autotag').setup()
+        -- end,
+    }, -- Autoclose HTML tags -- FIX: not working don't konw why
     {
         'folke/todo-comments.nvim',
-        event = 'VimEnter',
         dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('todo-comments').setup()
+            map('n', '<leader>sc', '<cmd>TodoTelescope<CR>', { desc = 'Search Todo' })
+            map('n', '<leader>ll', '<cmd>TodoLocList<CR>', { desc = 'Todo Loc List' })
+        end,
         opts = {
             signs = false,
             keywards = {
                 COPIED_FROM = { icon = " ", color = "hint", alt = { "COPY", "COPIED", "CREDIT" } },
             }
         },
-        config = function()
-            map('n', '<leader>sc', '<cmd>TodoTelescope<CR>', { desc = 'Search Todo' })
-            map('n', '<leader>ll', '<cmd>TodoLocList<CR>', { desc = 'Todo Loc List' })
-            --   require('todo-comments')
-        end
     }, -- Highlight todo, notes, etc in comments
     {
         'norcalli/nvim-colorizer.lua',
@@ -52,7 +50,6 @@ return {
                 map('n', '<leader>ssR', '<cmd>SessionDisableAutoSave<CR>', { desc = 'Toggle Session Autosave' }),
             }
         end
-
     }, -- session manager
     {
         'numToStr/Comment.nvim',

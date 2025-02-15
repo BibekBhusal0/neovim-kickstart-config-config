@@ -26,6 +26,7 @@ return { -- Autocompletion
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
+        'roobert/tailwindcss-colorizer-cmp.nvim', -- FIX: not working don't know why
     },
 
     config = function()
@@ -33,7 +34,6 @@ return { -- Autocompletion
         local cmp = require 'cmp'
         local luasnip = require 'luasnip'
         luasnip.config.setup {}
-
         local kind_icons = {
             Text = '󰉿',
             Method = 'm',
