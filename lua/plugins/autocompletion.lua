@@ -26,7 +26,17 @@ return { -- Autocompletion
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
-        'roobert/tailwindcss-colorizer-cmp.nvim', -- FIX: not working don't know why
+        {
+            'luckasRanarison/tailwind-tools.nvim',
+            opts = {}
+        },
+        {
+            'Exafunction/codeium.vim',
+            event = 'BufEnter',
+            config = function()
+                vim.keymap.set('n', '<leader>cc', '<cmd>Codeium Toggle<CR>', { noremap = true, silent = true })
+            end
+        } -- FIX: Codeium not working don't know why
     },
 
     config = function()
@@ -91,8 +101,6 @@ return { -- Autocompletion
                 -- If you prefer more traditional completion keymaps,
                 -- you can uncomment the following lines
                 ['<CR>'] = cmp.mapping.confirm { select = true },
-                ['<Tab>'] = cmp.mapping.select_next_item(),
-                ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
                 -- Manually trigger a completion from nvim-cmp.
                 --  Generally you don't need this, because nvim-cmp will display

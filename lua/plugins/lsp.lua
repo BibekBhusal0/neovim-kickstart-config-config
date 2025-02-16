@@ -150,7 +150,6 @@ return {
     tailwindcss = {},
     terraformls = {},
     jsonls = {},
-    yamlls = {},
     lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},

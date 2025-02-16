@@ -2,9 +2,9 @@ local map = vim.keymap.set
 
 return {
     {
-        'tpope/vim-sleuth',               -- Detect tabstop and shiftwidth automatically
-        'tpope/vim-rhubarb',              -- GitHub integration for vim-fugitive
-        'folke/which-key.nvim',           -- Hints keybinds
+        'tpope/vim-sleuth',     -- Detect tabstop and shiftwidth automatically
+        'tpope/vim-rhubarb',    -- GitHub integration for vim-fugitive
+        'folke/which-key.nvim', -- Hints keybinds
     },
     {
         'windwp/nvim-autopairs',
@@ -14,9 +14,8 @@ return {
     {
         'windwp/nvim-ts-autotag',
         -- event = 'InsertEnter',
-        -- config = function ()
-        --     require('nvim-ts-autotag').setup()
-        -- end,
+        config = true,
+        opts ={}
     }, -- Autoclose HTML tags -- FIX: not working don't konw why
     {
         'folke/todo-comments.nvim',
@@ -104,7 +103,4 @@ return {
             { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
         }
     }, -- Git integration (only works if lazy git installed in system)
-
-
-
 }

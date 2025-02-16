@@ -26,6 +26,5 @@ require('lazy').setup {
     require 'plugins.gitsigns',         -- Git status in the gutter
     require 'plugins.alpha',            -- Customizable dashboard screen
     require 'plugins.misc',             -- Miscellaneous utility plugins
-    require 'plugins.codeium',          -- AI completion and chat (not working for now)
     require 'plugins.games'             -- Fun games
 }
