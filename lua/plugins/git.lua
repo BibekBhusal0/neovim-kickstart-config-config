@@ -1,8 +1,27 @@
 -- local map = vim.api.nvim_set_keymap
 local map = function(keys, func, desc, mode)
     mode = mode or 'n'
-    vim.api.nvim_set_keymap(mode, keys, func, { noremap = true, silent = true, desc = desc })
+    vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
 end
+
+local function commit_with_message()
+    local commit_message = vim.fn.input("Commit message: ")
+    if commit_message ~= "" then
+        vim.cmd("Git commit -m '" .. commit_message .. "'")
+    else
+        print("Commit message cannot be empty.")
+    end
+end
+
+local function commit_all_with_message()
+    local commit_message = vim.fn.input("Commit message: ")
+    if commit_message ~= "" then
+        vim.cmd("Git commit -a -m '" .. commit_message .. "'")
+    else
+        print("Commit message cannot be empty.")
+    end
+end
+
 
 return {
     {
@@ -28,11 +47,9 @@ return {
             map("<leader>ga", "<cmd>Git add .<CR>", "Git add all files")
             map("<leader>gA", "<cmd>Git add %<CR>", "Git add current file")
             map("<leader>gP", "<cmd>Git pull<CR>", "Git pull")
+            map("<leader>gcm", commit_with_message, "Git commit with message")
             map("<leader>gcM", "<cmd>Git commit<CR>", "Git commit Without Message")
-            map("<leader>gcm", "<cmd>Git commit -m '<C-r>=input(\"Commit message: \")<CR>'<CR>",
-                "Git commit with message")
-            map("<leader>gca", "<cmd>Git commit -a -m '<C-r>=input(\"Commit message: \")<CR>'<CR>",
-                "Git commit all with message prompt")
+            map("<leader>gca", commit_all_with_message, "Git commit all with message prompt")
             map("<leader>gcA", "<cmd>Git commit -a<CR>", "Git commit all Withoug Message")
         end
     }, {
@@ -51,3 +68,11 @@ return {
     }
 },
 }
+
+
+-- [null-ls] failed to load builtin flake8 for method diagnostics; please check your config
+-- Failed to run `config` for -fugitive
+-- ~\Local\nvim/lua/plugins/git.lua:4: Invalid 'rhs': Expected Lua string
+--#stacktrace: - lua/plugins/git.lua:4
+-- **map** - lua/plugins/git.lua:50 _in_ **config**
+-- - init.lua:16
