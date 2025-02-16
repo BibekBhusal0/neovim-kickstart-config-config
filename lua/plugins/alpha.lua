@@ -74,7 +74,6 @@ local function render()
         return #plugins
     end
 
-
     local header = {
         [[                                                                     ]],
         [[       ████ ██████           █████      ██                     ]],
@@ -97,18 +96,20 @@ local function render()
         [[   \▓▓▓▓▓▓ \▓▓   \▓▓ \▓▓▓▓▓▓▓ \▓▓▓▓▓▓▓   \▓▓▓▓       \▓▓▓▓▓▓ \▓▓   \▓▓ \▓▓▓▓▓▓▓ \▓▓▓▓▓▓▓   \▓▓▓▓]],
     }
 
-
+    local buttons_divider = { type = "text", val = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', opts = { position = "center" } }
 
     -- https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-1309233
-    -- Set menu
-    local buttons_divider = { type = "text", val = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', opts = { position = "center" } }
     local buttons = {
         dashboard.button("f", "  > Find file", ":Telescope find_files<CR>"),
         dashboard.button("r", "  > Recent Files", ":Telescope oldfiles<CR>"),
         dashboard.button("n", "  > New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("a", "  > Sessions", '<cmd>SessionSearch<CR>'),
+        dashboard.button("t", "  > File Explorer", ":Neotree toggle position=left <CR>"),
+        dashboard.button("g", "󰊢  > Git File Changes", ":Neotree float git_status <CR>"),
+
+        -- dashboard.button("a", "  > Sessions", '<cmd>SessionSearch<CR>'),
         buttons_divider,
         dashboard.button("p", "󰐱  > Plugins", ":Lazy<CR>"),
+        dashboard.button("m", "  > Mason (LSP,  linter, formatter)", ":Mason<CR>"),
         dashboard.button("c", "  > Cheat sheet", ':AlphaShowCheatSheet<CR>'),
         dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
         dashboard.button("q", "󰅙  > Quit", ":qa<CR>"),

@@ -32,6 +32,16 @@ map('n', '<C-q>', '<cmd> q <CR>', opts)
 -- delete single character without copying into register
 map('n', 'x', '"_x', opts)
 
+-- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
+
+-- move liens in visual mode
+map("v", "J", ":m '>+1<CR>gv=gv" ,opts)
+map("v", "K", ":m '<-2<CR>gv=gv" ,opts)
+
+-- copy to system clipboard with leader y
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], opts)
+vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
+
 -- Vertical scroll and center
 map('n', '<C-d>', '<C-d>zz', opts)
 map('n', '<C-u>', '<C-u>zz', opts)

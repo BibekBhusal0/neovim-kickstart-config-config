@@ -144,21 +144,16 @@ return {
                     ['l'] = 'open',
                     ['S'] = 'open_split',
                     ['s'] = 'open_vsplit',
-                    -- ["S"] = "split_with_window_picker",
-                    -- ["s"] = "vsplit_with_window_picker",
                     ['t'] = 'open_tabnew',
                     -- ["<cr>"] = "open_drop",
                     -- ["t"] = "open_tab_drop",
                     ['w'] = 'open_with_window_picker',
                     --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
                     ['C'] = 'close_node',
-                    -- ['C'] = 'close_all_subnodes',
                     ['z'] = 'close_all_nodes',
-                    --["Z"] = "expand_all_nodes",
+                    ["Z"] = "expand_all_nodes",
                     ['a'] = {
                         'add',
-                        -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
-                        -- some commands may take optional config options, see `:h neo-tree-mappings` for details
                         config = {
                             show_path = 'none', -- "none", "relative", "absolute"
                         },
@@ -170,12 +165,6 @@ return {
                     ['x'] = 'cut_to_clipboard',
                     ['p'] = 'paste_from_clipboard',
                     ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
-                    -- ["c"] = {
-                    --  "copy",
-                    --  config = {
-                    --    show_path = "none" -- "none", "relative", "absolute"
-                    --  }
-                    --}
                     ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
                     ['q'] = 'close_window',
                     ['R'] = 'refresh',
@@ -237,8 +226,7 @@ return {
                         ['H'] = 'toggle_hidden',
                         ['/'] = 'fuzzy_finder',
                         ['D'] = 'fuzzy_finder_directory',
-                        ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
-                        -- ["D"] = "fuzzy_sorter_directory",
+                        ['#'] = 'fuzzy_sorter',
                         ['f'] = 'filter_on_submit',
                         ['<c-x>'] = 'clear_filter',
                         ['[g'] = 'prev_git_modified',
@@ -252,23 +240,20 @@ return {
                         ['os'] = { 'order_by_size', nowait = false },
                         ['ot'] = { 'order_by_type', nowait = false },
                     },
-                    fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+                    fuzzy_finder_mappings = {
                         ['<down>'] = 'move_cursor_down',
                         ['<C-n>'] = 'move_cursor_down',
                         ['<up>'] = 'move_cursor_up',
                         ['<C-p>'] = 'move_cursor_up',
                     },
                 },
-
-                commands = {}, -- Add a custom command or override a global one using the same function name
             },
             buffers = {
                 follow_current_file = {
-                    enabled = true,  -- This will find and focus the file in the active buffer every time
-                    --              -- the current file is changed while the tree is open.
-                    leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+                    enabled = true,
+                    leave_dirs_open = true,
                 },
-                group_empty_dirs = true, -- when true, empty folders will be grouped together
+                group_empty_dirs = true,
                 show_unloaded = true,
                 window = {
                     mappings = {
@@ -310,7 +295,10 @@ return {
 
         vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
         vim.keymap.set('n', '<leader>e', ':Neotree toggle position=left<CR>', { noremap = true, silent = true }) -- focus file explorer
-        vim.keymap.set('n', '<C-b>', ':Neotree toggle position=left<CR>', { noremap = true, silent = true })   -- focus file explorer
-        vim.keymap.set('n', '<leader>gc', ':Neotree float git_status<CR>', { noremap = true, silent = true })  -- open git status window
+        vim.keymap.set({'n' , 'v' , 'i'}, '<C-b>', function ()
+            vim.cmd [[Neotree toggle position=left]]
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, true, true), 'n', true)
+        end , { noremap = true, silent = true })   -- focus file explorer
+        vim.keymap.set('n', '<leader>gf', ':Neotree float git_status <CR>', { noremap = true, silent = true , desc = "Git changes in files" })
     end,
 }

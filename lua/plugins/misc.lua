@@ -15,22 +15,16 @@ return {
         'windwp/nvim-ts-autotag',
         -- event = 'InsertEnter',
         config = true,
-        opts ={}
+        opts = {}
     }, -- Autoclose HTML tags -- FIX: not working don't konw why
     {
         'folke/todo-comments.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
-            require('todo-comments').setup()
+            require('todo-comments').setup({ signs = false, })
             map('n', '<leader>sc', '<cmd>TodoTelescope<CR>', { desc = 'Search Todo' })
             map('n', '<leader>ll', '<cmd>TodoLocList<CR>', { desc = 'Todo Loc List' })
         end,
-        opts = {
-            signs = false,
-            keywards = {
-                COPIED_FROM = { icon = " ", color = "hint", alt = { "COPY", "COPIED", "CREDIT" } },
-            }
-        },
     }, -- Highlight todo, notes, etc in comments
     {
         'norcalli/nvim-colorizer.lua',
@@ -38,18 +32,19 @@ return {
             require('colorizer').setup()
         end,
     }, -- High-performance color highlighter
-    {
-        'rmagatti/auto-session',
-        lazy = false,
-        config = function()
-            require('auto-session').setup {
-                map('n', '<leader>ssf', '<cmd>SessionSearch<CR>', { desc = 'Search Session' }),
-                map('n', '<leader>sss', '<cmd>SessionSave<CR>', { desc = 'Save Session' }),
-                map('n', '<leader>ssr', '<cmd>SessionRestore<CR>', { desc = 'Restore Session' }),
-                map('n', '<leader>ssR', '<cmd>SessionDisableAutoSave<CR>', { desc = 'Toggle Session Autosave' }),
-            }
-        end
-    }, -- session manager
+    -- {
+    --     'rmagatti/auto-session',
+    --     lazy = false,
+    --     config = function()
+    --         require('auto-session').setup {
+    --             bypass_save_filetypes = { 'alpha', 'dashboard' }
+    --         }
+    --         map('n', '<leader>ssf', '<cmd>SessionSearch<CR>', { desc = 'Search Session' })
+    --         map('n', '<leader>sss', '<cmd>SessionSave<CR>', { desc = 'Save Session' })
+    --         map('n', '<leader>ssr', '<cmd>SessionRestore<CR>', { desc = 'Restore Session' })
+    --         map('n', '<leader>ssR', '<cmd>SessionDisableAutoSave<CR>', { desc = 'Toggle Session Autosave' })
+    --     end
+    -- }, -- session manager removed because causing slow startup
     {
         'numToStr/Comment.nvim',
         opts = {},
@@ -61,6 +56,7 @@ return {
             map('v', '<C-_>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
             map('v', '<C-c>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
             map('v', '<C-/>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
+            map('i', '<C-/>', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
         end,
     }, -- Easily comment visual regions/lines
     {
@@ -88,19 +84,4 @@ return {
             },
         },
     }, -- Better indentations
-    {
-        "kdheepak/lazygit.nvim",
-        lazy = true,
-        cmd = {
-            "LazyGit",
-            "LazyGitConfig",
-            "LazyGitCurrentFile",
-            "LazyGitFilter",
-            "LazyGitFilterCurrentFile",
-        },
-        dependencies = { "nvim-lua/plenary.nvim" },
-        keys = {
-            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-        }
-    }, -- Git integration (only works if lazy git installed in system)
 }
