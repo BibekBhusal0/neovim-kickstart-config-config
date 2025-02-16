@@ -3,7 +3,6 @@ local map = vim.keymap.set
 return {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
     dependencies = {
         'nvim-lua/plenary.nvim',
         { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -27,18 +26,6 @@ return {
                     },
                 },
             },
-            pickers = {
-                find_files = {
-                    file_ignore_patterns = { 'node_modules', '.git', '.venv' },
-                    hidden = true,
-                },
-            },
-            live_grep = {
-                file_ignore_patterns = { 'node_modules', '.git', '.venv' },
-                additional_args = function(_)
-                    return { '--hidden' }
-                end,
-            },
             extensions = {
                 ['ui-select'] = {
                     require('telescope.themes').get_dropdown(),
@@ -56,12 +43,12 @@ return {
         map('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
         map('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
         map('n', '<leader>st', builtin.builtin, { desc = 'Search Telescope' })
-        map('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
+        map('n', '<leader>sW', builtin.grep_string, { desc = 'Search current Word' })
         map('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
         map('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
         map('n', '<leader>s.', builtin.oldfiles, { desc = 'Search recent Files' })
         map('n', '<leader><leader>', builtin.buffers, { desc = 'Search buffers' })
-        map('n', '<leader>sgg', builtin.live_grep, { desc = 'Search by Grep' })
+        map('n', '<leader>sw', builtin.live_grep, { desc = 'Search by Grep' })
         map('n', '<leader>sgb', builtin.git_branches, { desc = 'Search Git Branches' })
         map('n', '<leader>sgc', builtin.git_commits, { desc = 'Search Git Commits' })
         map('n', '<leader>sgC', builtin.git_bcommits, { desc = 'Search Git Bcommits' })

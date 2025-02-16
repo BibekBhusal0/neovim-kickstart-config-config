@@ -45,6 +45,7 @@ return {
         config = function()
             map("<leader>gp", "<cmd>Git push<CR>", "Git push")
             map("<leader>ga", "<cmd>Git add .<CR>", "Git add all files")
+            map("<leader>gi", "<cmd>Git init<CR>", "Git Init")
             map("<leader>gA", "<cmd>Git add %<CR>", "Git add current file")
             map("<leader>gP", "<cmd>Git pull<CR>", "Git pull")
             map("<leader>gcm", commit_with_message, "Git commit with message")
@@ -52,27 +53,20 @@ return {
             map("<leader>gca", commit_all_with_message, "Git commit all with message prompt")
             map("<leader>gcA", "<cmd>Git commit -a<CR>", "Git commit all Withoug Message")
         end
-    }, {
-    "kdheepak/lazygit.nvim",
-    lazy = true,
-    cmd = {
-        "LazyGit",
-        "LazyGitConfig",
-        "LazyGitCurrentFile",
-        "LazyGitFilter",
-        "LazyGitFilterCurrentFile",
     },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
-},
+    {
+        "kdheepak/lazygit.nvim",
+        lazy = true,
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        dependencies = { "nvim-lua/plenary.nvim" },
+        keys = {
+            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+        }
+    },
 }
-
-
--- [null-ls] failed to load builtin flake8 for method diagnostics; please check your config
--- Failed to run `config` for -fugitive
--- ~\Local\nvim/lua/plugins/git.lua:4: Invalid 'rhs': Expected Lua string
---#stacktrace: - lua/plugins/git.lua:4
--- **map** - lua/plugins/git.lua:50 _in_ **config**
--- - init.lua:16

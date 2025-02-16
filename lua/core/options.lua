@@ -45,7 +45,7 @@ vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- Separate Vim plugins fro
 
 -- folding
 
-vim.o.foldcolumn = '1'
+vim.o.foldcolumn = '0'   --- disabled fold vislaus in left side it was not appearing properly
 vim.o.foldlevel = 99 
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
