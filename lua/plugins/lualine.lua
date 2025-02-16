@@ -12,7 +12,7 @@ return {
         local filename = {
             'filename',
             file_status = true, -- displays file status (readonly status, modified status)
-            path = 1,     -- 0 = just filename, 1 = relative path, 2 = absolute path
+            path = 1,           -- 0 = just filename, 1 = relative path, 2 = absolute path
         }
 
         local hide_in_width = function()
@@ -37,9 +37,28 @@ return {
 
         local codeium_status = {
             function()
-                local status = vim.fn['codeium#GetStatusString']()
-                local icon = '󰘦 '
-                return icon .. (status)
+                local symbols = {
+                    status = {
+                        [0] = "󰚩 ", -- Enabled
+                        [1] = "󱚧 ", -- Disabled Globally
+                        [2] = "󱙻 ", -- Disabled for Buffer
+                        [3] = "󱙺 ", -- Disabled for Buffer filetype
+                        [4] = "󱙺 ", -- Disabled for Buffer with enabled function
+                        [5] = "󱚠 ", -- Disabled for Buffer encoding
+                    },
+                    server_status = {
+                        [0] = "󰣺 ", -- Connected
+                        [1] = "󰣻 ", -- Connecting
+                        [2] = "󰣽 ", -- Disconnected
+                    },
+                }
+                local status, serverStatus = require("neocodeium").get_status()
+                -- print(symbols.status[status], symbols.server_status[serverStatus])
+
+                -- local icon = '󰘦 '
+                -- return icon
+                return symbols.status[status] .. symbols.server_status[serverStatus]
+                -- return 'disabled'
             end,
             cond = hide_in_width,
         }

@@ -31,12 +31,28 @@ return { -- Autocompletion
             opts = {}
         },
         {
-            'Exafunction/codeium.vim',
-            event = 'BufEnter',
+            "monkoose/neocodeium",
+            event = "VeryLazy",
             config = function()
-                vim.keymap.set('n', '<leader>cc', '<cmd>Codeium Toggle<CR>', { noremap = true, silent = true })
-            end
-        } -- FIX: Codeium not working don't know why
+                local neocodeium = require("neocodeium")
+                neocodeium.setup()
+                vim.keymap.set("i", "<A-f>", neocodeium.accept)
+                vim.keymap.set("i", "<A-f>", neocodeium.accept)
+                vim.keymap.set("i", "<A-w>", neocodeium.accept_word)
+                vim.keymap.set("i", "<A-a>", neocodeium.accept_line)
+                vim.keymap.set("i", "<A-e>", neocodeium.cycle_or_complete)
+                vim.keymap.set("i", "<A-r>", neocodeium.cycle_or_complete)
+                vim.keymap.set("i", "<A-c>", neocodeium.clear)
+                vim.keymap.set('n', '<leader>cn', ':NeoCodeium toggle<CR>',
+                    { noremap = true, silent = true, desc = "Toggle NeoCodeium" })
+                vim.keymap.set('n', '<leader>cc', ':NeoCodeium chat<CR>',
+                    { noremap = true, silent = true, desc = "Chat with Codeium" })
+                vim.keymap.set('n', '<leader>cr', ':NeoCodeium restart<CR>',
+                    { noremap = true, silent = true, desc = "Codeium Restart" })
+                vim.keymap.set('n', '<leader>cb', ':NeoCodeium toggle_buffer<CR>', 
+                { noremap = true, silent = true, desc = "Toggle NeoCodeium Buffer" })
+            end,
+        }
     },
 
     config = function()
