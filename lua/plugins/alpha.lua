@@ -70,8 +70,21 @@ local function render()
     local dashboard = require 'alpha.themes.dashboard'
 
     local function get_plugin_count()
-        local plugins = require('lazy').plugins()
-        return #plugins
+        local stats = require('lazy').stats()
+        return stats.count
+
+        end
+
+    local function get_lazy_startup_time()
+        local success, stats = pcall(function()
+            return require('lazy').stats()
+        end)
+
+        if success then
+            return stats.times.LazyStart
+        else
+            return 0
+        end
     end
 
     local header = {
@@ -144,7 +157,12 @@ local function render()
         { type = "padding", val = 3 },
         {
             type = "text",
-            val = prettifyFooterText('', string.format('%s plugins loaded', get_plugin_count())),
+            val = prettifyFooterText('', string.format('%d plugins loaded', get_plugin_count())),
+            opts = { position = "center", hl = "AlphaFooter" }
+        },
+        {
+            type = "text",
+            val = prettifyFooterText('', string.format('Startup Time %.3fs', get_lazy_startup_time())),
             opts = { position = "center", hl = "AlphaFooter" }
         },
         {
