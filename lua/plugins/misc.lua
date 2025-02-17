@@ -7,15 +7,9 @@ return {
     },
     {
         "windwp/nvim-autopairs",
-        event = "InsertEnter",
+        event = "User FilePost",
         config = true,
     }, -- Autoclose parentheses, brackets, quotes, etc.
-    {
-        "windwp/nvim-ts-autotag",
-        event = "InsertEnter",
-        config = true,
-        opts = {}
-    }, -- Autoclose HTML tags -- FIX: not working don't konw why
     {
         "folke/todo-comments.nvim",
         event = "VimEnter",
@@ -28,7 +22,7 @@ return {
     }, -- Highlight todo, notes, etc in comments
     {
         "norcalli/nvim-colorizer.lua",
-        event = "VimEnter",
+        event = "User FilePost",
         config = function()
             require("colorizer").setup()
         end,
@@ -48,7 +42,7 @@ return {
     -- }, -- session manager removed because causing slow startup
     {
         "numToStr/Comment.nvim",
-        event = "InsertEnter",
+        event = "User FilePost",
         opts = {},
         config = function()
             local opts = { noremap = true, silent = true }
@@ -64,7 +58,7 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        event = "BufRead",
+        event = "User FilePost",
         opts = {
             indent = {
                 char = "▏",
@@ -88,12 +82,10 @@ return {
         },
     }, -- Better indentations
     {
-        "nvzone/volt",
-        dependencies = {
-            "nvzone/timerly",
-            cmd = "TimerlyToggle",
-            lazy = true,
-            keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
-        }
+        "nvzone/timerly",
+        dependencies = { "nvzone/volt", },
+        cmd = "TimerlyToggle",
+        lazy = true,
+        keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
     },
 }

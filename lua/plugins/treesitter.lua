@@ -1,5 +1,3 @@
-local map = vim.keymap.set
-
 return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
@@ -19,7 +17,7 @@ return {
                             click = 'v:lua.ScLa',
                         },
                         {
-                            sign = { namespace = { 'gitsigns' }},
+                            sign = { namespace = { 'gitsigns' } },
                             click = 'v:lua.ScSa',
                         },
                     },

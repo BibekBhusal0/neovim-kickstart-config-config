@@ -1,7 +1,15 @@
+vim.keymap.set("n", "<leader>e", ":Neotree toggle position=right<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>w", ":Neotree toggle position=left<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v", "i" }, "<C-b>", function()
+    vim.cmd [[Neotree toggle position=left]]
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, true, true), "n", true)
+end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gf", ":Neotree float git_status <CR>",
+    { noremap = true, silent = true, desc = "Git changes in files" })
+
 return {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    event = "VimEnter",
+    cmd = { "Neotree" },
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
@@ -32,8 +40,6 @@ return {
         vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
         vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
         vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
-
-
 
         require("neo-tree").setup {
             close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -294,14 +300,5 @@ return {
                 },
             },
         }
-
-        vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
-        vim.keymap.set("n", "<leader>e", ":Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
-        vim.keymap.set({ "n", "v", "i" }, "<C-b>", function()
-            vim.cmd [[Neotree toggle position=left]]
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, true, true), "n", true)
-        end, { noremap = true, silent = true })  -- focus file explorer
-        vim.keymap.set("n", "<leader>gf", ":Neotree float git_status <CR>",
-            { noremap = true, silent = true, desc = "Git changes in files" })
     end,
 }

@@ -14,17 +14,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    require "plugins.treesitter",         -- syntax highlighting
-    require "plugins.colortheme",         -- Color scheme setup
-    require "plugins.telescope",          -- Fuzzy finder for searching
-    require "plugins.neotree",            -- File explorer for Neovim
-    require "plugins.bufferline",         -- Buffer management Neovim
-    require "plugins.lualine",            -- Statusline
-    require "plugins.lsp",                -- Language Server Protocol setup
-    require "plugins.autocompletion",     -- Autocompletion for code
-    require "plugins.none-ls",            -- External tools integration (formatters, linters)
-    require "plugins.git",                -- Git status in the gutter
-    require "plugins.alpha",              -- Customizable dashboard screen
-    require "plugins.misc",               -- Miscellaneous utility plugins
-    require "plugins.games"               -- Fun games
+    require "plugins.treesitter",     -- syntax highlighting
+    require "plugins.colortheme",     -- Color scheme setup
+    require "plugins.telescope",      -- Fuzzy finder for searching
+    require "plugins.neotree",        -- File explorer for Neovim
+    require "plugins.bufferline",     -- Buffer management Neovim
+    require "plugins.lualine",        -- Statusline
+    require "plugins.lsp",            -- Language Server Protocol setup
+    require "plugins.autocompletion", -- Autocompletion for code
+    require "plugins.none-ls",        -- External tools integration (formatters, linters)
+    require "plugins.git",            -- Git stuff like lazygit, gitsigns
+    require "plugins.alpha",          -- Customizable dashboard screen
+    require "plugins.misc",           -- Miscellaneous utility plugins
+    require "plugins.games"           -- Fun games
 })

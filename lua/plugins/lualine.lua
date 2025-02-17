@@ -38,6 +38,9 @@ return {
 
         local codeium_status = {
             function()
+                if not package.loaded["neocodeium"] then
+                    return " "
+                end
                 local symbols = {
                     status = {
                         [0] = "󰚩 ", -- Enabled
@@ -54,12 +57,16 @@ return {
                     },
                 }
                 local status, serverStatus = require("neocodeium").get_status()
-                -- print(symbols.status[status], symbols.server_status[serverStatus])
-
-                -- local icon = "󰘦 "
-                -- return icon
                 return symbols.status[status] .. symbols.server_status[serverStatus]
-                -- return "disabled"
+            end,
+            cond = hide_in_width,
+        }
+        local lsp_status = {
+            function()
+                local clients = vim.lsp.get_active_clients()
+                if #clients == 0 then
+                    return "  No LSP"
+                end
             end,
             cond = hide_in_width,
         }
@@ -80,7 +87,7 @@ return {
                 lualine_b = { "branch" },
                 lualine_c = { filename },
                 lualine_x = { diagnostics, diff, { "filetype", cond = hide_in_width } },
-                lualine_y = { "location", codeium_status },
+                lualine_y = { lsp_status, codeium_status },
                 lualine_z = { "progress" },
             },
             inactive_sections = {

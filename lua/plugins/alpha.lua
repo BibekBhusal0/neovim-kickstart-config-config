@@ -143,7 +143,7 @@ vim.api.nvim_create_autocmd("User", {
                 render()
                 vim.cmd("AlphaRedraw")
             end
-        end, 50)
+        end, 5)
     end,
 })
 
