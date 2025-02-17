@@ -6,18 +6,28 @@ return {
 
     dependencies = {
         {
-            "kevinhwang91/nvim-ufo",
-            dependencies = { "kevinhwang91/promise-async" },
-            config = function()
-                local ufo = require("ufo")
+            'luukvbaal/statuscol.nvim',
+            opts = function()
+                local builtin = require('statuscol.builtin')
 
-                ufo.setup({
-                    provider_selector = function(bufnr, filetype, buftype)
-                        return { "treesitter", "indent" }
-                    end
-                })
-            end
-        }
+                return {
+                    setopt = true,
+                    segments = {
+                        { text = { builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
+                        {
+                            text = { builtin.lnumfunc, '' },
+                            condition = { true, builtin.not_empty },
+                            click = 'v:lua.ScLa',
+                        },
+                        {
+                            sign = { namespace = { 'gitsigns' }, width = '5', auto = true },
+                            click = 'v:lua.ScSa',
+
+                        }
+                    },
+                }
+            end,
+        },
 
     },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -40,7 +50,6 @@ return {
             "bash",
         },
         auto_install = true,
-        autotag = { enable = true },
         highlight = {
             enable = true,
             use_languagetree = true,

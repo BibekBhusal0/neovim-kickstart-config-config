@@ -36,9 +36,10 @@ map("n", "<C-q>", "<cmd> q <CR>", opts)
 map("v", "J", ":m '>+1<CR>gv=gv", opts)
 map("v", "K", ":m '<-2<CR>gv=gv", opts)
 
--- copy to system clipboard with leader y
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], opts)
-vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
+-- copy/paste to system clipboard with leader y
+map({ "n", "v" }, "<leader>y", [["+y]], opts)
+map("n", "<leader>Y", [["+Y]], opts)
+map('x', '<leader>p', [["_dP]], opts)
 
 -- Vertical scroll and center
 map("n", "<C-d>", "<C-d>zz", opts)
@@ -97,3 +98,6 @@ map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list
 -- line numbers
 map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+
+-- folding 
+map('n', 'zj', 'za')
