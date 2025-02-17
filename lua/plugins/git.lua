@@ -1,6 +1,6 @@
 -- local map = vim.api.nvim_set_keymap
 local map = function(keys, func, desc, mode)
-    mode = mode or 'n'
+    mode = mode or "n"
     vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
 end
 
@@ -25,9 +25,10 @@ end
 
 return {
     {
-        'lewis6991/gitsigns.nvim',
+        "lewis6991/gitsigns.nvim",
+        event = "VimEnter",
         config = function()
-            require('gitsigns').setup()
+            require("gitsigns").setup()
             map("<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage hunk")
             map("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset hunk")
             map("<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", "Git Stage buffer")
@@ -41,18 +42,20 @@ return {
         end
     },
     {
-        'tpope/vim-fugitive',
-        config = function()
-            map("<leader>gp", "<cmd>Git push<CR>", "Git push")
-            map("<leader>ga", "<cmd>Git add .<CR>", "Git add all files")
-            map("<leader>gi", "<cmd>Git init<CR>", "Git Init")
-            map("<leader>gA", "<cmd>Git add %<CR>", "Git add current file")
-            map("<leader>gP", "<cmd>Git pull<CR>", "Git pull")
-            map("<leader>gcm", commit_with_message, "Git commit with message")
-            map("<leader>gcM", "<cmd>Git commit<CR>", "Git commit Without Message")
-            map("<leader>gca", commit_all_with_message, "Git commit all with message prompt")
-            map("<leader>gcA", "<cmd>Git commit -a<CR>", "Git commit all Withoug Message")
-        end
+        "tpope/vim-fugitive",
+        lazy = true,
+        cmd = { "Git" },
+        keys = {
+            { "<leader>gp",  "<cmd>Git push<CR>",      desc = "Git push" },
+            { "<leader>ga",  "<cmd>Git add .<CR>",     desc = "Git add all files" },
+            { "<leader>gi",  "<cmd>Git init<CR>",      desc = "Git Init" },
+            { "<leader>gA",  "<cmd>Git add %<CR>",     desc = "Git add current file" },
+            { "<leader>gP",  "<cmd>Git pull<CR>",      desc = "Git pull" },
+            { "<leader>gcm", commit_with_message,      desc = "Git commit with message" },
+            { "<leader>gcM", "<cmd>Git commit<CR>",    desc = "Git commit Without Message" },
+            { "<leader>gca", commit_all_with_message,  desc = "Git commit all with message prompt" },
+            { "<leader>gcA", "<cmd>Git commit -a<CR>", desc = "Git commit all Withoug Message" },
+        }
     },
     {
         "kdheepak/lazygit.nvim",

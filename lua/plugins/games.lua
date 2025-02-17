@@ -2,29 +2,36 @@ local map = vim.keymap.set
 
 return {
     {
-        'ThePrimeagen/vim-be-good',
-        config = function()
-            map("n", "<leader>zv", "<cmd>VimBeGood<CR>", { desc = "Vim be good" })
-        end
+        "ThePrimeagen/vim-be-good",
+        lazy = true,
+        cmd = { 'VimBeGood' },
+        keys = {
+            { "<leader>zv", "<cmd>VimBeGood<CR>", desc = "Vim be good" }
+        }
     },
     {
-        'rktjmp/playtime.nvim',
-        config = function()
-            map('n', '<leader>zp', '<cmd>Playtime<CR>', { desc = 'More games' })
-        end
+        "rktjmp/playtime.nvim",
+        lazy = true,
+        cmd = { 'Playtime' },
+        keys = {
+            { "<leader>zp", "<cmd>Playtime<CR>", desc = "More games" }
+        }
     },
     {
-        'seandewar/nvimesweeper',
-        config = function()
-            map("n", "<leader>zm", "<cmd>Nvimesweeper <CR>", { desc = "MineSweeper" })
-        end
+        "seandewar/nvimesweeper",
+        lazy = true,
+        cmd = { 'Nvimesweeper' },
+        keys = {
+            { "<leader>zm", "<cmd>Nvimesweeper <CR>", desc = "MineSweeper" }
+        }
     },
     {
-        'jim-fx/sudoku.nvim',
-        config = function()
-            require("sudoku").setup({
-                map("n", "<leader>zs", "<cmd>Sudoku<CR>", { desc = "Sudoku" })
-            })
-        end
+        "jim-fx/sudoku.nvim",
+        lazy = true,
+        cmd = { 'Sudoku' },
+        keys = {
+            { "<leader>zs", "<cmd>Sudoku<CR>", desc = "Sudoku" }
+        },
+        opts = {}
     },
 }

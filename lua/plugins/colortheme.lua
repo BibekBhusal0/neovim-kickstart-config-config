@@ -1,7 +1,7 @@
-local bg_transparent = false
+local bg_transparent = true
 
 return {
-    'olimorris/onedarkpro.nvim',
+    "olimorris/onedarkpro.nvim",
     lazy = false,
     priority = 1000,
     config = function()
@@ -22,7 +22,7 @@ return {
             vim.cmd("colorscheme onedark_dark")
         end
 
-        vim.keymap.set('n', '<leader>bg', toggle_transparency,
+        vim.keymap.set("n", "<leader>bg", toggle_transparency,
             { noremap = true, silent = true, desc = "Toggle background transparency" })
     end,
 }
