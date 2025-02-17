@@ -13,14 +13,13 @@ return {
                 return {
                     setopt = true,
                     segments = {
-                        { text = { builtin.foldfunc, '' }, click = 'v:lua.ScFa' },
+                        { text = { builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
                         {
                             text = { builtin.lnumfunc, '' },
-                            -- condition = { true, builtin.not_empty },
                             click = 'v:lua.ScLa',
                         },
                         {
-                            sign = { namespace = { 'gitsigns' }, width = '5', auto = true },
+                            sign = { namespace = { 'gitsigns' }},
                             click = 'v:lua.ScSa',
                         },
                     },

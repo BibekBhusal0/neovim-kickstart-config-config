@@ -3,8 +3,8 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-        vim.g.nightflyNormalFloat = true
-        vim.g.nightflyCursorColor = true
+        -- vim.g.nightflyNormalFloat = true
+        -- vim.g.nightflyCursorColor = true
         vim.cmd [[colorscheme nightfly]]
     end,
 }

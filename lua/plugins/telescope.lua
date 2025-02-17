@@ -44,7 +44,6 @@ return {
         map("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
         map("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
         map("n", "<leader>ss", builtin.builtin, { desc = "Search Telescope" })
-        map("n", "<leader>st", ':Telescope themes<CR>', { desc = "Search Telescope Themes " })
         map("n", "<leader>sW", builtin.grep_string, { desc = "Search current Word" })
         map("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
         map("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })

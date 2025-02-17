@@ -87,4 +87,14 @@ return {
             },
         },
     }, -- Better indentations
+    {
+        "nvzone/volt",
+        dependencies = {
+            "nvzone/timerly",
+            cmd = "TimerlyToggle",
+            lazy = true,
+            keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
+        }
+
+    }
 }
