@@ -95,6 +95,5 @@ return {
             lazy = true,
             keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
         }
-
-    }
+    },
 }
