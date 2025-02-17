@@ -5,16 +5,17 @@ return {
     event = "VimEnter",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        { -- If encountering errors, see telescope-fzf-native README for installation instructions
+        { 
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "make",
             cond = function()
                 return vim.fn.executable "make" == 1
             end,
         },
-        { "nvim-telescope/telescope-ui-select.nvim" },
-        { "nvim-tree/nvim-web-devicons",            enabled = vim.g.have_nerd_font },
+        "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-tree/nvim-web-devicons",
     },
+
     config = function()
         require("telescope").setup {
             defaults = {
@@ -42,7 +43,8 @@ return {
         map("n", "<leader>sh", builtin.help_tags, { desc = "Search Help" })
         map("n", "<leader>sk", builtin.keymaps, { desc = "Search Keymaps" })
         map("n", "<leader>sf", builtin.find_files, { desc = "Search Files" })
-        map("n", "<leader>st", builtin.builtin, { desc = "Search Telescope" })
+        map("n", "<leader>ss", builtin.builtin, { desc = "Search Telescope" })
+        map("n", "<leader>st", ':Telescope themes<CR>', { desc = "Search Telescope Themes " })
         map("n", "<leader>sW", builtin.grep_string, { desc = "Search current Word" })
         map("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
         map("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })

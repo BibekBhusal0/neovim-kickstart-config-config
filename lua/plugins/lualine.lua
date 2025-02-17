@@ -68,7 +68,7 @@ return {
         require("lualine").setup {
             options = {
                 icons_enabled = true,
-                theme = "onedark_dark",
+                theme = "nightfly",
                 --        
                 section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
