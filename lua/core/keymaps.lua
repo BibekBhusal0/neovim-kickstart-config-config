@@ -17,9 +17,9 @@ map("<C-]>", "<Esc>ldbi", "Delete Word", 'i')
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 map("<Space>", "<Nop>", '', { 'n', 'v' })
 
-map("<C-s>", "<cmd> w <CR>", 'Save File')
-map("<leader>sn", "<cmd>noautocmd w <CR>", "Save File Without Auto-formatting")
-map("<C-q>", "<cmd> q <CR>", "Quit File")
+map("<C-s>", ": w <CR>", 'Save File')
+map("<leader>sn", ":noautocmd w <CR>", "Save File Without Auto-formatting")
+map("<C-q>", ": q <CR>", "Quit File")
 
 -- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
 -- move lines in visual mode
@@ -70,7 +70,7 @@ map("<leader>tn", ":tabn<CR>", "Go to next tab")
 map("<leader>tp", ":tabp<CR>", "Go to previous tab")
 
 -- Toggle line wrapping
-map("<leader>lw", "<cmd>set wrap!<CR>", "Toggle line wrapping")
+map("<leader>lw", ":set wrap!<CR>", "Toggle line wrapping")
 
 -- Stay in indent mode
 map("<", "<gv", "Indent to the left", "v")
@@ -83,8 +83,8 @@ map("<leader>d", vim.diagnostic.open_float, "Open floating diagnostic message")
 map("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
 
 -- line numbers
-map("<leader>n", "<cmd>set nu!<CR>", "toggle line number")
-map("<leader>rn", "<cmd>set rnu!<CR>", "toggle relative number")
+map("<leader>n", ":set nu!<CR>", "Toggle Line Number")
+map("<leader>rn", ":set rnu!<CR>", "Toggle Relative Line Number")
 
 -- folding
 local function toggle_foldcolumn()

@@ -61,6 +61,8 @@ return {
                     background = { bg = bg },
                     modified_selected = { bg = selected_bg },
                     modified = { bg = bg },
+                    diagnostic = { bg = bg },
+                    diagnostic_selected = { bg = bg },
                 },
 
             }

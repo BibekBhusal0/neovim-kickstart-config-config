@@ -110,8 +110,8 @@ return {
     },
     {
         "smartinellimarco/nvcheatsheet.nvim",
-        lazy = true ,
-        keys = {{"<leader>ch" , ':lua require("nvcheatsheet").toggle()<CR>', desc = "cheat sheet"}},
+        lazy = true,
+        keys = { { "<leader>ch", ':lua require("nvcheatsheet").toggle()<CR>', desc = "cheat sheet" } },
         opts = {}
     }
 }
