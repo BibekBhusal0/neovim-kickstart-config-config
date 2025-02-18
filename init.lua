@@ -26,5 +26,5 @@ require("lazy").setup({
     require "plugins.git",            -- Git stuff like lazygit, gitsigns
     require "plugins.alpha",          -- Customizable dashboard screen
     require "plugins.misc",           -- Miscellaneous utility plugins
-    require "plugins.games"           -- Fun games
+    require "plugins.games",          -- Fun games
 })

@@ -11,8 +11,9 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 map("i", "jj", "<ESC>")
+map("i", "<C-c>", "<Esc>")
 map("i", "<C-O>", "<Esc>o", { desc = "move to new line" })
-map("i", "<C-]>", "<Esc>dlbi", { desc = "delete word" })
+map("i", "<C-]>", "<Esc>ldbi", { desc = "delete word" })
 
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
@@ -29,9 +30,7 @@ map("n", "<leader>sn", "<cmd>noautocmd w <CR>", opts)
 -- quit file
 map("n", "<C-q>", "<cmd> q <CR>", opts)
 
-
 -- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
-
 -- move liens in visual mode
 map("v", "J", ":m '>+1<CR>gv=gv", opts)
 map("v", "K", ":m '<-2<CR>gv=gv", opts)

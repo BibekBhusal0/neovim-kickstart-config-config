@@ -11,7 +11,6 @@ end
 
 local function render()
     local alpha = require "alpha"
-    local dashboard = require "alpha.themes.dashboard"
 
     local function get_plugin_count()
         local stats = require("lazy").stats()
@@ -41,6 +40,37 @@ local function render()
         [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
     }
 
+    local function button(sc, txt, keybind, keybind_opts)
+        local leader = "SPC"
+        local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
+
+        local opts = {
+            position = "center",
+            shortcut = sc,
+            cursor = 3,
+            width = 50,
+            align_shortcut = "right",
+            hl_shortcut = "Keyword",
+        }
+        if keybind then
+            keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+            opts.keymap = { "n", sc_, keybind, keybind_opts }
+        end
+
+        local function on_press()
+            local key = vim.api.nvim_replace_termcodes(keybind or sc_ .. "<Ignore>", true, false, true)
+            vim.api.nvim_feedkeys(key, "t", false)
+        end
+
+        return {
+            type = "button",
+            val = txt,
+            on_press = on_press,
+            opts = opts,
+        }
+    end
+
+
     local buttons_divider = {
         type = "text",
         val = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
@@ -53,24 +83,24 @@ local function render()
             {
                 type = "group",
                 val = {
-                    dashboard.button("f", "  > Find file", ":Telescope find_files<CR>"),
-                    dashboard.button("r", "  > Recent Files", ":Telescope oldfiles<CR>"),
-                    dashboard.button("n", "  > New file", ":ene <BAR> startinsert <CR>"),
-                    dashboard.button("t", "  > File Explorer", ":Neotree toggle position=left <CR>"),
+                    button("f", "  > Find file", ":Telescope find_files<CR>"),
+                    button("r", "  > Recent Files", ":Telescope oldfiles<CR>"),
+                    button("n", "  > New file", ":ene <BAR> startinsert <CR>"),
+                    button("t", "  > File Explorer", ":Neotree toggle position=left <CR>"),
                 },
                 opts = { spacing = 1 }
             },
-            dashboard.button("g", "󰊢  > Git File Changes", ":Neotree float git_status <CR>"),
+            button("g", "󰊢  > Git File Changes", ":Neotree float git_status <CR>"),
         },
     }
 
     local buttonGroup2 = {
         type = "group",
         val  = {
-            dashboard.button("p", "  > Plugins", ":Lazy<CR>"),
-            dashboard.button("m", "  > Mason (LSP,  linter, formatter)", ":Mason<CR>"),
-            dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
-            dashboard.button("q", "󰅙  > Quit", ":qa<CR>"),
+            button("p", "  > Plugins", ":Lazy<CR>"),
+            button("m", "  > Mason (LSP,  linter, formatter)", ":Mason<CR>"),
+            button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
+            button("q", "󰅙  > Quit", ":qa<CR>"),
         },
         opts = { spacing = 1 }
     }
@@ -123,7 +153,7 @@ local function render()
                 val = header,
                 opts = { position = "center", hl = "Type" }
             },
-            { type = "padding", val = 2 },
+            { type = "padding", val = 3 },
             buttons,
             { type = "padding", val = 1 },
             footer

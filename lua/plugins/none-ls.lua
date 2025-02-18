@@ -13,18 +13,17 @@ return {
         -- Formatters & linters for mason to install
         require("mason-null-ls").setup {
             ensure_installed = {
-                "prettierd", -- ts/js formatter
+                "prettierd", -- ts/js/html/more formatter
                 "eslint_d",  -- ts/js linter
-                "black",     -- Python formatter
-                "flake8",    -- Python linter
+                "ruff"
             },
             automatic_installation = true,
         }
 
         local sources = {
             formatting.prettierd,
-            formatting.terraform_fmt,
-            formatting.black
+            require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
+            require 'none-ls.formatting.ruff_format',
         }
 
         local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

@@ -1,3 +1,9 @@
+local diagnostics_symbols = { error = " ", warn = " ", info = " ", hint = " " }
+for type, icon in pairs(diagnostics_symbols) do
+    local hl = "DiagnosticSign" .. type:sub(1, 1):upper() .. type:sub(2)
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     event = "VimEnter",
@@ -24,7 +30,7 @@ return {
             "diagnostics",
             sources = { "nvim_diagnostic" },
             sections = { "error", "warn" },
-            symbols = { error = " ", warn = " ", info = " ", hint = " " },
+            symbols = diagnostics_symbols,
             update_in_insert = false,
             always_visible = false,
             cond = hide_in_width,
@@ -65,8 +71,9 @@ return {
             function()
                 local clients = vim.lsp.get_active_clients()
                 if #clients == 0 then
-                    return "  No LSP"
+                    return "No LSP"
                 end
+                return ""
             end,
             cond = hide_in_width,
         }
@@ -76,8 +83,8 @@ return {
             options = {
                 icons_enabled = true,
                 theme = "nightfly",
-                --        
-                section_separators = { left = "", right = "" },
+                --          
+                section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
                 disabled_filetypes = { "alpha", "neo-tree" },
                 always_divide_middle = true,

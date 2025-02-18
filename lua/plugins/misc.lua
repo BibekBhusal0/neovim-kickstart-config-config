@@ -12,7 +12,7 @@ return {
     }, -- Autoclose parentheses, brackets, quotes, etc.
     {
         "folke/todo-comments.nvim",
-        event = "VimEnter",
+        event = { "BufNewFile", "BufReadPost" },
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("todo-comments").setup({ signs = false, })
@@ -22,7 +22,7 @@ return {
     }, -- Highlight todo, notes, etc in comments
     {
         "norcalli/nvim-colorizer.lua",
-        event = "User FilePost",
+        event = "InsertEnter",
         config = function()
             require("colorizer").setup()
         end,
@@ -42,7 +42,7 @@ return {
     -- }, -- session manager removed because causing slow startup
     {
         "numToStr/Comment.nvim",
-        event = "User FilePost",
+        event = "InsertEnter",
         opts = {},
         config = function()
             local opts = { noremap = true, silent = true }
@@ -58,7 +58,7 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        event = "User FilePost",
+        event = { "BufNewFile", "BufReadPost" },
         opts = {
             indent = {
                 char = "▏",
@@ -84,8 +84,39 @@ return {
     {
         "nvzone/timerly",
         dependencies = { "nvzone/volt", },
-        cmd = "TimerlyToggle",
-        lazy = true,
+        -- cmd = "TimerlyToggle",
+        -- lazy = true,
         keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
     },
+    {
+        'luukvbaal/statuscol.nvim',
+        event = { "BufReadPost", "BufNewFile" },
+        opts = function()
+            local builtin = require('statuscol.builtin')
+
+            return {
+                setopt = true,
+                segments = {
+                    {
+                        text = { builtin.foldfunc, '' },
+                        click = 'v:lua.ScFa',
+                        auto = true,
+                    },
+                    {
+                        text = { builtin.lnumfunc, '' },
+                        click = 'v:lua.ScLa',
+                        auto = true,
+                    },
+                    {
+                        sign = { namespace = { 'diagnostic/signs' }, auto = true },
+                        click = 'v:lua.ScSa',
+                    },
+                    {
+                        sign = { namespace = { 'gitsigns' }, auto = true },
+                        click = 'v:lua.ScSa',
+                    },
+                },
+            }
+        end,
+    }
 }

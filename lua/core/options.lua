@@ -45,7 +45,7 @@ vim.opt.runtimepath:remove "/usr/share/vim/vimfiles" -- Separate Vim plugins fro
 
 -- folding
 
-vim.o.foldcolumn = "1" --- disabled fold vislaus in left side it was not appearing properly
+vim.o.foldcolumn = "1"
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.opt.foldmethod = "expr"
@@ -56,5 +56,12 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- ref: https://github.com/neovim/neovim/pull/20750
 vim.opt.foldtext = ""
 vim.opt.fillchars:append("fold: ")
--- vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "-", foldsep = " ", foldclose = "+", }
-vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "", }
+vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "-", foldsep = " ", foldclose = "+", }
+-- vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "", }
+
+
+-- -- defining signs
+-- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+-- vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+-- vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+-- vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })

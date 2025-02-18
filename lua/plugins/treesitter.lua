@@ -1,31 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
-
-    dependencies = {
-        {
-            'luukvbaal/statuscol.nvim',
-            opts = function()
-                local builtin = require('statuscol.builtin')
-
-                return {
-                    setopt = true,
-                    segments = {
-                        { text = { builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
-                        {
-                            text = { builtin.lnumfunc, '' },
-                            click = 'v:lua.ScLa',
-                        },
-                        {
-                            sign = { namespace = { 'gitsigns' } },
-                            click = 'v:lua.ScSa',
-                        },
-                    },
-                }
-            end,
-        },
-
-    },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = {
