@@ -27,19 +27,6 @@ return {
             require("colorizer").setup()
         end,
     }, -- High-performance color highlighter
-    -- {
-    --     "rmagatti/auto-session",
-    --     lazy = false,
-    --     config = function()
-    --         require("auto-session").setup {
-    --             bypass_save_filetypes = { "alpha", "dashboard" }
-    --         }
-    --         map("n", "<leader>ssf", "<cmd>SessionSearch<CR>", { desc = "Search Session" })
-    --         map("n", "<leader>sss", "<cmd>SessionSave<CR>", { desc = "Save Session" })
-    --         map("n", "<leader>ssr", "<cmd>SessionRestore<CR>", { desc = "Restore Session" })
-    --         map("n", "<leader>ssR", "<cmd>SessionDisableAutoSave<CR>", { desc = "Toggle Session Autosave" })
-    --     end
-    -- }, -- session manager removed because causing slow startup
     {
         "numToStr/Comment.nvim",
         event = "InsertEnter",
@@ -84,8 +71,8 @@ return {
     {
         "nvzone/timerly",
         dependencies = { "nvzone/volt", },
-        -- cmd = "TimerlyToggle",
-        -- lazy = true,
+        cmd = "TimerlyToggle",
+        lazy = true,
         keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
     },
     {
@@ -98,7 +85,7 @@ return {
                 setopt = true,
                 segments = {
                     {
-                        text = { builtin.foldfunc, '' },
+                        text = { builtin.foldfunc, ' ' },
                         click = 'v:lua.ScFa',
                         auto = true,
                     },

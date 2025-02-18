@@ -3,8 +3,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-        -- vim.g.nightflyNormalFloat = true
-        -- vim.g.nightflyCursorColor = true
         vim.cmd [[colorscheme nightfly]]
+        vim.api.nvim_set_hl(0, "FoldColumn", { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
     end,
 }
