@@ -100,3 +100,13 @@ map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 
 -- folding 
 map('n', 'zo', 'za')
+
+local function toggle_foldcolumn()
+    if vim.o.foldcolumn == "0" then
+        vim.o.foldcolumn = "1"  
+    else
+        vim.o.foldcolumn = "0" 
+    end
+end
+
+vim.keymap.set('n', 'zi', toggle_foldcolumn, { noremap = true, silent = true , desc = "ToggleFold"})

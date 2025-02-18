@@ -15,6 +15,8 @@ map("n", "<leader>sgc", ':Telescope git_commits<CR>', { desc = "Search Git Commi
 map("n", "<leader>sgC", ':Telescope git_bcommits<CR>', { desc = "Search Git Bcommits" })
 map("n", "<leader>sgs", ':Telescope git_stash<CR>', { desc = "Search Git Stash" })
 map("n", "<leader>sgf", ':Telescope git_files<CR>', { desc = "Search Git Files" })
+map("n", "<leader>sb", ':Telescope scope buffers<CR>', {desc = "Seach Buffers in current tab"})
+map("n", "<leader>sh", ":Telescope harpoon marks<CR>", { desc = "Search Harpoon Marks" })
 
 map("n", "<leader>/", function()
     require "telescope.builtin".current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
@@ -61,6 +63,8 @@ return {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown(),
                 },
+                require('scope'),
+                require('harpoon')
             },
         }
     end,

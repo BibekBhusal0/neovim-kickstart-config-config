@@ -1,5 +1,6 @@
 local selected_bg = "#3f3f46"
 local bg = "#18181b"
+local map = vim.keymap.set
 
 return {
     {
@@ -66,5 +67,15 @@ return {
             }
         end,
     },
-    {}
+    { "tiagovla/scope.nvim", config = true, event = 'vimEnter' },
+    {
+        'ThePrimeagen/harpoon',
+        keys = {
+            { "<leader>fa", "<cmd>lua require('harpoon.mark').add_file()<CR>", desc = "Add file to harpoon" },
+            { "<leader>fm", "<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>", desc = "Harpoon menu" },
+            { "<leader>fn", "<cmd>lua require('harpoon.ui').nav_next()<CR>", desc = "Next harpoon" },
+            { "<leader>fp", "<cmd>lua require('harpoon.ui').nav_prev()<CR>", desc = "Previous harpoon" },
+            { "<leader>ff", "<cmd>lua require('harpoon.ui').nav_file()<CR>", desc = "Open harpoon file" },
+        }
+    }
 }

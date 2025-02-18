@@ -7,7 +7,7 @@ return {
     },
     {
         "windwp/nvim-autopairs",
-        event = "User FilePost",
+        event = "InsertEnter",
         config = true,
     }, -- Autoclose parentheses, brackets, quotes, etc.
     {
@@ -99,7 +99,7 @@ return {
                         click = 'v:lua.ScSa',
                     },
                     {
-                        sign = { namespace = { 'gitsigns' }, auto = true },
+                        sign = { namespace = { 'gitsigns' }, },
                         click = 'v:lua.ScSa',
                     },
                 },
