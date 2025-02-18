@@ -40,22 +40,22 @@ map("n", "nzzzv", "Find next and center")
 map("N", "Nzzzv", "Find previous and center")
 
 -- Resize with arrows
-map("<Up>", ":resize -2", "Resize window up")
-map("<Down>", ":resize +2", "Resize window down")
-map("<Left>", ":vertical resize -2", "Resize window left")
-map("<Right>", ":vertical resize +2", "Resize window right")
+map("<Up>", ":resize -2<CR>", "Resize window up")
+map("<Down>", ":resize +2<CR>"", "Resize window down")
+map("<Left>", ":vertical resize -2<CR>"", "Resize window left")
+map("<Right>", ":vertical resize +2<CR>"", "Resize window right")
 
 -- Buffers
-map("<Tab>", ":bnext", "Next buffer")
-map("<S-Tab>", ":bprevious", "Previous buffer")
-map("<leader>x", ":bdelete!", "Close buffer")
-map("<leader>b", ":enew", "New buffer")
+map("<Tab>", ":bnext", "Next buffer<CR>"")
+map("<S-Tab>", ":bprevious", "Previous buffer<CR>"")
+map("<leader>x", ":bdelete!", "Close buffer<CR>"")
+map("<leader>b", ":enew", "New buffer<CR>"")
 
 -- Window management
-map("<leader>v", ":vsplit", "Split window vertically")
-map("<leader>h", ":split", "Split window horizontally")
-map("<leader>se", ":winc =", "Make split windows equal width & height")
-map("<leader>xs", ":close", "Close current split window")
+map("<leader>v", ":vsplit<CR>"", "Split window vertically")
+map("<leader>h", ":split<CR>"", "Split window horizontally")
+map("<leader>se", ":winc =<CR>"", "Make split windows equal width & height")
+map("<leader>xs", ":close<CR>"", "Close current split window")
 
 -- Navigate between splits
 map("<C-k>", ":wincmd k<CR>", "Go to previous window")
