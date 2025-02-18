@@ -1,4 +1,4 @@
-local map = vim.keymap.set
+local map = require("utils.map")
 
 return {
     {
@@ -14,10 +14,12 @@ return {
         "folke/todo-comments.nvim",
         event = { "BufNewFile", "BufReadPost" },
         dependencies = { "nvim-lua/plenary.nvim" },
+        keys = {
+            { "<leader>sc", "<cmd>TodoTelescope<CR>", desc = "Search Todo" },
+            { "<leader>ll", "<cmd>TodoLocList<CR>",   desc = "Todo Loc List" },
+        },
         config = function()
             require("todo-comments").setup({ signs = false, })
-            map("n", "<leader>sc", "<cmd>TodoTelescope<CR>", { desc = "Search Todo" })
-            map("n", "<leader>ll", "<cmd>TodoLocList<CR>", { desc = "Todo Loc List" })
         end,
     }, -- Highlight todo, notes, etc in comments
     {
@@ -32,14 +34,13 @@ return {
         event = "InsertEnter",
         opts = {},
         config = function()
-            local opts = { noremap = true, silent = true }
-            map("n", "<C-_>", require("Comment.api").toggle.linewise.current, opts)
-            map("n", "<C-c>", require("Comment.api").toggle.linewise.current, opts)
-            map("n", "<C-/>", require("Comment.api").toggle.linewise.current, opts)
-            map("v", "<C-_>", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
-            map("v", "<C-c>", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
-            map("v", "<C-/>", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
-            map("i", "<C-/>", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", opts)
+            local toggleComment = require("Comment.api").toggle.linewise.current
+            local toggleCommentVisual = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>"
+            local keys = { '/', '_', 'c' }
+            for _, key in ipairs(keys) do
+                map("<C-" .. key .. ">", toggleComment, 'Toggle Comment', { "n", "i" })
+                map("<C-" .. key .. ">", toggleCommentVisual, 'Toggle Comment', 'v')
+            end
         end,
     }, -- Easily comment visual regions/lines
     {
@@ -64,6 +65,7 @@ return {
                     "neogitstatus",
                     "NvimTree",
                     "Trouble",
+                    "alpha"
                 },
             },
         },

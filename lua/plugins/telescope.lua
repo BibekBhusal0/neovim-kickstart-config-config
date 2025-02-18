@@ -1,36 +1,37 @@
-local map = vim.keymap.set
-
-map("n", "<leader>sh", ':Telescope help_tags<CR>', { desc = "Search Help" })
-map("n", "<leader>sk", ':Telescope keymaps<CR>', { desc = "Search Keymaps" })
-map("n", "<leader>sf", ':Telescope find_files<CR>', { desc = "Search Files" })
-map("n", "<leader>ss", ':Telescope builtin<CR>', { desc = "Search Telescope" })
-map("n", "<leader>sW", ':Telescope grep_string<CR>', { desc = "Search current Word" })
-map("n", "<leader>sd", ':Telescope diagnostics<CR>', { desc = "Search Diagnostics" })
-map("n", "<leader>sr", ':Telescope resume<CR>', { desc = "Search Resume" })
-map("n", "<leader>s.", ':Telescope oldfiles<CR>', { desc = "Search recent Files" })
-map("n", "<leader><leader>", ':Telescope buffers<CR>', { desc = "Search buffers" })
-map("n", "<leader>sw", ':Telescope live_grep<CR>', { desc = "Search by Grep" })
-map("n", "<leader>sgb", ':Telescope git_branches<CR>', { desc = "Search Git Branches" })
-map("n", "<leader>sgc", ':Telescope git_commits<CR>', { desc = "Search Git Commits" })
-map("n", "<leader>sgC", ':Telescope git_bcommits<CR>', { desc = "Search Git Bcommits" })
-map("n", "<leader>sgs", ':Telescope git_stash<CR>', { desc = "Search Git Stash" })
-map("n", "<leader>sgf", ':Telescope git_files<CR>', { desc = "Search Git Files" })
-map("n", "<leader>sb", ':Telescope scope buffers<CR>', {desc = "Seach Buffers in current tab"})
-map("n", "<leader>sh", ":Telescope harpoon marks<CR>", { desc = "Search Harpoon Marks" })
-
-map("n", "<leader>/", function()
+local searchInCurrentBuffer = function()
     require "telescope.builtin".current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
         winblend = 10,
         previewer = false,
     })
-end, { desc = "[/] Fuzzily search in current buffer" })
+end
 
-map("n", "<leader>s/", function()
+local searchInOpenFiles = function()
     require "telescope.builtin".live_grep {
         grep_open_files = true,
         prompt_title = "Live Grep in Open Files",
     }
-end, { desc = "[S]earch [/] in Open Files" })
+end
+
+map = require 'utils.map'
+map("<leader>sh", ':Telescope help_tags<CR>', "Search Help")
+map("<leader>sk", ':Telescope keymaps<CR>', "Search Keymaps")
+map("<leader>sf", ':Telescope find_files<CR>', "Search Files")
+map("<leader>ss", ':Telescope builtin<CR>', "Search Telescope")
+map("<leader>sW", ':Telescope grep_string<CR>', "Search current Word")
+map("<leader>sd", ':Telescope diagnostics<CR>', "Search Diagnostics")
+map("<leader>sr", ':Telescope resume<CR>', "Search Resume")
+map("<leader>s.", ':Telescope oldfiles<CR>', "Search recent Files")
+map("<leader><leader>", ':Telescope buffers<CR>', "Search buffers")
+map("<leader>sw", ':Telescope live_grep<CR>', "Search by Grep")
+map("<leader>sgb", ':Telescope git_branches<CR>', "Search Git Branches")
+map("<leader>sgc", ':Telescope git_commits<CR>', "Search Git Commits")
+map("<leader>sgC", ':Telescope git_bcommits<CR>', "Search Git Bcommits")
+map("<leader>sgs", ':Telescope git_stash<CR>', "Search Git Stash")
+map("<leader>sgf", ':Telescope git_files<CR>', "Search Git Files")
+map("<leader>sb", ':Telescope scope buffers<CR>', "Seach Buffers in current tab")
+map("<leader>sh", ":Telescope harpoon marks<CR>", "Search Harpoon Marks")
+map("<leader>/", searchInCurrentBuffer, "[/] Fuzzily search in current buffer")
+map("<leader>s/", searchInOpenFiles, "[S]earch [/] in Open Files")
 
 return {
     "nvim-telescope/telescope.nvim",

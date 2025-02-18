@@ -1,3 +1,5 @@
+local map = require("utils.map")
+
 return { -- Autocompletion
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -33,22 +35,17 @@ return { -- Autocompletion
             cmd = { "NeoCodeium" },
             config = function()
                 local neocodeium = require("neocodeium")
-                neocodeium.setup({enabled = false})
-                vim.keymap.set("i", "<A-f>", neocodeium.accept)
-                vim.keymap.set("i", "<A-f>", neocodeium.accept)
-                vim.keymap.set("i", "<A-w>", neocodeium.accept_word)
-                vim.keymap.set("i", "<A-a>", neocodeium.accept_line)
-                vim.keymap.set("i", "<A-e>", neocodeium.cycle_or_complete)
-                vim.keymap.set("i", "<A-r>", neocodeium.cycle_or_complete)
-                vim.keymap.set("i", "<A-c>", neocodeium.clear)
-                vim.keymap.set("n", "<leader>cn", ":NeoCodeium toggle<CR>",
-                    { noremap = true, silent = true, desc = "Toggle NeoCodeium" })
-                vim.keymap.set("n", "<leader>cc", ":NeoCodeium chat<CR>",
-                    { noremap = true, silent = true, desc = "Chat with Codeium" })
-                vim.keymap.set("n", "<leader>cr", ":NeoCodeium restart<CR>",
-                    { noremap = true, silent = true, desc = "Codeium Restart" })
-                vim.keymap.set("n", "<leader>cb", ":NeoCodeium toggle_buffer<CR>",
-                    { noremap = true, silent = true, desc = "Toggle NeoCodeium Buffer" })
+                neocodeium.setup({ enabled = false })
+                map("<A-f>", neocodeium.accept, "Codeium Accept", "i")
+                map("<A-w>", neocodeium.accept_word, "Codeium Accept Word", "i")
+                map("<A-a>", neocodeium.accept_line, "Codeium Accept Line", "i")
+                map("<A-e>", neocodeium.cycle_or_complete, "Codeium Next Autocomplete", "i")
+                map("<A-r>", neocodeium.cycle_or_complete, "Codeium Previous Autocomplete", "i")
+                map("<A-c>", neocodeium.clear, "Codeium Clear", "i")
+                map("<leader>cn", ":NeoCodeium toggle<CR>", "Toggle NeoCodeium")
+                map("<leader>cc", ":NeoCodeium chat<CR>", "Chat with Codeium")
+                map("<leader>cr", ":NeoCodeium restart<CR>", "Codeium Restart")
+                map("<leader>cb", ":NeoCodeium toggle_buffer<CR>", "Toggle NeoCodeium Buffer")
             end,
         }
     },

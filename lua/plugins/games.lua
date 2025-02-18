@@ -1,5 +1,3 @@
-local map = vim.keymap.set
-
 return {
     {
         "ThePrimeagen/vim-be-good",

@@ -186,6 +186,6 @@ return {
 
     config = function()
         render()
-        vim.keymap.set("n", "<leader>a", "<cmd>Alpha<CR>", { noremap = true, silent = true, desc = "Alpha Dashboard" })
+        require('utils.map')("<leader>a", "<cmd>Alpha<CR>", "Alpha Dashboard")
     end
 }

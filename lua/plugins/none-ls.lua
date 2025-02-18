@@ -42,9 +42,10 @@ return {
                         end,
                     })
 
-                    vim.keymap.set("n", "<leader>f", function()
+                    local format = function()
                         vim.lsp.buf.format({ async = true })
-                    end, { desc = "Format file using LSP" })
+                    end
+                    require("utils.map")("<leader>f", format, { desc = "Format file using LSP" })
                 end
             end,
         }

@@ -1,14 +1,17 @@
-vim.keymap.set("n", "<leader>e", ":Neotree toggle position=right<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>w", ":Neotree toggle position=left<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "n", "v", "i" }, "<C-b>", function()
+local showTree = function()
     vim.cmd [[Neotree toggle position=left]]
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, true, true), "n", true)
-end, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>gf", ":Neotree float git_status <CR>",
-    { noremap = true, silent = true, desc = "Git changes in files" })
+end
+
+map = require("utils.map")
+map("<leader>e", ":Neotree toggle position=right<CR>", 'File Tree on Right')
+map("<leader>w", ":Neotree toggle position=left<CR>", "File Tree on Left")
+map("<C-b>", showTree, "Toggle File Tree", { "n", "v", "i" })
+map("<leader>gf", ":Neotree float git_status <CR>", "Git changes in files")
 
 return {
     "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
     cmd = { "Neotree" },
     dependencies = {
         "nvim-lua/plenary.nvim",

@@ -1,8 +1,4 @@
-local map = function(keys, func, desc, mode)
-    mode = mode or "n"
-    vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
-end
-
+map = require('utils.map')
 local function commit_with_message()
     local commit_message = vim.fn.input("Commit message: ")
     if commit_message ~= "" then
@@ -31,27 +27,26 @@ map("<leader>gcM", "<cmd>Git commit<CR>", "Git commit Without Message")
 map("<leader>gca", commit_all_with_message, "Git commit all with message prompt")
 map("<leader>gcA", "<cmd>Git commit -a<CR>", "Git commit all Withoug Message")
 
+map("<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage hunk")
+map("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset hunk")
+map("<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", "Git Stage buffer")
+map("<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", "Git Reset buffer")
+map("<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", "Git Preview hunk")
+map("<leader>gb", "<cmd>Gitsigns blame<CR>", "Git Blame")
+map("<leader>gB", "<cmd>Gitsigns blame_line<CR>", "Git Toggle line blame")
+map("<leader>gd", "<cmd>Gitsigns diffthis<CR>", "Git Diff this")
+map("<leader>gl", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git toggle current line blame")
+map("<leader>gt", "<cmd>Gitsigns toggle_signs<CR>", "Gitsigns toggle")
+
 return {
     {
         "lewis6991/gitsigns.nvim",
-        event = "VimEnter",
-        config = function()
-            require("gitsigns").setup()
-            map("<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage hunk")
-            map("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset hunk")
-            map("<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", "Git Stage buffer")
-            map("<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", "Git Reset buffer")
-            map("<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", "Git Preview hunk")
-            map("<leader>gb", "<cmd>Gitsigns blame<CR>", "Git Blame")
-            map("<leader>gB", "<cmd>Gitsigns blame_line<CR>", "Git Toggle line blame")
-            map("<leader>gd", "<cmd>Gitsigns diffthis<CR>", "Git Diff this")
-            map("<leader>gl", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git toggle current line blame")
-            map("<leader>gt", "<cmd>Gitsigns toggle_signs<CR>", "Gitsigns toggle")
-        end
+        event = { "BufNewFile", "BufReadPost" },
+        cmd = { "Gitsigns" },
+        opts = {},
     },
     {
         "tpope/vim-fugitive",
-        lazy = true,
         cmd = { "Git" },
     },
     {
