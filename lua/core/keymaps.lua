@@ -18,7 +18,7 @@ map("<C-]>", "<Esc>ldbi", "Delete Word", 'i')
 map("<Space>", "<Nop>", '', { 'n', 'v' })
 
 map("<C-s>", ": w <CR>", 'Save File')
-map("<leader>sn", ":noautocmd w <CR>", "Save File Without Auto-formatting")
+map("<leader>sn", ":noautocmd w <CR>", "Save File Without formatting")
 map("<C-q>", ": q <CR>", "Quit File")
 
 -- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
@@ -48,8 +48,8 @@ map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 -- Buffers
 map("<Tab>", ":bnext<CR>", "Buffer Next")
 map("<S-Tab>", ":bprevious<CR>", "Buffer Previous")
-map("<leader>x", ":bdelete!<CR>", "Buffer Delete")
-map("<leader>b", ":enew<CR>", "Buffer New")
+map("<leader>bx", ":bdelete!<CR>", "Buffer Delete")
+map("<leader>bb", ":enew<CR>", "Buffer New")
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")

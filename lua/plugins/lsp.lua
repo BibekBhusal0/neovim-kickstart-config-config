@@ -32,11 +32,49 @@ return {
 
                 map("<leader>la", require("telescope.builtin").lsp_document_symbols, "LSP Document Symbols")
                 map("<leader>lw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "LSP Workspace Symbols")
-                map("<leader>ln", vim.lsp.buf.rename, "LSP Rename variable")
+
+                -- https://github.com/NvChad/ui/blob/63116af409e1d822ef0782e8bf2c45b19227128c/lua/nvchad/lsp/renamer.lua
+                local rename = function()
+                    local api = vim.api
+                    local var = vim.fn.expand "<cword>"
+                    local buf = api.nvim_create_buf(false, true)
+                    local opts = { height = 1, style = "minimal", border = "single", row = 1, col = 1 }
+
+                    opts.relative, opts.width = "cursor", #var + 15
+                    opts.title, opts.title_pos = { { " Renamer ", "@comment.danger" } }, "center"
+
+                    local win = api.nvim_open_win(buf, true, opts)
+                    vim.wo[win].winhl = "Normal:Normal,FloatBorder:Removed"
+                    api.nvim_set_current_win(win)
+
+                    api.nvim_buf_set_lines(buf, 0, -1, true, { " " .. var })
+
+                    vim.bo[buf].buftype = "prompt"
+                    vim.fn.prompt_setprompt(buf, "")
+                    vim.api.nvim_input "A"
+
+                    vim.keymap.set({ "i", "n" }, "<Esc>", "<cmd>q!<CR>", { buffer = buf })
+
+                    vim.fn.prompt_setcallback(buf, function(text)
+                        local newName = vim.trim(text)
+                        api.nvim_buf_delete(buf, { force = true })
+
+                        if #newName > 0 and newName ~= var then
+                            local params = vim.lsp.util.make_position_params()
+                            params.newName = newName
+                            vim.lsp.buf_request(0, "textDocument/rename", params)
+                        end
+                    end)
+                end
+                map("<leader>ln", rename, "LSP Rename variable")
 
                 -- Execute a code action, usually your cursor needs to be on top of an error
                 -- or a suggestion from your LSP for this to activate.
-                map("<leader>ca", vim.lsp.buf.code_action, "LSP code action", { "n", "x" })
+                local function code_action()
+                    pcall(require('telescope').load_extension, 'ui-select')
+                    vim.lsp.buf.code_action()
+                end
+                map("<leader>ca", code_action, "LSP code action", { "n", "x" })
 
                 -- WARN: This is not Goto Definition, this is Goto Declaration.
                 --  For example, in C this would take you to the header.

@@ -1,8 +1,5 @@
 local selected_bg = "#3f3f46"
 local bg = "#18181b"
-vim.cmd('highlight TabLine guibg=#00ff00 guifg=#ff00ff')
-vim.cmd('highlight TabLineSel guibg=#00ffff guifg=#ff0000')
-vim.cmd('highlight TabLineFill guibg=#ffff00')
 
 return {
     {

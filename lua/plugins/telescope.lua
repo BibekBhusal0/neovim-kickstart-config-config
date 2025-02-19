@@ -30,8 +30,8 @@ map("<leader>sgs", ':Telescope git_stash<CR>', "Search Git Stash")
 map("<leader>sgf", ':Telescope git_files<CR>', "Search Git Files")
 map("<leader>sb", ':Telescope scope buffers<CR>', "Seach Buffers in current tab")
 map("<leader>sh", ":Telescope harpoon marks<CR>", "Search Harpoon Marks")
-map("<leader>/", searchInCurrentBuffer, "Search Fuzzily search in current buffer")
-map("<leader>s/", searchInOpenFiles, "Search [/] in Open Files")
+map("<leader>/", searchInCurrentBuffer, "Search in current buffer")
+map("<leader>s/", searchInOpenFiles, "Search  in Open Files")
 
 return {
     "nvim-telescope/telescope.nvim",
@@ -60,13 +60,15 @@ return {
                     },
                 },
             },
+
             extensions = {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown(),
                 },
-                require('scope'),
-                require('harpoon')
             },
         }
+
+        pcall(require('telescope').load_extension, 'fzf')
+        pcall(require('telescope').load_extension, 'ui-select')
     end,
 }
