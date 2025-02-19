@@ -112,6 +112,9 @@ return {
         "smartinellimarco/nvcheatsheet.nvim",
         lazy = true,
         keys = { { "<leader>ch", ':lua require("nvcheatsheet").toggle()<CR>', desc = "cheat sheet" } },
-        opts = {}
+        -- opts = require('utils.cheatsheet')
+        config = function ()
+            require('nvcheatsheet').setup(require('utils.cheatsheet'))
+        end
     }
 }
