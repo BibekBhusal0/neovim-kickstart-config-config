@@ -15,7 +15,7 @@ return {
         event = { "BufNewFile", "BufReadPost" },
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
-            { "<leader>sc", "<cmd>TodoTelescope<CR>", desc = "Search Todo" },
+            { "<leader>sc", "<cmd>TodoTelescope<CR>", desc = "Todo Search Telescope" },
             { "<leader>ll", "<cmd>TodoLocList<CR>",   desc = "Todo Loc List" },
         },
         config = function()
@@ -75,7 +75,7 @@ return {
         dependencies = { "nvzone/volt", },
         cmd = "TimerlyToggle",
         lazy = true,
-        keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Timerly Toggle" } }
+        keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Toggle Timerly" } }
     },
     {
         'luukvbaal/statuscol.nvim',

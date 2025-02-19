@@ -46,41 +46,41 @@ map("<Left>", ":vertical resize -2<CR>", "Resize window left")
 map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 
 -- Buffers
-map("<Tab>", ":bnext<CR>", "Next buffer")
-map("<S-Tab>", ":bprevious<CR>", "Previous buffer")
-map("<leader>x", ":bdelete!<CR>", "Close buffer")
-map("<leader>b", ":enew<CR>", "New buffer")
+map("<Tab>", ":bnext<CR>", "Buffer Next")
+map("<S-Tab>", ":bprevious<CR>", "Buffer Previous")
+map("<leader>x", ":bdelete!<CR>", "Buffer Delete")
+map("<leader>b", ":enew<CR>", "Buffer New")
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
 map("<leader>h", ":split<CR>", "Split window horizontally")
-map("<leader>se", ":winc =<CR>", "Make split windows equal width & height")
-map("<leader>xs", ":close<CR>", "Close current split window")
+map("<leader>se", ":winc =<CR>", "Split window equal")
+map("<leader>xs", ":close<CR>", "Split window close")
 
 -- Navigate between splits
-map("<C-k>", ":wincmd k<CR>", "Go to previous window")
-map("<C-j>", ":wincmd j<CR>", "Go to next window")
-map("<C-h>", ":wincmd h<CR>", "Go to left window")
-map("<C-l>", ":wincmd l<CR>", "Go to right window")
+map("<C-k>", ":wincmd k<CR>", "Window up")
+map("<C-j>", ":wincmd j<CR>", "Window down")
+map("<C-h>", ":wincmd h<CR>", "Window left")
+map("<C-l>", ":wincmd l<CR>", "Window right")
 
 -- Tabs
-map("<leader>to", ":tabnew<CR>", "Open new tab")
-map("<leader>tx", ":tabclose<CR>", "Close current tab")
-map("<leader>tn", ":tabn<CR>", "Go to next tab")
-map("<leader>tp", ":tabp<CR>", "Go to previous tab")
+map("<leader>to", ":tabnew<CR>", "Tab new")
+map("<leader>tx", ":tabclose<CR>", "Tab close")
+map("<leader>tn", ":tabn<CR>", "Tab next")
+map("<leader>tp", ":tabp<CR>", "Tab Previous")
 
 -- Toggle line wrapping
 map("<leader>lw", ":set wrap!<CR>", "Toggle line wrapping")
 
 -- Stay in indent mode
-map("<", "<gv", "Indent to the left", "v")
-map(">", ">gv", "Indent to the right", "v")
+map("<", "<gv", "Indent left", "v")
+map(">", ">gv", "Indent right", "v")
 
 -- Diagnostic keymaps
-map("[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-map("]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
-map("<leader>d", vim.diagnostic.open_float, "Open floating diagnostic message")
-map("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
+map("[d", vim.diagnostic.goto_prev, "Diagnostic previous")
+map("]d", vim.diagnostic.goto_next, "Diagnostic next")
+map("<leader>d", vim.diagnostic.open_float, "Diagnostic floating")
+map("<leader>q", vim.diagnostic.setloclist, "Diagnostic list")
 
 -- line numbers
 map("<leader>n", ":set nu!<CR>", "Toggle Line Number")
@@ -96,4 +96,4 @@ local function toggle_foldcolumn()
 end
 
 map('zo', 'za', "Toggle fold")
-map('zi', toggle_foldcolumn, "ToggleFold")
+map('zi', toggle_foldcolumn, "Toggle fold column")

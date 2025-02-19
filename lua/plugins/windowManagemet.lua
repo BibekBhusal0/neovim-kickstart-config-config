@@ -49,7 +49,7 @@ return {
                     hover = {
                         enabled = true,
                         delay = 200,
-                        reveal = {'close'}
+                        reveal = { 'close' }
                     },
                 },
                 highlights = {
@@ -68,7 +68,6 @@ return {
                     diagnostic = { bg = bg },
                     diagnostic_selected = { bg = bg },
                 },
-
             }
         end,
     },
@@ -76,11 +75,12 @@ return {
     {
         'ThePrimeagen/harpoon',
         keys = {
-            { "<leader>fa", "<cmd>lua require('harpoon.mark').add_file()<CR>",            desc = "Add file to harpoon" },
-            { "<leader>fm", "<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>", desc = "Harpoon menu" },
-            { "<leader>fn", "<cmd>lua require('harpoon.ui').nav_next()<CR>",              desc = "Next harpoon" },
-            { "<leader>fp", "<cmd>lua require('harpoon.ui').nav_prev()<CR>",              desc = "Previous harpoon" },
-            { "<leader>ff", "<cmd>lua require('harpoon.ui').nav_file()<CR>",              desc = "Open harpoon file" },
+            { "<leader>fa", ": lua require('harpoon.mark').add_file()<CR>",        desc = "Harpoon Add File" },
+            { "<leader>fm", ": lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = "Harpoon Menu" },
+            { "<leader>fn", ": lua require('harpoon.ui').nav_next()<CR>",          desc = "Harpoon Next" },
+            { "<leader>fp", ": lua require('harpoon.ui').nav_prev()<CR>",          desc = "Harpoon Previous" },
+            { "<leader>ft", ": lua require('harpoon.mark').toggle_file()<CR>",     desc = "Harpoon Toggle File" },
+            { "<leader>fc", ": lua require('harpoon.mark').clear_all()<CR>",       desc = "Harpoon Clear Files" },
         }
     }
 }

@@ -186,6 +186,6 @@ return {
 
     config = function()
         render()
-        require('utils.map')("<leader>a", "<cmd>Alpha<CR>", "Alpha Dashboard")
+        require('utils.map')("<leader>a", "<cmd>Alpha<CR>", "Toggle Alpha Dashboard")
     end
 }

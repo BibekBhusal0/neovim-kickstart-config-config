@@ -18,32 +18,29 @@ return {
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
             callback = function(event)
-                map("<leader>ld", require("telescope.builtin").lsp_definitions, "Goto [D]efinition")
+                map("<leader>ld", require("telescope.builtin").lsp_definitions, "LSP goto Definition")
                 -- Find references for the word under your cursor.
-                map("<leader>lr", require("telescope.builtin").lsp_references, "Goto [R]eferences")
+                map("<leader>lr", require("telescope.builtin").lsp_references, "LSP goto References")
                 -- Jump to the implementation of the word under your cursor.
                 --  Useful when your language has ways of declaring types without an actual implementation.
-                map("<leader>li", require("telescope.builtin").lsp_implementations, "Goto [I]mplementation")
+                map("<leader>li", require("telescope.builtin").lsp_implementations, "LSP Goto Implementation")
 
                 -- Jump to the type of the word under your cursor.
                 --  Useful when you're not sure what type a variable is and you want to see
                 --  the definition of its *type*, not where it was *defined*.
-                map("<leader>ls", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+                map("<leader>ls", require("telescope.builtin").lsp_type_definitions, "LSP Type Definition")
 
-                -- Fuzzy find all the symbols in your current document.
-                map("<leader>la", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-
-                -- Fuzzy find all the symbols in your current workspace.
-                map("<leader>lw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-                map("<leader>ln", vim.lsp.buf.rename, "[R]e[n]ame variable")
+                map("<leader>la", require("telescope.builtin").lsp_document_symbols, "LSP Document Symbols")
+                map("<leader>lw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "LSP Workspace Symbols")
+                map("<leader>ln", vim.lsp.buf.rename, "LSP Rename variable")
 
                 -- Execute a code action, usually your cursor needs to be on top of an error
                 -- or a suggestion from your LSP for this to activate.
-                map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+                map("<leader>ca", vim.lsp.buf.code_action, "LSP code action", { "n", "x" })
 
                 -- WARN: This is not Goto Definition, this is Goto Declaration.
                 --  For example, in C this would take you to the header.
-                map("<leader>lD", vim.lsp.buf.declaration, "Goto [D]eclaration")
+                map("<leader>lD", vim.lsp.buf.declaration, "LSP goto Declaration")
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
@@ -81,7 +78,7 @@ return {
                 if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
                     map("<leader>th", function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-                    end, "[T]oggle Inlay [H]ints")
+                    end, "LSP Toggle Inlay Hints")
                 end
             end,
         })

@@ -4,7 +4,7 @@ return {
         lazy = true,
         cmd = { 'VimBeGood' },
         keys = {
-            { "<leader>zv", "<cmd>VimBeGood<CR>", desc = "Vim be good" }
+            { "<leader>zv", "<cmd>VimBeGood<CR>", desc = "Game Vim be good" }
         }
     },
     {
@@ -12,7 +12,7 @@ return {
         lazy = true,
         cmd = { 'Playtime' },
         keys = {
-            { "<leader>zp", "<cmd>Playtime<CR>", desc = "More games" }
+            { "<leader>zp", "<cmd>Playtime<CR>", desc = "Game More" }
         }
     },
     {
@@ -20,7 +20,7 @@ return {
         lazy = true,
         cmd = { 'Nvimesweeper' },
         keys = {
-            { "<leader>zm", "<cmd>Nvimesweeper <CR>", desc = "MineSweeper" }
+            { "<leader>zm", "<cmd>Nvimesweeper <CR>", desc = "Game MineSweeper" }
         }
     },
     {
@@ -28,7 +28,7 @@ return {
         lazy = true,
         cmd = { 'Sudoku' },
         keys = {
-            { "<leader>zs", "<cmd>Sudoku<CR>", desc = "Sudoku" }
+            { "<leader>zs", "<cmd>Sudoku<CR>", desc = "Game Sudoku" }
         },
         opts = {}
     },

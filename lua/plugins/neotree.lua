@@ -4,9 +4,9 @@ local showTree = function()
 end
 
 map = require("utils.map")
-map("<leader>e", ":Neotree toggle position=right<CR>", 'File Tree on Right')
-map("<leader>w", ":Neotree toggle position=left<CR>", "File Tree on Left")
-map("<C-b>", showTree, "Toggle File Tree", { "n", "v", "i" })
+map("<leader>e", ":Neotree toggle position=right<CR>", 'NeoTree on Right')
+map("<leader>w", ":Neotree toggle position=left<CR>", "NeoTree on Left")
+map("<C-b>", showTree, "Neotree Toggle", { "n", "v", "i" })
 map("<leader>gf", ":Neotree float git_status <CR>", "Git changes in files")
 
 return {

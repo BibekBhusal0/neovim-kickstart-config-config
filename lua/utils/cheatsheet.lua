@@ -319,8 +319,8 @@ return {
         [[   \▓▓▓▓▓▓ \▓▓   \▓▓ \▓▓▓▓▓▓▓ \▓▓▓▓▓▓▓   \▓▓▓▓       \▓▓▓▓▓▓ \▓▓   \▓▓ \▓▓▓▓▓▓▓ \▓▓▓▓▓▓▓   \▓▓▓▓]],
         [[                                                                                                   ]],
         [[                                                                                                   ]],
-        [[               Cheat Sheet scrapped from :https://vim.rtorr.com/                                   ]],
+        [[               Cheat Sheet scrapped from :https://vim.rtorr.com/                               ]],
         [[                                                                                                   ]],
     },
-    keymaps = vim.tbl_deep_extend("force", copiedMaps, maps)
+    keymaps = vim.tbl_deep_extend("force", maps, copiedMaps)
 }
