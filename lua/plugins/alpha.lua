@@ -8,7 +8,6 @@ local function prettifyFooterText(icon, text)
     end
 end
 
-
 local function render()
     local alpha = require "alpha"
 
@@ -40,7 +39,7 @@ local function render()
         [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
     }
 
-    local function button(sc, txt, keybind, keybind_opts)
+    local function button(sc, icon, txt, keybind, hl)
         local leader = "SPC"
         local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
 
@@ -50,31 +49,30 @@ local function render()
             cursor = 3,
             width = 50,
             align_shortcut = "right",
-            hl_shortcut = "Keyword",
+            hl_shortcut = hl or "Keyword",
+            hl = hl or "Added"
         }
         if keybind then
-            keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
-            opts.keymap = { "n", sc_, keybind, keybind_opts }
+            opts.keymap = { "n", sc_, keybind, { noremap = true, silent = true, nowait = true } }
         end
 
         local function on_press()
-            local key = vim.api.nvim_replace_termcodes(keybind or sc_ .. "<Ignore>", true, false, true)
+            local key = vim.api.nvim_replace_termcodes(sc_ .. "<Ignore>", true, false, true)
             vim.api.nvim_feedkeys(key, "t", false)
         end
 
         return {
             type = "button",
-            val = txt,
+            val = icon .. "  > " .. txt,
             on_press = on_press,
             opts = opts,
         }
     end
 
-
     local buttons_divider = {
         type = "text",
         val = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-        opts = { position = "center" }
+        opts = { position = "center", hl = "Comment" }
     }
 
     local buttonGroup1 = {
@@ -83,24 +81,24 @@ local function render()
             {
                 type = "group",
                 val = {
-                    button("f", "  > Find file", ":Telescope find_files<CR>"),
-                    button("r", "  > Recent Files", ":Telescope oldfiles<CR>"),
-                    button("n", "  > New file", ":ene <BAR> startinsert <CR>"),
-                    button("t", "  > File Explorer", ":Neotree toggle position=left <CR>"),
+                    button("f", "", "Find file", ":Telescope find_files<CR>"),
+                    button("r", "", "Recent Files", ":Telescope oldfiles<CR>"),
+                    button("n", "", "New file", ":ene <BAR> startinsert <CR>"),
+                    button("t", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>"),
                 },
                 opts = { spacing = 1 }
             },
-            button("g", "󰊢  > Git File Changes", ":Neotree float git_status <CR>"),
+            button("g", "󰊢", "Git File Changes", ":Neotree float git_status <CR>"),
         },
     }
 
     local buttonGroup2 = {
         type = "group",
         val  = {
-            button("p", "  > Plugins", ":Lazy<CR>"),
-            button("m", "  > Mason (LSP,  linter, formatter)", ":Mason<CR>"),
-            button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
-            button("q", "󰅙  > Quit", ":qa<CR>"),
+            button("p", "", "Plugins", ":Lazy<CR>"),
+            button("c", "󱙓", "Cheat Sheet", ':lua require("nvcheatsheet").toggle()<CR>'),
+            button("s", "", "Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
+            button("q", "󰅙", "Quit", ":qa<CR>", 'DiagnosticError'),
         },
         opts = { spacing = 1 }
     }
@@ -115,34 +113,22 @@ local function render()
         },
     }
 
+    local function getFooter(val)
+        return { type = "text", val = val, opts = { position = "center", hl = "Ignore" } }
+    end
+
     local footer = {
         type = "group",
         val = {
-            {
-                type = "text",
-                val = prettifyFooterText("", string.format("%d plugins loaded", get_plugin_count())),
-                opts = { position = "center", hl = "Number" }
-            },
-            {
-                type = "text",
-                val = prettifyFooterText("", string.format("Startup Time %d ms", get_lazy_startup_time())),
-                opts = { position = "center", hl = "Number" }
-            },
-            {
-                type = "text",
-                val = prettifyFooterText("", string.format("Today: %s", os.date("%Y-%m-%d"))),
-                opts = { position = "center", hl = "Number" }
-            },
+            getFooter(prettifyFooterText("", string.format("%d plugins loaded", get_plugin_count()))),
+            getFooter(prettifyFooterText("", string.format("Startup Time %d ms", get_lazy_startup_time()))),
+            getFooter(prettifyFooterText("", string.format("Today: %s", os.date("%Y-%m-%d")))),
             { type = "padding", val = 1 },
-            {
-                type = "text",
-                val = {
-                    [[ There are only two ways to write error free programs,]],
-                    [[ and the third one works.                             ]],
-                    [[                                             -Fireship]],
-                },
-                opts = { position = "center", hl = "Number" }
-            },
+            getFooter({
+                [[ There are only two ways to write error free programs,]],
+                [[ and the third one works.                             ]],
+                [[                                             -Fireship]],
+            })
         },
     }
 
