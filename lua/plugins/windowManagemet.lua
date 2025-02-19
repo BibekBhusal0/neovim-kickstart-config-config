@@ -46,7 +46,11 @@ return {
                     minimum_padding = 1,
                     maximum_padding = 3,
                     maximum_length = 15,
-                    sort_by = "insert_at_end",
+                    hover = {
+                        enabled = true,
+                        delay = 200,
+                        reveal = {'close'}
+                    },
                 },
                 highlights = {
                     fill = { bg = vim.api.nvim_get_hl_by_name('Normal', true).background },
