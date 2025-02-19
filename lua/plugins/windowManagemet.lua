@@ -1,5 +1,8 @@
 local selected_bg = "#3f3f46"
 local bg = "#18181b"
+vim.cmd('highlight TabLine guibg=#00ff00 guifg=#ff00ff')
+vim.cmd('highlight TabLineSel guibg=#00ffff guifg=#ff0000')
+vim.cmd('highlight TabLineFill guibg=#ffff00')
 
 return {
     {
@@ -35,7 +38,7 @@ return {
                     color_icons = true,
                     show_buffer_icons = true,
                     show_buffer_close_icons = true,
-                    show_close_icon = true,
+                    show_close_icon = false,
                     persist_buffer_sort = true,     -- whether or not custom sorted buffers should persist
                     separator_style = { "|", "|" }, -- | "thick" | "thin" | { "any", "any" },
                     enforce_regular_tabs = true,
@@ -51,6 +54,29 @@ return {
                         delay = 200,
                         reveal = { 'close' }
                     },
+                    custom_areas = {
+                        right = function()
+                            local result = {}
+                            local current_tab = vim.fn.tabpagenr()
+                            local tab_count = vim.fn.tabpagenr('$')
+
+                            if tab_count > 1 then
+                                for i = 1, tab_count do
+                                    local is_active = (i == current_tab)
+                                    local left = is_active and "▏" or " "
+                                    local right = is_active and "▕" or " "
+
+                                    table.insert(result, {
+                                        text = left .. i .. right,
+                                        link = is_active and "CurSearch" or "TermCursor",
+                                    })
+                                end
+                            end
+
+                            return result
+                        end,
+                    }
+
                 },
                 highlights = {
                     fill = { bg = vim.api.nvim_get_hl_by_name('Normal', true).background },
