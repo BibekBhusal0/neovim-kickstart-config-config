@@ -18,8 +18,18 @@ map("<C-]>", "<Esc>ldbi", "Delete Word", 'i')
 map("<Space>", "<Nop>", '', { 'n', 'v' })
 
 map("<C-s>", ": w <CR>", 'Save File')
+
+-- quit
 map("<leader>sn", ":noautocmd w <CR>", "Save File Without formatting")
-map("<C-q>", ": q <CR>", "Quit File")
+map("<C-q>", ": q!<CR>", "Quit File")
+map("<leader>xx", ": q <CR>", "Quit File")
+map("<leader>xX", ": q!<CR>", "Quit File force")
+map("<leader>xa", ":qa<CR>", "Quit all Files")
+map("<leader>xA", ":qa!<CR>", "Quit all Files force")
+map("<leader>xb", ":bd<CR>", "Quit Buffer")
+map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
+map("<leader>xt", ":tabclose<CR>", "Quit Tab")
+map("<leader>xs", ":close<CR>", "Quit Split")
 
 -- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
 -- move lines in visual mode
@@ -46,16 +56,34 @@ map("<Left>", ":vertical resize -2<CR>", "Resize window left")
 map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 
 -- Buffers
-map("<Tab>", ":bnext<CR>", "Buffer Next")
-map("<S-Tab>", ":bprevious<CR>", "Buffer Previous")
+map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
+map("<S-Tab>", ":bprevious<CR>", "Buffer Cycle Previous")
 map("<leader>bx", ":bdelete!<CR>", "Buffer Delete")
 map("<leader>bb", ":enew<CR>", "Buffer New")
+map("<leader>bp", ":BufferLineTogglePin<CR>", "Buffer Pin")
+map("<leader>bP", ":BufferLinePick<CR>", "Buffer Pick")
+map("<leader>bj", ":BufferLineMoveNext<CR>", "Buffer Move Next")
+map("<leader>bk", ":BufferLineMovePrev<CR>", "Buffer Move Prev")
+map("<leader>bo", ":BufferLineCloseOthers<CR>", "Buffer Close others")
+map("<leader>bh", ":BufferLineCyclePrev<CR>", "Buffer Cycle Prev")
+map("<leader>bl", ":BufferLineCycleNext<CR>", "Buffer Cycle Next")
+map("<leader>bH", ":BufferLineCloseLeft<CR>", "Buffer Close Prev")
+map("<leader>bL", ":BufferLineCloseRight<CR>", "Buffer Close Next")
+
+map("<leader>bse", ":BufferLineSortByExtension<CR>", "Buffer Sort By Extension")
+map("<leader>bsr", ":BufferLineSortByRelativeDirectory<CR>", "Buffer Sort By Relative Directory")
+
+for i = 1, 9 do
+    map("<leader>b" .. i, ":BufferLineGoToBuffer " .. i .. "<CR>", "Buffer Go to " .. i)
+end
+
+-- terminal
+map("<C-x>", "<C-\\><C-N>", "terminal escape terminal mode", 't')
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
 map("<leader>h", ":split<CR>", "Split window horizontally")
 map("<leader>se", ":winc =<CR>", "Split window equal")
-map("<leader>xs", ":close<CR>", "Split window close")
 
 -- Navigate between splits
 map("<C-k>", ":wincmd k<CR>", "Window up")
@@ -68,6 +96,16 @@ map("<leader>to", ":tabnew<CR>", "Tab new")
 map("<leader>tx", ":tabclose<CR>", "Tab close")
 map("<leader>tn", ":tabn<CR>", "Tab next")
 map("<leader>tp", ":tabp<CR>", "Tab Previous")
+
+local function gotoTab()
+    require 'utils.input' (" Tab ", function(text) vim.cmd("tabn " .. text) end, '', 5)
+end
+map("<leader>tg", gotoTab, "Tab goto")
+
+-- leader t 0-9 to move between tabs
+for i = 1, 9 do
+    map("<leader>t" .. i, ":tabn " .. i .. "<CR>", "Tab " .. i)
+end
 
 -- Toggle line wrapping
 map("<leader>lw", ":set wrap!<CR>", "Toggle line wrapping")

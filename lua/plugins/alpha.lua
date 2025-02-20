@@ -84,7 +84,7 @@ local function render()
                     button("f", "", "Find file", ":Telescope find_files<CR>"),
                     button("r", "", "Recent Files", ":Telescope oldfiles<CR>"),
                     button("n", "", "New file", ":ene <BAR> startinsert <CR>"),
-                    button("t", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>"),
+                    button("e", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>"),
                 },
                 opts = { spacing = 1 }
             },
@@ -96,6 +96,7 @@ local function render()
         type = "group",
         val  = {
             button("p", "", "Plugins", ":Lazy<CR>"),
+            button("h", "", "Sessions", "<cmd>SessionSearch<CR>"),
             button("c", "󱙓", "Cheat Sheet", ':lua require("nvcheatsheet").toggle()<CR>'),
             button("s", "", "Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
             button("q", "󰅙", "Quit", ":qa<CR>", 'DiagnosticError'),
@@ -117,12 +118,17 @@ local function render()
         return { type = "text", val = val, opts = { position = "center", hl = "Ignore" } }
     end
 
+    local function getPrettifiedFooter(icon, string)
+        return getFooter(prettifyFooterText(icon, string))
+        
+    end
+
     local footer = {
         type = "group",
         val = {
-            getFooter(prettifyFooterText("", string.format("%d plugins loaded", get_plugin_count()))),
-            getFooter(prettifyFooterText("", string.format("Startup Time %d ms", get_lazy_startup_time()))),
-            getFooter(prettifyFooterText("", string.format("Today: %s", os.date("%Y-%m-%d")))),
+            getPrettifiedFooter("", string.format("%d plugins loaded", get_plugin_count())),
+            getPrettifiedFooter("", string.format("Startup Time %d ms", get_lazy_startup_time())),
+            getPrettifiedFooter("", string.format("Today: %s", os.date("%Y-%m-%d"))),
             { type = "padding", val = 1 },
             getFooter({
                 [[ There are only two ways to write error free programs,]],

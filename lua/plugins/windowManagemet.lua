@@ -1,5 +1,15 @@
 local selected_bg = "#3f3f46"
 local bg = "#18181b"
+local map = require('utils.map')
+
+local saveSesssion = function ()
+    require("utils.input")(" Session Name ", function(text) vim.cmd("SessionSave " .. text) end, '', 40)
+end
+local deleteSessfion = function ()
+    require("utils.input")(" Session Name ", function(text) vim.cmd("SessionDelete " .. text) end, '', 40)
+end
+map("<leader>fS", saveSesssion, "Session Save")
+map("<leader>fD", deleteSessfion, "Session Delete")
 
 return {
     {
@@ -42,7 +52,6 @@ return {
                     always_show_bufferline = true,
                     show_tab_indicators = false,
                     indicator = { style = 'none' },
-                    icon_pinned = "󰐃",
                     minimum_padding = 1,
                     maximum_padding = 3,
                     maximum_length = 15,
@@ -120,10 +129,9 @@ return {
         keys = {
             { "<leader>fs", "<cmd>SessionSave<CR>",           desc = "Session Save" },
             { "<leader>fr", "<cmd>SessionRestore<CR>",        desc = "Session Restore" },
-            { "<leader>fS", "<cmd>SessionSearch<CR>",         desc = "Session Search" },
+            { "<leader>fR", "<cmd>SessionSearch<CR>",         desc = "Session Search" },
             { "<leader>fd", "<cmd>SessionDelete<CR>",         desc = "Session Delete" },
             { "<leader>fA", "<cmd>SessionToggleAutosave<CR>", desc = "Session TOggle Autosave" },
-
         },
         config = function()
             require('auto-session').setup {
