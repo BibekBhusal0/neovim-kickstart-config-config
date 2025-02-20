@@ -102,6 +102,7 @@ return {
                     },
                     {
                         sign = { namespace = { 'gitsigns' }, },
+
                         click = 'v:lua.ScSa',
                     },
                 },
