@@ -42,7 +42,7 @@ return { -- Autocompletion
                 map("<A-e>", neocodeium.cycle_or_complete, "Codeium Next Autocomplete", "i")
                 map("<A-r>", neocodeium.cycle_or_complete, "Codeium Previous Autocomplete", "i")
                 map("<A-c>", neocodeium.clear, "Codeium Clear", "i")
-                map("<leader>cn", ":NeoCodeium toggle<CR>", "Codeium Toggle")
+                map("<leader>ct", ":NeoCodeium toggle<CR>", "Codeium Toggle")
                 map("<leader>cc", ":NeoCodeium chat<CR>", "Codeium Chat")
                 map("<leader>cr", ":NeoCodeium restart<CR>", "Codeium Restart")
                 map("<leader>cb", ":NeoCodeium toggle_buffer<CR>", "Codeium Toggle Buffer")

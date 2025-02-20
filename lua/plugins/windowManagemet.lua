@@ -105,5 +105,33 @@ return {
             { "<leader>ft", ": lua require('harpoon.mark').toggle_file()<CR>",     desc = "Harpoon Toggle File" },
             { "<leader>fc", ": lua require('harpoon.mark').clear_all()<CR>",       desc = "Harpoon Clear Files" },
         }
-    }
+    },
+    {
+        'rmagatti/auto-session',
+        cmd = {
+            "SessionSave",
+            "SessionRestore",
+            "SessionDelete",
+            "SessionDisableAutoSave",
+            "SessionToggleAutoSave",
+            "SessionPurgeOrphaned",
+            "SessionSearch",
+        },
+        keys = {
+            { "<leader>fs", "<cmd>SessionSave<CR>",           desc = "Session Save" },
+            { "<leader>fr", "<cmd>SessionRestore<CR>",        desc = "Session Restore" },
+            { "<leader>fS", "<cmd>SessionSearch<CR>",         desc = "Session Search" },
+            { "<leader>fd", "<cmd>SessionDelete<CR>",         desc = "Session Delete" },
+            { "<leader>fA", "<cmd>SessionToggleAutosave<CR>", desc = "Session TOggle Autosave" },
+
+        },
+        config = function()
+            require('auto-session').setup {
+                auto_save = false,
+                auto_restore = false,
+                auto_create = false,
+                git_branch = true
+            }
+        end
+    },
 }
