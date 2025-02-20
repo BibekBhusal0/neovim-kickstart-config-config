@@ -3,13 +3,13 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
-    opts = {
+    config  =function ()
+        require "nvim-treesitter.configs".setup{
         ensure_installed = {
             "lua",
             "python",
             "javascript",
             "typescript",
-            "jsx",
             "tsx",
             "css",
             "html",
@@ -27,5 +27,6 @@ return {
             additional_vim_regex_highlighting = { "ruby" },
         },
         indent = { enable = true, disable = { "ruby" } },
-    },
+    }
+    end
 }
