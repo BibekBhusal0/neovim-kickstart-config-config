@@ -78,7 +78,7 @@ local copiedMaps = {
         { "change entire line",                       "cc" },
         { "change to the end of the line",            "c$ or C" },
         { "change entire word",                       "ciw" },
-        { "transpose two letters (delete and paste)", "xp" },
+        { "transpose two letters", "xp" },
         { "undo",                                     "u" },
         { "restore (undo) last changed line",         "U" },
         { "redo",                                     "Ctrl + r" },
@@ -255,9 +255,9 @@ local copiedMaps = {
     },
 }
 
+excluded_groups = { "terminal (t)", "autopairs", "Nvim", "Opens", "LuaSnip" }
 -- code inspired from, https://github.com/NvChad/ui/blob/v3.0/lua/nvchad/cheatsheet/init.lua
 local get_mappings = function(mappings, tb_to_add)
-    --   local excluded_groups = require("nvconfig").cheatsheet.excluded_groups
     for _, v in ipairs(mappings) do
         local desc = v.desc
         -- dont include mappings which have \n in their desc
@@ -267,13 +267,13 @@ local get_mappings = function(mappings, tb_to_add)
         local heading = desc:match "%S+" -- get first word
         heading = (v.mode ~= "n" and heading .. " (" .. v.mode .. ")") or heading
         -- useful for removing groups || <Plug> lhs keymaps from cheatsheet
-        -- if
-        --   vim.tbl_contains(excluded_groups, heading)
-        --   or vim.tbl_contains(excluded_groups, desc:match "%S+")
-        --   or string.find(v.lhs, "<Plug>")
-        -- then
-        --   goto continue
-        -- end
+        if
+          vim.tbl_contains(excluded_groups, heading)
+          or vim.tbl_contains(excluded_groups, desc:match "%S+")
+          or string.find(v.lhs, "<Plug>")
+        then
+          goto continue
+        end
         heading = heading
         if not tb_to_add[heading] then
             tb_to_add[heading] = {}

@@ -107,7 +107,7 @@ return {
                 },
             }
         end,
-    },
+    }, -- changes the status column which appears in left side
     {
         "smartinellimarco/nvcheatsheet.nvim",
         lazy = true,
@@ -115,5 +115,5 @@ return {
         config = function()
             require('nvcheatsheet').setup(require('utils.cheatsheet'))
         end
-    }
+    }, -- provides cheatsheet
 }
