@@ -119,6 +119,7 @@ return {
     }, --  cheatsheet
     {
         'petertriho/nvim-scrollbar', 
+        event = { "BufNewFile", "BufReadPost" },
         config = function()
             require('scrollbar').setup({
                 show_in_active_only = true,

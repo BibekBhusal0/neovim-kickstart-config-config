@@ -45,7 +45,7 @@ return {
                     local format = function()
                         vim.lsp.buf.format({ async = true })
                     end
-                    require("utils.map")("<leader>fs", format, "Format file using LSP")
+                    require("utils.map")("<leader>ff", format, "Format file using LSP")
                 end
             end,
         }

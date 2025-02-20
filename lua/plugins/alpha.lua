@@ -96,7 +96,7 @@ local function render()
         type = "group",
         val  = {
             button("p", "", "Plugins", ":Lazy<CR>"),
-            button("h", "", "Sessions", "<cmd>SessionSearch<CR>"),
+            button("h", "", "Sessions", "<cmd>SessionSearch<CR>"),
             button("c", "󱙓", "Cheat Sheet", ':lua require("nvcheatsheet").toggle()<CR>'),
             button("s", "", "Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
             button("q", "󰅙", "Quit", ":qa<CR>", 'DiagnosticError'),
