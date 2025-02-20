@@ -31,7 +31,7 @@ return {
     }, -- High-performance color highlighter
     {
         "numToStr/Comment.nvim",
-        event = "InsertEnter",
+        event = {"BufNewFile", "BufReadPost"},
         opts = {},
         config = function()
             local toggleComment = require("Comment.api").toggle.linewise.current

@@ -1,20 +1,25 @@
 map = require('utils.map')
+input = require('utils.input')
 local function commit_with_message()
-    local commit_message = vim.fn.input("Commit message: ")
-    if commit_message ~= "" then
-        vim.cmd("Git commit -m '" .. commit_message .. "'")
-    else
-        print("Commit message cannot be empty.")
-    end
+    input("Commit Message", function(text) vim.cmd("Git commit -m '" .. text .. "'") end, '', 40)
+    -- local commit_message = vim.fn.input("Commit message: ")
+    -- if commit_message ~= "" then
+    --     vim.cmd("Git commit -m '" .. commit_message .. "'")
+    -- else
+    --     print("Commit message cannot be empty.")
+    -- end
 end
 
 local function commit_all_with_message()
-    local commit_message = vim.fn.input("Commit message: ")
-    if commit_message ~= "" then
-        vim.cmd("Git commit -a -m '" .. commit_message .. "'")
-    else
-        print("Commit message cannot be empty.")
-    end
+    input("Commit Message", function(text)
+        vim.cmd("Git commit -a -m '" .. text .. "'")
+    end, '', 50)
+    -- local commit_message = vim.fn.input("Commit message: ")
+    -- if commit_message ~= "" then
+    --     vim.cmd("Git commit -a -m '" .. commit_message .. "'")
+    -- else
+    --     print("Commit message cannot be empty.")
+    -- end
 end
 
 map("<leader>gp", "<cmd>Git push<CR>", "Git push")
