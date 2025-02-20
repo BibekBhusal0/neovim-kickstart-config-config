@@ -76,7 +76,7 @@ return {
         cmd = "TimerlyToggle",
         lazy = true,
         keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Toggle Timerly" } }
-    },
+    }, -- Simple Timer
     {
         'luukvbaal/statuscol.nvim',
         event = { "BufReadPost", "BufNewFile" },
@@ -115,5 +115,20 @@ return {
         config = function()
             require('nvcheatsheet').setup(require('utils.cheatsheet'))
         end
-    }, -- provides cheatsheet
+    }, --  cheatsheet
+    {
+        'petertriho/nvim-scrollbar', 
+        config = function()
+            require('scrollbar').setup({
+                show_in_active_only = true,
+                hide_if_all_visible = true,
+                handlers ={
+                    cursor = true,
+                    diagnostic = true,
+                    gitsigns = true,
+                    handle = true,
+                }
+            })
+        end
+    },  -- scrollbar showing gitsigns and diagnostics
 }

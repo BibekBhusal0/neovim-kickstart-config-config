@@ -18,6 +18,8 @@ map("<leader>gP", "<cmd>Git pull<CR>", "Git pull")
 map("<leader>gC", commit_with_message, "Git commit")
 map("<leader>gc", commit_all_with_message, "Git commit all")
 
+map("]g", "<cmd>Gitsigns next_hunk<CR>", "Git Next change")
+map("[g", "<cmd>Gitsigns prev_hunk<CR>", "Git Previous change")
 map("<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage hunk")
 map("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset hunk")
 map("<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", "Git Stage buffer")

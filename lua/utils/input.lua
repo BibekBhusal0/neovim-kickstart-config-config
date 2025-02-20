@@ -27,9 +27,6 @@ return function(title, callback, val, width)
         if #newVal > 0 and newVal ~= val then
             print('input is changed and is not empty')
             callback(newVal)
-            -- local params = vim.lsp.util.make_position_params()
-            -- params.newVal = newName
-            -- vim.lsp.buf_request(0, "textDocument/rename", params)
         end
     end)
 end

@@ -256,7 +256,7 @@ local copiedMaps = {
 }
 
 excluded_groups = { "terminal (t)", "autopairs", "Nvim", "Opens", "LuaSnip" }
--- code inspired from, https://github.com/NvChad/ui/blob/v3.0/lua/nvchad/cheatsheet/init.lua
+-- code copied from, https://github.com/NvChad/ui/blob/v3.0/lua/nvchad/cheatsheet/init.lua
 local get_mappings = function(mappings, tb_to_add)
     for _, v in ipairs(mappings) do
         local desc = v.desc
@@ -294,7 +294,6 @@ local organize_mappings = function()
         local bufkeymaps = vim.api.nvim_buf_get_keymap(0, mode)
         get_mappings(keymaps, tb_to_add)
         get_mappings(bufkeymaps, tb_to_add)
-        -- print(vim.inspect(bufkeymaps))
     end
     -- remove groups which have only 1 mapping
     for key, x in pairs(tb_to_add) do
