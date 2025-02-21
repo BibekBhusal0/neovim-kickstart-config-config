@@ -59,13 +59,8 @@ return {
         }
     },
     {
-        "NeogitOrg/neogit",
-        event = 'VeryLazy',
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-        },
-        config = true
-    }
+        "sindrets/diffview.nvim",
+        event = 'VeryLazy'
+    },   
 
 }
