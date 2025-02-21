@@ -84,6 +84,8 @@ map("<C-x>", "<C-\\><C-N>", "terminal escape terminal mode", 't')
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
 map("<leader>h", ":split<CR>", "Split window horizontally")
 map("<leader>se", ":winc =<CR>", "Split window equal")
+map("<leader>V", ":vsplit | ter<CR>", "Split window vertically")
+map("<leader>H", ":split | ter<CR>", "Split window horizontally")
 
 -- Navigate between splits
 map("<C-k>", ":wincmd k<CR>", "Window up")
@@ -117,8 +119,8 @@ map(">", ">gv", "Indent right", "v")
 -- Diagnostic keymaps
 map("[d", vim.diagnostic.goto_prev, "Diagnostic previous")
 map("]d", vim.diagnostic.goto_next, "Diagnostic next")
-map("<leader>d", vim.diagnostic.open_float, "Diagnostic floating")
-map("<leader>q", vim.diagnostic.setloclist, "Diagnostic list")
+map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
+map("<leader>dl", vim.diagnostic.setloclist, "Diagnostic list")
 
 -- line numbers
 map("<leader>n", ":set nu!<CR>", "Toggle Line Number")
