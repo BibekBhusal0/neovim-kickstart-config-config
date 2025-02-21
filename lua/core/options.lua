@@ -44,8 +44,15 @@ vim.opt.formatoptions:remove { "c", "r", "o" }       -- Don"t insert the current
 vim.opt.runtimepath:remove "/usr/share/vim/vimfiles" -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
 vim.o.mousemoveevent = true
 
--- folding
+-- spell 
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+vim.opt.spelloptions = 'camel'
+vim.cmd([[
+  autocmd FileType telescope,mason,lazygit,nvcheatsheet setlocal nospell
+]])
 
+-- folding
 vim.o.foldcolumn = "1"
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true

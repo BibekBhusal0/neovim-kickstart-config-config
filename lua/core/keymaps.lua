@@ -69,6 +69,7 @@ map("<leader>bh", ":BufferLineCyclePrev<CR>", "Buffer Cycle Prev")
 map("<leader>bl", ":BufferLineCycleNext<CR>", "Buffer Cycle Next")
 map("<leader>bH", ":BufferLineCloseLeft<CR>", "Buffer Close Prev")
 map("<leader>bL", ":BufferLineCloseRight<CR>", "Buffer Close Next")
+map("<leader>br", ":e!<CR>", "Buffer Reset")
 
 map("<leader>bse", ":BufferLineSortByExtension<CR>", "Buffer Sort By Extension")
 map("<leader>bsr", ":BufferLineSortByRelativeDirectory<CR>", "Buffer Sort By Relative Directory")
