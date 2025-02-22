@@ -45,10 +45,6 @@ map('<leader>p', '"_dP', "Paste without yanking", 'x')
 map("<C-d>", "<C-d>zz", "Scroll down and center")
 map("<C-u>", "<C-u>zz", "Scroll up and center")
 
--- Find and center
-map("n", "nzzzv", "Find next and center")
-map("N", "Nzzzv", "Find previous and center")
-
 -- Resize with arrows
 map("<Up>", ":resize -2<CR>", "Resize window up")
 map("<Down>", ":resize +2<CR>", "Resize window down")

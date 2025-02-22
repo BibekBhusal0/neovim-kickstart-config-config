@@ -120,6 +120,23 @@ return {
     {
         'petertriho/nvim-scrollbar', 
         event = { "BufNewFile", "BufReadPost" },
+        dependencies = {
+            'kevinhwang91/nvim-hlslens',
+            config = function () 
+                require('scrollbar.handlers.search').setup({
+                    calm_down = true ,
+                    nearest_only = true,
+                })
+                map('n', [[<Cmd>execute('normal! ' . v:count1 . 'nzz')<CR><Cmd>lua require('hlslens').start()<CR>]] , "Find Next" )
+                map('N',  [[<Cmd>execute('normal! ' . v:count1 . 'Nzz')<CR><Cmd>lua require('hlslens').start()<CR>]] , "Find Previous" )
+                map('*', [[*<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Under Cursor')
+                map('#', [[#<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Before Cursor')
+                map('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Under Cursor')
+                map('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Before Cursor')
+                map("<leader>.", '<Cmd>noh<CR>', 'Clear Highlight')
+                
+            end
+        },
         config = function()
             require('scrollbar').setup({
                 show_in_active_only = true,

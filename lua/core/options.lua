@@ -44,6 +44,7 @@ vim.opt.formatoptions:remove { "c", "r", "o" }       -- Don"t insert the current
 vim.opt.runtimepath:remove "/usr/share/vim/vimfiles" -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
 vim.o.mousemoveevent = true
 
+vim.opt.hlsearch = true
 -- spell 
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true

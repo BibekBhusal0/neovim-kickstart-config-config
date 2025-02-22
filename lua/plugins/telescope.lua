@@ -5,6 +5,13 @@ local searchInCurrentBuffer = function()
     })
 end
 
+local spellSuggestion = function()
+    require "telescope.builtin".spell_suggest(require("telescope.themes").get_dropdown {
+        winblend = 10,
+        previewer = false,
+    })
+end
+
 local searchInOpenFiles = function()
     require "telescope.builtin".live_grep {
         grep_open_files = true,
@@ -32,6 +39,8 @@ map("<leader>sb", ':Telescope scope buffers<CR>', "Seach Buffers in current tab"
 map("<leader>sh", ":Telescope harpoon marks<CR>", "Search Harpoon Marks")
 map("<leader>/", searchInCurrentBuffer, "Search in current buffer")
 map("<leader>s/", searchInOpenFiles, "Search  in Open Files")
+map( "<leader>i", spellSuggestion, "Spell suggestion")
+map("<leader>sz", spellSuggestion, "Spell suggestion")
 
 return {
     "nvim-telescope/telescope.nvim",
