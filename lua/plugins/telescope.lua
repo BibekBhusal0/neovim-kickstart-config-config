@@ -9,6 +9,8 @@ local spellSuggestion = function()
     require "telescope.builtin".spell_suggest(require("telescope.themes").get_dropdown {
         winblend = 10,
         previewer = false,
+        default_index= 1,
+        initial_mode = 'normal'
     })
 end
 
@@ -28,14 +30,14 @@ map("<leader>sW", ':Telescope grep_string<CR>', "Search current Word")
 map("<leader>sd", ':Telescope diagnostics<CR>', "Search Diagnostics")
 map("<leader>sr", ':Telescope resume<CR>', "Search Resume")
 map("<leader>s.", ':Telescope oldfiles<CR>', "Search recent Files")
-map("<leader><leader>", ':Telescope buffers<CR>', "Search buffers")
+map("<leader>sB", ':Telescope buffers<CR>', "Search buffers in current tab")
 map("<leader>sw", ':Telescope live_grep<CR>', "Search by Grep")
 map("<leader>sgb", ':Telescope git_branches<CR>', "Search Git Branches")
 map("<leader>sgc", ':Telescope git_commits<CR>', "Search Git Commits")
 map("<leader>sgC", ':Telescope git_bcommits<CR>', "Search Git Bcommits")
 map("<leader>sgs", ':Telescope git_stash<CR>', "Search Git Stash")
 map("<leader>sgf", ':Telescope git_files<CR>', "Search Git Files")
-map("<leader>sb", ':Telescope scope buffers<CR>', "Seach Buffers in current tab")
+map("<leader>sb", ':Telescope scope buffers<CR>', "Seach All Buffers ")
 map("<leader>sh", ":Telescope harpoon marks<CR>", "Search Harpoon Marks")
 map("<leader>/", searchInCurrentBuffer, "Search in current buffer")
 map("<leader>s/", searchInOpenFiles, "Search  in Open Files")

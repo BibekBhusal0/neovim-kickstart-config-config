@@ -92,6 +92,7 @@ map("<C-l>", ":wincmd l<CR>", "Window right")
 
 -- Tabs
 map("<leader>to", ":tabnew<CR>", "Tab new")
+map("<leader>tO", ":tabonly<CR>", "Tab Close other")
 map("<leader>tx", ":tabclose<CR>", "Tab close")
 map("<leader>tn", ":tabn<CR>", "Tab next")
 map("<leader>tp", ":tabp<CR>", "Tab Previous")
