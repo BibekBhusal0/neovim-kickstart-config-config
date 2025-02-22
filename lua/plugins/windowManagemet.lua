@@ -47,11 +47,11 @@ return {
                     show_buffer_close_icons = true,
                     show_close_icon = false,
                     persist_buffer_sort = true,     -- whether or not custom sorted buffers should persist
-                    separator_style = { "|", "|" }, -- | "thick" | "thin" | { "any", "any" },
+                    separator_style = { "", "" }, -- | "thick" | "thin" | { "any", "any" },
                     enforce_regular_tabs = true,
                     always_show_bufferline = true,
                     show_tab_indicators = false,
-                    indicator = { style = 'none' },
+                    indicator = { style = 'icon', icon = "▕" },
                     minimum_padding = 1,
                     maximum_padding = 3,
                     maximum_length = 15,
@@ -74,7 +74,7 @@ return {
 
                                     table.insert(result, {
                                         text = left .. i .. right,
-                                        link = is_active and "CurSearch" or "TermCursor",
+                                        link = is_active and "WildMenu" or "TermCursorNC",
                                     })
                                 end
                             end
@@ -85,7 +85,6 @@ return {
 
                 },
                 highlights = {
-                    fill = { bg = vim.api.nvim_get_hl_by_name('Normal', true).background },
                     buffer_selected = {
                         fg = "#e4e4e7",
                         bg = selected_bg,

@@ -55,6 +55,11 @@ return { -- Autocompletion
         local cmp = require "cmp"
         local luasnip = require "luasnip"
         luasnip.config.setup {}
+
+        local winhighlight = {
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+        }
+
         local kind_icons = {
             Text = "󰉿",
             Method = "m",
@@ -89,6 +94,11 @@ return { -- Autocompletion
                 end,
             },
             completion = { completeopt = "menu,menuone,noinsert" },
+            window = {
+                completion = cmp.config.window.bordered(winhighlight),
+                documentation = cmp.config.window.bordered(winhighlight),
+            },
+
 
             -- For an understanding of why these mappings were
             -- chosen, you will need to read `:help ins-completion`
