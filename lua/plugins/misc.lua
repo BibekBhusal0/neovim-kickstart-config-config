@@ -163,4 +163,14 @@ return {
             })
         end
     },  -- scrollbar showing gitsigns and diagnostics
+    {
+        'ziontee113/icon-picker.nvim',
+        cmd = {'IconPickerNormal', 'IconPickerYank', 'IconPickerInsert'},
+        opts = {} ,
+        keys = {
+            { "<leader>si", "<cmd>IconPickerNormal<cr>", desc = "Icon Picker" },
+            { "<leader>sI", "<cmd>IconPickerYank<cr>", desc = "Icon Picker Yank" },
+        },
+
+    }
 }
