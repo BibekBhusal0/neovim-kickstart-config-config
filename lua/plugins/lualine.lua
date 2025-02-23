@@ -67,6 +67,15 @@ return {
             end,
             cond = hide_in_width,
         }
+        local pomodoro = {
+            function()
+                if not package.loaded["pomodoro"] then
+                    return " 0:0"
+                end
+                  return require("pomodoro").get_pomodoro_status("","","")
+            end,
+            cond = hide_in_width,
+        }
         local lsp_status = {
             function()
                 local clients = vim.lsp.get_active_clients()
@@ -93,10 +102,10 @@ return {
             sections = {
                 lualine_a = { mode },
                 lualine_b = { "branch" },
-                lualine_c = {  diff },
+                lualine_c = {  diff , pomodoro},
                 lualine_x = { diagnostics,  { "filetype", cond = hide_in_width } },
                 lualine_y = { lsp_status, codeium_status },
-                lualine_z = {filename },
+                lualine_z = { filename },
             },
             inactive_sections = {
                 lualine_a = {},

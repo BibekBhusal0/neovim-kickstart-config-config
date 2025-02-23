@@ -71,12 +71,25 @@ return {
         },
     }, -- Better indentations
     {
-        "nvzone/timerly",
-        dependencies = { "nvzone/volt", },
-        cmd = "TimerlyToggle",
-        lazy = true,
-        keys = { { "<leader>tf", "<cmd>TimerlyToggle<CR>", desc = "Toggle Timerly" } }
-    }, -- Simple Timer
+        "quentingruber/pomodoro.nvim",
+        -- event = {'VeryLazy'},
+        keys = {
+            {'<leader>ps', ':PomodoroStart<CR>', desc = 'Pomodoro Start'},
+            {'<Leader>pS', ':PomodoroStop<CR>', desc = 'Pomodoro Stop'},
+            {'<Leader>pu', ':PomodoroUI<CR>', desc = 'Pomodoro UI'},
+            {'<Leader>pd', ':PomodoroDelayBreak<CR>', desc = 'Pomodoro Delay Break'},
+            {'<Leader>pb', ':PomodoroForceBreak<CR>', desc = 'Pomodoro Force Break'},
+            {'<Leader>pB', ':PomodoroSkipBreak<CR>', desc = 'Pomodoro Skip Break'},
+        } ,
+        opts = {
+            start_at_launch = false,
+            work_duration = 25,
+            break_duration = 5,
+            delay_duration = 1,
+            long_break_duration = 15,
+            breaks_before_long = 4,
+        },
+    }, -- Simple pomodoro timer
     {
         'luukvbaal/statuscol.nvim',
         event = { "BufReadPost", "BufNewFile" },

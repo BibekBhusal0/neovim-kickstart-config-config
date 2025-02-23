@@ -39,6 +39,8 @@ map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", 'v')
 -- copy/paste to system clipboard with leader y
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard")
+map("<leader>u", 'ggVGy', "Yank all")
+map("<leader>U", 'ggVG"+y', "Yank all to System Clipboard")
 map('<leader>p', '"_dP', "Paste without yanking", 'x')
 
 -- Vertical scroll and center
