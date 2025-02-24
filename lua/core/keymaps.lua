@@ -123,7 +123,7 @@ map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
 map("<leader>dl", vim.diagnostic.setloclist, "Diagnostic list")
 
 -- line numbers
-map("<leader>n", ":set nu!<CR>", "Toggle Line Number")
+map("<leader>nn", ":set nu!<CR>", "Toggle Line Number")
 map("<leader>rn", ":set rnu!<CR>", "Toggle Relative Line Number")
 
 -- folding

@@ -165,12 +165,94 @@ return {
     },  -- scrollbar showing gitsigns and diagnostics
     {
         'ziontee113/icon-picker.nvim',
-        cmd = {'IconPickerNormal', 'IconPickerYank', 'IconPickerInsert'},
         opts = {} ,
         keys = {
-            { "<leader>si", "<cmd>IconPickerNormal<cr>", desc = "Icon Picker" },
-            { "<leader>sI", "<cmd>IconPickerYank<cr>", desc = "Icon Picker Yank" },
+            { "<leader>si", "<cmd>PickIcons<cr>", desc = "Icon Picker" },
+            { "<leader>sI", "<cmd>PickIconsYank<cr>", desc = "Icon Picker Yank" },
+            { "<leader>se", "<cmd>PickEmoji<cr>", desc = "Icon Picker Emoji" },
+            { "<leader>sE", "<cmd>PickEmojiYank emoji<cr>", desc = "Icon Picker Emoji Yank" },
         },
+    },
+    {
+        'backdround/global-note.nvim',
+        keys = {
+            {"<leader>ng", "<cmd>GlobalNote<cr>", desc = "Global Note"},
+            {"<leader>np", "<cmd>ProjectNote<cr>", desc = "Project Note"},
+        },
+        config = function () 
+            local gloabl_note = require('global-note')
+            local get_project_name = function()
+                local project_directory, err = vim.loop.cwd()
+                if project_directory == nil then
+                    vim.notify(err, vim.log.levels.WARN)
+                    return nil
+                end
 
-    }
+                local project_name = vim.fs.basename(project_directory)
+                if project_name == nil then
+                    vim.notify("Unable to get the project name", vim.log.levels.WARN)
+                    return nil
+                end
+
+                return project_name
+            end
+
+            gloabl_note.setup({
+                additional_presets = {
+                    project_local = {
+                        command_name = "ProjectNote",
+                        filename = function()
+                            return get_project_name() .. ".md"
+                        end,
+                        title = "Project note",
+                    },
+                }
+            })
+        end
+    },
+    {
+        'jakewvincent/mkdnflow.nvim',
+        event = { "BufNewFile", "BufReadPost" },
+        config = function()
+            require('mkdnflow').setup({
+                mappings = {
+                    MkdnEnter = {{'n', 'v'}, '<CR>'},
+                    MkdnTab = false,
+                    MkdnSTab = false,
+                    MkdnNextLink = {'n', ']l'},
+                    MkdnPrevLink = {'n', '[l'},
+                    MkdnNextHeading = {'n', ']]'},
+                    MkdnPrevHeading = {'n', '[['},
+                    MkdnGoBack = {'n', '<BS>'},
+                    MkdnGoForward = {'n', '<Del>'},
+                    MkdnCreateLink = false, -- see MkdnEnter
+                    MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<A-p>'}, -- see MkdnEnter
+                    MkdnFollowLink = false, -- see MkdnEnter
+                    MkdnDestroyLink = {'n', '<M-CR>'},
+                    MkdnTagSpan = {'v', '<M-CR>'},
+                    MkdnMoveSource = {'n', '<F2>'},
+                    MkdnYankAnchorLink = {'n', 'yaa'},
+                    MkdnYankFileAnchorLink = {'n', 'yfa'},
+                    MkdnIncreaseHeading = {'n', '+'},
+                    MkdnDecreaseHeading = {'n', '-'},
+                    MkdnToggleToDo = {{'n', 'v'}, '<C-Space>'},
+                    MkdnNewListItem = false,
+                    MkdnNewListItemBelowInsert = {'n', 'o'},
+                    MkdnNewListItemAboveInsert = {'n', 'O'},
+                    MkdnExtendList = false,
+                    MkdnUpdateNumbering = {'n', '<leader>nn'},
+                    MkdnTableNextCell = {'i', ']c'},
+                    MkdnTablePrevCell = {'i', '[c'},
+                    MkdnTableNextRow = false,
+                    MkdnTablePrevRow = {'i', '<M-CR>'},
+                    MkdnTableNewRowBelow = {'n', '<C-i>r'},
+                    MkdnTableNewRowAbove = {'n', '<C-i>R'},
+                    MkdnTableNewColAfter = {'n', '<C-i>c'},
+                    MkdnTableNewColBefore = {'n', '<C-i>C'},
+                    MkdnFoldSection = {'n', 'f'},
+                    MkdnUnfoldSection = {'n', '<leader>F'}
+                }
+            })
+        end
+    },
 }
