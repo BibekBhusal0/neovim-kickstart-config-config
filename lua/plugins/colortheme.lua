@@ -1,26 +1,9 @@
-local bg_transparent = true
-
 return {
-    "olimorris/onedarkpro.nvim",
+    "bluz71/vim-moonfly-colors",
     lazy = false,
     priority = 1000,
     config = function()
-        local render = function ()
-
-            require("onedarkpro").setup({
-                options = {
-                    transparency = bg_transparent,
-                }
-            })
-            vim.cmd("colorscheme onedark_dark")
-        end
-        render()
-
-        local toggle_transparency = function()
-            bg_transparent = not bg_transparent
-            render()
-        end
-
-        require('utils.map')( "<leader>bg", toggle_transparency, "Toggle Background transparency")
+        vim.cmd [[colorscheme moonfly]]
+        vim.api.nvim_set_hl(0, "FoldColumn", { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
     end,
 }

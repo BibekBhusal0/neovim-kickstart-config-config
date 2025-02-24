@@ -98,11 +98,11 @@ return {
             return {
                 setopt = true,
                 segments = {
-                    {
-                        text = { builtin.foldfunc, ' ' },
-                        click = 'v:lua.ScFa',
-                        auto = true,
-                    },
+                    -- {
+                    --     text = { builtin.foldfunc, ' ' },
+                    --     click = 'v:lua.ScFa',
+                    --     auto = true,
+                    -- },
                     {
                         text = { builtin.lnumfunc, '' },
                         click = 'v:lua.ScLa',
@@ -263,5 +263,11 @@ return {
                 remove_default_keybinds = true,
             })
         end
+    },
+   
+    {
+        "sphamba/smear-cursor.nvim",
+        event = { "CursorHold", "CursorHoldI" },
+        opts = {},
     },
 }

@@ -11,6 +11,49 @@ end
 map("<leader>fS", saveSesssion, "Session Save")
 map("<leader>fD", deleteSessfion, "Session Delete")
 
+-- Resize with arrows
+map("<Up>", ":resize -2<CR>", "Resize window up")
+map("<Down>", ":resize +2<CR>", "Resize window down")
+map("<Left>", ":vertical resize -2<CR>", "Resize window left")
+map("<Right>", ":vertical resize +2<CR>", "Resize window right")
+
+-- Buffers
+map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
+map("<S-Tab>", ":bprevious<CR>", "Buffer Cycle Previous")
+map("<leader>bx", ":bdelete!<CR>", "Buffer Delete")
+map("<leader>bb", ":enew<CR>", "Buffer New")
+
+-- Window management
+map("<leader>v", ":vsplit<CR>", "Split window vertically")
+map("<leader>h", ":split<CR>", "Split window horizontally")
+map("<leader>V", ":vsplit | ter<CR>", "Split window vertically")
+map("<leader>H", ":split | ter<CR>", "Split window horizontally")
+map("<leader>br", ":e!<CR>", "Buffer Reset")
+
+-- Navigate between splits
+map("<C-k>", ":wincmd k<CR>", "Window up")
+map("<C-j>", ":wincmd j<CR>", "Window down")
+map("<C-h>", ":wincmd h<CR>", "Window left")
+map("<C-l>", ":wincmd l<CR>", "Window right")
+
+-- Tabs
+map("<leader>to", ":tabnew<CR>", "Tab new")
+map("<leader>tO", ":tabonly<CR>", "Tab Close other")
+map("<leader>tx", ":tabclose<CR>", "Tab close")
+map("<leader>tn", ":tabn<CR>", "Tab next")
+map("<leader>tp", ":tabp<CR>", "Tab Previous")
+
+local function gotoTab()
+    require 'utils.input' (" Tab ", function(text) vim.cmd("tabn " .. text) end, '', 5)
+end
+map("<leader>tg", gotoTab, "Tab goto")
+
+-- leader t 0-9 to move between tabs
+for i = 1, 9 do
+    map("<leader>t" .. i, ":tabn " .. i .. "<CR>", "Tab " .. i)
+end
+
+
 return {
     {
         "akinsho/bufferline.nvim",
@@ -100,6 +143,22 @@ return {
                     diagnostic_selected = { bg = bg },
                 },
             }
+            map("<leader>bp", ":BufferLineTogglePin<CR>", "Buffer Toggle Pin")
+            map("<leader>bP", ":BufferLinePick<CR>", "Buffer Pick")
+            map("<leader>bj", ":BufferLineMoveNext<CR>", "Buffer Move Next")
+            map("<leader>bk", ":BufferLineMovePrev<CR>", "Buffer Move Prev")
+            map("<leader>bo", ":BufferLineCloseOthers<CR>", "Buffer Close others")
+            map("<leader>bh", ":BufferLineCyclePrev<CR>", "Buffer Cycle Prev")
+            map("<leader>bl", ":BufferLineCycleNext<CR>", "Buffer Cycle Next")
+            map("<leader>bH", ":BufferLineCloseLeft<CR>", "Buffer Close Prev")
+            map("<leader>bL", ":BufferLineCloseRight<CR>", "Buffer Close Next")
+
+            map("<leader>bse", ":BufferLineSortByExtension<CR>", "Buffer Sort By Extension")
+            map("<leader>bsr", ":BufferLineSortByRelativeDirectory<CR>", "Buffer Sort By Relative Directory")
+
+            for i = 1, 9 do
+                map("<leader>b" .. i, ":BufferLineGoToBuffer " .. i .. "<CR>", "Buffer Go to " .. i)
+            end
         end,
     },
     { "tiagovla/scope.nvim", config = true, event = 'vimEnter' },
@@ -139,6 +198,25 @@ return {
                 auto_create = false,
                 git_branch = true
             }
+        end
+    },
+    {
+        "anuvyklack/windows.nvim",
+        event = {'WinNew'},
+        dependencies = {
+            "anuvyklack/middleclass",
+            "anuvyklack/animation.nvim"
+        },
+        config = function()
+            vim.o.winwidth = 20
+            vim.o.winminwidth = 15
+            vim.o.equalalways = false
+            require('windows').setup()
+            map("<leader>wm", ":WindowsMaximize<CR>", "Window Maximize")
+            map("<leader>wv", ":WindowsMaximizeVertically<CR>", "Window Maximize Vertically")
+            map("<leader>wh", ":WindowsMaximizeHorizontally<CR>", "Window Maximize Horizontally")
+            map("<leader>w=", ":WindowsEqualize<CR>", "Window Equalize")
+            map("<leader>wt", ":WindowsToggleAutowidth<CR>", 'Window Toggle Autowidth')
         end
     },
 }
