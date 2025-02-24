@@ -72,7 +72,6 @@ return {
     }, -- Better indentations
     {
         "quentingruber/pomodoro.nvim",
-        -- event = {'VeryLazy'},
         keys = {
             {'<leader>ps', ':PomodoroStart<CR>', desc = 'Pomodoro Start'},
             {'<Leader>pS', ':PomodoroStop<CR>', desc = 'Pomodoro Stop'},
@@ -146,7 +145,7 @@ return {
                 map('#', [[#<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Before Cursor')
                 map('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Under Cursor')
                 map('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Before Cursor')
-                map("<leader>.", '<Cmd>noh<CR>', 'Clear Highlight')
+                map("<Esc>", '<Cmd>noh<CR>', 'Clear Highlight')
                 
             end
         },
@@ -252,6 +251,16 @@ return {
                     MkdnFoldSection = {'n', 'f'},
                     MkdnUnfoldSection = {'n', '<leader>F'}
                 }
+            })
+        end
+    },
+    {
+        'nguyenvukhang/nvim-toggler',
+        keys = {
+            { '<leader>tt', ':lua require("nvim-toggler").toggle() <Cr>', desc = "Toggle Value"}},
+        config = function () 
+            require("nvim-toggler").setup({
+                remove_default_keybinds = true,
             })
         end
     },
