@@ -32,6 +32,7 @@ map("<leader>xt", ":tabclose<CR>", "Quit Tab")
 map("<leader>xs", ":close<CR>", "Quit Split")
 
 -- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
+--
 -- move lines in visual mode
 map("J", ":m '>+1<CR>gv=gv", "Move Lines Down", 'v')
 map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", 'v')

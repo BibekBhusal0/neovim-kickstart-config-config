@@ -257,7 +257,8 @@ return {
     {
         'nguyenvukhang/nvim-toggler',
         keys = {
-            { '<leader>tt', ':lua require("nvim-toggler").toggle() <Cr>', desc = "Toggle Value"}},
+            { '<leader>tt', ':lua require("nvim-toggler").toggle() <Cr>', desc = "Toggle Value"}
+        },
         config = function () 
             require("nvim-toggler").setup({
                 remove_default_keybinds = true,
@@ -274,7 +275,7 @@ return {
                 cursor_color = "#ff8800",
                 stiffness = 0.6,
                 trailing_stiffness = 0.3,
-                 distance_stop_animating = 0.5,
+                distance_stop_animating = 0.5,
                 hide_target_hack = true,
                 gamma = 1,
 
@@ -283,4 +284,43 @@ return {
             map("<leader>tc", ":SmearCursorToggle<CR>", "Toggle Smear Cursor")
         end
     }, -- cursor animation 
+    {
+        'mg979/vim-visual-multi',
+        event = "VeryLazy", 
+        config  = function () 
+            local hlslens = require('hlslens')
+            if hlslens then
+                local overrideLens = function(render, posList, nearest, idx, relIdx)
+                    local _ = relIdx
+                    local lnum, col = unpack(posList[idx])
+
+                    local text, chunks
+                    if nearest then
+                        text = ('[%d/%d]'):format(idx, #posList)
+                        chunks = {{' ', 'Ignore'}, {text, 'VM_Extend'}}
+                    else
+                        text = ('[%d]'):format(idx)
+                        chunks = {{' ', 'Ignore'}, {text, 'HlSearchLens'}}
+                    end
+                    render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+                end
+                local lensBak
+                local config = require('hlslens.config')
+                local gid = vim.api.nvim_create_augroup('VMlens', {})
+                vim.api.nvim_create_autocmd('User', {
+                    pattern = {'visual_multi_start', 'visual_multi_exit'},
+                    group = gid,
+                    callback = function(ev)
+                        if ev.match == 'visual_multi_start' then
+                            lensBak = config.override_lens
+                            config.override_lens = overrideLens
+                        else
+                            config.override_lens = lensBak
+                        end
+                        hlslens.start()
+                    end
+                })
+            end
+        end
+    }
 }
