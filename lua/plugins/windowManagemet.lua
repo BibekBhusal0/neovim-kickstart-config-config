@@ -1,15 +1,25 @@
 local selected_bg = "#3f3f46"
 local bg = "#18181b"
-local map = require('utils.map')
 
-local saveSesssion = function ()
-    require("utils.input")(" Session Name ", function(text) vim.cmd("SessionSave " .. text) end, '', 40)
+local function close_buffer()
+    local current_buf = vim.api.nvim_get_current_buf()
+    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+    if #buffers == 1 then
+        vim.cmd('enew')
+    else
+        vim.cmd('bprevious') 
+    end
+    vim.cmd('bdelete ' .. current_buf)
 end
-local deleteSessfion = function ()
-    require("utils.input")(" Session Name ", function(text) vim.cmd("SessionDelete " .. text) end, '', 40)
-end
-map("<leader>fS", saveSesssion, "Session Save Custom")
-map("<leader>fD", deleteSessfion, "Session Delete Custom")
+
+map("<leader>xb", close_buffer, "Quit Buffer")
+map('<Leader>bx', close_buffer,'Close Buffer' )
+map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
+
+map('<leader>fs', ':lua require("resession").save()<CR>', 'Session Save')
+map('<leader>fS', ':lua require("resession").save_tab()<CR>', 'Session Save Tab')
+map('<leader>fl', ':lua require("resession").load()<CR>', 'Session Load')
+map('<leader>fd', ':lua require("resession").delete()<CR>', 'Session Delete')
 
 -- Resize with arrows
 map("<Up>", ":resize -2<CR>", "Resize window up")
@@ -151,7 +161,6 @@ return {
             map("<leader>bl", ":BufferLineCycleNext<CR>", "Buffer Cycle Next")
             map("<leader>bH", ":BufferLineCloseLeft<CR>", "Buffer Close Prev")
             map("<leader>bL", ":BufferLineCloseRight<CR>", "Buffer Close Next")
-
             map("<leader>bse", ":BufferLineSortByExtension<CR>", "Buffer Sort By Extension")
             map("<leader>bsr", ":BufferLineSortByRelativeDirectory<CR>", "Buffer Sort By Relative Directory")
 
@@ -160,14 +169,32 @@ return {
             end
         end,
     },
-    { 
-        "backdround/tabscope.nvim",
+    {
+        'tiagovla/scope.nvim',
         event = 'vimEnter',
-        config = function () 
-            local tabscope = require('tabscope')
-            tabscope.setup()
-            map('<Leader>bx', tabscope.remove_tab_buffer , 'Buffer Close' )
+        config = function()
+            require('scope').setup()
         end
+    },
+    {
+        "stevearc/resession.nvim",
+        lazy = true,
+        opts = {
+            buf_filter = function(bufnr)
+                local buftype = vim.bo.buftype
+                if buftype == 'help' then
+                    return true
+                end
+                if buftype ~= "" and buftype ~= "acwrite" then
+                    return false
+                end
+                if vim.api.nvim_buf_get_name(bufnr) == "" then
+                    return false
+                end
+                return true
+            end,
+            extensions = { scope = {} },
+        }
     },
     {
         'ThePrimeagen/harpoon',
@@ -179,33 +206,6 @@ return {
             { "<leader>ft", ": lua require('harpoon.mark').toggle_file()<CR>",     desc = "Harpoon Toggle File" },
             { "<leader>fc", ": lua require('harpoon.mark').clear_all()<CR>",       desc = "Harpoon Clear Files" },
         }
-    },
-    {
-        'rmagatti/auto-session',
-        cmd = {
-            "SessionSave",
-            "SessionRestore",
-            "SessionDelete",
-            "SessionDisableAutoSave",
-            "SessionToggleAutoSave",
-            "SessionPurgeOrphaned",
-            "SessionSearch",
-        },
-        keys = {
-            { "<leader>fs", "<cmd>SessionSave<CR>",           desc = "Session Save" },
-            { "<leader>fr", "<cmd>SessionRestore<CR>",        desc = "Session Restore" },
-            { "<leader>fR", "<cmd>SessionSearch<CR>",         desc = "Session Search" },
-            { "<leader>fd", "<cmd>SessionDelete<CR>",         desc = "Session Delete" },
-            { "<leader>fA", "<cmd>SessionToggleAutosave<CR>", desc = "Session TOggle Autosave" },
-        },
-        config = function()
-            require('auto-session').setup {
-                auto_save = false,
-                auto_restore = false,
-                auto_create = false,
-                git_branch = true
-            }
-        end
     },
     {
         "anuvyklack/windows.nvim",

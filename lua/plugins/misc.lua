@@ -278,7 +278,6 @@ return {
                 distance_stop_animating = 0.5,
                 hide_target_hack = true,
                 gamma = 1,
-
             })
             sm.enabled = true
             map("<leader>tc", ":SmearCursorToggle<CR>", "Toggle Smear Cursor")

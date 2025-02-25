@@ -26,8 +26,6 @@ map("<leader>xx", ": q <CR>", "Quit File")
 map("<leader>xX", ": q!<CR>", "Quit File force")
 map("<leader>xa", ":qa<CR>", "Quit all Files")
 map("<leader>xA", ":qa!<CR>", "Quit all Files force")
-map("<leader>xb", ":bd<CR>", "Quit Buffer")
-map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
 map("<leader>xt", ":tabclose<CR>", "Quit Tab")
 map("<leader>xs", ":close<CR>", "Quit Split")
 

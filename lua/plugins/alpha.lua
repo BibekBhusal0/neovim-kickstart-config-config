@@ -9,20 +9,20 @@ local function prettifyFooterText(icon, text)
 end
 
 local quotes = {
-    { 'Before software can be reusable it first has to be usable',                                              'Ralph Johnson' },
+    { 'Before software can be reusable it first has to be usable.',                                              'Ralph Johnson' },
     { 'There are two ways to write error-free programs; only the third one works.',                             'Alan J. Perlis' },
-    { 'Deleted code is debugged code',                                                                          'Jeff Sickel' },
-    { 'It works on my machine',                                                                                 'Every Developer Ever' },
+    { 'Deleted code is debugged code.',                                                                          'Jeff Sickel' },
+    { 'It works on my machine.',                                                                                 'Every Developer Ever' },
     { 'It is not a bug, it is a feature.',                                                                      'Me' },
-    { '6 hours of debugging can save you 5 minutes of reading documentation',                                   'Random Reddit post' },
-    { 'To replace programmers with bots, clients will have to accurately describe what they want, We are safe', 'Random Reddit post' },
-    { 'Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it',         'Random Reddit post' },
-    { 'An idiot admires complexity, a genius admires simplicity',                                               'Terry Davis' },
+    { '6 hours of debugging can save you 5 minutes of reading documentation.',                                   'Random Reddit post' },
+    { 'To replace programmers with bots, clients will have to accurately describe what they want, We are safe.', 'Random Reddit post' },
+    { 'Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.',         'Random Reddit post' },
+    { 'An idiot admires complexity, a genius admires simplicity.',                                               'Terry Davis' },
     { 'In theory there is no difference between theory and practice. In practice there is.',                    'Yogi Berra' },
-    { 'Thik of how stupid the average person is, and realize half of them are stupider than that',              'George Carlin' },
-    { 'Only 2 things are infinite, the universe and human stupidity, and I\'m not sure about the universe',     'Albert Einstein' },
-    { 'Good Artists copy; Great artist steal',                                                                  'Pablo Picasso' },
-    { 'You know the bug is serous when you pause your Spotify music to focus',                                  'Random Reddit post' },
+    { 'Think of how stupid the average person is, and realize half of them are stupider than that.',              'George Carlin' },
+    { 'Only 2 things are infinite, the universe and human stupidity, and I\'m not sure about the universe.',     'Albert Einstein' },
+    { 'Good Artists copy; Great artist steal.',                                                                  'Pablo Picasso' },
+    { 'You know the bug is serous when you pause your Spotify music to focus.',                                  'Random Reddit post' },
 }
 
 local function get_random_quote()
@@ -164,9 +164,8 @@ local function render()
         type = "group",
         val  = {
             button("p", "", "Plugins", ":Lazy<CR>"),
-            button("h", "", "Sessions", "<cmd>SessionSearch<CR>"),
-            button("c", "󱙓", "Cheat Sheet", ':lua require("nvcheatsheet").toggle()<CR>'),
-            button("s", "", "Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
+            button("h", "", "Sessions",  ':lua require("telescope") require("resession").load()<CR>'),
+            button("c", "󱙓", "Cheat Sheet", ':lua  require("nvcheatsheet").toggle()<CR>'),
             button("q", "󰅙", "Quit", ":qa<CR>", 'DiagnosticError'),
         },
         opts = { spacing = 1 }
