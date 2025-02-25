@@ -2,9 +2,9 @@ local map = require("utils.map")
 
 return {
     {
-        "folke/which-key.nvim", -- Hints keybinds
+        "folke/which-key.nvim", 
         event = "VeryLazy",
-    },
+    },   -- Hints keybinds
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -98,11 +98,11 @@ return {
             return {
                 setopt = true,
                 segments = {
-                    -- {
-                    --     text = { builtin.foldfunc, ' ' },
-                    --     click = 'v:lua.ScFa',
-                    --     auto = true,
-                    -- },
+                    {
+                        text = { builtin.foldfunc, ' ' },
+                        click = 'v:lua.ScFa',
+                        auto = true,
+                    },
                     {
                         text = { builtin.lnumfunc, '' },
                         click = 'v:lua.ScLa',
@@ -171,7 +171,7 @@ return {
             { "<leader>se", "<cmd>PickEmoji<cr>", desc = "Icon Picker Emoji" },
             { "<leader>sE", "<cmd>PickEmojiYank emoji<cr>", desc = "Icon Picker Emoji Yank" },
         },
-    },
+    }, -- icon picker with telescope 
     {
         'backdround/global-note.nvim',
         keys = {
@@ -208,7 +208,7 @@ return {
                 }
             })
         end
-    },
+    }, -- note taking 
     {
         'jakewvincent/mkdnflow.nvim',
         event = { "BufNewFile", "BufReadPost" },
@@ -253,7 +253,7 @@ return {
                 }
             })
         end
-    },
+    }, -- Better editing in markdown 
     {
         'nguyenvukhang/nvim-toggler',
         keys = {
@@ -263,11 +263,24 @@ return {
                 remove_default_keybinds = true,
             })
         end
-    },
-   
+    }, -- Toggle between true and false ; more
     {
         "sphamba/smear-cursor.nvim",
         event = { "CursorHold", "CursorHoldI" },
         opts = {},
-    },
+        config = function()
+            local sm = require("smear_cursor")
+            sm.setup({
+                cursor_color = "#ff8800",
+                stiffness = 0.6,
+                trailing_stiffness = 0.3,
+                 distance_stop_animating = 0.5,
+                hide_target_hack = true,
+                gamma = 1,
+
+            })
+            sm.enabled = true
+            map("<leader>tc", ":SmearCursorToggle<CR>", "Toggle Smear Cursor")
+        end
+    }, -- cursor animation 
 }

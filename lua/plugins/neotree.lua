@@ -191,7 +191,7 @@ return {
                         "node_modules",
                         "__pycache__",
                         ".virtual_documents",
-                        ".git",
+                        -- ".git",
                         ".python-version",
                         ".venv",
                     },

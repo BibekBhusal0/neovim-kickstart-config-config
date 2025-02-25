@@ -1,9 +1,35 @@
+local bg_transparent = true
+
 return {
     "bluz71/vim-moonfly-colors",
     lazy = false,
     priority = 1000,
     config = function()
+        vim.g.moonflyCursorColor = true
+        vim.g.moonflyWinSeparator = 2
+        --
+        -- vim.g.
         vim.cmd [[colorscheme moonfly]]
         vim.api.nvim_set_hl(0, "FoldColumn", { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
-    end,
+
+        local set_transparency = function()
+            local bg = 'none' 
+            if not bg_transparent then
+                bg = '#080808' 
+            end
+
+            local allHighlights = {'Normal', 'NormalFloat', 'Error', 'ErrorMsg', 'WarinigMsg' , 'LineNr', 'SignColumn' , 'SpecialKey', 'FloatBorder', 'NvimTreeNormalFloat' , 'MatchWordCur'}
+            for _, hl in pairs(allHighlights) do
+                vim.api.nvim_set_hl(0, hl, { bg = bg })
+            end
+        end
+
+        local toggle_transparent = function()
+            bg_transparent = not bg_transparent
+            set_transparency()
+        end
+
+        set_transparency()
+        require("utils.map")("<leader>bg", toggle_transparent, "Toggle transparency")
+    end
 }

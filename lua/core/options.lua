@@ -15,7 +15,6 @@ vim.o.sidescrolloff = 8                              -- Minimal number of screen
 vim.o.cursorline = false                             -- Highlight the current line (default: false)
 vim.o.splitbelow = true                              -- Force all horizontal splits to go below current window (default: false)
 vim.o.splitright = true                              -- Force all vertical splits to go to the right of current window (default: false)
-vim.o.hlsearch = false                               -- Set highlight on search (default: true)
 vim.o.showmode = false                               -- We don't need to see things like -- INSERT -- anymore (default: true)
 vim.opt.termguicolors = true                         -- Set termguicolors to enable highlight groups (default: false)
 vim.o.whichwrap =
@@ -54,7 +53,7 @@ vim.cmd([[
 ]])
 
 -- folding
-vim.o.foldcolumn = "1"
+vim.o.foldcolumn = "0"
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.opt.foldmethod = "expr"

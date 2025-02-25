@@ -8,8 +8,8 @@ end
 local deleteSessfion = function ()
     require("utils.input")(" Session Name ", function(text) vim.cmd("SessionDelete " .. text) end, '', 40)
 end
-map("<leader>fS", saveSesssion, "Session Save")
-map("<leader>fD", deleteSessfion, "Session Delete")
+map("<leader>fS", saveSesssion, "Session Save Custom")
+map("<leader>fD", deleteSessfion, "Session Delete Custom")
 
 -- Resize with arrows
 map("<Up>", ":resize -2<CR>", "Resize window up")
@@ -20,7 +20,6 @@ map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 -- Buffers
 map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
 map("<S-Tab>", ":bprevious<CR>", "Buffer Cycle Previous")
-map("<leader>bx", ":bdelete!<CR>", "Buffer Delete")
 map("<leader>bb", ":enew<CR>", "Buffer New")
 
 -- Window management
@@ -117,7 +116,7 @@ return {
 
                                     table.insert(result, {
                                         text = left .. i .. right,
-                                        link = is_active and "WildMenu" or "TermCursorNC",
+                                        link = is_active and "CurSearch" or "Search",
                                     })
                                 end
                             end
@@ -161,7 +160,15 @@ return {
             end
         end,
     },
-    { "tiagovla/scope.nvim", config = true, event = 'vimEnter' },
+    { 
+        "backdround/tabscope.nvim",
+        event = 'vimEnter',
+        config = function () 
+            local tabscope = require('tabscope')
+            tabscope.setup()
+            map('<Leader>bx', tabscope.remove_tab_buffer , 'Buffer Close' )
+        end
+    },
     {
         'ThePrimeagen/harpoon',
         keys = {
