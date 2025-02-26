@@ -8,7 +8,6 @@ return {
         vim.g.nightflyCursorColor = true
         vim.g.nightflyWinSeparator = 2
         vim.cmd [[colorscheme nightfly]]
-        vim.api.nvim_set_hl(0, "FoldColumn", { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
 
         local set_transparency = function()
             local bg = 'none' 
@@ -20,6 +19,7 @@ return {
             for _, hl in pairs(allHighlights) do
                 vim.api.nvim_set_hl(0, hl, { bg = bg })
             end
+            vim.api.nvim_set_hl(0, "FoldColumn", { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
         end
 
         local toggle_transparent = function()

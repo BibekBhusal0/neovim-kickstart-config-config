@@ -26,10 +26,7 @@ return { -- Autocompletion
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        {
-            "luckasRanarison/tailwind-tools.nvim",
-            opts = {}
-        },
+        { "luckasRanarison/tailwind-tools.nvim", opts = {} },
         {
             "monkoose/neocodeium",
             cmd = { "NeoCodeium" },

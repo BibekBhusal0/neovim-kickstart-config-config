@@ -321,5 +321,15 @@ return {
                 })
             end
         end
+    },
+    {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+            require("lsp_lines").setup()
+            vim.diagnostic.config({ virtual_text = false, })
+            vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
+            map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
+        end,
+        event = "LspAttach"
     }
 }
