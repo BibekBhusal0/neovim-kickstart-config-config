@@ -10,17 +10,17 @@ end
 
 local quotes = {
     { 'Before software can be reusable it first has to be usable.',                                              'Ralph Johnson' },
-    { 'There are two ways to write error-free programs; only the third one works.',                             'Alan J. Perlis' },
+    { 'There are two ways to write error-free programs; only the third one works.',                              'Alan J. Perlis' },
     { 'Deleted code is debugged code.',                                                                          'Jeff Sickel' },
     { 'It works on my machine.',                                                                                 'Every Developer Ever' },
-    { 'It is not a bug, it is a feature.',                                                                      'Me' },
+    { 'It is not a bug, it is a feature.',                                                                       'Me' },
     { '6 hours of debugging can save you 5 minutes of reading documentation.',                                   'Random Reddit post' },
     { 'To replace programmers with bots, clients will have to accurately describe what they want, We are safe.', 'Random Reddit post' },
     { 'Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.',         'Random Reddit post' },
     { 'An idiot admires complexity, a genius admires simplicity.',                                               'Terry Davis' },
-    { 'In theory there is no difference between theory and practice. In practice there is.',                    'Yogi Berra' },
-    { 'Think of how stupid the average person is, and realize half of them are stupider than that.',              'George Carlin' },
-    { 'Only 2 things are infinite, the universe and human stupidity, and I\'m not sure about the universe.',     'Albert Einstein' },
+    { 'In theory there is no difference between theory and practice. In practice there is.',                     'Yogi Berra' },
+    { 'Think of how stupid the average person is, and realize half of them are stupider than that.',             'George Carlin' },
+    { "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.",      'Albert Einstein' },
     { 'Good Artists copy; Great artist steal.',                                                                  'Pablo Picasso' },
     { 'You know the bug is serous when you pause your Spotify music to focus.',                                  'Random Reddit post' },
 }
@@ -34,7 +34,7 @@ local function get_random_quote()
 end
 
 local function get_quote_for_footer()
-    local maxChar = 50
+    local maxChar = 60
     local quote_data = get_random_quote()
 
     local quote = quote_data[1]
@@ -51,7 +51,7 @@ local function get_quote_for_footer()
 
     for _, word in ipairs(words) do
         if #current_line + #word + 1 > maxChar then
-            table.insert(formatted_lines, current_line)
+            table.insert(formatted_lines, current_line .. string.rep(" ", maxChar - #current_line))
             current_line = word
         else
             if #current_line > 0 then
@@ -63,11 +63,11 @@ local function get_quote_for_footer()
     end
 
     if #current_line > 0 then
-        table.insert(formatted_lines, current_line)
+        table.insert(formatted_lines, current_line .. string.rep(" ", maxChar - #current_line))
     end
 
     if #formatted_lines > 0 then
-        local author_line = string.rep(" ", maxChar - #author - 4) .. ' - ' .. author
+        local author_line = string.rep(" ", maxChar - #author - 3) .. ' - ' .. author
         table.insert(formatted_lines, author_line)
     end
 
@@ -164,7 +164,7 @@ local function render()
         type = "group",
         val  = {
             button("p", "", "Plugins", ":Lazy<CR>"),
-            button("h", "", "Sessions",  ':lua require("telescope") require("resession").load()<CR>'),
+            button("h", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>'),
             button("c", "󱙓", "Cheat Sheet", ':lua  require("nvcheatsheet").toggle()<CR>'),
             button("q", "󰅙", "Quit", ":qa<CR>", 'DiagnosticError'),
         },
@@ -194,7 +194,7 @@ local function render()
             getPrettifiedFooter("", string.format("%d plugins loaded", get_plugin_count())),
             getPrettifiedFooter("", string.format("Startup Time %d ms", get_lazy_startup_time())),
             getPrettifiedFooter("", string.format("Today: %s", os.date("%Y-%m-%d"))),
-            { type = "padding", val = 1 },
+            { type = "padding", val = 2 },
             getFooter(quote)
         },
     }

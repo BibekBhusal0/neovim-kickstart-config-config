@@ -1,13 +1,13 @@
 local bg_transparent = true
 
 return {
-    "bluz71/vim-moonfly-colors",
+    "bluz71/vim-nightfly-colors",
     lazy = false,
     priority = 1000,
     config = function()
-        vim.g.moonflyCursorColor = false
-        vim.g.moonflyWinSeparator = 2
-        vim.cmd [[colorscheme moonfly]]
+        vim.g.nightflyCursorColor = true
+        vim.g.nightflyWinSeparator = 2
+        vim.cmd [[colorscheme nightfly]]
         vim.api.nvim_set_hl(0, "FoldColumn", { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
 
         local set_transparency = function()

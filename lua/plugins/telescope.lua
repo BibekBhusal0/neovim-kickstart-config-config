@@ -46,41 +46,51 @@ map( "<leader>i", spellSuggestion, "Spell suggestion")
 map("<leader>sz", spellSuggestion, "Spell suggestion")
 
 return {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
-            cond = function()
-                return vim.fn.executable "make" == 1
-            end,
+    {
+        "nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
+                cond = function()
+                    return vim.fn.executable "make" == 1
+                end,
+            },
+            "nvim-telescope/telescope-ui-select.nvim",
+            "nvim-tree/nvim-web-devicons",
         },
-        "nvim-telescope/telescope-ui-select.nvim",
-        "nvim-tree/nvim-web-devicons",
-    },
 
-    config = function()
-        require("telescope").setup {
-            defaults = {
-                mappings = {
-                    i = {
-                        ["<C-k>"] = require("telescope.actions").move_selection_previous, -- move to prev result
-                        ["<C-j>"] = require("telescope.actions").move_selection_next,     -- move to next result
-                        ["<C-l>"] = require("telescope.actions").select_default,          -- open file
+        config = function()
+            require("telescope").setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-k>"] = require("telescope.actions").move_selection_previous, -- move to prev result
+                            ["<C-j>"] = require("telescope.actions").move_selection_next,     -- move to next result
+                            ["<C-l>"] = require("telescope.actions").select_default,          -- open file
+                        },
                     },
                 },
-            },
 
-            extensions = {
-                ["ui-select"] = {
-                    require("telescope.themes").get_dropdown(),
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown(),
+                    },
                 },
-            },
-        }
+            }
 
-        pcall(require('telescope').load_extension, 'fzf')
-        pcall(require('telescope').load_extension, 'ui-select')
-    end,
+            pcall(require('telescope').load_extension, 'fzf')
+            pcall(require('telescope').load_extension, 'ui-select')
+        end,
+    },
+    {
+        'debugloop/telescope-undo.nvim', 
+        keys = {{"<leader>u" , ":Telescope undo<cr>" , desc = "Undo Tree"}}, 
+        cmd = {"Telescope undo"},
+        config = function()
+            require("telescope").load_extension("undo")
+        end
+    }
 }
