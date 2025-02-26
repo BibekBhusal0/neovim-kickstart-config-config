@@ -174,6 +174,12 @@ return {
         event = 'vimEnter',
         config = function()
             require('scope').setup()
+            map(
+                '<leader>bm',
+                function () require 'utils.input'( "Tab Idx",
+                    function(text) vim.cmd("ScopeMoveBuf" .. text)end , "", 5 ) end,
+                "Move Buffer"
+            )
         end
     },
     {

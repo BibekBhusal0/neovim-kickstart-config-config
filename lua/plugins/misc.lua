@@ -331,5 +331,12 @@ return {
             map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
         end,
         event = "LspAttach"
+    },
+    {
+        "kylechui/nvim-surround",
+        event = { "BufNewFile", "BufReadPost" },
+        config = function()
+            require("nvim-surround").setup({ })
+        end
     }
 }
