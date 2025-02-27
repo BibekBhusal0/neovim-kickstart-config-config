@@ -1,7 +1,7 @@
 local map = require("utils.map")
 return {
     "neovim/nvim-lspconfig",
-    event = "VimEnter",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         { "williamboman/mason.nvim", config = true }, 
         "williamboman/mason-lspconfig.nvim",

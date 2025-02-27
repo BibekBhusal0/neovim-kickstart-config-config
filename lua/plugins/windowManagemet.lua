@@ -16,10 +16,6 @@ map("<leader>xb", close_buffer, "Quit Buffer")
 map('<Leader>bx', close_buffer,'Close Buffer' )
 map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
 
-map('<leader>fs', ':lua require("resession").save()<CR>', 'Session Save')
-map('<leader>fS', ':lua require("resession").save_tab()<CR>', 'Session Save Tab')
-map('<leader>fl', ':lua require("resession").load()<CR>', 'Session Load')
-map('<leader>fd', ':lua require("resession").delete()<CR>', 'Session Delete')
 
 -- Resize with arrows
 map("<Up>", ":resize -2<CR>", "Resize window up")
@@ -167,7 +163,7 @@ return {
     },
     {
         'tiagovla/scope.nvim',
-        event = 'vimEnter',
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require('scope').setup()
             map(
@@ -180,6 +176,12 @@ return {
     },
     {
         "stevearc/resession.nvim",
+        keys = {
+            { '<leader>fs', ':lua require("resession").save()<CR>', desc = 'Session Save' },
+            { '<leader>fS', ':lua require("resession").save_tab()<CR>', desc = 'Session Save Tab' },
+            { '<leader>fl', ':lua require("resession").load()<CR>', desc  = 'Session Load' },
+            { '<leader>fd', ':lua require("resession").delete()<CR>', desc = 'Session Delete' },
+        },
         lazy = true,
         opts = {
             buf_filter = function(bufnr)
