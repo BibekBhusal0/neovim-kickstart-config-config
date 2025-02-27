@@ -190,13 +190,11 @@ local copiedMaps = {
         { "replace all throughout file",           ":%s/old/new/g" },
         { "remove highlighting of search matches", ":noh[lsearch]" },
         { "replace all confirmations",             ":%s/old/new/gc" },
-        -- { "'very magic' pattern: non-alphanumeric characters are interpreted as special regex symbols (no escaping needed)", "\vpattern" },
     },
     ["Search in multiple files"] = {
         { "jump to the next match",                       ":cn[ext]" },
         { "jump to the previous match",                   ":cp[revious]" },
         { "close the quickfix window",                    ":ccl[ose]" },
-        -- { "search for pattern in multiple files",         ":vim[grep] /pattern/ {`{file}`}" },
         { "open a window containing the list of matches", ":cope[n]" },
     },
     ["Tabs"] = {

@@ -67,6 +67,7 @@ return {
             end,
             cond = hide_in_width,
         }
+
         local pomodoro = {
             function()
                 if not package.loaded["pomodoro"] then
@@ -76,6 +77,7 @@ return {
             end,
             cond = hide_in_width,
         }
+
         local lsp_status = {
             function()
                 local clients = vim.lsp.get_active_clients()
@@ -86,7 +88,6 @@ return {
             end,
             cond = hide_in_width,
         }
-
 
         require("lualine").setup {
             options = {
@@ -116,7 +117,6 @@ return {
                 lualine_z = {},
             },
             tabline = {},
-            extensions = { "fugitive" },
         }
     end,
 }

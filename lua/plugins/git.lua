@@ -32,7 +32,7 @@ map("<leader>gd", "<cmd>Gitsigns diffthis<CR>", "Git Diff this")
 map("<leader>gl", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git toggle current line blame")
 map("<leader>gt", "<cmd>Gitsigns toggle_signs<CR>", "Gitsigns toggle")
 
-local function diffViewTelescopeCompareWithHead()
+local function diffViewTelescopeCompareWithCurrentBranch()
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
     local builtin = require("telescope.builtin")
@@ -41,13 +41,13 @@ local function diffViewTelescopeCompareWithHead()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
         if selection then
-            vim.cmd("DiffviewOpen HEAD.." .. selection.value)
+            vim.cmd("DiffviewOpen " .. selection.value)
         end
     end
 
     builtin.git_branches(themes.get_dropdown({
         previewer = false,
-        prompt_title = "Compare HEAD with Branch",
+        prompt_title = "Compare Current with Branch",
         attach_mappings = function(_, map)
             map({ "i", "n" }, "<cr>", select)
             return true
@@ -119,14 +119,6 @@ local function diffViewTelescopeCompareBranches()
     }))
 end
 
-map("<leader>dO", "<cmd>DiffviewOpen<CR>", "Diffview open")
-map("<leader>do", diffViewTelescopeCompareWithHead, "Diffview Compare with head")
-map("<leader>dF", diffViewTelescopeFileHistory, "Diffview file history Telescope ")
-map("<leader>db", diffViewTelescopeCompareBranches, "Diffview compare branches")
-map("<leader>dc", "<cmd>DiffviewClose<CR>", "Diffview close")
-map("<leader>df", "<cmd>DiffviewFileHistory %<CR>", "Diffview file history Current File")
-map("<leader>dh", "<cmd>DiffviewFileHistory<CR>", "Diffview file history")
-
 return {
     {
         "lewis6991/gitsigns.nvim",
@@ -140,7 +132,6 @@ return {
     },
     {
         "kdheepak/lazygit.nvim",
-        lazy = true,
         cmd = {
             "LazyGit",
             "LazyGitConfig",
@@ -155,6 +146,14 @@ return {
     },
     {
         "sindrets/diffview.nvim",
-        event = 'VeryLazy'
+        keys = {
+            {"<leader>dO", ":DiffviewOpen<Cr>", desc = "DiffView Open"},
+            {"<leader>do", diffViewTelescopeCompareWithCurrentBranch, desc ="Diffview Compare with Current Files"},
+            {"<leader>dF", diffViewTelescopeFileHistory, desc = "Diffview file history Telescope "},
+            {"<leader>db", diffViewTelescopeCompareBranches, desc = "Diffview compare branches"},
+            {"<leader>dc", "<cmd>DiffviewClose<CR>", desc = "Diffview close"},
+            {"<leader>df", "<cmd>DiffviewFileHistory %<CR>",desc = "Diffview file history Current File"},
+            {"<leader>dh", "<cmd>DiffviewFileHistory<CR>", desc = "Diffview file history"},
+        }
     },
 }

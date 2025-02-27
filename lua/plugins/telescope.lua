@@ -49,18 +49,7 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                cond = function()
-                    return vim.fn.executable "make" == 1
-                end,
-            },
-            "nvim-telescope/telescope-ui-select.nvim",
-            "nvim-tree/nvim-web-devicons",
-        },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
 
         config = function()
             require("telescope").setup {
@@ -71,12 +60,6 @@ return {
                             ["<C-j>"] = require("telescope.actions").move_selection_next,     -- move to next result
                             ["<C-l>"] = require("telescope.actions").select_default,          -- open file
                         },
-                    },
-                },
-
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown(),
                     },
                 },
             }
