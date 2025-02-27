@@ -46,6 +46,14 @@ map('<leader>p', '"_dP', "Paste without yanking", 'x')
 map("<C-d>", "<C-d>zz", "Scroll down and center")
 map("<C-u>", "<C-u>zz", "Scroll up and center")
 
+-- center movements 
+map("<A-j>", "jzz", "Move Next line and center")
+map("<A-k>", "kzz", "Move Previous line and center")
+
+-- Move lines 
+map("<A-J>", ":m .+1<CR>==", "Move line down")
+map("<A-K>", ":m .-2<CR>==", "Move line up")
+
 -- terminal
 map("<C-x>", "<C-\\><C-N>", "terminal escape terminal mode", 't')
 

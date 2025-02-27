@@ -1,4 +1,8 @@
 local map = require("utils.map")
+
+map("<leader>Lt", ":LspStart<CR>", "LSP Start")
+map("<leader>LT", ":LspStop<CR>", "LSP Stop")
+
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },

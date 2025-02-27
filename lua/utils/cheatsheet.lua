@@ -253,7 +253,7 @@ local copiedMaps = {
     },
 }
 
-excluded_groups = { "terminal (t)", "autopairs", "Nvim", "Opens", "LuaSnip" }
+excluded_groups = { "terminal (t)", "autopairs", "Nvim", "Opens", "LuaSnip", "Ignore" , "Add"}
 -- code copied from, https://github.com/NvChad/ui/blob/v3.0/lua/nvchad/cheatsheet/init.lua
 local get_mappings = function(mappings, tb_to_add)
     for _, v in ipairs(mappings) do

@@ -53,6 +53,16 @@ return {
         end,
     }, -- Easily comment visual regions/lines
     {
+        'LudoPinelli/comment-box.nvim', 
+        event = { "BufNewFile", "BufReadPost" },
+        config = function()
+            require('comment-box').setup()
+        end
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                Makes comments like this                 │
+-- ╰─────────────────────────────────────────────────────────╯
+    },
+    {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         event = { "BufNewFile", "BufReadPost" },
@@ -123,7 +133,6 @@ return {
                     },
                     {
                         sign = { namespace = { 'gitsigns' }, },
-
                         click = 'v:lua.ScSa',
                     },
                 },
@@ -220,7 +229,7 @@ return {
     }, -- note taking 
     {
         'jakewvincent/mkdnflow.nvim',
-        event = { "BufNewFile", "BufReadPost" },
+        ft = 'markdown',
         config = function()
             require('mkdnflow').setup({
                 mappings = {
@@ -348,4 +357,12 @@ return {
             require("nvim-surround").setup({ })
         end
     }, -- change brackets, quotes and surrounds 
+    {
+        "folke/twilight.nvim",
+        cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+        keys = {  {"<leader>T", "<cmd>Twilight<cr>", desc = "Toggle Twilight" } },
+        opts = {
+            context = 20
+        }
+    } , -- dim inactive code 
 }
