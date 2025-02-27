@@ -164,6 +164,7 @@ local function render()
         type = "group",
         val  = {
             button("p", "", "Plugins", ":Lazy<CR>"),
+            button("d", "󰾶", "Change Directory", ":Proot<CR>"),
             button("h", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>'),
             button("c", "󱙓", "Cheat Sheet", ':lua  require("nvcheatsheet").toggle()<CR>'),
             button("q", "󰅙", "Quit", ":qa<CR>", 'DiagnosticError'),
@@ -206,7 +207,7 @@ local function render()
                 val = header,
                 opts = { position = "center", hl = "Type" }
             },
-            { type = "padding", val = 3 },
+            { type = "padding", val = 2 },
             buttons,
             { type = "padding", val = 1 },
             footer
@@ -231,7 +232,6 @@ vim.api.nvim_create_autocmd("User", {
 
 return {
     "goolord/alpha-nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", },
     lazy = false,
     priority = 1001,
 

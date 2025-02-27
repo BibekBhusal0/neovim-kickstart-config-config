@@ -3,7 +3,9 @@ local map = require("utils.map")
 return {
     {
         "folke/which-key.nvim", 
-        event = "VeryLazy",
+        -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+        cmd = "WhichKey", -- disable which key by default
+        -- event = "VeryLazy",
     },   -- Hints keybinds
     {
         "windwp/nvim-autopairs",
@@ -292,7 +294,7 @@ return {
     }, -- cursor animation 
     {
         'mg979/vim-visual-multi',
-        event = "VeryLazy", 
+        event = { "BufNewFile", "BufReadPost"}, 
         config  = function () 
             local hlslens = require('hlslens')
             if hlslens then
@@ -328,7 +330,7 @@ return {
                 })
             end
         end
-    },
+    }, -- multi line editing 
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         config = function()
@@ -338,12 +340,12 @@ return {
             map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
         end,
         event = "LspAttach"
-    },
+    }, -- Better diagnostic messages 
     {
         "kylechui/nvim-surround",
-        event = { "BufNewFile", "BufReadPost" },
+        event = { "InsertEnter"},
         config = function()
             require("nvim-surround").setup({ })
         end
-    }
+    }, -- change brackets, quotes and surrounds 
 }

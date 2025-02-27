@@ -213,7 +213,7 @@ return {
     },
     {
         "anuvyklack/windows.nvim",
-        event = {'WinNew'},
+        event = { "BufNewFile", "BufReadPost" },
         dependencies = {
             "anuvyklack/middleclass",
             "anuvyklack/animation.nvim"
