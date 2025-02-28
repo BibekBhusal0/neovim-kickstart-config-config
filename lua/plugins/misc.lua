@@ -31,15 +31,45 @@ return {
             config = true,
         }, -- Autoclose parentheses, brackets, quotes, etc.
         {
-            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-            config = function()
-                require("lsp_lines").setup()
-                vim.diagnostic.config({ virtual_text = false, })
-                vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
-                map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
-            end,
-            event = "LspAttach"
-        }, -- Better diagnostic messages 
+            'mg979/vim-visual-multi',
+            event = { "BufNewFile", "BufReadPost"}, 
+            config  = function () 
+                local hlslens = require('hlslens')
+                if hlslens then
+                    local overrideLens = function(render, posList, nearest, idx, relIdx)
+                        local _ = relIdx
+                        local lnum, col = unpack(posList[idx])
+
+                        local text, chunks
+                        if nearest then
+                            text = ('[%d/%d]'):format(idx, #posList)
+                            chunks = {{' ', 'Ignore'}, {text, 'VM_Extend'}}
+                        else
+                            text = ('[%d]'):format(idx)
+                            chunks = {{' ', 'Ignore'}, {text, 'HlSearchLens'}}
+                        end
+                        render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+                    end
+                    local lensBak
+                    local config = require('hlslens.config')
+                    local gid = vim.api.nvim_create_augroup('VMlens', {})
+                    vim.api.nvim_create_autocmd('User', {
+                        pattern = {'visual_multi_start', 'visual_multi_exit'},
+                        group = gid,
+                        callback = function(ev)
+                            if ev.match == 'visual_multi_start' then
+                                lensBak = config.override_lens
+                                config.override_lens = overrideLens
+                            else
+                                config.override_lens = lensBak
+                            end
+                            hlslens.start()
+                        end
+                    })
+                end
+            end
+        }, -- multi line editing 
+ 
         {
             'nguyenvukhang/nvim-toggler',
             keys = { { '<leader>tt', ':lua require("nvim-toggler").toggle() <Cr>', desc = "Toggle Value"}},
@@ -99,7 +129,7 @@ return {
         }, -- Better editing in markdown 
         {
             "gregorias/coerce.nvim",
-            event = {"BufNewFile", "BufReadPost"},
+            event = {'InsertEnter'},
             tag = 'v4.1.0',
             config = true,
         }, -- Changing case easily
@@ -112,7 +142,7 @@ return {
         { -- comments 
             {
                 "numToStr/Comment.nvim",
-                event = {"BufNewFile", "BufReadPost"},
+                event = {'InsertEnter'},
                 opts = {},
                 config = function()
                     local toggleComment = require("Comment.api").toggle.linewise.current
@@ -126,7 +156,7 @@ return {
             }, -- Easily comment visual regions/lines
             {
                 'LudoPinelli/comment-box.nvim', 
-                event = { "BufNewFile", "BufReadPost" },
+                event = { 'InsertEnter' },
                 config = function() require('comment-box').setup() end
                 -- ╭─────────────────────────────────────────────────────────╮
                 -- │                Makes comments like this                 │
@@ -164,7 +194,7 @@ return {
         }, -- High-performance color highlighter
         {
             "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-            event = "LspAttach"
+            event = "LspAttach",
             config = function()
                 require("lsp_lines").setup()
                 vim.diagnostic.config({ virtual_text = false, })
@@ -197,6 +227,16 @@ return {
                 },
             },
         }, -- Better indentations
+        {
+            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            config = function()
+                require("lsp_lines").setup()
+                vim.diagnostic.config({ virtual_text = false, })
+                vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
+                map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
+            end,
+            event = "LspAttach"
+        }, -- Better diagnostic messages 
         {
             'luukvbaal/statuscol.nvim',
             event = { "BufReadPost", "BufNewFile" },
@@ -277,7 +317,7 @@ return {
             }, -- cursor animation 
             {
                 "karb94/neoscroll.nvim",
-                opts = { hide_cursor = false },
+                opts = { hide_cursor = true },
                 event = { "BufNewFile", "BufReadPost" },
             }, -- Smooth scrolling
         },

@@ -1,11 +1,11 @@
-local bg_transparent = true
+local bg_transparent = false
 
 return {
     "bluz71/vim-nightfly-colors",
     lazy = false,
     priority = 1000,
     config = function()
-        vim.g.nightflyCursorColor = true
+        vim.g.nightflyCursorColor = false
         vim.g.nightflyWinSeparator = 2
         vim.cmd [[colorscheme nightfly]]
 
