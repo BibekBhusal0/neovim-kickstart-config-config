@@ -100,14 +100,14 @@ return {
         },
         cmd = {"Proot"}
     },
-    -- {
-    --     'ziontee113/icon-picker.nvim',
-    --     opts = {} ,
-    --     keys = {
-    --         { "<leader>si", "<cmd>PickIcons<cr>", desc = "Icon Picker" },
-    --         { "<leader>sI", "<cmd>PickIconsYank<cr>", desc = "Icon Picker Yank" },
-    --         { "<leader>se", "<cmd>PickEmoji<cr>", desc = "Icon Picker Emoji" },
-    --         { "<leader>sE", "<cmd>PickEmojiYank emoji<cr>", desc = "Icon Picker Emoji Yank" },
-    --     },
-    -- }, -- icon picker with telescope 
+    {
+        'ziontee113/icon-picker.nvim',
+        opts = {} ,
+        keys = {
+            { "<leader>si", "<cmd>PickIcons<cr>", desc = "Icon Picker" },
+            { "<leader>sI", "<cmd>PickIconsYank<cr>", desc = "Icon Picker Yank" },
+            { "<leader>se", "<cmd>PickEmoji<cr>", desc = "Icon Picker Emoji" },
+            { "<leader>sE", "<cmd>PickEmojiYank emoji<cr>", desc = "Icon Picker Emoji Yank" },
+        },
+    }, -- icon picker with telescope 
 }

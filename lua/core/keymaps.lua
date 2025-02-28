@@ -31,9 +31,14 @@ map("<leader>xs", ":close<CR>", "Quit Split")
 
 -- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
 --
--- move lines in visual mode
+-- move lines 
 map("J", ":m '>+1<CR>gv=gv", "Move Lines Down", 'v')
 map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", 'v')
+map("<A-J>", ":m .+1<CR>==", "Move line down")
+map("<A-K>", ":m .-2<CR>==", "Move line up")
+
+-- Duplicate lines 
+map("<C-K>", ":t.<CR>", "Duplicate lines", {'n','v'})
 
 -- copy/paste to system clipboard with leader y
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
@@ -50,9 +55,6 @@ map("<C-u>", "<C-u>zz", "Scroll up and center")
 map("<A-j>", "jzz", "Move Next line and center")
 map("<A-k>", "kzz", "Move Previous line and center")
 
--- Move lines 
-map("<A-J>", ":m .+1<CR>==", "Move line down")
-map("<A-K>", ":m .-2<CR>==", "Move line up")
 
 -- terminal
 map("<C-x>", "<C-\\><C-N>", "terminal escape terminal mode", 't')
