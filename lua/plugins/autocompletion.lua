@@ -85,17 +85,13 @@ return { -- Autocompletion
         }
         cmp.setup {
             snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
+                expand = function(args) luasnip.lsp_expand(args.body) end,
             },
             completion = { completeopt = "menu,menuone,noinsert" },
             window = {
                 completion = cmp.config.window.bordered(winhighlight),
                 documentation = cmp.config.window.bordered(winhighlight),
             },
-
-
             -- For an understanding of why these mappings were
             -- chosen, you will need to read `:help ins-completion`
             --
@@ -166,10 +162,7 @@ return { -- Autocompletion
                 end, { "i", "s" }),
             },
             sources = {
-                {
-                    name = "lazydev",
-                    group_index = 0,
-                },
+                { name = "lazydev", group_index = 0 },
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
                 { name = "buffer" },

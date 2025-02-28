@@ -75,9 +75,7 @@ return {
                 },
             }
             extensions = {
-                ["ui-select"] = {
-                    require("telescope.themes").get_dropdown(),
-                },
+                ["ui-select"] = { require("telescope.themes").get_dropdown() },
             },
 
             pcall(require('telescope').load_extension, 'fzf')
@@ -95,9 +93,7 @@ return {
     {
         "zongben/proot.nvim",
         opts = {},
-        keys = {
-            {"<Leader>sp", ":Proot<Cr>", desc = "Search Directories"}
-        },
+        keys = { {"<Leader>sp", ":Proot<Cr>", desc = "Search Directories"} },
         cmd = {"Proot"}
     },
     {

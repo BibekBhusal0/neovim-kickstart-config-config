@@ -174,11 +174,7 @@ local function render()
 
     local buttons = {
         type = "group",
-        val = {
-            buttonGroup1,
-            buttons_divider,
-            buttonGroup2,
-        },
+        val = { buttonGroup1, buttons_divider, buttonGroup2 },
     }
 
     local function getFooter(val)

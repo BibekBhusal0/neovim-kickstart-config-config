@@ -16,9 +16,7 @@ vim.diagnostic.config {
     },
     underline = false,
     update_in_insert = true,
-    float = {
-        source = "always", -- Or "if_many"
-    },
+    float = { source = "always" },
     -- Make diagnostic background transparent
     on_ready = function()
         vim.cmd "highlight DiagnosticVirtualText guibg=NONE"
@@ -28,9 +26,7 @@ vim.diagnostic.config {
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+    callback = function() vim.highlight.on_yank() end,
     group = highlight_group,
     pattern = "*",
 })

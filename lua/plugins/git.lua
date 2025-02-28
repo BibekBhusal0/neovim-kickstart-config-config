@@ -143,9 +143,7 @@ return {
             "LazyGitFilterCurrentFile",
         },
         dependencies = { "nvim-lua/plenary.nvim" },
-        keys = {
-            { "<leader>lg", ":LazyGit<cr>", desc = "Toggle LazyGit" }
-        }
+        keys = { { "<leader>lg", ":LazyGit<cr>", desc = "Toggle LazyGit" } }
     },
     {
         "sindrets/diffview.nvim",

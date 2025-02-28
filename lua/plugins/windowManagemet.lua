@@ -85,11 +85,7 @@ return {
                     minimum_padding = 1,
                     maximum_padding = 3,
                     maximum_length = 15,
-                    hover = {
-                        enabled = true,
-                        delay = 200,
-                        reveal = { 'close' }
-                    },
+                    hover = { enabled = true, delay = 200, reveal = { 'close' } },
                     custom_areas = {
                         right = function()
                             local result = {}
@@ -180,15 +176,9 @@ return {
         opts = {
             buf_filter = function(bufnr)
                 local buftype = vim.bo.buftype
-                if buftype == 'help' then
-                    return true
-                end
-                if buftype ~= "" and buftype ~= "acwrite" then
-                    return false
-                end
-                if vim.api.nvim_buf_get_name(bufnr) == "" then
-                    return false
-                end
+                if buftype == 'help' then return true end
+                if buftype ~= "" and buftype ~= "acwrite" then return false end
+                if vim.api.nvim_buf_get_name(bufnr) == "" then return false end
                 return true
             end,
             extensions = { scope = {} },
@@ -208,10 +198,7 @@ return {
     {
         "anuvyklack/windows.nvim",
         event = { "BufNewFile", "BufReadPost" },
-        dependencies = {
-            "anuvyklack/middleclass",
-            "anuvyklack/animation.nvim"
-        },
+        dependencies = { "anuvyklack/middleclass", "anuvyklack/animation.nvim" },
         config = function()
             vim.o.winwidth = 20
             vim.o.winminwidth = 15

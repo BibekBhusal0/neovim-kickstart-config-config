@@ -11,9 +11,7 @@ return {
 
         local set_transparency = function()
             local bg = 'none' 
-            if not bg_transparent then
-                bg = '#080808' 
-            end
+            if not bg_transparent then bg = '#080808' end
 
             local allHighlights = {'Normal', 'NormalFloat', 'Error', 'ErrorMsg', 'WarinigMsg' , 'LineNr', 'SignColumn' , 'SpecialKey', 'FloatBorder', 'NvimTreeNormalFloat' , 'MatchWordCur'}
             for _, hl in pairs(allHighlights) do

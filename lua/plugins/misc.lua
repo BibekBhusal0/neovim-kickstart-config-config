@@ -4,17 +4,15 @@ return {
     { -- hints, will remove soon
         {
             "folke/which-key.nvim", 
-            -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
             cmd = "WhichKey", -- disable which key by default
+            -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
             -- event = "VeryLazy",
         },   -- Hints keybinds
         {
             "smartinellimarco/nvcheatsheet.nvim",
             lazy = true,
             keys = { { "<leader>ch", ':lua require("nvcheatsheet").toggle()<CR>', desc = "Toggle Cheatsheet" } },
-            config = function()
-                require('nvcheatsheet').setup(require('utils.cheatsheet'))
-            end
+            config = function() require('nvcheatsheet').setup(require('utils.cheatsheet')) end
         }, --  cheatsheet
     },
 
@@ -25,9 +23,7 @@ return {
         {
             "kylechui/nvim-surround",
             event = { "InsertEnter"},
-            config = function()
-                require("nvim-surround").setup({ })
-            end
+            config = function() require("nvim-surround").setup({}) end
         }, -- change brackets, quotes and surrounds 
         {
             "windwp/nvim-autopairs",
@@ -107,22 +103,6 @@ return {
             tag = 'v4.1.0',
             config = true,
         }, -- Changing case easily
-        {
-            "malbertzard/inline-fold.nvim",
-
-            opts = {
-                defaultPlaceholder = "…",
-                queries = {
-
-                    -- Some examples you can use
-                    html = {
-                        { pattern = 'class="([^"]*)"', placeholder = "@" }, -- classes in html
-                        { pattern = 'href="(.-)"' }, -- hrefs in html
-                        { pattern = 'src="(.-)"' }, -- HTML img src attribute
-                    }
-                },
-            }
-        },
         { 'bennypowers/splitjoin.nvim',
             keys = {
               { 'gj', function() require'splitjoin'.join() end, desc = 'Join the object under cursor' },
@@ -147,9 +127,7 @@ return {
             {
                 'LudoPinelli/comment-box.nvim', 
                 event = { "BufNewFile", "BufReadPost" },
-                config = function()
-                    require('comment-box').setup()
-                end
+                config = function() require('comment-box').setup() end
                 -- ╭─────────────────────────────────────────────────────────╮
                 -- │                Makes comments like this                 │
                 -- ╰─────────────────────────────────────────────────────────╯
@@ -182,19 +160,17 @@ return {
         {
             "norcalli/nvim-colorizer.lua",
             event = "InsertEnter",
-            config = function()
-                require("colorizer").setup()
-            end,
+            config = function() require("colorizer").setup() end,
         }, -- High-performance color highlighter
         {
             "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            event = "LspAttach"
             config = function()
                 require("lsp_lines").setup()
                 vim.diagnostic.config({ virtual_text = false, })
                 vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
                 map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
             end,
-            event = "LspAttach"
         }, -- Better diagnostic messages 
         {
             "lukas-reineke/indent-blankline.nvim",
@@ -247,10 +223,7 @@ return {
             dependencies = {
                 'kevinhwang91/nvim-hlslens',
                 config = function () 
-                    require('scrollbar.handlers.search').setup({
-                        calm_down = true ,
-                        nearest_only = true,
-                    })
+                    require('scrollbar.handlers.search').setup({ calm_down = true, nearest_only = true })
                     map('n', [[<Cmd>execute('normal! ' . v:count1 . 'nzz')<CR><Cmd>lua require('hlslens').start()<CR>]] , "Find Next" )
                     map('N',  [[<Cmd>execute('normal! ' . v:count1 . 'Nzz')<CR><Cmd>lua require('hlslens').start()<CR>]] , "Find Previous" )
                     map('*', [[*<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Under Cursor')
@@ -356,9 +329,7 @@ return {
                 additional_presets = {
                     project_local = {
                         command_name = "ProjectNote",
-                        filename = function()
-                            return get_project_name() .. ".md"
-                        end,
+                        filename = function() return get_project_name() .. ".md" end,
                         title = "Project note",
                     },
                 }
