@@ -1,22 +1,6 @@
 local selected_bg = "#3f3f46"
 local bg = "#18181b"
 
-local function close_buffer()
-    local current_buf = vim.api.nvim_get_current_buf()
-    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-    if #buffers == 1 then
-        vim.cmd('enew')
-    else
-        vim.cmd('bprevious') 
-    end
-    vim.cmd('bdelete ' .. current_buf)
-end
-
-map("<leader>xb", close_buffer, "Quit Buffer")
-map('<Leader>bx', close_buffer,'Close Buffer' )
-map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
-
-
 -- Resize with arrows
 map("<Up>", ":resize -2<CR>", "Resize window up")
 map("<Down>", ":resize +2<CR>", "Resize window down")
@@ -27,6 +11,7 @@ map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
 map("<S-Tab>", ":bprevious<CR>", "Buffer Cycle Previous")
 map("<leader>bb", ":enew<CR>", "Buffer New")
+map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
@@ -69,6 +54,7 @@ return {
                     mode = "buffers",
                     themable = true,
                     numbers = "none",
+                    close_command = 'Bdelete! %d',
                     middle_mouse_command = "Bdelete! %d",
                     path_components = 1,
                     max_name_length = 30,
@@ -160,6 +146,14 @@ return {
                 map("<leader>b" .. i, ":BufferLineGoToBuffer " .. i .. "<CR>", "Buffer Go to " .. i)
             end
         end,
+    },
+    {
+        "moll/vim-bbye",
+        cmd = {"Bdelete", 'Bwipeout'},
+        keys = {
+            { '<leader>xb', ':Bdelete<CR>', desc = 'Close Buffer' },
+            { '<leader>bx', ':Bwipeout<CR>', desc = 'Close Buffer' },
+        }
     },
     {
         'tiagovla/scope.nvim',

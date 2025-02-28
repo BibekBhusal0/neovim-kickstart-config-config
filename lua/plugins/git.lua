@@ -10,27 +10,27 @@ local function commit_all_with_message()
     end, '', 50)
 end
 
-map("<leader>gp", "<cmd>Git push<CR>", "Git push")
-map("<leader>ga", "<cmd>Git add .<CR>", "Git add all files")
-map("<leader>gi", "<cmd>Git init<CR>", "Git Init")
-map("<leader>gA", "<cmd>Git add %<CR>", "Git add current file")
-map("<leader>gP", "<cmd>Git pull<CR>", "Git pull")
+map("<leader>gp", ":Git push<CR>", "Git push")
+map("<leader>ga", ":Git add .<CR>", "Git add all files")
+map("<leader>gi", ":Git init<CR>", "Git Init")
+map("<leader>gA", ":Git add %<CR>", "Git add current file")
+map("<leader>gP", ":Git pull<CR>", "Git pull")
 map("<leader>gC", commit_with_message, "Git commit")
 map("<leader>gc", commit_all_with_message, "Git commit all")
 
-map("]g", "<cmd>Gitsigns next_hunk<CR>zz", "Git Next change")
-map("[g", "<cmd>Gitsigns prev_hunk<CR>zz", "Git Previous change")
-map("<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", "Git Stage hunk")
-map("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", "Git Reset hunk")
-map("<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", "Git Stage buffer")
-map("<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", "Git Reset buffer")
-map("<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", "Git Preview hunk")
-map("<leader>gH", "<cmd>Gitsigns preview_hunk_inline<CR>", "Git Preview hunk inline")
-map("<leader>gb", "<cmd>Gitsigns blame<CR>", "Git Blame")
-map("<leader>gB", "<cmd>Gitsigns blame_line<CR>", "Git Toggle line blame")
-map("<leader>gd", "<cmd>Gitsigns diffthis<CR>", "Git Diff this")
-map("<leader>gl", "<cmd>Gitsigns toggle_current_line_blame<CR>", "Git toggle current line blame")
-map("<leader>gt", "<cmd>Gitsigns toggle_signs<CR>", "Gitsigns toggle")
+map("]g", ":Gitsigns next_hunk<CR>zz", "Git Next change")
+map("[g", ":Gitsigns prev_hunk<CR>zz", "Git Previous change")
+map("<leader>gs", ":Gitsigns stage_hunk<CR>", "Git Stage hunk")
+map("<leader>gr", ":Gitsigns reset_hunk<CR>", "Git Reset hunk")
+map("<leader>gS", ":Gitsigns stage_buffer<CR>", "Git Stage buffer")
+map("<leader>gR", ":Gitsigns reset_buffer<CR>", "Git Reset buffer")
+map("<leader>gh", ":Gitsigns preview_hunk<CR>", "Git Preview hunk")
+map("<leader>gH", ":Gitsigns preview_hunk_inline<CR>", "Git Preview hunk inline")
+map("<leader>gb", ":Gitsigns blame<CR>", "Git Blame")
+map("<leader>gB", ":Gitsigns blame_line<CR>", "Git Toggle line blame")
+map("<leader>gd", ":Gitsigns diffthis<CR>", "Git Diff this")
+map("<leader>gl", ":Gitsigns toggle_current_line_blame<CR>", "Git toggle current line blame")
+map("<leader>gt", ":Gitsigns toggle_signs<CR>", "Gitsigns toggle")
 
 local function diffViewTelescopeCompareWithCurrentBranch()
     local actions = require("telescope.actions")
@@ -41,6 +41,7 @@ local function diffViewTelescopeCompareWithCurrentBranch()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
         if selection then
+            vim.cmd("WindowsDisableAutowidth")
             vim.cmd("DiffviewOpen " .. selection.value)
         end
     end
@@ -71,6 +72,7 @@ local function diffViewTelescopeFileHistory()
                 actions.close(prompt_bufnr)
                 if selection then
                     -- Directly open file history for selected file
+                    vim.cmd("WindowsDisableAutowidth")
                     vim.cmd("DiffviewFileHistory " .. selection.path)
                 end
             end)
@@ -105,6 +107,7 @@ local function diffViewTelescopeCompareBranches()
                             actions.close(second_bufnr)
 
                             if first_branch ~= second_branch then
+                                vim.cmd("WindowsDisableAutowidth")
                                 vim.cmd("DiffviewOpen " .. first_branch .. ".." .. second_branch)
                             else
                                 vim.notify("Cannot compare identical branches", vim.log.levels.WARN)
@@ -141,19 +144,19 @@ return {
         },
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
-            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "Toggle LazyGit" }
+            { "<leader>lg", ":LazyGit<cr>", desc = "Toggle LazyGit" }
         }
     },
     {
         "sindrets/diffview.nvim",
         keys = {
-            {"<leader>dO", ":DiffviewOpen<Cr>", desc = "DiffView Open"},
+            {"<leader>dO", ":WindowsDisableAutowidth<CR>:DiffviewOpen<Cr>", desc = "DiffView Open"},
             {"<leader>do", diffViewTelescopeCompareWithCurrentBranch, desc ="Diffview Compare with Current Files"},
             {"<leader>dF", diffViewTelescopeFileHistory, desc = "Diffview file history Telescope "},
             {"<leader>db", diffViewTelescopeCompareBranches, desc = "Diffview compare branches"},
-            {"<leader>dc", "<cmd>DiffviewClose<CR>", desc = "Diffview close"},
-            {"<leader>df", "<cmd>DiffviewFileHistory %<CR>",desc = "Diffview file history Current File"},
-            {"<leader>dh", "<cmd>DiffviewFileHistory<CR>", desc = "Diffview file history"},
+            {"<leader>dc", ":DiffviewClose<CR>", desc = "Diffview close"},
+            {"<leader>df", ":WindowsDisableAutowidth<CR>:DiffviewFileHistory %<CR>",desc = "Diffview file history Current File"},
+            {"<leader>dh", ":WindowsDisableAutowidth<CR>:DiffviewFileHistory<CR>", desc = "Diffview file history"},
         }
     },
 }
