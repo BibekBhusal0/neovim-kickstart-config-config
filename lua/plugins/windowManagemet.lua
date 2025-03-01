@@ -11,7 +11,6 @@ map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
 map("<S-Tab>", ":bprevious<CR>", "Buffer Cycle Previous")
 map("<leader>bb", ":enew<CR>", "Buffer New")
-map("<leader>xB", ":bd!<CR>", "Quit Buffer force")
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
@@ -42,7 +41,6 @@ map("<leader>tg", gotoTab, "Tab goto")
 for i = 1, 9 do
     map("<leader>t" .. i, ":tabn " .. i .. "<CR>", "Tab " .. i)
 end
-
 
 return {
     {
@@ -148,7 +146,8 @@ return {
         cmd = {"Bdelete", 'Bwipeout'},
         keys = {
             { '<leader>xb', ':Bdelete<CR>', desc = 'Close Buffer' },
-            { '<leader>bx', ':Bwipeout<CR>', desc = 'Close Buffer' },
+            { '<leader>xB', ':Bdelete!<CR>', desc = 'Close Buffer Force' },
+            { '<leader>bx', ':Bwipeout<CR>', desc = 'Buffer Close' },
         }
     },
     {

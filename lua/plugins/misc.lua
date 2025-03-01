@@ -2,12 +2,12 @@ local map = require("utils.map")
 
 return {
     { -- hints, will remove soon
-        -- {
-        --     "folke/which-key.nvim", 
-        --     cmd = "WhichKey", -- disable which key by default
-        --     -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-        --     -- event = "VeryLazy",
-        -- },   -- Hints keybinds
+        {
+            "folke/which-key.nvim", 
+            cmd = "WhichKey", 
+            -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+            -- event = "VeryLazy",
+        },   -- Hints keybinds
         {
             "smartinellimarco/nvcheatsheet.nvim",
             lazy = true,
@@ -172,12 +172,12 @@ return {
                 config = function()
                     local todo = require("todo-comments")
                     todo.setup({ signs = false, })
-                    map("]t", todo.jump_next, "Next todo comment")
-                    map("[t", todo.jump_prev, "Previous todo comment")
+                    map("]t", todo.jump_next, "Next todo comment", {'n', 'v'})
+                    map("[t", todo.jump_prev, "Previous todo comment", {'n', 'v'})
                     local comments = {"FIX", "WARN", "TODO", "HACK", "NOTE"}
                     for _, comment in ipairs(comments) do 
-                        map ("[" .. comment:sub(1,1), function() todo.jump_prev({ keywords = {comment} }) end , "Previous " .. comment)
-                        map( ']' .. comment:sub(1,1), function() todo.jump_next({ keywords = {comment} }) end , "Next " .. comment)
+                        map ("[" .. comment:sub(1,1), function() todo.jump_prev({ keywords = {comment} }) end , "Previous " .. comment, {'n', 'v'})
+                        map( ']' .. comment:sub(1,1), function() todo.jump_next({ keywords = {comment} }) end , "Next " .. comment, {'n', 'v'})
                     end
                 end,
             }, -- Highlight todo, notes, etc in comments
@@ -414,8 +414,8 @@ return {
             }
 
             for k, v in pairs(jumps) do 
-                map("]" .. k, function() sts.filtered_jump(v, true) end, "Jump to next " .. k)
-                map("[" .. k, function() sts.filtered_jump(v, false) end, "Jump to previous " .. k)
+                map("]" .. k, function() sts.filtered_jump(v, true) end, "Jump to next " .. k, {'n', 'v'})
+                map("[" .. k, function() sts.filtered_jump(v, false) end, "Jump to previous " .. k, {'n', 'v'})
             end
             map("<leader>j", function() sts.targeted_jump({
                 "function",

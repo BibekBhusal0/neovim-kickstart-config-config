@@ -4,6 +4,7 @@ return {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     config  =function ()
+        require ('nvim-treesitter.install').compilers = { 'zig' }
         require "nvim-treesitter.configs".setup{
         ensure_installed = {
             "lua",
@@ -26,7 +27,7 @@ return {
             use_languagetree = true,
             additional_vim_regex_highlighting = { "ruby" },
         },
-        indent = { enable = true, disable = { "ruby" } },
+        indent = {enable = true},
     }
     end
 }
