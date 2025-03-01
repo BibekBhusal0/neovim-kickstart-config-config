@@ -78,7 +78,7 @@ return {
             map("vu", ":STSSwapCurrentNodePrevNormal<cr>", "Swap Node Previous", "n")
 
             -- Select Nodes in Visual Mode
-            map("vD", ":STSSwapDownVisual<cr>", "Swap Node Down", "x"))
+            map("vD", ":STSSwapDownVisual<cr>", "Swap Node Down", "x")
             map("vU", ":STSSwapUpVisual<cr>", "Swap Node Up", "x")
             map("vd", ":STSSwapCurrentNodeNextVisual<cr>", "Swap Node Next", "x")
             map("vu", ":STSSwapCurrentNodePrevVisual<cr>", "Swap Node Previous", "x")
@@ -88,7 +88,7 @@ return {
             map("<A-k>", ":STSSwapPrevVisual<cr>", "Swap Node Previous", "x")
 
             -- Swap Or Hold
-            map("gnh", ":STSSwapOrHold<cr>", "Swap Or Hold Node", "n"))
+            map("gnh", ":STSSwapOrHold<cr>", "Swap Or Hold Node", "n")
             map("gnh", ":STSSwapOrHoldVisual<cr>", "Swap Or Hold Node", "x")
         end
     }, --- better navigation with treesitter 
