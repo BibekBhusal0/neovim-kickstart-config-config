@@ -10,18 +10,20 @@ return {
     config = function()
         local mode = {
             "mode",
-            fmt = function(str) return " " .. str end,
-            -- return " " .. str:sub(1, 1) -- displays only the first character of the mode
-        }
-
-        local filename = {
-            "filename",
-            file_status = true, -- displays file status (readonly status, modified status)
-            path = 0,           -- 0 = just filename, 1 = relative path, 2 = absolute path
+            fmt = function(str) return " " .. str end,
+            -- .. str:sub(1, 1) -- displays only the first character of the mode
         }
 
         local hide_in_width = function()
             return vim.fn.winwidth(0) > 100
+        end
+
+        local getFileName = function () 
+            if hide_in_width() then
+                return vim.fn.fnamemodify(vim.fn.expand('%:p'), ":.")
+            else
+                return vim.fn.expand('%:t')
+            end
         end
 
         local diagnostics = {
@@ -104,7 +106,7 @@ return {
                 lualine_c = {  diff , pomodoro},
                 lualine_x = { diagnostics,  { "filetype", cond = hide_in_width } },
                 lualine_y = { lsp_status, codeium_status },
-                lualine_z = { filename },
+                lualine_z = { getFileName},
             },
             inactive_sections = {
                 lualine_a = {},
