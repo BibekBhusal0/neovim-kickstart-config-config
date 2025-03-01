@@ -8,8 +8,6 @@ map("<Left>", ":vertical resize -2<CR>", "Resize window left")
 map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 
 -- Buffers
-map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
-map("<S-Tab>", ":bprevious<CR>", "Buffer Cycle Previous")
 map("<leader>bb", ":enew<CR>", "Buffer New")
 
 -- Window management
@@ -51,10 +49,10 @@ return {
                 options = {
                     mode = "buffers",
                     themable = true,
-                    numbers = "none",
                     close_command = 'Bdelete! %d',
                     middle_mouse_command = "Bdelete! %d",
-                    path_components = 1,
+                    right_mouse_command = false,
+                    -- path_components = 1,
                     max_name_length = 30,
                     max_prefix_length = 30,
                     tab_size = 21,
@@ -74,7 +72,7 @@ return {
                     show_buffer_icons = true,
                     show_buffer_close_icons = true,
                     show_close_icon = false,
-                    persist_buffer_sort = true,     -- whether or not custom sorted buffers should persist
+                    persist_buffer_sort = false,     -- whether or not custom sorted buffers should persist
                     separator_style = { "", "" }, -- | "thick" | "thin" | { "any", "any" },
                     enforce_regular_tabs = true,
                     always_show_bufferline = true,
@@ -83,6 +81,7 @@ return {
                     minimum_padding = 1,
                     maximum_padding = 3,
                     maximum_length = 15,
+                    sort_by = 'insert_at_end',
                     hover = { enabled = true, delay = 200, reveal = { 'close' } },
                     custom_areas = {
                         right = function()
@@ -106,7 +105,6 @@ return {
                             return result
                         end,
                     }
-
                 },
                 highlights = {
                     buffer_selected = {
@@ -124,10 +122,13 @@ return {
                     diagnostic_selected = { bg = bg },
                 },
             }
+
+            map("<Tab>", ":BufferLineCycleNext<CR>", "Buffer Cycle Next")
+            map("<S-Tab>", ":BufferLineCyclePrev<CR>", "Buffer Cycle Previous")
             map("<leader>bp", ":BufferLineTogglePin<CR>", "Buffer Toggle Pin")
-            map("<leader>bP", ":BufferLinePick<CR>", "Buffer Pick")
-            map("<leader>bj", ":BufferLineMoveNext<CR>", "Buffer Move Next")
-            map("<leader>bk", ":BufferLineMovePrev<CR>", "Buffer Move Prev")
+            map("<leader>bc", ":BufferLinePick<CR>", "Buffer Pick")
+            map("<leader>bk", ":BufferLineMoveNext<CR>", "Buffer Move Next")
+            map("<leader>bj", ":BufferLineMovePrev<CR>", "Buffer Move Prev")
             map("<leader>bo", ":BufferLineCloseOthers<CR>", "Buffer Close others")
             map("<leader>bh", ":BufferLineCyclePrev<CR>", "Buffer Cycle Prev")
             map("<leader>bl", ":BufferLineCycleNext<CR>", "Buffer Cycle Next")
@@ -141,6 +142,7 @@ return {
             end
         end,
     },
+
     {
         "moll/vim-bbye",
         cmd = {"Bdelete", 'Bwipeout'},
@@ -150,6 +152,7 @@ return {
             { '<leader>bx', ':Bwipeout<CR>', desc = 'Buffer Close' },
         }
     },
+
     {
         'tiagovla/scope.nvim',
         event = { "BufReadPost", "BufNewFile" },
@@ -163,6 +166,7 @@ return {
             )
         end
     },
+
     {
         "stevearc/resession.nvim",
         keys = {
@@ -171,7 +175,6 @@ return {
             { '<leader>fl', ':lua require("resession").load()<CR>', desc  = 'Session Load' },
             { '<leader>fd', ':lua require("resession").delete()<CR>', desc = 'Session Delete' },
         },
-        lazy = true,
         opts = {
             buf_filter = function(bufnr)
                 local buftype = vim.bo.buftype
@@ -183,6 +186,7 @@ return {
             extensions = { scope = {} },
         }
     },
+
     {
         'ThePrimeagen/harpoon',
         keys = {
@@ -194,6 +198,7 @@ return {
             { "<leader>fc", ": lua require('harpoon.mark').clear_all()<CR>",       desc = "Harpoon Clear Files" },
         }
     },
+
     {
         "anuvyklack/windows.nvim",
         event = { "BufNewFile", "BufReadPost" },

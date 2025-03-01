@@ -86,3 +86,4 @@ end
 
 map('zo', 'za', "Toggle fold")
 map('zi', toggle_foldcolumn, "Toggle fold column")
+map("<Esc>", '<Cmd>noh<CR>', 'Clear Highlight')
