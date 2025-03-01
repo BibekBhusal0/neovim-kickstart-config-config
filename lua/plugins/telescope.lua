@@ -46,6 +46,7 @@ map( "<leader>i", spellSuggestion, "Spell suggestion")
 map("<leader>sz", spellSuggestion, "Spell suggestion")
 
 return {
+
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
@@ -61,7 +62,6 @@ return {
             "nvim-telescope/telescope-ui-select.nvim",
             "nvim-tree/nvim-web-devicons",
         },
-
         config = function()
             require("telescope").setup {
                 defaults = {
@@ -77,11 +77,11 @@ return {
             extensions = {
                 ["ui-select"] = { require("telescope.themes").get_dropdown() },
             },
-
             pcall(require('telescope').load_extension, 'fzf')
             pcall(require('telescope').load_extension, 'ui-select')
         end,
     },
+
     {
         'debugloop/telescope-undo.nvim', 
         keys = {{"<leader>u" , ":Telescope undo<cr>" , desc = "Undo Tree"}}, 
@@ -90,12 +90,14 @@ return {
             require("telescope").load_extension("undo")
         end
     },
+
     {
         "zongben/proot.nvim",
         opts = {},
         keys = { {"<Leader>sp", ":Proot<Cr>", desc = "Search Directories"} },
         cmd = {"Proot"}
     },
+
     {
         'ziontee113/icon-picker.nvim',
         opts = {} ,

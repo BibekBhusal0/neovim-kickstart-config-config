@@ -54,10 +54,9 @@ return {
                     close_command = 'Bdelete! %d',
                     middle_mouse_command = "Bdelete! %d",
                     right_mouse_command = false,
-                    -- path_components = 1,
                     max_name_length = 30,
                     max_prefix_length = 30,
-                    -- truncate_names = true,
+                    truncate_names = true,
                     tab_size = 21,
                     diagnostics = 'nvim_lsp',
                     diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -132,7 +131,7 @@ return {
         keys = {
             { '<leader>xb', ':Bdelete<CR>', desc = 'Close Buffer' },
             { '<leader>xB', ':Bdelete!<CR>', desc = 'Close Buffer Force' },
-            { '<leader>bx', ':Bwipeout<CR>', desc = 'Buffer Close' },
+            { '<leader>bx', ':Bdelete<CR>', desc = 'Buffer Close' },
         }
     },
 
@@ -153,10 +152,10 @@ return {
     {
         "stevearc/resession.nvim",
         keys = {
-            { '<leader>fs', ':lua require("resession").save()<CR>', desc = 'Session Save' },
-            { '<leader>fS', ':lua require("resession").save_tab()<CR>', desc = 'Session Save Tab' },
-            { '<leader>fl', ':lua require("resession").load()<CR>', desc  = 'Session Load' },
-            { '<leader>fd', ':lua require("resession").delete()<CR>', desc = 'Session Delete' },
+            { '<leader>Ss', ':lua require("resession").save()<CR>', desc = 'Session Save' },
+            { '<leader>SS', ':lua require("resession").save_tab()<CR>', desc = 'Session Save Tab' },
+            { '<leader>Sl', ':lua require("resession").load()<CR>', desc  = 'Session Load' },
+            { '<leader>Sd', ':lua require("resession").delete()<CR>', desc = 'Session Delete' },
         },
         opts = {
             buf_filter = function(bufnr)
