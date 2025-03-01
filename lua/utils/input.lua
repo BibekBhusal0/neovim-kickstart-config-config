@@ -25,7 +25,6 @@ return function(title, callback, val, width)
         api.nvim_buf_delete(buf, { force = true })
 
         if #newVal > 0 and newVal ~= val then
-            print('input is changed and is not empty')
             callback(newVal)
         end
     end)

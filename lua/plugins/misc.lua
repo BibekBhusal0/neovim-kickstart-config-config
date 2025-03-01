@@ -2,12 +2,12 @@ local map = require("utils.map")
 
 return {
     { -- hints, will remove soon
-        {
-            "folke/which-key.nvim", 
-            cmd = "WhichKey", -- disable which key by default
-            -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-            -- event = "VeryLazy",
-        },   -- Hints keybinds
+        -- {
+        --     "folke/which-key.nvim", 
+        --     cmd = "WhichKey", -- disable which key by default
+        --     -- keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+        --     -- event = "VeryLazy",
+        -- },   -- Hints keybinds
         {
             "smartinellimarco/nvcheatsheet.nvim",
             lazy = true,
@@ -193,16 +193,6 @@ return {
             config = function() require("colorizer").setup() end,
         }, -- High-performance color highlighter
         {
-            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-            event = "LspAttach",
-            config = function()
-                require("lsp_lines").setup()
-                vim.diagnostic.config({ virtual_text = false, })
-                vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
-                map('<leader>lt' ,require("lsp_lines").toggle , "Toggle LSP line" )
-            end,
-        }, -- Better diagnostic messages 
-        {
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
             event = { "BufNewFile", "BufReadPost" },
@@ -376,4 +366,67 @@ return {
             })
         end
     }, -- note taking 
+    {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim"
+        },
+        keys  = {{"<leader>lm", ":lua require('nvim-navbuddy').open()<CR>", desc = "Open Navbuddy" }} ,
+        config = function () 
+            local navbuddy = require("nvim-navbuddy")
+            local icons = {}
+            for k, v in pairs(require('utils.icons')) do 
+                icons[k] =  v .. ' '
+            end
+
+            navbuddy.setup({
+                lsp = { auto_attach = true },
+                icons = icons,
+            })
+        end
+    }, -- Better navigation with LSP
+    {
+        'ziontee113/syntax-tree-surfer',
+        event = { "BufReadPre", "BufNewFile" },
+        config = function () 
+            local sts = require('syntax-tree-surfer')
+            sts.setup({
+                icon_dictionary = {
+                    ["if_statement"] = "󰵉",
+                    ["else_clause"] = "󱞽",
+                    ["else_statement"] = "󱞽",
+                    ["elseif_statement"] = "󰵕",
+                    ["for_statement"] = "󰑓ﭜ",
+                    ["while_statement"] = "󰑓",
+                    ["switch_statement"] = "",
+                    ["function"] = "󰡱",
+                    ["function_definition"] = "󰊕",
+                    ["variable_declaration"] = "󰫧",
+                },
+            })
+            map("vx", ":STSSelectMasterNode<cr>", "Select Master Node")
+            map("vn", ":STSSelectCurrentNode<cr>", "Select Current Node")
+            local jumps = {
+                f = {"function", "arrrow_function", "function_definition"},
+                i = {"if_statemet", "else_statement", "else_clause", "switch_statement", "if_clause"} , 
+                l = {"for_statement", 'while_statement' },
+            }
+
+            for k, v in pairs(jumps) do 
+                map("]" .. k, function() sts.filtered_jump(v, true) end, "Jump to next " .. k)
+                map("[" .. k, function() sts.filtered_jump(v, false) end, "Jump to previous " .. k)
+            end
+            map("<leader>j", function() sts.targeted_jump({
+                "function",
+                "if_statement",
+                "else_clause",
+                "else_statement",
+                "elseif_statement",
+                "for_statement",
+                "while_statement",
+                "switch_statement",
+            }) end, "Jump to next node")
+        end
+    }, --- better navigation with treesitter 
 }

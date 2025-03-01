@@ -43,8 +43,8 @@ map("<C-K>", ":t.<CR>", "Duplicate lines", {'n','v'})
 -- copy/paste to system clipboard with leader y
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard")
-map("<leader>j", 'ggVGy', "Yank all")
-map("<leader>J", 'ggVG"+y', "Yank all to System Clipboard")
+map("<leader>k", 'ggVGy', "Yank all")
+map("<leader>K", 'ggVG"+y', "Yank all to System Clipboard")
 map('<leader>p', '"_dP', "Paste without yanking", 'x')
 
 -- Vertical scroll and center
@@ -54,7 +54,6 @@ map("<C-u>", "<C-u>zz", "Scroll up and center")
 -- center movements 
 map("<A-j>", "jzz", "Move Next line and center")
 map("<A-k>", "kzz", "Move Previous line and center")
-
 
 -- terminal
 map("<C-x>", "<C-\\><C-N>", "terminal escape terminal mode", 't')

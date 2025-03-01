@@ -1,4 +1,5 @@
 local map = require("utils.map")
+local kind_icons = require("utils.icons")
 
 return { -- Autocompletion
     "hrsh7th/nvim-cmp",
@@ -56,33 +57,6 @@ return { -- Autocompletion
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
         }
 
-        local kind_icons = {
-            Text = "󰉿",
-            Method = "m",
-            Function = "󰊕",
-            Constructor = "",
-            Field = "",
-            Variable = "󰆧",
-            Class = "󰌗",
-            Interface = "",
-            Module = "",
-            Property = "",
-            Unit = "",
-            Value = "󰎠",
-            Enum = "",
-            Keyword = "󰌋",
-            Snippet = "",
-            Color = "󰏘",
-            File = "󰈙",
-            Reference = "",
-            Folder = "󰉋",
-            EnumMember = "",
-            Constant = "󰇽",
-            Struct = "",
-            Event = "",
-            Operator = "󰆕",
-            TypeParameter = "󰊄",
-        }
         cmp.setup {
             snippet = {
                 expand = function(args) luasnip.lsp_expand(args.body) end,

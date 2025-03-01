@@ -45,7 +45,6 @@ local function diffViewTelescopeCompareWithCurrentBranch()
             vim.cmd("DiffviewOpen " .. selection.value)
         end
     end
-
     builtin.git_branches(themes.get_dropdown({
         previewer = false,
         prompt_title = "Compare Current with Branch",
@@ -61,8 +60,6 @@ local function diffViewTelescopeFileHistory()
     local action_state = require("telescope.actions.state")
     local themes = require("telescope.themes")
     local builtin = require("telescope.builtin")
-
-    -- First select a file
     builtin.git_files(themes.get_dropdown({
         prompt_title = "Select File for History",
         previewer = false,
@@ -87,7 +84,6 @@ local function diffViewTelescopeCompareBranches()
     local themes = require("telescope.themes")
     local builtin = require("telescope.builtin")
     local branches = {}
-
     -- First branch selection
     builtin.git_branches(themes.get_dropdown({
         prompt_title = "Select First Branch",
@@ -96,7 +92,6 @@ local function diffViewTelescopeCompareBranches()
             map({ "i", "n" }, "<CR>", function(first_bufnr)
                 local first_branch = action_state.get_selected_entry().value
                 actions.close(first_bufnr)
-
                 -- Second branch selection
                 builtin.git_branches(themes.get_dropdown({
                     prompt_title = "Select Second Branch",
@@ -105,7 +100,6 @@ local function diffViewTelescopeCompareBranches()
                         second_map({ "i", "n" }, "<CR>", function(second_bufnr)
                             local second_branch = action_state.get_selected_entry().value
                             actions.close(second_bufnr)
-
                             if first_branch ~= second_branch then
                                 vim.cmd("WindowsDisableAutowidth")
                                 vim.cmd("DiffviewOpen " .. first_branch .. ".." .. second_branch)
@@ -129,10 +123,12 @@ return {
         cmd = { "Gitsigns" },
         opts = {},
     },
+
     {
         "tpope/vim-fugitive",
         cmd = { "Git" },
     },
+
     {
         "kdheepak/lazygit.nvim",
         cmd = {
@@ -145,6 +141,7 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = { { "<leader>lg", ":LazyGit<cr>", desc = "Toggle LazyGit" } }
     },
+
     {
         "sindrets/diffview.nvim",
         keys = {
