@@ -206,7 +206,6 @@ return {
         },
 
         {
-            -- WARN: Gives color to comments
             "folke/todo-comments.nvim",
             event = { "BufNewFile", "BufReadPost" },
             keys = {
@@ -224,7 +223,7 @@ return {
                     map( ']' .. comment:sub(1,1), function() todo.jump_next({ keywords = {comment} }) end , "Next " .. comment, {'n', 'v'})
                 end
             end,
-        }, -- Highlight todo, notes, etc in comments
+        }, -- WARNING: Highlight todo, notes, etc in comments
 
     }
 }

@@ -1,6 +1,7 @@
 return {
     {
         "quentingruber/pomodoro.nvim",
+        cmd = {'PomodoroStart', 'PomodoroStop', 'PomodoroUI', 'PomodoroDelayBreak', 'PomodoroForceBreak', 'PomodoroSkipBreak'},
         keys = {
             {'<leader>ps', ':PomodoroStart<CR>', desc = 'Pomodoro Start'},
             {'<Leader>pS', ':PomodoroStop<CR>', desc = 'Pomodoro Stop'},
@@ -18,6 +19,7 @@ return {
             breaks_before_long = 4,
         },
     }, -- Simple pomodoro timer
+
     {
         'backdround/global-note.nvim',
         keys = {
@@ -32,16 +34,13 @@ return {
                     vim.notify(err, vim.log.levels.WARN)
                     return nil
                 end
-
                 local project_name = vim.fs.basename(project_directory)
                 if project_name == nil then
                     vim.notify("Unable to get the project name", vim.log.levels.WARN)
                     return nil
                 end
-
                 return project_name
             end
-
             gloabl_note.setup({
                 additional_presets = {
                     project_local = {
@@ -53,4 +52,36 @@ return {
             })
         end
     }, -- note taking 
+
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                backdrop = 0.7,
+                width = 1,
+                height = 0.98,
+                options = {
+                    signcolumn = "yes", 
+                    number = true, 
+                    relativenumber = true,
+                },
+            },
+            plugins = {
+                gitsigns = { enabled = false }, 
+                todo = { enabled = false }, 
+            },
+            on_open = function(win)
+                require("smear_cursor").enabled = false
+                require "utils.transparency".disable_transparency('#000000')
+                vim.cmd("PomodoroSkipBreak")
+            end,
+            on_close = function()
+                require("smear_cursor").enabled = true
+                require "utils.transparency".enable_transparency()
+                vim.cmd("PomodoroUI")
+            end,
+        } ,
+        keys = { { "<leader>zz", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
+        cmd = { 'ZenMode' }
+    }
 }

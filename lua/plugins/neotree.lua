@@ -8,6 +8,7 @@ map("<leader>e", ":Neotree toggle position=right<CR>", 'NeoTree on Right')
 map("<leader>q", ":Neotree toggle position=left<CR>", "NeoTree on Left")
 map("<C-b>", showTree, "Neotree Toggle", { "n", "v", "i" })
 map("<leader>gf", ":Neotree float git_status <CR>", "Git changes in files")
+map("<leader>E", ":Neotree float <CR>", "Neotree Floating")
 
 return {
     "nvim-neo-tree/neo-tree.nvim",
