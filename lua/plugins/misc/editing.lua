@@ -1,14 +1,5 @@
 local map = require("utils.map")
 
-local comment_keys = {} 
-local toggleComment = ':require("Comment.api").toggle.linewise.current()<CR>'
-local toggleCommentVisual = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>"
-local keys = { '/', '_', 'c' }
-for _, key in ipairs(keys) do
-    table.insert(comment_keys, { "<C-" .. key .. ">", toggleComment, 'Toggle Comment', { "n", "i" } })
-    table.insert(comment_keys, { "<C-" .. key .. ">", toggleCommentVisual, 'Toggle Comment', 'v' })
-end
-
 local webDev =  {"html" , "css", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"}
 
 return {
@@ -160,10 +151,8 @@ return {
     { -- comments 
         {
             "numToStr/Comment.nvim",
-            keys = comment_keys,
-            dependencies = {
-                "JoosepAlviste/nvim-ts-context-commentstring",
-            },
+            event = { "BufNewFile", "BufReadPost" },
+            dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
             opts = {},
             config = function()
                 require('Comment').setup {
@@ -223,7 +212,7 @@ return {
                     map( ']' .. comment:sub(1,1), function() todo.jump_next({ keywords = {comment} }) end , "Next " .. comment, {'n', 'v'})
                 end
             end,
-        }, -- WARNING: Highlight todo, notes, etc in comments
+        }, -- WARNING: Highlights todo, notes, etc in comments
 
     }
 }
