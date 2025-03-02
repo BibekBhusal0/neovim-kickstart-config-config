@@ -1,6 +1,7 @@
 require 'core.options'
 require 'core.keymaps'
 require 'core.snippets'
+require 'utils.screenshot'
 
 -- Set up the Lazy plugin manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
