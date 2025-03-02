@@ -24,6 +24,7 @@ map("<C-k>", ":wincmd k<CR>", "Window up")
 map("<C-j>", ":wincmd j<CR>", "Window down")
 map("<C-h>", ":wincmd h<CR>", "Window left")
 map("<C-l>", ":wincmd l<CR>", "Window right")
+map("<C-p>", ":wincmd p<CR>", "Window Floating")
 
 -- Tabs
 map("<leader>to", ":tabnew<CR>", "Tab new")

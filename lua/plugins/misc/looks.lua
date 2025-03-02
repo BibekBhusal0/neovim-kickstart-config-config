@@ -49,7 +49,6 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
             local builtin = require('statuscol.builtin')
-
             return {
                 setopt = true,
                 segments = {
