@@ -3,11 +3,6 @@ local function freeze_code(options, output_dir)
     theme = 'charm',
     margin = 20,
     language = vim.bo.filetype,
-    ['show-line-numbers'] = '',
-    ['border.radius'] = 6,
-    ['border.width'] = 2,
-    ['border.color'] = '"#52525B"',
-    window = '',
   }
 
   options = options or {}
@@ -20,7 +15,8 @@ local function freeze_code(options, output_dir)
 
   local full_path = vim.fn.expand '%:p'
   local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t')
-  local output_file = (output_dir or vim.fn.expand '~/Desktop/code') .. '/' .. file_name .. '_' .. os.date '%Y%m%d_%H%M%S' .. '.png'
+  local output_file = (output_dir or vim.fn.expand '~/Desktop/code') .. '/'
+  output_file = output_file .. file_name .. '_' .. os.date '%Y%m%d_%H%M%S' .. '.png'
   local command = 'freeze ' .. full_path .. ' -o ' .. output_file
 
   local mode = vim.fn.mode()
@@ -33,7 +29,7 @@ local function freeze_code(options, output_dir)
   for k, v in pairs(options) do
     command = command .. ' --' .. k .. ' ' .. v
   end
-  -- print('Executing command: ' .. command)
+  print('Executing command: ' .. command)
   local result = vim.fn.system(command)
 
   if result then
@@ -43,14 +39,4 @@ local function freeze_code(options, output_dir)
   end
 end
 
-local function freeze_to_desktop()
-  freeze_code()
-end
-
-local function freeze_to_working_directory()
-  freeze_code({}, './')
-end
-
-local map = require 'utils.map'
-map('<leader>fz', freeze_to_desktop, 'Freeze to desktop', { 'n', 'v' })
-map('<leader>fw', freeze_to_working_directory, 'Freeze here', { 'n', 'v' })
+return freeze_code
