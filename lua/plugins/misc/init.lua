@@ -4,4 +4,5 @@ return {
   require 'plugins.misc.looks',
   require 'plugins.misc.nav',
   require 'plugins.misc.productivity',
+  require 'plugins.misc.screenshot',
 }

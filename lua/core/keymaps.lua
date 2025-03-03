@@ -87,28 +87,3 @@ end
 map('zo', 'za', 'Toggle fold')
 map('<leader>zi', toggle_foldcolumn, 'Toggle fold column')
 map('<Esc>', '<Cmd>noh<CR>', 'Clear Highlight')
-
---screenshot
-
-local freeze_code = require 'utils.screenshot'
-local defaults = {
-  ['show-line-numbers'] = '',
-  ['border.radius'] = 9,
-  ['border.width'] = 4,
-  ['border.color'] = '"#635656"',
-  background = '"#2b1212"',
-  padding = '20,15,10,5',
-  window = '',
-}
-
-local function freeze_to_desktop()
-  freeze_code(defaults)
-end
-
-local function freeze_to_working_directory()
-  freeze_code(defaults, './')
-end
-
-local map = require 'utils.map'
-map('<leader>fz', freeze_to_desktop, 'Freeze to desktop', { 'n', 'v' })
-map('<leader>fw', freeze_to_working_directory, 'Freeze here', { 'n', 'v' })
