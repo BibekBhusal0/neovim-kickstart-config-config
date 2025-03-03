@@ -25,7 +25,11 @@ return {
     font = 'JetBrainsMono Nerd Font',
     theme = 'DarkNeon',
     -- background = '#f76161',
-    background_image = os.getenv 'USERPROFILE' .. '/AppData/Local/nvim/abs.png',
+    shadow_blur_radius = 14,
+    shadow_offset_x = 20,
+    shadow_offset_y = 20,
+    shadow_color = '#27272a',
+    background_image = os.getenv 'USERPROFILE' .. '/AppData/Local/nvim/gradient.png',
     num_separator = '\u{258f} ',
     window_title = function()
       return '    ' .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t')

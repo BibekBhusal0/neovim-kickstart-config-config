@@ -9,7 +9,11 @@ return { -- hints, will remove soon
   {
     'smartinellimarco/nvcheatsheet.nvim',
     lazy = true,
-    keys = { { '<leader>ch', ':lua require("nvcheatsheet").toggle()<CR>', desc = 'Toggle Cheatsheet' } },
+    keys = { {
+      '<leader>ch',
+      ':lua require("nvcheatsheet").toggle()<CR>',
+      desc = 'Toggle Cheatsheet',
+    } },
     config = function()
       require('nvcheatsheet').setup(require 'utils.cheatsheet')
     end,
