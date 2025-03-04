@@ -39,8 +39,7 @@ return {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
     config = function()
       require('lsp_lines').setup()
-      -- vim.diagnostic.config { virtual_text = false }
-      vim.diagnostic.config { virtual_lines = { only_current_line = true }, virtual_text = false, float = { show_line_diagnostics = false } }
+      vim.diagnostic.config { virtual_lines = { only_current_line = true }, virtual_text = false }
       map('<leader>lt', require('lsp_lines').toggle, 'Toggle LSP line')
     end,
     event = 'LspAttach',
@@ -99,7 +98,7 @@ return {
     'folke/twilight.nvim',
     cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
     keys = { { '<leader>F', '<cmd>Twilight<cr>', desc = 'Toggle Twilight' } },
-    opts = { context = 20 },
+    opts = { context = 10 },
   }, -- dim inactive code
 
   -- ╭─────────────────────────────────────────────────────────╮
@@ -126,7 +125,17 @@ return {
 
   {
     'karb94/neoscroll.nvim',
+    keys = {
+      { '<C-u>', mode = { 'n', 'v', 'x' } },
+      { '<C-d>', mode = { 'n', 'v', 'x' } },
+      { '<C-b>', mode = { 'n', 'v', 'x' } },
+      { '<C-f>', mode = { 'n', 'v', 'x' } },
+      { '<C-y>', mode = { 'n', 'v', 'x' } },
+      { '<C-e>', mode = { 'n', 'v', 'x' } },
+      { 'zt', mode = { 'n', 'v', 'x' } },
+      { 'zz', mode = { 'n', 'v', 'x' } },
+      { 'zb', mode = { 'n', 'v', 'x' } },
+    },
     opts = { hide_cursor = true },
-    event = { 'BufNewFile', 'BufReadPost' },
   }, -- Smooth scrolling
 }

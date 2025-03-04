@@ -100,6 +100,19 @@ return {
   {
     'ziontee113/icon-picker.nvim',
     opts = {},
+    cmd = {
+      'IconPickerInsert',
+      'IconPickerNormal',
+      'IconPickerYank',
+      'PickIcons',
+      'PickIconsYank',
+      'PickEmoji',
+      'PickEmojiYank',
+      'PickEverything',
+      'PickEverythingYank',
+      'PickSymbols',
+      'PickSymbolsYank',
+    },
     keys = {
       { '<leader>si', '<cmd>PickIcons<cr>', desc = 'Icon Picker' },
       { '<leader>sI', '<cmd>PickIconsYank<cr>', desc = 'Icon Picker Yank' },

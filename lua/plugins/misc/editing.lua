@@ -13,7 +13,17 @@ return {
 
   {
     'windwp/nvim-autopairs',
-    event = 'InsertEnter',
+    keys = {
+      { '{', mode = 'i' },
+      { '[', mode = 'i' },
+      { '(', mode = 'i' },
+      { '"', mode = 'i' },
+      { "'", mode = 'i' },
+      { '`', mode = 'i' },
+      { '}', mode = 'i' },
+      { ']', mode = 'i' },
+      { ')', mode = 'i' },
+    },
     config = true,
   }, -- Autoclose parentheses, brackets, quotes, etc.
 
@@ -25,7 +35,7 @@ return {
 
   {
     'mg979/vim-visual-multi',
-    event = { 'BufNewFile', 'BufReadPost' },
+    keys = { '<C-n>', '<C-Up>', '<C-Down>', '<S-Left>', '<S-Right>' },
     config = function()
       local hlslens = require 'hlslens'
       if hlslens then
@@ -66,7 +76,13 @@ return {
     'nguyenvukhang/nvim-toggler',
     keys = { { '<leader>tt', ':lua require("nvim-toggler").toggle() <Cr>', desc = 'Toggle Value' } },
     config = function()
-      require('nvim-toggler').setup { remove_default_keybinds = true }
+      require('nvim-toggler').setup {
+        inverses = {
+          ['neo-vim'] = 'vs-code',
+          ['0'] = '1',
+        },
+        remove_default_keybinds = true,
+      }
     end,
   }, -- Toggle between true and false ; more
 
@@ -146,20 +162,8 @@ return {
   {
     'bennypowers/splitjoin.nvim',
     keys = {
-      {
-        'gj',
-        function()
-          require('splitjoin').join()
-        end,
-        desc = 'Join the object under cursor',
-      },
-      {
-        'g,',
-        function()
-          require('splitjoin').split()
-        end,
-        desc = 'Split the object under cursor',
-      },
+      { 'gj', ":lua require('splitjoin').join()<CR>", desc = 'Join the object under cursor' },
+      { 'g,', ":require('splitjoin').split()<CR>", desc = 'Split the object under cursor' },
     },
   }, -- advanced join and split
 
@@ -168,7 +172,6 @@ return {
       'numToStr/Comment.nvim',
       event = { 'BufNewFile', 'BufReadPost' },
       dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
-      opts = {},
       config = function()
         require('Comment').setup {
           pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
