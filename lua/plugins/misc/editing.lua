@@ -163,7 +163,7 @@ return {
     'bennypowers/splitjoin.nvim',
     keys = {
       { 'gj', ":lua require('splitjoin').join()<CR>", desc = 'Join the object under cursor' },
-      { 'g,', ":require('splitjoin').split()<CR>", desc = 'Split the object under cursor' },
+      { 'g,', ":lua require('splitjoin').split()<CR>", desc = 'Split the object under cursor' },
     },
   }, -- advanced join and split
 

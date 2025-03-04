@@ -36,6 +36,31 @@ return {
   },
 
   {
+    'nvim-treesitter/nvim-treesitter-context',
+    keys = {
+      { '<leader>tC', ':TSContextToggle<cr>', desc = 'Toggle Treesitter Context' },
+    },
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      require('treesitter-context').setup {
+        max_lines = 5,
+      }
+      map('<leader><Cr>', function()
+        require('treesitter-context').go_to_context(vim.v.count1)
+      end, 'Go to context')
+    end,
+  },
+
+  {
+    'nvim-treesitter/playground',
+    keys = {
+      { '<leader>pc', ':TSHighlightCapturesUnderCursor<CR>', desc = 'Highlight Captures Under Cursor' },
+      { '<leader>pt', ':TSPlaygroundToggle<CR>', desc = 'Toggle Treesiter Playground' },
+    },
+    cmd = { 'TSHighlightCapturesUnderCursor', 'TSPlaygroundToggle' },
+  },
+
+  {
     'ziontee113/syntax-tree-surfer',
     keys = {
       { 'vs', ':STSSelectMasterNode<cr>', desc = 'Select Master Node' },
@@ -139,6 +164,19 @@ return {
       end
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
+
+      local original_set_last_move = ts_repeat_move.set_last_move
+      ts_repeat_move.set_last_move = function(move_fn, opts, ...)
+        local success = original_set_last_move(move_fn, opts, ...)
+        if success then
+          vim.defer_fn(function()
+            require('neoscroll').zz { half_win_duration = 100, hide_cursor = true }
+          end, 10)
+        end
+
+        return success
+      end
+
       local get_pair = ts_repeat_move.make_repeatable_move_pair
       local next_hunk, prev_hunk = get_pair(call_require('gitsigns', 'next_hunk'), call_require('gitsigns', 'prev_hunk'))
       local next_dig, prev_dig = get_pair(function()
