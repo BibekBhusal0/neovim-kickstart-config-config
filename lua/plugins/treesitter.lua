@@ -75,8 +75,13 @@ return {
         '<leader>j',
         function()
           require('syntax-tree-surfer').targeted_jump {
+            'start_tag',
             'arrow_function',
             'function_definition',
+            'jsx_element',
+            'jsx_self_closing_tag',
+            'function_declaration',
+            'return_statement',
             'if_statement',
             'else_clause',
             'else_statement',
@@ -92,11 +97,16 @@ return {
         '<leader>J',
         function()
           require('syntax-tree-surfer').targeted_jump {
-            'html_tag',
-            'jsx_tag',
-            'tag',
+            'import_statement',
+            'start_tag',
+            'end_tag',
+            'open_tag',
+            'close_tag',
+            'jsx_closing_element',
+            'jsx_opening_element',
             'function_call',
             'variable_declaration',
+            'lexical_declaration',
           }
         end,
         desc = 'Jump to calls',

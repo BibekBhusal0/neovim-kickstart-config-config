@@ -59,11 +59,11 @@ return {
     'folke/zen-mode.nvim',
     opts = {
       window = {
-        backdrop = 0.7,
+        backdrop = 1,
         width = 1,
-        height = 0.98,
+        height = 1,
         options = {
-          signcolumn = 'yes',
+          signcolumn = 'no',
           number = true,
           relativenumber = true,
         },
@@ -71,6 +71,7 @@ return {
       plugins = {
         gitsigns = { enabled = false },
         todo = { enabled = false },
+        twilight = { enabled = false },
       },
       on_open = function(win)
         require('smear_cursor').enabled = false

@@ -1,7 +1,7 @@
 local selected_bg = '#095028'
 local bg = '#18181b'
-local tab_selected = '#f31260'
-local tab = '#310413'
+local tab_selected = '#74dfa2'
+local tab = '#052814'
 
 -- Resize with arrows
 map('<Up>', ':resize -2<CR>', 'Resize window up')
@@ -55,6 +55,7 @@ return {
           mode = 'buffers',
           themable = true,
           close_command = 'Bdelete! %d',
+          close_icon = ' 󰅙',
           middle_mouse_command = 'Bdelete! %d',
           right_mouse_command = false,
           max_name_length = 30,
@@ -76,7 +77,7 @@ return {
           color_icons = true,
           show_buffer_icons = true,
           show_buffer_close_icons = true,
-          show_close_icon = false,
+          show_close_icon = true,
           persist_buffer_sort = false, -- whether or not custom sorted buffers should persist
           separator_style = { '', '' }, -- | "thick" | "thin" | { "any", "any" },
           enforce_regular_tabs = false,
@@ -103,11 +104,11 @@ return {
           modified = { bg = bg },
           diagnostic = { bg = bg },
           diagnostic_selected = { bg = bg },
-          tab = { bg = tab },
-          tab_selected = { bg = tab_selected },
+          tab_close = { fg = '#f31260' },
         },
       }
-
+      vim.api.nvim_set_hl(0, 'BufferLineTabSelected', { bg = tab_selected, fg = tab })
+      vim.api.nvim_set_hl(0, 'BufferLineTab', { bg = tab, fg = tab_selected })
       map('<Tab>', ':BufferLineCycleNext<CR>', 'Buffer Cycle Next')
       map('<S-Tab>', ':BufferLineCyclePrev<CR>', 'Buffer Cycle Previous')
       map('<leader>bp', ':BufferLineTogglePin<CR>', 'Buffer Toggle Pin')
@@ -186,6 +187,27 @@ return {
       { '<leader>fp', ": lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
       { '<leader>ft', ": lua require('harpoon.mark').toggle_file()<CR>", desc = 'Harpoon Toggle File' },
       { '<leader>fc', ": lua require('harpoon.mark').clear_all()<CR>", desc = 'Harpoon Clear Files' },
+    },
+  },
+
+  {
+    'gaborvecsei/memento.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    keys = {
+      { '<leader>bh', ':lua require("memento").toggle()<cr>', desc = 'Toggle Buffer History' },
+      {
+        '<leader>ba',
+        function()
+          local is_closed = require('memento.ui').close_popup()
+          if is_closed then
+            return
+          end
+          local m = require 'memento'
+          m.toggle()
+          m.open_selected()
+        end,
+        desc = 'Open Last Closed Buffer',
+      },
     },
   },
 
