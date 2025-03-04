@@ -34,8 +34,8 @@ map('<leader>xs', ':close<CR>', 'Quit Split')
 -- move lines
 map('J', ":m '>+1<CR>gv=gv", 'Move Lines Down', 'v')
 map('K', ":m '<-2<CR>gv=gv", 'Move Lines Up', 'v')
-map('<A-J>', ':m .+1<CR>==', 'Move line down')
-map('<A-K>', ':m .-2<CR>==', 'Move line up')
+map('<C-J>', ':m .+1<CR>==', 'Move line down')
+map('<C-K>', ':m .-2<CR>==', 'Move line up')
 
 -- Duplicate lines
 map('<C-K>', ':t.<CR>', 'Duplicate lines', { 'n', 'v' })
@@ -52,8 +52,8 @@ map('<C-d>', '<C-d>zz', 'Scroll down and center')
 map('<C-u>', '<C-u>zz', 'Scroll up and center')
 
 -- center movements
-map('<A-j>', 'jzz', 'Move Next line and center')
-map('<A-k>', 'kzz', 'Move Previous line and center')
+map('<A-J>', 'jzz', 'Move Next line and center')
+map('<A-K>', 'kzz', 'Move Previous line and center')
 
 -- terminal
 map('<C-x>', '<C-\\><C-N>', 'terminal escape terminal mode', 't')

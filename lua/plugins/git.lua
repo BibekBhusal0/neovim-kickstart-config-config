@@ -20,8 +20,6 @@ map('<leader>gP', ':Git pull<CR>', 'Git pull')
 map('<leader>gC', commit_with_message, 'Git commit')
 map('<leader>gc', commit_all_with_message, 'Git commit all')
 
-map(']g', ':Gitsigns next_hunk<CR>zz', 'Git Next change', { 'n', 'v' })
-map('[g', ':Gitsigns prev_hunk<CR>zz', 'Git Previous change', { 'n', 'v' })
 map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
 map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
 map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')

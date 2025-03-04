@@ -39,8 +39,8 @@ return {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
     config = function()
       require('lsp_lines').setup()
-      vim.diagnostic.config { virtual_text = false }
-      vim.diagnostic.config { virtual_lines = { only_current_line = true } }
+      -- vim.diagnostic.config { virtual_text = false }
+      vim.diagnostic.config { virtual_lines = { only_current_line = true }, virtual_text = false, float = { show_line_diagnostics = false } }
       map('<leader>lt', require('lsp_lines').toggle, 'Toggle LSP line')
     end,
     event = 'LspAttach',
@@ -60,7 +60,7 @@ return {
             sign = { namespace = { 'diagnostic/signs' }, auto = true },
             click = 'v:lua.ScSa',
           },
-          { sign = { namespace = { 'gitsigns' } }, click = 'v:lua.ScSa' },
+          { sign = { namespace = { 'gitsigns' } }, click = 'v:lua.ScSa', auto = true },
         },
       }
     end,
