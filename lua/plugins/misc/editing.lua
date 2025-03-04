@@ -99,8 +99,6 @@ return {
       map('<leader>TS', ':TailwindSort<CR>', 'Tailwind Sort')
       map('<leader>Ts', ':TailwindSortSelection<CR>', 'Tailwind Sort', 'v')
       map('<leader>Tc', ':TailwindColorToggle<CR>', 'Tailwind Color Toggle')
-      map(']c', ':TailwindNextClass<CR>', 'Tailwind Next Class', { 'n', 'v' })
-      map('[c', ':TailwindPrevClass<CR>', 'Tailwind Previous Class', { 'n', 'v' })
       map('<leader>st', ':Telescope tailwind classes<CR>', 'Search Tailwind Classes')
       map('<leader>Ts', ':Telescope tailwind classes<CR>', 'Tailwind search')
     end,

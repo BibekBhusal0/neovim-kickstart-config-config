@@ -184,6 +184,11 @@ return {
       end, function()
         vim.diagnostic.goto_prev { float = false }
       end)
+      local tw_next, tw_prev = get_pair(function()
+        vim.cmd 'TailwindNextClass'
+      end, function()
+        vim.cmd 'TailwindPrevClass'
+      end)
 
       local todos = {
         t = {},
@@ -204,6 +209,8 @@ return {
       map('[g', prev_hunk, 'Jump Previous hunk', { 'n', 'x', 'o' })
       map(']d', next_dig, 'Jump Next Diagnostic', { 'n', 'x', 'o' })
       map('[d', prev_dig, 'Jump Previous Diagnostic', { 'n', 'x', 'o' })
+      map(']n', tw_next, 'Jump Next Tailwind Class', { 'n', 'x', 'o' })
+      map('[n', tw_prev, 'Jump Previous Tailwind Class', { 'n', 'x', 'o' })
       map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next', { 'n', 'x', 'o' })
       map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous', { 'n', 'x', 'o' })
     end,
