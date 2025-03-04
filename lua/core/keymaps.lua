@@ -47,10 +47,6 @@ map('<leader>k', 'ggVGy', 'Yank all')
 map('<leader>K', 'ggVG"+y', 'Yank all to System Clipboard')
 map('<leader>p', '"_dP', 'Paste without yanking', 'x')
 
--- Vertical scroll and center
-map('<C-d>', '<C-d>zz', 'Scroll down and center')
-map('<C-u>', '<C-u>zz', 'Scroll up and center')
-
 -- center movements
 map('<A-J>', 'jzz', 'Move Next line and center')
 map('<A-K>', 'kzz', 'Move Previous line and center')

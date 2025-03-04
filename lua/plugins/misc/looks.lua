@@ -72,12 +72,13 @@ return {
       'kevinhwang91/nvim-hlslens',
       config = function()
         require('scrollbar.handlers.search').setup { calm_down = true, nearest_only = true }
-        map('n', [[<Cmd>execute('normal! ' . v:count1 . 'nzz')<CR><Cmd>lua require('hlslens').start()<CR>]], 'Find Next')
-        map('N', [[<Cmd>execute('normal! ' . v:count1 . 'Nzz')<CR><Cmd>lua require('hlslens').start()<CR>]], 'Find Previous')
-        map('*', [[*<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Under Cursor')
-        map('#', [[#<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Before Cursor')
-        map('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Under Cursor')
-        map('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], 'Find Word Before Cursor')
+        local cmd = "<Cmd>lua require('neoscroll').zz({half_win_duration = 100}) require('hlslens').start()<CR>"
+        map('n', "<Cmd>execute('normal! ' . v:count1 . 'n')<CR>" .. cmd, 'Find Next')
+        map('N', "<Cmd>execute('normal! ' . v:count1 . 'N')<CR>" .. cmd, 'Find Previous')
+        map('*', '*' .. cmd, 'Find Word Under Cursor')
+        map('#', '#' .. cmd, 'Find Word Before Cursor')
+        map('g*', 'g*' .. cmd, 'Find Word Under Cursor')
+        map('g#', 'g#' .. cmd, 'Find Word Before Cursor')
       end,
     },
     config = function()
