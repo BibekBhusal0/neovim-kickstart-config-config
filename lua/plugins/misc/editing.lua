@@ -158,11 +158,13 @@ return {
   }, -- Changing case easily
 
   {
-    'bennypowers/splitjoin.nvim',
+    'Wansmer/treesj',
     keys = {
-      { 'gj', ":lua require('splitjoin').join()<CR>", desc = 'Join the object under cursor' },
-      { 'g,', ":lua require('splitjoin').split()<CR>", desc = 'Split the object under cursor' },
+      { 'gj', ':TSJJoin<CR>', desc = 'Join the object under cursor' },
+      { 'gs', ':TSJSplit<CR>', desc = 'Split the object under cursor' },
+      { 'ga', ':TSJToggle<CR>', desc = 'Toggle split object under cursor' },
     },
+    opts = { use_default_keymaps = false },
   }, -- advanced join and split
 
   { -- comments

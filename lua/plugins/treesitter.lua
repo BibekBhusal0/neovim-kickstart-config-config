@@ -79,7 +79,7 @@ return {
             'arrow_function',
             'function_definition',
             'jsx_element',
-            'jsx_self_closing_tag',
+            'jsx_self_closing_element',
             'function_declaration',
             'return_statement',
             'if_statement',
@@ -104,12 +104,13 @@ return {
             'close_tag',
             'jsx_closing_element',
             'jsx_opening_element',
+            'jsx_self_closing_element',
             'function_call',
             'variable_declaration',
             'lexical_declaration',
           }
         end,
-        desc = 'Jump to calls',
+        desc = 'Jump to next',
       },
     },
     opts = {},
@@ -125,31 +126,38 @@ return {
         C = 'comment',
         f = 'function',
         i = 'conditional',
+        j = 'jsx',
         l = 'loop',
         P = 'parameter',
         r = 'return',
       }
-      local keymsps = {}
+      local keymaps = {}
       local goto_next_start = {}
       local goto_previous_start = {}
       local swap_next = {}
       local swap_previous = {}
+      local goto_next_end = {}
+      local goto_previous_end = {}
 
       for k, v in pairs(keys) do
-        keymsps['i' .. k] = { query = '@' .. v .. '.inner', desc = 'Inner ' .. v }
-        keymsps['a' .. k] = { query = '@' .. v .. '.outer', desc = 'Outer ' .. v }
+        keymaps['i' .. k] = { query = '@' .. v .. '.inner', desc = 'Inner ' .. v }
+        keymaps['a' .. k] = { query = '@' .. v .. '.outer', desc = 'Outer ' .. v }
         goto_next_start[']' .. k] = { query = '@' .. v .. '.outer', desc = 'Jump Next ' .. v }
         goto_previous_start['[' .. k] = { query = '@' .. v .. '.outer', desc = 'Jump Previous ' .. v }
         swap_next['<leader>m' .. k] = { query = '@' .. v .. '.outer', desc = 'Swap Next ' .. v }
         swap_previous['<leader>M' .. k] = { query = '@' .. v .. '.outer', desc = 'Swap Previous ' .. v }
+        goto_previous_end['(' .. k] = { query = '@' .. v .. '.outer', desc = 'Jump Previous ' .. v .. ' End' }
+        goto_next_end[')' .. k] = { query = '@' .. v .. '.outer', desc = 'Jump Next ' .. v .. ' End' }
       end
+      goto_next_start[']z'] = { query = '@fold', query_group = 'folds', desc = 'Jump next fold' }
+      goto_next_start['[z'] = { query = '@fold', query_group = 'folds', desc = 'Prev next fold' }
 
       require('nvim-treesitter.configs').setup {
         textobjects = {
           select = {
             enable = true,
             lookahead = true,
-            keymaps = keymsps,
+            keymaps = keymaps,
           },
           swap = {
             enable = true,
@@ -160,9 +168,9 @@ return {
             enable = true,
             set_jumps = true,
             goto_next_start = goto_next_start,
-            goto_next_end = {},
+            goto_next_end = goto_next_end,
             goto_previous_start = goto_previous_start,
-            goto_previous_end = {},
+            goto_previous_end = goto_previous_end,
           },
         },
       }
@@ -180,8 +188,8 @@ return {
         local success = original_set_last_move(move_fn, opts, ...)
         if success then
           vim.defer_fn(function()
-            require('neoscroll').zz { half_win_duration = 100, hide_cursor = true }
-          end, 10)
+            require('neoscroll').zz { half_win_duration = 10, hide_cursor = true }
+          end, 5)
         end
 
         return success

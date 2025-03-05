@@ -1,4 +1,5 @@
 local map = require 'utils.map'
+local smear_cursor_enabled = true
 
 return {
   {
@@ -111,14 +112,7 @@ return {
     opts = {},
     config = function()
       local sm = require 'smear_cursor'
-      sm.setup {
-        cursor_color = '#ff8800',
-        stiffness = 0.6,
-        trailing_stiffness = 0.3,
-        distance_stop_animating = 0.5,
-        hide_target_hack = true,
-        gamma = 1,
-      }
+      sm.setup { cursor_color = '#ff8800' }
       sm.enabled = true
       map('<leader>tc', ':SmearCursorToggle<CR>', 'Toggle Smear Cursor')
     end,

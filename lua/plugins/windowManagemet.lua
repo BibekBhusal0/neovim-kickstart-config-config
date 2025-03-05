@@ -83,7 +83,7 @@ return {
           enforce_regular_tabs = false,
           always_show_bufferline = true,
           show_tab_indicators = true,
-          indicator = { style = 'icon', icon = '▕' },
+          indicator = { style = 'icon', icon = '' },
           minimum_padding = 1,
           maximum_padding = 3,
           maximum_length = 15,
@@ -141,7 +141,7 @@ return {
 
   {
     'tiagovla/scope.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'VimEnter' },
     config = function()
       require('scope').setup()
       map('<leader>bm', function()
