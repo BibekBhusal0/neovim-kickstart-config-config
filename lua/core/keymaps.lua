@@ -29,23 +29,20 @@ map('<leader>xA', ':qa!<CR>', 'Quit all Files force')
 map('<leader>xt', ':tabclose<CR>', 'Quit Tab')
 map('<leader>xs', ':close<CR>', 'Quit Split')
 
--- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
---
--- move lines
-map('J', ":m '>+1<CR>gv=gv", 'Move Lines Down', 'v')
-map('K', ":m '<-2<CR>gv=gv", 'Move Lines Up', 'v')
-map('<C-J>', ':m .+1<CR>==', 'Move line down')
-map('<C-K>', ':m .-2<CR>==', 'Move line up')
-
--- Duplicate lines
-map('<C-K>', ':t.<CR>', 'Duplicate lines', { 'n', 'v' })
-
--- copy/paste to system clipboard with leader y
+-- copy/paste to
+-- system clipboard with leader y
 map('<leader>y', '"+y', 'Yank to system clipboard', { 'n', 'v' })
 map('<leader>Y', '"+Y', 'Yank line to system clipboard')
+
+-- yank all
 map('<leader>k', 'ggVGy', 'Yank all')
 map('<leader>K', 'ggVG"+y', 'Yank all to System Clipboard')
-map('<leader>p', '"_dP', 'Paste without yanking', 'x')
+
+-- use black hole register
+map('zc', '"_c', 'Change to black hole register', { 'n', 'v' })
+map('zd', '"_d', 'Delete to black hole register', { 'n', 'v' })
+map('zy', '"_y', 'Yank to black hole register', { 'n', 'v' })
+map('zp', '"_dP', 'Paste without yanking', 'x')
 
 -- center movements
 map('<A-J>', 'jzz', 'Move Next line and center')

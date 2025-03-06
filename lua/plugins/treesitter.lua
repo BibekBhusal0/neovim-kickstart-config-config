@@ -1,4 +1,5 @@
 local map = require 'utils.map'
+local mode = { 'n', 'x', 'o' }
 
 return {
   {
@@ -65,12 +66,12 @@ return {
     keys = {
       { 'vs', ':STSSelectMasterNode<cr>', desc = 'Select Master Node' },
       { 'vn', ':STSSelectCurrentNode<cr>', desc = 'Select Current Node' },
-      { 'vD', ':STSSwapDownNormal<cr>', desc = 'Swap Node Down', mode = 'n' },
-      { 'vU', ':STSSwapUpNormal<cr>', desc = 'Swap Node Up', mode = 'n' },
-      { 'vu', ':STSSwapCurrentNodePrevNormal<cr>', desc = 'Swap Node Previous', mode = 'n' },
-      { 'vd', ':STSSwapCurrentNodeNextNormal<cr>', desc = 'Swap Node Next', mode = 'n' },
-      { 'gnh', ':STSSwapOrHold<cr>', desc = 'Swap Or Hold Node', mode = 'n' },
-      { 'gnh', ':STSSwapOrHoldVisual<cr>', desc = 'Swap Or Hold Node', mode = 'x' },
+      { 'vD', ':STSSwapDownNormal<cr>', desc = 'Swap Node Down' },
+      { 'vU', ':STSSwapUpNormal<cr>', desc = 'Swap Node Up' },
+      { 'vu', ':STSSwapCurrentNodePrevNormal<cr>', desc = 'Swap Node Previous' },
+      { 'vd', ':STSSwapCurrentNodeNextNormal<cr>', desc = 'Swap Node Next' },
+      { 'gS', ':STSSwapOrHold<cr>', desc = 'Swap Or Hold Node' },
+      { 'gS', ':STSSwapOrHoldVisual<cr>', desc = 'Swap Or Hold Node', mode = 'x' },
       {
         '<leader>j',
         function()
@@ -117,13 +118,25 @@ return {
   },
 
   {
+    'drybalka/tree-climber.nvim',
+    keys = {
+      {
+        'n',
+        ':lua require("tree-climber").goto_parent() require("tree-climber").select_node()<cr>',
+        desc = 'Goto Parent',
+        mode = 'v',
+      },
+    },
+  },
+
+  {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       keys = {
+        ['/'] = 'comment',
         b = 'block',
         c = 'class',
-        C = 'comment',
         f = 'function',
         i = 'conditional',
         j = 'jsx',
@@ -219,18 +232,17 @@ return {
       for k, p in pairs(todos) do
         local next, prev = get_pair(call_require('todo-comments', 'jump_next', { keywords = p }), call_require('todo-comments', 'jump_prev', { keywords = p }))
         local name = #p == 0 and 'todo comment' or p[1]
-        map(']' .. k, next, 'Jump Next ' .. name, { 'n', 'x', 'o' })
-        map('[' .. k, prev, 'Jump Prev ' .. name, { 'n', 'x', 'o' })
+        map(']' .. k, next, 'Jump Next ' .. name, mode)
+        map('[' .. k, prev, 'Jump Prev ' .. name, mode)
       end
-
-      map(']g', next_hunk, 'Jump Next hunk', { 'n', 'x', 'o' })
-      map('[g', prev_hunk, 'Jump Previous hunk', { 'n', 'x', 'o' })
-      map(']d', next_dig, 'Jump Next Diagnostic', { 'n', 'x', 'o' })
-      map('[d', prev_dig, 'Jump Previous Diagnostic', { 'n', 'x', 'o' })
-      map(']n', tw_next, 'Jump Next Tailwind Class', { 'n', 'x', 'o' })
-      map('[n', tw_prev, 'Jump Previous Tailwind Class', { 'n', 'x', 'o' })
-      map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next', { 'n', 'x', 'o' })
-      map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous', { 'n', 'x', 'o' })
+      map(']g', next_hunk, 'Jump Next hunk', mode)
+      map('[g', prev_hunk, 'Jump Previous hunk', mode)
+      map(']d', next_dig, 'Jump Next Diagnostic', mode)
+      map('[d', prev_dig, 'Jump Previous Diagnostic', mode)
+      map(']n', tw_next, 'Jump Next Tailwind Class', mode)
+      map('[n', tw_prev, 'Jump Previous Tailwind Class', mode)
+      map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next', mode)
+      map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous', mode)
     end,
   },
 }
