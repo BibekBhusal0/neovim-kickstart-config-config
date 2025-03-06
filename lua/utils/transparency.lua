@@ -1,5 +1,5 @@
 local M = {}
-M.bg_transparent = true
+M.bg_transparent = false
 
 M.apply_transparency = function(color)
   local bg = 'none'

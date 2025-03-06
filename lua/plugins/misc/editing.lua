@@ -80,6 +80,7 @@ return {
         inverses = {
           ['neo-vim'] = 'vs-code',
           ['0'] = '1',
+          show = 'hide',
         },
         remove_default_keybinds = true,
       }
@@ -188,11 +189,11 @@ return {
         { '<S-j>', '<Plug>GoVSMDown', mode = 'x', desc = 'Move down' },
         { '<S-k>', '<Plug>GoVSMUp', mode = 'x', desc = 'Move up' },
 
-        { '<C-j>', '<Plug>GoNSDDown', desc = 'Duplicate down' },
-        { '<C-k>', '<Plug>GoNSDUp', desc = 'Duplicate up' },
+        { '<C-A-j>', '<Plug>GoNSDDown', desc = 'Duplicate down' },
+        { '<C-A-k>', '<Plug>GoNSDUp', desc = 'Duplicate up' },
 
-        { '<C-j>', '<Plug>GoVSDDown', mode = 'x', desc = 'Duplicate down' },
-        { '<C-k>', '<Plug>GoVSDUp', mode = 'x', desc = 'Duplicate up' },
+        { '<A-j>', '<Plug>GoVSDDown', mode = 'x', desc = 'Duplicate down' },
+        { '<A-k>', '<Plug>GoVSDUp', mode = 'x', desc = 'Duplicate up' },
       },
       opts = { map_defaults = false },
     },

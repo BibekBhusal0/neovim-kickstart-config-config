@@ -40,7 +40,7 @@ return {
     shadow_offset_x = 20,
     shadow_offset_y = 20,
     shadow_color = '#27272a',
-    background_image = os.getenv 'USERPROFILE' .. '/AppData/Local/nvim/gradient.png',
+    background_image = vim.fn.stdpath 'config' .. '/gradient.png',
     num_separator = '\u{258f}',
 
     output = function()

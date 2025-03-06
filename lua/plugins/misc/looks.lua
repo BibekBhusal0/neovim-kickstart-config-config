@@ -3,12 +3,37 @@ local smear_cursor_enabled = true
 
 return {
   {
-    'norcalli/nvim-colorizer.lua',
-    event = 'InsertEnter',
+    'uga-rosa/ccc.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    keys = {
+      { '<leader>cp', ':CccPick<CR>', desc = 'Color Picker' },
+      { '<leader>cP', ':CccConvert<CR>', desc = 'Color Convert' },
+      { '<leader>ch', ':CccHighlighterToggle<CR>', desc = 'Color Highlighter Toggle' },
+    },
     config = function()
-      require('colorizer').setup()
+      local ccc = require 'ccc'
+      ccc.setup {
+        default_color = '#c6c8d1',
+        point_char = '░',
+        highlighter = { auto_enable = true, lsp = true },
+      }
     end,
-  }, -- High-performance color highlighter
+  }, -- Color picker
+
+  {
+    'nvzone/showkeys',
+    cmd = 'ShowkeysToggle',
+    keys = { { '<leader>sk', ':ShowkeysToggle<CR>', desc = 'Toggle Showkeys' } },
+    opts = {
+      timeout = 1,
+      maxkeys = 5,
+      show_count = true,
+      position = 'top-center',
+      height = 3,
+      excluded_modes = { 'i' },
+      keyformat = { ['<C>'] = '󰘳' },
+    },
+  }, -- Show keys while typing
 
   {
     'lukas-reineke/indent-blankline.nvim',

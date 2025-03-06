@@ -1,3 +1,5 @@
+local transparency_enabled = false
+
 return {
   {
     'quentingruber/pomodoro.nvim',
@@ -75,12 +77,17 @@ return {
       },
       on_open = function(win)
         require('smear_cursor').enabled = false
+        transparency_enabled = require('utils.transparency').bg_transparent
         require('utils.transparency').disable_transparency '#000000'
         vim.cmd 'PomodoroSkipBreak'
       end,
       on_close = function()
         require('smear_cursor').enabled = true
-        require('utils.transparency').enable_transparency()
+        if transparency_enabled then
+          require('utils.transparency').enable_transparency()
+        else
+          require('utils.transparency').disable_transparency()
+        end
         vim.cmd 'PomodoroUI'
       end,
     },

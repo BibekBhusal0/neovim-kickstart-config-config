@@ -29,7 +29,8 @@ map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')
 map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
 map('<leader>sr', ':Telescope resume<CR>', 'Search Resume')
-map('<leader>sC', ':Telescope commands<CR>', 'Search Commands')
+map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
+map('<leader>:', ':Telescope command_history<CR>', 'Search Commands history')
 map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
 map('<leader>sw', ':Telescope live_grep<CR>', 'Search by Grep')
@@ -39,7 +40,9 @@ map('<leader>sgC', ':Telescope git_bcommits<CR>', 'Search Git Bcommits')
 map('<leader>sgs', ':Telescope git_stash<CR>', 'Search Git Stash')
 map('<leader>sgf', ':Telescope git_files<CR>', 'Search Git Files')
 map('<leader>sB', ':Telescope scope buffers<CR>', 'Seach All Buffers ')
+map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
 map('<leader>sh', ':Telescope harpoon marks<CR>', 'Search Harpoon Marks')
+map('<leader>sH', ':Telescope help_tags<CR>', 'Search Help Tags')
 map('<leader>/', searchInCurrentBuffer, 'Search in current buffer')
 map('<leader>s/', searchInOpenFiles, 'Search in Open Files')
 map('<leader>i', spellSuggestion, 'Spell suggestion')
@@ -85,9 +88,6 @@ return {
     'debugloop/telescope-undo.nvim',
     keys = { { '<leader>u', ':Telescope undo<cr>', desc = 'Undo Tree' } },
     cmd = { 'Telescope undo' },
-    config = function()
-      require('telescope').load_extension 'undo'
-    end,
   },
 
   {
@@ -117,6 +117,7 @@ return {
       { '<leader>si', '<cmd>PickIcons<cr>', desc = 'Icon Picker' },
       { '<leader>sI', '<cmd>PickIconsYank<cr>', desc = 'Icon Picker Yank' },
       { '<leader>se', '<cmd>PickEmoji<cr>', desc = 'Icon Picker Emoji' },
+      { '<leader>sS', '<cmd>PickSymbols<cr>', desc = 'Icon Picker Emoji' },
       { '<leader>sE', '<cmd>PickEmojiYank emoji<cr>', desc = 'Icon Picker Emoji Yank' },
     },
   }, -- icon picker with telescope
