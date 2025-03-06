@@ -42,6 +42,7 @@ map('<leader>K', 'ggVG"+y', 'Yank all to System Clipboard')
 map('zc', '"_c', 'Change to black hole register', { 'n', 'v' })
 map('zd', '"_d', 'Delete to black hole register', { 'n', 'v' })
 map('zy', '"_y', 'Yank to black hole register', { 'n', 'v' })
+map('zx', '"_x', 'Cut to black hole register', { 'n', 'v' })
 map('zp', '"_dP', 'Paste without yanking', 'x')
 
 -- center movements

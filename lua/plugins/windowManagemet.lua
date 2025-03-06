@@ -127,7 +127,7 @@ return {
         map('<leader>b' .. i, ':BufferLineGoToBuffer ' .. i .. '<CR>', 'Buffer Go to ' .. i)
       end
     end,
-  },
+  }, -- show open buffer  and tab
 
   {
     'moll/vim-bbye',
@@ -137,7 +137,7 @@ return {
       { '<leader>xB', ':Bdelete!<CR>', desc = 'Close Buffer Force' },
       { '<leader>bx', ':Bdelete<CR>', desc = 'Buffer Close' },
     },
-  },
+  }, -- close buffer without closing tab
 
   {
     'tiagovla/scope.nvim',
@@ -150,7 +150,7 @@ return {
         end, '', 5)
       end, 'Move Buffer')
     end,
-  },
+  }, -- only show buffer from current tag
 
   {
     'stevearc/resession.nvim',
@@ -176,7 +176,7 @@ return {
       end,
       extensions = { scope = {} },
     },
-  },
+  }, -- session management
 
   {
     'ThePrimeagen/harpoon',
@@ -188,7 +188,7 @@ return {
       { '<leader>ft', ": lua require('harpoon.mark').toggle_file()<CR>", desc = 'Harpoon Toggle File' },
       { '<leader>fc', ": lua require('harpoon.mark').clear_all()<CR>", desc = 'Harpoon Clear Files' },
     },
-  },
+  }, -- pinning files and quickly moving between them
 
   {
     'gaborvecsei/memento.nvim',
@@ -209,7 +209,7 @@ return {
         desc = 'Open Last Closed Buffer',
       },
     },
-  },
+  }, -- reopen close buffer
 
   {
     'anuvyklack/windows.nvim',
@@ -226,5 +226,22 @@ return {
       map('<leader>w=', ':WindowsEqualize<CR>', 'Window Equalize')
       map('<leader>wt', ':WindowsToggleAutowidth<CR>', 'Window Toggle Autowidth')
     end,
-  },
+  }, -- split window autosize with better animations
+
+  {
+    'MisanthropicBit/winmove.nvim',
+    keys = {
+      { '<leader>ws', ":lua require'winmove'.start_mode('swap')<cr>", desc = 'Window Swap mode' },
+      { '<leader>wm', ":lua require'winmove'.start_mode('move')<cr>", desc = 'Window Move mode' },
+    },
+  }, -- Easy move and swap split windows
+
+  {
+    'jyscao/ventana.nvim',
+    cmd = { 'VentanaTranspose', 'VentanaShift', 'VentanaShiftMaintailLinear' },
+    keys = {
+      { '<leader>wT', ':VentanaTranspose<CR>', desc = 'Window Transpose' },
+      { '<leader>wS', ':VentanaShift<CR>', desc = 'Window Shift' },
+    },
+  }, -- easy change layout of split window
 }
