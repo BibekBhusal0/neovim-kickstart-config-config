@@ -21,19 +21,14 @@ return {
   }, -- Color picker
 
   {
-    'nvzone/showkeys',
-    cmd = 'ShowkeysToggle',
-    keys = { { '<leader>sk', ':ShowkeysToggle<CR>', desc = 'Toggle Showkeys' } },
-    opts = {
-      timeout = 1,
-      maxkeys = 5,
-      show_count = true,
-      position = 'top-center',
-      height = 3,
-      excluded_modes = { 'i' },
-      keyformat = { ['<C>'] = '󰘳' },
-    },
-  }, -- Show keys while typing
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = { 'markdown' },
+    config = function()
+      require('render-markdown').setup {}
+      map('<leader>mm', ':RenderMarkdown toggle<CR>', 'Markdown Render Toggle')
+      map('<leader>mM', ':RenderMarkdown buf_toggle<CR>', 'Markdown Render Buffer Toggle')
+    end,
+  }, -- better markdown render
 
   {
     'lukas-reineke/indent-blankline.nvim',

@@ -220,7 +220,7 @@ return {
       vim.o.winminwidth = 15
       vim.o.equalalways = false
       require('windows').setup()
-      map('<leader>wm', ':WindowsMaximize<CR>', 'Window Maximize')
+      map('<leader>wM', ':WindowsMaximize<CR>', 'Window Maximize')
       map('<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically')
       map('<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally')
       map('<leader>w=', ':WindowsEqualize<CR>', 'Window Equalize')
