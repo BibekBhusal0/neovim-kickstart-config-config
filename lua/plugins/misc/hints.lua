@@ -1,4 +1,4 @@
-return { -- hints, will remove soon
+return {
   {
     'folke/which-key.nvim',
     cmd = 'WhichKey',
@@ -18,4 +18,26 @@ return { -- hints, will remove soon
       require('nvcheatsheet').setup(require 'utils.cheatsheet')
     end,
   }, --  cheatsheet
+
+  {
+    'nvzone/showkeys',
+    cmd = 'ShowkeysToggle',
+    keys = { { '<leader>sk', ':ShowkeysToggle<CR>', desc = 'Toggle Showkeys' } },
+    opts = {
+      timeout = 1,
+      maxkeys = 5,
+      show_count = true,
+      position = 'top-center',
+      height = 3,
+      excluded_modes = { 'i' },
+      keyformat = { ['<C>'] = '󰘳' },
+    },
+  },
+
+  {
+    'm4xshen/hardtime.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    keys = { { '<leader>th', ':HardTimeToggle<CR>', desc = 'Toggle Hardtime' } },
+    opts = { restriction_mode = 'hint' },
+  },
 }
