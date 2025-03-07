@@ -38,6 +38,14 @@ return {
     'm4xshen/hardtime.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
     keys = { { '<leader>th', ':HardTimeToggle<CR>', desc = 'Toggle Hardtime' } },
-    opts = { restriction_mode = 'hint' },
+    opts = {
+      restriction_mode = 'hint',
+      disabled_keys = {
+        ['<Up>'] = {},
+        ['<Down>'] = {},
+        ['<Left>'] = {},
+        ['<Right>'] = {},
+      },
+    },
   },
 }

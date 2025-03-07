@@ -54,9 +54,16 @@ return {
       },
     },
     config = function()
-      local export = function(context)
-        return string.format([[You are a export %s developer.]], context.filetype)
-      end
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'CodeCompanionChatOpened',
+        callback = function()
+          vim.defer_fn(function()
+            if vim.bo.filetype ~= 'markdown' then
+              vim.bo.filetype = 'markdown' -- causes better rendering
+            end
+          end, 50)
+        end,
+      })
 
       require('utils.loader'):init()
       require('codecompanion').setup {
