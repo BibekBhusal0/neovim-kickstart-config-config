@@ -28,11 +28,19 @@ return {
     keys = {
       { '<leader>aa', ':CodeCompanionActions<cr>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
       { '<leader>ac', ':CodeCompanionChat toggle<cr>', desc = 'CodeCompanion Chat' },
-      { '<leader>ac', ':CodeCompanionChat Add<cr>', desc = 'CodeCompanion chat', mode = { 'v' } },
+      { '<leader>ac', ':CodeCompanionChat Add<cr>', desc = 'CodeCompanion Chat', mode = { 'v' } },
       { '<leader>ae', ':CodeCompanion /error<cr>', desc = 'CodeCompanion Check For Error', mode = { 'v' } },
       { '<leader>af', ':CodeCompanion /fix<cr>', desc = 'CodeCompanion Fix Errors', mode = { 'v' } },
       { '<leader>aR', ':CodeCompanion /readable<cr>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
       { '<leader>ag', ':CodeCompanion /commit<cr>', desc = 'CodeCompanion get commit message' },
+      {
+        '<leader>aG',
+        function()
+          vim.cmd 'Git add .'
+          vim.cmd 'CodeCompanion /commit'
+        end,
+        desc = 'Commit changes and get commit message',
+      },
       {
         '<leader>ai',
         function()

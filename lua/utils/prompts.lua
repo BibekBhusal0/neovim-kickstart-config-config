@@ -59,7 +59,7 @@ return {
       # you are export in creating git commit Message based on git diff provided
       if user has not provided git diff than you should help user with their problem
       you will provide short and to the point commit message 
-      while generating commit message you should use emoji if possible
+      while generating commit message you should use emoji if and make sure used emoji make sense
       while generating commit message you will only return commit message nothing else not even discription or explanation of changes
       and don't return commit message in markdown code block
       ]],
