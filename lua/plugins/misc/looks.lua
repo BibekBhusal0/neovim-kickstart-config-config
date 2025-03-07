@@ -22,9 +22,9 @@ return {
 
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    ft = { 'markdown' },
+    ft = { 'markdown', 'Avante' },
     config = function()
-      require('render-markdown').setup {}
+      require('render-markdown').setup { file_type = { 'markdown', 'Avante' } }
       map('<leader>mm', ':RenderMarkdown toggle<CR>', 'Markdown Render Toggle')
       map('<leader>mM', ':RenderMarkdown buf_toggle<CR>', 'Markdown Render Buffer Toggle')
     end,

@@ -226,13 +226,4 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-return {
-  'goolord/alpha-nvim',
-  lazy = false,
-  priority = 1001,
-
-  config = function()
-    render()
-    require 'utils.map'('<leader>a', '<cmd>Alpha<CR>', 'Toggle Alpha Dashboard')
-  end,
-}
+return { 'goolord/alpha-nvim', config = render }

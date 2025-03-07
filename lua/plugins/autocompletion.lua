@@ -27,24 +27,6 @@ return { -- Autocompletion
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
-    {
-      'monkoose/neocodeium',
-      cmd = { 'NeoCodeium' },
-      config = function()
-        local neocodeium = require 'neocodeium'
-        neocodeium.setup { enabled = false }
-        map('<A-f>', neocodeium.accept, 'Codeium Accept', 'i')
-        map('<A-w>', neocodeium.accept_word, 'Codeium Accept Word', 'i')
-        map('<A-a>', neocodeium.accept_line, 'Codeium Accept Line', 'i')
-        map('<A-e>', neocodeium.cycle_or_complete, 'Codeium Next Autocomplete', 'i')
-        map('<A-r>', neocodeium.cycle_or_complete, 'Codeium Previous Autocomplete', 'i')
-        map('<A-c>', neocodeium.clear, 'Codeium Clear', 'i')
-        map('<leader>ct', ':NeoCodeium toggle<CR>', 'Codeium Toggle')
-        map('<leader>cc', ':NeoCodeium chat<CR>', 'Codeium Chat')
-        map('<leader>cr', ':NeoCodeium restart<CR>', 'Codeium Restart')
-        map('<leader>cb', ':NeoCodeium toggle_buffer<CR>', 'Codeium Toggle Buffer')
-      end,
-    },
   },
 
   config = function()

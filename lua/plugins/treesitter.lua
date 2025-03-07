@@ -23,6 +23,7 @@ return {
           'json',
           'gitignore',
           'markdown',
+          'yaml',
           'bash',
         },
         auto_install = true,

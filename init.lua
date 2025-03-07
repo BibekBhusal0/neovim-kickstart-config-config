@@ -25,6 +25,7 @@ require('lazy').setup {
   require 'plugins.none-ls', -- External tools integration (formatters, linters)
   require 'plugins.git', -- Git stuff like lazygit, gitsigns
   require 'plugins.alpha', -- Customizable dashboard screen
+  require 'plugins.ai', -- syntax highlighting
   require 'plugins.misc', -- Miscellaneous utility plugins
   require 'plugins.games', -- Fun games
 }
