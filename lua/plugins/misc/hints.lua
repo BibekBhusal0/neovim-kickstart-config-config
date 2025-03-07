@@ -46,6 +46,25 @@ return {
         ['<Left>'] = {},
         ['<Right>'] = {},
       },
+      disable_mouse = false,
     },
+  },
+
+  {
+    'meznaric/key-analyzer.nvim',
+    cmd = 'KeyAnalyzer',
+    keys = {
+      {
+        '<leader>tk',
+        function()
+          require 'utils.input'('Key', function(text)
+            vim.cmd('KeyAnalyzer ' .. text)
+          end, '<leader>', 22, '   ')
+        end,
+        desc = 'Key Analyzer',
+      },
+    },
+
+    opts = {},
   },
 }
