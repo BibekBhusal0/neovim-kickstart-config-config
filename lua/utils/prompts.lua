@@ -51,7 +51,6 @@ return {
       auto_submit = true,
       ignore_system_prompt = true,
     },
-
     prompts = {
       {
         role = 'system',
@@ -61,6 +60,7 @@ return {
       you will provide short and to the point commit message 
       while generating commit message you should use emoji if and make sure used emoji make sense
       while generating commit message you will only return commit message nothing else not even discription or explanation of changes
+      generated commit message should be less than 100 characters in any case
       and don't return commit message in markdown code block
       ]],
       },
@@ -69,13 +69,13 @@ return {
         content = function()
           local diff = vim.fn.system 'git diff --no-ext-diff --staged'
           if string.find(diff, '^error') then
-            return 'Your job was to generage git commit message, but user has not initialized git repo, explain user there are no changes in git and also teach them how to initialize git repo'
+            return 'User has not initialized git repo, explain user there are no changes in git and also teach them how to initialize git repo'
           end
           if diff == '' then
-            return 'Your job was to generage git commit message, but user has not made any changes, explain user there are no changes in git and also teach them how to add changes'
+            return 'But user has not made any changes, explain user there are no changes in git and also teach them how to add changes'
           end
           return string.format(
-            [[You are an expert at following the Conventional Commit specification. Given the git diff listed below, please generate a commit message for me:
+            [[ Given the git diff listed below, please generate a commit message for me:
 ```diff
 %s
 ```

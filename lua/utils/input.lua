@@ -24,7 +24,7 @@ return function(title, callback, val, width)
     local newVal = vim.trim(text)
     api.nvim_buf_delete(buf, { force = true })
 
-    if #newVal > 0 and newVal ~= val then
+    if #newVal > 0 then
       callback(newVal)
     end
   end)
