@@ -2,6 +2,8 @@ map = require 'utils.map'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+map('n', '<ESC>', 'Normal Mode', 'v')
+
 -- navigation in insert mode
 map('<C-b>', '<ESC>^i', 'Move to Begining of line', 'i')
 map('<C-e>', '<End>', 'Move to End of line', 'i')
@@ -44,10 +46,6 @@ map('zd', '"_d', 'Delete to black hole register', { 'n', 'v' })
 map('zy', '"_y', 'Yank to black hole register', { 'n', 'v' })
 map('zx', '"_x', 'Cut to black hole register', { 'n', 'v' })
 map('zp', '"_dP', 'Paste without yanking', 'x')
-
--- center movements
-map('<A-J>', 'jzz', 'Move Next line and center')
-map('<A-K>', 'kzz', 'Move Previous line and center')
 
 -- terminal
 map('<C-x>', '<C-\\><C-N>', 'terminal escape terminal mode', 't')

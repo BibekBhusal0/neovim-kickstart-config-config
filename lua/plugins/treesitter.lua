@@ -65,12 +65,11 @@ return {
   {
     'ziontee113/syntax-tree-surfer',
     keys = {
-      { 'vs', ':STSSelectMasterNode<cr>', desc = 'Select Master Node' },
       { 'vn', ':STSSelectCurrentNode<cr>', desc = 'Select Current Node' },
-      { 'vD', ':STSSwapDownNormal<cr>', desc = 'Swap Node Down' },
-      { 'vU', ':STSSwapUpNormal<cr>', desc = 'Swap Node Up' },
-      { 'vu', ':STSSwapCurrentNodePrevNormal<cr>', desc = 'Swap Node Previous' },
-      { 'vd', ':STSSwapCurrentNodeNextNormal<cr>', desc = 'Swap Node Next' },
+      { 'vd', ':STSSwapDownNormal<cr>', desc = 'Swap Node Down' },
+      { 'vu', ':STSSwapUpNormal<cr>', desc = 'Swap Node Up' },
+      { 'vU', ':STSSwapCurrentNodePrevNormal<cr>', desc = 'Swap Node Previous' },
+      { 'vD', ':STSSwapCurrentNodeNextNormal<cr>', desc = 'Swap Node Next' },
       { 'gS', ':STSSwapOrHold<cr>', desc = 'Swap Or Hold Node' },
       { 'gS', ':STSSwapOrHoldVisual<cr>', desc = 'Swap Or Hold Node', mode = 'x' },
       {
@@ -119,10 +118,21 @@ return {
   },
 
   {
+    'aaronik/treewalker.nvim',
+    opts = {},
+    keys = {
+      { 'zh', ':Treewalker Left<CR>', mode = 'n' },
+      { 'zl', ':Treewalker Right<CR>', mode = 'n' },
+      { 'zk', ':Treewalker Up<CR>', mode = 'n' },
+      { 'zj', ':Treewalker Down<CR>', mode = 'n' },
+    },
+  },
+
+  {
     'drybalka/tree-climber.nvim',
     keys = {
       {
-        'n',
+        'm',
         ':lua require("tree-climber").goto_parent() require("tree-climber").select_node()<cr>',
         desc = 'Goto Parent',
         mode = 'v',

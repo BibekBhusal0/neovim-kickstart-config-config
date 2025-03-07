@@ -168,6 +168,19 @@ return {
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split
 
+  {
+    'chrisgrieser/nvim-chainsaw',
+    keys = {
+      { '<leader>lv', ':lua require("chainsaw").variableLog()<cr>', desc = 'Log Variable' },
+      { '<leader>lp', ':lua require("chainsaw").objectLog()<cr>', desc = 'Log Object' },
+      { '<leader>lP', ':lua require("chainsaw").typeLog()<cr>', desc = 'Log Type' },
+    },
+    opts = {
+      marker = '🌟',
+      visuals = { icon = '🌟' },
+    },
+  },
+
   { -- comments
     {
       'numToStr/Comment.nvim',
