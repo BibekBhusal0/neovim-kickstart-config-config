@@ -36,7 +36,7 @@ map('<leader>tp', ':tabp<CR>', 'Tab Previous')
 local function gotoTab()
   require 'utils.input'(' Tab ', function(text)
     vim.cmd('tabn ' .. text)
-  end, '', 5)
+  end, '', 9, '  ')
 end
 map('<leader>tg', gotoTab, 'Tab goto')
 
@@ -147,7 +147,7 @@ return {
       map('<leader>bm', function()
         require 'utils.input'('Tab Idx', function(text)
           vim.cmd('ScopeMoveBuf' .. text)
-        end, '', 5)
+        end, '', 9, '  ')
       end, 'Move Buffer')
     end,
   }, -- only show buffer from current tag

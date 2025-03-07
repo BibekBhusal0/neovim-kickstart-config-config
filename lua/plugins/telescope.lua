@@ -117,7 +117,7 @@ return {
       { '<leader>si', '<cmd>PickIcons<cr>', desc = 'Icon Picker' },
       { '<leader>sI', '<cmd>PickIconsYank<cr>', desc = 'Icon Picker Yank' },
       { '<leader>se', '<cmd>PickEmoji<cr>', desc = 'Icon Picker Emoji' },
-      { '<leader>sS', '<cmd>PickSymbols<cr>', desc = 'Icon Picker Emoji' },
+      { '<leader>sS', '<cmd>PickSymbols<cr>', desc = 'Icon Picker Unicode Symbols' },
       { '<leader>sE', '<cmd>PickEmojiYank emoji<cr>', desc = 'Icon Picker Emoji Yank' },
     },
   }, -- icon picker with telescope

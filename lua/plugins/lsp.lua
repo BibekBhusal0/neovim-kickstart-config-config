@@ -39,7 +39,7 @@ return {
               params.newName = text
               vim.lsp.buf_request(0, 'textDocument/rename', params)
             end
-            require 'utils.input'(' Rename ', callback, var)
+            require 'utils.input'(' Rename ', callback, var, nil, '󰆧  ')
           end
           map('<leader>ln', rename, 'LSP Rename variable')
 

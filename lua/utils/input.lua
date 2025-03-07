@@ -1,31 +1,39 @@
-return function(title, callback, val, width)
-  local api = vim.api
-  local initialValue = val or ''
-  -- local var = vim.fn.expand "<cword>"
-  local buf = api.nvim_create_buf(false, true)
-  local opts = { height = 1, style = 'minimal', border = 'single', row = 1, col = 1 }
+local Input = require 'nui.input'
+local event = require('nui.utils.autocmd').event
 
-  opts.relative, opts.width = 'cursor', width or #val + 15
-  opts.title, opts.title_pos = { { title, '@comment.danger' } }, 'center'
+return function(title, callback, val, width, prompt)
+  local initalVal = val or ''
+  local input = Input({
+    position = '50%',
+    size = { width = width or #initalVal + 5 },
+    border = {
+      style = 'single',
+      text = {
+        top = title,
+        top_align = 'center',
+      },
+    },
+    win_options = {
+      winhighlight = 'Normal:Normal,FloatBorder:Normal',
+    },
+  }, {
+    prompt = prompt or '> ',
+    default_value = initalVal,
 
-  local win = api.nvim_open_win(buf, true, opts)
-  vim.wo[win].winhl = 'Normal:Normal,FloatBorder:Removed'
-  api.nvim_set_current_win(win)
+    on_submit = function(value)
+      if value ~= '' then
+        print(value)
+        callback(value)
+      else
+        print 'Event not executed because input is empty'
+      end
+    end,
+  })
 
-  api.nvim_buf_set_lines(buf, 0, -1, true, { ' ' .. initialValue })
+  vim.api.nvim_buf_set_keymap(input.bufnr, 'n', '<Esc>', '<cmd>close<cr>', { noremap = true, silent = true })
+  input:mount()
 
-  vim.bo[buf].buftype = 'prompt'
-  vim.fn.prompt_setprompt(buf, '')
-  vim.api.nvim_input 'A'
-
-  vim.keymap.set({ 'i', 'n' }, '<Esc>', '<cmd>q!<CR>', { buffer = buf })
-
-  vim.fn.prompt_setcallback(buf, function(text)
-    local newVal = vim.trim(text)
-    api.nvim_buf_delete(buf, { force = true })
-
-    if #newVal > 0 then
-      callback(newVal)
-    end
+  input:on(event.BufLeave, function()
+    input:unmount()
   end)
 end

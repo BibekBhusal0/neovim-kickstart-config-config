@@ -14,7 +14,7 @@ local commit_with_message = function()
         if type(last_message) == 'string' and string.len(last_message) < 100 then
           require 'utils.input'(' Commit Message ', function(text)
             vim.cmd("Git commit -a -m '" .. text .. "'")
-          end, last_message)
+          end, last_message, nil, '   ')
         end
         executed = true
       end
@@ -69,7 +69,7 @@ return {
           require 'utils.input'('  Command to AI  ', function(text)
             vim.cmd 'normal! gv'
             vim.cmd('CodeCompanion /buffer ' .. text)
-          end, '', 80)
+          end, '', 80, '  ')
         end,
         desc = 'CodeCompanion Inline command',
         mode = { 'v' },
@@ -79,7 +79,7 @@ return {
         function()
           require 'utils.input'('  Chat to AI  ', function(text)
             vim.cmd('CodeCompanionChat ' .. text)
-          end, '', 80)
+          end, '', 80, '  ')
         end,
         desc = 'CodeCompanion Start Chat',
       },
