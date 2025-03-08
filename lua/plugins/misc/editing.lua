@@ -12,20 +12,31 @@ return {
   }, -- change brackets, quotes and surrounds
 
   {
-    'windwp/nvim-autopairs',
+    'echasnovski/mini.trailspace',
+    keys = { { '<leader>tw', ':lua require("mini.trailspace").trim() <cr>', desc = 'Trim Whitespace' } },
+  },
+
+  {
+    'nacro90/numb.nvim',
+    opts = {},
+    event = { 'CmdlineEnter' },
+  }, -- Preview of line from command mode
+
+  {
+    'altermo/ultimate-autopair.nvim',
     keys = {
-      { '{', mode = 'i' },
-      { '[', mode = 'i' },
-      { '(', mode = 'i' },
-      { '"', mode = 'i' },
-      { "'", mode = 'i' },
-      { '`', mode = 'i' },
-      { '}', mode = 'i' },
-      { ']', mode = 'i' },
-      { ')', mode = 'i' },
+      { '{', mode = { 'i', 'c' } },
+      { '[', mode = { 'i', 'c' } },
+      { '(', mode = { 'i', 'c' } },
+      { '"', mode = { 'i', 'c' } },
+      { "'", mode = { 'i', 'c' } },
+      { '`', mode = { 'i', 'c' } },
+      { '}', mode = { 'i', 'c' } },
+      { ']', mode = { 'i', 'c' } },
+      { ')', mode = { 'i', 'c' } },
     },
     config = true,
-  }, -- Autoclose parentheses, brackets, quotes, etc.
+  }, -- Autoclose parentheses, brackets, quotes, etc. also work on command mode
 
   {
     'windwp/nvim-ts-autotag',

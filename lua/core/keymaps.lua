@@ -51,7 +51,7 @@ map('zp', '"_dP', 'Paste without yanking', 'x')
 map('<C-x>', '<C-\\><C-N>', 'terminal escape terminal mode', 't')
 
 -- Toggle line wrapping
-map('<leader>lw', ':set wrap!<CR>', 'Toggle line wrapping')
+map('<leader>lW', ':set wrap!<CR>', 'Toggle line wrapping')
 
 -- Stay in indent mode
 map('<', '<gv', 'Indent left', 'v')
