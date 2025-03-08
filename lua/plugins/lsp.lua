@@ -221,7 +221,7 @@ return {
     config = function()
       local navbuddy = require 'nvim-navbuddy'
       local icons = {}
-      for k, v in pairs(require 'utils.icons') do
+      for k, v in pairs(require('utils.icons').symbols) do
         icons[k] = v .. ' '
       end
 
