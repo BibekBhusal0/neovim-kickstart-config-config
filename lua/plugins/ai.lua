@@ -98,6 +98,10 @@ return {
           inline = { adapter = 'gemini' },
         },
         prompt_library = require 'utils.prompts',
+        adapters = {
+          gemini = 'gemini',
+          opts = { show_defaults = false },
+        },
       }
     end,
   },

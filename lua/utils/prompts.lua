@@ -73,10 +73,10 @@ return {
         content = function()
           local m = require 'utils.diff'()
           if not m.ok then
-            return 'Git diff is not available it is problem from user please provide proper explanation to user, error recived is' .. m.message
+            return 'Git diff is not available, please help to user by providing step by step instructions what they need to do. The reason why git diff is not available is '
+              .. m.message
           end
           local diff = m.message
-
           return string.format(
             [[ Given the git diff listed below, please generate a commit message for me:
 ```diff
