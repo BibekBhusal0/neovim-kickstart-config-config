@@ -120,9 +120,9 @@ return { -- Autocompletion
         end, { 'i', 's' }),
       },
       sources = {
+        { name = 'luasnip' },
         { name = 'lazydev', group_index = 0 },
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
       },
@@ -131,10 +131,10 @@ return { -- Autocompletion
         format = function(entry, vim_item)
           vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
           vim_item.menu = ({
-            nvim_lsp = '[LSP]',
-            luasnip = '[Snippet]',
-            buffer = '[Buffer]',
-            path = '[Path]',
+            luasnip = '[S]',
+            nvim_lsp = '[L]',
+            buffer = '[B]',
+            path = '[P]',
           })[entry.source.name]
           return vim_item
         end,
