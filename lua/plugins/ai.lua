@@ -67,7 +67,6 @@ return {
 
   {
     'olimorris/codecompanion.nvim',
-    dependencies = { 'j-hui/fidget.nvim' },
     cmd = { 'CodeCompanion', 'CodeCompanionActions', 'CodeCompanionChat' },
     keys = {
       { '<leader>aa', ':CodeCompanionActions<cr>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },

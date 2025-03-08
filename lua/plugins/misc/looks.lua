@@ -118,6 +118,7 @@ return {
 
   {
     'folke/noice.nvim',
+    event = { 'VimEnter' },
     dependencies = {
       {
         'rcarriga/nvim-notify',
