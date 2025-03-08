@@ -1,7 +1,17 @@
 local commit_with_message = function()
   vim.cmd 'Git add .'
-  vim.cmd 'CodeCompanion /commit'
 
+  local diff = vim.fn.system 'git diff --no-ext-diff --staged'
+  if string.find(diff, '^error') then
+    print 'Git not initialized'
+    return
+  end
+  if diff == '' then
+    print 'No changes made'
+    return
+  end
+
+  vim.cmd 'CodeCompanion /commit'
   local executed = false
 
   vim.api.nvim_create_autocmd({ 'User' }, {
@@ -20,6 +30,19 @@ local commit_with_message = function()
       end
     end,
   })
+end
+
+local inline_command = function()
+  require 'utils.input'('  Command to AI  ', function(text)
+    vim.cmd 'normal! gv'
+    vim.cmd('CodeCompanion /buffer ' .. text)
+  end, '', 80, '  ')
+end
+
+local start_chat = function()
+  require 'utils.input'('  Chat to AI  ', function(text)
+    vim.cmd('CodeCompanionChat ' .. text)
+  end, '', 80, '  ')
 end
 
 return {
@@ -57,32 +80,11 @@ return {
       { '<leader>ae', ':CodeCompanion /error<cr>', desc = 'CodeCompanion Check For Error', mode = { 'v' } },
       { '<leader>af', ':CodeCompanion /fix<cr>', desc = 'CodeCompanion Fix Errors', mode = { 'v' } },
       { '<leader>ar', ':CodeCompanion /readable<cr>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
-      { '<leader>ag', ':CodeCompanion /commit<cr>', desc = 'CodeCompanion get commit message' },
-      {
-        '<leader>aG',
-        commit_with_message,
-        desc = 'Add changes and get commit message',
-      },
-      {
-        '<leader>ai',
-        function()
-          require 'utils.input'('  Command to AI  ', function(text)
-            vim.cmd 'normal! gv'
-            vim.cmd('CodeCompanion /buffer ' .. text)
-          end, '', 80, '  ')
-        end,
-        desc = 'CodeCompanion Inline command',
-        mode = { 'v' },
-      },
-      {
-        '<leader>ai',
-        function()
-          require 'utils.input'('  Chat to AI  ', function(text)
-            vim.cmd('CodeCompanionChat ' .. text)
-          end, '', 80, '  ')
-        end,
-        desc = 'CodeCompanion Start Chat',
-      },
+      { '<leader>aG', ':CodeCompanion /commit<cr>', desc = 'CodeCompanion get commit message' },
+      { '<leader>an', ':lua require("codecompanion.strategies.chat").new({})<cr>', desc = 'CodeCompanion start new chat' },
+      { '<leader>ag', commit_with_message, desc = 'Add changes and get commit message' },
+      { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
+      { '<leader>ai', start_chat, desc = 'CodeCompanion Start Chat' },
     },
     config = function()
       require('utils.loader'):init()

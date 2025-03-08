@@ -44,12 +44,8 @@ return {
     },
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
-      require('treesitter-context').setup {
-        max_lines = 5,
-      }
-      map('<leader><Cr>', function()
-        require('treesitter-context').go_to_context(vim.v.count1)
-      end, 'Go to context')
+      require('treesitter-context').setup { max_lines = 5 }
+      map('<leader><Cr>', ':lua require("treesitter-context").go_to_context(vim.v.count1)<cr>', 'Go to context')
     end,
   },
 
@@ -120,6 +116,7 @@ return {
   {
     'aaronik/treewalker.nvim',
     opts = {},
+    cmd = { 'Treewalker' },
     keys = {
       { 'zh', ':Treewalker Left<CR>', mode = 'n' },
       { 'zl', ':Treewalker Right<CR>', mode = 'n' },
