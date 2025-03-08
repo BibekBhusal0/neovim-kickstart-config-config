@@ -43,6 +43,10 @@ return {
   ['Generate a Commit Message'] = {
     strategy = 'chat',
     description = 'Generate a commit message',
+    condition = function()
+      m = require 'utils.diff'()
+      return m.ok
+    end,
     opts = {
       index = 10,
       is_default = true,
@@ -60,20 +64,19 @@ return {
       you will provide short and to the point commit message 
       while generating commit message you should use emoji if and make sure used emoji make sense
       while generating commit message you will only return commit message nothing else not even discription or explanation of changes
-      generated commit message should be less than 100 characters in any case
+      generated commit message should be less than 60 characters in any case
       and don't return commit message in markdown code block
       ]],
       },
       {
         role = 'user',
         content = function()
-          local diff = vim.fn.system 'git diff --no-ext-diff --staged'
-          if string.find(diff, '^error') then
-            return 'User has not initialized git repo, explain user there are no changes in git and also teach them how to initialize git repo'
+          local m = require 'utils.diff'()
+          if not m.ok then
+            return 'Git diff is not available it is problem from user please provide proper explanation to user, error recived is' .. m.message
           end
-          if diff == '' then
-            return 'But user has not made any changes, explain user there are no changes in git and also teach them how to add changes'
-          end
+          local diff = m.message
+
           return string.format(
             [[ Given the git diff listed below, please generate a commit message for me:
 ```diff

@@ -1,13 +1,9 @@
 local commit_with_message = function()
   vim.cmd 'Git add .'
 
-  local diff = vim.fn.system 'git diff --no-ext-diff --staged'
-  if string.find(diff, '^error') then
-    print 'Git not initialized'
-    return
-  end
-  if diff == '' then
-    print 'No changes made'
+  local m = require 'utils.diff'()
+  if not m.ok then
+    print(m.message)
     return
   end
 
