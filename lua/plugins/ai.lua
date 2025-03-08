@@ -73,14 +73,14 @@ return {
       { '<leader>aa', ':CodeCompanionActions<cr>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
       { '<leader>ac', ':CodeCompanionChat toggle<cr>', desc = 'CodeCompanion Chat' },
       { '<leader>ac', ':CodeCompanionChat Add<cr>', desc = 'CodeCompanion Chat', mode = { 'v' } },
-      { '<leader>ae', ':CodeCompanion /error<cr>', desc = 'CodeCompanion Check For Error', mode = { 'v' } },
+      { '<leader>ae', ':CodeCompanion /explain<cr>', desc = 'CodeCompanion Explain', mode = { 'v' } },
       { '<leader>af', ':CodeCompanion /fix<cr>', desc = 'CodeCompanion Fix Errors', mode = { 'v' } },
+      { '<leader>al', ':CodeCompanion /lsp<cr>', desc = 'CodeCompanion Explain LSP Diagnostics', mode = { 'v' } },
       { '<leader>ar', ':CodeCompanion /readable<cr>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
       { '<leader>aG', ':CodeCompanion /commit<cr>', desc = 'CodeCompanion get commit message' },
       { '<leader>an', ':lua require("codecompanion.strategies.chat").new({})<cr>', desc = 'CodeCompanion start new chat' },
       { '<leader>ag', commit_with_message, desc = 'Add changes and get commit message' },
       { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
-      { '<leader>ai', start_chat, desc = 'CodeCompanion Start Chat' },
     },
     config = function()
       require('utils.loader'):init()

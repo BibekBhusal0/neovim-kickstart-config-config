@@ -5,37 +5,10 @@ return {
     opts = { modes = { 'v' }, shortname = 'readable' },
     description = 'Make Code more readable',
     prompts = {
-      { role = 'system', content = export },
+      { role = 'system', content = export, opts = { visible = false } },
       {
         role = 'user',
         content = 'Make this code more readable, so that non developer could also understand this.',
-      },
-    },
-  },
-
-  ['Search errors'] = {
-    strategy = 'chat',
-    description = 'Search for potentially errors in code',
-    opts = {
-      modes = { 'v' },
-      short_name = 'error',
-      auto_submit = true,
-      stop_context_insertion = true,
-      user_prompt = true,
-    },
-    prompts = {
-      { role = 'system', content = export },
-      {
-        role = 'user',
-        content = function(context)
-          local code = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
-          return 'I have the following code, what are the potential errors there might be in this code:\n\n```'
-            .. context.filetype
-            .. '\n'
-            .. code
-            .. '\n```\n\n'
-        end,
-        opts = { contains_code = true },
       },
     },
   },
@@ -58,6 +31,7 @@ return {
     prompts = {
       {
         role = 'system',
+        opts = { visible = false, tag = 'system_tag' },
         content = [[
       # you are export in creating git commit Message based on git diff provided
       if user has not provided git diff than you should help user with their problem
@@ -86,7 +60,7 @@ return {
             diff
           )
         end,
-        opts = { contains_code = true },
+        opts = { contains_code = true, visible = false },
       },
     },
   },
