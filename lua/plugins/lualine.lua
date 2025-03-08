@@ -1,9 +1,3 @@
-local diagnostics_symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }
-for type, icon in pairs(diagnostics_symbols) do
-  local hl = 'DiagnosticSign' .. type:sub(1, 1):upper() .. type:sub(2)
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VimEnter',
@@ -32,7 +26,7 @@ return {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = diagnostics_symbols,
+      symbols = require('utils.icons').diagnostics,
       update_in_insert = false,
       always_visible = false,
       cond = hide_in_width,

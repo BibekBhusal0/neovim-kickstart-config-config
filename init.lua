@@ -28,5 +28,5 @@ require('lazy').setup {
   require 'plugins.ai', -- syntax highlighting
   require 'plugins.misc', -- Miscellaneous utility plugins
   require 'plugins.games', -- Fun games
-  require 'plugins.leetcode',
+  require 'plugins.leetcode', -- solving leetcode problems
 }

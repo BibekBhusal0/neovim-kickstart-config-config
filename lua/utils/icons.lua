@@ -1,4 +1,11 @@
-local kind_icons = {
+local diagnostics = {
+  error = ' ',
+  warn = ' ',
+  info = ' ',
+  hint = ' ',
+}
+
+local symbols = {
   Array = '󰅪 ',
   Boolean = '◩ ',
   Class = '󰌗 ',
@@ -35,4 +42,30 @@ local kind_icons = {
   Value = '󰎠',
   Variable = '󰆧',
 }
-return kind_icons
+
+local folder = {
+  default = '',
+  folder_empty = '󰉖',
+  folder_empty_open = '󱞞',
+  folder_open = '',
+  fodler_symlink = '',
+}
+
+local git = {
+  added = 'A', -- or "✚",
+  modified = 'M', -- or "",
+  deleted = '󰩹',
+  renamed = '󰁕',
+  untracked = 'U',
+  ignored = '',
+  unstaged = '',
+  staged = '',
+  conflict = '',
+}
+
+return {
+  diagnostics = diagnostics,
+  symbols = symbols,
+  folder = folder,
+  git = git,
+}
