@@ -18,6 +18,7 @@ require('lazy').setup {
   require 'plugins.colortheme', -- Color scheme setup
   require 'plugins.telescope', -- Fuzzy finder for searching
   require 'plugins.neotree', -- File explorer for Neovim
+  require 'plugins.mini_file', -- Yet another file explorer
   require 'plugins.windowManagemet', -- Buffer Tab and Session Management
   require 'plugins.lualine', -- Statusline
   require 'plugins.lsp', -- Language Server Protocol setup
