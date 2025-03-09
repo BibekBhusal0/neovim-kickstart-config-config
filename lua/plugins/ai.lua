@@ -47,7 +47,7 @@ return {
     'monkoose/neocodeium',
     cmd = { 'NeoCodeium' },
     keys = {
-      { '<leader>a<leader>', ':NeoCodeium eneble<cr>', desc = 'Codeium Start' },
+      { '<leader>a<leader>', ':NeoCodeium enable<cr>', desc = 'Codeium Start' },
       { '<leader>aT', ':lua require"neocodeium.commands".toggle(true)<cr>', desc = 'Codeium Toggle' },
       { '<leader>aC', ':NeoCodeium chat<cr>', desc = 'Codeium Chat' },
       { '<leader>ar', ':NeoCodeium restart<cr>', desc = 'Codeium Restart' },
