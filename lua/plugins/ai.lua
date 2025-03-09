@@ -77,6 +77,7 @@ return {
       { '<leader>al', ':CodeCompanion /lsp<cr>', desc = 'CodeCompanion Explain LSP Diagnostics', mode = { 'v' } },
       { '<leader>ar', ':CodeCompanion /readable<cr>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
       { '<leader>aG', ':CodeCompanion /commit<cr>', desc = 'CodeCompanion get commit message' },
+      { '<leader>aj', ':CodeCompanion /straight<cr>', desc = 'CodeCompanion straight forward coder', mode = { 'n', 'v' } },
       { '<leader>an', ':lua require("codecompanion.strategies.chat").new({})<cr>', desc = 'CodeCompanion start new chat' },
       { '<leader>ag', commit_with_message, desc = 'Add changes and get commit message' },
       { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
@@ -84,6 +85,13 @@ return {
     config = function()
       require('utils.loader'):init()
       require('codecompanion').setup {
+        display = {
+          chat = {
+            window = { height = 1 },
+            intro_message = '   Ask me anything',
+          },
+          diff = { enabled = false },
+        },
         strategies = {
           chat = {
             adapter = 'gemini',

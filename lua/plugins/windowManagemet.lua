@@ -68,6 +68,12 @@ return {
           end,
           offsets = {
             {
+              filetype = 'codecompanion',
+              text = 'Code Companion',
+              text_aligh = 'center',
+              separator = true,
+            },
+            {
               filetype = 'neo-tree',
               text = 'File Explorer',
               text_align = 'left',

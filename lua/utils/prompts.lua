@@ -13,6 +13,50 @@ return {
     },
   },
 
+  ['Straight forward model'] = {
+    strategy = 'chat',
+    description = 'Super straight forward model which will just provide code',
+    opts = {
+      auto_submit = false,
+      ignore_system_prompt = true,
+      short_name = 'straight',
+    },
+    prompts = {
+      {
+        role = 'system',
+        content = [[ 
+You are a super straight forward model which will provide code to user or solve user problem based on user input.
+Currently you are trapped in Neovim in user's machine, your task is to solve user's problem.
+Aside from coading you will not be able to do anything else.
+
+You must:
+- Follow the user's requirements carefully and to the letter.
+- Keep your answers short and impersonal, especially if the user's context is outside your core tasks.
+- Minimize additional prose unless clarification is needed.
+- Use Markdown formatting in your answers unless specified by user.
+- Avoid including line numbers in code blocks.
+- Avoid wrapping the whole response in triple backticks.
+- Avoid using H1 and H2 headers in your responses.
+
+Your reply must:
+- Contain code unelss specified by user.
+- Only show code you have modified.
+- Highlight and explain changes if you have made any
+
+You must not:
+- Give very long response.
+- Talk about anything except programming.
+        ]],
+        opts = { visible = false, tag = 'system_tag' },
+      },
+      {
+        role = 'user',
+        content = '',
+        opts = { auto_submit = false },
+      },
+    },
+  },
+
   ['Generate a Commit Message'] = {
     strategy = 'chat',
     description = 'Generate a commit message',
