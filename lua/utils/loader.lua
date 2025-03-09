@@ -1,97 +1,73 @@
 -- https://codecompanion.olimorris.dev/usage/ui
 
-local M = {}
-local notify = require 'notify'
-M.loading = false
-local spinner_frames = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
-local index = 1
-local timer = vim.loop.new_timer()
-local max_itr = 1000
-local notify_id = {}
+local progress = require 'fidget.progress'
 
-function get_current_icon()
-  return spinner_frames[(index - 1) % #spinner_frames + 1] -- lua 1 based indexing different from all other languages
-end
+local M = {}
 
 function M:init()
+  local group = vim.api.nvim_create_augroup('CodeCompanionFidgetHooks', {})
+
   vim.api.nvim_create_autocmd({ 'User' }, {
     pattern = 'CodeCompanionRequestStarted',
+    group = group,
     callback = function(request)
-      if M.loading == true then
-        return
-      end
-      start_spinner(request)
+      local handle = M:create_progress_handle(request)
+      M:store_progress_handle(request.data.id, handle)
     end,
   })
+
   vim.api.nvim_create_autocmd({ 'User' }, {
     pattern = 'CodeCompanionRequestFinished',
+    group = group,
     callback = function(request)
-      handle_request_finished(request)
+      local handle = M:pop_progress_handle(request.data.id)
+      if handle then
+        M:report_exit_status(handle, request)
+        handle:finish()
+      end
     end,
   })
 end
 
-function start_spinner(request)
-  M.loading = true
-  index = 1
-  title = 'AI ' .. request.data.strategy
-  timer:start(
-    1000,
-    150,
-    vim.schedule_wrap(function()
-      message = get_current_icon() .. '   In progress...'
-      redraw_spinner(message, title, '  ')
-    end)
-  )
+M.handles = {}
+
+function M:store_progress_handle(id, handle)
+  M.handles[id] = handle
 end
 
-function redraw_spinner(message, title, icon, timeout)
-  local id = notify_id
-  if id.id == nil then
-    id = nil
-  end
-  icon = icon or spinner_frames[index % #spinner_frames]
-  notify_id = notify(message, 'info', { timeout = timeout or 160, icon = icon, title = title, replace = id })
-  index = index + 1
-  if index > max_itr then
-    stop_spinner()
-  end
+function M:pop_progress_handle(id)
+  local handle = M.handles[id]
+  M.handles[id] = nil
+  return handle
 end
 
-function stop_spinner(message, title, icon)
-  timer:stop()
-  local id = notify_id
-  if id.id == nil then
-    id = nil
-  end
-  notify(message, 'info', { timeout = 4000, icon = icon, title = title, replace = id })
-  index = 1
-  notify_id = {}
-  vim.defer_fn(function()
-    M.loading = false
-  end, 500)
+function M:create_progress_handle(request)
+  return progress.handle.create {
+    title = ' AI ' .. request.data.strategy,
+    message = 'In progress...',
+    lsp_client = {
+      name = M:llm_role_title(request.data.adapter),
+    },
+  }
 end
 
-function handle_request_finished(request)
-  local message
-  local title
-  local icon
+function M:llm_role_title(adapter)
+  local parts = {}
+  table.insert(parts, adapter.formatted_name)
+  if adapter.model and adapter.model ~= '' then
+    table.insert(parts, '(' .. adapter.model .. ')')
+  end
+  return table.concat(parts, ' ')
+end
 
+function M:report_exit_status(handle, request)
   if request.data.status == 'success' then
-    message = 'Completed'
-    title = 'Success'
-    icon = ' '
+    handle.message = 'Completed'
   elseif request.data.status == 'error' then
-    message = 'Error'
-    title = 'Error'
-    icon = ' '
+    handle.message = ' Error'
   else
-    message = 'Cancelled'
-    title = 'Cancelled'
-    icon = '󰜺 '
+    handle.message = '󰜺 Cancelled'
   end
-
-  stop_spinner(message, title, icon)
 end
 
 return M

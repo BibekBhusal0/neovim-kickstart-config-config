@@ -40,6 +40,9 @@ map('<leader>Y', '"+Y', 'Yank line to system clipboard')
 map('<leader>k', 'ggVGy', 'Yank all')
 map('<leader>K', 'ggVG"+y', 'Yank all to System Clipboard')
 
+-- select all
+map('<C-a>', 'ggVG', 'Yank all')
+
 -- use black hole register
 map('zc', '"_c', 'Change to black hole register', { 'n', 'v' })
 map('zd', '"_d', 'Delete to black hole register', { 'n', 'v' })
