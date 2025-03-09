@@ -19,7 +19,18 @@ return {
   {
     'nacro90/numb.nvim',
     opts = {},
-    event = { 'CmdlineEnter' },
+    keys = {
+      { '0', mode = 'c' },
+      { '1', mode = 'c' },
+      { '2', mode = 'c' },
+      { '3', mode = 'c' },
+      { '4', mode = 'c' },
+      { '5', mode = 'c' },
+      { '6', mode = 'c' },
+      { '7', mode = 'c' },
+      { '8', mode = 'c' },
+      { '9', mode = 'c' },
+    },
   }, -- Preview of line from command mode
 
   {
