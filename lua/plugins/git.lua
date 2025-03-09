@@ -32,6 +32,15 @@ map('<leader>gd', ':Gitsigns diffthis<CR>', 'Git Diff this')
 map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current line blame')
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 
+-- Lua
+local function disableAutowidth()
+  local lazy = require 'lazy'
+  local plugins = lazy.plugins()
+  if plugins['windows.nvim'] and plugins['windows.nvim'].loaded then
+    vim.cmd 'WindowsDisableAutowidth'
+  end
+end
+
 local function diffViewTelescopeCompareWithCurrentBranch()
   local actions = require 'telescope.actions'
   local action_state = require 'telescope.actions.state'
@@ -41,7 +50,7 @@ local function diffViewTelescopeCompareWithCurrentBranch()
     local selection = action_state.get_selected_entry()
     actions.close(prompt_bufnr)
     if selection then
-      vim.cmd 'WindowsDisableAutowidth'
+      disableAutowidth()
       vim.cmd('DiffviewOpen ' .. selection.value)
     end
   end
@@ -68,8 +77,7 @@ local function diffViewTelescopeFileHistory()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
         if selection then
-          -- Directly open file history for selected file
-          vim.cmd 'WindowsDisableAutowidth'
+          disableAutowidth()
           vim.cmd('DiffviewFileHistory ' .. selection.path)
         end
       end)
@@ -101,7 +109,7 @@ local function diffViewTelescopeCompareBranches()
                 local second_branch = action_state.get_selected_entry().value
                 actions.close(second_bufnr)
                 if first_branch ~= second_branch then
-                  vim.cmd 'WindowsDisableAutowidth'
+                  disableAutowidth()
                   vim.cmd('DiffviewOpen ' .. first_branch .. '..' .. second_branch)
                 else
                   vim.notify('Cannot compare identical branches', vim.log.levels.WARN)
@@ -114,6 +122,21 @@ local function diffViewTelescopeCompareBranches()
       return true
     end,
   })
+end
+
+function diffViewOpen()
+  disableAutowidth()
+  vim.cmd 'DiffviewOpen'
+end
+
+function diffViewFileHistory()
+  disableAutowidth()
+  vim.cmd 'DiffviewFileHistory'
+end
+
+function diffviewFileHistoryCurrentFile()
+  disableAutowidth()
+  vim.cmd 'DiffviewFileHistory %'
 end
 
 return {
@@ -145,13 +168,13 @@ return {
   {
     'sindrets/diffview.nvim',
     keys = {
-      { '<leader>dO', ':WindowsDisableAutowidth<CR>:DiffviewOpen<Cr>', desc = 'DiffView Open' },
+      { '<leader>dO', diffViewOpen, desc = 'DiffView Open' },
       { '<leader>do', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with Current Files' },
       { '<leader>dF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope ' },
       { '<leader>db', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
       { '<leader>dc', ':DiffviewClose<CR>', desc = 'Diffview close' },
-      { '<leader>df', ':WindowsDisableAutowidth<CR>:DiffviewFileHistory %<CR>', desc = 'Diffview file history Current File' },
-      { '<leader>dh', ':WindowsDisableAutowidth<CR>:DiffviewFileHistory<CR>', desc = 'Diffview file history' },
+      { '<leader>df', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
+      { '<leader>dh', diffViewFileHistory, desc = 'Diffview file history' },
     },
   },
 }

@@ -221,16 +221,18 @@ return {
     'anuvyklack/windows.nvim',
     event = { 'BufNewFile', 'BufReadPost' },
     dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
+    keys = {
+      { '<leader>wf', ':WindowsMaximize<CR>', 'Window Maximize' },
+      { '<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically' },
+      { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally' },
+      { '<leader>w=', ':WindowsEqualize<CR>', 'Window Equalize' },
+      { '<leader>wt', ':WindowsToggleAutowidth<CR>', 'Window Toggle Autowidth' },
+    }, -- autowidth is disabled so this is not needed
     config = function()
       vim.o.winwidth = 20
       vim.o.winminwidth = 15
       vim.o.equalalways = false
-      require('windows').setup()
-      map('<leader>wM', ':WindowsMaximize<CR>', 'Window Maximize')
-      map('<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically')
-      map('<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally')
-      map('<leader>w=', ':WindowsEqualize<CR>', 'Window Equalize')
-      map('<leader>wt', ':WindowsToggleAutowidth<CR>', 'Window Toggle Autowidth')
+      require('windows').setup { autowidth = { enable = false } }
     end,
   }, -- split window autosize with better animations
 
@@ -246,8 +248,8 @@ return {
     'jyscao/ventana.nvim',
     cmd = { 'VentanaTranspose', 'VentanaShift', 'VentanaShiftMaintailLinear' },
     keys = {
-      { '<leader>wT', ':VentanaTranspose<CR>', desc = 'Window Transpose' },
-      { '<leader>wS', ':VentanaShift<CR>', desc = 'Window Shift' },
+      { '<leader>wr', ':VentanaTranspose<CR>', desc = 'Window Rotate(transpose)' },
+      { '<leader>ww', ':VentanaShift<CR>', desc = 'Window Shift' },
     },
   }, -- easy change layout of split window
 }

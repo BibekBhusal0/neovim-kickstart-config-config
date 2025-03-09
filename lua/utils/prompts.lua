@@ -41,7 +41,7 @@ You must:
 Your reply must:
 - Contain code unelss specified by user.
 - Only show code you have modified.
-- Highlight and explain changes if you have made any
+- explain changes if you have made any
 
 You must not:
 - Give very long response.
