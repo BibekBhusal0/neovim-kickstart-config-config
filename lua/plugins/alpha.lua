@@ -226,4 +226,9 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-return { 'goolord/alpha-nvim', config = render, lazy = 'leetcode.nvim' == vim.fn.argv(0, -1) }
+return {
+  'goolord/alpha-nvim',
+  config = render,
+  lazy = 'leetcode.nvim' == vim.fn.argv(0, -1),
+  cmd = 'Alpha',
+}

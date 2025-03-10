@@ -9,7 +9,7 @@ return {
   },
   lazy = leet_arg ~= vim.fn.argv(0, -1),
   config = function()
-    require('leetcode').setup { arg = leet_arg }
+    require('leetcode').setup { lang = 'javascript', arg = leet_arg }
     map('<leader>lcc', ':Leet console<cr>', 'Leetcoce console')
     map('<leader>lcd', ':Leet daily<cr>', 'Leetcode proplem of the day')
     map('<leader>lci', ':Leet info<cr>', 'Leetcode problem info')
@@ -22,6 +22,5 @@ return {
     map('<leader>lcR', ':Leet reset<cr>', 'Leetcode reset')
     map('<leader>lcs', ':Leet submit<cr>', 'Leetcode submit')
     map('<leader>lct', ':Leet test<cr>', 'Leetcode test')
-    map('<leader>lcy', ':Leat yank<cr>', 'Leetcode yank soultion')
   end,
 }
