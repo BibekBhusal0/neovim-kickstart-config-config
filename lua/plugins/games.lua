@@ -33,4 +33,15 @@ return {
     cmd = { 'KillKillKill' },
     keys = { { '<leader>zk', '<cmd>KillKillKill<CR>', desc = 'Game Killersheep' } },
   },
+
+  {
+    'nvzone/typr',
+    keys = {
+      { '<leader>ty', ':Typr<cr>', desc = 'Typer start' },
+      { '<leader>tY', ':TyprStats<cr>', desc = 'Typer Stats' },
+    },
+    dependencies = 'nvzone/volt',
+    opts = {},
+    cmd = { 'Typr', 'TyprStats' },
+  },
 }

@@ -23,6 +23,7 @@ local quotes = {
   { "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.", 'Albert Einstein' },
   { 'Good Artists copy; Great artist steal.', 'Pablo Picasso' },
   { 'You know the bug is serous when you pause your Spotify music to focus.', 'Random Reddit post' },
+  { 'Nothing is as permanent as a temporary solution that works', 'Random Reddit Post' },
 }
 
 local function get_random_quote()

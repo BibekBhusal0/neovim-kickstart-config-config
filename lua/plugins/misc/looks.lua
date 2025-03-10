@@ -117,16 +117,6 @@ return {
   }, -- scrollbar showing gitsigns and diagnostics
 
   {
-    'rcarriga/nvim-notify',
-    event = { 'VimEnter' },
-    opts = {
-      icons = require('utils.icons').diagnostics,
-      render = 'wrapped-default',
-      stages = 'slide',
-    },
-  }, -- better notifications
-
-  {
     'folke/twilight.nvim',
     cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
     keys = { { '<leader>F', '<cmd>Twilight<cr>', desc = 'Toggle Twilight' } },
