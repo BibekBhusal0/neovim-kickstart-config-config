@@ -64,6 +64,12 @@ return {
       cond = hide_in_width,
     }
 
+    local plugins = {
+      function()
+        local stats = require('lazy').stats()
+        return (string.format(' %d/%d', stats.loaded, stats.count))
+      end,
+    }
     local pomodoro = {
       function()
         if not package.loaded['pomodoro'] then
@@ -101,7 +107,7 @@ return {
         lualine_b = { 'branch' },
         lualine_c = { diff, pomodoro },
         lualine_x = { diagnostics, { 'filetype', cond = hide_in_width } },
-        lualine_y = { lsp_status, codeium_status },
+        lualine_y = { lsp_status, codeium_status, plugins },
         lualine_z = { getFileName },
       },
       inactive_sections = {

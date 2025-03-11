@@ -90,7 +90,7 @@ return {
             window = { height = 1 },
             intro_message = '   Ask me anything',
           },
-          diff = { enabled = false },
+          diff = { enabled = true },
         },
         strategies = {
           chat = {
