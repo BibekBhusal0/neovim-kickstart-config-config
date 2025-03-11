@@ -23,7 +23,7 @@ end
 
 map = require 'utils.map'
 map('<leader>sh', ':Telescope help_tags<CR>', 'Search Help')
-map('<leader>sk', ':Telescope keymaps<CR>', 'Search Keymaps')
+map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
 map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')

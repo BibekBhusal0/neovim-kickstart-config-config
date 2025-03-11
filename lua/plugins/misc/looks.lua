@@ -8,7 +8,7 @@ return {
     keys = {
       { '<leader>cp', ':CccPick<CR>', desc = 'Color Picker' },
       { '<leader>cP', ':CccConvert<CR>', desc = 'Color Convert' },
-      { '<leader>ch', ':CccHighlighterToggle<CR>', desc = 'Color Highlighter Toggle' },
+      { '<leader>cH', ':CccHighlighterToggle<CR>', desc = 'Color Highlighter Toggle' },
     },
     config = function()
       local ccc = require 'ccc'
@@ -65,26 +65,6 @@ return {
     end,
     event = 'LspAttach',
   }, -- Better diagnostic messages
-
-  {
-    'luukvbaal/statuscol.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = function()
-      local builtin = require 'statuscol.builtin'
-      return {
-        setopt = true,
-        segments = {
-          { text = { builtin.foldfunc, ' ' }, click = 'v:lua.ScFa', auto = true },
-          { text = { builtin.lnumfunc, '' }, click = 'v:lua.ScLa', auto = true },
-          {
-            sign = { namespace = { 'diagnostic/signs' }, auto = true },
-            click = 'v:lua.ScSa',
-          },
-          { sign = { namespace = { 'gitsigns' } }, click = 'v:lua.ScSa', auto = true },
-        },
-      }
-    end,
-  }, -- changes the status column which appears in left side
 
   {
     'petertriho/nvim-scrollbar',
