@@ -16,9 +16,6 @@ map('<C-c>', '<Esc>', 'Normal Mode', 'i')
 map('<C-O>', '<Esc>o', 'Move to New Line', 'i')
 map('<C-]>', '<Esc>ldbi', 'Delete Word', 'i')
 
--- Disable the spacebar key's default behavior in Normal and Visual modes
-map('<Space>', '<Nop>', '', { 'n', 'v' })
-
 map('<C-s>', ': w <CR>', 'Save File')
 
 -- quit

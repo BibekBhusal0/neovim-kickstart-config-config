@@ -19,11 +19,11 @@ M.apply_transparency = function(color)
     'FloatBorder',
     'NvimTreeNormalFloat',
     'MatchWordCur',
+    'FoldColumn',
   }
   for _, hl in pairs(allHighlights) do
     vim.api.nvim_set_hl(0, hl, { bg = bg })
   end
-  vim.api.nvim_set_hl(0, 'FoldColumn', { bg = vim.api.nvim_get_hl_by_name('Normal', true).background })
 end
 
 M.Toggle_transparent = function()

@@ -40,11 +40,6 @@ local function gotoTab()
 end
 map('<leader>tg', gotoTab, 'Tab goto')
 
--- leader t 0-9 to move between tabs
-for i = 1, 9 do
-  map('<leader>t' .. i, ':tabn ' .. i .. '<CR>', 'Tab ' .. i)
-end
-
 return {
   {
     'akinsho/bufferline.nvim',
@@ -128,10 +123,6 @@ return {
       map('<leader>bL', ':BufferLineCloseRight<CR>', 'Buffer Close Next')
       map('<leader>bse', ':BufferLineSortByExtension<CR>', 'Buffer Sort By Extension')
       map('<leader>bsr', ':BufferLineSortByRelativeDirectory<CR>', 'Buffer Sort By Relative Directory')
-
-      for i = 1, 9 do
-        map('<leader>b' .. i, ':BufferLineGoToBuffer ' .. i .. '<CR>', 'Buffer Go to ' .. i)
-      end
     end,
   }, -- show open buffer  and tab
 
