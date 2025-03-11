@@ -37,11 +37,20 @@ return {
   {
     'nvzone/typr',
     keys = {
-      { '<leader>ty', ':Typr<cr>', desc = 'Typer start' },
-      { '<leader>tY', ':TyprStats<cr>', desc = 'Typer Stats' },
+      { '<leader>zy', ':Typr<cr>', desc = 'Typer start' },
+      { '<leader>zY', ':TyprStats<cr>', desc = 'Typer Stats' },
     },
     dependencies = 'nvzone/volt',
     opts = {},
     cmd = { 'Typr', 'TyprStats' },
+  },
+
+  {
+    'eandrju/cellular-automaton.nvim',
+    cmd = { 'CellularAutomaton' },
+    keys = {
+      { '<leader>zr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = 'Game CellularAutomaton' },
+      { '<leader>zg', '<cmd>CellularAutomaton game_of_life<CR>', desc = 'Game CellularAutomaton' },
+    },
   },
 }
