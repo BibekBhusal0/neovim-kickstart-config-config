@@ -167,14 +167,15 @@ return {
 
   {
     'sindrets/diffview.nvim',
+    lazy = true,
     keys = {
-      { '<leader>dO', diffViewOpen, desc = 'DiffView Open' },
-      { '<leader>do', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with Current Files' },
-      { '<leader>dF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope ' },
-      { '<leader>db', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
-      { '<leader>dc', ':DiffviewClose<CR>', desc = 'Diffview close' },
-      { '<leader>df', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
-      { '<leader>dh', diffViewFileHistory, desc = 'Diffview file history' },
+      -- { '<leader>dO', diffViewOpen, desc = 'DiffView Open' },
+      -- { '<leader>do', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with Current Files' },
+      -- { '<leader>dF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope ' },
+      -- { '<leader>db', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
+      -- { '<leader>dc', ':DiffviewClose<CR>', desc = 'Diffview close' },
+      -- { '<leader>df', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
+      -- { '<leader>dh', diffViewFileHistory, desc = 'Diffview file history' },
     },
   },
 }

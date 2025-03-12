@@ -14,20 +14,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  require 'plugins.treesitter', -- syntax highlighting
-  require 'plugins.colortheme', -- Color scheme setup
-  require 'plugins.telescope', -- Fuzzy finder for searching
-  require 'plugins.neotree', -- File explorer for Neovim
-  require 'plugins.mini_file', -- Yet another file explorer
-  require 'plugins.windowManagemet', -- Buffer Tab and Session Management
-  require 'plugins.lualine', -- Statusline
-  require 'plugins.lsp', -- Language Server Protocol setup
-  require 'plugins.autocompletion', -- Autocompletion for code
-  require 'plugins.none-ls', -- External tools integration (formatters, linters)
-  require 'plugins.git', -- Git stuff like lazygit, gitsigns
-  require 'plugins.alpha', -- Customizable dashboard screen
   require 'plugins.ai', -- syntax highlighting
-  require 'plugins.misc', -- Miscellaneous utility plugins
+  require 'plugins.alpha', -- Customizable dashboard screen
+  require 'plugins.autocompletion', -- Autocompletion for code
+  require 'plugins.colortheme', -- Color scheme setup
+  require 'plugins.debugging', -- Debugger
   require 'plugins.games', -- Fun games
+  require 'plugins.git', -- Git stuff like lazygit, gitsigns
   require 'plugins.leetcode', -- solving leetcode problems
+  require 'plugins.lsp', -- Language Server Protocol setup
+  require 'plugins.lualine', -- Statusline
+  require 'plugins.mini_file', -- Yet another file explorer
+  require 'plugins.misc', -- Miscellaneous utility plugins
+  require 'plugins.neotree', -- File explorer for Neovim
+  require 'plugins.none-ls', -- External tools integration (formatters, linters)
+  require 'plugins.telescope', -- Fuzzy finder for searching
+  require 'plugins.treesitter', -- syntax highlighting
+  require 'plugins.windowManagemet', -- Buffer Tab and Session Management
 }
