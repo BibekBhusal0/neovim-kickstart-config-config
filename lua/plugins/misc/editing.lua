@@ -133,7 +133,7 @@ return {
     config = function()
       require('mkdnflow').setup {
         mappings = {
-          MkdnEnter = { { 'n', 'v' }, '<CR>' },
+          MkdnEnter = { { 'n', 'v', 'i' }, '<CR>' },
           MkdnTab = false,
           MkdnSTab = false,
           MkdnNextLink = { 'n', ']l' },
@@ -152,7 +152,7 @@ return {
           MkdnYankFileAnchorLink = { 'n', 'yfa' },
           MkdnIncreaseHeading = { 'n', '+' },
           MkdnDecreaseHeading = { 'n', '-' },
-          MkdnToggleToDo = { { 'n', 'v' }, '<C-Space>' },
+          MkdnToggleToDo = { { 'n', 'i' }, '<C-h>' },
           MkdnNewListItem = false,
           MkdnNewListItemBelowInsert = { 'n', 'o' },
           MkdnNewListItemAboveInsert = { 'n', 'O' },
@@ -166,8 +166,8 @@ return {
           MkdnTableNewRowAbove = { 'n', '<C-i>R' },
           MkdnTableNewColAfter = { 'n', '<C-i>c' },
           MkdnTableNewColBefore = { 'n', '<C-i>C' },
-          MkdnFoldSection = { 'n', 'f' },
-          MkdnUnfoldSection = { 'n', '<leader>F' },
+          MkdnFoldSection = false,
+          MkdnUnfoldSection = false,
         },
       }
     end,

@@ -1,6 +1,6 @@
 return {
   'nvimtools/none-ls.nvim',
-  -- event = 'InsertEnter',
+  event = 'InsertEnter',
   dependencies = {
     'nvimtools/none-ls-extras.nvim',
     'jayp0521/mason-null-ls.nvim',

@@ -1,4 +1,3 @@
-local map = require 'utils.map'
 local kind_icons = require('utils.icons').symbols
 
 return { -- Autocompletion

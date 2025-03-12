@@ -1,5 +1,4 @@
 local map = require 'utils.map'
-local smear_cursor_enabled = true
 
 return {
   {
@@ -22,9 +21,18 @@ return {
 
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    ft = { 'markdown', 'codecompanion' },
+    ft = { 'markdown', 'codecompanion', 'vimwiki' },
     config = function()
-      require('render-markdown').setup { file_type = { 'markdown', 'codecompanion' } }
+      require('render-markdown').setup {
+        file_type = { 'markdown', 'codecompanion', 'vimwiki' },
+        link = {
+          custom = {
+            wikipedia = { pattern = 'wikiwand%.org', icon = '󰖬 ' },
+            twitter = { pattern = 'twitter%.com', icon = ' ' },
+            linkedin = { pattern = 'linkedin%.com', icon = ' ' },
+          },
+        },
+      }
       map('<leader>mm', ':RenderMarkdown toggle<CR>', 'Markdown Render Toggle')
       map('<leader>mM', ':RenderMarkdown buf_toggle<CR>', 'Markdown Render Buffer Toggle')
     end,

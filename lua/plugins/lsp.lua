@@ -11,7 +11,7 @@ return {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -31,7 +31,7 @@ return {
               params.newName = text
               vim.lsp.buf_request(0, 'textDocument/rename', params)
             end
-            require 'utils.input' (' Rename ', callback, var, nil, '󰆧  ')
+            require 'utils.input'(' Rename ', callback, var, nil, '󰆧  ')
           end
           map('<leader>ln', rename, 'LSP Rename variable')
 
@@ -173,6 +173,7 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
+            -- server.autostart = false
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)

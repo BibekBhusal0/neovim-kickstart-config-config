@@ -34,6 +34,7 @@ return {
         },
         indent = { enable = true },
       }
+      vim.treesitter.language.register('markdown', 'vimwiki')
     end,
   },
 
