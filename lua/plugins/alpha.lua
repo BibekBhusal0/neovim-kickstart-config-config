@@ -150,9 +150,8 @@ local function render()
       {
         type = 'group',
         val = {
-          button('f', '', 'Find file', ':Telescope find_files<CR>'),
-          button('r', '', 'Recent Files', ':Telescope oldfiles<CR>'),
-          button('n', '', 'New file', ':ene <BAR> startinsert <CR>'),
+          button('f', '', 'Find file', ':Telescope frecency workspace=CWD<CR>'),
+          button('r', '', 'Recent Files', ':Telescope frecency<CR>'),
           button('e', '󰙅', 'File Explorer', ':Neotree toggle position=left <CR>'),
         },
         opts = { spacing = 1 },
