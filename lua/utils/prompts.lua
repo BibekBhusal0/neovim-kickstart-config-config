@@ -1,3 +1,7 @@
+local export = function(context)
+  return context
+end
+
 return {
 
   ['Make more readable'] = {
@@ -61,8 +65,7 @@ You must not:
     strategy = 'chat',
     description = 'Generate a commit message',
     condition = function()
-      m = require 'utils.diff'()
-      return m.ok
+      return require 'utils.diff'().ok
     end,
     opts = {
       index = 10,

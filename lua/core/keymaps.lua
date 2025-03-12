@@ -61,7 +61,6 @@ map('>', '>gv', 'Indent right', 'v')
 map('[d', vim.diagnostic.goto_prev, 'Diagnostic previous')
 map(']d', vim.diagnostic.goto_next, 'Diagnostic next')
 map('<leader>dd', vim.diagnostic.open_float, 'Diagnostic floating')
-map('<leader>dL', vim.diagnostic.setloclist, 'Diagnostic list')
 
 -- line numbers
 map('<leader>nn', ':set nu!<CR>', 'Toggle Line Number')

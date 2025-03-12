@@ -1,4 +1,4 @@
-function get_diff()
+return function()
   local diff = vim.fn.system 'git diff --no-ext-diff --staged'
   local m = {}
   if string.find(diff, '^error') then
@@ -13,4 +13,3 @@ function get_diff()
   end
   return m
 end
-return get_diff

@@ -21,9 +21,14 @@ local searchInOpenFiles = function()
   }
 end
 
+local searchInLazy = function()
+  require('telescope.builtin').find_files {
+    cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy'),
+  }
+end
+
 local map = require 'utils.map'
 map('<leader>sh', ':Telescope help_tags<CR>', 'Search Help')
-map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
 map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')
@@ -47,9 +52,9 @@ map('<leader>/', searchInCurrentBuffer, 'Search in current buffer')
 map('<leader>s/', searchInOpenFiles, 'Search in Open Files')
 map('<leader>i', spellSuggestion, 'Spell suggestion')
 map('<leader>sz', spellSuggestion, 'Spell suggestion')
+map('<leader>sL', searchInLazy, 'Search Lazy Plugins')
 
 return {
-
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
@@ -64,6 +69,10 @@ return {
       },
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-tree/nvim-web-devicons',
+      {
+        'polirritmico/telescope-lazy-plugins.nvim',
+        -- opts = { lazy_config = vim.fn.stdpath 'config' .. '/init.lua' },
+      },
     },
     config = function()
       require('telescope').setup {
@@ -78,6 +87,8 @@ return {
         },
         extensions = {
           ['ui-select'] = { require('telescope.themes').get_dropdown() },
+          fzf = {},
+          lazy_plugins = { lazy_config = vim.fn.stdpath 'config' .. '/init.lua' },
         },
       }
       pcall(require('telescope').load_extension, 'fzf')

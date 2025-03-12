@@ -9,7 +9,6 @@ local symbols = {
   Array = '󰅪 ',
   Boolean = '◩ ',
   Class = '󰌗 ',
-  Class = '󰌗',
   Color = '󰏘',
   Constant = '󰇽',
   Constructor = '',

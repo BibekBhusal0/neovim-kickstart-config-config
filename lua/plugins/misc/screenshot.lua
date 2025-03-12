@@ -38,8 +38,8 @@ return {
     main = 'nvim-silicon',
 
     keys = {
-      { '<leader>cs', ':Silicon<cr>', desc = 'Screenshot to Root directory', mode = { 'n', 'v' }, silent = true },
-      { '<leader>cS', ":lua require('nvim-silicon').clip()<CR>", desc = 'Screenshot to clipboard', mode = { 'n', 'v' }, silent = true },
+      { '<leader>cc', ':Silicon<cr>', desc = 'Screenshot to Root directory', mode = { 'n', 'v' }, silent = true },
+      { '<leader>cC', ":lua require('nvim-silicon').clip()<CR>", desc = 'Screenshot to clipboard', mode = { 'n', 'v' }, silent = true },
       { '<leader>cd', save_to_desktop, desc = 'Screenshot to Desktop', mode = { 'n', 'v' }, silent = true },
     },
 
