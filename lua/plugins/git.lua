@@ -28,7 +28,7 @@ map('<leader>gh', ':Gitsigns preview_hunk<CR>', 'Git Preview hunk')
 map('<leader>gH', ':Gitsigns preview_hunk_inline<CR>', 'Git Preview hunk inline')
 map('<leader>gb', ':Gitsigns blame<CR>', 'Git Blame')
 map('<leader>gB', ':Gitsigns blame_line<CR>', 'Git Toggle line blame')
-map('<leader>gd', ':Gitsigns diffthis<CR>', 'Git Diff this')
+map('<leader>gD', ':Gitsigns diffthis<CR>', 'Git Diff this')
 map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current line blame')
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 
@@ -169,13 +169,13 @@ return {
     'sindrets/diffview.nvim',
     lazy = true,
     keys = {
-      -- { '<leader>dO', diffViewOpen, desc = 'DiffView Open' },
-      -- { '<leader>do', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with Current Files' },
-      -- { '<leader>dF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope ' },
-      -- { '<leader>db', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
-      -- { '<leader>dc', ':DiffviewClose<CR>', desc = 'Diffview close' },
-      -- { '<leader>df', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
-      -- { '<leader>dh', diffViewFileHistory, desc = 'Diffview file history' },
+      { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
+      { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with Current Files' },
+      { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope ' },
+      { '<leader>gdb', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
+      { '<leader>gdc', ':DiffviewClose<CR>', desc = 'Diffview close' },
+      { '<leader>gdf', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
+      { '<leader>gdh', diffViewFileHistory, desc = 'Diffview file history' },
     },
   },
 }
