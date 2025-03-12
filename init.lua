@@ -30,5 +30,6 @@ require('lazy').setup {
   require 'plugins.none-ls', -- External tools integration (formatters, linters)
   require 'plugins.telescope', -- Fuzzy finder for searching
   require 'plugins.treesitter', -- syntax highlighting
+  require 'plugins.trouble', -- provides better references diagnostics
   require 'plugins.windowManagemet', -- Buffer Tab and Session Management
 }

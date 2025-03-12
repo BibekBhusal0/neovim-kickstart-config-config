@@ -255,7 +255,7 @@ return {
       event = { 'BufNewFile', 'BufReadPost' },
       keys = {
         { '<leader>sc', '<cmd>TodoTelescope<CR>', desc = 'Todo Search Telescope' },
-        { '<leader>ll', '<cmd>TodoLocList<CR>', desc = 'Todo Loc List' },
+        { '<leader>cT', '<cmd>Trouble todo<CR>', desc = 'Todo Loc List' },
       },
       config = function()
         require('todo-comments').setup { signs = false }

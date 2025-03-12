@@ -74,7 +74,9 @@ return {
         -- opts = { lazy_config = vim.fn.stdpath 'config' .. '/init.lua' },
       },
     },
+
     config = function()
+      local open_with_trouble = require('trouble.sources.telescope').open
       require('telescope').setup {
         defaults = {
           mappings = {
@@ -82,7 +84,9 @@ return {
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
               ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
               ['<C-l>'] = require('telescope.actions').select_default, -- open file
+              ['<c-g>'] = open_with_trouble,
             },
+            n = { ['<c-g>'] = open_with_trouble },
           },
         },
         extensions = {

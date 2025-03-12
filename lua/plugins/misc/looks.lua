@@ -5,8 +5,8 @@ return {
     'uga-rosa/ccc.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
     keys = {
-      { '<leader>cp', ':CccPick<CR>', desc = 'Color Picker' },
-      { '<leader>cP', ':CccConvert<CR>', desc = 'Color Convert' },
+      { '<leader>cP', ':CccPick<CR>', desc = 'Color Picker' },
+      { '<leader>cm', ':CccConvert<CR>', desc = 'Color Convert' },
       { '<leader>cH', ':CccHighlighterToggle<CR>', desc = 'Color Highlighter Toggle' },
     },
     config = function()
