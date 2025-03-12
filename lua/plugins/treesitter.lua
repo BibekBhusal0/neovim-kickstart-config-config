@@ -121,8 +121,6 @@ return {
     keys = {
       { 'zh', ':Treewalker Left<CR>', mode = 'n' },
       { 'zl', ':Treewalker Right<CR>', mode = 'n' },
-      { 'zk', ':Treewalker Up<CR>', mode = 'n' },
-      { 'zj', ':Treewalker Down<CR>', mode = 'n' },
     },
   },
 
@@ -205,16 +203,24 @@ return {
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
 
-      local original_set_last_move = ts_repeat_move.set_last_move
-      ts_repeat_move.set_last_move = function(move_fn, opts, ...)
-        local success = original_set_last_move(move_fn, opts, ...)
-        if success then
-          vim.defer_fn(function()
-            require('neoscroll').zz { half_win_duration = 10, hide_cursor = true }
-          end, 5)
-        end
+      local scroll_center = function()
+        require('neoscroll').zz { half_win_duration = 10, hide_cursor = true }
+      end
 
+      local orignal_set = ts_repeat_move.set_last_move
+      ts_repeat_move.set_last_move = function(...)
+        local success = orignal_set(...)
+        if success then
+          vim.defer_fn(scroll_center, 5)
+        end
         return success
+      end
+
+      local orignal_repeat = ts_repeat_move.repeat_last_move
+      ts_repeat_move.repeat_last_move = function(...)
+        local r = orignal_repeat(...)
+        vim.defer_fn(scroll_center, 5)
+        return r
       end
 
       local get_pair = ts_repeat_move.make_repeatable_move_pair
@@ -228,6 +234,11 @@ return {
         vim.cmd 'TailwindNextClass'
       end, function()
         vim.cmd 'TailwindPrevClass'
+      end)
+      local next_node, prev_node = get_pair(function()
+        vim.cmd 'Treewalker Down'
+      end, function()
+        vim.cmd 'Treewalker Up'
       end)
 
       local todos = {
@@ -250,6 +261,8 @@ return {
       map('[d', prev_dig, 'Jump Previous Diagnostic', mode)
       map(']n', tw_next, 'Jump Next Tailwind Class', mode)
       map('[n', tw_prev, 'Jump Previous Tailwind Class', mode)
+      map('zj', next_node, 'Jump Next Node', mode)
+      map('zk', prev_node, 'Jump Previous Node', mode)
       map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next', mode)
       map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous', mode)
     end,
