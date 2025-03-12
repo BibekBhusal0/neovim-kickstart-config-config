@@ -21,7 +21,7 @@ local searchInOpenFiles = function()
   }
 end
 
-map = require 'utils.map'
+local map = require 'utils.map'
 map('<leader>sh', ':Telescope help_tags<CR>', 'Search Help')
 map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
@@ -76,10 +76,11 @@ return {
             },
           },
         },
+        extensions = {
+          ['ui-select'] = { require('telescope.themes').get_dropdown() },
+        },
       }
-      extensions = {
-        ['ui-select'] = { require('telescope.themes').get_dropdown() },
-      }, pcall(require('telescope').load_extension, 'fzf')
+      pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
     end,
   },

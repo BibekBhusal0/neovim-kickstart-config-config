@@ -1,6 +1,6 @@
 return {
   'nvimtools/none-ls.nvim',
-  event = 'InsertEnter',
+  -- event = 'InsertEnter',
   dependencies = {
     'nvimtools/none-ls-extras.nvim',
     'jayp0521/mason-null-ls.nvim',
@@ -8,7 +8,7 @@ return {
   config = function()
     local null_ls = require 'null-ls'
     local formatting = null_ls.builtins.formatting -- to setup formatters
-    local diagnostics = null_ls.builtins.diagnostics -- to setup linters
+    -- local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
     -- Formatters & linters for mason to install
     require('mason-null-ls').setup {
@@ -16,6 +16,7 @@ return {
         'prettierd', -- ts/js/html/more formatter
         'eslint_d', -- ts/js linter
         'ruff',
+        'stylua',
       },
       automatic_installation = true,
     }

@@ -3,7 +3,7 @@ local showTree = function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, true, true), 'n', true)
 end
 
-map = require 'utils.map'
+local map = require 'utils.map'
 map('<leader>e', ':Neotree toggle position=right<CR>', 'NeoTree on Right')
 map('<leader>q', ':Neotree toggle position=left<CR>', 'NeoTree on Left')
 map('<C-g>', showTree, 'Neotree Toggle', { 'n', 'v', 'i' })

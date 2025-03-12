@@ -11,24 +11,16 @@ return {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
           map('<leader>ld', require('telescope.builtin').lsp_definitions, 'LSP goto Definition')
-          -- Find references for the word under your cursor.
           map('<leader>lr', require('telescope.builtin').lsp_references, 'LSP goto References')
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
           map('<leader>li', require('telescope.builtin').lsp_implementations, 'LSP Goto Implementation')
-
-          -- Jump to the type of the word under your cursor.
-          --  Useful when you're not sure what type a variable is and you want to see
-          --  the definition of its *type*, not where it was *defined*.
           map('<leader>ls', require('telescope.builtin').lsp_type_definitions, 'LSP Type Definition')
-
           map('<leader>la', require('telescope.builtin').lsp_document_symbols, 'LSP Document Symbols')
           map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'LSP Workspace Symbols')
 
@@ -39,20 +31,16 @@ return {
               params.newName = text
               vim.lsp.buf_request(0, 'textDocument/rename', params)
             end
-            require 'utils.input'(' Rename ', callback, var, nil, '󰆧  ')
+            require 'utils.input' (' Rename ', callback, var, nil, '󰆧  ')
           end
           map('<leader>ln', rename, 'LSP Rename variable')
 
-          -- Execute a code action, usually your cursor needs to be on top of an error
-          -- or a suggestion from your LSP for this to activate.
           local function code_action()
             pcall(require('telescope').load_extension, 'ui-select')
             vim.lsp.buf.code_action()
           end
           map('<leader>ca', code_action, 'LSP code action', { 'n', 'x' })
 
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
-          --  For example, in C this would take you to the header.
           map('<leader>lD', vim.lsp.buf.declaration, 'LSP goto Declaration')
 
           -- The following two autocommands are used to highlight references of the
@@ -146,30 +134,25 @@ return {
         tailwindcss = {},
         -- terraformls = {},
         jsonls = {},
-        -- lua_ls = {
-        -- -- cmd = {...},
-        -- -- filetypes = { ...},
-        -- -- capabilities = {},
-        -- settings = {
-        --   Lua = {
-        --     completion = {
-        --       callSnippet = "Replace",
-        --     },
-        --     runtime = { version = "LuaJIT" },
-        --     workspace = {
-        --       checkThirdParty = false,
-        --       library = {
-        --         "${3rd}/luv/library",
-        --         unpack(vim.api.nvim_get_runtime_file('', true)),
-        --       },
-        --     },
-        --     diagnostics = { disable = { "missing-fields" } },
-        --     format = {
-        --       enable = false,
-        --     },
-        --   },
-        -- },
-        -- },
+        lua_ls = {
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              runtime = { version = 'LuaJIT' },
+              workspace = {
+                checkThirdParty = false,
+                library = {
+                  '${3rd}/luv/library',
+                  unpack(vim.api.nvim_get_runtime_file('', true)),
+                },
+              },
+              diagnostics = { disable = { 'missing-fields' }, globals = { 'vim' } },
+              format = { enable = false },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed

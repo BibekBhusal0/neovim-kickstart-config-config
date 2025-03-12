@@ -1,3 +1,5 @@
+local map = require 'utils.map'
+
 local commit_with_message = function()
   vim.cmd 'Git add .'
 
@@ -12,7 +14,7 @@ local commit_with_message = function()
 
   vim.api.nvim_create_autocmd({ 'User' }, {
     pattern = 'CodeCompanionRequestFinished',
-    callback = function(request)
+    callback = function()
       if not executed then
         local chat = require('codecompanion.strategies.chat').last_chat()
         local messages = chat.agents.messages
@@ -32,12 +34,6 @@ local inline_command = function()
   require 'utils.input'('  Command to AI  ', function(text)
     vim.cmd 'normal! gv'
     vim.cmd('CodeCompanion /buffer ' .. text)
-  end, '', 80, '  ')
-end
-
-local start_chat = function()
-  require 'utils.input'('  Chat to AI  ', function(text)
-    vim.cmd('CodeCompanionChat ' .. text)
   end, '', 80, '  ')
 end
 

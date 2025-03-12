@@ -2,6 +2,7 @@ local selected_bg = '#095028'
 local bg = '#18181b'
 local tab_selected = '#74dfa2'
 local tab = '#052814'
+local map = require 'utils.map'
 
 -- Resize with arrows
 map('<Up>', ':resize -2<CR>', 'Resize window up')
@@ -52,13 +53,12 @@ return {
           close_command = 'Bdelete! %d',
           close_icon = ' 󰅙',
           middle_mouse_command = 'Bdelete! %d',
-          right_mouse_command = false,
           max_name_length = 30,
           max_prefix_length = 30,
           truncate_names = true,
           tab_size = 21,
           diagnostics = 'nvim_lsp',
-          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+          diagnostics_indicator = function(count)
             return '(' .. count .. ')'
           end,
           offsets = {

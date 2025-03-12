@@ -141,7 +141,7 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
-      keys = {
+      local keys = {
         ['/'] = 'comment',
         b = 'block',
         c = 'class',
@@ -196,7 +196,7 @@ return {
         },
       }
 
-      function call_require(module_name, call_function, parameter)
+      local function call_require(module_name, call_function, parameter)
         return function()
           require(module_name)[call_function](parameter)
         end

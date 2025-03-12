@@ -1,4 +1,4 @@
-map = require 'utils.map'
+local map = require 'utils.map'
 
 local function commit_with_message()
   require 'utils.input'(' Commit Message ', function(text)
@@ -57,8 +57,8 @@ local function diffViewTelescopeCompareWithCurrentBranch()
   builtin.git_branches(themes.get_dropdown {
     previewer = false,
     prompt_title = 'Compare Current with Branch',
-    attach_mappings = function(_, map)
-      map({ 'i', 'n' }, '<cr>', select)
+    attach_mappings = function(_, n)
+      n({ 'i', 'n' }, '<cr>', select)
       return true
     end,
   })
@@ -72,8 +72,8 @@ local function diffViewTelescopeFileHistory()
   builtin.git_files(themes.get_dropdown {
     prompt_title = 'Select File for History',
     previewer = false,
-    attach_mappings = function(_, map)
-      map({ 'i', 'n' }, '<CR>', function(prompt_bufnr)
+    attach_mappings = function(_, n)
+      n({ 'i', 'n' }, '<CR>', function(prompt_bufnr)
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
         if selection then
@@ -91,13 +91,12 @@ local function diffViewTelescopeCompareBranches()
   local action_state = require 'telescope.actions.state'
   local themes = require 'telescope.themes'
   local builtin = require 'telescope.builtin'
-  local branches = {}
   -- First branch selection
   builtin.git_branches(themes.get_dropdown {
     prompt_title = 'Select First Branch',
-    attach_mappings = function(_, map)
+    attach_mappings = function(_, keymap)
       previewer =
-        false, map({ 'i', 'n' }, '<CR>', function(first_bufnr)
+        false, keymap({ 'i', 'n' }, '<CR>', function(first_bufnr)
           local first_branch = action_state.get_selected_entry().value
           actions.close(first_bufnr)
           -- Second branch selection
@@ -124,17 +123,17 @@ local function diffViewTelescopeCompareBranches()
   })
 end
 
-function diffViewOpen()
+local function diffViewOpen()
   disableAutowidth()
   vim.cmd 'DiffviewOpen'
 end
 
-function diffViewFileHistory()
+local function diffViewFileHistory()
   disableAutowidth()
   vim.cmd 'DiffviewFileHistory'
 end
 
-function diffviewFileHistoryCurrentFile()
+local function diffviewFileHistoryCurrentFile()
   disableAutowidth()
   vim.cmd 'DiffviewFileHistory %'
 end
