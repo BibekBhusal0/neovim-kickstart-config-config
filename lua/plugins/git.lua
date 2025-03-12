@@ -94,30 +94,30 @@ local function diffViewTelescopeCompareBranches()
   -- First branch selection
   builtin.git_branches(themes.get_dropdown {
     prompt_title = 'Select First Branch',
+    previewer = false,
     attach_mappings = function(_, keymap)
-      previewer =
-        false, keymap({ 'i', 'n' }, '<CR>', function(first_bufnr)
-          local first_branch = action_state.get_selected_entry().value
-          actions.close(first_bufnr)
-          -- Second branch selection
-          builtin.git_branches(themes.get_dropdown {
-            prompt_title = 'Select Second Branch',
-            previewer = false,
-            attach_mappings = function(_, second_map)
-              second_map({ 'i', 'n' }, '<CR>', function(second_bufnr)
-                local second_branch = action_state.get_selected_entry().value
-                actions.close(second_bufnr)
-                if first_branch ~= second_branch then
-                  disableAutowidth()
-                  vim.cmd('DiffviewOpen ' .. first_branch .. '..' .. second_branch)
-                else
-                  vim.notify('Cannot compare identical branches', vim.log.levels.WARN)
-                end
-              end)
-              return true
-            end,
-          })
-        end)
+      keymap({ 'i', 'n' }, '<CR>', function(first_bufnr)
+        local first_branch = action_state.get_selected_entry().value
+        actions.close(first_bufnr)
+        -- Second branch selection
+        builtin.git_branches(themes.get_dropdown {
+          prompt_title = 'Select Second Branch',
+          previewer = false,
+          attach_mappings = function(_, second_map)
+            second_map({ 'i', 'n' }, '<CR>', function(second_bufnr)
+              local second_branch = action_state.get_selected_entry().value
+              actions.close(second_bufnr)
+              if first_branch ~= second_branch then
+                disableAutowidth()
+                vim.cmd('DiffviewOpen ' .. first_branch .. '..' .. second_branch)
+              else
+                vim.notify('Cannot compare identical branches', vim.log.levels.WARN)
+              end
+            end)
+            return true
+          end,
+        })
+      end)
       return true
     end,
   })
@@ -169,8 +169,8 @@ return {
     lazy = true,
     keys = {
       { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
-      { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with Current Files' },
-      { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope ' },
+      { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with head' },
+      { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },
       { '<leader>gdb', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
       { '<leader>gdc', ':DiffviewClose<CR>', desc = 'Diffview close' },
       { '<leader>gdf', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
