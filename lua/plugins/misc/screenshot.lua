@@ -65,7 +65,7 @@ return {
         return './' .. get_file_name_and_timestamp() .. '.png'
       end,
 
-      window_title = function(args)
+      window_title = function()
         local repo_url = vim.fn.system 'git config --get remote.origin.url'
         if repo_url and repo_url ~= '' then
           repo_url = vim.fn.trim(repo_url)

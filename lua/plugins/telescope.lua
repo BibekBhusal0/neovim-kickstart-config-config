@@ -38,7 +38,7 @@ map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
 map('<leader>sB', ':Telescope scope buffers<CR>', 'Seach All Buffers ')
 map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
-map('<leader>sf', ':Telescope frecency workspace=CWD<CR>', 'Search Files')
+map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
 map('<leader>sgb', ':Telescope git_branches<CR>', 'Search Git Branches')
 map('<leader>sgC', ':Telescope git_bcommits<CR>', 'Search Git Bcommits')
 map('<leader>sgc', ':Telescope git_commits<CR>', 'Search Git Commits')
@@ -61,11 +61,16 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-tree/nvim-web-devicons',
-      'nvim-telescope/telescope-frecency.nvim',
+      'prochri/telescope-all-recent.nvim',
+      'kkharji/sqlite.lua',
     },
 
     config = function()
       local open_with_trouble = require('trouble.sources.telescope').open
+      vim.g.sqlite_clib_path = 'C:/ProgramData/sqlite/sqlite3.dll'
+      require('telescope-all-recent').setup {
+        default = { sorting = 'frecency' },
+      }
       require('telescope').setup {
         defaults = {
           mappings = {
@@ -83,7 +88,6 @@ return {
         },
       }
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'frecency')
     end,
   },
 
