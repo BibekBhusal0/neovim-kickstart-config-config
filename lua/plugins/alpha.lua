@@ -24,6 +24,8 @@ local quotes = {
   { 'Good Artists copy; Great artist steal.', 'Pablo Picasso' },
   { 'You know the bug is serous when you pause your Spotify music to focus.', 'Random Reddit post' },
   { 'Nothing is as permanent as a temporary solution that works', 'Random Reddit Post' },
+  { 'Time is free but somehow priceless, so whatch how you spend it wisely', 'Central Cee' },
+  { 'Gotta concentrate, against the clock I rase,got no time to waste, I am already late, I got a marathon pased', 'Eminiem' },
 }
 
 local function get_random_quote()
@@ -172,10 +174,7 @@ local function render()
     opts = { spacing = 1 },
   }
 
-  local buttons = {
-    type = 'group',
-    val = { buttonGroup1, buttons_divider, buttonGroup2 },
-  }
+  local buttons = { type = 'group', val = { buttonGroup1, buttons_divider, buttonGroup2 } }
 
   local function getFooter(val)
     return { type = 'text', val = val, opts = { position = 'center', hl = 'Ignore' } }
@@ -198,12 +197,8 @@ local function render()
 
   local content = {
     layout = {
-      {
-        type = 'text',
-        val = header,
-        opts = { position = 'center', hl = 'Type' },
-      },
-      { type = 'padding', val = 2 },
+      { type = 'text', val = header, opts = { position = 'center', hl = 'Type' } },
+      { type = 'padding', val = 3 },
       buttons,
       { type = 'padding', val = 1 },
       footer,
