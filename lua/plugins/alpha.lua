@@ -35,7 +35,7 @@ local function get_random_quote()
 end
 
 local function get_quote_for_footer()
-  local maxChar = 60
+  local maxChars = 60
   local quote_data = get_random_quote()
 
   local quote = quote_data[1]
@@ -51,8 +51,8 @@ local function get_quote_for_footer()
   local current_line = ''
 
   for _, word in ipairs(words) do
-    if #current_line + #word + 1 > maxChar then
-      table.insert(formatted_lines, current_line .. string.rep(' ', maxChar - #current_line))
+    if #current_line + #word + 1 > maxChars then
+      table.insert(formatted_lines, current_line .. string.rep(' ', maxChars - #current_line))
       current_line = word
     else
       if #current_line > 0 then
@@ -64,11 +64,11 @@ local function get_quote_for_footer()
   end
 
   if #current_line > 0 then
-    table.insert(formatted_lines, current_line .. string.rep(' ', maxChar - #current_line))
+    table.insert(formatted_lines, current_line .. string.rep(' ', maxChars - #current_line))
   end
 
   if #formatted_lines > 0 then
-    local author_line = string.rep(' ', maxChar - #author - 3) .. ' - ' .. author
+    local author_line = string.rep(' ', maxChars - #author - 3) .. ' - ' .. author
     table.insert(formatted_lines, author_line)
   end
 
@@ -150,7 +150,7 @@ local function render()
       {
         type = 'group',
         val = {
-          button('f', '', 'Find file', ':Telescope <CR>'),
+          button('f', '', 'Find file', ':Telescope find_files<CR>'),
           button('r', '', 'Recent Files', ':Telescope oldfiles<CR>'),
           button('e', '󰙅', 'File Explorer', ':Neotree toggle position=left <CR>'),
         },
