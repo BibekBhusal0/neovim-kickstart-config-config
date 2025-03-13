@@ -119,9 +119,9 @@ return { -- Autocompletion
         end, { 'i', 's' }),
       },
       sources = {
-        { name = 'luasnip' },
-        { name = 'lazydev', group_index = 0 },
         { name = 'nvim_lsp' },
+        { name = 'lazydev', group_index = 0 },
+        { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
       },

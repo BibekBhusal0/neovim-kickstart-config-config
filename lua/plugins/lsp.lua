@@ -1,7 +1,15 @@
 local map = require 'utils.map'
 
-map('<leader>Lt', ':LspStart<CR>', 'LSP Start')
-map('<leader>LT', ':LspStop<CR>', 'LSP Stop')
+vim.g.lsp_autostart = true
+map('<leader>Lt', function()
+  vim.g.lsp_autostart = true
+  vim.cmd.LspStart()
+end, 'LSP Start')
+
+map('<leader>LT', function()
+  vim.g.lsp_autostart = false
+  vim.cmd.LspStop()
+end, 'LSP Stop')
 
 return {
   {
@@ -42,6 +50,7 @@ return {
           map('<leader>ca', code_action, 'LSP code action', { 'n', 'x' })
 
           map('<leader>lD', vim.lsp.buf.declaration, 'LSP goto Declaration')
+          map('<leader>lh', vim.lsp.buf.hover, 'LSP Hover')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -77,9 +86,18 @@ return {
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            map('<leader>th', function()
+            map('<leader>lH', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, 'LSP Toggle Inlay Hints')
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNew' }, {
+        group = vim.api.nvim_create_augroup('lsp_autostart', { clear = true }),
+        callback = function()
+          if vim.g.lsp_autostart then
+            vim.schedule(vim.cmd.LspStart)
           end
         end,
       })
@@ -162,7 +180,7 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            -- server.autostart = false
+            server.autostart = false
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)

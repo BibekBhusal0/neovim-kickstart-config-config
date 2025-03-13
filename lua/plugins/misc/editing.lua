@@ -197,6 +197,21 @@ return {
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split
 
+  {
+    'booperlv/nvim-gomove',
+    keys = {
+      { '<S-j>', '<Plug>GoNSMDown', desc = 'Move down' },
+      { '<S-k>', '<Plug>GoNSMUp', desc = 'Move up' },
+      { '<S-j>', '<Plug>GoVSMDown', mode = 'x', desc = 'Move down' },
+      { '<S-k>', '<Plug>GoVSMUp', mode = 'x', desc = 'Move up' },
+      { '<C-A-j>', '<Plug>GoNSDDown', desc = 'Duplicate down' },
+      { '<C-A-k>', '<Plug>GoNSDUp', desc = 'Duplicate up' },
+      { '<A-j>', '<Plug>GoVSDDown', mode = 'x', desc = 'Duplicate down' },
+      { '<A-k>', '<Plug>GoVSDUp', mode = 'x', desc = 'Duplicate up' },
+    },
+    opts = { map_defaults = false },
+  }, -- simple moving and duplicating lines
+
   { -- comments
     {
       'numToStr/Comment.nvim',
@@ -208,21 +223,6 @@ return {
         }
       end,
     }, -- Easily comment visual regions/lines
-
-    {
-      'booperlv/nvim-gomove',
-      keys = {
-        { '<S-j>', '<Plug>GoNSMDown', desc = 'Move down' },
-        { '<S-k>', '<Plug>GoNSMUp', desc = 'Move up' },
-        { '<S-j>', '<Plug>GoVSMDown', mode = 'x', desc = 'Move down' },
-        { '<S-k>', '<Plug>GoVSMUp', mode = 'x', desc = 'Move up' },
-        { '<C-A-j>', '<Plug>GoNSDDown', desc = 'Duplicate down' },
-        { '<C-A-k>', '<Plug>GoNSDUp', desc = 'Duplicate up' },
-        { '<A-j>', '<Plug>GoVSDDown', mode = 'x', desc = 'Duplicate down' },
-        { '<A-k>', '<Plug>GoVSDUp', mode = 'x', desc = 'Duplicate up' },
-      },
-      opts = { map_defaults = false },
-    },
 
     {
       'LudoPinelli/comment-box.nvim',
