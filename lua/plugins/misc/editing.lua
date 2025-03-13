@@ -1,5 +1,4 @@
 local map = require 'utils.map'
-
 local webDev = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
 
 return {
@@ -181,11 +180,19 @@ return {
   }, -- Changing case easily
 
   {
+    'christoomey/vim-sort-motion',
+    event = { 'BufNewFile', 'BufReadPost' },
+    config = function()
+      vim.g.sort_motion_flags = 'i'
+    end,
+  }, -- sorting with motion
+
+  {
     'Wansmer/treesj',
     keys = {
-      { 'gj', ':TSJJoin<CR>', desc = 'Join the object under cursor' },
-      { 'gs', ':TSJSplit<CR>', desc = 'Split the object under cursor' },
       { 'ga', ':TSJToggle<CR>', desc = 'Toggle split object under cursor' },
+      { 'gj', ':TSJJoin<CR>', desc = 'Join the object under cursor' },
+      { 'gk', ':TSJSplit<CR>', desc = 'Split the object under cursor' },
     },
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split
