@@ -66,15 +66,5 @@ map('<leader>dd', vim.diagnostic.open_float, 'Diagnostic floating')
 map('<leader>nn', ':set nu!<CR>', 'Toggle Line Number')
 map('<leader>rn', ':set rnu!<CR>', 'Toggle Relative Line Number')
 
--- folding
-local function toggle_foldcolumn()
-  if vim.o.foldcolumn == '0' then
-    vim.o.foldcolumn = '1'
-  else
-    vim.o.foldcolumn = '0'
-  end
-end
-
 map('zo', 'za', 'Toggle fold')
-map('<leader>zi', toggle_foldcolumn, 'Toggle fold column')
 map('<Esc>', '<Cmd>noh<CR>', 'Clear Highlight')

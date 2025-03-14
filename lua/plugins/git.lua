@@ -24,13 +24,15 @@ map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
 map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
 map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')
 map('<leader>gR', ':Gitsigns reset_buffer<CR>', 'Git Reset buffer')
-map('<leader>gh', ':Gitsigns preview_hunk<CR>', 'Git Preview hunk')
-map('<leader>gH', ':Gitsigns preview_hunk_inline<CR>', 'Git Preview hunk inline')
+map('<leader>gH', ':Gitsigns preview_hunk<CR>', 'Git Preview hunk')
+map('<leader>gh', ':Gitsigns preview_hunk_inline<CR>', 'Git Preview hunk inline')
 map('<leader>gb', ':Gitsigns blame<CR>', 'Git Blame')
 map('<leader>gB', ':Gitsigns blame_line<CR>', 'Git Toggle line blame')
 map('<leader>gD', ':Gitsigns diffthis<CR>', 'Git Diff this')
 map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current line blame')
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
+map('<leader>gq', ':Gitsigns setqflist<CR>', 'Git quick fix list')
+map('ih', ':lua require("gitsigns").select_hunk()<cr>', 'Select hunk', { 'o', 'x' })
 
 -- Lua
 local function disableAutowidth()
@@ -143,7 +145,7 @@ return {
     'lewis6991/gitsigns.nvim',
     event = { 'BufNewFile', 'BufReadPost' },
     cmd = { 'Gitsigns' },
-    opts = {},
+    opts = { numhl = true },
   },
 
   {

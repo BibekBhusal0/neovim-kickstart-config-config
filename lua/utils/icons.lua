@@ -43,10 +43,10 @@ local symbols = {
 }
 
 local dap = {
-  Breakpoint = '',
-  BreakpointCondition = '',
-  BreakpointRejected = '',
-  LogPoint = '󰛿',
+  Breakpoint = '●',
+  BreakpointCondition = '',
+  BreakpointRejected = '◌',
+  LogPoint = '󰝶',
   Stopped = '󰁕',
 }
 
