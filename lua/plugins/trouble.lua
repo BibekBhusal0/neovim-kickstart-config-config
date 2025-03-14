@@ -10,12 +10,12 @@ return {
   opts = {},
   cmd = 'Trouble',
   keys = {
-    { '<leader>cd', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Trouble Diagnostics Toggle' },
-    { '<leader>cD', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Trouble Diagnostics Toggle Buffer' },
-    { '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Trouble Symbols Toggle' },
-    { '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', desc = 'Trouble LSP Toggle' },
+    { '<leader>cE', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Trouble Diagnostics Toggle Buffer' },
+    { '<leader>ce', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Trouble Diagnostics Toggle' },
     { '<leader>cL', '<cmd>Trouble loclist toggle<cr>', desc = 'Trouble LocList Toggle' },
+    { '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', desc = 'Trouble LSP Toggle' },
     { '<leader>cq', '<cmd>Trouble qflist toggle<cr>', desc = 'Trouble Quickfix Toggle' },
+    { '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Trouble Symbols Toggle' },
     { '<leader>ct', '<cmd>Trouble toggle<cr>', desc = 'Trouble  Toggle' },
   },
 }
