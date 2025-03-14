@@ -3,13 +3,13 @@ local map = require 'utils.map'
 local function commit_with_message()
   require 'utils.input'(' Commit Message ', function(text)
     vim.cmd("Git commit -m '" .. text .. "'")
-  end, '', 40, '  ')
+  end, '', 40, require('utils.icons').others.github .. '  ')
 end
 
 local function commit_all_with_message()
   require 'utils.input'(' Commit Message ', function(text)
     vim.cmd("Git commit -a -m '" .. text .. "'")
-  end, '', 50, '  ')
+  end, '', 50, require('utils.icons').others.github .. '  ')
 end
 
 map('<leader>gp', ':Git push<CR>', 'Git push')

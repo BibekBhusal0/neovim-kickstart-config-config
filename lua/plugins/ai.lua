@@ -22,7 +22,7 @@ local commit_with_message = function()
         if type(last_message) == 'string' and string.len(last_message) < 100 then
           require 'utils.input'(' Commit Message ', function(text)
             vim.cmd("Git commit -a -m '" .. text .. "'")
-          end, last_message, nil, '   ')
+          end, last_message, nil, require('utils.icons').others.ai .. ' ' .. require('utils.icons').others.github .. '  ')
         end
         executed = true
       end
@@ -34,7 +34,7 @@ local inline_command = function()
   require 'utils.input'('  Command to AI  ', function(text)
     vim.cmd 'normal! gv'
     vim.cmd('CodeCompanion /buffer ' .. text)
-  end, '', 80, '  ')
+  end, '', 80, require('utils.icons').others.ai .. '  ')
 end
 
 return {

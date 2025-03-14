@@ -39,7 +39,7 @@ return {
               params.newName = text
               vim.lsp.buf_request(0, 'textDocument/rename', params)
             end
-            require 'utils.input'(' Rename ', callback, var, nil, '󰆧  ')
+            require 'utils.input'(' Rename ', callback, var, nil, require('utils.icons').symbols.Variable)
           end
           map('<leader>ln', rename, 'LSP Rename variable')
 
@@ -211,11 +211,7 @@ return {
     keys = { { '<leader>lm', ":lua require('nvim-navbuddy').open()<CR>", desc = 'Open Navbuddy' } },
     config = function()
       local navbuddy = require 'nvim-navbuddy'
-      local icons = {}
-      for k, v in pairs(require('utils.icons').symbols) do
-        icons[k] = v .. ' '
-      end
-
+      local icons = require('utils.icons').get_padded_icon 'symbols'
       navbuddy.setup {
         lsp = { auto_attach = true },
         icons = icons,

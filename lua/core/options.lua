@@ -65,8 +65,13 @@ vim.opt.fillchars:append 'fold: '
 -- vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "-", foldsep = " ", foldclose = "+", }
 vim.opt.fillchars = { fold = ' ', eob = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
 
--- d
+-- setting up icons
 for type, icon in pairs(require('utils.icons').diagnostics) do
   local hl = 'DiagnosticSign' .. type:sub(1, 1):upper() .. type:sub(2)
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+for type, icon in pairs(require('utils.icons').dap) do
+  local hl = 'Dap' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end

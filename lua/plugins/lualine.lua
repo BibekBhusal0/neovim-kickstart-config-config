@@ -26,7 +26,7 @@ return {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = require('utils.icons').diagnostics,
+      symbols = require('utils.icons').get_padded_icon 'diagnostics',
       update_in_insert = false,
       always_visible = false,
       cond = hide_in_width,
@@ -34,7 +34,7 @@ return {
 
     local diff = {
       'diff',
-      symbols = { added = ' ', modified = ' ', removed = ' ' },
+      symbols = require('utils.icons').get_padded_icon 'git',
       cond = hide_in_width,
     }
 

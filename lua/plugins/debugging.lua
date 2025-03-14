@@ -45,8 +45,6 @@ return {
     keys = { { '<leader>dc', ":lua require('dap').continue() <cr>", desc = 'Debugger Continue' } },
 
     config = function()
-      vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = '' })
-      vim.fn.sign_define('DapStopped', { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = '' })
       local dap, dapui = require 'dap', require 'dapui'
       local mason = vim.fn.stdpath 'data' .. '/mason/packages'
       require('dap-python').setup(mason .. '/debugpy/venv/Scripts/python.exe')
