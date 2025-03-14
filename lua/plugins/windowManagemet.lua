@@ -241,4 +241,23 @@ return {
       { '<leader>ww', ':VentanaShift<CR>', desc = 'Window Shift' },
     },
   }, -- easy change layout of split window
+
+  {
+    's1n7ax/nvim-window-picker',
+    main = 'window-picker',
+    lazy = true,
+    keys = { { '<leader>wp', ":lua local w = require'window-picker'.pick_window() vim.api.nvim_set_current_win(w)<cr>" } },
+    opts = { hint = 'floating-big-letter' },
+  }, -- picking window
+
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = true,
+    cmd = 'ToggleTerm',
+    keys = {
+      { '<C-P>', ':ToggleTerm<cr>', 'Toggle Terminal' },
+      { '<C-O>', ':ToggleTerm direction=float<cr>', 'Toggle Terminal Float' },
+    },
+  }, -- easy switching terminal
 }
