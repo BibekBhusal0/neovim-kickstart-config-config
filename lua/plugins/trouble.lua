@@ -1,13 +1,22 @@
 local map = require 'utils.map'
 
-map('<leader>cn', ':cnext<cr>', 'QuickFix Next')
-map('<leader>cp', ':cprevious<cr>', 'QuickFix Previous')
+map('<leader>cj', ':cnext<cr>', 'QuickFix Next')
+map('<leader>ck', ':cprevious<cr>', 'QuickFix Previous')
 map('<leader>c[', ':cfirst<cr>', 'QuickFix First')
 map('<leader>c]', ':clast<cr>', 'QuickFix Last')
 
 return {
   'folke/trouble.nvim',
-  opts = {},
+  config = function()
+    local trouble = require 'trouble'
+    trouble.setup()
+    map('<leader>cl', function()
+      trouble.next { skip_groups = true, jump = true }
+    end, 'Trouble next')
+    map('<leader>ch', function()
+      trouble.prev { jump = true }
+    end, 'Trouble prev')
+  end,
   cmd = 'Trouble',
   keys = {
     { '<leader>cE', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Trouble Diagnostics Toggle Buffer' },

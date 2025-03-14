@@ -15,10 +15,10 @@ local spellSuggestion = function()
 end
 
 local searchInOpenFiles = function()
-  require('telescope.builtin').live_grep {
+  require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown {
     grep_open_files = true,
-    prompt_title = 'Live Grep in Open Files',
-  }
+    prompt_title = 'Search in open files',
+  })
 end
 
 local searchInLazy = function()

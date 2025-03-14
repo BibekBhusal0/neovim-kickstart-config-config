@@ -117,8 +117,6 @@ return {
       map('<leader>bk', ':BufferLineMoveNext<CR>', 'Buffer Move Next')
       map('<leader>bj', ':BufferLineMovePrev<CR>', 'Buffer Move Prev')
       map('<leader>bo', ':BufferLineCloseOthers<CR>', 'Buffer Close others')
-      map('<leader>bh', ':BufferLineCyclePrev<CR>', 'Buffer Cycle Prev')
-      map('<leader>bl', ':BufferLineCycleNext<CR>', 'Buffer Cycle Next')
       map('<leader>bH', ':BufferLineCloseLeft<CR>', 'Buffer Close Prev')
       map('<leader>bL', ':BufferLineCloseRight<CR>', 'Buffer Close Next')
       map('<leader>bse', ':BufferLineSortByExtension<CR>', 'Buffer Sort By Extension')

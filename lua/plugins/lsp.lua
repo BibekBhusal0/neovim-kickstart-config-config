@@ -25,12 +25,14 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          map('<leader>ld', require('telescope.builtin').lsp_definitions, 'LSP goto Definition')
-          map('<leader>lr', require('telescope.builtin').lsp_references, 'LSP goto References')
-          map('<leader>li', require('telescope.builtin').lsp_implementations, 'LSP Goto Implementation')
-          map('<leader>ls', require('telescope.builtin').lsp_type_definitions, 'LSP Type Definition')
-          map('<leader>la', require('telescope.builtin').lsp_document_symbols, 'LSP Document Symbols')
-          map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'LSP Workspace Symbols')
+          map('<leader>la', ":lua require('telescope.builtin').lsp_document_symbols()<CR>", 'LSP Document Symbols')
+          map('<leader>ld', ":lua require('telescope.builtin').lsp_definitions()<CR>", 'LSP goto Definition')
+          map('<leader>le', ":lua require('telescope.builtin').lsp_definitions({jump_type='vsplit'})<CR>", 'LSP goto Definition In Split')
+          map('<leader>li', ":lua require('telescope.builtin').lsp_implementations()<CR>", 'LSP Goto Implementation')
+          map('<leader>lr', ":lua require('telescope.builtin').lsp_references()<CR>", 'LSP goto References')
+          map('<leader>ls', ":lua require('telescope.builtin').lsp_type_definitions()<CR>", 'LSP Type Definition')
+          map('<leader>lS', ":lua require('telescope.builtin').lsp_type_definitions({jump_type='vsplit'})<CR>", 'LSP Type Definition In Split')
+          map('<leader>lw', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", 'LSP Workspace Symbols')
 
           local rename = function()
             local var = vim.fn.expand '<cword>'
@@ -39,7 +41,7 @@ return {
               params.newName = text
               vim.lsp.buf_request(0, 'textDocument/rename', params)
             end
-            require 'utils.input'(' Rename ', callback, var, nil, require('utils.icons').symbols.Variable)
+            require 'utils.input'(' Rename ', callback, var, nil, require('utils.icons').symbols.Variable .. ' ')
           end
           map('<leader>ln', rename, 'LSP Rename variable')
 
@@ -51,6 +53,7 @@ return {
 
           map('<leader>lD', vim.lsp.buf.declaration, 'LSP goto Declaration')
           map('<leader>lh', vim.lsp.buf.hover, 'LSP Hover')
+          map('L', vim.lsp.buf.hover, 'LSP Hover')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -191,12 +194,12 @@ return {
       }
       -- setting up emmit  https://github.com/aca/emmet-ls
       local lspconfig = require 'lspconfig'
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      local capabilities_ = vim.lsp.protocol.make_client_capabilities()
+      capabilities_.textDocument.completion.completionItem.snippetSupport = true
 
       lspconfig.emmet_ls.setup {
         -- on_attach = on_attach,
-        capabilities = capabilities,
+        capabilities = capabilities_,
         filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'svelte', 'pug', 'typescriptreact', 'vue' },
       }
     end,
