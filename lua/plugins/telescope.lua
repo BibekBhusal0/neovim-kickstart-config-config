@@ -151,6 +151,7 @@ return {
   {
     'dhruvmanila/browser-bookmarks.nvim',
     keys = wrap_keys { { '<leader>B', ':BrowserBookmarks<CR>', desc = 'Search Browser Bookmarks' } },
+    cmd = { 'BrowserBookmarks' },
     config = function()
       require('telescope').load_extension 'bookmarks'
       require('browser_bookmarks').setup {

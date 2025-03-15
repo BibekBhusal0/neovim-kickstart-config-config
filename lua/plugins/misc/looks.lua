@@ -77,7 +77,7 @@ return {
 
   {
     'folke/noice.nvim',
-    event = { 'VimEnter' },
+    event = { 'VeryLazy' },
     dependencies = {
       {
         'rcarriga/nvim-notify',
@@ -88,8 +88,12 @@ return {
         },
       },
     },
+
     config = function()
-      map('<leader>nr', ':lua require("notify").dismiss()<CR>', 'Remove Notification')
+      map('<leader>nr', ':lua require("notify").dismiss()<CR>', 'Notification remove')
+      map('<leader>nl', ':Noice last<cr>', 'Notification last')
+      map('<leader>nh', ':Noice history<cr>', 'Notification history')
+
       require('noice').setup {
         level = { icons = require('utils.icons').diagnostics },
         lsp = {
@@ -98,12 +102,25 @@ return {
             ['vim.lsp.util.stylize_markdown'] = true,
             ['cmp.entry.get_documentation'] = true,
           },
+          progress = { enabled = false },
+          hover = { enabled = true, silent = true },
         },
         presets = {
-          bottom_search = true,
-          long_message_to_split = true,
+          bottom_search = false,
           inc_rename = true,
           lsp_doc_border = true,
+        },
+        cmdline = {
+          format = {
+            cmdline = { pattern = '^:', icon = '', lang = 'vim' },
+            help = { pattern = '^:%s*he?l?p?%s+', icon = '󰋖' },
+            input = { view = 'cmdline_input', icon = '󰥻 ' },
+          },
+        },
+        commands = {
+          history = { view = 'popup' },
+          last = { view = 'notify' },
+          all = { view = 'popup' },
         },
       }
     end,

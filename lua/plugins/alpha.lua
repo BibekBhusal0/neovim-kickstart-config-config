@@ -1,6 +1,6 @@
-local maxChar = 27
+local maxChar = 25
 local function prettifyFooterText(icon, text)
-  local str = icon .. '   ' .. text
+  local str = icon .. '  ' .. text
   if #str > maxChar then
     return str:sub(1, maxChar)
   else
@@ -82,23 +82,6 @@ local quote = get_quote_for_footer()
 local function render()
   local alpha = require 'alpha'
 
-  local function get_plugin_count()
-    local stats = require('lazy').stats()
-    return stats.loaded
-  end
-
-  local function get_lazy_startup_time()
-    local success, stats = pcall(function()
-      return require('lazy').stats()
-    end)
-
-    if success and stats.times.LazyDone and stats.times.LazyStart then
-      return stats.times.LazyDone - stats.times.LazyStart
-    else
-      return 0
-    end
-  end
-
   local header = {
     [[                                                                     ]],
     [[       ████ ██████           █████      ██                     ]],
@@ -166,6 +149,8 @@ local function render()
     type = 'group',
     val = {
       button('p', '', 'Plugins', ':Lazy<CR>'),
+      button('b', '', 'Search Browser Bookmarks', ':BrowserBookmarks<CR>'),
+      button('l', '', 'Leetcode Dashboard', ':Leet<CR>'),
       button('d', '󰾶', 'Change Directory', ':Proot<CR>'),
       button('h', '', 'Sessions', ':lua require("telescope") require("resession").load()<CR>'),
       button('c', '󱙓', 'Cheat Sheet', ':lua  require("nvcheatsheet").toggle()<CR>'),
@@ -187,10 +172,8 @@ local function render()
   local footer = {
     type = 'group',
     val = {
-      getPrettifiedFooter('', string.format('%d plugins loaded', get_plugin_count())),
-      getPrettifiedFooter('', string.format('Startup Time %d ms', get_lazy_startup_time())),
       getPrettifiedFooter('', string.format('Today: %s', os.date '%Y-%m-%d')),
-      { type = 'padding', val = 2 },
+      { type = 'padding', val = 1 },
       getFooter(quote),
     },
   }
@@ -200,7 +183,7 @@ local function render()
       { type = 'text', val = header, opts = { position = 'center', hl = 'Type' } },
       { type = 'padding', val = 3 },
       buttons,
-      { type = 'padding', val = 1 },
+      { type = 'padding', val = 3 },
       footer,
     },
     opts = {},
