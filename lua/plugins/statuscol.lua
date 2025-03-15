@@ -69,14 +69,15 @@ end
 return {
   'luukvbaal/statuscol.nvim',
   event = { 'BufReadPost', 'BufNewFile' },
-  opts = function()
+  config = function()
     local builtin = require 'statuscol.builtin'
-    return {
+    require('statuscol').setup {
       segments = {
         { text = { builtin.foldfunc }, click = 'v:lua.ScFa', auto = true },
         { text = { lnumfunc }, click = 'v:lua.ScLa', auto = true },
         { text = { '%s' }, click = 'v:lua.ScSa', auto = true },
       },
+      ft_ignore = { 'quickrun', 'codecompanion' },
     }
   end,
 }

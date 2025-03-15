@@ -109,6 +109,7 @@ return {
 
       map('<leader>dt', ':lua require("nvim-dap-virtual-text").toggle()<cr>', 'Debugger Toggle Virtual Text')
       map('<leader>dT', dapui.toggle, 'Debugger UI Toggle')
+      map('<leader>ds', ':DapTerminate<cr>', 'Debugger Stop')
       map('<leader>do', dap.step_over, 'Debugger Step Over')
       map('<leader>dO', dap.step_out, 'Debugger Step Out')
       map('<leader>di', dap.step_into, 'Debugger Step Into')
