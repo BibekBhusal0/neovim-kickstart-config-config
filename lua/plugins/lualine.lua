@@ -105,30 +105,19 @@ return {
       sections = {
         lualine_a = { mode },
         lualine_b = { 'branch' },
+        lualine_c = { diff, pomodoro },
         lualine_x = {
-          {
-            require('noice').api.status.message.get_hl,
-            cond = require('noice').api.status.message.has,
-            color = { fg = '#ffffff' },
-          },
           {
             require('noice').api.status.command.get,
             cond = require('noice').api.status.command.has,
-            color = { fg = '#ff0000' },
           },
           {
             require('noice').api.status.mode.get,
             cond = require('noice').api.status.mode.has,
-            color = { fg = '#00ffff' },
           },
-          {
-            require('noice').api.status.search.get,
-            cond = require('noice').api.status.search.has,
-            color = { fg = '#ffff00' },
-          },
+          diagnostics,
+          { 'filetype', cond = hide_in_width },
         },
-        lualine_c = { diff, pomodoro },
-        -- lualine_x = { diagnostics, { 'filetype', cond = hide_in_width } },
         lualine_y = { lsp_status, codeium_status, plugins },
         lualine_z = { getFileName },
       },

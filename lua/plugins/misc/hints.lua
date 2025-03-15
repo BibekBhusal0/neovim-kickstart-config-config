@@ -11,7 +11,7 @@ return {
     'smartinellimarco/nvcheatsheet.nvim',
     lazy = true,
     keys = wrap_keys { {
-      '<leader>ch',
+      '<leader>CH',
       ':lua require("nvcheatsheet").toggle()<CR>',
       desc = 'Toggle Cheatsheet',
     } },

@@ -90,11 +90,21 @@ return {
     },
 
     config = function()
-      map('<leader>nr', ':lua require("notify").dismiss()<CR>', 'Notification remove')
-      map('<leader>nl', ':Noice last<cr>', 'Notification last')
-      map('<leader>nh', ':Noice history<cr>', 'Notification history')
-
-      require('noice').setup {
+      local noice = require 'noice'
+      map('<leader>nr', ':Noice dismiss<CR>', 'Noice remove')
+      map('<leader>nl', ':Noice last<CR>', 'Noice last')
+      map('<leader>nh', ':Noice history<CR>', 'Noice history')
+      map('<leader>ns', ':Telescope noice<CR>', 'Noice Telescope')
+      map('<leader>nS', ':Telescope notify<CR>', 'Notify Telescope')
+      map('<leader>nT', function()
+        local running = require('noice.config')._running
+        if running then
+          noice.disable()
+        else
+          noice.enable()
+        end
+      end, 'Toggle Noice')
+      noice.setup {
         level = { icons = require('utils.icons').diagnostics },
         lsp = {
           override = {
