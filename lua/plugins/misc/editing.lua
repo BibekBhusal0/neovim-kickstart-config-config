@@ -1,4 +1,5 @@
 local map = require 'utils.map'
+local wrap_keys = require 'utils.wrap_keys'
 local webDev = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
 
 return {
@@ -12,7 +13,7 @@ return {
 
   {
     'echasnovski/mini.trailspace',
-    keys = { { '<leader>tw', ':lua require("mini.trailspace").trim() <cr>', desc = 'Trim Whitespace' } },
+    keys = { { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' } },
   },
 
   {
@@ -95,7 +96,7 @@ return {
 
   {
     'nguyenvukhang/nvim-toggler',
-    keys = { { '<leader>tt', ':lua require("nvim-toggler").toggle() <Cr>', desc = 'Toggle Value' } },
+    keys = wrap_keys { { '<leader>tt', ':lua require("nvim-toggler").toggle() <CR>', desc = 'Toggle Value' } },
     config = function()
       require('nvim-toggler').setup {
         inverses = {
@@ -189,7 +190,7 @@ return {
 
   {
     'Wansmer/treesj',
-    keys = {
+    keys = wrap_keys {
       { 'ga', ':TSJToggle<CR>', desc = 'Toggle split object under cursor' },
       { 'gj', ':TSJJoin<CR>', desc = 'Join the object under cursor' },
       { 'gk', ':TSJSplit<CR>', desc = 'Split the object under cursor' },
@@ -199,7 +200,7 @@ return {
 
   {
     'booperlv/nvim-gomove',
-    keys = {
+    keys = wrap_keys {
       { '<S-j>', '<Plug>GoNSMDown', desc = 'Move down' },
       { '<S-k>', '<Plug>GoNSMUp', desc = 'Move up' },
       { '<S-j>', '<Plug>GoVSMDown', mode = 'x', desc = 'Move down' },
@@ -260,9 +261,9 @@ return {
     {
       'folke/todo-comments.nvim',
       event = { 'BufNewFile', 'BufReadPost' },
-      keys = {
-        { '<leader>sc', '<cmd>TodoTelescope<CR>', desc = 'Todo Search Telescope' },
-        { '<leader>cT', '<cmd>Trouble todo<CR>', desc = 'Todo Loc List' },
+      keys = wrap_keys {
+        { '<leader>sc', ':TodoTelescope<CR>', desc = 'Todo Search Telescope' },
+        { '<leader>cT', ':Trouble todo<CR>', desc = 'Todo Loc List' },
       },
       config = function()
         require('todo-comments').setup { signs = false }

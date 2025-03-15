@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 local selected_bg = '#095028'
 local bg = '#18181b'
 local tab_selected = '#74dfa2'
@@ -127,7 +128,7 @@ return {
   {
     'moll/vim-bbye',
     cmd = { 'Bdelete', 'Bwipeout' },
-    keys = {
+    keys = wrap_keys {
       { '<leader>xb', ':Bdelete<CR>', desc = 'Close Buffer' },
       { '<leader>xB', ':Bdelete!<CR>', desc = 'Close Buffer Force' },
       { '<leader>bx', ':Bdelete<CR>', desc = 'Buffer Close' },
@@ -149,7 +150,7 @@ return {
 
   {
     'stevearc/resession.nvim',
-    keys = {
+    keys = wrap_keys {
       { '<leader>Ss', ':lua require("resession").save()<CR>', desc = 'Session Save' },
       { '<leader>SS', ':lua require("resession").save_tab()<CR>', desc = 'Session Save Tab' },
       { '<leader>Sl', ':lua require("resession").load()<CR>', desc = 'Session Load' },
@@ -175,7 +176,7 @@ return {
 
   {
     'ThePrimeagen/harpoon',
-    keys = {
+    keys = wrap_keys {
       { '<leader>fa', ": lua require('harpoon.mark').add_file()<CR>", desc = 'Harpoon Add File' },
       { '<leader>fm', ": lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Harpoon Menu' },
       { '<leader>fn', ": lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
@@ -188,8 +189,8 @@ return {
   {
     'gaborvecsei/memento.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
-    keys = {
-      { '<leader>bh', ':lua require("memento").toggle()<cr>', desc = 'Toggle Buffer History' },
+    keys = wrap_keys {
+      { '<leader>bh', ':lua require("memento").toggle()<CR>', desc = 'Toggle Buffer History' },
       {
         '<leader>ba',
         function()
@@ -210,7 +211,7 @@ return {
     'anuvyklack/windows.nvim',
     event = { 'BufNewFile', 'BufReadPost' },
     dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
-    keys = {
+    keys = wrap_keys {
       { '<leader>wf', ':WindowsMaximize<CR>', 'Window Maximize' },
       { '<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically' },
       { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally' },
@@ -227,16 +228,16 @@ return {
 
   {
     'MisanthropicBit/winmove.nvim',
-    keys = {
-      { '<leader>ws', ":lua require'winmove'.start_mode('swap')<cr>", desc = 'Window Swap mode' },
-      { '<leader>wm', ":lua require'winmove'.start_mode('move')<cr>", desc = 'Window Move mode' },
+    keys = wrap_keys {
+      { '<leader>ws', ":lua require'winmove'.start_mode('swap')<CR>", desc = 'Window Swap mode' },
+      { '<leader>wm', ":lua require'winmove'.start_mode('move')<CR>", desc = 'Window Move mode' },
     },
   }, -- Easy move and swap split windows
 
   {
     'jyscao/ventana.nvim',
     cmd = { 'VentanaTranspose', 'VentanaShift', 'VentanaShiftMaintailLinear' },
-    keys = {
+    keys = wrap_keys {
       { '<leader>wr', ':VentanaTranspose<CR>', desc = 'Window Rotate(transpose)' },
       { '<leader>ww', ':VentanaShift<CR>', desc = 'Window Shift' },
     },
@@ -246,7 +247,9 @@ return {
     's1n7ax/nvim-window-picker',
     main = 'window-picker',
     lazy = true,
-    keys = { { '<leader>wp', ":lua local w = require'window-picker'.pick_window() vim.api.nvim_set_current_win(w)<cr>" } },
+    keys = wrap_keys {
+      { '<leader>wp', ":lua local w = require'window-picker'.pick_window() vim.api.nvim_set_current_win(w)<CR>", desc = 'Window pick' },
+    },
     opts = { hint = 'floating-big-letter' },
   }, -- picking window
 
@@ -255,9 +258,9 @@ return {
     version = '*',
     config = true,
     cmd = 'ToggleTerm',
-    keys = {
-      { '<C-P>', ':ToggleTerm<cr>', 'Toggle Terminal' },
-      { '<C-O>', ':ToggleTerm direction=float<cr>', 'Toggle Terminal Float' },
+    keys = wrap_keys {
+      { '<C-P>', ':ToggleTerm<CR>', desc = 'Toggle Terminal' },
+      { '<C-O>', ':ToggleTerm direction=float<CR>', desc = 'Toggle Terminal Float' },
     },
   }, -- easy switching terminal
 }

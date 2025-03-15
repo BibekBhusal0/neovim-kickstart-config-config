@@ -1,3 +1,5 @@
+local wrap_keys = require 'utils.wrap_keys'
+
 return {
   require 'plugins.misc.editing',
   require 'plugins.misc.hints',
@@ -6,7 +8,7 @@ return {
   require 'plugins.misc.screenshot',
   {
     'thinca/vim-quickrun',
-    keys = { { '<leader>rr', ':QuickRun<cr>', desc = 'Run' } },
+    keys = wrap_keys { { '<leader>rr', ':QuickRun<CR>', desc = 'Run' } },
     cmd = { 'QuickRun' },
   },
 }

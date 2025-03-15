@@ -1,44 +1,45 @@
+local wrap_keys = require 'utils.wrap_keys'
 return {
   {
     'ThePrimeagen/vim-be-good',
     lazy = true,
     cmd = { 'VimBeGood' },
-    keys = { { '<leader>zv', '<cmd>VimBeGood<CR>', desc = 'Game Vim be good' } },
+    keys = wrap_keys { { '<leader>zv', ':VimBeGood<CR>', desc = 'Game Vim be good' } },
   },
 
   {
     'rktjmp/playtime.nvim',
     lazy = true,
     cmd = { 'Playtime' },
-    keys = { { '<leader>zp', '<cmd>Playtime<CR>', desc = 'Game More' } },
+    keys = wrap_keys { { '<leader>zp', ':Playtime<CR>', desc = 'Game More' } },
   },
 
   {
     'seandewar/nvimesweeper',
     lazy = true,
     cmd = { 'Nvimesweeper' },
-    keys = { { '<leader>zm', '<cmd>Nvimesweeper <CR>', desc = 'Game MineSweeper' } },
+    keys = wrap_keys { { '<leader>zm', ':Nvimesweeper <CR>', desc = 'Game MineSweeper' } },
   },
 
   {
     'jim-fx/sudoku.nvim',
     lazy = true,
     cmd = { 'Sudoku' },
-    keys = { { '<leader>zs', '<cmd>Sudoku<CR>', desc = 'Game Sudoku' } },
+    keys = wrap_keys { { '<leader>zs', ':Sudoku<CR>', desc = 'Game Sudoku' } },
     opts = {},
   },
 
   {
     'seandewar/killersheep.nvim',
     cmd = { 'KillKillKill' },
-    keys = { { '<leader>zk', '<cmd>KillKillKill<CR>', desc = 'Game Killersheep' } },
+    keys = wrap_keys { { '<leader>zk', ':KillKillKill<CR>', desc = 'Game Killersheep' } },
   },
 
   {
     'nvzone/typr',
-    keys = {
-      { '<leader>zy', ':Typr<cr>', desc = 'Typer start' },
-      { '<leader>zY', ':TyprStats<cr>', desc = 'Typer Stats' },
+    keys = wrap_keys {
+      { '<leader>zy', ':Typr<CR>', desc = 'Typer start' },
+      { '<leader>zY', ':TyprStats<CR>', desc = 'Typer Stats' },
     },
     dependencies = 'nvzone/volt',
     opts = {},
@@ -48,9 +49,9 @@ return {
   {
     'eandrju/cellular-automaton.nvim',
     cmd = { 'CellularAutomaton' },
-    keys = {
-      { '<leader>zr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = 'Game CellularAutomaton' },
-      { '<leader>zg', '<cmd>CellularAutomaton game_of_life<CR>', desc = 'Game CellularAutomaton' },
+    keys = wrap_keys {
+      { '<leader>zr', ':CellularAutomaton make_it_rain<CR>', desc = 'Game CellularAutomaton' },
+      { '<leader>zg', ':CellularAutomaton game_of_life<CR>', desc = 'Game CellularAutomaton' },
     },
   },
 }

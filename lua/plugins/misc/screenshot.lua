@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 local get_file_name = function()
   return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t')
 end
@@ -19,8 +20,8 @@ return {
   {
     'TobinPalmer/rayso.nvim',
     cmd = { 'Rayso' },
-    keys = {
-      { '<leader>rs', ':Rayso<cr>', desc = 'Screenshot with rayso', mode = { 'n', 'v' }, silent = true },
+    keys = wrap_keys {
+      { '<leader>rs', ':Rayso<CR>', desc = 'Screenshot with rayso', mode = { 'n', 'v' } },
     },
     opts = {
       open_cmd = 'brave',
@@ -37,10 +38,10 @@ return {
     cmd = 'Silicon',
     main = 'nvim-silicon',
 
-    keys = {
-      { '<leader>cc', ':Silicon<cr>', desc = 'Screenshot to Root directory', mode = { 'n', 'v' }, silent = true },
-      { '<leader>cC', ":lua require('nvim-silicon').clip()<CR>", desc = 'Screenshot to clipboard', mode = { 'n', 'v' }, silent = true },
-      { '<leader>cd', save_to_desktop, desc = 'Screenshot to Desktop', mode = { 'n', 'v' }, silent = true },
+    keys = wrap_keys {
+      { '<leader>cc', ':Silicon<CR>', desc = 'Screenshot to Root directory', mode = { 'n', 'v' } },
+      { '<leader>cC', ":lua require('nvim-silicon').clip()<CR>", desc = 'Screenshot to clipboard', mode = { 'n', 'v' } },
+      { '<leader>cd', save_to_desktop, desc = 'Screenshot to Desktop', mode = { 'n', 'v' } },
     },
 
     opts = {

@@ -67,7 +67,7 @@ map('<leader>nn', ':set nu!<CR>', 'Toggle Line Number')
 map('<leader>rn', ':set rnu!<CR>', 'Toggle Relative Line Number')
 
 map('zo', 'za', 'Toggle fold')
-map('<Esc>', '<Cmd>noh<CR>', 'Clear Highlight')
+map('<Esc>', ':noh<CR>', 'Clear Highlight')
 
 -- https://www.reddit.com/r/neovim/comments/1janrmf/smart_delete/
 local function smart_delete(key)

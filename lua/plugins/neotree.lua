@@ -82,7 +82,7 @@ return {
         mappings = {
           ['<space>'] = { 'toggle_node', nowait = false },
           ['<2-LeftMouse>'] = 'open',
-          ['<cr>'] = 'open',
+          ['<CR>'] = 'open',
           ['<esc>'] = 'cancel',
           ['P'] = { 'toggle_preview', config = { use_float = true } },
           ['l'] = 'open',

@@ -1,12 +1,13 @@
+local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
 
 return {
   {
     'chrisgrieser/nvim-chainsaw',
-    keys = {
-      { '<leader>lv', ':lua require("chainsaw").variableLog()<cr>', desc = 'Log Variable' },
-      { '<leader>lp', ':lua require("chainsaw").objectLog()<cr>', desc = 'Log Object' },
-      { '<leader>lP', ':lua require("chainsaw").typeLog()<cr>', desc = 'Log Type' },
+    keys = wrap_keys {
+      { '<leader>lv', ':lua require("chainsaw").variableLog()<CR>', desc = 'Log Variable' },
+      { '<leader>lp', ':lua require("chainsaw").objectLog()<CR>', desc = 'Log Object' },
+      { '<leader>lP', ':lua require("chainsaw").typeLog()<CR>', desc = 'Log Type' },
     },
     opts = { marker = '🌟', visuals = { icon = '🌟' } },
   }, -- Easy printing
@@ -14,23 +15,23 @@ return {
   {
     'Weissle/persistent-breakpoints.nvim',
     opts = {},
-    keys = {
+    keys = wrap_keys {
       {
         '<leader>db',
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<cr>:PBToggleBreakpoint<cr>",
+        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBToggleBreakpoint<CR>",
         desc = 'Debuger Toggle BreakPoint',
       },
       {
         '<leader>dC',
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<cr>:PBSetConditionalBreakpoint<cr>",
+        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBSetConditionalBreakpoint<CR>",
         desc = 'Debuger Toggle Conditional BreakPoint',
       },
       {
         '<leader>dl',
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<cr>:PBSetLogPoint<cr>",
+        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBSetLogPoint<CR>",
         desc = 'Debuger Toggle Log BreakPoint',
       },
-      { '<leader>dB', ':PBClearAllBreakpoints<cr>', desc = 'Debuger Clear All BreakPoint' },
+      { '<leader>dB', ':PBClearAllBreakpoints<CR>', desc = 'Debuger Clear All BreakPoint' },
     },
   },
 
@@ -42,7 +43,7 @@ return {
       'nvim-neotest/nvim-nio',
       'mfussenegger/nvim-dap-python',
     },
-    keys = { { '<leader>dc', ":lua require('dap').continue() <cr>", desc = 'Debugger Continue' } },
+    keys = wrap_keys { { '<leader>dc', ":lua require('dap').continue() <CR>", desc = 'Debugger Continue' } },
 
     config = function()
       local dap, dapui = require 'dap', require 'dapui'
@@ -107,9 +108,9 @@ return {
       dap.listeners.before.event_terminated.dapui_config = dapui.close
       dap.listeners.before.event_exited.dapui_config = dapui.close
 
-      map('<leader>dt', ':lua require("nvim-dap-virtual-text").toggle()<cr>', 'Debugger Toggle Virtual Text')
+      map('<leader>dt', ':lua require("nvim-dap-virtual-text").toggle()<CR>', 'Debugger Toggle Virtual Text')
       map('<leader>dT', dapui.toggle, 'Debugger UI Toggle')
-      map('<leader>ds', ':DapTerminate<cr>', 'Debugger Stop')
+      map('<leader>ds', ':DapTerminate<CR>', 'Debugger Stop')
       map('<leader>do', dap.step_over, 'Debugger Step Over')
       map('<leader>dO', dap.step_out, 'Debugger Step Out')
       map('<leader>di', dap.step_into, 'Debugger Step Into')

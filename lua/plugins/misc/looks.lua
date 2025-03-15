@@ -1,10 +1,11 @@
 local map = require 'utils.map'
+local wrap_keys = require 'utils.wrap_keys'
 
 return {
   {
     'uga-rosa/ccc.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
-    keys = {
+    keys = wrap_keys {
       { '<leader>cP', ':CccPick<CR>', desc = 'Color Picker' },
       { '<leader>cm', ':CccConvert<CR>', desc = 'Color Convert' },
       { '<leader>cH', ':CccHighlighterToggle<CR>', desc = 'Color Highlighter Toggle' },
@@ -88,7 +89,7 @@ return {
       },
     },
     config = function()
-      map('<leader>nr', ':lua require("notify").dismiss()<cr>', 'Remove Notification')
+      map('<leader>nr', ':lua require("notify").dismiss()<CR>', 'Remove Notification')
       require('noice').setup {
         level = { icons = require('utils.icons').diagnostics },
         lsp = {
@@ -115,9 +116,9 @@ return {
       'kevinhwang91/nvim-hlslens',
       config = function()
         require('scrollbar.handlers.search').setup { calm_down = true, nearest_only = true }
-        local cmd = "<Cmd>lua require('neoscroll').zz({half_win_duration = 100}) require('hlslens').start()<CR>"
-        map('n', "<Cmd>execute('normal! ' . v:count1 . 'n')<CR>" .. cmd, 'Find Next')
-        map('N', "<Cmd>execute('normal! ' . v:count1 . 'N')<CR>" .. cmd, 'Find Previous')
+        local cmd = ":lua require('neoscroll').zz({half_win_duration = 100}) require('hlslens').start()<CR>"
+        map('n', ":execute('normal! ' . v:count1 . 'n')<CR>" .. cmd, 'Find Next')
+        map('N', ":execute('normal! ' . v:count1 . 'N')<CR>" .. cmd, 'Find Previous')
         map('*', '*' .. cmd, 'Find Word Under Cursor')
         map('#', '#' .. cmd, 'Find Word Before Cursor')
         map('g*', 'g*' .. cmd, 'Find Word Under Cursor')
@@ -141,7 +142,7 @@ return {
   {
     'folke/twilight.nvim',
     cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
-    keys = { { '<leader>F', '<cmd>Twilight<cr>', desc = 'Toggle Twilight' } },
+    keys = wrap_keys { { '<leader>F', ':Twilight<CR>', desc = 'Toggle Twilight' } },
     opts = { context = 10 },
   }, -- dim inactive code
 

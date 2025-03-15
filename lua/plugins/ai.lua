@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
 
 local commit_with_message = function()
@@ -42,12 +43,12 @@ return {
   {
     'monkoose/neocodeium',
     cmd = { 'NeoCodeium' },
-    keys = {
-      { '<leader>a<leader>', ':NeoCodeium enable<cr>', desc = 'Codeium Start' },
-      { '<leader>aT', ':lua require"neocodeium.commands".toggle(true)<cr>', desc = 'Codeium Toggle' },
-      { '<leader>aC', ':NeoCodeium chat<cr>', desc = 'Codeium Chat' },
-      { '<leader>ar', ':NeoCodeium restart<cr>', desc = 'Codeium Restart' },
-      { '<leader>ab', ':NeoCodeium toggle_buffer<cr>', desc = 'Codeium Toggle Buffer' },
+    keys = wrap_keys {
+      { '<leader>a<leader>', ':NeoCodeium enable<CR>', desc = 'Codeium Start' },
+      { '<leader>aT', ':lua require"neocodeium.commands".toggle(true)<CR>', desc = 'Codeium Toggle' },
+      { '<leader>aC', ':NeoCodeium chat<CR>', desc = 'Codeium Chat' },
+      { '<leader>ar', ':NeoCodeium restart<CR>', desc = 'Codeium Restart' },
+      { '<leader>ab', ':NeoCodeium toggle_buffer<CR>', desc = 'Codeium Toggle Buffer' },
     },
     config = function()
       local neocodeium = require 'neocodeium'
@@ -64,17 +65,17 @@ return {
   {
     'olimorris/codecompanion.nvim',
     cmd = { 'CodeCompanion', 'CodeCompanionActions', 'CodeCompanionChat' },
-    keys = {
-      { '<leader>aa', ':CodeCompanionActions<cr>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
-      { '<leader>ac', ':CodeCompanionChat toggle<cr>', desc = 'CodeCompanion Chat' },
-      { '<leader>ac', ':CodeCompanionChat Add<cr>', desc = 'CodeCompanion Chat', mode = { 'v' } },
-      { '<leader>ae', ':CodeCompanion /explain<cr>', desc = 'CodeCompanion Explain', mode = { 'v' } },
-      { '<leader>af', ':CodeCompanion /fix<cr>', desc = 'CodeCompanion Fix Errors', mode = { 'v' } },
-      { '<leader>al', ':CodeCompanion /lsp<cr>', desc = 'CodeCompanion Explain LSP Diagnostics', mode = { 'v' } },
-      { '<leader>ar', ':CodeCompanion /readable<cr>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
-      { '<leader>aG', ':CodeCompanion /commit<cr>', desc = 'CodeCompanion get commit message' },
-      { '<leader>aj', ':CodeCompanion /straight<cr>', desc = 'CodeCompanion straight forward coder', mode = { 'n', 'v' } },
-      { '<leader>an', ':lua require("codecompanion.strategies.chat").new({})<cr>', desc = 'CodeCompanion start new chat' },
+    keys = wrap_keys {
+      { '<leader>aa', ':CodeCompanionActions<CR>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
+      { '<leader>ac', ':CodeCompanionChat toggle<CR>', desc = 'CodeCompanion Chat' },
+      { '<leader>ac', ':CodeCompanionChat Add<CR>', desc = 'CodeCompanion Chat', mode = { 'v' } },
+      { '<leader>ae', ':CodeCompanion /explain<CR>', desc = 'CodeCompanion Explain', mode = { 'v' } },
+      { '<leader>af', ':CodeCompanion /fix<CR>', desc = 'CodeCompanion Fix Errors', mode = { 'v' } },
+      { '<leader>al', ':CodeCompanion /lsp<CR>', desc = 'CodeCompanion Explain LSP Diagnostics', mode = { 'v' } },
+      { '<leader>ar', ':CodeCompanion /readable<CR>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
+      { '<leader>aG', ':CodeCompanion /commit<CR>', desc = 'CodeCompanion get commit message' },
+      { '<leader>aj', ':CodeCompanion /straight<CR>', desc = 'CodeCompanion straight forward coder', mode = { 'n', 'v' } },
+      { '<leader>an', ':lua require("codecompanion.strategies.chat").new({})<CR>', desc = 'CodeCompanion start new chat' },
       { '<leader>ag', commit_with_message, desc = 'Add changes and get commit message' },
       { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
     },

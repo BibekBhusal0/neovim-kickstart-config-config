@@ -1,10 +1,11 @@
 local transparency_enabled = false
+local wrap_keys = require 'utils.wrap_keys'
 
 return {
   {
     'quentingruber/pomodoro.nvim',
     cmd = { 'PomodoroStart', 'PomodoroStop', 'PomodoroUI', 'PomodoroDelayBreak', 'PomodoroForceBreak', 'PomodoroSkipBreak' },
-    keys = {
+    keys = wrap_keys {
       { '<leader>ps', ':PomodoroStart<CR>', desc = 'Pomodoro Start' },
       { '<Leader>pS', ':PomodoroStop<CR>', desc = 'Pomodoro Stop' },
       { '<Leader>pu', ':PomodoroUI<CR>', desc = 'Pomodoro UI' },
@@ -24,9 +25,9 @@ return {
 
   {
     'backdround/global-note.nvim',
-    keys = {
-      { '<leader>ng', '<cmd>GlobalNote<cr>', desc = 'Global Note' },
-      { '<leader>np', '<cmd>ProjectNote<cr>', desc = 'Project Note' },
+    keys = wrap_keys {
+      { '<leader>ng', ':GlobalNote<CR>', desc = 'Global Note' },
+      { '<leader>np', ':ProjectNote<CR>', desc = 'Project Note' },
     },
     config = function()
       local gloabl_note = require 'global-note'
@@ -91,7 +92,7 @@ return {
         vim.cmd 'PomodoroUI'
       end,
     },
-    keys = { { '<leader>zz', '<cmd>ZenMode<cr>', desc = 'Zen Mode' } },
+    keys = wrap_keys { { '<leader>zz', ':ZenMode<CR>', desc = 'Zen Mode' } },
     cmd = { 'ZenMode' },
   },
 }

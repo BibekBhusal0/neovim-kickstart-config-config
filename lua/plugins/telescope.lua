@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 local searchInCurrentBuffer = function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
@@ -111,14 +112,14 @@ return {
 
   {
     'debugloop/telescope-undo.nvim',
-    keys = { { '<leader>u', ':Telescope undo<cr>', desc = 'Undo Tree' } },
+    keys = wrap_keys { { '<leader>u', ':Telescope undo<CR>', desc = 'Undo Tree' } },
     cmd = { 'Telescope undo' },
   },
 
   {
     'zongben/proot.nvim',
     opts = {},
-    keys = { { '<Leader>sp', ':Proot<Cr>', desc = 'Search Directories' } },
+    keys = wrap_keys { { '<Leader>sp', ':Proot<CR>', desc = 'Search Directories' } },
     cmd = { 'Proot' },
   },
 
@@ -138,18 +139,18 @@ return {
       'PickSymbols',
       'PickSymbolsYank',
     },
-    keys = {
-      { '<leader>si', '<cmd>PickIcons<cr>', desc = 'Icon Picker' },
-      { '<leader>sI', '<cmd>PickIconsYank<cr>', desc = 'Icon Picker Yank' },
-      { '<leader>se', '<cmd>PickEmoji<cr>', desc = 'Icon Picker Emoji' },
-      { '<leader>sS', '<cmd>PickSymbols<cr>', desc = 'Icon Picker Unicode Symbols' },
-      { '<leader>sE', '<cmd>PickEmojiYank emoji<cr>', desc = 'Icon Picker Emoji Yank' },
+    keys = wrap_keys {
+      { '<leader>si', ':PickIcons<CR>', desc = 'Icon Picker' },
+      { '<leader>sI', ':PickIconsYank<CR>', desc = 'Icon Picker Yank' },
+      { '<leader>se', ':PickEmoji<CR>', desc = 'Icon Picker Emoji' },
+      { '<leader>sS', ':PickSymbols<CR>', desc = 'Icon Picker Unicode Symbols' },
+      { '<leader>sE', ':PickEmojiYank emoji<CR>', desc = 'Icon Picker Emoji Yank' },
     },
   }, -- icon picker with telescope
 
   {
     'dhruvmanila/browser-bookmarks.nvim',
-    keys = { { '<leader>B', ':BrowserBookmarks<cr>' } },
+    keys = wrap_keys { { '<leader>B', ':BrowserBookmarks<CR>', desc = 'Search Browser Bookmarks' } },
     config = function()
       require('telescope').load_extension 'bookmarks'
       require('browser_bookmarks').setup {
@@ -161,6 +162,6 @@ return {
 
   {
     'tsakirist/telescope-lazy.nvim',
-    keys = { { '<leader>sl', ':Telescope lazy<cr>', desc = 'Search Lazy Plugins Doc' } },
+    keys = wrap_keys { { '<leader>sl', ':Telescope lazy<CR>', desc = 'Search Lazy Plugins Doc' } },
   },
 }

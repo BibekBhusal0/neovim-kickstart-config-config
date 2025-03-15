@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 return {
   {
     'folke/which-key.nvim',
@@ -9,7 +10,7 @@ return {
   {
     'smartinellimarco/nvcheatsheet.nvim',
     lazy = true,
-    keys = { {
+    keys = wrap_keys { {
       '<leader>ch',
       ':lua require("nvcheatsheet").toggle()<CR>',
       desc = 'Toggle Cheatsheet',
@@ -22,7 +23,7 @@ return {
   {
     'nvzone/showkeys',
     cmd = 'ShowkeysToggle',
-    keys = { { '<leader>sk', ':ShowkeysToggle<CR>', desc = 'Toggle Showkeys' } },
+    keys = wrap_keys { { '<leader>sk', ':ShowkeysToggle<CR>', desc = 'Toggle Showkeys' } },
     opts = {
       timeout = 1,
       maxkeys = 5,
@@ -37,7 +38,7 @@ return {
   {
     'm4xshen/hardtime.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
-    keys = { { '<leader>th', ':HardTimeToggle<CR>', desc = 'Toggle Hardtime' } },
+    keys = wrap_keys { { '<leader>th', ':HardTimeToggle<CR>', desc = 'Toggle Hardtime' } },
     opts = {
       restriction_mode = 'hint',
       disabled_keys = {
@@ -53,7 +54,7 @@ return {
   {
     'meznaric/key-analyzer.nvim',
     cmd = 'KeyAnalyzer',
-    keys = {
+    keys = wrap_keys {
       {
         '<leader>tk',
         function()

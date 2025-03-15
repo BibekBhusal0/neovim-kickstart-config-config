@@ -30,8 +30,8 @@ return function(title, callback, val, width, prompt)
     end,
   })
 
-  vim.api.nvim_buf_set_keymap(input.bufnr, 'n', '<Esc>', '<cmd>close<cr>', { noremap = true, silent = true })
-  vim.api.nvim_buf_set_keymap(input.bufnr, 'i', '<Esc>', '<cmd>close<cr>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(input.bufnr, 'n', '<Esc>', ':close<CR>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(input.bufnr, 'i', '<Esc>', ':close<CR>', { noremap = true, silent = true })
   input:mount()
 
   input:on(event.BufLeave, function()

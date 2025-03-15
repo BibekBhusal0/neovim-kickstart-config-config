@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
 
 local function commit_with_message()
@@ -32,7 +33,7 @@ map('<leader>gD', ':Gitsigns diffthis<CR>', 'Git Diff this')
 map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current line blame')
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 map('<leader>gq', ':Gitsigns setqflist<CR>', 'Git quick fix list')
-map('ih', ':lua require("gitsigns").select_hunk()<cr>', 'Select hunk', { 'o', 'x' })
+map('ih', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
 
 -- Lua
 local function disableAutowidth()
@@ -60,7 +61,7 @@ local function diffViewTelescopeCompareWithCurrentBranch()
     previewer = false,
     prompt_title = 'Compare Current with Branch',
     attach_mappings = function(_, n)
-      n({ 'i', 'n' }, '<cr>', select)
+      n({ 'i', 'n' }, '<CR>', select)
       return true
     end,
   })
@@ -163,13 +164,13 @@ return {
       'LazyGitFilterCurrentFile',
     },
     dependencies = { 'nvim-lua/plenary.nvim' },
-    keys = { { '<leader>lg', ':LazyGit<cr>', desc = 'Toggle LazyGit' } },
+    keys = wrap_keys { { '<leader>lg', ':LazyGit<CR>', desc = 'Toggle LazyGit' } },
   },
 
   {
     'sindrets/diffview.nvim',
     lazy = true,
-    keys = {
+    keys = wrap_keys {
       { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
       { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with head' },
       { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },

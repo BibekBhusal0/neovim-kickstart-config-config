@@ -1,3 +1,4 @@
+local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
 local mode = { 'n', 'x', 'o' }
 
@@ -40,19 +41,19 @@ return {
 
   {
     'nvim-treesitter/nvim-treesitter-context',
-    keys = {
-      { '<leader>tC', ':TSContextToggle<cr>', desc = 'Toggle Treesitter Context' },
+    keys = wrap_keys {
+      { '<leader>tC', ':TSContextToggle<CR>', desc = 'Toggle Treesitter Context' },
     },
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       require('treesitter-context').setup { max_lines = 5 }
-      map('<leader><Cr>', ':lua require("treesitter-context").go_to_context(vim.v.count1)<cr>', 'Go to context')
+      map('<leader><CR>', ':lua require("treesitter-context").go_to_context(vim.v.count1)<CR>', 'Go to context')
     end,
   },
 
   {
     'nvim-treesitter/playground',
-    keys = {
+    keys = wrap_keys {
       { '<leader>pc', ':TSHighlightCapturesUnderCursor<CR>', desc = 'Highlight Captures Under Cursor' },
       { '<leader>pt', ':TSPlaygroundToggle<CR>', desc = 'Toggle Treesiter Playground' },
     },
@@ -61,14 +62,14 @@ return {
 
   {
     'ziontee113/syntax-tree-surfer',
-    keys = {
-      { 'vn', ':STSSelectCurrentNode<cr>', desc = 'Select Current Node' },
-      { 'vd', ':STSSwapDownNormal<cr>', desc = 'Swap Node Down' },
-      { 'vu', ':STSSwapUpNormal<cr>', desc = 'Swap Node Up' },
-      { 'vU', ':STSSwapCurrentNodePrevNormal<cr>', desc = 'Swap Node Previous' },
-      { 'vD', ':STSSwapCurrentNodeNextNormal<cr>', desc = 'Swap Node Next' },
-      { 'gS', ':STSSwapOrHold<cr>', desc = 'Swap Or Hold Node' },
-      { 'gS', ':STSSwapOrHoldVisual<cr>', desc = 'Swap Or Hold Node', mode = 'x' },
+    keys = wrap_keys {
+      { 'vn', ':STSSelectCurrentNode<CR>', desc = 'Select Current Node' },
+      { 'vd', ':STSSwapDownNormal<CR>', desc = 'Swap Node Down' },
+      { 'vu', ':STSSwapUpNormal<CR>', desc = 'Swap Node Up' },
+      { 'vU', ':STSSwapCurrentNodePrevNormal<CR>', desc = 'Swap Node Previous' },
+      { 'vD', ':STSSwapCurrentNodeNextNormal<CR>', desc = 'Swap Node Next' },
+      { 'gS', ':STSSwapOrHold<CR>', desc = 'Swap Or Hold Node' },
+      { 'gS', ':STSSwapOrHoldVisual<CR>', desc = 'Swap Or Hold Node', mode = 'x' },
       {
         '<leader>j',
         function()
@@ -118,18 +119,18 @@ return {
     'aaronik/treewalker.nvim',
     opts = {},
     cmd = { 'Treewalker' },
-    keys = {
-      { 'zh', ':Treewalker Left<CR>', mode = 'n' },
-      { 'zl', ':Treewalker Right<CR>', mode = 'n' },
+    keys = wrap_keys {
+      { 'zh', ':Treewalker Left<CR>', desc = 'Goto parent' },
+      { 'zl', ':Treewalker Right<CR>', desc = 'Goto Children' },
     },
   },
 
   {
     'drybalka/tree-climber.nvim',
-    keys = {
+    keys = wrap_keys {
       {
         'm',
-        ':lua require("tree-climber").goto_parent() require("tree-climber").select_node()<cr>',
+        ':lua require("tree-climber").goto_parent() require("tree-climber").select_node()<CR>',
         desc = 'Goto Parent',
         mode = 'v',
       },
