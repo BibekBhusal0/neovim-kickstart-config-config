@@ -137,6 +137,12 @@ return {
   },
 
   {
+    'mawkler/jsx-element.nvim',
+    ft = { 'typescriptreact', 'javascriptreact', 'javascript' },
+    opts = { enabled = false }, -- enabled in treesitter textobjects
+  },
+
+  {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
@@ -146,7 +152,7 @@ return {
         c = 'class',
         f = 'function',
         i = 'conditional',
-        j = 'jsx',
+        j = 'jsx_element',
         l = 'loop',
         P = 'parameter',
         r = 'return',
