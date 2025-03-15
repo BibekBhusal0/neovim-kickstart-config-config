@@ -77,7 +77,7 @@ return {
 
   {
     'folke/noice.nvim',
-    event = { 'VeryLazy' },
+    event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
       {
         'rcarriga/nvim-notify',

@@ -64,6 +64,17 @@ return {
       cond = hide_in_width,
     }
 
+    local noice_info = {
+      function()
+        if not package.loaded['noice'] then
+          return ''
+        end
+        local cmd = require('noice').api.status.command.get() or ''
+        local get = require('noice').api.status.mode.get() or ''
+        return get .. '  ' .. cmd
+      end,
+    }
+
     local plugins = {
       function()
         local stats = require('lazy').stats()
@@ -107,14 +118,7 @@ return {
         lualine_b = { 'branch' },
         lualine_c = { diff, pomodoro },
         lualine_x = {
-          {
-            require('noice').api.status.command.get,
-            cond = require('noice').api.status.command.has,
-          },
-          {
-            require('noice').api.status.mode.get,
-            cond = require('noice').api.status.mode.has,
-          },
+          noice_info,
           diagnostics,
           { 'filetype', cond = hide_in_width },
         },
