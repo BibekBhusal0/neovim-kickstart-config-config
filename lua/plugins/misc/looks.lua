@@ -116,7 +116,6 @@ return {
           hover = { enabled = true, silent = true },
         },
         presets = {
-          bottom_search = false,
           inc_rename = true,
           lsp_doc_border = true,
         },
@@ -203,4 +202,27 @@ return {
     },
     opts = { hide_cursor = true },
   }, -- Smooth scrolling
+
+  {
+    'rachartier/tiny-glimmer.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {
+      enabled = true,
+      overwrite = {
+        yank = { enabled = true },
+        search = { enabled = false },
+        paste = { enabled = true },
+        undo = { enabled = true },
+        redo = { enabled = true },
+      },
+      animations = {
+        fade = { from_color = '#c4841d' },
+        reverse_fade = { from_color = '#312107' },
+      },
+      virt_text = {
+        priority = 2048,
+      },
+    },
+    keys = wrap_keys { { '<leader>tG', ":lua require('tiny-glimmer').toggle()<CR>", desc = 'Toggle Glimmer' } },
+  },
 }
