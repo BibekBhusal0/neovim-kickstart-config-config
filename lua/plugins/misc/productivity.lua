@@ -76,14 +76,32 @@ return {
         todo = { enabled = false },
         twilight = { enabled = false },
       },
-      on_open = function(win)
-        require('smear_cursor').enabled = false
+
+      on_open = function()
+        pcall(function()
+          require('tiny-glimmer').disable()
+        end)
+        pcall(function()
+          require('noice').disable()
+        end)
+        pcall(function()
+          require('smear_cursor').enabled = false
+        end)
         transparency_enabled = require('utils.transparency').bg_transparent
         require('utils.transparency').disable_transparency '#000000'
         vim.cmd 'PomodoroSkipBreak'
       end,
+
       on_close = function()
-        require('smear_cursor').enabled = true
+        pcall(function()
+          require('tiny-glimmer').enable()
+        end)
+        pcall(function()
+          require('noice').enable()
+        end)
+        pcall(function()
+          require('smear_cursor').enabled = true
+        end)
         if transparency_enabled then
           require('utils.transparency').enable_transparency()
         else
