@@ -50,8 +50,24 @@ return {
     'eandrju/cellular-automaton.nvim',
     cmd = { 'CellularAutomaton' },
     keys = wrap_keys {
-      { '<leader>zr', ':CellularAutomaton make_it_rain<CR>', desc = 'Game CellularAutomaton' },
-      { '<leader>zg', ':CellularAutomaton game_of_life<CR>', desc = 'Game CellularAutomaton' },
+      { '<leader>zr', ':CellularAutomaton make_it_rain<CR>', desc = 'Game Make it rain' },
+      { '<leader>zg', ':CellularAutomaton game_of_life<CR>', desc = 'Game of life' },
+    },
+  },
+
+  {
+    'alanfortlink/blackjack.nvim',
+    cmd = { 'BlackJackNewGame', 'BlackJackQuit', 'BlackJackResetScores' },
+    keys = wrap_keys {
+      { '<leader>zb', ':BlackJackNewGame<CR>', desc = 'Game Black Jack' },
+    },
+  },
+
+  {
+    'alec-gibson/nvim-tetris',
+    cmd = { 'Tetris' },
+    keys = wrap_keys {
+      { '<leader>zt', ':Tetris<CR>', desc = 'Game Tetris' },
     },
   },
 }
