@@ -33,7 +33,13 @@ return {
       },
       { '<leader>dB', ':PBClearAllBreakpoints<CR>', desc = 'Debuger Clear All BreakPoint' },
     },
-  },
+  }, -- Breakpoint data is not lost
+
+  {
+    'jay-babu/mason-nvim-dap.nvim',
+    cmd = { 'DapInstall', 'DapUninstall' },
+    opts = { ensure_installed = { 'python', 'deno' } },
+  }, -- Installing dap made easy
 
   {
     'mfussenegger/nvim-dap',
@@ -90,11 +96,7 @@ return {
         request = 'launch',
         name = 'Launch file',
         runtimeExecutable = 'deno',
-        runtimeArgs = {
-          'run',
-          '--inspect-wait',
-          '--allow-all',
-        },
+        runtimeArgs = { 'run', '--inspect-wait', '--allow-all' },
         program = '${file}',
         cwd = '${workspaceFolder}',
         attachSimplePort = 9229,

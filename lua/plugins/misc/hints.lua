@@ -65,7 +65,6 @@ return {
         desc = 'Key Analyzer',
       },
     },
-
     opts = {},
   },
 }
