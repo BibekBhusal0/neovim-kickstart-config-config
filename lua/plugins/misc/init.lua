@@ -8,7 +8,10 @@ return {
   require 'plugins.misc.screenshot',
   {
     'thinca/vim-quickrun',
-    keys = wrap_keys { { '<leader>rr', ':QuickRun<CR>', desc = 'Run' } },
+    keys = wrap_keys {
+      { '<leader>rr', ':QuickRun<CR>', desc = 'Run' },
+      { '<leader>rt', ':w<CR> :QuickRun<CR>', desc = 'Save and run' },
+    },
     cmd = { 'QuickRun' },
   },
 }

@@ -270,8 +270,8 @@ return {
       map('[n', tw_prev, 'Jump Previous Tailwind Class', mode)
       map('zj', next_node, 'Jump Next Node', mode)
       map('zk', prev_node, 'Jump Previous Node', mode)
-      map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next', mode)
-      map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous', mode)
+      map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next')
+      map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous')
     end,
   },
 }

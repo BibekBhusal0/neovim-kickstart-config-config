@@ -84,3 +84,25 @@ for _, key in pairs(keys) do
     return smart_delete(key)
   end, { noremap = true, expr = true, desc = 'Smart delete' })
 end
+
+local function toggle_statusline()
+  local statusline_visible = vim.opt.laststatus._value == 2
+  if statusline_visible then
+    vim.opt.laststatus = 0
+  else
+    vim.opt.laststatus = 2
+  end
+end
+
+local function toggle_tabline()
+  local tabline_visible = vim.opt.showtabline._value == 2
+  if tabline_visible then
+    vim.opt.showtabline = 0
+  else
+    vim.opt.showtabline = 2
+  end
+end
+
+-- Use your custom map function to create key mappings
+map('<leader>ll', toggle_statusline, 'Toggle Status Line')
+map('<leader>bl', toggle_tabline, 'Toggle Tab Line')

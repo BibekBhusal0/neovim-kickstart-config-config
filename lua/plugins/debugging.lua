@@ -116,6 +116,10 @@ return {
       map('<leader>do', dap.step_over, 'Debugger Step Over')
       map('<leader>dO', dap.step_out, 'Debugger Step Out')
       map('<leader>di', dap.step_into, 'Debugger Step Into')
+      map('<leader>de', dapui.eval, 'Debugger Eval')
+      map('<leader>dp', dap.pause, 'Debugger Pause')
+      map('<leader>dr', dap.restart_frame, 'Debugger Restart')
+      map('<leader>dR', dap.run_to_cursor, 'Debugger Run to Cursor')
     end,
   },
 }
