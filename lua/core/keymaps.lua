@@ -78,7 +78,6 @@ end
 
 local keys = { 'd', 'dd', 'x', 'c', 's', 'C', 'S', 'X' }
 
--- Set keymaps for both normal and visual modes
 for _, key in pairs(keys) do
   vim.keymap.set({ 'n', 'v' }, key, function()
     return smart_delete(key)
@@ -103,6 +102,5 @@ local function toggle_tabline()
   end
 end
 
--- Use your custom map function to create key mappings
 map('<leader>ll', toggle_statusline, 'Toggle Status Line')
 map('<leader>bl', toggle_tabline, 'Toggle Tab Line')

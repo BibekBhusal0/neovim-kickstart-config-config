@@ -67,8 +67,6 @@ return {
         created = { enabled = true, required_width = 110 },
         symlink_target = { enabled = false },
       },
-      -- A list of functions, each representing a global custom command
-      -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
       -- see `:h neo-tree-custom-commands-global`
       commands = {},
 
@@ -92,12 +90,11 @@ return {
           -- ["<cr>"] = "open_drop",
           -- ["t"] = "open_tab_drop",
           ['w'] = 'open_with_window_picker',
-          --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
           ['C'] = 'close_node',
           ['z'] = 'close_all_nodes',
           ['Z'] = 'expand_all_nodes',
           ['a'] = { 'add', config = { show_path = 'none' } },
-          ['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+          ['A'] = 'add_directory',
           ['d'] = 'delete',
           ['r'] = 'rename',
           ['y'] = 'copy_to_clipboard',
@@ -138,20 +135,19 @@ return {
           always_show = { -- remains visible even if other settings would normally hide it
             --".gitignored",
           },
-          never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-            --".DS_Store",
-            --"thumbs.db"
+          never_show = {
+            '.DS_Store',
+            'thumbs.db',
           },
-          never_show_by_pattern = { -- uses glob style patterns
-            --".null-ls_*",
+          never_show_by_pattern = {
+            '.null-ls_*',
           },
         },
         follow_current_file = {
-          enabled = false, -- This will find and focus the file in the active buffer every time
-          --               -- the current file is changed while the tree is open.
-          leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+          enabled = true,
+          leave_dirs_open = true,
         },
-        group_empty_dirs = false, -- when true, empty folders will be grouped together
+        group_empty_dirs = false,
         hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
         -- in whatever position is specified in window.position
         -- "open_current",  -- netrw disabled, opening a directory opens within the

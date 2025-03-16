@@ -35,7 +35,6 @@ map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 map('<leader>gq', ':Gitsigns setqflist<CR>', 'Git quick fix list')
 map('ih', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
 
--- Lua
 local function disableAutowidth()
   local lazy = require 'lazy'
   local plugins = lazy.plugins()

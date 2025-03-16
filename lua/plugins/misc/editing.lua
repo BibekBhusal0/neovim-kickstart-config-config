@@ -14,7 +14,7 @@ return {
   {
     'echasnovski/mini.trailspace',
     keys = { { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' } },
-  },
+  }, -- Simple ways to train whitespace useful when formatter is not working
 
   {
     'nacro90/numb.nvim',
@@ -227,6 +227,10 @@ return {
 
     {
       'LudoPinelli/comment-box.nvim',
+      keys = wrap_keys {
+        { '<leader>CB', ':CBlcbox<CR>', desc = 'Comment box' },
+        { '<leader>CL', ':CBlcline<CR>', desc = 'Comment Line' },
+      },
       cmd = {
         'CBllbox',
         'CBllbox',

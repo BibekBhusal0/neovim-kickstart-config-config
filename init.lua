@@ -14,7 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  require 'plugins.ai', -- syntax highlighting
+  require 'plugins.ai', -- AI autocompletion and chat
   require 'plugins.alpha', -- Customizable dashboard screen
   require 'plugins.autocompletion', -- Autocompletion for code
   require 'plugins.colortheme', -- Color scheme setup
