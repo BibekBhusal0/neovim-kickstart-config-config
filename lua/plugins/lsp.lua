@@ -212,5 +212,11 @@ return {
         icons = icons,
       }
     end,
-  },
+  }, -- Easy navigation within lsp Symbols
+
+  {
+    'Zeioth/garbage-day.nvim',
+    event = 'LspAttach',
+    opts = {},
+  }, -- Free up resources by stooping unused LSP clients
 }

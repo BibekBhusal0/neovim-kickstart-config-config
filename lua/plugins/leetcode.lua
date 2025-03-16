@@ -9,8 +9,9 @@ return {
     { '<leader>lC', ':Leet<CR>', desc = 'Leetcode dashboard' },
   },
   lazy = leet_arg ~= vim.fn.argv(0, -1),
+
   config = function()
-    require('leetcode').setup { lang = 'javascript', arg = leet_arg }
+    require('leetcode').setup { lang = 'typescript', arg = leet_arg }
     map('<leader>lcc', ':Leet console<CR>', 'Leetcoce console')
     map('<leader>lcd', ':Leet daily<CR>', 'Leetcode proplem of the day')
     map('<leader>lci', ':Leet info<CR>', 'Leetcode problem info')

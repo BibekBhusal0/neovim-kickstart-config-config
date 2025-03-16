@@ -22,10 +22,7 @@ return function(title, callback, val, width, prompt)
 
     on_submit = function(value)
       if value ~= '' then
-        print(value)
         callback(value)
-      else
-        print 'Event not executed because input is empty'
       end
     end,
   })
