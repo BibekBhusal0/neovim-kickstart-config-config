@@ -166,9 +166,10 @@ return {
           MkdnTableNewRowAbove = { 'n', '<C-i>R' },
           MkdnTableNewColAfter = { 'n', '<C-i>c' },
           MkdnTableNewColBefore = { 'n', '<C-i>C' },
-          MkdnFoldSection = false,
-          MkdnUnfoldSection = false,
+          MkdnFoldSection = { 'n', 'gf' },
+          MkdnUnfoldSection = { 'n', 'gF' },
         },
+        foldtext = { object_count_icon_set = 'nerdfont' },
       }
     end,
   }, -- Better editing in markdown

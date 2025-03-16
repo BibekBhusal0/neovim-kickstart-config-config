@@ -26,6 +26,7 @@ return {
     config = function()
       require('render-markdown').setup {
         file_type = { 'markdown', 'codecompanion', 'vimwiki' },
+        sign = { enabled = false },
         link = {
           custom = {
             wikipedia = { pattern = 'wikiwand%.org', icon = '󰖬 ' },

@@ -66,7 +66,7 @@ return {
         width = 1,
         height = 1,
         options = {
-          signcolumn = 'no',
+          signcolumn = 'yes',
           number = true,
           relativenumber = true,
         },
