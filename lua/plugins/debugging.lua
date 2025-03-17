@@ -36,18 +36,12 @@ return {
   }, -- Breakpoint data is not lost
 
   {
-    'jay-babu/mason-nvim-dap.nvim',
-    cmd = { 'DapInstall', 'DapUninstall' },
-    opts = { ensure_installed = { 'python', 'deno' } },
-  }, -- Installing dap made easy
-
-  {
     'mfussenegger/nvim-dap',
     dependencies = {
       'rcarriga/nvim-dap-ui',
       'theHamsta/nvim-dap-virtual-text',
       'nvim-neotest/nvim-nio',
-      'mfussenegger/nvim-dap-python',
+      { 'mfussenegger/nvim-dap-python', lazy = true },
     },
     keys = wrap_keys { { '<leader>dc', ":lua require('dap').continue() <CR>", desc = 'Debugger Continue' } },
 
@@ -104,7 +98,6 @@ return {
 
       dap.configurations.typescript = { ts_config }
       dap.configurations.javascript = { ts_config }
-
       dap.listeners.before.attach.dapui_config = dapui.open
       dap.listeners.before.launch.dapui_config = dapui.open
       dap.listeners.before.event_terminated.dapui_config = dapui.close

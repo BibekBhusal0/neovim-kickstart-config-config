@@ -6,7 +6,7 @@ local commit_with_message = function()
 
   local m = require 'utils.diff'()
   if not m.ok then
-    print(m.message)
+    vim.notify(m.message, vim.log.levels.WARN)
     return
   end
 
