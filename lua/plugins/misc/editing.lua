@@ -13,7 +13,7 @@ return {
 
   {
     'echasnovski/mini.trailspace',
-    keys = { { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' } },
+    keys = wrap_keys { { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' } },
   }, -- Simple ways to train whitespace useful when formatter is not working
 
   {

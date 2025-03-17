@@ -87,6 +87,7 @@ return {
         pcall(function()
           require('smear_cursor').enabled = false
         end)
+        vim.opt.fillchars = { fold = ' ', eob = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
         transparency_enabled = require('utils.transparency').bg_transparent
         require('utils.transparency').disable_transparency '#000000'
         vim.cmd 'PomodoroSkipBreak'

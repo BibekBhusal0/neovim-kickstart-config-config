@@ -42,6 +42,7 @@ local function toggle_foldcolumn()
   else
     vim.o.foldcolumn = '0'
   end
+  set_dynamic_number_width()
 end
 map('<leader>zi', toggle_foldcolumn, 'Toggle fold column')
 
@@ -77,7 +78,8 @@ return {
         { text = { lnumfunc }, click = 'v:lua.ScLa', auto = true },
         { text = { '%s' }, click = 'v:lua.ScSa', auto = true },
       },
-      ft_ignore = { 'quickrun', 'codecompanion' },
+      ft_ignore = { 'quickrun', 'codecompanion', 'terminal' },
+      bt_ignore = { 'terminal' },
     }
   end,
 }
