@@ -73,6 +73,7 @@ local git = {
 
 local others = {
   github = '',
+  git = '󰊢',
   ai = '',
   ai2 = '',
 }

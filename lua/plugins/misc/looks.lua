@@ -86,6 +86,9 @@ return {
           icons = require('utils.icons').diagnostics,
           render = 'wrapped-default',
           stages = 'slide',
+          max_width = 35,
+          max_height = 50,
+          top_down = false,
         },
       },
     },
@@ -105,6 +108,7 @@ return {
           noice.enable()
         end
       end, 'Toggle Noice')
+
       noice.setup {
         level = { icons = require('utils.icons').diagnostics },
         lsp = {
@@ -123,6 +127,11 @@ return {
         cmdline = {
           format = {
             cmdline = { pattern = '^:', icon = '', lang = 'vim' },
+            Telescope = { pattern = '^:Telescope ', icon = '' },
+            Trouble = { pattern = '^:Trouble ', icon = '' },
+            gitsigns = { pattern = '^:Gitsigns ', icon = require('utils.icons').others.git },
+            git = { pattern = '^:Git ', icon = require('utils.icons').others.github },
+            ai = { pattern = '^:CodeCompanion ', icon = require('utils.icons').others.ai },
             help = { pattern = '^:%s*he?l?p?%s+', icon = '󰋖' },
             input = { view = 'cmdline_input', icon = '󰥻 ' },
           },

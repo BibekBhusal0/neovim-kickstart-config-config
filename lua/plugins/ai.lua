@@ -85,7 +85,7 @@ return {
         display = {
           chat = {
             window = { height = 1 },
-            intro_message = '   Ask me anything',
+            intro_message = require('utils.icons').others.ai .. '  Ask me anything',
           },
           diff = { enabled = true },
         },
