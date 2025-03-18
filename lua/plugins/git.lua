@@ -179,4 +179,25 @@ return {
       { '<leader>gdh', diffViewFileHistory, desc = 'Diffview file history' },
     },
   },
+
+  {
+    'ThePrimeagen/git-worktree.nvim',
+    keys = wrap_keys {
+      { '<leader>gwn', ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", desc = 'Git Worktree New (Telescope)' },
+      { '<leader>gww', ":lua require('telescope').extensions.git_worktree.git_worktree()<CR>", desc = 'Git Worktree (no)' },
+      {
+        '<leader>gws',
+        function()
+          require 'utils.input'('Worktree Name', function(text)
+            require('git-worktree').switch_worktree(text)
+          end, '', 50, require('utils.icons').others.github .. '  ')
+        end,
+        desc = 'Git Work tree switch',
+      },
+    },
+    config = function()
+      require('git-worktree').setup {}
+      require('telescope').load_extension 'git_worktree'
+    end,
+  },
 }
