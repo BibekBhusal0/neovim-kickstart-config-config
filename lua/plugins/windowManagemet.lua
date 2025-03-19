@@ -187,25 +187,20 @@ return {
   }, -- pinning files and quickly moving between them
 
   {
-    'gaborvecsei/memento.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    keys = wrap_keys {
-      { '<leader>bh', ':lua require("memento").toggle()<CR>', desc = 'Toggle Buffer History' },
-      {
-        '<leader>ba',
-        function()
-          local is_closed = require('memento.ui').close_popup()
-          if is_closed then
-            return
-          end
-          local m = require 'memento'
-          m.toggle()
-          m.open_selected()
-        end,
-        desc = 'Open Last Closed Buffer',
-      },
-    },
-  }, -- reopen close buffer
+    'BibekBhusal0/bufstack.nvim',
+    event = { 'BufNewFile', 'BufReadPost' },
+    config = function()
+      require('bufstack').setup { max_tracked = 400 }
+      map('gl', ':BufStackNext<CR>', 'Buffer Next Recent')
+      map('gh', ':BufStackPrev<CR>', 'Buffer Prevevious Recent')
+      map('<leader>bu', ':BufStackList<CR>', 'Buffer Open List')
+      map('<leader>bh', ':BufClosedList<CR>', 'Buffer Closed List')
+      map('<leader>ba', ':BufReopen<CR>', 'Buffer Repoen')
+      vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+        callback = require('bufstack.core').track_buffer,
+      })
+    end,
+  }, -- Reopen closed buffer and cycle through recently closed buffer
 
   {
     'anuvyklack/windows.nvim',
