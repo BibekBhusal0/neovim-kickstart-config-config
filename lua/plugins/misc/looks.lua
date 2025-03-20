@@ -111,6 +111,7 @@ return {
 
       noice.setup {
         level = { icons = require('utils.icons').diagnostics },
+        messages = { view_search = false },
         lsp = {
           override = {
             ['vim.lsp.util.convert_input_to_markdown_lines'] = true,

@@ -138,6 +138,7 @@ local function render()
           button('f', '', 'Find file', ':Telescope find_files<CR>'),
           button('r', '', 'Recent Files', ':Telescope oldfiles<CR>'),
           button('e', '󰙅', 'File Explorer', ':Neotree toggle position=left <CR>'),
+          button('h', '', 'Harpoon Marks', ": lua require('harpoon.ui').toggle_quick_menu()<CR>"),
         },
         opts = { spacing = 1 },
       },
@@ -152,7 +153,7 @@ local function render()
       button('b', '', 'Search Browser Bookmarks', ':BrowserBookmarks<CR>'),
       button('l', '', 'Leetcode Dashboard', ':Leet<CR>'),
       button('d', '󰾶', 'Change Directory', ':Proot<CR>'),
-      button('h', '', 'Sessions', ':lua require("telescope") require("resession").load()<CR>'),
+      button('s', '', 'Sessions', ':lua require("telescope") require("resession").load()<CR>'),
       button('c', '󱙓', 'Cheat Sheet', ':lua  require("nvcheatsheet").toggle()<CR>'),
       button('q', '󰅙', 'Quit', ':qa<CR>', 'DiagnosticError'),
     },
@@ -180,10 +181,11 @@ local function render()
 
   local content = {
     layout = {
+      { type = 'padding', val = 1 },
       { type = 'text', val = header, opts = { position = 'center', hl = 'Type' } },
-      { type = 'padding', val = 3 },
+      { type = 'padding', val = 2 },
       buttons,
-      { type = 'padding', val = 3 },
+      { type = 'padding', val = 2 },
       footer,
     },
     opts = {},

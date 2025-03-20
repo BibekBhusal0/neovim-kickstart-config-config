@@ -110,7 +110,16 @@ return {
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
 
-        disabled_filetypes = { 'alpha', 'neo-tree', 'codecompanion', 'terminal', 'quickrun' },
+        disabled_filetypes = {
+          'alpha',
+          'neo-tree',
+          'codecompanion',
+          'terminal',
+          'quickrun',
+          'trouble',
+          'qf',
+          'noice',
+        },
         always_divide_middle = true,
       },
       sections = {
