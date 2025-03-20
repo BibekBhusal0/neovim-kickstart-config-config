@@ -62,79 +62,58 @@ return {
 
   {
     'ziontee113/syntax-tree-surfer',
-    keys = wrap_keys {
-      { 'vn', ':STSSelectCurrentNode<CR>', desc = 'Select Current Node' },
-      { 'vd', ':STSSwapDownNormal<CR>', desc = 'Swap Node Down' },
-      { 'vu', ':STSSwapUpNormal<CR>', desc = 'Swap Node Up' },
-      { 'vU', ':STSSwapCurrentNodePrevNormal<CR>', desc = 'Swap Node Previous' },
-      { 'vD', ':STSSwapCurrentNodeNextNormal<CR>', desc = 'Swap Node Next' },
-      { 'gS', ':STSSwapOrHold<CR>', desc = 'Swap Or Hold Node' },
-      { 'gS', ':STSSwapOrHoldVisual<CR>', desc = 'Swap Or Hold Node', mode = 'x' },
-      {
-        '<leader>j',
-        function()
-          require('syntax-tree-surfer').targeted_jump {
-            'start_tag',
-            'arrow_function',
-            'function_definition',
-            'jsx_element',
-            'jsx_self_closing_element',
-            'function_declaration',
-            'return_statement',
-            'if_statement',
-            'else_clause',
-            'else_statement',
-            'elseif_statement',
-            'for_statement',
-            'while_statement',
-            'switch_statement',
-          }
-        end,
-        desc = 'Jump to important',
-      },
-      {
-        '<leader>J',
-        function()
-          require('syntax-tree-surfer').targeted_jump {
-            'import_statement',
-            'start_tag',
-            'end_tag',
-            'open_tag',
-            'close_tag',
-            'jsx_closing_element',
-            'jsx_opening_element',
-            'jsx_self_closing_element',
-            'function_call',
-            'variable_declaration',
-            'lexical_declaration',
-          }
-        end,
-        desc = 'Jump to next',
-      },
-    },
-    opts = {},
-  },
-
-  {
-    'aaronik/treewalker.nvim',
-    opts = {},
-    cmd = { 'Treewalker' },
-    keys = wrap_keys {
-      { 'zh', ':Treewalker Left<CR>', desc = 'Goto parent' },
-      { 'zl', ':Treewalker Right<CR>', desc = 'Goto Children' },
-    },
-  },
-
-  {
-    'drybalka/tree-climber.nvim',
-    keys = wrap_keys {
-      {
-        'm',
-        ':lua require("tree-climber").goto_parent() require("tree-climber").select_node()<CR>',
-        desc = 'Goto Parent',
-        mode = 'v',
-      },
-    },
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      require('syntax-tree-surfer').setup {}
+      map('m', '<cmd>STSSelectParentNode<cr>', 'Select Parent', 'x')
+      map('i', '<cmd>STSSelectChildNode<cr>', 'Select Child', 'x')
+      map('zj', '<cmd>STSSelectNextSiblingNode<cr>', 'Select Next Sibling', 'x')
+      map('zk', '<cmd>STSSelectPrevSiblingNode<cr>', 'Select Previous Sibling', 'x')
+      map('zh', '<cmd>STSSelectParentNode<cr>', 'Select Parent', 'x')
+      map('zl', '<cmd>STSSelectChildNode<cr>', 'Select Child', 'x')
+      map('<A-j>', '<cmd>STSSwapNextVisual<cr>', 'Swap Next', 'x')
+      map('<A-k>', '<cmd>STSSwapPrevVisual<cr>', 'Swap Previous', 'x')
+      map('vn', '<cmd>STSSelectCurrentNode<cr>', 'Select Current Node')
+      map('vd', '<cmd>STSSwapDownNormal<cr>', 'Swap Node Down')
+      map('vu', '<cmd>STSSwapUpNormal<cr>', 'Swap Node Up')
+      map('vU', '<cmd>STSSwapCurrentNodePrevNormal<cr>', 'Swap Node Previous')
+      map('vD', '<cmd>STSSwapCurrentNodeNextNormal<cr>', 'Swap Node Next')
+      map('gS', '<cmd>STSSwapOrHold<cr>', 'Swap Or Hold Node')
+      map('gS', '<cmd>STSSwapOrHoldVisual<cr>', 'Swap Or Hold Node', 'x')
+      map('<leader>j', function()
+        require('syntax-tree-surfer').targeted_jump {
+          'start_tag',
+          'arrow_function',
+          'function_definition',
+          'jsx_element',
+          'jsx_self_closing_element',
+          'function_declaration',
+          'return_statement',
+          'if_statement',
+          'else_clause',
+          'else_statement',
+          'elseif_statement',
+          'for_statement',
+          'while_statement',
+          'switch_statement',
+        }
+      end, 'Jump to important')
+      map('<leader>J', function()
+        require('syntax-tree-surfer').targeted_jump {
+          'import_statement',
+          'start_tag',
+          'end_tag',
+          'open_tag',
+          'close_tag',
+          'jsx_closing_element',
+          'jsx_opening_element',
+          'jsx_self_closing_element',
+          'function_call',
+          'variable_declaration',
+          'lexical_declaration',
+        }
+      end)
+    end,
   },
 
   {
@@ -242,11 +221,6 @@ return {
       end, function()
         vim.cmd 'TailwindPrevClass'
       end)
-      local next_node, prev_node = get_pair(function()
-        vim.cmd 'Treewalker Down'
-      end, function()
-        vim.cmd 'Treewalker Up'
-      end)
 
       local todos = {
         t = {},
@@ -268,8 +242,6 @@ return {
       map('[d', prev_dig, 'Jump Previous Diagnostic', mode)
       map(']n', tw_next, 'Jump Next Tailwind Class', mode)
       map('[n', tw_prev, 'Jump Previous Tailwind Class', mode)
-      map('zj', next_node, 'Jump Next Node', mode)
-      map('zk', prev_node, 'Jump Previous Node', mode)
       map('<A-j>', ts_repeat_move.repeat_last_move_next, 'Repeat last Jump Next')
       map('<A-k>', ts_repeat_move.repeat_last_move_previous, 'Repat last Jump Previous')
     end,
