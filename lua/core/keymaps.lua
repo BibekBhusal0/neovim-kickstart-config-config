@@ -18,6 +18,16 @@ map('<C-]>', '<Esc>ldbi', 'Delete Word', 'i')
 
 map('<C-s>', ': w <CR>', 'Save File')
 
+-- Move and duplicate lines
+map('K', ":m '<-2<CR>gv=gv", 'Move Lines Up', 'v')
+map('J', ":m '>+1<CR>gv=gv", 'Move Lines Down', 'v')
+map('<A-j>', ":copy '<-1<CR>gv=gv", 'Duplicate Lines Below', 'v')
+map('<A-k>', ":copy '><CR>gv=gv", 'Duplicate Lines Above', 'v')
+map('<C-A-k>', ':copy .-1<CR>', 'Duplicate Line Above')
+map('<C-A-j>', ':copy .<CR>', 'Duplicate Line Below')
+map('K', ':m .-2<CR>==', 'Move Line Up')
+map('J', ':m .+1<CR>==', 'Move Line Down')
+
 -- quit
 map('<leader>sn', ':noautocmd w <CR>', 'Save File Without formatting')
 map('<C-q>', ': q!<CR>', 'Quit File')
