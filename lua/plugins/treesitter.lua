@@ -66,7 +66,7 @@ return {
     opts = {},
     keys = {
       { 'm', '<cmd>STSSelectParentNode<CR>', desc = 'Select Parent', mode = 'x' },
-      { 'i', '<cmd>STSSelectChildNode<CR>', desc = 'Select Child', mode = 'x' },
+      { 't', '<cmd>STSSelectChildNode<CR>', desc = 'Select Child', mode = 'x' },
       { 'zj', '<cmd>STSSelectNextSiblingNode<CR>', desc = 'Select Next Sibling', mode = 'x' },
       { 'zk', '<cmd>STSSelectPrevSiblingNode<CR>', desc = 'Select Previous Sibling', mode = 'x' },
       { 'zh', '<cmd>STSSelectParentNode<CR>', desc = 'Select Parent', mode = 'x' },

@@ -149,19 +149,6 @@ return {
   }, -- icon picker with telescope
 
   {
-    'dhruvmanila/browser-bookmarks.nvim',
-    keys = wrap_keys { { '<leader>B', ':BrowserBookmarks<CR>', desc = 'Search Browser Bookmarks' } },
-    cmd = { 'BrowserBookmarks' },
-    config = function()
-      require('telescope').load_extension 'bookmarks'
-      require('browser_bookmarks').setup {
-        profile_name = 'Bibek',
-        url_open_command = 'start brave',
-      }
-    end,
-  },
-
-  {
     'tsakirist/telescope-lazy.nvim',
     keys = wrap_keys { { '<leader>sl', ':Telescope lazy<CR>', desc = 'Search Lazy Plugins Doc' } },
   },

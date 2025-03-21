@@ -6,6 +6,7 @@ return {
   require 'plugins.misc.looks',
   require 'plugins.misc.productivity',
   require 'plugins.misc.screenshot',
+  require 'plugins.misc.browser',
 
   {
     'thinca/vim-quickrun',
