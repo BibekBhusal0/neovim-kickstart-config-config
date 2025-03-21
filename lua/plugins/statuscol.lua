@@ -15,19 +15,19 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 local function lnumfunc(args)
-  if not args.rnu and not args.nu then
-    return ''
-  end
-  if args.virtnum ~= 0 then
-    return '%='
-  end
-  local lnum_n = args.rnu and (args.relnum > 0 and args.relnum or (args.nu and args.lnum or 0)) or args.lnum
-  local lnum = tostring(lnum_n)
-  local pad = (' '):rep(args.nuw - #lnum)
   local left_pad = ''
   if vim.o.foldcolumn == '1' then
     left_pad = ' '
   end
+  if not args.rnu and not args.nu then
+    return left_pad
+  end
+  if args.virtnum ~= 0 then
+    return left_pad .. '%='
+  end
+  local lnum_n = args.rnu and (args.relnum > 0 and args.relnum or (args.nu and args.lnum or 0)) or args.lnum
+  local lnum = tostring(lnum_n)
+  local pad = (' '):rep(args.nuw - #lnum)
   if args.relnum == 0 and args.rnu then
     return left_pad .. lnum .. pad .. '%='
   else
