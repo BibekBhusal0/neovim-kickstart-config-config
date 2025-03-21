@@ -25,6 +25,8 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-emoji',
+    'hrsh7th/cmp-calc',
   },
 
   config = function()
@@ -94,6 +96,8 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = 'emoji' },
+        { name = 'calc' },
       },
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
@@ -104,6 +108,8 @@ return {
             nvim_lsp = '[L]',
             buffer = '[B]',
             path = '[P]',
+            emoji = '[E]',
+            calc = '[C]',
           })[entry.source.name]
           return vim_item
         end,

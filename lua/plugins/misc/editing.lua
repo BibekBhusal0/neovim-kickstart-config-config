@@ -12,6 +12,16 @@ return {
   }, -- change brackets, quotes and surrounds
 
   {
+    'chrisgrieser/nvim-spider',
+    dependencies = { 'yutkat/wb-only-current-line.nvim' },
+    keys = wrap_keys {
+      { 'w', "<cmd>lua require('spider').motion('w')<CR>", mode = { 'n', 'o', 'x' } },
+      { 'e', "<cmd>lua require('spider').motion('e')<CR>", mode = { 'n', 'o', 'x' } },
+      { 'b', "<cmd>lua require('spider').motion('b')<CR>", mode = { 'n', 'o', 'x' } },
+    },
+  }, -- Better navigation with W,E and B
+
+  {
     'echasnovski/mini.trailspace',
     keys = wrap_keys { { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' } },
   }, -- Simple ways to train whitespace useful when formatter is not working
