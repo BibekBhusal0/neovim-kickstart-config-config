@@ -21,4 +21,13 @@ return {
       vim.g.quickrun_config.ts = { command = 'deno run --allow-all' }
     end,
   },
+
+  {
+    'BibekBhusal0/nvim-shadcn',
+    opts = {},
+    cmd = { 'ShadcnAdd' },
+    keys = wrap_keys {
+      { '<leader>sa', ':ShadcnAdd<CR>', desc = 'Add shadcn component' },
+    },
+  },
 }
