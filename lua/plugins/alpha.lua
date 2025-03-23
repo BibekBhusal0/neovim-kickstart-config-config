@@ -194,18 +194,6 @@ local function render()
   alpha.setup(content)
 end
 
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'LazyDone',
-  callback = function()
-    vim.defer_fn(function()
-      if vim.bo.filetype == 'alpha' then
-        render()
-        vim.cmd 'AlphaRedraw'
-      end
-    end, 5)
-  end,
-})
-
 return {
   'goolord/alpha-nvim',
   config = render,

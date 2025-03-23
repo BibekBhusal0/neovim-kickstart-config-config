@@ -18,6 +18,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
+    'antosha417/nvim-lsp-file-operations',
   },
 
   config = function()
@@ -231,5 +232,8 @@ return {
         },
       },
     }
+    vim.defer_fn(function()
+      require('lsp-file-operations').setup()
+    end, 50)
   end,
 }
