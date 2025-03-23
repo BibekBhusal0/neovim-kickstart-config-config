@@ -1,4 +1,4 @@
-# neovim-kickstart-config-config/
+# neovim-kickstart-config-config
 
 <a href="https://dotfyle.com/BibekBhusal0/neovim-kickstart-config-config"><img src="https://dotfyle.com/BibekBhusal0/neovim-kickstart-config-config/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/BibekBhusal0/neovim-kickstart-config-config"><img src="https://dotfyle.com/BibekBhusal0/neovim-kickstart-config-config/badges/leaderkey?style=flat" /></a>

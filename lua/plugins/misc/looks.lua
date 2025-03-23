@@ -78,7 +78,7 @@ return {
 
   {
     'folke/noice.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile', 'CmdLineEnter' },
     dependencies = {
       {
         'rcarriga/nvim-notify',
