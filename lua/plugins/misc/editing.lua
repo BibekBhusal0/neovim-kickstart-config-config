@@ -3,7 +3,11 @@ local wrap_keys = require 'utils.wrap_keys'
 return {
   {
     'kylechui/nvim-surround',
-    event = { 'InsertEnter' },
+    keys = {
+      { 'ys', mode = { 'n', 'o', 'x' }, desc = 'Surround Text' },
+      { 'ds', mode = { 'n', 'o', 'x' }, desc = 'Surround Delete' },
+      { 'cs', mode = { 'n', 'o', 'x' }, desc = 'Surround Change' },
+    },
     opts = {},
   }, -- change brackets, quotes and surrounds
 
@@ -108,7 +112,7 @@ return {
 
   {
     'christoomey/vim-sort-motion',
-    event = { 'BufNewFile', 'BufReadPost' },
+    keys = { { 'gs', mode = { 'n', 'o', 'x' }, 'Sort' } },
     config = function()
       vim.g.sort_motion_flags = 'i'
     end,
@@ -127,8 +131,13 @@ return {
   { -- comments
     {
       'numToStr/Comment.nvim',
-      event = { 'BufNewFile', 'BufReadPost' },
       dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+      keys = {
+        { 'gcc', mode = 'n', desc = 'Comment toggle current line' },
+        { 'gc', mode = { 'n', 'o', 'x' }, desc = 'Comment toggle' },
+        { 'gbc', mode = 'n', desc = 'Comment toggle current block' },
+        { 'gb', mode = { 'n', 'o', 'x' }, desc = 'Comment toggle blockwise' },
+      },
       config = function()
         require('Comment').setup {
           pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),

@@ -4,7 +4,7 @@ local wrap_keys = require 'utils.wrap_keys'
 return {
   {
     'uga-rosa/ccc.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    -- event = { 'BufReadPost', 'BufNewFile' },
     keys = wrap_keys {
       { '<leader>cP', ':CccPick<CR>', desc = 'Color Picker' },
       { '<leader>cm', ':CccConvert<CR>', desc = 'Color Convert' },

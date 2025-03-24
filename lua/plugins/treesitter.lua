@@ -62,7 +62,6 @@ return {
 
   {
     'ziontee113/syntax-tree-surfer',
-    event = { 'BufReadPost', 'BufNewFile' },
     opts = {},
     keys = {
       { 'm', '<cmd>STSSelectParentNode<CR>', desc = 'Select Parent', mode = 'x' },
@@ -126,12 +125,6 @@ return {
         desc = 'Jump',
       },
     },
-  },
-
-  {
-    'mawkler/jsx-element.nvim',
-    ft = { 'typescriptreact', 'javascriptreact', 'javascript' },
-    opts = { enabled = false }, -- enabled in treesitter textobjects
   },
 
   {

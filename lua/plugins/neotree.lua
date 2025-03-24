@@ -79,36 +79,42 @@ return {
           nowait = true,
         },
         mappings = {
-          ['<space>'] = { 'toggle_node', nowait = false },
-          ['<2-LeftMouse>'] = 'open',
           ['<CR>'] = 'open',
+          ['<'] = 'prev_source',
+          ['<2-LeftMouse>'] = 'open',
           ['<esc>'] = 'cancel',
-          ['P'] = { 'toggle_preview', config = { use_float = true } },
-          ['l'] = 'open',
-          ['S'] = 'open_split',
-          ['s'] = 'open_vsplit',
-          ['t'] = 'open_tabnew',
-          -- ["<cr>"] = "open_drop",
-          -- ["t"] = "open_tab_drop",
-          ['w'] = 'open_with_window_picker',
-          ['C'] = 'close_node',
-          ['z'] = 'close_all_nodes',
-          ['Z'] = 'expand_all_nodes',
-          ['a'] = { 'add', config = { show_path = 'none' } },
+          ['<space>'] = { 'toggle_node', nowait = false },
+          ['>'] = 'next_source',
+          ['?'] = 'show_help',
           ['A'] = 'add_directory',
-          ['d'] = 'delete',
-          ['r'] = 'rename',
-          ['y'] = 'copy_to_clipboard',
-          ['x'] = 'cut_to_clipboard',
-          ['p'] = 'paste_from_clipboard',
+          ['a'] = { 'add', config = { show_path = 'none' } },
+          ['C'] = 'close_node',
           ['c'] = 'copy',
+          ['d'] = 'delete',
+          ['i'] = 'show_file_details',
+          ['l'] = 'open',
           ['m'] = 'move',
+          ['p'] = 'paste_from_clipboard',
+          ['P'] = { 'toggle_preview', config = { use_float = true } },
           ['q'] = 'close_window',
           ['R'] = 'refresh',
-          ['?'] = 'show_help',
-          ['<'] = 'prev_source',
-          ['>'] = 'next_source',
-          ['i'] = 'show_file_details',
+          ['r'] = function(...)
+            require('lsp-file-operations').setup()
+            require('neo-tree.sources.common.commands').rename(...)
+          end,
+          ['e'] = function(...)
+            require('lsp-file-operations').setup()
+            require('neo-tree.sources.common.commands').rename_basename(...)
+          end,
+          ['h'] = 'open_split',
+          ['v'] = 'open_vsplit',
+          ['T'] = 'open_tab_drop',
+          ['t'] = 'open_tabnew',
+          ['w'] = 'open_with_window_picker',
+          ['x'] = 'cut_to_clipboard',
+          ['y'] = 'copy_to_clipboard',
+          ['z'] = 'close_all_nodes',
+          ['Z'] = 'expand_all_nodes',
         },
       },
       nesting_rules = {},
@@ -232,9 +238,5 @@ return {
         },
       },
     }
-
-    vim.defer_fn(function()
-      require('lsp-file-operations').setup()
-    end, 50)
   end,
 }

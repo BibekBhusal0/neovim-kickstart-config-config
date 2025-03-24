@@ -47,14 +47,24 @@ return {
             vim.cmd('CreateComponent ' .. text)
           end, '', 20, '󰜈 ')
         end,
+        desc = 'Add component',
       },
     },
-    opts = {},
+    opts = {
+      defult_path = '/src/components/',
+      generate_css_file = false,
+    },
   },
 
   {
     'farias-hecdin/CSSVarViewer',
     ft = { 'css' },
     opts = {},
+  },
+
+  {
+    'mawkler/jsx-element.nvim',
+    ft = { 'typescriptreact', 'javascriptreact', 'javascript' },
+    opts = { enabled = false }, -- enabled in treesitter textobjects
   },
 }

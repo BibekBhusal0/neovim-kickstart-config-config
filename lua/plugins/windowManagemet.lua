@@ -180,6 +180,8 @@ return {
       { '<leader>fa', ": lua require('harpoon.mark').add_file()<CR>", desc = 'Harpoon Add File' },
       { '<leader>fm', ": lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Harpoon Menu' },
       { '<leader>fn', ": lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
+      { '<leader>fk', ": lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
+      { '<leader>fj', ": lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
       { '<leader>fp', ": lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
       { '<leader>ft', ": lua require('harpoon.mark').toggle_file()<CR>", desc = 'Harpoon Toggle File' },
       { '<leader>fc', ": lua require('harpoon.mark').clear_all()<CR>", desc = 'Harpoon Clear Files' },
@@ -204,7 +206,6 @@ return {
 
   {
     'anuvyklack/windows.nvim',
-    event = { 'BufNewFile', 'BufReadPost' },
     dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
     keys = wrap_keys {
       { '<leader>wf', ':WindowsMaximize<CR>', 'Window Maximize' },
@@ -247,15 +248,4 @@ return {
     },
     opts = { hint = 'floating-big-letter' },
   }, -- picking window
-
-  {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    config = true,
-    cmd = 'ToggleTerm',
-    keys = wrap_keys {
-      { '<C-P>', ':ToggleTerm<CR>', desc = 'Toggle Terminal' },
-      { '<C-O>', ':ToggleTerm direction=float<CR>', desc = 'Toggle Terminal Float' },
-    },
-  }, -- easy switching terminal
 }
