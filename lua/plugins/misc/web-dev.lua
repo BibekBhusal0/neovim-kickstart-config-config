@@ -1,9 +1,8 @@
 local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
-local webDev = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
+local webDev = { 'html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
 
 return {
-
   {
     'BibekBhusal0/nvim-shadcn',
     opts = {},
@@ -33,7 +32,29 @@ return {
 
   {
     'windwp/nvim-ts-autotag',
-    config = true,
+    opts = {},
     ft = webDev,
   }, -- Autoclose HTML tags
+
+  {
+    'TiagoMDG/react-comp-gen.nvim',
+    cmd = { 'CreateComponent' },
+    keys = wrap_keys {
+      {
+        '<leader>CC',
+        function()
+          require 'utils.input'('Name', function(text)
+            vim.cmd('CreateComponent ' .. text)
+          end, '', 20, '󰜈 ')
+        end,
+      },
+    },
+    opts = {},
+  },
+
+  {
+    'farias-hecdin/CSSVarViewer',
+    ft = { 'css' },
+    opts = {},
+  },
 }
