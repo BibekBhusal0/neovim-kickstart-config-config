@@ -86,12 +86,12 @@ local function smart_delete(key)
   return (line:match '^%s*$' and '"_' or '') .. key
 end
 
-local keys = { 'd', 'dd', 'x', 'c', 's', 'C', 'S', 'X' }
+local keys = { 'dd', 'x', 'c', 's', 'C', 'S', 'X' }
 
 for _, key in pairs(keys) do
-  vim.keymap.set({ 'n', 'v' }, key, function()
+  map('key', function()
     return smart_delete(key)
-  end, { noremap = true, expr = true, desc = 'Smart delete' })
+  end, 'Smart Delete')
 end
 
 local function toggle_statusline()
