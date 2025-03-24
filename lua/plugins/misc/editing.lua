@@ -1,6 +1,4 @@
-local map = require 'utils.map'
 local wrap_keys = require 'utils.wrap_keys'
-local webDev = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
 
 return {
   {
@@ -46,12 +44,6 @@ return {
     },
     config = true,
   }, -- Autoclose parentheses, brackets, quotes, etc. also work on command mode
-
-  {
-    'windwp/nvim-ts-autotag',
-    config = true,
-    ft = webDev,
-  }, -- Autoclose HTML tags
 
   {
     'mg979/vim-visual-multi',
@@ -106,71 +98,6 @@ return {
       }
     end,
   }, -- Toggle between true and false ; more
-
-  {
-    'luckasRanarison/tailwind-tools.nvim',
-    ft = webDev,
-    dependencies = {
-      'razak17/tailwind-fold.nvim',
-      opts = { ft = webDev },
-    },
-    config = function()
-      require('tailwind-tools').setup {}
-      map('<leader>Tf', ':TailwindFoldToggle<CR>', 'Tailwind Fold Toggle')
-      map('<leader>TS', ':TailwindSort<CR>', 'Tailwind Sort')
-      map('<leader>Ts', ':TailwindSortSelection<CR>', 'Tailwind Sort', 'v')
-      map('<leader>Tc', ':TailwindColorToggle<CR>', 'Tailwind Color Toggle')
-      map('<leader>st', ':Telescope tailwind classes<CR>', 'Search Tailwind Classes')
-      map('<leader>Ts', ':Telescope tailwind classes<CR>', 'Tailwind search')
-    end,
-  }, -- tailwind color highlights folds and more
-
-  {
-    'jakewvincent/mkdnflow.nvim',
-    ft = 'markdown',
-    config = function()
-      require('mkdnflow').setup {
-        mappings = {
-          MkdnEnter = { { 'n', 'v', 'i' }, '<CR>' },
-          MkdnTab = false,
-          MkdnSTab = false,
-          MkdnNextLink = { 'n', ']l' },
-          MkdnPrevLink = { 'n', '[l' },
-          MkdnNextHeading = { 'n', ']h' },
-          MkdnPrevHeading = { 'n', '[h' },
-          MkdnGoBack = { 'n', '<BS>' },
-          MkdnGoForward = { 'n', '<Del>' },
-          MkdnCreateLink = false,
-          MkdnCreateLinkFromClipboard = { { 'n', 'v' }, '<A-p>' },
-          MkdnFollowLink = false,
-          MkdnDestroyLink = { 'n', '<M-CR>' },
-          MkdnTagSpan = { 'v', '<M-CR>' },
-          MkdnMoveSource = { 'n', '<F2>' },
-          MkdnYankAnchorLink = { 'n', 'yaa' },
-          MkdnYankFileAnchorLink = { 'n', 'yfa' },
-          MkdnIncreaseHeading = { 'n', '+' },
-          MkdnDecreaseHeading = { 'n', '-' },
-          MkdnToggleToDo = { { 'n', 'i' }, '<C-h>' },
-          MkdnNewListItem = false,
-          MkdnNewListItemBelowInsert = { 'n', 'o' },
-          MkdnNewListItemAboveInsert = { 'n', 'O' },
-          MkdnExtendList = false,
-          MkdnUpdateNumbering = { 'n', '<leader>nN' },
-          MkdnTableNextCell = { 'i', ']C' },
-          MkdnTablePrevCell = { 'i', '[C' },
-          MkdnTableNextRow = false,
-          MkdnTablePrevRow = { 'i', '<M-CR>' },
-          MkdnTableNewRowBelow = { 'n', '<C-i>r' },
-          MkdnTableNewRowAbove = { 'n', '<C-i>R' },
-          MkdnTableNewColAfter = { 'n', '<C-i>c' },
-          MkdnTableNewColBefore = { 'n', '<C-i>C' },
-          MkdnFoldSection = { 'n', 'gf' },
-          MkdnUnfoldSection = { 'n', 'gF' },
-        },
-        foldtext = { object_count_icon_set = 'nerdfont' },
-      }
-    end,
-  }, -- Better editing in markdown
 
   {
     'gregorias/coerce.nvim',

@@ -232,6 +232,7 @@ return {
         },
       },
     }
+
     vim.defer_fn(function()
       require('lsp-file-operations').setup()
     end, 50)
