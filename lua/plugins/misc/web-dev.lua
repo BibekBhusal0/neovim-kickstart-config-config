@@ -5,8 +5,15 @@ local webDev = { 'html', 'javascript', 'javascriptreact', 'typescript', 'typescr
 return {
   {
     'BibekBhusal0/nvim-shadcn',
-    opts = {},
+    opts = {
+      format = { solid = 'npx shadcn-solid@latest add %s' },
+      keys = {
+        n = { solid = '<C-s>' },
+        i = { solid = '<C-s>' },
+      },
+    },
     cmd = { 'ShadcnAdd' },
+
     keys = wrap_keys {
       { '<leader>sa', ':ShadcnAdd<CR>', desc = 'Add shadcn component' },
     },

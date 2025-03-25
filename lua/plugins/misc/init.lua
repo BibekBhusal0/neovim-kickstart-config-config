@@ -9,7 +9,7 @@ return {
   require 'plugins.misc.productivity',
   require 'plugins.misc.screenshot',
   require 'plugins.misc.web-dev',
-  require 'plugins.misc.animation',
+  -- require 'plugins.misc.animation',
   require 'plugins.misc.comments',
 
   {
