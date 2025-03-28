@@ -13,7 +13,6 @@ return {
       },
     },
     cmd = { 'ShadcnAdd' },
-
     keys = wrap_keys {
       { '<leader>sa', ':ShadcnAdd<CR>', desc = 'Add shadcn component' },
     },
@@ -44,7 +43,7 @@ return {
   }, -- Autoclose HTML tags
 
   {
-    'BibekBhusal0/react-comp-gen.nvim',
+    dir = 'D:/github/react-comp-gen.nvim',
     cmd = { 'CreateComponent' },
     keys = wrap_keys {
       {
@@ -57,16 +56,13 @@ return {
         desc = 'Add component',
       },
     },
-    opts = {
-      defult_path = '/src/components/',
-      generate_css_file = false,
-    },
+    opts = { defult_path = '/src/components/', generate_css_file = false },
   },
 
   {
-    'farias-hecdin/CSSVarViewer',
-    ft = { 'css' },
-    opts = {},
+    -- 'farias-hecdin/CSSVarViewer',
+    -- ft = { 'css' },
+    -- opts = {},
   },
 
   {
