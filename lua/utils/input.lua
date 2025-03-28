@@ -5,7 +5,7 @@ return function(title, callback, val, width, prompt)
   local initalVal = val or ''
   local input = Input({
     position = '50%',
-    size = { width = width or #initalVal + 5 },
+    size = { width = width or #initalVal + 10 },
     border = {
       style = 'single',
       text = {

@@ -35,7 +35,16 @@ return {
           map('<leader>lS', ":lua require('telescope.builtin').lsp_type_definitions({jump_type='vsplit'})<CR>", 'LSP Type Definition In Split')
           map('<leader>lw', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", 'LSP Workspace Symbols')
 
-          map('<leader>ln', vim.lsp.buf.rename, 'LSP Rename variable')
+          local rename = function()
+            local var = vim.fn.expand '<cword>'
+            local callback = function(text)
+              local params = vim.lsp.util.make_position_params()
+              params.newName = text
+              vim.lsp.buf_request(0, 'textDocument/rename', params)
+            end
+            require 'utils.input'(' Rename ', callback, var, nil, require('utils.icons').symbols.Variable .. '  ')
+          end
+          map('<leader>ln', rename, 'LSP Rename variable')
 
           local function code_action()
             pcall(require('telescope').load_extension, 'ui-select')
