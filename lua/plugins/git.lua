@@ -13,26 +13,26 @@ local function commit_all_with_message()
   end, '', 50, require('utils.icons').others.github .. '  ')
 end
 
-map('<leader>gp', ':Git push<CR>', 'Git push')
-map('<leader>ga', ':Git add .<CR>', 'Git add all files')
-map('<leader>gi', ':Git init<CR>', 'Git Init')
 map('<leader>gA', ':Git add %<CR>', 'Git add current file')
-map('<leader>gP', ':Git pull<CR>', 'Git pull')
-map('<leader>gC', commit_with_message, 'Git commit')
+map('<leader>ga', ':Git add .<CR>', 'Git add all files')
 map('<leader>gc', commit_all_with_message, 'Git commit all')
+map('<leader>gC', commit_with_message, 'Git commit')
+map('<leader>gi', ':Git init<CR>', 'Git Init')
+map('<leader>gP', ':Git pull<CR>', 'Git pull')
+map('<leader>gp', ':Git push<CR>', 'Git push')
 
-map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
-map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
-map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')
-map('<leader>gR', ':Gitsigns reset_buffer<CR>', 'Git Reset buffer')
-map('<leader>gH', ':Gitsigns preview_hunk<CR>', 'Git Preview hunk')
-map('<leader>gh', ':Gitsigns preview_hunk_inline<CR>', 'Git Preview hunk inline')
 map('<leader>gb', ':Gitsigns blame<CR>', 'Git Blame')
 map('<leader>gB', ':Gitsigns blame_line<CR>', 'Git Toggle line blame')
 map('<leader>gD', ':Gitsigns diffthis<CR>', 'Git Diff this')
+map('<leader>gH', ':Gitsigns preview_hunk<CR>', 'Git Preview hunk')
+map('<leader>gh', ':Gitsigns preview_hunk_inline<CR>', 'Git Preview hunk inline')
 map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current line blame')
-map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 map('<leader>gq', ':Gitsigns setqflist<CR>', 'Git quick fix list')
+map('<leader>gR', ':Gitsigns reset_buffer<CR>', 'Git Reset buffer')
+map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
+map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')
+map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
+map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 map('ih', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
 
 local function disableAutowidth()
@@ -170,13 +170,13 @@ return {
     'sindrets/diffview.nvim',
     lazy = true,
     keys = wrap_keys {
-      { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
-      { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with head' },
-      { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },
       { '<leader>gdb', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
       { '<leader>gdc', ':DiffviewClose<CR>', desc = 'Diffview close' },
       { '<leader>gdf', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
+      { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },
       { '<leader>gdh', diffViewFileHistory, desc = 'Diffview file history' },
+      { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
+      { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with head' },
     },
   },
 

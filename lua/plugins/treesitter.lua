@@ -194,25 +194,26 @@ return {
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
 
-      -- local scroll_center = function()
-      --   require('neoscroll').zz { half_win_duration = 10, hide_cursor = true }
-      -- end
+      local scroll_center = function()
+        vim.api.nvim_feedkeys('zz', 'n', false) -- center
+        -- require('neoscroll').zz { half_win_duration = 10, hide_cursor = true }
+      end
 
-      -- local orignal_set = ts_repeat_move.set_last_move
-      -- ts_repeat_move.set_last_move = function(...)
-      --   local success = orignal_set(...)
-      --   if success then
-      --     vim.defer_fn(scroll_center, 5)
-      --   end
-      --   return success
-      -- end
+      local orignal_set = ts_repeat_move.set_last_move
+      ts_repeat_move.set_last_move = function(...)
+        local success = orignal_set(...)
+        if success then
+          vim.defer_fn(scroll_center, 5)
+        end
+        return success
+      end
 
-      -- local orignal_repeat = ts_repeat_move.repeat_last_move
-      -- ts_repeat_move.repeat_last_move = function(...)
-      --   local r = orignal_repeat(...)
-      --   vim.defer_fn(scroll_center, 5)
-      --   return r
-      -- end
+      local orignal_repeat = ts_repeat_move.repeat_last_move
+      ts_repeat_move.repeat_last_move = function(...)
+        local r = orignal_repeat(...)
+        vim.defer_fn(scroll_center, 5)
+        return r
+      end
 
       local get_pair = ts_repeat_move.make_repeatable_move_pair
       local next_hunk, prev_hunk = get_pair(call_require('gitsigns', 'next_hunk'), call_require('gitsigns', 'prev_hunk'))

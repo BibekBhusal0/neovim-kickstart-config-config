@@ -4,11 +4,11 @@ local showTree = function()
 end
 
 local map = require 'utils.map'
-map('<leader>e', ':Neotree toggle position=right<CR>', 'NeoTree on Right')
-map('<leader>q', ':Neotree toggle position=left<CR>', 'NeoTree on Left')
 map('<C-g>', showTree, 'Neotree Toggle', { 'n', 'v', 'i' })
-map('<leader>gf', ':Neotree float git_status <CR>', 'Git changes in files')
 map('<leader>E', ':Neotree float <CR>', 'Neotree Floating')
+map('<leader>e', ':Neotree toggle position=right<CR>', 'NeoTree on Right')
+map('<leader>gf', ':Neotree float git_status <CR>', 'Git changes in files')
+map('<leader>q', ':Neotree toggle position=left<CR>', 'NeoTree on Left')
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
@@ -79,9 +79,9 @@ return {
           nowait = true,
         },
         mappings = {
-          ['<CR>'] = 'open',
           ['<'] = 'prev_source',
           ['<2-LeftMouse>'] = 'open',
+          ['<CR>'] = 'open',
           ['<esc>'] = 'cancel',
           ['<space>'] = { 'toggle_node', nowait = false },
           ['>'] = 'next_source',
@@ -91,6 +91,11 @@ return {
           ['C'] = 'close_node',
           ['c'] = 'copy',
           ['d'] = 'delete',
+          ['e'] = function(...)
+            require('lsp-file-operations').setup()
+            require('neo-tree.sources.common.commands').rename_basename(...)
+          end,
+          ['h'] = 'open_split',
           ['i'] = 'show_file_details',
           ['l'] = 'open',
           ['m'] = 'move',
@@ -102,14 +107,9 @@ return {
             require('lsp-file-operations').setup()
             require('neo-tree.sources.common.commands').rename(...)
           end,
-          ['e'] = function(...)
-            require('lsp-file-operations').setup()
-            require('neo-tree.sources.common.commands').rename_basename(...)
-          end,
-          ['h'] = 'open_split',
-          ['v'] = 'open_vsplit',
           ['T'] = 'open_tab_drop',
           ['t'] = 'open_tabnew',
+          ['v'] = 'open_vsplit',
           ['w'] = 'open_with_window_picker',
           ['x'] = 'cut_to_clipboard',
           ['y'] = 'copy_to_clipboard',
@@ -164,16 +164,16 @@ return {
         -- instead of relying on nvim autocmd events.
         window = {
           mappings = {
-            ['<bs>'] = 'navigate_up',
-            ['.'] = 'set_root',
-            ['H'] = 'toggle_hidden',
-            ['/'] = 'fuzzy_finder',
-            ['D'] = 'fuzzy_finder_directory',
             ['#'] = 'fuzzy_sorter',
-            ['f'] = 'filter_on_submit',
+            ['.'] = 'set_root',
+            ['/'] = 'fuzzy_finder',
+            ['<bs>'] = 'navigate_up',
             ['<c-x>'] = 'clear_filter',
             ['[g'] = 'prev_git_modified',
             [']g'] = 'next_git_modified',
+            ['D'] = 'fuzzy_finder_directory',
+            ['f'] = 'filter_on_submit',
+            ['H'] = 'toggle_hidden',
             ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
             ['oc'] = { 'order_by_created', nowait = false },
             ['od'] = { 'order_by_diagnostics', nowait = false },
@@ -184,10 +184,10 @@ return {
             ['ot'] = { 'order_by_type', nowait = false },
           },
           fuzzy_finder_mappings = {
-            ['<down>'] = 'move_cursor_down',
             ['<C-n>'] = 'move_cursor_down',
-            ['<up>'] = 'move_cursor_up',
             ['<C-p>'] = 'move_cursor_up',
+            ['<down>'] = 'move_cursor_down',
+            ['<up>'] = 'move_cursor_up',
           },
         },
       },
@@ -201,9 +201,9 @@ return {
         show_unloaded = true,
         window = {
           mappings = {
-            ['bd'] = 'buffer_delete',
-            ['<bs>'] = 'navigate_up',
             ['.'] = 'set_root',
+            ['<bs>'] = 'navigate_up',
+            ['bd'] = 'buffer_delete',
             ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
             ['oc'] = { 'order_by_created', nowait = false },
             ['od'] = { 'order_by_diagnostics', nowait = false },
@@ -221,12 +221,12 @@ return {
           mappings = {
             ['A'] = 'git_add_all',
             ['g'] = { 'show_help', nowait = false, config = { title = 'Git actions', prefix_key = 'g' } },
-            ['gu'] = 'git_unstage_file',
             ['ga'] = 'git_add_file',
-            ['gr'] = 'git_revert_file',
             ['gc'] = 'git_commit',
-            ['gp'] = 'git_push',
             ['gg'] = 'git_commit_and_push',
+            ['gp'] = 'git_push',
+            ['gr'] = 'git_revert_file',
+            ['gu'] = 'git_unstage_file',
             ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
             ['oc'] = { 'order_by_created', nowait = false },
             ['od'] = { 'order_by_diagnostics', nowait = false },

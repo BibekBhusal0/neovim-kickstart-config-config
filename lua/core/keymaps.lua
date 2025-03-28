@@ -38,6 +38,12 @@ map('<leader>xA', ':qa!<CR>', 'Quit all Files force')
 map('<leader>xt', ':tabclose<CR>', 'Quit Tab')
 map('<leader>xs', ':close<CR>', 'Quit Split')
 
+-- center while navigation
+map('N', 'Nzzzv', 'Previous and center')
+map('n', 'nzzzv', 'next and center')
+map('<C-d>', '<C-d>zz', 'Scroll down')
+map('<C-u>', '<C-u>zz', 'Scroll up')
+
 -- copy/paste to
 -- system clipboard with leader y
 map('<leader>y', '"+y', 'Yank to system clipboard', { 'n', 'v' })

@@ -44,7 +44,7 @@ return {
   }, -- Autoclose HTML tags
 
   {
-    'TiagoMDG/react-comp-gen.nvim',
+    'BibekBhusal0/react-comp-gen.nvim',
     cmd = { 'CreateComponent' },
     keys = wrap_keys {
       {

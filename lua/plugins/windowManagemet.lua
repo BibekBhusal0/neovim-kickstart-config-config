@@ -177,14 +177,14 @@ return {
   {
     'ThePrimeagen/harpoon',
     keys = wrap_keys {
-      { '<leader>fa', ": lua require('harpoon.mark').add_file()<CR>", desc = 'Harpoon Add File' },
-      { '<leader>fm', ": lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Harpoon Menu' },
-      { '<leader>fn', ": lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
-      { '<leader>fk', ": lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
-      { '<leader>fj', ": lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
-      { '<leader>fp', ": lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
-      { '<leader>ft', ": lua require('harpoon.mark').toggle_file()<CR>", desc = 'Harpoon Toggle File' },
-      { '<leader>fc', ": lua require('harpoon.mark').clear_all()<CR>", desc = 'Harpoon Clear Files' },
+      { '<leader>fa', ":lua require('harpoon.mark').add_file()<CR>", desc = 'Harpoon Add File' },
+      { '<leader>fc', ":lua require('harpoon.mark').clear_all()<CR>", desc = 'Harpoon Clear Files' },
+      { '<leader>fj', ":lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
+      { '<leader>fk', ":lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
+      { '<leader>fm', ":lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Harpoon Menu' },
+      { '<leader>fn', ":lua require('harpoon.ui').nav_next()<CR>", desc = 'Harpoon Next' },
+      { '<leader>fp', ":lua require('harpoon.ui').nav_prev()<CR>", desc = 'Harpoon Previous' },
+      { '<leader>ft', ":lua require('harpoon.mark').toggle_file()<CR>", desc = 'Harpoon Toggle File' },
     },
   }, -- pinning files and quickly moving between them
 
@@ -208,11 +208,11 @@ return {
     'anuvyklack/windows.nvim',
     dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
     keys = wrap_keys {
-      { '<leader>wf', ':WindowsMaximize<CR>', 'Window Maximize' },
-      { '<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically' },
-      { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally' },
       { '<leader>w=', ':WindowsEqualize<CR>', 'Window Equalize' },
+      { '<leader>wf', ':WindowsMaximize<CR>', 'Window Maximize' },
+      { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally' },
       { '<leader>wt', ':WindowsToggleAutowidth<CR>', 'Window Toggle Autowidth' },
+      { '<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically' },
     }, -- autowidth is disabled so this is not needed
     config = function()
       vim.o.winwidth = 20

@@ -112,7 +112,8 @@ return {
 
   {
     'christoomey/vim-sort-motion',
-    keys = { { 'gs', mode = { 'n', 'o', 'x' }, 'Sort' } },
+    event = { 'BufNewFile', 'BufReadPost' },
+    -- keys = { { 'gs', mode = { 'n', 'o', 'x' }, 'Sort' } },
     config = function()
       vim.g.sort_motion_flags = 'i'
     end,
