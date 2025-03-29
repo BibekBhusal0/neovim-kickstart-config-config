@@ -85,21 +85,6 @@ map('<leader>rn', ':set rnu!<CR>', 'Toggle Relative Line Number')
 map('zo', 'za', 'Toggle fold')
 map('<Esc>', ':noh<CR>', 'Clear Highlight')
 
--- https://www.reddit.com/r/neovim/comments/1janrmf/smart_delete/
-local function smart_delete(key)
-  local l = vim.api.nvim_win_get_cursor(0)[1]
-  local line = vim.api.nvim_buf_get_lines(0, l - 1, l, true)[1]
-  return (line:match '^%s*$' and '"_' or '') .. key
-end
-
-local keys = { 'dd', 'x', 'c', 's', 'C', 'S', 'X' }
-
-for _, key in pairs(keys) do
-  map('key', function()
-    return smart_delete(key)
-  end, 'Smart Delete')
-end
-
 local function toggle_statusline()
   local statusline_visible = vim.opt.laststatus._value == 2
   if statusline_visible then

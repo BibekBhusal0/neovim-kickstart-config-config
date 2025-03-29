@@ -198,9 +198,6 @@ return {
       map('<leader>bu', ':BufStackList<CR>', 'Buffer Open List')
       map('<leader>bh', ':BufClosedList<CR>', 'Buffer Closed List')
       map('<leader>ba', ':BufReopen<CR>', 'Buffer Repoen')
-      vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-        callback = require('bufstack.core').track_buffer,
-      })
     end,
   }, -- Reopen closed buffer and cycle through recently closed buffer
 

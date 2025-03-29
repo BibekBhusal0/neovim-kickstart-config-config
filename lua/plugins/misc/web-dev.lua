@@ -11,8 +11,10 @@ return {
         n = { solid = '<C-s>' },
         i = { solid = '<C-s>' },
       },
+
+      init_command = { default_color = 'Zinc' },
     },
-    cmd = { 'ShadcnAdd' },
+    cmd = { 'ShadcnAdd', 'ShadcnInit', 'ShadcnAddImportant' },
     keys = wrap_keys {
       { '<leader>sa', ':ShadcnAdd<CR>', desc = 'Add shadcn component' },
     },
