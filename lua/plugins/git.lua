@@ -33,7 +33,11 @@ map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
 map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')
 map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
+map('ah', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
 map('ih', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
+
+map(']h', ':execute("normal! ]c")<CR>', 'Next Change')
+map('[h', ':execute("normal! [c")<CR>', 'Prev Change')
 
 local function disableAutowidth()
   local lazy = require 'lazy'
@@ -150,7 +154,15 @@ return {
 
   {
     'tpope/vim-fugitive',
-    cmd = { 'Git' },
+    cmd = { 'Git', 'Gdiffsplit', 'Gedit', 'Gread', 'Gwrite', 'Ggrep', 'GMove', 'GRename', 'GDelete', 'GRemove', 'GBrowse' },
+  },
+
+  {
+    'tpope/vim-rhubarb',
+    cmd = { 'GBrowse' },
+    keys = wrap_keys {
+      { '<leader>go', ':GBrowse<CR>', 'Git open in browser', mode = { 'n', 'v' } },
+    },
   },
 
   {

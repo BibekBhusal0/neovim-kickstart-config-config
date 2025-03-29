@@ -9,23 +9,25 @@ local function prettifyFooterText(icon, text)
 end
 
 local quotes = {
-  { 'Before software can be reusable it first has to be usable.', 'Ralph Johnson' },
-  { 'There are two ways to write error-free programs; only the third one works.', 'Alan J. Perlis' },
-  { 'Deleted code is debugged code.', 'Jeff Sickel' },
-  { 'It works on my machine.', 'Every Developer Ever' },
-  { 'It is not a bug, it is a feature.', 'Me' },
   { '6 hours of debugging can save you 5 minutes of reading documentation.', 'Random Reddit post' },
-  { 'To replace programmers with bots, clients will have to accurately describe what they want, We are safe.', 'Random Reddit post' },
-  { 'Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.', 'Random Reddit post' },
   { 'An idiot admires complexity, a genius admires simplicity.', 'Terry Davis' },
-  { 'In theory there is no difference between theory and practice. In practice there is.', 'Yogi Berra' },
-  { 'Think of how stupid the average person is, and realize half of them are stupider than that.', 'George Carlin' },
-  { "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.", 'Albert Einstein' },
+  { 'Before software can be reusable it first has to be usable.', 'Ralph Johnson' },
+  { 'Deleted code is debugged code.', 'Jeff Sickel' },
   { 'Good Artists copy; Great artist steal.', 'Pablo Picasso' },
-  { 'You know the bug is serous when you pause your Spotify music to focus.', 'Random Reddit post' },
-  { 'Nothing is as permanent as a temporary solution that works', 'Random Reddit Post' },
-  { 'Time is free but somehow priceless, so whatch how you spend it wisely', 'Central Cee' },
   { 'Gotta concentrate, against the clock I rase,got no time to waste, I am already late, I got a marathon pased', 'Eminiem' },
+  { 'In theory there is no difference between theory and practice. In practice there is.', 'Yogi Berra' },
+  { 'It is not a bug, it is a feature.', 'Me' },
+  { 'It works on my machine.', 'Every Developer Ever' },
+  { 'Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.', 'Random Reddit post' },
+  { 'Nothing is as permanent as a temporary solution that works', 'Random Reddit Post' },
+  { "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.", 'Albert Einstein' },
+  { 'The best error message is the one that never shows up.', 'Thomas Fuchs' },
+  { 'There are three things programmers struggle withㅤㅤㅤㅤ  1. Naming variabls, 2. Off by one errors', 'Fireship video comment' },
+  { 'There are two ways to write error-free programs; only the third one works.', 'Alan J. Perlis' },
+  { 'Think of how stupid the average person is, and realize half of them are stupider than that.', 'George Carlin' },
+  { 'Time is free but somehow priceless, so whatch how you spend it wisely', 'Central Cee' },
+  { 'To replace programmers with bots, clients will have to accurately describe what they want, We are safe.', 'Random Reddit post' },
+  { 'You know the bug is serous when you pause your Spotify music to focus.', 'Random Reddit post' },
 }
 
 local function get_random_quote()

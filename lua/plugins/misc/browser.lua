@@ -48,7 +48,7 @@ return {
       require('telescope').load_extension 'bookmarks'
       require('browser_bookmarks').setup {
         profile_name = 'Bibek',
-        url_open_command = 'start brave',
+        url_open_command = 'start ""',
       }
     end,
   },

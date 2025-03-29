@@ -24,7 +24,7 @@ return {
       { '<leader>rs', ':Rayso<CR>', desc = 'Screenshot with rayso', mode = { 'n', 'v' } },
     },
     opts = {
-      open_cmd = 'brave',
+      open_cmd = 'zen',
       options = {
         background = false,
         padding = 16,
