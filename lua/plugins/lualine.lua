@@ -92,17 +92,6 @@ return {
       cond = hide_in_width,
     }
 
-    local lsp_status = {
-      function()
-        local clients = vim.lsp.get_active_clients()
-        if #clients == 0 then
-          return 'No LSP'
-        end
-        return ''
-      end,
-      cond = hide_in_width,
-    }
-
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -132,7 +121,7 @@ return {
           diagnostics,
           { 'filetype', cond = hide_in_width },
         },
-        lualine_y = { lsp_status, codeium_status, plugins },
+        lualine_y = { codeium_status, plugins },
         lualine_z = { getFileName },
       },
       inactive_sections = {

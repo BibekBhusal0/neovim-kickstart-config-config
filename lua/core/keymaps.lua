@@ -74,8 +74,6 @@ map('<', '<gv', 'Indent left', 'v')
 map('>', '>gv', 'Indent right', 'v')
 
 -- Diagnostic keymaps
-map('[d', vim.diagnostic.goto_prev, 'Diagnostic previous')
-map(']d', vim.diagnostic.goto_next, 'Diagnostic next')
 map('<leader>dd', vim.diagnostic.open_float, 'Diagnostic floating')
 
 -- line numbers

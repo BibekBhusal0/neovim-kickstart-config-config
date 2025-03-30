@@ -61,11 +61,11 @@ vim.opt.fillchars = { fold = ' ', eob = ' ', foldopen = '', foldsep = ' ', fo
 for type, icon in pairs(require('utils.icons').diagnostics) do
   local hl = 'DiagnosticSign' .. type:sub(1, 1):upper() .. type:sub(2)
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+end -- depreciated
 for type, icon in pairs(require('utils.icons').dap) do
   local hl = 'Dap' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl })
-end
+end -- depreciated
 
 return {
   'luukvbaal/statuscol.nvim',
