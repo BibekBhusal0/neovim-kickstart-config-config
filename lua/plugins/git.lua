@@ -20,6 +20,9 @@ map('<leader>gC', commit_with_message, 'Git commit')
 map('<leader>gi', ':Git init<CR>', 'Git Init')
 map('<leader>gP', ':Git pull<CR>', 'Git pull')
 map('<leader>gp', ':Git push<CR>', 'Git push')
+map('<leader>g/', ':Git stash<CR>', 'Git stash')
+map('<leader>gj', ':Git commit -a --amend --no-edit<CR>', 'Git add and commit to last commit')
+map('<leader>gJ', ':Git commit --amend --no-edit<CR>', 'Git commit to last commit')
 
 map('<leader>gb', ':Gitsigns blame<CR>', 'Git Blame')
 map('<leader>gB', ':Gitsigns blame_line<CR>', 'Git Toggle line blame')
@@ -161,7 +164,7 @@ return {
     'tpope/vim-rhubarb',
     cmd = { 'GBrowse' },
     keys = wrap_keys {
-      { '<leader>go', ':GBrowse<CR>', 'Git open in browser', mode = { 'n', 'v' } },
+      { '<leader>go', ':GBrowse<CR>', desc = 'Git open in browser', mode = { 'n', 'v' } },
     },
   },
 
