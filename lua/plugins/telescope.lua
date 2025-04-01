@@ -92,11 +92,13 @@ return {
       }
       require('telescope').setup {
         defaults = {
+          file_ignore_patterns = { 'node_modules', '.git', '.github', 'dist', 'build' },
+          grep_ignore_patterns = { '**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock' },
           mappings = {
             i = {
-              ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
-              ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
-              ['<C-l>'] = require('telescope.actions').select_default, -- open file
+              ['<C-k>'] = require('telescope.actions').move_selection_previous,
+              ['<C-j>'] = require('telescope.actions').move_selection_next,
+              ['<C-l>'] = require('telescope.actions').select_default,
               ['<c-g>'] = open_with_trouble,
             },
             n = { ['<c-g>'] = open_with_trouble },
