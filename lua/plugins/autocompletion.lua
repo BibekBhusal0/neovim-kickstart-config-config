@@ -102,6 +102,12 @@ return {
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
+          local webDev = { 'html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
+          local filetype = vim.bo.filetype
+          local is_webdev_file = vim.tbl_contains(webDev, filetype)
+          if is_webdev_file then
+            vim_item = require('tailwind-tools.cmp').lspkind_format(entry, vim_item)
+          end
           vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
           vim_item.menu = ({
             luasnip = '[S]',

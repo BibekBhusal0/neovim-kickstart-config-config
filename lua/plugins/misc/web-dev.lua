@@ -1,6 +1,17 @@
 local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
 local webDev = { 'html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' }
+local patterns = {
+  'tw`([^`]*)',
+  'tw="([^"]*)',
+  'tw={"([^"}]*)',
+  'tw\\.\\w+`([^`]*)',
+  'tw\\(.*?\\)`([^`]*)',
+  { 'clsx\\(([^)]*)\\)', "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+  { 'classnames\\(([^)]*)\\)', "'([^']*)'" },
+  { 'cva\\(([^)]*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
+  { 'cn\\(([^)]*)\\)', "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+}
 
 return {
   {
@@ -11,7 +22,6 @@ return {
         n = { solid = '<C-s>' },
         i = { solid = '<C-s>' },
       },
-
       init_command = { default_color = 'Zinc' },
     },
     cmd = { 'ShadcnAdd', 'ShadcnInit', 'ShadcnAddImportant' },
@@ -23,18 +33,17 @@ return {
   {
     'luckasRanarison/tailwind-tools.nvim',
     ft = webDev,
-    dependencies = {
-      'razak17/tailwind-fold.nvim',
-      opts = { ft = webDev },
-    },
     config = function()
-      require('tailwind-tools').setup {}
-      map('<leader>Tf', ':TailwindFoldToggle<CR>', 'Tailwind Fold Toggle')
-      map('<leader>TS', ':TailwindSort<CR>', 'Tailwind Sort')
-      map('<leader>Ts', ':TailwindSortSelection<CR>', 'Tailwind Sort', 'v')
-      map('<leader>Tc', ':TailwindColorToggle<CR>', 'Tailwind Color Toggle')
+      require('tailwind-tools').setup {
+        document_color = { enabled = true },
+        conceal = { enabled = true, symbol = '…' },
+        server = { settings = { experimental = { classRegex = patterns } } },
+      }
       map('<leader>st', ':Telescope tailwind classes<CR>', 'Search Tailwind Classes')
-      map('<leader>Ts', ':Telescope tailwind classes<CR>', 'Tailwind search')
+      map('<leader>tc', ':TailwindColorToggle<CR>', 'Tailwind Color Toggle')
+      map('<leader>tf', ':TailwindConcealToggle<CR>', 'Tailwind Fold Toggle')
+      map('<leader>ts', ':Telescope tailwind classes<CR>', 'Tailwind search')
+      map('<leader>TS', ':TailwindSort<CR>', 'Tailwind search')
     end,
   }, -- tailwind color highlights folds and more
 
@@ -59,12 +68,6 @@ return {
       },
     },
     opts = { defult_path = '/src/components/', generate_css_file = false },
-  },
-
-  {
-    -- 'farias-hecdin/CSSVarViewer',
-    -- ft = { 'css' },
-    -- opts = {},
   },
 
   {
