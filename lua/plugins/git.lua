@@ -9,7 +9,7 @@ end
 
 local function commit_all_with_message()
   require 'utils.input'(' Commit Message ', function(text)
-    vim.cmd("Git commit -a -m '" .. text .. "'")
+    vim.cmd("Git commit -am'" .. text .. "'")
   end, '', 50, require('utils.icons').others.github .. '  ')
 end
 
@@ -20,6 +20,7 @@ map('<leader>gC', commit_with_message, 'Git commit')
 map('<leader>gi', ':Git init<CR>', 'Git Init')
 map('<leader>gP', ':Git pull<CR>', 'Git pull')
 map('<leader>gp', ':Git push<CR>', 'Git push')
+map('<leader>g[', ':Git push --force<CR>', 'Git push Force')
 map('<leader>g/', ':Git stash<CR>', 'Git stash')
 map('<leader>gj', ':Git commit -a --amend --no-edit<CR>', 'Git add and commit to last commit')
 map('<leader>gJ', ':Git commit --amend --no-edit<CR>', 'Git commit to last commit')
@@ -220,5 +221,14 @@ return {
       end)
       require('telescope').load_extension 'git_worktree'
     end,
+  },
+
+  {
+    'fredehoey/tardis.nvim',
+    opts = {
+      next = '<C-S-j>',
+      prev = '<C-S-K>',
+    },
+    keys = wrap_keys { { '<leader>gg', ':Tardis git<CR>', desc = 'Git Time Travel' } },
   },
 }

@@ -13,7 +13,7 @@ return {
     -- Formatters & linters for mason to install
     require('mason-null-ls').setup {
       ensure_installed = {
-        'prettierd', -- ts/js/html/more formatter
+        'prettier', -- ts/js/html/more formatter
         'eslint_d', -- ts/js linter
         'ruff',
         'stylua',
@@ -22,7 +22,7 @@ return {
     }
 
     local sources = {
-      formatting.prettierd,
+      formatting.prettier,
       formatting.stylua,
       require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
       require 'none-ls.formatting.ruff_format',
