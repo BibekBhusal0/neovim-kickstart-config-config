@@ -14,16 +14,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  require 'plugins.ai', -- AI autocompletion and chat
+  require 'plugins.ai', -- AI Autocompletion and chat
   require 'plugins.alpha', -- Customizable dashboard screen
   require 'plugins.autocompletion', -- Autocompletion for code
   require 'plugins.colortheme', -- Color scheme setup
   require 'plugins.debugging', -- Debugger
   require 'plugins.games', -- Fun games
-  require 'plugins.git', -- Git stuff like lazygit, gitsigns
+  require 'plugins.git', -- Git stuff like lazyGit, gitsigns
   require 'plugins.leetcode', -- solving leetcode problems
   require 'plugins.lsp', -- Language Server Protocol setup
-  require 'plugins.lualine', -- Statusline
+  require 'plugins.lualine', -- StatusLine
   require 'plugins.mini_file', -- Yet another file explorer
   require 'plugins.misc', -- Miscellaneous utility plugins
   require 'plugins.neotree', -- File explorer for Neovim

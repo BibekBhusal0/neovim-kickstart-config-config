@@ -33,7 +33,7 @@ return {
       },
       { '<leader>dB', ':PBClearAllBreakpoints<CR>', desc = 'Debuger Clear All BreakPoint' },
     },
-  }, -- Breakpoint data is not lost
+  }, -- BreakPoint data is not lost
 
   {
     'mfussenegger/nvim-dap',

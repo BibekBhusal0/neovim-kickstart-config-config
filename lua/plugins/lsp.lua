@@ -56,11 +56,11 @@ return {
           map('<leader>lh', vim.lsp.buf.hover, 'LSP Hover')
           map('L', vim.lsp.buf.hover, 'LSP Hover')
 
-          -- The following two autocommands are used to highlight references of the
+          -- The following two autoCommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
           --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
+          -- When you move your cursor, the highlights will be cleared (the second autoCommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -85,7 +85,7 @@ return {
             })
           end
 
-          -- The following code creates a keymap to toggle inlay hints in your
+          -- The following code creates a keyMap to toggle inlay hints in your
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
@@ -108,7 +108,7 @@ return {
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
+      --  When you add nvim-cmp, luaSnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities =
@@ -159,7 +159,7 @@ return {
             server.autostart = false
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
+            -- certain features of an LSP (for example, turning off formatting for tsServer)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,

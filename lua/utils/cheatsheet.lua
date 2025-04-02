@@ -258,7 +258,7 @@ local excluded_groups = { 'terminal (t)', 'autopairs', 'Nvim', 'Opens', 'LuaSnip
 local get_mappings = function(mappings, tb_to_add)
   for _, v in ipairs(mappings) do
     local desc = v.desc
-    -- dont include mappings which have \n in their desc
+    -- don't include mappings which have \n in their desc
     if not desc or (select(2, desc:gsub('%S+', '')) <= 1) or string.find(desc, '\n') then
       goto continue
     end

@@ -210,7 +210,7 @@ return {
       { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally' },
       { '<leader>wt', ':WindowsToggleAutowidth<CR>', 'Window Toggle Autowidth' },
       { '<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically' },
-    }, -- autowidth is disabled so this is not needed
+    }, -- autoWidth is disabled so this is not needed
     config = function()
       vim.o.winwidth = 20
       vim.o.winminwidth = 15

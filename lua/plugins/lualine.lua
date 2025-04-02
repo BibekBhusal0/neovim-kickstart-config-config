@@ -48,7 +48,7 @@ return {
             [0] = '󰚩 ', -- Enabled
             [1] = '󱚧 ', -- Disabled Globally
             [2] = '󱙻 ', -- Disabled for Buffer
-            [3] = '󱙺 ', -- Disabled for Buffer filetype
+            [3] = '󱙺 ', -- Disabled for Buffer fileType
             [4] = '󱙺 ', -- Disabled for Buffer with enabled function
             [5] = '󱚠 ', -- Disabled for Buffer encoding
           },
