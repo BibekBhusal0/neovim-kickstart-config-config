@@ -7,25 +7,25 @@ local diagnostics = {
 
 local symbols = {
   Array = '󰅪',
-  Boolean = '◩',
+  Boolean = '󰨙',
   Class = '󰌗',
   Color = '󰏘',
-  Constant = '󰇽',
+  Constant = '󰏿',
   Constructor = '',
   Enum = '',
   EnumMember = '',
   Event = '',
-  Field = '',
+  Field = ' ',
   File = '󰈙',
   Folder = '󰉋',
   Function = '󰊕',
   Interface = '',
-  Key = '󰌋',
+  Key = '',
   Keyword = '󰌋',
   Method = '󰆧',
   Module = '',
-  Namespace = '󰌗',
-  Null = '󰟢',
+  Namespace = '󰦮',
+  Null = '',
   Number = '󰎠',
   Object = '󰅩',
   Operator = '󰆕',
@@ -33,10 +33,10 @@ local symbols = {
   Property = '󰜢',
   Reference = '󰈇',
   Snippet = '',
-  String = '󰀬',
-  Struct = '',
+  String = ' ',
+  Struct = '󰆼',
   Text = '󰉿',
-  TypeParameter = '󰊄',
+  TypeParameter = '',
   Unit = '󰑭',
   Value = '󰎠',
   Variable = '󰆧',
@@ -86,26 +86,25 @@ local pad_icons = function(inp)
   return icons
 end
 
-local get_padded_icon = function(name)
-  if name == 'git' then
-    return pad_icons(git)
-  elseif name == 'folder' then
-    return pad_icons(folder)
-  elseif name == 'diagnostics' then
-    return pad_icons(diagnostics)
-  elseif name == 'symbols' then
-    return pad_icons(symbols)
-  end
-  return {}
-end
-
-return {
+local icons = {
+  git = git,
+  folder = folder,
   diagnostics = diagnostics,
   symbols = symbols,
-  folder = folder,
-  git = git,
-  pad_icons = pad_icons,
-  get_padded_icon = get_padded_icon,
   dap = dap,
   others = others,
 }
+
+local get_padded_icon = function(name)
+  local icon = icons[name]
+  if icon then
+    return pad_icons(icon)
+  else
+    return {}
+  end
+end
+
+return vim.tbl_extend('force', icons, {
+  get_padded_icon = get_padded_icon,
+  pad_icons = pad_icons,
+})

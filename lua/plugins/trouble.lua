@@ -10,7 +10,7 @@ return {
   'folke/trouble.nvim',
   config = function()
     local trouble = require 'trouble'
-    trouble.setup()
+    trouble.setup { icons = { kinds = require('utils.icons').get_padded_icon 'symbols' } }
     map('<leader>cl', function()
       trouble.next { skip_groups = true, jump = true }
     end, 'Trouble next')
