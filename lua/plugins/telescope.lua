@@ -1,43 +1,22 @@
 local wrap_keys = require 'utils.wrap_keys'
-local searchInCurrentBuffer = function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end
-
-local spellSuggestion = function()
-  require('telescope.builtin').spell_suggest(require('telescope.themes').get_cursor {
-    previewer = false,
-    default_index = 1,
-    layout_config = { width = 40 },
-    initial_mode = 'normal',
-  })
-end
-
-local searchInOpenFiles = function()
-  require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown {
-    grep_open_files = true,
-    prompt_title = 'Search in open files',
-  })
-end
-
-local searchInLazy = function()
-  require('telescope.builtin').find_files {
-    cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy'),
-  }
-end
-
 local map = require 'utils.map'
 
-map('<leader>/', searchInCurrentBuffer, 'Search in current buffer')
+local searchInLazy = function()
+  require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy') }
+end
+
+local searchInConfig = function()
+  require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
+end
+
+map('<leader>/', ':Telescope current_buffer_fuzzy_find theme=dropdown previewer=false<CR>', 'Search in current buffer')
 map('<leader>:', ':Telescope command_history<CR>', 'Search Commands history')
-map('<leader>i', spellSuggestion, 'Spell suggestion')
+map('<leader>i', ':Telescope spell_suggest default_index=1 theme=get_cursor initial_mode=normal layout_config={width=40}<CR>', 'Spell suggestion')
 map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
-map('<leader>s/', searchInOpenFiles, 'Search in Open Files')
 map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
 map('<leader>sB', ':Telescope scope buffers<CR>', 'Seach All Buffers ')
+map('<leader>sC', searchInConfig, 'Seach All Neovim Config')
 map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
 map('<leader>sgb', ':Telescope git_branches<CR>', 'Search Git Branches')
@@ -52,7 +31,7 @@ map('<leader>sr', ':Telescope resume<CR>', 'Search Resume')
 map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')
 map('<leader>sw', ':Telescope live_grep<CR>', 'Search by Grep')
-map('<leader>sz', spellSuggestion, 'Spell suggestion')
+map('<leader>sz', ':Telescope spell_suggest default_index=1 theme=get_cursor initial_mode=normal layout_config={width=40}<CR>', 'Spell suggestion')
 
 return {
   {
