@@ -148,6 +148,11 @@ local function diffviewFileHistoryCurrentFile()
   vim.cmd 'DiffviewFileHistory %'
 end
 
+local function diffviewCompareCommits()
+  disableAutowidth()
+  vim.cmd 'Telescope git_diffs  diff_commits'
+end
+
 return {
   {
     'lewis6991/gitsigns.nvim',
@@ -185,9 +190,10 @@ return {
   {
     'sindrets/diffview.nvim',
     lazy = true,
+    cmd = { 'Diffview', 'DiffviewOpen', 'DiffviewFileHistory' },
     keys = wrap_keys {
       { '<leader>gdb', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
-      { '<leader>gdc', ':DiffviewClose<CR>', desc = 'Diffview close' },
+      { '<leader>gdx', ':DiffviewClose<CR>', desc = 'Diffview close' },
       { '<leader>gdf', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
       { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },
       { '<leader>gdh', diffViewFileHistory, desc = 'Diffview file history' },
@@ -230,5 +236,13 @@ return {
       prev = '<C-S-K>',
     },
     keys = wrap_keys { { '<leader>gg', ':Tardis git<CR>', desc = 'Git Time Travel' } },
+  },
+
+  {
+    keys = wrap_keys { { '<leader>gdc', diffviewCompareCommits, desc = 'Diffview Compare commmits' } },
+    'paopaol/telescope-git-diffs.nvim',
+    config = function()
+      require('telescope').load_extension 'git_diffs'
+    end,
   },
 }

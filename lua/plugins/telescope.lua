@@ -106,6 +106,7 @@ return {
         },
         extensions = {
           ['ui-select'] = { require('telescope.themes').get_dropdown() },
+          git_diffs = { enable_preview_diff = false },
         },
       }
       pcall(require('telescope').load_extension, 'ui-select')
