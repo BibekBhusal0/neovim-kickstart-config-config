@@ -51,29 +51,6 @@ local function disableAutowidth()
   end
 end
 
-local function diffViewTelescopeCompareWithCurrentBranch()
-  local actions = require 'telescope.actions'
-  local action_state = require 'telescope.actions.state'
-  local builtin = require 'telescope.builtin'
-  local themes = require 'telescope.themes'
-  local select = function(prompt_bufnr)
-    local selection = action_state.get_selected_entry()
-    actions.close(prompt_bufnr)
-    if selection then
-      disableAutowidth()
-      vim.cmd('DiffviewOpen ' .. selection.value)
-    end
-  end
-  builtin.git_branches(themes.get_dropdown {
-    previewer = false,
-    prompt_title = 'Compare Current with Branch',
-    attach_mappings = function(_, n)
-      n({ 'i', 'n' }, '<CR>', select)
-      return true
-    end,
-  })
-end
-
 local function diffViewTelescopeFileHistory()
   local actions = require 'telescope.actions'
   local action_state = require 'telescope.actions.state'
@@ -82,10 +59,9 @@ local function diffViewTelescopeFileHistory()
   builtin.git_files(themes.get_dropdown {
     prompt_title = 'Select File for History',
     previewer = false,
-    attach_mappings = function(_, n)
-      n({ 'i', 'n' }, '<CR>', function(prompt_bufnr)
-        local selection = action_state.get_selected_entry()
-        actions.close(prompt_bufnr)
+    attach_mappings = function()
+      actions.select_default:replace(function(prompt_bufnr)
+        local selection = action_state.get_selected_entry(prompt_bufnr)
         if selection then
           disableAutowidth()
           vim.cmd('DiffviewFileHistory ' .. selection.path)
@@ -101,32 +77,27 @@ local function diffViewTelescopeCompareBranches()
   local action_state = require 'telescope.actions.state'
   local themes = require 'telescope.themes'
   local builtin = require 'telescope.builtin'
-  -- First branch selection
+
   builtin.git_branches(themes.get_dropdown {
     prompt_title = 'Select First Branch',
     previewer = false,
-    attach_mappings = function(_, keymap)
-      keymap({ 'i', 'n' }, '<CR>', function(first_bufnr)
-        local first_branch = action_state.get_selected_entry().value
-        actions.close(first_bufnr)
-        -- Second branch selection
-        builtin.git_branches(themes.get_dropdown {
-          prompt_title = 'Select Second Branch',
-          previewer = false,
-          attach_mappings = function(_, second_map)
-            second_map({ 'i', 'n' }, '<CR>', function(second_bufnr)
-              local second_branch = action_state.get_selected_entry().value
-              actions.close(second_bufnr)
-              if first_branch ~= second_branch then
-                disableAutowidth()
-                vim.cmd('DiffviewOpen ' .. first_branch .. '..' .. second_branch)
-              else
-                vim.notify('Cannot compare identical branches', vim.log.levels.WARN)
-              end
-            end)
-            return true
-          end,
-        })
+    attach_mappings = function()
+      actions.select_default:replace(function(prompt_bufnr)
+        local picker = action_state.get_current_picker(prompt_bufnr)
+        local selections = picker:get_multi_selection()
+        actions.close(prompt_bufnr)
+        if #selections > 2 then
+          vim.notify 'Must select 1 or 2 branches'
+          return
+        end
+        local old = #selections == 0 and action_state.get_selected_entry().ordinal or selections[1].value
+        if #selections == 2 then
+          local new = string.sub(selections[2].value, 1, 8)
+          vim.cmd(string.format('DiffviewOpen %s..%s', old, new))
+        else
+          vim.cmd(string.format('DiffviewOpen %s', old))
+        end
+        vim.cmd [[stopinsert]]
       end)
       return true
     end,
@@ -198,7 +169,6 @@ return {
       { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },
       { '<leader>gdh', diffViewFileHistory, desc = 'Diffview file history' },
       { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
-      { '<leader>gdo', diffViewTelescopeCompareWithCurrentBranch, desc = 'Diffview Compare with head' },
     },
   },
 
