@@ -1,8 +1,8 @@
 local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
 
-map('<leader>cj', ':cnext<CR>', 'QuickFix Next')
-map('<leader>ck', ':cprevious<CR>', 'QuickFix Previous')
+map('<leader>cj', ':cprevious<CR>', 'QuickFix Next')
+map('<leader>ck', ':cnext<CR>', 'QuickFix Previous')
 map('<leader>c[', ':cfirst<CR>', 'QuickFix First')
 map('<leader>c]', ':clast<CR>', 'QuickFix Last')
 
@@ -10,7 +10,10 @@ return {
   'folke/trouble.nvim',
   config = function()
     local trouble = require 'trouble'
-    trouble.setup { icons = { kinds = require('utils.icons').get_padded_icon 'symbols' } }
+    trouble.setup {
+      icons = { kinds = require('utils.icons').get_padded_icon 'symbols' },
+      keys = { l = 'jump', j = 'next', k = 'prev', f = 'fold_toggle' },
+    }
     map('<leader>cl', function()
       trouble.next { skip_groups = true, jump = true }
     end, 'Trouble next')
