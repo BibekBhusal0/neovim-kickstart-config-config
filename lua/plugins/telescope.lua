@@ -64,23 +64,45 @@ return {
     },
 
     config = function()
-      local open_with_trouble = require('trouble.sources.telescope').open
+      local open_with_trouble = function(...)
+        require('trouble.sources.telescope').open(...)
+      end
       vim.g.sqlite_clib_path = 'C:/ProgramData/sqlite/sqlite3.dll'
       require('telescope-all-recent').setup {
         default = { sorting = 'frecency' },
       }
       require('telescope').setup {
+        pickers = {
+          find_files = { prompt_prefix = '󰈔 ' },
+          live_grep = { prompt_prefix = '\\ ' },
+          command_history = { prompt_prefix = ' ' },
+          commands = { prompt_prefix = '  ' },
+          diagnostics = { prompt_prefix = ' ' },
+          git_branches = { prompt_prefix = require('utils.icons').others.git .. ' ' },
+          git_bcommits = { prompt_prefix = require('utils.icons').others.git .. ' ' },
+          git_commits = { prompt_prefix = require('utils.icons').others.git .. ' ' },
+          git_files = { prompt_prefix = require('utils.icons').others.git .. ' ' },
+          git_stash = { prompt_prefix = require('utils.icons').others.git .. ' ' },
+          help_tags = { prompt_prefix = ' ' },
+          builtin = { prompt_prefix = ' ' },
+          spell_suggest = { prompt_prefix = '󰓆  ' },
+        },
         defaults = {
           file_ignore_patterns = { '^node_modules', '^.git', '^.github', '^dist', '^build' },
+          prompt_prefix = ' ',
           grep_ignore_patterns = { '**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock' },
           mappings = {
             i = {
               ['<C-k>'] = require('telescope.actions').move_selection_previous,
               ['<C-j>'] = require('telescope.actions').move_selection_next,
               ['<C-l>'] = require('telescope.actions').select_default,
+              ['<a-t>'] = require('telescope.actions').select_tab,
               ['<c-g>'] = open_with_trouble,
             },
-            n = { ['<c-g>'] = open_with_trouble },
+            n = {
+              ['<a-t>'] = require('telescope.actions').select_tab,
+              ['<c-g>'] = open_with_trouble,
+            },
           },
         },
         extensions = {
