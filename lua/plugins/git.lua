@@ -150,7 +150,7 @@ end
 
 local function diffviewCompareCommits()
   disableAutowidth()
-  vim.cmd 'Telescope git_diffs  diff_commits'
+  vim.cmd 'Telescope git_diffs  diff_commits theme=get_dropdown previewer=false'
 end
 
 return {

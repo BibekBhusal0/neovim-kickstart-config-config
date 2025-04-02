@@ -30,7 +30,6 @@ map('J', ':m .+1<CR>==', 'Move Line Down')
 
 -- quit
 map('<leader>sn', ':noautocmd w <CR>', 'Save File Without formatting')
-map('<C-q>', ': q!<CR>', 'Quit File')
 map('<leader>xx', ': q <CR>', 'Quit File')
 map('<leader>xX', ': q!<CR>', 'Quit File force')
 map('<leader>xa', ':qa<CR>', 'Quit all Files')

@@ -56,7 +56,7 @@ return {
           MkdnYankFileAnchorLink = { 'n', 'yfa' },
           MkdnIncreaseHeading = { 'n', '+' },
           MkdnDecreaseHeading = { 'n', '-' },
-          MkdnToggleToDo = { { 'n', 'i' }, '<C-h>' },
+          MkdnToggleToDo = { { 'n', 'i' }, '<C-q>' },
           MkdnNewListItem = false,
           MkdnNewListItemBelowInsert = { 'n', 'o' },
           MkdnNewListItemAboveInsert = { 'n', 'O' },
