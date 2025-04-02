@@ -92,7 +92,7 @@ return {
       }
       require('telescope').setup {
         defaults = {
-          file_ignore_patterns = { 'node_modules', '.git', '.github', 'dist', 'build' },
+          file_ignore_patterns = { '^node_modules', '^.git', '^.github', '^dist', '^build' },
           grep_ignore_patterns = { '**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock' },
           mappings = {
             i = {
