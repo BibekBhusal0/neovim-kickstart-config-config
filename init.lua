@@ -17,6 +17,7 @@ require('lazy').setup {
   require 'plugins.ai', -- AI Autocompletion and chat
   require 'plugins.alpha', -- Customizable dashboard screen
   require 'plugins.autocompletion', -- Autocompletion for code
+  require 'plugins.bufferline', -- Line showing tabs and buffer
   require 'plugins.colortheme', -- Color scheme setup
   require 'plugins.debugging', -- Debugger
   require 'plugins.games', -- Fun games
