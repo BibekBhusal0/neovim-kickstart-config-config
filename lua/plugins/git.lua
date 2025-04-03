@@ -43,14 +43,6 @@ map('ih', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x
 map(']h', ':execute("normal! ]c")<CR>', 'Next Change')
 map('[h', ':execute("normal! [c")<CR>', 'Prev Change')
 
-local function disableAutowidth()
-  local lazy = require 'lazy'
-  local plugins = lazy.plugins()
-  if plugins['windows.nvim'] and plugins['windows.nvim'].loaded then
-    vim.cmd 'WindowsDisableAutowidth'
-  end
-end
-
 local function diffViewTelescopeFileHistory()
   local actions = require 'telescope.actions'
   local action_state = require 'telescope.actions.state'
@@ -63,7 +55,6 @@ local function diffViewTelescopeFileHistory()
       actions.select_default:replace(function(prompt_bufnr)
         local selection = action_state.get_selected_entry(prompt_bufnr)
         if selection then
-          disableAutowidth()
           vim.cmd('DiffviewFileHistory ' .. selection.path)
         end
       end)
@@ -104,25 +95,8 @@ local function diffViewTelescopeCompareBranches()
   })
 end
 
-local function diffViewOpen()
-  disableAutowidth()
-  vim.cmd 'DiffviewOpen'
-end
-
-local function diffViewFileHistory()
-  disableAutowidth()
-  vim.cmd 'DiffviewFileHistory'
-end
-
-local function diffviewFileHistoryCurrentFile()
-  disableAutowidth()
-  vim.cmd 'DiffviewFileHistory %'
-end
-
-local function diffviewCompareCommits()
-  disableAutowidth()
-  vim.cmd 'Telescope git_diffs  diff_commits theme=get_dropdown previewer=false'
-end
+map('<leader>gdb', diffViewTelescopeCompareBranches, 'Diffview compare branches')
+map('<leader>gdF', diffViewTelescopeFileHistory, 'Diffview file history Telescope')
 
 return {
   {
@@ -162,13 +136,20 @@ return {
     'sindrets/diffview.nvim',
     lazy = true,
     cmd = { 'Diffview', 'DiffviewOpen', 'DiffviewFileHistory' },
+    opts = {
+      hooks = {
+        view_post_layout = function()
+          if package.loaded['windows'] then
+            vim.cmd 'WindowsDisableAutowidth'
+          end
+        end,
+      },
+    },
     keys = wrap_keys {
-      { '<leader>gdb', diffViewTelescopeCompareBranches, desc = 'Diffview compare branches' },
       { '<leader>gdx', ':DiffviewClose<CR>', desc = 'Diffview close' },
-      { '<leader>gdf', diffviewFileHistoryCurrentFile, desc = 'Diffview file history Current File' },
-      { '<leader>gdF', diffViewTelescopeFileHistory, desc = 'Diffview file history Telescope' },
-      { '<leader>gdh', diffViewFileHistory, desc = 'Diffview file history' },
-      { '<leader>gdO', diffViewOpen, desc = 'DiffView Open' },
+      { '<leader>gdf', ':DiffviewFileHistory %<CR>', desc = 'Diffview file history Current File' },
+      { '<leader>gdh', ':DiffviewFileHistory<CR>', desc = 'Diffview file history' },
+      { '<leader>gdo', ':DiffviewOpen<CR>', desc = 'DiffView Open' },
     },
   },
 
@@ -209,7 +190,7 @@ return {
   },
 
   {
-    keys = wrap_keys { { '<leader>gdc', diffviewCompareCommits, desc = 'Diffview Compare commmits' } },
+    keys = wrap_keys { { '<leader>gdc', ':Telescope git_diffs  diff_commits theme=get_dropdown previewer=false<CR>', desc = 'Diffview Compare commmits' } },
     'paopaol/telescope-git-diffs.nvim',
     config = function()
       require('telescope').load_extension 'git_diffs'
