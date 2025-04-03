@@ -241,7 +241,7 @@ return {
     main = 'window-picker',
     lazy = true,
     keys = wrap_keys {
-      { '<leader>wp', ":lua local w = require'window-picker'.pick_window() vim.api.nvim_set_current_win(w)<CR>", desc = 'Window pick' },
+      { '<leader>wp', ":lua vim.api.nvim_set_current_win(require'window-picker'.pick_window())<CR>", desc = 'Window pick' },
     },
     opts = { hint = 'floating-big-letter' },
   }, -- picking window
