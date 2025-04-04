@@ -25,4 +25,12 @@ return {
       vim.g.quickrun_config.ts = { command = 'deno run --allow-all' }
     end,
   },
+
+  {
+    'cxwx/lazyUrlUpdate.nvim',
+    opts = {},
+    keys = wrap_keys {
+      { '<leader>lu', '<cmd>LazyUrlUpdate<CR>', desc = 'Update plugin under cursor' },
+    },
+  },
 }

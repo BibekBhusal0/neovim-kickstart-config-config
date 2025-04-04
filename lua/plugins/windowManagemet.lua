@@ -107,7 +107,7 @@ return {
     'BibekBhusal0/bufstack.nvim',
     event = { 'BufNewFile', 'BufReadPost' },
     config = function()
-      require('bufstack').setup { max_tracked = 400 }
+      require('bufstack').setup { max_tracked = 400, shorten_path = true }
       map('gl', ':BufStackNext<CR>', 'Buffer Next Recent')
       map('gh', ':BufStackPrev<CR>', 'Buffer Prevevious Recent')
       map('<leader>bu', ':BufStackList<CR>', 'Buffer Open List')
@@ -120,11 +120,11 @@ return {
     'anuvyklack/windows.nvim',
     dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
     keys = wrap_keys {
-      { '<leader>w=', ':WindowsEqualize<CR>', 'Window Equalize' },
-      { '<leader>wf', ':WindowsMaximize<CR>', 'Window Maximize' },
-      { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', 'Window Maximize Horizontally' },
-      { '<leader>wt', ':WindowsToggleAutowidth<CR>', 'Window Toggle Autowidth' },
-      { '<leader>wv', ':WindowsMaximizeVertically<CR>', 'Window Maximize Vertically' },
+      { '<leader>w=', ':WindowsEqualize<CR>', desc = 'Window Equalize' },
+      { '<leader>wf', ':WindowsMaximize<CR>', desc = 'Window Maximize' },
+      { '<leader>wh', ':WindowsMaximizeHorizontally<CR>', desc = 'Window Maximize Horizontally' },
+      { '<leader>wt', ':WindowsToggleAutowidth<CR>', desc = 'Window Toggle Autowidth' },
+      { '<leader>wv', ':WindowsMaximizeVertically<CR>', desc = 'Window Maximize Vertically' },
     }, -- autoWidth is disabled so this is not needed
     config = function()
       vim.o.winwidth = 20
