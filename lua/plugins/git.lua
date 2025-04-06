@@ -9,6 +9,7 @@ end
 
 local function commit_all_with_message()
   require 'utils.input'(' Commit Message ', function(text)
+    vim.cmd 'Git add .'
     vim.cmd("Git commit -am'" .. text .. "'")
   end, '', 50, require('utils.icons').others.github .. '  ')
 end
@@ -53,6 +54,7 @@ local function diffViewTelescopeFileHistory()
     previewer = false,
     attach_mappings = function()
       actions.select_default:replace(function(prompt_bufnr)
+        actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry(prompt_bufnr)
         if selection then
           vim.cmd('DiffviewFileHistory ' .. selection.path)
