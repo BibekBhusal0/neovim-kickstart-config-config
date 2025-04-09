@@ -45,7 +45,7 @@ return {
             require 'utils.input'(' Rename ', callback, var, nil, require('utils.icons').symbols.Variable .. '  ')
           end
           map('<leader>ln', rename, 'LSP Rename variable')
-          map('<leader>ca', vim.lsp.buf.code_action, 'LSP code action', { 'n', 'x' })
+          -- map('<leader>ca', vim.lsp.buf.code_action, 'LSP code action', { 'n', 'x' })
 
           map('<leader>lD', vim.lsp.buf.declaration, 'LSP goto Declaration')
           map('<leader>lh', vim.lsp.buf.hover, 'LSP Hover')
@@ -198,5 +198,22 @@ return {
   {
     'antosha417/nvim-lsp-file-operations',
     lazy = true,
+  },
+
+  {
+    'rachartier/tiny-code-action.nvim',
+    config = function()
+      require('tiny-code-action').setup {
+        telescope_opts = vim.tbl_extend('force', require('telescope.themes').get_cursor(), {
+          default_index = 1,
+          initial_mode = 'normal',
+          layout_config = { width = 60, height = 15, preview_cutoff = 200 }, -- only way to disable preview
+          -- layout_config = { width = 90, height = 15, preview_width = 30 },  -- this is also fine i guess
+        }),
+      }
+    end,
+    keys = wrap_keys {
+      { '<leader>ca', ':lua require("tiny-code-action").code_action()<CR>', desc = 'LSP code actions' },
+    },
   },
 }
