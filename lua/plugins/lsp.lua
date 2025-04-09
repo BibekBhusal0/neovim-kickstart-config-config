@@ -26,14 +26,14 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          map('<leader>la', ":lua require('telescope.builtin').lsp_document_symbols()<CR>", 'LSP Document Symbols')
-          map('<leader>ld', ":lua require('telescope.builtin').lsp_definitions()<CR>", 'LSP goto Definition')
-          map('<leader>le', ":lua require('telescope.builtin').lsp_definitions({jump_type='vsplit'})<CR>", 'LSP goto Definition In Split')
-          map('<leader>li', ":lua require('telescope.builtin').lsp_implementations()<CR>", 'LSP Goto Implementation')
-          map('<leader>lr', ":lua require('telescope.builtin').lsp_references()<CR>", 'LSP goto References')
-          map('<leader>ls', ":lua require('telescope.builtin').lsp_type_definitions()<CR>", 'LSP Type Definition')
-          map('<leader>lS', ":lua require('telescope.builtin').lsp_type_definitions({jump_type='vsplit'})<CR>", 'LSP Type Definition In Split')
-          map('<leader>lw', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", 'LSP Workspace Symbols')
+          map('<leader>la', ':Telescope lsp_document_symbols<CR>', 'LSP Document Symbols')
+          map('<leader>ld', ':Telescope lsp_definitions<CR>', 'LSP goto Definition')
+          map('<leader>le', ':Telescope lsp_definitions jump_type=vsplit<CR>', 'LSP goto Definition In Split')
+          map('<leader>li', ':Telescope lsp_implementations<CR>', 'LSP Goto Implementation')
+          map('<leader>lr', ':Telescope lsp_references<CR>', 'LSP goto References')
+          map('<leader>ls', ':Telescope lsp_type_definitions<CR>', 'LSP Type Definition')
+          map('<leader>lS', ':Telescope lsp_type_definitions jump_type=vsplit<CR>', 'LSP Type Definition In Split')
+          map('<leader>lw', ':Telescope lsp_dynamic_workspace_symbols<CR>', 'LSP Workspace Symbols')
 
           local rename = function()
             local var = vim.fn.expand '<cword>'
@@ -45,12 +45,7 @@ return {
             require 'utils.input'(' Rename ', callback, var, nil, require('utils.icons').symbols.Variable .. '  ')
           end
           map('<leader>ln', rename, 'LSP Rename variable')
-
-          local function code_action()
-            pcall(require('telescope').load_extension, 'ui-select')
-            vim.lsp.buf.code_action()
-          end
-          map('<leader>ca', code_action, 'LSP code action', { 'n', 'x' })
+          map('<leader>ca', vim.lsp.buf.code_action, 'LSP code action', { 'n', 'x' })
 
           map('<leader>lD', vim.lsp.buf.declaration, 'LSP goto Declaration')
           map('<leader>lh', vim.lsp.buf.hover, 'LSP Hover')
@@ -199,4 +194,9 @@ return {
     event = 'LspAttach',
     opts = {},
   }, -- Free up resources by stooping unused LSP clients
+
+  {
+    'antosha417/nvim-lsp-file-operations',
+    lazy = true,
+  },
 }

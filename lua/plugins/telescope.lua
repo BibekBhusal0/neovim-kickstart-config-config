@@ -1,5 +1,6 @@
 local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
+local spell = ':Telescope spell_suggest theme=get_cursor initial_mode=normal layout_config={width=40}<CR>'
 
 local searchInLazy = function()
   require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy') }
@@ -11,27 +12,35 @@ end
 
 map('<leader>/', ':Telescope current_buffer_fuzzy_find theme=dropdown previewer=false<CR>', 'Search in current buffer')
 map('<leader>:', ':Telescope command_history<CR>', 'Search Commands history')
-map('<leader>i', ':Telescope spell_suggest default_index=1 theme=get_cursor initial_mode=normal layout_config={width=40}<CR>', 'Spell suggestion')
+map('<leader>i', spell, 'Spell suggestion')
 map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
 map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
+map('<leader>sA', ':Telescope autocommands<CR>', 'Search Autocommands')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
 map('<leader>sB', ':Telescope scope buffers<CR>', 'Seach All Buffers ')
 map('<leader>sC', searchInConfig, 'Seach All Neovim Config')
 map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
+map('<leader>sg/', ':Telescope git_stash<CR>', 'Search Git Stash')
 map('<leader>sgb', ':Telescope git_branches<CR>', 'Search Git Branches')
-map('<leader>sgC', ':Telescope git_bcommits<CR>', 'Search Git Bcommits')
+map('<leader>sgC', ':Telescope git_bcommits<CR>', 'Search Git Commits of current buffer')
 map('<leader>sgc', ':Telescope git_commits<CR>', 'Search Git Commits')
 map('<leader>sgf', ':Telescope git_files<CR>', 'Search Git Files')
-map('<leader>sgs', ':Telescope git_stash<CR>', 'Search Git Stash')
+map('<leader>sgs', ':Telescope git_status<CR>', 'Search Git Status')
 map('<leader>sh', ':Telescope harpoon marks<CR>', 'Search Harpoon Marks')
 map('<leader>sH', ':Telescope help_tags<CR>', 'Search Help Tags')
+map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sL', searchInLazy, 'Search Lazy Plugins Files')
+map('<leader>sm', ':Telescope marks<CR>', 'Search marks')
+map('<leader>sq', ':Telescope quickfix<CR>', 'Search Quickfix list')
 map('<leader>sr', ':Telescope resume<CR>', 'Search Resume')
 map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
+map('<leader>st', ':Telescope treesitter<CR>', 'Search Treesitter')
+map('<leader>sv', ':Telescope vim_options<CR>', 'Search Files in split')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')
 map('<leader>sw', ':Telescope live_grep<CR>', 'Search by Grep')
-map('<leader>sz', ':Telescope spell_suggest default_index=1 theme=get_cursor initial_mode=normal layout_config={width=40}<CR>', 'Spell suggestion')
+map('<leader>sy', ':Telescope registers<CR>', 'Search registers')
+map('<leader>sz', spell, 'Spell suggestion')
 
 return {
   {
@@ -98,19 +107,25 @@ return {
               ['<C-l>'] = require('telescope.actions').select_default,
               ['<a-t>'] = require('telescope.actions').select_tab,
               ['<c-g>'] = open_with_trouble,
+              ['<a-h>'] = require('telescope.actions').preview_scrolling_left,
+              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
+              ['<a-j>'] = require('telescope.actions').preview_scrolling_up,
+              ['<a-k>'] = require('telescope.actions').preview_scrolling_down,
             },
             n = {
               ['<a-t>'] = require('telescope.actions').select_tab,
               ['<c-g>'] = open_with_trouble,
+              ['<a-h>'] = require('telescope.actions').preview_scrolling_left,
+              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
+              ['<a-j>'] = require('telescope.actions').preview_scrolling_up,
+              ['<a-k>'] = require('telescope.actions').preview_scrolling_down,
             },
           },
         },
         extensions = {
-          ['ui-select'] = { require('telescope.themes').get_dropdown() },
           git_diffs = { enable_preview_diff = false },
         },
       }
-      pcall(require('telescope').load_extension, 'ui-select')
     end,
   },
 

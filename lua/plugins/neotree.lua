@@ -10,6 +10,16 @@ map('<leader>e', ':Neotree toggle position=right<CR>', 'NeoTree on Right')
 map('<leader>gf', ':Neotree float git_status <CR>', 'Git changes in files')
 map('<leader>q', ':Neotree toggle position=left<CR>', 'NeoTree on Left')
 
+local lsp_operations = function(name)
+  return function(...)
+    local params = { ... }
+    require('lsp-file-operations').setup()
+    params[1].commands[name](..., function()
+      params[1].commands.refresh(unpack(params))
+    end)
+  end
+end
+
 return {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v3.x',
@@ -18,7 +28,6 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
-    'antosha417/nvim-lsp-file-operations',
   },
 
   config = function()
@@ -91,22 +100,16 @@ return {
           ['C'] = 'close_node',
           ['c'] = 'copy',
           ['d'] = 'delete',
-          ['e'] = function(...)
-            require('lsp-file-operations').setup()
-            require('neo-tree.sources.common.commands').rename_basename(...)
-          end,
+          ['e'] = lsp_operations 'rename_basename',
           ['h'] = 'open_split',
           ['i'] = 'show_file_details',
           ['l'] = 'open',
-          ['m'] = 'move',
-          ['p'] = 'paste_from_clipboard',
+          ['m'] = lsp_operations 'move',
+          ['p'] = lsp_operations 'paste_from_clipboard',
           ['P'] = { 'toggle_preview', config = { use_float = true } },
           ['q'] = 'close_window',
           ['R'] = 'refresh',
-          ['r'] = function(...)
-            require('lsp-file-operations').setup()
-            require('neo-tree.sources.common.commands').rename(...)
-          end,
+          ['r'] = lsp_operations 'rename',
           ['T'] = 'open_tab_drop',
           ['t'] = 'open_tabnew',
           ['v'] = 'open_vsplit',
