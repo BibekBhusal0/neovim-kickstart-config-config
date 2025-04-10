@@ -1,6 +1,5 @@
 local wrap_keys = require 'utils.wrap_keys'
 local map = require 'utils.map'
-local spell = ':Telescope spell_suggest theme=get_cursor initial_mode=normal layout_config={width=40}<CR>'
 
 local searchInLazy = function()
   require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy') }
@@ -10,9 +9,9 @@ local searchInConfig = function()
   require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
 end
 
-map('<leader>/', ':Telescope current_buffer_fuzzy_find theme=dropdown previewer=false<CR>', 'Search in current buffer')
+map('<leader>/', ':Telescope current_buffer_fuzzy_find<CR>', 'Search in current buffer')
 map('<leader>:', ':Telescope command_history<CR>', 'Search Commands history')
-map('<leader>i', spell, 'Spell suggestion')
+map('<leader>i', ':Telescope spell_suggest<CR>', 'Spell suggestion')
 map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
 map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
 map('<leader>sA', ':Telescope autocommands<CR>', 'Search Autocommands')
@@ -26,12 +25,14 @@ map('<leader>sgb', ':Telescope git_branches<CR>', 'Search Git Branches')
 map('<leader>sgC', ':Telescope git_bcommits<CR>', 'Search Git Commits of current buffer')
 map('<leader>sgc', ':Telescope git_commits<CR>', 'Search Git Commits')
 map('<leader>sgf', ':Telescope git_files<CR>', 'Search Git Files')
+map('<leader>sgm', ':Telescope marks mark_type=gloabl<CR>', 'Search marks global')
 map('<leader>sgs', ':Telescope git_status<CR>', 'Search Git Status')
 map('<leader>sh', ':Telescope harpoon marks<CR>', 'Search Harpoon Marks')
 map('<leader>sH', ':Telescope help_tags<CR>', 'Search Help Tags')
 map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sL', searchInLazy, 'Search Lazy Plugins Files')
-map('<leader>sm', ':Telescope marks<CR>', 'Search marks')
+map('<leader>sM', ':Telescope marks mark_type=all<CR>', 'Search marks all')
+map('<leader>sm', ':Telescope marks mark_type=local<CR>', 'Search marks')
 map('<leader>sq', ':Telescope quickfix<CR>', 'Search Quickfix list')
 map('<leader>sr', ':Telescope resume<CR>', 'Search Resume')
 map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
@@ -40,7 +41,7 @@ map('<leader>sv', ':Telescope vim_options<CR>', 'Search Files in split')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')
 map('<leader>sw', ':Telescope live_grep<CR>', 'Search by Grep')
 map('<leader>sy', ':Telescope registers<CR>', 'Search registers')
-map('<leader>sz', spell, 'Spell suggestion')
+map('<leader>sz', ':Telescope spell_suggest<CR>', 'Spell suggestion')
 
 return {
   {
@@ -80,51 +81,167 @@ return {
       require('telescope-all-recent').setup {
         default = { sorting = 'frecency' },
       }
+      local theme = require 'telescope.themes'
+      local get_dropdown = theme.get_dropdown
+      local git_icon = require('utils.icons').others.git .. ' '
+      local grep = {
+        prompt_prefix = '󱎸 ',
+        path_display = { 'shorten' },
+        layout_config = { preview_width = 0.5 },
+      }
       require('telescope').setup {
+
         pickers = {
-          find_files = { prompt_prefix = '󰈔 ' },
-          live_grep = { prompt_prefix = '\\ ' },
-          command_history = { prompt_prefix = ' ' },
-          commands = { prompt_prefix = '  ' },
-          diagnostics = { prompt_prefix = ' ' },
-          git_branches = { prompt_prefix = require('utils.icons').others.git .. ' ' },
-          git_bcommits = { prompt_prefix = require('utils.icons').others.git .. ' ' },
-          git_commits = { prompt_prefix = require('utils.icons').others.git .. ' ' },
-          git_files = { prompt_prefix = require('utils.icons').others.git .. ' ' },
-          git_stash = { prompt_prefix = require('utils.icons').others.git .. ' ' },
-          help_tags = { prompt_prefix = ' ' },
-          builtin = { prompt_prefix = ' ' },
-          spell_suggest = { prompt_prefix = '󰓆  ' },
+          live_grep = grep,
+          grep_string = grep,
+          find_files = {
+            prompt_prefix = '󰈔 ',
+            layout_config = { preview_width = 0.6 },
+          },
+          treesitter = {
+            prompt_prefix = ' ',
+            show_line = false,
+            symbol_width = 18,
+            layout_config = { preview_width = 0.7 },
+          },
+          current_buffer_fuzzy_find = get_dropdown {
+            prompt_prefix = '⚡ ',
+            skip_empty_lines = true,
+            previewer = false,
+          },
+          tags = {},
+          current_buffer_tabs = {},
+          git_files = {
+            prompt_prefix = git_icon,
+            layout_config = { preview_width = 0.6 },
+          },
+          git_commits = {
+            prompt_prefix = git_icon,
+          },
+          git_bcommits = {
+            prompt_prefix = git_icon,
+          },
+          git_branches = get_dropdown {
+            prompt_prefix = git_icon,
+            previewer = false,
+          },
+          git_stash = get_dropdown {
+            prompt_prefix = git_icon,
+          },
+          git_status = {
+            prompt_prefix = git_icon,
+            git_icons = require('utils.icons').git,
+          },
+          builtin = {},
+          picekrs = {},
+          planets = {},
+          symbols = {},
+          commands = get_dropdown {
+            prompt_prefix = '  ',
+          },
+          quickfix = {
+            prompt_prefix = ' ',
+          },
+          quickfixhistory = {
+            prompt_prefix = ' ',
+          },
+          loclist = {},
+          oldfiles = {
+            prompt_prefix = ' ',
+          },
+          command_history = get_dropdown {
+            prompt_prefix = ' ',
+          },
+          search_history = get_dropdown {
+            prompt_prefix = ' ',
+          },
+          vim_options = get_dropdown {
+            prompt_prefix = '󰍜 ',
+          },
+          help_tags = {
+            prompt_prefix = ' ',
+            layout_config = { preview_width = 0.6 },
+          },
+          man_pages = {},
+          reloader = {},
+          buffers = {
+            sort_lastused = true,
+            initial_mode = 'normal',
+            layout_config = { preview_width = 0.6 },
+          },
+          colorscheme = {
+            enable_preview = true,
+            prompt_prefix = '  ',
+          },
+          marks = {
+            prompt_prefix = ' ',
+            layout_config = { preview_width = 0.4 },
+          },
+          registers = get_dropdown {
+            prompt_prefix = '󰆒 ',
+          },
+          keymaps = get_dropdown {
+            prompt_prefix = ' ',
+          },
+          filetypes = {},
+          highlights = {},
+          autocommands = {},
+          spell_suggest = theme.get_cursor {
+            prompt_prefix = '󰓆  ',
+            initial_mode = 'normal',
+            layout_config = { width = 40 },
+          },
+          tagstack = {},
+          jumplist = {},
+          lsp_references = {},
+          lsp_incomming_calls = {},
+          lsp_outgoing_calls = {},
+          lsp_definitions = {},
+          lsp_type_definitions = {},
+          lsp_implementations = {},
+          lsp_document_symbols = {},
+          lsp_workspace_symbols = {},
+          lsp_dynamic_workspace_symbols = {},
+          diagnostics = {
+            prompt_prefix = ' ',
+          },
         },
+
         defaults = {
+          path_display = { 'truncate', truncate = 2 },
           file_ignore_patterns = { '^node_modules', '^.git', '^.github', '^dist', '^build' },
           prompt_prefix = ' ',
           grep_ignore_patterns = { '**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock' },
+
           mappings = {
             i = {
-              ['<C-k>'] = require('telescope.actions').move_selection_previous,
-              ['<C-j>'] = require('telescope.actions').move_selection_next,
-              ['<C-l>'] = require('telescope.actions').select_default,
-              ['<a-t>'] = require('telescope.actions').select_tab,
-              ['<c-g>'] = open_with_trouble,
               ['<a-h>'] = require('telescope.actions').preview_scrolling_left,
-              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
               ['<a-j>'] = require('telescope.actions').preview_scrolling_up,
               ['<a-k>'] = require('telescope.actions').preview_scrolling_down,
+              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
+              ['<a-m>'] = require('telescope.actions').delete_mark,
+              ['<a-t>'] = require('telescope.actions').select_tab,
+              ['<c-g>'] = open_with_trouble,
+              ['<C-j>'] = require('telescope.actions').move_selection_next,
+              ['<C-k>'] = require('telescope.actions').move_selection_previous,
+              ['<C-l>'] = require('telescope.actions').select_default,
             },
             n = {
-              ['<a-t>'] = require('telescope.actions').select_tab,
-              ['<c-g>'] = open_with_trouble,
               ['<a-h>'] = require('telescope.actions').preview_scrolling_left,
-              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
               ['<a-j>'] = require('telescope.actions').preview_scrolling_up,
               ['<a-k>'] = require('telescope.actions').preview_scrolling_down,
+              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
+              ['<a-m>'] = require('telescope.actions').delete_mark,
+              ['<a-t>'] = require('telescope.actions').select_tab,
+              ['<c-g>'] = open_with_trouble,
             },
           },
         },
         extensions = {
+          ['ui-select'] = { require('telescope.themes').get_dropdown() },
           git_diffs = { enable_preview_diff = false },
         },
+        pcall(require('telescope').load_extension, 'ui-select'),
       }
     end,
   },
@@ -144,7 +261,6 @@ return {
 
   {
     'ziontee113/icon-picker.nvim',
-    opts = {},
     cmd = {
       'IconPickerInsert',
       'IconPickerNormal',
@@ -165,6 +281,10 @@ return {
       { '<leader>sS', ':PickSymbols<CR>', desc = 'Icon Picker Unicode Symbols' },
       { '<leader>sE', ':PickEmojiYank emoji<CR>', desc = 'Icon Picker Emoji Yank' },
     },
+    config = function()
+      pcall(require('telescope').load_extension, 'ui-select')
+      require('icon-picker').setup {}
+    end,
   }, -- icon picker with telescope
 
   {
