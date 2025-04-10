@@ -13,7 +13,7 @@ map('<C-j>', '<Down>', 'Move down', 'i')
 map('<C-k>', '<Up>', 'Move up', 'i')
 map('jj', '<ESC>', 'Normal Mode', 'i')
 map('<C-c>', '<Esc>', 'Normal Mode', 'i')
-map('<C-O>', '<Esc>o', 'Move to New Line', 'i')
+map('<C-o>', '<Esc>o', 'Move to New Line', 'i')
 map('<C-]>', '<Esc>ldbi', 'Delete Word', 'i')
 
 map('<C-s>', ': w <CR>', 'Save File')

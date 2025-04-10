@@ -56,8 +56,12 @@ return {
       map('<A-f>', neocodeium.accept, 'Codeium Accept', 'i')
       map('<A-w>', neocodeium.accept_word, 'Codeium Accept Word', 'i')
       map('<A-a>', neocodeium.accept_line, 'Codeium Accept Line', 'i')
-      map('<A-e>', neocodeium.cycle_or_complete, 'Codeium Next Autocomplete', 'i')
-      map('<A-r>', neocodeium.cycle_or_complete, 'Codeium Previous Autocomplete', 'i')
+      map('<A-e>', function()
+        neocodeium.cycle_or_complete(-1)
+      end, 'Codeium Next Autocomplete', 'i')
+      map('<A-r>', function()
+        neocodeium.cycle_or_complete(1)
+      end, 'Codeium Previous Autocomplete', 'i')
       map('<A-c>', neocodeium.clear, 'Codeium Clear', 'i')
     end,
   },
