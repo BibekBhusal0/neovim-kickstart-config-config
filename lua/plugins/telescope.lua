@@ -36,7 +36,7 @@ map('<leader>sm', ':Telescope marks mark_type=local<CR>', 'Search marks')
 map('<leader>sq', ':Telescope quickfix<CR>', 'Search Quickfix list')
 map('<leader>sr', ':Telescope resume<CR>', 'Search Resume')
 map('<leader>ss', ':Telescope builtin<CR>', 'Search Telescope')
-map('<leader>st', ':Telescope treesitter<CR>', 'Search Treesitter')
+map('<leader>sT', ':Telescope treesitter<CR>', 'Search Treesitter')
 map('<leader>sv', ':Telescope vim_options<CR>', 'Search Files in split')
 map('<leader>sW', ':Telescope grep_string<CR>', 'Search current Word')
 map('<leader>sw', ':Telescope live_grep<CR>', 'Search by Grep')
@@ -49,7 +49,6 @@ return {
     cmd = 'Telescope',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-ui-select.nvim',
       {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
@@ -238,10 +237,8 @@ return {
           },
         },
         extensions = {
-          ['ui-select'] = { require('telescope.themes').get_dropdown() },
           git_diffs = { enable_preview_diff = false },
         },
-        pcall(require('telescope').load_extension, 'ui-select'),
       }
     end,
   },
@@ -281,14 +278,31 @@ return {
       { '<leader>sS', ':PickSymbols<CR>', desc = 'Icon Picker Unicode Symbols' },
       { '<leader>sE', ':PickEmojiYank emoji<CR>', desc = 'Icon Picker Emoji Yank' },
     },
-    config = function()
-      pcall(require('telescope').load_extension, 'ui-select')
-      require('icon-picker').setup {}
-    end,
+    opts = {},
   }, -- icon picker with telescope
 
   {
     'tsakirist/telescope-lazy.nvim',
     keys = wrap_keys { { '<leader>sl', ':Telescope lazy<CR>', desc = 'Search Lazy Plugins Doc' } },
-  },
+  }, -- search lazy plugins readme file
+
+  {
+    'stevearc/dressing.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('dressing').setup {
+        input = {
+          enabled = true,
+          title_pos = 'center',
+          start_mode = 'insert',
+          border = 'rounded',
+          relative = 'win',
+        },
+        select = {
+          enabled = true,
+          telescope = require('telescope.themes').get_dropdown(),
+        },
+      }
+    end,
+  }, -- uses telescope for vim.input
 }

@@ -6,12 +6,16 @@ vim.api.nvim_create_autocmd('User', {
   group = au_group,
   desc = 'LSP Rename file',
   callback = function(event)
-    print 'renamed'
     local ok, rename = pcall(require, 'lsp-file-operations.did-rename')
     if not ok then
       return
     end
-    rename.callback { old_name = event.data.from, new_name = event.data.to }
+    vim.defer_fn(function()
+      require('mini.files').close()
+    end, 1)
+    vim.defer_fn(function()
+      rename.callback { old_name = event.data.from, new_name = event.data.to }
+    end, 1)
   end,
 })
 
