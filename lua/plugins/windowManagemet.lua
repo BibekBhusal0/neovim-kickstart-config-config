@@ -14,6 +14,7 @@ map('<leader>bb', ':enew<CR>', 'Buffer New')
 map('<leader>v', ':vsplit<CR>', 'Split window vertically')
 map('<leader>h', ':split<CR>', 'Split window horizontally')
 map('<leader>V', ':vsplit | ter<CR>', 'Split Terminal vertically')
+map('<leader><leader>s', ':vert ba<CR>', 'Split all')
 map('<leader>H', ':split | ter<CR>', 'Split Terminal horizontally')
 map('<leader>br', ':e!<CR>', 'Buffer Reset')
 
@@ -26,6 +27,7 @@ map('<C-p>', ':wincmd p<CR>', 'Window Floating')
 
 -- Tabs
 map('<leader>to', ':tabnew<CR>', 'Tab new')
+map('<leader>tb', ':tab ba<CR>', 'Tab new with current buffer')
 map('<leader>tO', ':tabonly<CR>', 'Tab Close other')
 map('<leader>tx', ':tabclose<CR>', 'Tab close')
 map('<leader>tn', ':tabn<CR>', 'Tab next')
@@ -44,8 +46,8 @@ return {
     'moll/vim-bbye',
     cmd = { 'Bdelete', 'Bwipeout' },
     keys = wrap_keys {
-      { '<leader>xb', ':Bdelete<CR>', desc = 'Close Buffer' },
-      { '<leader>xB', ':Bdelete!<CR>', desc = 'Close Buffer Force' },
+      { '<leader>xb', ':Bdelete<CR>', desc = 'Quit Buffer' },
+      { '<leader>xB', ':Bdelete!<CR>', desc = 'Quit Buffer Force' },
       { '<leader>bx', ':Bdelete<CR>', desc = 'Buffer Close' },
     },
   }, -- close buffer without closing tab
