@@ -84,6 +84,7 @@ return {
       { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
     },
     config = function()
+      require 'dressing'
       require('utils.loader'):init()
       require('codecompanion').setup {
         display = {

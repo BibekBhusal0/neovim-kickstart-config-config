@@ -88,6 +88,7 @@ return {
         path_display = { 'shorten' },
         layout_config = { preview_width = 0.5 },
       }
+      require 'dressing'
       require('telescope').setup {
 
         pickers = {
@@ -278,7 +279,10 @@ return {
       { '<leader>sS', ':PickSymbols<CR>', desc = 'Icon Picker Unicode Symbols' },
       { '<leader>sE', ':PickEmojiYank emoji<CR>', desc = 'Icon Picker Emoji Yank' },
     },
-    opts = {},
+    config = function()
+      require 'dressing'
+      require('icon-picker').setup {}
+    end,
   }, -- icon picker with telescope
 
   {
@@ -288,7 +292,7 @@ return {
 
   {
     'stevearc/dressing.nvim',
-    event = 'VeryLazy',
+    lazy = true,
     config = function()
       require('dressing').setup {
         input = {
