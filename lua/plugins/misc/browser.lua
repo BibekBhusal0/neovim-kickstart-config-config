@@ -14,6 +14,7 @@ return {
     keys = wrap_keys { { '<leader>B', ':BrowserBookmarks<CR>', desc = 'Search Browser Bookmarks' } },
     cmd = { 'BrowserBookmarks' },
     config = function()
+      require 'dressing'
       require('browser_bookmarks').setup {
         profile_name = 'Bibek',
         url_open_command = 'start ""',

@@ -13,8 +13,8 @@ map('<leader>bb', ':enew<CR>', 'Buffer New')
 -- Window management
 map('<leader>v', ':vsplit<CR>', 'Split window vertically')
 map('<leader>h', ':split<CR>', 'Split window horizontally')
-map('<leader>V', ':vsplit | ter<CR>', 'Split window vertically')
-map('<leader>H', ':split | ter<CR>', 'Split window horizontally')
+map('<leader>V', ':vsplit | ter<CR>', 'Split Terminal vertically')
+map('<leader>H', ':split | ter<CR>', 'Split Terminal horizontally')
 map('<leader>br', ':e!<CR>', 'Buffer Reset')
 
 -- Navigate between splits

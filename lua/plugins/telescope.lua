@@ -16,8 +16,8 @@ map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
 map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
 map('<leader>sA', ':Telescope autocommands<CR>', 'Search Autocommands')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
-map('<leader>sB', ':Telescope scope buffers<CR>', 'Seach All Buffers ')
-map('<leader>sC', searchInConfig, 'Seach All Neovim Config')
+map('<leader>sB', ':Telescope scope buffers<CR>', 'Search All Buffers ')
+map('<leader>sC', searchInConfig, 'Search All Neovim Config')
 map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
 map('<leader>sg/', ':Telescope git_stash<CR>', 'Search Git Stash')
@@ -73,9 +73,34 @@ return {
     },
 
     config = function()
+      require 'dressing'
       local open_with_trouble = function(...)
         require('trouble.sources.telescope').open(...)
       end
+
+      local actions = require 'telescope.actions'
+      local open_all_selected = function(open_callback)
+        return function(prompt_bufnr)
+          local action_state = require 'telescope.actions.state'
+          local picker = action_state.get_current_picker(prompt_bufnr)
+          local selections = picker:get_multi_selection()
+          actions.close(prompt_bufnr)
+          if #selections == 0 then
+            open_callback(action_state.get_selected_entry().ordinal, 1)
+          end
+          for i, selection in ipairs(selections) do
+            open_callback(selection.value, i)
+          end
+        end
+      end
+
+      local open_all_in_new_tab = open_all_selected(function(val, i)
+        vim.cmd((i > 1 and 'edit ' or 'tabnew ') .. val)
+      end)
+      local open_all = open_all_selected(function(val)
+        vim.cmd('edit ' .. val)
+      end)
+
       vim.g.sqlite_clib_path = 'C:/ProgramData/sqlite/sqlite3.dll'
       require('telescope-all-recent').setup {
         default = { sorting = 'frecency' },
@@ -88,7 +113,18 @@ return {
         path_display = { 'shorten' },
         layout_config = { preview_width = 0.5 },
       }
-      require 'dressing'
+
+      local mappings = {
+        ['<a-a>'] = actions.select_all,
+        ['<a-h>'] = actions.preview_scrolling_left,
+        ['<a-j>'] = actions.preview_scrolling_up,
+        ['<a-k>'] = actions.preview_scrolling_down,
+        ['<a-l>'] = actions.preview_scrolling_right,
+        ['<a-m>'] = actions.delete_mark,
+        ['<a-t>'] = actions.select_tab,
+        ['<c-g>'] = open_with_trouble,
+      }
+
       require('telescope').setup {
 
         pickers = {
@@ -97,6 +133,16 @@ return {
           find_files = {
             prompt_prefix = '󰈔 ',
             layout_config = { preview_width = 0.6 },
+            mappings = {
+              i = {
+                ['<a-g>'] = open_all_in_new_tab,
+                ['<a-i>'] = open_all,
+              },
+              n = {
+                ['<a-g>'] = open_all_in_new_tab,
+                ['<a-i>'] = open_all,
+              },
+            },
           },
           treesitter = {
             prompt_prefix = ' ',
@@ -211,30 +257,18 @@ return {
           path_display = { 'truncate', truncate = 2 },
           file_ignore_patterns = { '^node_modules', '^.git', '^.github', '^dist', '^build' },
           prompt_prefix = ' ',
+          entry_prefix = ' ',
+          selection_caret = ' ',
+          multi_icon = ' ',
           grep_ignore_patterns = { '**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock' },
 
           mappings = {
-            i = {
-              ['<a-h>'] = require('telescope.actions').preview_scrolling_left,
-              ['<a-j>'] = require('telescope.actions').preview_scrolling_up,
-              ['<a-k>'] = require('telescope.actions').preview_scrolling_down,
-              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
-              ['<a-m>'] = require('telescope.actions').delete_mark,
-              ['<a-t>'] = require('telescope.actions').select_tab,
-              ['<c-g>'] = open_with_trouble,
-              ['<C-j>'] = require('telescope.actions').move_selection_next,
-              ['<C-k>'] = require('telescope.actions').move_selection_previous,
-              ['<C-l>'] = require('telescope.actions').select_default,
-            },
-            n = {
-              ['<a-h>'] = require('telescope.actions').preview_scrolling_left,
-              ['<a-j>'] = require('telescope.actions').preview_scrolling_up,
-              ['<a-k>'] = require('telescope.actions').preview_scrolling_down,
-              ['<a-l>'] = require('telescope.actions').preview_scrolling_right,
-              ['<a-m>'] = require('telescope.actions').delete_mark,
-              ['<a-t>'] = require('telescope.actions').select_tab,
-              ['<c-g>'] = open_with_trouble,
-            },
+            i = vim.tbl_extend('force', mappings, {
+              ['<C-j>'] = actions.move_selection_next,
+              ['<C-k>'] = actions.move_selection_previous,
+              ['<C-l>'] = actions.select_default,
+            }),
+            n = mappings,
           },
         },
         extensions = {
