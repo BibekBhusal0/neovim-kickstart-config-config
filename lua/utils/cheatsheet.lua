@@ -132,8 +132,8 @@ local copiedMaps = {
     { 'go to older position in change list', 'g;' },
     { 'jump to the tag under cursor', 'Ctrl + ]' },
     { 'go to the previously exit position', '`0' },
-    { 'got to last edited line in file', '`"' },
-    { 'got to last changed position', '`.' },
+    { 'go to last edited line in file', '`"' },
+    { 'go to last changed position', '`.' },
     { 'go to the position before the last jump', '``' },
   },
   ['Macros'] = {

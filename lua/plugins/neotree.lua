@@ -6,9 +6,9 @@ end
 local map = require 'utils.map'
 map('<C-g>', showTree, 'Neotree Toggle', { 'n', 'v', 'i' })
 map('<leader>E', ':Neotree float <CR>', 'Neotree Floating')
-map('<leader>e', ':Neotree toggle position=right<CR>', 'NeoTree on Right')
+map('<leader>e', ':Neotree toggle position=right<CR>', 'Neotree on Right')
 map('<leader>gf', ':Neotree float git_status <CR>', 'Git changes in files')
-map('<leader>q', ':Neotree toggle position=left<CR>', 'NeoTree on Left')
+map('<leader>q', ':Neotree toggle position=left<CR>', 'Neotree on Left')
 
 local lsp_operations = function(name)
   return function(...)
