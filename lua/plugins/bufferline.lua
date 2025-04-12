@@ -1,18 +1,72 @@
+local map = require 'utils.map'
+
 local selected_bg = '#095028'
 local bg = '#18181b'
 local tab_selected = '#74dfa2'
 local tab = '#052814'
-local map = require 'utils.map'
+local close = '#f31260'
+local fg = '#e4e4e7'
+local main_bg = { attribute = 'bg', highlight = 'Normal' }
 
 return {
   'akinsho/bufferline.nvim',
   event = 'VimEnter',
   config = function()
+    local highlights = {
+      background = { bg = bg },
+      fill = { bg = main_bg, fg = selected_bg },
+      tab_close = { fg = close },
+      trunc_marker = { bg = bg, fg = fg },
+      tab = { bg = tab, fg = tab_selected },
+      tab_selected = { bg = tab_selected, fg = tab },
+      tab_separator = { bg = tab, fg = main_bg },
+      tab_separator_selected = { bg = tab_selected, fg = main_bg },
+    }
+
+    local set_colors = function(keys, foreground, foreground_selected, background, background_selected)
+      local suffix = { '_selected', '_visible', '' }
+      for _, p in pairs(keys) do
+        for _, s in pairs(suffix) do
+          local key = p .. s
+          local colors = { bg = background or bg, fg = foreground }
+          if s == '_selected' then
+            colors = { bg = background_selected or background or selected_bg, fg = foreground_selected or foreground }
+          end
+          highlights[key] = colors
+        end
+      end
+    end
+
+    set_colors({
+      'hint',
+      'warning',
+      'error',
+      'info',
+      'hint_diagnostic',
+      'warning_diagnostic',
+      'error_diagnostic',
+      'info_diagnostic',
+      'numbers',
+      'buffer',
+      'diagnostic',
+      'modified',
+      'duplicate',
+    }, fg)
+    set_colors({ 'close_button', 'pick' }, close)
+    set_colors({ 'separator' }, main_bg)
+    -- set_colors({ 'separator' }, bg, selected_bg, main_bg, main_bg)
+
     local bufferline = require 'bufferline'
     bufferline.setup {
       options = {
         mode = 'buffers',
-        themable = true,
+        groups = {
+          items = {
+            require('bufferline.groups').builtin.pinned:with { icon = '󰐃 ' },
+          },
+        },
+
+        themable = false,
         close_command = 'Bdelete! %d',
         close_icon = ' 󰅙',
         middle_mouse_command = 'Bdelete! %d',
@@ -42,8 +96,8 @@ return {
         show_buffer_icons = true,
         show_buffer_close_icons = true,
         show_close_icon = true,
-        persist_buffer_sort = false, -- whether or not custom sorted buffers should persist
-        separator_style = { '', '' }, -- | "thick" | "thin" | { "any", "any" },
+        persist_buffer_sort = true,
+        separator_style = 'slope',
         enforce_regular_tabs = false,
         always_show_bufferline = true,
         show_tab_indicators = true,
@@ -54,24 +108,8 @@ return {
         sort_by = 'insert_at_end',
         hover = { enabled = true, delay = 200, reveal = { 'close' } },
       },
-      highlights = {
-        buffer_selected = {
-          fg = '#e4e4e7',
-          bg = selected_bg,
-          bold = true,
-          italic = false,
-        },
-        close_button = { bg = bg, fg = '#f31260' },
-        close_button_selected = { bg = selected_bg, fg = '#f31260' },
-        background = { bg = bg },
-        modified_selected = { bg = selected_bg },
-        modified = { bg = bg },
-        diagnostic = { bg = bg },
-        diagnostic_selected = { bg = bg },
-        tab_close = { fg = '#f31260' },
-      },
+      highlights = highlights,
     }
-    vim.api.nvim_set_hl(0, 'BufferLineTabSelected', { bg = tab_selected, fg = tab })
     local function close_all_saved_buffers()
       for _, e in ipairs(bufferline.get_elements().elements) do
         vim.schedule(function()
@@ -86,7 +124,6 @@ return {
         bufferline.rename_tab { text }
       end, '', 15, '󰓩 ')
     end
-    vim.api.nvim_set_hl(0, 'BufferLineTab', { bg = tab, fg = tab_selected })
     map('<Tab>', ':BufferLineCycleNext<CR>', 'Buffer Cycle Next')
     map('<S-Tab>', ':BufferLineCyclePrev<CR>', 'Buffer Cycle Previous')
     map('<leader>bp', ':BufferLineTogglePin<CR>', 'Buffer Toggle Pin')

@@ -35,7 +35,6 @@ map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current
 map('<leader>gq', ':Gitsigns setqflist<CR>', 'Git quick fix list')
 map('<leader>gR', ':Gitsigns reset_buffer<CR>', 'Git Reset buffer')
 map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
-map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')
 map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
 map('ag', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
