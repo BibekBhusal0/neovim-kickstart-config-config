@@ -10,6 +10,7 @@ local searchInConfig = function()
 end
 
 map('<leader>/', ':Telescope current_buffer_fuzzy_find<CR>', 'Search in current buffer')
+map('<leader>s/', ':Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>', 'Search in Open Files')
 map('<leader>:', ':Telescope command_history<CR>', 'Search Commands history')
 map('<leader>i', ':Telescope spell_suggest<CR>', 'Spell suggestion')
 map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
@@ -94,6 +95,11 @@ return {
         end
       end
 
+      local yank_selected = function()
+        local action_state = require 'telescope.actions.state'
+        vim.fn.setreg('"', action_state.get_selected_entry().ordinal)
+      end
+
       local open_all_in_new_tab = open_all_selected(function(val, i)
         vim.cmd((i > 1 and 'edit ' or 'tabnew ') .. val)
       end)
@@ -123,6 +129,7 @@ return {
         ['<a-m>'] = actions.delete_mark,
         ['<a-t>'] = actions.select_tab,
         ['<c-g>'] = open_with_trouble,
+        ['<c-y>'] = yank_selected,
       }
 
       require('telescope').setup {
@@ -204,9 +211,17 @@ return {
           vim_options = get_dropdown {
             prompt_prefix = '󰍜 ',
           },
-          help_tags = {
+          help_tags = get_dropdown {
             prompt_prefix = ' ',
-            layout_config = { preview_width = 0.6 },
+            previewer = false,
+            mappings = {
+              i = {
+                ['<CR>'] = require('telescope.actions').select_vertical,
+              },
+              n = {
+                ['<CR>'] = require('telescope.actions').select_vertical,
+              },
+            },
           },
           man_pages = {},
           reloader = {},
@@ -227,7 +242,7 @@ return {
             prompt_prefix = '󰆒 ',
           },
           keymaps = get_dropdown {
-            prompt_prefix = ' ',
+            prompt_prefix = '  ',
           },
           filetypes = {},
           highlights = {},

@@ -128,11 +128,37 @@ return {
       { '<leader>wt', ':WindowsToggleAutowidth<CR>', desc = 'Window Toggle Autowidth' },
       { '<leader>wv', ':WindowsMaximizeVertically<CR>', desc = 'Window Maximize Vertically' },
     }, -- autoWidth is disabled so this is not needed
+    event = { 'BufNewFile', 'BufReadPost' },
+    cmd = {
+      'WindowsEqualize',
+      'WindowsMaximize',
+      'WindowsMaximizeHorizontally',
+      'WindowsMaximizeVertically',
+      'WindowsToggleAutowidth',
+      'WindowsEnableAutowidth',
+      'WindowsDisableAutowidth',
+    },
     config = function()
       vim.o.winwidth = 20
       vim.o.winminwidth = 15
       vim.o.equalalways = false
-      require('windows').setup { autowidth = { enable = false } }
+      require('windows').setup {
+        autowidth = { enable = true },
+        ignore = {
+          buftype = { 'quickfix' },
+          filetype = {
+            'codecompanion',
+            'quickrun',
+            'trouble',
+            'qf',
+            'noice',
+            'NvimTree',
+            'neo-tree',
+            'undotree',
+            'gundo',
+          },
+        },
+      }
     end,
   }, -- split window autosize with better animations
 

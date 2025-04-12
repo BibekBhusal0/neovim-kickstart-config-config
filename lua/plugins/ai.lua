@@ -52,7 +52,16 @@ return {
     },
     config = function()
       local neocodeium = require 'neocodeium'
-      neocodeium.setup { enabled = true }
+      neocodeium.setup {
+        enabled = true,
+        filetypes = {
+          codecompanion = false,
+          quickrun = false,
+          trouble = false,
+          qf = false,
+          noice = false,
+        },
+      }
       map('<A-f>', neocodeium.accept, 'Codeium Accept', 'i')
       map('<A-w>', neocodeium.accept_word, 'Codeium Accept Word', 'i')
       map('<A-a>', neocodeium.accept_line, 'Codeium Accept Line', 'i')
@@ -70,7 +79,7 @@ return {
     'olimorris/codecompanion.nvim',
     cmd = { 'CodeCompanion', 'CodeCompanionActions', 'CodeCompanionChat' },
     keys = wrap_keys {
-      { '<leader>aa', ':CodeCompanionActions<CR>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
+      { '<leader>aa', ':Telescope codecompanion theme=dropdown previewer=false<CR>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
       { '<leader>ac', ':CodeCompanionChat toggle<CR>', desc = 'CodeCompanion Chat' },
       { '<leader>ac', ':CodeCompanionChat Add<CR>', desc = 'CodeCompanion Chat', mode = { 'v' } },
       { '<leader>ae', ':CodeCompanion /explain<CR>', desc = 'CodeCompanion Explain', mode = { 'v' } },
@@ -83,6 +92,7 @@ return {
       { '<leader>ag', commit_with_message, desc = 'Add changes and get commit message' },
       { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
     },
+
     config = function()
       require 'dressing'
       require('utils.loader'):init()

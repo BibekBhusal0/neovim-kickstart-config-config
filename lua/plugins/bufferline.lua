@@ -99,7 +99,7 @@ return {
     map('<leader>bL', ':BufferLineCloseRight<CR>', 'Buffer Close Next')
     map('<leader>bse', ':BufferLineSortByExtension<CR>', 'Buffer Sort By Extension')
     map('<leader>bsr', ':BufferLineSortByRelativeDirectory<CR>', 'Buffer Sort By Relative Directory')
-    map('<leader>bX', close_all_saved_buffers, 'Buffer close all saved')
+    map('<leader>bq', close_all_saved_buffers, 'Buffer close all saved')
     map('<leader>tr', renameTab, 'Remane tab')
   end,
 }
