@@ -34,12 +34,15 @@ end
 local inline_command = function()
   require 'utils.input'('  Command to AI  ', function(text)
     vim.cmd 'normal! gv'
-    vim.cmd('CodeCompanion /buffer ' .. text)
+    vim.cmd(
+      'CodeCompanion /buffer'
+        .. text
+        .. '**Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**'
+    )
   end, '', 80, require('utils.icons').others.ai .. '  ')
 end
 
 return {
-
   {
     'monkoose/neocodeium',
     cmd = { 'NeoCodeium' },
@@ -79,7 +82,7 @@ return {
     'olimorris/codecompanion.nvim',
     cmd = { 'CodeCompanion', 'CodeCompanionActions', 'CodeCompanionChat' },
     keys = wrap_keys {
-      { '<leader>aa', ':Telescope codecompanion theme=dropdown previewer=false<CR>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
+      { '<leader>aa', ':CodeCompanionActions<CR>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
       { '<leader>ac', ':CodeCompanionChat toggle<CR>', desc = 'CodeCompanion Chat' },
       { '<leader>ac', ':CodeCompanionChat Add<CR>', desc = 'CodeCompanion Chat', mode = { 'v' } },
       { '<leader>ae', ':CodeCompanion /explain<CR>', desc = 'CodeCompanion Explain', mode = { 'v' } },
@@ -88,6 +91,7 @@ return {
       { '<leader>ar', ':CodeCompanion /readable<CR>', desc = 'CodeCompanion Make Code Readable', mode = { 'v' } },
       { '<leader>aG', ':CodeCompanion /commit<CR>', desc = 'CodeCompanion get commit message' },
       { '<leader>aj', ':CodeCompanion /straight<CR>', desc = 'CodeCompanion straight forward coder', mode = { 'n', 'v' } },
+      { '<leader>ap', ':CodeCompanion /paste<CR>', desc = 'CodeCompanion Smart paste', mode = { 'n', 'v' } },
       { '<leader>an', ':lua require("codecompanion.strategies.chat").new({})<CR>', desc = 'CodeCompanion start new chat' },
       { '<leader>ag', commit_with_message, desc = 'Add changes and get commit message' },
       { '<leader>ai', inline_command, desc = 'CodeCompanion Inline command', mode = { 'v' } },
