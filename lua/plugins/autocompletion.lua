@@ -27,6 +27,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-emoji',
     'hrsh7th/cmp-calc',
+    { 'dnnr1/lorem-ipsum.nvim', opts = {} },
   },
 
   config = function()
@@ -106,6 +107,7 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = 'lorem_ipsum' },
         { name = 'emoji' },
         { name = 'calc' },
       },
@@ -120,12 +122,13 @@ return {
           end
           vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
           vim_item.menu = ({
-            luasnip = '[S]',
-            nvim_lsp = '[L]',
-            buffer = '[B]',
-            path = '[P]',
-            emoji = '[E]',
-            calc = '[C]',
+            luasnip = ' ',
+            nvim_lsp = ' ',
+            buffer = ' ',
+            path = ' ',
+            emoji = '',
+            lorem_ipsum = '󰎞 ',
+            calc = ' ',
           })[entry.source.name]
           return vim_item
         end,
