@@ -110,15 +110,7 @@ return {
       },
       highlights = highlights,
     }
-    local function close_all_saved_buffers()
-      for _, e in ipairs(bufferline.get_elements().elements) do
-        vim.schedule(function()
-          if vim.bo[e.id].modified == false then
-            vim.cmd('bd ' .. e.id)
-          end
-        end)
-      end
-    end
+
     local function renameTab()
       require 'utils.input'('Tab name', function(text)
         bufferline.rename_tab { text }
@@ -136,7 +128,6 @@ return {
     map('<leader>bL', ':BufferLineCloseRight<CR>', 'Buffer Close Next')
     map('<leader>bse', ':BufferLineSortByExtension<CR>', 'Buffer Sort By Extension')
     map('<leader>bsr', ':BufferLineSortByRelativeDirectory<CR>', 'Buffer Sort By Relative Directory')
-    map('<leader>bq', close_all_saved_buffers, 'Buffer close all saved')
     map('<leader>tr', renameTab, 'Remane tab')
   end,
 }

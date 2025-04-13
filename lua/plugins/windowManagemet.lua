@@ -40,6 +40,28 @@ local function gotoTab()
 end
 map('<leader>tg', gotoTab, 'Tab goto')
 
+local function list_all_buffers_in_current_tab()
+  local bufnrs = vim.tbl_filter(function(bufnr)
+    if 1 ~= vim.fn.buflisted(bufnr) then
+      return false
+    end
+    return true
+  end, vim.api.nvim_list_bufs())
+  return bufnrs
+end
+
+local function close_all_saved_buffers()
+  for _, e in ipairs(list_all_buffers_in_current_tab()) do
+    vim.schedule(function()
+      if vim.bo[e].modified == false then
+        vim.cmd('bd ' .. e)
+      end
+    end)
+  end
+end
+
+map('<leader>bq', close_all_saved_buffers, 'Buffer close all saved')
+
 return {
 
   {
