@@ -8,6 +8,21 @@ local function searchYTMusic()
   require('browse.utils').format_search('https://music.youtube.com/search?q=%s', { prompt = 'YT Music' })()
 end
 
+local function open_github()
+  local original_word = vim.fn.expand '<cWORD>'
+  local cleaned_word = original_word
+  local chars_to_remove = ',\'"'
+  while true do
+    local original = cleaned_word
+    cleaned_word = string.gsub(cleaned_word, '^[' .. chars_to_remove .. ']+', '')
+    cleaned_word = string.gsub(cleaned_word, '[' .. chars_to_remove .. ']+$', '')
+    if original == cleaned_word then
+      break
+    end
+  end
+  require('browse.utils').default_search('https://github.com/' .. cleaned_word)
+end
+
 return {
   {
     'dhruvmanila/browser-bookmarks.nvim',
@@ -29,6 +44,7 @@ return {
       { '<leader>rF', ":lua require('browse.devdocs').search()<CR>", desc = 'Search DevDocs' },
       { '<leader>ry', searchYoutube, desc = 'Search Youtube' },
       { '<leader>rm', searchYTMusic, desc = 'Search Youtube Music' },
+      { '<leader>rg', open_github, desc = 'Open Github' },
       { '<leader>rj', ":lua require('browse').browse()<CR>", desc = 'Search any' },
       { '<leader>rb', ":lua require('browse').open_bookmarks()<CR>", desc = 'Search Bookmarks' },
       { '<leader>ri', ":lua require('browse').input_search()<CR>", desc = 'Search' },
