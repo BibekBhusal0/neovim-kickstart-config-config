@@ -14,10 +14,24 @@ local function commit_all_with_message()
   end, '', 50, require('utils.icons').others.github .. '  ')
 end
 
+local function change_last_commit_message()
+  local handle = io.popen 'git log -1 --pretty=%B'
+  if not handle then return end
+  local message = handle:read '*a'
+  handle:close()
+  local m = message:match '^%s*(.-)%s*$'
+  if not m then return end
+  require 'utils.input'('Commit Message', function(title)
+    local cmd = "Git commit --amend -m '" .. title .. "'"
+    vim.cmd(cmd)
+  end, m, 100, require('utils.icons').others.github .. '  ')
+end
+
 map('<leader>gA', ':Git add %<CR>', 'Git add current file')
 map('<leader>ga', ':Git add .<CR>', 'Git add all files')
 map('<leader>gc', commit_all_with_message, 'Git commit all')
 map('<leader>gC', commit_with_message, 'Git commit')
+map('<leader>ge', change_last_commit_message, 'Git change last commit message')
 map('<leader>gi', ':Git init<CR>', 'Git Init')
 map('<leader>gP', ':Git pull<CR>', 'Git pull')
 map('<leader>gp', ':Git push<CR>', 'Git push')
