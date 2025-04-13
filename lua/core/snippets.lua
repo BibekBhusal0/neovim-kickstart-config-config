@@ -19,3 +19,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+if vim.fn.argc() > 0 then
+  if vim.fn.argv(0) == 'config' then
+    vim.cmd('lcd ' .. vim.fn.stdpath 'config')
+    vim.cmd('silent bwipeout ' .. vim.fn.argv(0))
+    vim.defer_fn(function()
+      vim.cmd('edit ' .. vim.fn.stdpath 'config' .. '/init.lua')
+      vim.cmd 'normal! zR'
+    end, 1)
+  end
+end

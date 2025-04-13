@@ -32,6 +32,7 @@ return {
 
   {
     'luckasRanarison/tailwind-tools.nvim',
+    build = ':UpdateRemotePlugins',
     ft = webDev,
     config = function()
       require('tailwind-tools').setup {
