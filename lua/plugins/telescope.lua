@@ -17,7 +17,7 @@ map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
 map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
 map('<leader>sA', ':Telescope autocommands<CR>', 'Search Autocommands')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
-map('<leader>sB', ':Telescope scope buffers<CR>', 'Search All Buffers ')
+map('<leader>sB', ':Telescope scope buffers layout_strategy=vertical<CR>', 'Search All Buffers ')
 map('<leader>sC', searchInConfig, 'Search All Neovim Config')
 map('<leader>sd', ':Telescope diagnostics<CR>', 'Search Diagnostics')
 map('<leader>sf', ':Telescope find_files<CR>', 'Search Files')
@@ -28,7 +28,7 @@ map('<leader>sgc', ':Telescope git_commits<CR>', 'Search Git Commits')
 map('<leader>sgf', ':Telescope git_files<CR>', 'Search Git Files')
 map('<leader>sgm', ':Telescope marks mark_type=gloabl<CR>', 'Search marks global')
 map('<leader>sgs', ':Telescope git_status<CR>', 'Search Git Status')
-map('<leader>sh', ':Telescope harpoon marks<CR>', 'Search Harpoon Marks')
+map('<leader>sh', ':Telescope harpoon marks layout_strategy=vertical<CR>', 'Search Harpoon Marks')
 map('<leader>sH', ':Telescope help_tags<CR>', 'Search Help Tags')
 map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sL', searchInLazy, 'Search Lazy Plugins Files')
@@ -126,7 +126,6 @@ return {
         ['<a-j>'] = actions.preview_scrolling_up,
         ['<a-k>'] = actions.preview_scrolling_down,
         ['<a-l>'] = actions.preview_scrolling_right,
-        ['<a-m>'] = actions.delete_mark,
         ['<a-t>'] = actions.select_tab,
         ['<c-g>'] = open_with_trouble,
         ['<c-y>'] = yank_selected,
@@ -155,6 +154,7 @@ return {
             prompt_prefix = ' ',
             show_line = false,
             symbol_width = 18,
+            layout_strategy = 'vertical',
             layout_config = { preview_width = 0.7 },
           },
           current_buffer_fuzzy_find = get_dropdown {
@@ -228,7 +228,7 @@ return {
           buffers = {
             sort_lastused = true,
             initial_mode = 'normal',
-            layout_config = { preview_width = 0.6 },
+            layout_strategy = 'vertical',
           },
           colorscheme = {
             enable_preview = true,
@@ -237,6 +237,10 @@ return {
           marks = {
             prompt_prefix = ' ',
             layout_config = { preview_width = 0.4 },
+            mappings = {
+              i = { ['<a-m>'] = actions.delete_mark },
+              n = { ['<a-m>'] = actions.delete_mark },
+            },
           },
           registers = get_dropdown {
             prompt_prefix = '󰆒 ',
@@ -288,6 +292,14 @@ return {
         },
         extensions = {
           git_diffs = { enable_preview_diff = false },
+          lazy = { theme = 'dropdown', previewer = false },
+          undo = {
+            side_by_side = true,
+            layout_strategy = 'vertical',
+            layout_config = {
+              preview_height = 0.8,
+            },
+          },
         },
       }
     end,

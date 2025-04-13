@@ -205,10 +205,7 @@ return {
   },
 
   {
-    keys = wrap_keys { { '<leader>gdc', ':Telescope git_diffs  diff_commits theme=get_dropdown previewer=false<CR>', desc = 'Diffview Compare commmits' } },
     'paopaol/telescope-git-diffs.nvim',
-    config = function()
-      require('telescope').load_extension 'git_diffs'
-    end,
+    keys = wrap_keys { { '<leader>gdc', ':Telescope git_diffs  diff_commits previewer=false<CR>', desc = 'Diffview Compare commmits' } },
   },
 }

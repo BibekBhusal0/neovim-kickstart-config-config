@@ -59,7 +59,7 @@ return {
       'folke/todo-comments.nvim',
       event = { 'BufNewFile', 'BufReadPost' },
       keys = wrap_keys {
-        { '<leader>sc', ':TodoTelescope<CR>', desc = 'Todo Search Telescope' },
+        { '<leader>sc', ':TodoTelescope layout_strategy=vertical<CR>', desc = 'Todo Search Telescope' },
         { '<leader>cT', ':Trouble todo<CR>', desc = 'Todo Loc List' },
       },
       config = function()

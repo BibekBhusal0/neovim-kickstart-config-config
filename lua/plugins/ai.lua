@@ -82,7 +82,12 @@ return {
     'olimorris/codecompanion.nvim',
     cmd = { 'CodeCompanion', 'CodeCompanionActions', 'CodeCompanionChat' },
     keys = wrap_keys {
-      { '<leader>aa', ':CodeCompanionActions<CR>', desc = 'CodeCompanion Actions', mode = { 'n', 'v' } },
+      {
+        '<leader>aa',
+        '<cmd>lua require("codecompanion").actions({provider={name="telescope",opts=require"telescope.themes".get_dropdown{previewer=false}}})<CR>',
+        desc = 'CodeCompanion Actions',
+        mode = { 'n', 'v' },
+      },
       { '<leader>ac', ':CodeCompanionChat toggle<CR>', desc = 'CodeCompanion Chat' },
       { '<leader>ac', ':CodeCompanionChat Add<CR>', desc = 'CodeCompanion Chat', mode = { 'v' } },
       { '<leader>ae', ':CodeCompanion /explain<CR>', desc = 'CodeCompanion Explain', mode = { 'v' } },
