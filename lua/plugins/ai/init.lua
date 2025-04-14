@@ -4,7 +4,7 @@ local map = require 'utils.map'
 local commit_with_message = function()
   vim.cmd 'Git add .'
 
-  local m = require 'utils.diff'()
+  local m = require 'plugins.ai.diff'()
   if not m.ok then
     vim.notify(m.message, vim.log.levels.WARN)
     return
@@ -104,7 +104,7 @@ return {
 
     config = function()
       require 'dressing'
-      require('utils.loader'):init()
+      require('plugins.ai.loader'):init()
       require('codecompanion').setup {
         display = {
           chat = {
@@ -122,11 +122,10 @@ return {
               next_header = { modes = { n = ']r' }, index = 13, callback = 'keymaps.next_header', description = 'Next Header' },
               previous_header = { modes = { n = '[r' }, index = 14, callback = 'keymaps.previous_header', description = 'Previous Header' },
             },
-            tools = { nvim_cmd_runner = { require 'utils.cmdrunner' } },
           },
           inline = { adapter = 'gemini' },
         },
-        prompt_library = require 'utils.prompts',
+        prompt_library = require 'plugins.ai.prompts',
         adapters = {
           gemini = 'gemini',
           opts = { show_defaults = false },

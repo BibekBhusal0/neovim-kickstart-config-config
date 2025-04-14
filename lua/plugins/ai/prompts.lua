@@ -137,7 +137,7 @@ You are a smart code paste agent within Neovim.
     strategy = 'chat',
     description = 'Generate a commit message',
     condition = function()
-      return require 'utils.diff'().ok
+      return require 'plugins.ai.diff'().ok
     end,
     opts = {
       index = 10,
@@ -164,7 +164,7 @@ You are a smart code paste agent within Neovim.
       {
         role = 'user',
         content = function()
-          local m = require 'utils.diff'()
+          local m = require 'plugins.ai.diff'()
           if not m.ok then
             return 'Git diff is not available, please help to user by providing step by step instructions what they need to do. The reason why git diff is not available is '
               .. m.message
