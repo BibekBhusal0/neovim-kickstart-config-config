@@ -42,20 +42,22 @@ map('<leader>gJ', ':Git commit --amend --no-edit<CR>', 'Git commit to last commi
 
 map('<leader>gb', ':Gitsigns blame<CR>', 'Git Blame')
 map('<leader>gB', ':Gitsigns blame_line<CR>', 'Git Toggle line blame')
-map('<leader>gD', ':Gitsigns diffthis<CR>', 'Git Diff this')
+map('<leader>gD', ':lua require("gitsigns").diffthis("~")<CR>', 'Git Diff this')
+map('<leader>Gd', ':lua require("gitsigns").toggle_deleted()<CR>', 'Git deleted diff')
 map('<leader>gH', ':Gitsigns preview_hunk<CR>', 'Git Preview hunk')
 map('<leader>gh', ':Gitsigns preview_hunk_inline<CR>', 'Git Preview hunk inline')
 map('<leader>gl', ':Gitsigns toggle_current_line_blame<CR>', 'Git toggle current line blame')
+map('<leader>gQ', ':Gitsigns setqflist all<CR>', 'Git quick fix list All')
 map('<leader>gq', ':Gitsigns setqflist<CR>', 'Git quick fix list')
 map('<leader>gR', ':Gitsigns reset_buffer<CR>', 'Git Reset buffer')
-map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk')
-map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk')
+map('<leader>gr', ':Gitsigns reset_hunk<CR>', 'Git Reset hunk', { 'n', 'v' })
+map('<leader>gS', ':Gitsigns stage_buffer<CR>', 'Git Stage buffer')
+map('<leader>gs', ':Gitsigns stage_hunk<CR>', 'Git Stage hunk', { 'n', 'v' })
 map('<leader>gt', ':Gitsigns toggle_signs<CR>', 'Gitsigns toggle')
+map('<leader>gu', ':Gitsigns undo_stage_hunk<CR>', 'Git Undu hunk')
+map('<leader>gW', ':lua require("gitsigns").toggle_word_diff()<CR>', 'Git Toggle word diff')
 map('ag', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
 map('ig', ':lua require("gitsigns").select_hunk()<CR>', 'Select hunk', { 'o', 'x' })
-
-map(']h', ':execute("normal! ]c")<CR>', 'Next Change')
-map('[h', ':execute("normal! [c")<CR>', 'Prev Change')
 
 local function diffViewTelescopeFileHistory()
   local actions = require 'telescope.actions'

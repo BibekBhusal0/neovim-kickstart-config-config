@@ -216,7 +216,19 @@ return {
       end
 
       local get_pair = ts_repeat_move.make_repeatable_move_pair
-      local next_hunk, prev_hunk = get_pair(call_require('gitsigns', 'next_hunk'), call_require('gitsigns', 'prev_hunk'))
+      local next_hunk, prev_hunk = get_pair(function()
+        if vim.wo.diff then
+          vim.cmd.normal { ']c', bang = true }
+        else
+          require('gitsigns').nav_hunk 'next'
+        end
+      end, function()
+        if vim.wo.diff then
+          vim.cmd.normal { '[c', bang = true }
+        else
+          require('gitsigns').nav_hunk 'prev'
+        end
+      end)
       local next_dig, prev_dig = get_pair(function()
         vim.diagnostic.goto_next { float = false }
       end, function()

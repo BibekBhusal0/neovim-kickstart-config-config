@@ -12,7 +12,7 @@ return {
     local trouble = require 'trouble'
     trouble.setup {
       icons = { kinds = require('utils.icons').get_padded_icon 'symbols' },
-      keys = { l = 'jump', j = 'next', k = 'prev', f = 'fold_toggle' },
+      keys = { l = 'jump', J = 'next', K = 'prev', f = 'fold_toggle' },
     }
     map('<leader>cl', function()
       trouble.next { skip_groups = true, jump = true }
