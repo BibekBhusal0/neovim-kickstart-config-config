@@ -79,8 +79,38 @@ return {
         require('trouble.sources.telescope').open(...)
       end
 
+      local multi_selection_codecompanion = function(prompt_bufnr)
+        local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+        local multi = picker:get_multi_selection()
+
+        local picker_type = picker.prompt_title or ''
+
+        local is_codecompanion = string.find(picker_type, 'Select file%(s%)') or string.find(picker_type, 'Select buffer%(s%)')
+
+        if is_codecompanion then
+          require('telescope.actions').select_default(prompt_bufnr)
+          return
+        end
+
+        if not vim.tbl_isempty(multi) then
+          require('telescope.actions').close(prompt_bufnr)
+          for _, j in pairs(multi) do
+            if j.path ~= nil then
+              if j.lnum ~= nil then
+                vim.cmd(string.format('%s %s:%s', 'edit', j.path, j.lnum))
+              else
+                vim.cmd(string.format('%s %s', 'edit', j.path))
+              end
+            end
+          end
+        else
+          require('telescope.actions').select_default(prompt_bufnr)
+        end
+      end
+
       local actions = require 'telescope.actions'
-      local open_all_selected = function(open_callback)
+
+      local all_cmd = function(open_callback)
         return function(prompt_bufnr)
           local action_state = require 'telescope.actions.state'
           local picker = action_state.get_current_picker(prompt_bufnr)
@@ -100,11 +130,8 @@ return {
         vim.fn.setreg('"', action_state.get_selected_entry().ordinal)
       end
 
-      local open_all_in_new_tab = open_all_selected(function(val, i)
+      local open_all_in_new_tab = all_cmd(function(val, i)
         vim.cmd((i > 1 and 'edit ' or 'tabnew ') .. val)
-      end)
-      local open_all = open_all_selected(function(val)
-        vim.cmd('edit ' .. val)
       end)
 
       vim.g.sqlite_clib_path = 'C:/ProgramData/sqlite/sqlite3.dll'
@@ -129,6 +156,7 @@ return {
         ['<a-t>'] = actions.select_tab,
         ['<c-g>'] = open_with_trouble,
         ['<c-y>'] = yank_selected,
+        ['<cr>'] = multi_selection_codecompanion,
       }
 
       require('telescope').setup {
@@ -140,14 +168,8 @@ return {
             prompt_prefix = '󰈔 ',
             layout_config = { preview_width = 0.6 },
             mappings = {
-              i = {
-                ['<a-g>'] = open_all_in_new_tab,
-                ['<a-i>'] = open_all,
-              },
-              n = {
-                ['<a-g>'] = open_all_in_new_tab,
-                ['<a-i>'] = open_all,
-              },
+              i = { ['<a-g>'] = open_all_in_new_tab },
+              n = { ['<a-g>'] = open_all_in_new_tab },
             },
           },
           treesitter = {

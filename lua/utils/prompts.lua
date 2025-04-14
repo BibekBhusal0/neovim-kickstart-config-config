@@ -74,6 +74,10 @@ You must not:
       index = 12,
       short_name = 'paste',
       ignore_system_prompt = false,
+      adapter = {
+        name = 'gemini',
+        model = 'gemini-1.5-flash', -- supposed to be fast
+      },
     },
     prompts = {
       {

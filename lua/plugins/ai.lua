@@ -35,9 +35,9 @@ local inline_command = function()
   require 'utils.input'('  Command to AI  ', function(text)
     vim.cmd 'normal! gv'
     vim.cmd(
-      'CodeCompanion /buffer'
+      'CodeCompanion /buffer '
         .. text
-        .. '**Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**'
+        .. ' **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**'
     )
   end, '', 80, require('utils.icons').others.ai .. '  ')
 end
@@ -122,6 +122,7 @@ return {
               next_header = { modes = { n = ']r' }, index = 13, callback = 'keymaps.next_header', description = 'Next Header' },
               previous_header = { modes = { n = '[r' }, index = 14, callback = 'keymaps.previous_header', description = 'Previous Header' },
             },
+            tools = { nvim_cmd_runner = { require 'utils.cmdrunner' } },
           },
           inline = { adapter = 'gemini' },
         },
