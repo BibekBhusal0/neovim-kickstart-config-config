@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 if vim.fn.argc() > 0 then
   if vim.fn.argv(0) == 'config' then
-    vim.cmd('lcd ' .. vim.fn.stdpath 'config')
+    vim.api.nvim_set_current_dir(vim.fn.stdpath 'config')
     vim.cmd('silent bwipeout ' .. vim.fn.argv(0))
     vim.defer_fn(function()
       vim.cmd('edit ' .. vim.fn.stdpath 'config' .. '/init.lua')

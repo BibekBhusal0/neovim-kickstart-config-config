@@ -24,7 +24,7 @@ local function change_last_commit_message()
   require 'utils.input'('Commit Message', function(title)
     local cmd = "Git commit --amend -m '" .. title .. "'"
     vim.cmd(cmd)
-  end, m, 100, require('utils.icons').others.github .. '  ')
+  end, m, 60, require('utils.icons').others.github .. '  ')
 end
 
 map('<leader>gA', ':Git add %<CR>', 'Git add current file')
