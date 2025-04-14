@@ -9,11 +9,20 @@ local searchInConfig = function()
   require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
 end
 
+local searchInCurrentBufferDir = function()
+  local current_file = vim.api.nvim_buf_get_name(0)
+  if current_file == '' then
+    require('telescope.builtin').find_files { cwd = vim.loop.cwd() }
+  else
+    require('telescope.builtin').find_files { cwd = vim.fn.fnamemodify(current_file, ':h') }
+  end
+end
+
 map('<leader>/', ':Telescope current_buffer_fuzzy_find<CR>', 'Search in current buffer')
-map('<leader>s/', ':Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>', 'Search in Open Files')
 map('<leader>:', ':Telescope command_history<CR>', 'Search Commands history')
 map('<leader>i', ':Telescope spell_suggest<CR>', 'Spell suggestion')
 map('<leader>s.', ':Telescope oldfiles<CR>', 'Search recent Files')
+map('<leader>s/', ':Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>', 'Search in Open Files')
 map('<leader>s:', ':Telescope commands<CR>', 'Search Commands')
 map('<leader>sA', ':Telescope autocommands<CR>', 'Search Autocommands')
 map('<leader>sb', ':Telescope buffers<CR>', 'Search buffers in current tab')
@@ -30,6 +39,7 @@ map('<leader>sgm', ':Telescope marks mark_type=gloabl<CR>', 'Search marks global
 map('<leader>sgs', ':Telescope git_status<CR>', 'Search Git Status')
 map('<leader>sh', ':Telescope harpoon marks layout_strategy=vertical<CR>', 'Search Harpoon Marks')
 map('<leader>sH', ':Telescope help_tags<CR>', 'Search Help Tags')
+map('<leader>sj', searchInCurrentBufferDir, 'Telescope search in current buffer directory')
 map('<leader>sK', ':Telescope keymaps<CR>', 'Search Keymaps')
 map('<leader>sL', searchInLazy, 'Search Lazy Plugins Files')
 map('<leader>sM', ':Telescope marks mark_type=all<CR>', 'Search marks all')
@@ -147,6 +157,7 @@ return {
         layout_config = { preview_width = 0.5 },
       }
 
+      local fb_actions = require 'telescope._extensions.file_browser.actions'
       local mappings = {
         ['<a-a>'] = actions.select_all,
         ['<a-h>'] = actions.preview_scrolling_left,
@@ -276,15 +287,16 @@ return {
           spell_suggest = theme.get_cursor {
             prompt_prefix = '󰓆  ',
             initial_mode = 'normal',
-            layout_config = { width = 40 },
+            layout_config = { width = 30 },
+            prompt_title = 'Spell',
           },
           tagstack = {},
           jumplist = {},
-          lsp_references = {},
+          lsp_references = get_dropdown { initial_mode = 'normal' },
           lsp_incomming_calls = {},
           lsp_outgoing_calls = {},
-          lsp_definitions = {},
-          lsp_type_definitions = {},
+          lsp_definitions = get_dropdown { initial_mode = 'normal' },
+          lsp_type_definitions = get_dropdown { initial_mode = 'normal' },
           lsp_implementations = {},
           lsp_document_symbols = {},
           lsp_workspace_symbols = {},
@@ -309,12 +321,35 @@ return {
               ['<C-k>'] = actions.move_selection_previous,
               ['<C-l>'] = actions.select_default,
             }),
-            n = mappings,
+            n = vim.tbl_extend('force', mappings, {
+              ['l'] = actions.select_default,
+            }),
           },
         },
+
         extensions = {
           git_diffs = { enable_preview_diff = false },
           lazy = { theme = 'dropdown', previewer = false },
+          file_browser = {
+            layout_strategy = 'vertical',
+            select_buffer = true,
+            hide_parent_dir = true,
+            collapse_dirs = true,
+            prompt_path = true,
+            dir_icon = '',
+            git_status = true,
+            mappings = {
+              ['i'] = {
+                ['<C-h>'] = fb_actions.backspace,
+              },
+              ['n'] = {
+                ['<bs>'] = fb_actions.backspace,
+                ['h'] = fb_actions.backspace,
+                ['H'] = fb_actions.toggle_hidden,
+                ['n'] = fb_actions.create,
+              },
+            },
+          },
           undo = {
             side_by_side = true,
             layout_strategy = 'vertical',
@@ -374,6 +409,14 @@ return {
   }, -- search lazy plugins readme file
 
   {
+    'nvim-telescope/telescope-file-browser.nvim',
+    keys = wrap_keys {
+      { '<leader>so', ':Telescope file_browser<CR>', desc = 'Telescope file browser' },
+      { '<leader>sJ', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', desc = 'Telescope file browser crr' },
+    },
+  }, -- uses telescope for vim.input
+
+  {
     'stevearc/dressing.nvim',
     lazy = true,
     config = function()
@@ -391,5 +434,5 @@ return {
         },
       }
     end,
-  }, -- uses telescope for vim.input
+  },
 }

@@ -165,7 +165,7 @@ return {
       vim.o.winminwidth = 15
       vim.o.equalalways = false
       require('windows').setup {
-        autowidth = { enable = true },
+        autowidth = { enable = false },
         ignore = {
           buftype = { 'quickfix' },
           filetype = {
