@@ -13,7 +13,10 @@ return {
 
   {
     'echasnovski/mini.trailspace',
-    keys = wrap_keys { { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' } },
+    keys = wrap_keys {
+      { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' },
+      { '<leader>T', ':lua require("mini.trailspace").trim() vim.api.nvim_feedkeys("ggVG=","n",false)<CR>', desc = 'Simple format' },
+    },
   }, -- Simple ways to train whitespace useful when formatter is not working
 
   {
