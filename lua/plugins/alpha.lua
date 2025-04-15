@@ -199,6 +199,6 @@ end
 return {
   'goolord/alpha-nvim',
   config = render,
-  lazy = 'leetcode.nvim' == vim.fn.argv(0, -1),
+  lazy = '' ~= vim.fn.argv(0, -1),
   cmd = 'Alpha',
 }

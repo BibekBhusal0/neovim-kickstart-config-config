@@ -48,7 +48,7 @@ map('<leader>zi', toggle_foldcolumn, 'Toggle fold column')
 
 vim.o.foldcolumn = '0'
 vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+vim.o.foldenable = false
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 

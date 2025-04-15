@@ -20,13 +20,30 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-if vim.fn.argc() > 0 then
-  if vim.fn.argv(0) == 'config' then
-    vim.api.nvim_set_current_dir(vim.fn.stdpath 'config')
-    vim.cmd('silent bwipeout ' .. vim.fn.argv(0))
-    vim.defer_fn(function()
-      vim.cmd('edit ' .. vim.fn.stdpath 'config' .. '/init.lua')
-      vim.cmd 'normal! zR'
-    end, 1)
+local function starting_command(condition, post_defer, pre_defer, dfr)
+  if vim.fn.argc() > 0 then
+    if condition(vim.fn.argv(0)) then
+      if pre_defer then
+        pre_defer(vim.fn.argv())
+      end
+      vim.cmd 'bufdo bd!'
+      vim.defer_fn(function()
+        if post_defer then
+          post_defer(vim.fn.argv())
+        end
+      end, dfr or 5)
+    end
   end
 end
+
+starting_command(
+  function(args) return args == 'config' end,
+  function() vim.cmd('edit ' .. vim.fn.stdpath 'config' .. '/init.lua') vim.cmd 'normal! zR' end,
+  function() vim.api.nvim_set_current_dir(vim.fn.stdpath 'config') end,
+  1
+)
+
+starting_command(
+  function(args) return string.sub(args, 1, 1) == ':' end,
+  function(args) vim.cmd(string.sub(table.concat(args, ' '), 2)) end
+)
