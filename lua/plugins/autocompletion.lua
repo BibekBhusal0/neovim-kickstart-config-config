@@ -27,7 +27,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-emoji',
     'hrsh7th/cmp-calc',
-    { 'dnnr1/lorem-ipsum.nvim', opts = {} },
+    'dnnr1/lorem-ipsum.nvim',
   },
 
   config = function()
