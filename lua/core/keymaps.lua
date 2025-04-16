@@ -83,20 +83,20 @@ map('zo', 'za', 'Toggle fold')
 map('<Esc>', ':noh<CR>', 'Clear Highlight')
 
 local function toggle_statusline()
-  local statusline_visible = vim.opt.laststatus._value == 2
-  if statusline_visible then
-    vim.opt.laststatus = 0
+  local current_status = vim.o.laststatus
+  if current_status == 2 then
+    vim.o.laststatus = 0
   else
-    vim.opt.laststatus = 2
+    vim.o.laststatus = 2
   end
 end
 
 local function toggle_tabline()
-  local tabline_visible = vim.opt.showtabline._value == 2
-  if tabline_visible then
-    vim.opt.showtabline = 0
+  local current_tabline = vim.o.showtabline
+  if current_tabline == 2 then
+    vim.o.showtabline = 0
   else
-    vim.opt.showtabline = 2
+    vim.o.showtabline = 2
   end
 end
 
