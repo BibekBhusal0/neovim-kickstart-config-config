@@ -1,87 +1,87 @@
 local diagnostics = {
-  error = '',
-  warn = '',
-  info = '󰋼',
-  hint = '󰌵',
+  error = "",
+  warn = "",
+  info = "󰋼",
+  hint = "󰌵",
 }
 
 local symbols = {
-  Array = '󰅪',
-  Boolean = '󰨙',
-  Class = '󰌗',
-  Color = '󰏘',
-  Constant = '󰏿',
-  Constructor = '',
-  Enum = '',
-  EnumMember = '',
-  Event = '',
-  Field = ' ',
-  File = '󰈙',
-  Folder = '󰉋',
-  Function = '󰊕',
-  Interface = '',
-  Key = '',
-  Keyword = '󰌋',
-  Method = '󰆧',
-  Module = '',
-  Namespace = '󰦮',
-  Null = '',
-  Number = '󰎠',
-  Object = '󰅩',
-  Operator = '󰆕',
-  Package = '󰏗',
-  Property = '󰜢',
-  Reference = '󰈇',
-  Snippet = '',
-  String = ' ',
-  Struct = '󰆼',
-  Text = '󰉿',
-  TypeParameter = '',
-  Unit = '󰑭',
-  Value = '󰎠',
-  Variable = '󰆧',
+  Array = "󰅪",
+  Boolean = "󰨙",
+  Class = "󰌗",
+  Color = "󰏘",
+  Constant = "󰏿",
+  Constructor = "",
+  Enum = "",
+  EnumMember = "",
+  Event = "",
+  Field = " ",
+  File = "󰈙",
+  Folder = "󰉋",
+  Function = "󰊕",
+  Interface = "",
+  Key = "",
+  Keyword = "󰌋",
+  Method = "󰆧",
+  Module = "",
+  Namespace = "󰦮",
+  Null = "",
+  Number = "󰎠",
+  Object = "󰅩",
+  Operator = "󰆕",
+  Package = "󰏗",
+  Property = "󰜢",
+  Reference = "󰈇",
+  Snippet = "",
+  String = " ",
+  Struct = "󰆼",
+  Text = "󰉿",
+  TypeParameter = "",
+  Unit = "󰑭",
+  Value = "󰎠",
+  Variable = "󰆧",
 }
 
 local dap = {
-  Breakpoint = '●',
-  BreakpointCondition = '',
-  BreakpointRejected = '◌',
-  LogPoint = '󰝶',
-  Stopped = '󰁕',
+  Breakpoint = "●",
+  BreakpointCondition = "",
+  BreakpointRejected = "◌",
+  LogPoint = "󰝶",
+  Stopped = "󰁕",
 }
 
 local folder = {
-  default = '',
-  folder_empty = '󰉖',
-  folder_empty_open = '󱞞',
-  folder_open = '',
-  fodler_symlink = '',
+  default = "",
+  folder_empty = "󰉖",
+  folder_empty_open = "󱞞",
+  folder_open = "",
+  fodler_symlink = "",
 }
 
 local git = {
-  added = '',
-  modified = '',
-  removed = '',
-  deleted = '',
-  renamed = '󰁕',
-  untracked = 'U',
-  ignored = '',
-  unstaged = '',
-  staged = '',
-  conflict = '',
+  added = "",
+  modified = "",
+  removed = "",
+  deleted = "",
+  renamed = "󰁕",
+  untracked = "U",
+  ignored = "",
+  unstaged = "",
+  staged = "",
+  conflict = "",
 }
 
 local others = {
-  github = '',
-  git = '󰊢',
-  ai = '',
-  ai2 = '',
+  github = "",
+  git = "󰊢",
+  ai = "",
+  ai2 = "",
 }
 
 local pad_icons = function(inp)
   local icons = {}
   for k, v in pairs(inp) do
-    icons[k] = v .. ' '
+    icons[k] = v .. " "
   end
   return icons
 end
@@ -104,7 +104,7 @@ local get_padded_icon = function(name)
   end
 end
 
-return vim.tbl_extend('force', icons, {
+return vim.tbl_extend("force", icons, {
   get_padded_icon = get_padded_icon,
   pad_icons = pad_icons,
 })

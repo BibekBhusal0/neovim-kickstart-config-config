@@ -1,22 +1,22 @@
 return {
-  'nvimtools/none-ls.nvim',
-  event = 'InsertEnter',
+  "nvimtools/none-ls.nvim",
+  event = "InsertEnter",
   dependencies = {
-    'nvimtools/none-ls-extras.nvim',
-    'jayp0521/mason-null-ls.nvim',
+    "nvimtools/none-ls-extras.nvim",
+    "jayp0521/mason-null-ls.nvim",
   },
   config = function()
-    local null_ls = require 'null-ls'
+    local null_ls = require "null-ls"
     local formatting = null_ls.builtins.formatting -- to setup formatters
     -- local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
     -- Formatters & linters for mason to install
-    require('mason-null-ls').setup {
+    require("mason-null-ls").setup {
       ensure_installed = {
-        'prettier', -- ts/js/html/more formatter
-        'eslint_d', -- ts/js linter
-        'ruff',
-        'stylua',
+        "prettier", -- ts/js/html/more formatter
+        "eslint_d", -- ts/js linter
+        "ruff",
+        "stylua",
       },
       automatic_installation = true,
     }
@@ -24,19 +24,19 @@ return {
     local sources = {
       formatting.prettier,
       formatting.stylua,
-      require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-      require 'none-ls.formatting.ruff_format',
+      require("none-ls.formatting.ruff").with { extra_args = { "--extend-select", "I" } },
+      require "none-ls.formatting.ruff_format",
     }
 
-    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     null_ls.setup {
       -- debug = true, -- Enable debug mode. Inspect logs with :NullLsLog.
       sources = sources,
       -- you can reuse a shared lspConfig on_attach callback here
       on_attach = function(client, bufnr)
-        if client:supports_method 'textDocument/formatting' then
+        if client:supports_method "textDocument/formatting" then
           vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-          vim.api.nvim_create_autocmd('BufWritePre', {
+          vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
             buffer = bufnr,
             callback = function()
@@ -47,7 +47,7 @@ return {
           local format = function()
             vim.lsp.buf.format { async = true }
           end
-          require 'utils.map'('<leader>ff', format, 'Format file using LSP')
+          require "utils.map"("<leader>ff", format, "Format file using LSP")
         end
       end,
     }

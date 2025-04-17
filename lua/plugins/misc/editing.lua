@@ -1,60 +1,64 @@
-local wrap_keys = require 'utils.wrap_keys'
+local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
-    'kylechui/nvim-surround',
+    "kylechui/nvim-surround",
     keys = {
-      { 'ys', mode = { 'n', 'o', 'x' }, desc = 'Surround Text' },
-      { 'ds', mode = { 'n', 'o', 'x' }, desc = 'Surround Delete' },
-      { 'cs', mode = { 'n', 'o', 'x' }, desc = 'Surround Change' },
+      { "ys", mode = { "n", "o", "x" }, desc = "Surround Text" },
+      { "ds", mode = { "n", "o", "x" }, desc = "Surround Delete" },
+      { "cs", mode = { "n", "o", "x" }, desc = "Surround Change" },
     },
     opts = {},
   }, -- change brackets, quotes and surrounds
 
   {
-    'echasnovski/mini.trailspace',
+    "echasnovski/mini.trailspace",
     keys = wrap_keys {
-      { '<leader>tw', ':lua require("mini.trailspace").trim() <CR>', desc = 'Trim Whitespace' },
-      { '<leader>T', ':lua require("mini.trailspace").trim() vim.api.nvim_feedkeys("ggVG=","n",false)<CR>', desc = 'Simple format' },
+      { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
+      {
+        "<leader>T",
+        ':lua require("mini.trailspace").trim() vim.api.nvim_feedkeys("ggVG=","n",false)<CR>',
+        desc = "Simple format",
+      },
     },
   }, -- Simple ways to train whitespace useful when formatter is not working
 
   {
-    'nacro90/numb.nvim',
+    "nacro90/numb.nvim",
     opts = {},
     keys = {
-      { '0', mode = 'c' },
-      { '1', mode = 'c' },
-      { '2', mode = 'c' },
-      { '3', mode = 'c' },
-      { '4', mode = 'c' },
-      { '5', mode = 'c' },
-      { '6', mode = 'c' },
-      { '7', mode = 'c' },
-      { '8', mode = 'c' },
-      { '9', mode = 'c' },
+      { "0", mode = "c" },
+      { "1", mode = "c" },
+      { "2", mode = "c" },
+      { "3", mode = "c" },
+      { "4", mode = "c" },
+      { "5", mode = "c" },
+      { "6", mode = "c" },
+      { "7", mode = "c" },
+      { "8", mode = "c" },
+      { "9", mode = "c" },
     },
   }, -- Preview of line from command mode
 
   {
-    'altermo/ultimate-autopair.nvim',
+    "altermo/ultimate-autopair.nvim",
     keys = {
-      { '{', mode = { 'i', 'c' } },
-      { '[', mode = { 'i', 'c' } },
-      { '(', mode = { 'i', 'c' } },
-      { '"', mode = { 'i', 'c' } },
-      { "'", mode = { 'i', 'c' } },
-      { '`', mode = { 'i', 'c' } },
-      { '}', mode = { 'i', 'c' } },
-      { ']', mode = { 'i', 'c' } },
-      { ')', mode = { 'i', 'c' } },
+      { "{", mode = { "i", "c" } },
+      { "[", mode = { "i", "c" } },
+      { "(", mode = { "i", "c" } },
+      { '"', mode = { "i", "c" } },
+      { "'", mode = { "i", "c" } },
+      { "`", mode = { "i", "c" } },
+      { "}", mode = { "i", "c" } },
+      { "]", mode = { "i", "c" } },
+      { ")", mode = { "i", "c" } },
     },
     config = true,
   }, -- Autoclose parentheses, brackets, quotes, etc. also work on command mode
 
   {
-    'mg979/vim-visual-multi',
-    keys = { '<C-n>', '<C-Up>', '<C-Down>', '<S-Left>', '<S-Right>' },
+    "mg979/vim-visual-multi",
+    keys = { "<C-n>", "<C-Up>", "<C-Down>", "<S-Left>", "<S-Right>" },
     -- config = function()
     --   local hlslens = require 'hlslens'
     --   if hlslens then
@@ -92,14 +96,16 @@ return {
   }, -- multi line editing
 
   {
-    'nguyenvukhang/nvim-toggler',
-    keys = wrap_keys { { '<leader>tt', ':lua require("nvim-toggler").toggle() <CR>', desc = 'Toggle Value' } },
+    "nguyenvukhang/nvim-toggler",
+    keys = wrap_keys {
+      { "<leader>tt", ':lua require("nvim-toggler").toggle() <CR>', desc = "Toggle Value" },
+    },
     config = function()
-      require('nvim-toggler').setup {
+      require("nvim-toggler").setup {
         inverses = {
-          ['neo-vim'] = 'vs-code',
-          ['0'] = '1',
-          show = 'hide',
+          ["neo-vim"] = "vs-code",
+          ["0"] = "1",
+          show = "hide",
         },
         remove_default_keybinds = true,
       }
@@ -107,27 +113,27 @@ return {
   }, -- Toggle between true and false ; more
 
   {
-    'gregorias/coerce.nvim',
-    event = { 'BufNewFile', 'BufReadPost' },
-    tag = 'v4.1.0',
+    "gregorias/coerce.nvim",
+    event = { "BufNewFile", "BufReadPost" },
+    tag = "v4.1.0",
     config = true,
   }, -- Changing case easily
 
   {
-    'christoomey/vim-sort-motion',
-    event = { 'BufNewFile', 'BufReadPost' },
+    "christoomey/vim-sort-motion",
+    event = { "BufNewFile", "BufReadPost" },
     -- keys = { { 'gs', mode = { 'n', 'o', 'x' }, 'Sort' } },
     config = function()
-      vim.g.sort_motion_flags = 'i'
+      vim.g.sort_motion_flags = "i"
     end,
   }, -- sorting with motion
 
   {
-    'Wansmer/treesj',
+    "Wansmer/treesj",
     keys = wrap_keys {
-      { 'ga', ':TSJToggle<CR>', desc = 'Toggle split object under cursor' },
-      { 'gj', ':TSJJoin<CR>', desc = 'Join the object under cursor' },
-      { 'gk', ':TSJSplit<CR>', desc = 'Split the object under cursor' },
+      { "ga", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
+      { "gj", ":TSJJoin<CR>", desc = "Join the object under cursor" },
+      { "gk", ":TSJSplit<CR>", desc = "Split the object under cursor" },
     },
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split

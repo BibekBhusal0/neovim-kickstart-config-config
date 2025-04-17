@@ -1,5 +1,5 @@
 return {
-  'bluz71/vim-nightfly-colors',
+  "bluz71/vim-nightfly-colors",
   lazy = false,
   priority = 1000,
   config = function()
@@ -7,6 +7,6 @@ return {
     vim.g.nightflyWinSeparator = 2
     vim.cmd [[colorscheme nightfly]]
 
-    require('utils.transparency').apply_transparency()
+    require("utils.transparency").apply_transparency()
   end,
 }

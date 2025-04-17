@@ -4,35 +4,35 @@ end
 
 return {
 
-  ['Make more readable'] = {
-    strategy = 'inline',
-    opts = { modes = { 'v' }, shortname = 'readable' },
-    description = 'Make Code more readable',
+  ["Make more readable"] = {
+    strategy = "inline",
+    opts = { modes = { "v" }, shortname = "readable" },
+    description = "Make Code more readable",
     prompts = {
-      { role = 'system', content = export, opts = { visible = false } },
+      { role = "system", content = export, opts = { visible = false } },
       {
-        role = 'system',
+        role = "system",
         content = "only change code according to user command and make sure you complete code and if you are not able to make change just give user's code as it is",
         opts = { visible = false },
       },
       {
-        role = 'user',
-        content = 'Make this code more readable, so that non developer could also understand this.',
+        role = "user",
+        content = "Make this code more readable, so that non developer could also understand this.",
       },
     },
   },
 
-  ['Straight forward model'] = {
-    strategy = 'chat',
-    description = 'Super straight forward model which will just provide code',
+  ["Straight forward model"] = {
+    strategy = "chat",
+    description = "Super straight forward model which will just provide code",
     opts = {
       auto_submit = false,
       ignore_system_prompt = true,
-      short_name = 'straight',
+      short_name = "straight",
     },
     prompts = {
       {
-        role = 'system',
+        role = "system",
         content = [[ 
 You are a super straight forward model which will provide code to user or solve user problem based on user input.
 Currently you are trapped in Neovim in user's machine, your task is to solve user's problem.
@@ -56,32 +56,32 @@ You must not:
 - Give very long response.
 - Talk about anything except programming.
         ]],
-        opts = { visible = false, tag = 'system_tag' },
+        opts = { visible = false, tag = "system_tag" },
       },
       {
-        role = 'user',
-        content = '',
+        role = "user",
+        content = "",
         opts = { auto_submit = false },
       },
     },
   },
 
-  ['Smart Paste'] = {
-    strategy = 'inline',
-    description = 'Paste code smartly',
+  ["Smart Paste"] = {
+    strategy = "inline",
+    description = "Paste code smartly",
     opts = {
       -- placement = 'add',
       index = 12,
-      short_name = 'paste',
+      short_name = "paste",
       ignore_system_prompt = false,
       adapter = {
-        name = 'gemini',
-        model = 'gemini-1.5-flash', -- supposed to be fast
+        name = "gemini",
+        model = "gemini-1.5-flash", -- supposed to be fast
       },
     },
     prompts = {
       {
-        role = 'user',
+        role = "user",
         content = [[
 You are a smart code paste agent within Neovim.
 
@@ -106,20 +106,29 @@ You are a smart code paste agent within Neovim.
  ]],
       },
       {
-        role = 'user',
+        role = "user",
         content = function(context)
-          local lines = require('codecompanion.helpers.actions').get_code(1, context.line_count, { show_line_numbers = true })
-          local selection_info = ''
-          local clipboard = vim.fn.getreg '+'
+          local lines = require("codecompanion.helpers.actions").get_code(
+            1,
+            context.line_count,
+            { show_line_numbers = true }
+          )
+          local selection_info = ""
+          local clipboard = vim.fn.getreg "+"
 
           if context.is_visual then
-            selection_info = string.format('Currently selected lines: %d-%d', context.start_line, context.end_line)
+            selection_info =
+              string.format("Currently selected lines: %d-%d", context.start_line, context.end_line)
           else
-            selection_info = string.format('Current cursor line: %d and Current cursor column is %d', context.cursor_pos[1], context.cursor_pos[2])
+            selection_info = string.format(
+              "Current cursor line: %d and Current cursor column is %d",
+              context.cursor_pos[1],
+              context.cursor_pos[2]
+            )
           end
 
           return string.format(
-            'I have the following code:\n\n```%s\n%s\n```\n\nClipboard content:\n\n```\n%s\n```\n\n%s',
+            "I have the following code:\n\n```%s\n%s\n```\n\nClipboard content:\n\n```\n%s\n```\n\n%s",
             context.filetype,
             lines,
             clipboard,
@@ -133,24 +142,24 @@ You are a smart code paste agent within Neovim.
     },
   },
 
-  ['Generate a Commit Message'] = {
-    strategy = 'chat',
-    description = 'Generate a commit message',
+  ["Generate a Commit Message"] = {
+    strategy = "chat",
+    description = "Generate a commit message",
     condition = function()
-      return require 'plugins.ai.diff'().ok
+      return require "plugins.ai.diff"().ok
     end,
     opts = {
       index = 10,
       is_default = true,
       is_slash_cmd = false,
-      short_name = 'commit',
+      short_name = "commit",
       auto_submit = true,
       ignore_system_prompt = true,
     },
     prompts = {
       {
-        role = 'system',
-        opts = { visible = false, tag = 'system_tag' },
+        role = "system",
+        opts = { visible = false, tag = "system_tag" },
         content = [[
       # you are export in creating git commit Message based on git diff provided
       if user has not provided git diff than you should help user with their problem
@@ -162,11 +171,11 @@ You are a smart code paste agent within Neovim.
       ]],
       },
       {
-        role = 'user',
+        role = "user",
         content = function()
-          local m = require 'plugins.ai.diff'()
+          local m = require "plugins.ai.diff"()
           if not m.ok then
-            return 'Git diff is not available, please help to user by providing step by step instructions what they need to do. The reason why git diff is not available is '
+            return "Git diff is not available, please help to user by providing step by step instructions what they need to do. The reason why git diff is not available is "
               .. m.message
           end
           local diff = m.message

@@ -7,17 +7,17 @@ vim.diagnostic.config {
   virtual_lines = { current_line = true },
   underline = false,
   update_in_insert = true,
-  float = { source = 'always' },
+  float = { source = "always" },
 }
 
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
-  pattern = '*',
+  pattern = "*",
 })
 
 local function starting_command(condition, post_defer, pre_defer, dfr)
@@ -26,7 +26,7 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
       if pre_defer then
         pre_defer(vim.fn.argv())
       end
-      vim.cmd 'bufdo bd!'
+      vim.cmd "bufdo bd!"
       vim.defer_fn(function()
         if post_defer then
           post_defer(vim.fn.argv())
@@ -36,14 +36,17 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
   end
 end
 
-starting_command(
-  function(args) return args == 'config' end,
-  function() vim.cmd('edit ' .. vim.fn.stdpath 'config' .. '/init.lua') vim.cmd 'normal! zR' end,
-  function() vim.api.nvim_set_current_dir(vim.fn.stdpath 'config') end,
-  1
-)
+starting_command(function(args)
+  return args == "config"
+end, function()
+  vim.cmd("edit " .. vim.fn.stdpath "config" .. "/init.lua")
+  vim.cmd "normal! zR"
+end, function()
+  vim.api.nvim_set_current_dir(vim.fn.stdpath "config")
+end, 1)
 
-starting_command(
-  function(args) return string.sub(args, 1, 1) == ':' end,
-  function(args) vim.cmd(string.sub(table.concat(args, ' '), 2)) end
-)
+starting_command(function(args)
+  return string.sub(args, 1, 1) == ":"
+end, function(args)
+  vim.cmd(string.sub(table.concat(args, " "), 2))
+end)

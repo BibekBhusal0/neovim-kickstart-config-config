@@ -1,31 +1,31 @@
-local map = require 'utils.map'
-local wrap_keys = require 'utils.wrap_keys'
+local map = require "utils.map"
+local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
-    'uga-rosa/ccc.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    "uga-rosa/ccc.nvim",
+    event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys {
-      { '<leader>cP', ':CccPick<CR>', desc = 'Color Picker' },
-      { '<leader>cm', ':CccConvert<CR>', desc = 'Color Convert' },
-      { '<leader>cH', ':CccHighlighterToggle<CR>', desc = 'Color Highlighter Toggle' },
+      { "<leader>cP", ":CccPick<CR>", desc = "Color Picker" },
+      { "<leader>cm", ":CccConvert<CR>", desc = "Color Convert" },
+      { "<leader>cH", ":CccHighlighterToggle<CR>", desc = "Color Highlighter Toggle" },
     },
     config = function()
-      local ccc = require 'ccc'
+      local ccc = require "ccc"
       ccc.setup {
-        default_color = '#c6c8d1',
-        point_char = '░',
+        default_color = "#c6c8d1",
+        point_char = "░",
         highlighter = { auto_enable = false, lsp = true },
       }
     end,
   }, -- Color picker
 
   {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    event = { 'BufNewFile', 'BufReadPost' },
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    event = { "BufNewFile", "BufReadPost" },
     opts = {
-      indent = { char = '▏' },
+      indent = { char = "▏" },
       scope = {
         show_start = false,
         show_end = false,
@@ -33,14 +33,14 @@ return {
       },
       exclude = {
         filetypes = {
-          'help',
-          'startify',
-          'dashboard',
-          'packer',
-          'neogitstatus',
-          'NvimTree',
-          'Trouble',
-          'alpha',
+          "help",
+          "startify",
+          "dashboard",
+          "packer",
+          "neogitstatus",
+          "NvimTree",
+          "Trouble",
+          "alpha",
         },
       },
     },
@@ -148,9 +148,9 @@ return {
   }, -- scrollbar showing gitsigns and diagnostics
 
   {
-    'folke/twilight.nvim',
-    cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
-    keys = wrap_keys { { '<leader>F', ':Twilight<CR>', desc = 'Toggle Twilight' } },
+    "folke/twilight.nvim",
+    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+    keys = wrap_keys { { "<leader>F", ":Twilight<CR>", desc = "Toggle Twilight" } },
     opts = { context = 10 },
   }, -- dim inactive code
 }

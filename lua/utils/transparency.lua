@@ -2,24 +2,24 @@ local M = {}
 M.bg_transparent = false
 
 M.apply_transparency = function(color)
-  local bg = 'none'
+  local bg = "none"
   if not M.bg_transparent then
-    bg = color or '#080808'
+    bg = color or "#080808"
   end
 
   local allHighlights = {
-    'Normal',
-    'NormalFloat',
-    'Error',
-    'ErrorMsg',
-    'WarinigMsg',
-    'LineNr',
-    'SignColumn',
-    'SpecialKey',
-    'FloatBorder',
-    'NvimTreeNormalFloat',
-    'MatchWordCur',
-    'FoldColumn',
+    "Normal",
+    "NormalFloat",
+    "Error",
+    "ErrorMsg",
+    "WarinigMsg",
+    "LineNr",
+    "SignColumn",
+    "SpecialKey",
+    "FloatBorder",
+    "NvimTreeNormalFloat",
+    "MatchWordCur",
+    "FoldColumn",
   }
   for _, hl in pairs(allHighlights) do
     vim.api.nvim_set_hl(0, hl, { bg = bg })
@@ -41,6 +41,6 @@ M.disable_transparency = function(color)
   M.apply_transparency(color)
 end
 
-require 'utils.map'('<leader>bg', M.Toggle_transparent, 'Toggle transparency')
+require "utils.map"("<leader>bg", M.Toggle_transparent, "Toggle transparency")
 
 return M

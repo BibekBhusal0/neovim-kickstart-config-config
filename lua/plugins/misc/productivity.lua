@@ -1,17 +1,24 @@
 local transparency_enabled = false
-local wrap_keys = require 'utils.wrap_keys'
+local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
-    'quentingruber/pomodoro.nvim',
-    cmd = { 'PomodoroStart', 'PomodoroStop', 'PomodoroUI', 'PomodoroDelayBreak', 'PomodoroForceBreak', 'PomodoroSkipBreak' },
+    "quentingruber/pomodoro.nvim",
+    cmd = {
+      "PomodoroDelayBreak",
+      "PomodoroForceBreak",
+      "PomodoroSkipBreak",
+      "PomodoroStart",
+      "PomodoroStop",
+      "PomodoroUI",
+    },
     keys = wrap_keys {
-      { '<leader>ps', ':PomodoroStart<CR>', desc = 'Pomodoro Start' },
-      { '<Leader>pS', ':PomodoroStop<CR>', desc = 'Pomodoro Stop' },
-      { '<Leader>pu', ':PomodoroUI<CR>', desc = 'Pomodoro UI' },
-      { '<Leader>pd', ':PomodoroDelayBreak<CR>', desc = 'Pomodoro Delay Break' },
-      { '<Leader>pb', ':PomodoroForceBreak<CR>', desc = 'Pomodoro Force Break' },
-      { '<Leader>pB', ':PomodoroSkipBreak<CR>', desc = 'Pomodoro Skip Break' },
+      { "<Leader>pb", ":PomodoroForceBreak<CR>", desc = "Pomodoro Force Break" },
+      { "<Leader>pB", ":PomodoroSkipBreak<CR>", desc = "Pomodoro Skip Break" },
+      { "<Leader>pd", ":PomodoroDelayBreak<CR>", desc = "Pomodoro Delay Break" },
+      { "<leader>ps", ":PomodoroStart<CR>", desc = "Pomodoro Start" },
+      { "<Leader>pS", ":PomodoroStop<CR>", desc = "Pomodoro Stop" },
+      { "<Leader>pu", ":PomodoroUI<CR>", desc = "Pomodoro UI" },
     },
     opts = {
       start_at_launch = false,
@@ -24,13 +31,13 @@ return {
   }, -- Simple pomodoro timer
 
   {
-    'backdround/global-note.nvim',
+    "backdround/global-note.nvim",
     keys = wrap_keys {
-      { '<leader>ng', ':GlobalNote<CR>', desc = 'Global Note' },
-      { '<leader>np', ':ProjectNote<CR>', desc = 'Project Note' },
+      { "<leader>ng", ":GlobalNote<CR>", desc = "Global Note" },
+      { "<leader>np", ":ProjectNote<CR>", desc = "Project Note" },
     },
     config = function()
-      local gloabl_note = require 'global-note'
+      local gloabl_note = require "global-note"
       local get_project_name = function()
         local project_directory, err = vim.loop.cwd()
         if project_directory == nil then
@@ -39,7 +46,7 @@ return {
         end
         local project_name = vim.fs.basename(project_directory)
         if project_name == nil then
-          vim.notify('Unable to get the project name', vim.log.levels.WARN)
+          vim.notify("Unable to get the project name", vim.log.levels.WARN)
           return nil
         end
         return project_name
@@ -47,11 +54,11 @@ return {
       gloabl_note.setup {
         additional_presets = {
           project_local = {
-            command_name = 'ProjectNote',
+            command_name = "ProjectNote",
             filename = function()
-              return get_project_name() .. '.md'
+              return get_project_name() .. ".md"
             end,
-            title = 'Project note',
+            title = "Project note",
           },
         },
       }
@@ -59,14 +66,14 @@ return {
   }, -- note taking
 
   {
-    'folke/zen-mode.nvim',
+    "folke/zen-mode.nvim",
     opts = {
       window = {
         backdrop = 1,
         width = 1,
         height = 1,
         options = {
-          signcolumn = 'yes',
+          signcolumn = "yes",
           number = true,
           relativenumber = true,
         },
@@ -79,39 +86,40 @@ return {
 
       on_open = function()
         pcall(function()
-          require('tiny-glimmer').disable()
+          require("tiny-glimmer").disable()
         end)
         pcall(function()
-          require('noice').disable()
+          require("noice").disable()
         end)
         pcall(function()
-          require('smear_cursor').enabled = false
+          require("smear_cursor").enabled = false
         end)
-        vim.opt.fillchars = { fold = ' ', eob = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
-        transparency_enabled = require('utils.transparency').bg_transparent
-        require('utils.transparency').disable_transparency '#000000'
-        vim.cmd 'PomodoroSkipBreak'
+        vim.opt.fillchars =
+          { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
+        transparency_enabled = require("utils.transparency").bg_transparent
+        require("utils.transparency").disable_transparency "#000000"
+        vim.cmd "PomodoroSkipBreak"
       end,
 
       on_close = function()
         pcall(function()
-          require('tiny-glimmer').enable()
+          require("tiny-glimmer").enable()
         end)
         pcall(function()
-          require('noice').enable()
+          require("noice").enable()
         end)
         pcall(function()
-          require('smear_cursor').enabled = true
+          require("smear_cursor").enabled = true
         end)
         if transparency_enabled then
-          require('utils.transparency').enable_transparency()
+          require("utils.transparency").enable_transparency()
         else
-          require('utils.transparency').disable_transparency()
+          require("utils.transparency").disable_transparency()
         end
-        vim.cmd 'PomodoroUI'
+        vim.cmd "PomodoroUI"
       end,
     },
-    keys = wrap_keys { { '<leader>zz', ':ZenMode<CR>', desc = 'Zen Mode' } },
-    cmd = { 'ZenMode' },
+    keys = wrap_keys { { "<leader>zz", ":ZenMode<CR>", desc = "Zen Mode" } },
+    cmd = { "ZenMode" },
   },
 }

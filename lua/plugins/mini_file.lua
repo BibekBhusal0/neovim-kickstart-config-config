@@ -1,17 +1,17 @@
-local wrap_keys = require 'utils.wrap_keys'
+local wrap_keys = require "utils.wrap_keys"
 
-local au_group = vim.api.nvim_create_augroup('__mini', { clear = true })
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesActionRename',
+local au_group = vim.api.nvim_create_augroup("__mini", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesActionRename",
   group = au_group,
-  desc = 'LSP Rename file',
+  desc = "LSP Rename file",
   callback = function(event)
-    local ok, rename = pcall(require, 'lsp-file-operations.did-rename')
+    local ok, rename = pcall(require, "lsp-file-operations.did-rename")
     if not ok then
       return
     end
     vim.defer_fn(function()
-      require('mini.files').close()
+      require("mini.files").close()
     end, 1)
     vim.defer_fn(function()
       rename.callback { old_name = event.data.from, new_name = event.data.to }
@@ -20,12 +20,12 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 return {
-  'echasnovski/mini.files',
+  "echasnovski/mini.files",
   keys = wrap_keys {
-    { '<leader>o', ':lua require("mini.files").open()<CR>', desc = 'Open Mini Files' },
+    { "<leader>o", ':lua require("mini.files").open()<CR>', desc = "Open Mini Files" },
   },
   config = function()
-    require('mini.files').setup {
+    require("mini.files").setup {
       options = { permanent_delete = false },
       windows = {
         max_number = math.huge,
