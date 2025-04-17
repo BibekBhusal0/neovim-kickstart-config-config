@@ -160,7 +160,11 @@ return {
         layout_config = { preview_width = 0.5 },
       }
 
-      local fb_actions = require "telescope._extensions.file_browser.actions"
+      local fb_actions = function(action)
+        return function(...)
+          require("telescope._extensions.file_browser.actions")[action](...)
+        end
+      end
       local mappings = {
         ["<a-a>"] = actions.select_all,
         ["<a-h>"] = actions.preview_scrolling_left,
@@ -343,13 +347,14 @@ return {
             git_status = true,
             mappings = {
               ["i"] = {
-                ["<C-h>"] = fb_actions.backspace,
+                ["<C-h>"] = fb_actions "backspace",
               },
               ["n"] = {
-                ["<bs>"] = fb_actions.backspace,
-                ["h"] = fb_actions.backspace,
-                ["H"] = fb_actions.toggle_hidden,
-                ["n"] = fb_actions.create,
+                ["<bs>"] = fb_actions "backspace",
+                ["h"] = fb_actions "backspace",
+                ["H"] = fb_actions "toggle_hidden",
+                ["n"] = fb_actions "create",
+                ["c"] = false,
               },
             },
           },
