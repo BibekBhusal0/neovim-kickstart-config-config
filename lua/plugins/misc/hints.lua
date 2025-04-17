@@ -48,6 +48,7 @@ return {
         ['<Right>'] = {},
       },
       disable_mouse = false,
+      disabled_filetypes = { 'qf', 'netrw', 'neotree', 'NvimTree', 'lazy', 'mason', 'oil', 'mcphub', 'codecompanion' },
     },
   },
 

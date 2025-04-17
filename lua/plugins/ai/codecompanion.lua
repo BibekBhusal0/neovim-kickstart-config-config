@@ -83,12 +83,43 @@ return {
             window = { height = 1 },
             intro_message = require('utils.icons').others.ai .. '  Ask me anything',
           },
-          diff = { enabled = false },
+          diff = { enabled = true },
         },
 
         strategies = {
           chat = {
             adapter = 'gemini',
+            tools = {
+              ['mcp'] = {
+                callback = require 'mcphub.extensions.codecompanion',
+                description = 'Call all MCP tools and resources',
+              },
+              ['github'] = {
+                callback = require 'plugins.ai.get_tool'('github', 'You can access tools regarding github'),
+                description = 'MCP: Github actions',
+              },
+              ['figma'] = {
+                callback = require 'plugins.ai.get_tool'(
+                  { 'figma', 'TalkToFigma' },
+                  'You can change figma design with TalkToFigma and get figma data and download images with figma MCP server'
+                ),
+                description = 'MCP: Figma downloader and talk to figma',
+              },
+              ['duck'] = {
+                callback = require 'plugins.ai.get_tool'(
+                  'duckduckgo',
+                  'if user asks you something you do not know feel free to search it change max results as required'
+                ),
+                description = 'MCP: DuckDuckGo search',
+              },
+              ['notion'] = {
+                callback = require 'plugins.ai.get_tool'(
+                  { 'notion', 'notion-page' },
+                  'If user says to run multiple commands or to taks all at once follow the user. Follow the user if user says to run multiple commands at once'
+                ),
+                description = 'MCP: Notion',
+              },
+            },
             keymaps = {
               next_chat = { modes = { n = '>' }, index = 11, callback = 'keymaps.next_chat', description = 'Next Chat' },
               previous_chat = { modes = { n = '<' }, index = 12, callback = 'keymaps.previous_chat', description = 'Previous Chat' },
