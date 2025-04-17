@@ -12,10 +12,9 @@ map("<leader>bb", ":enew<CR>", "Buffer New")
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
-map("<leader>h", ":split<CR>", "Split window horizontally")
 map("<leader>V", ":vsplit | ter<CR>", "Split Terminal vertically")
-map("<leader><leader>s", ":vert ba<CR>", "Split all")
-map("<leader>H", ":split | ter<CR>", "Split Terminal horizontally")
+map("<leader>sb", ":vert ba<CR>", "Split all")
+map("<leader>S", ":split | ter<CR>", "Split Terminal horizontally")
 map("<leader>br", ":e!<CR>", "Buffer Reset")
 
 -- Navigate between splits
@@ -62,6 +61,10 @@ end
 
 map("<leader>bq", close_all_saved_buffers, "Buffer close all saved")
 
+local function harpoon(a, b)
+  return string.format(":lua require('harpoon.%s').%s()<CR>", a, b)
+end
+
 return {
 
   {
@@ -90,10 +93,10 @@ return {
   {
     "stevearc/resession.nvim",
     keys = wrap_keys {
-      { "<leader>Sd", ':lua require("resession").delete()<CR>', desc = "Session Delete" },
-      { "<leader>Sl", ':lua require("resession").load()<CR>', desc = "Session Load" },
-      { "<leader>Ss", ':lua require("resession").save()<CR>', desc = "Session Save" },
-      { "<leader>SS", ':lua require("resession").save_tab()<CR>', desc = "Session Save Tab" },
+      { "<leader>sd", ':lua require("resession").delete()<CR>', desc = "Session Delete" },
+      { "<leader>sl", ':lua require("resession").load()<CR>', desc = "Session Load" },
+      { "<leader>ss", ':lua require("resession").save()<CR>', desc = "Session Save" },
+      { "<leader>sS", ':lua require("resession").save_tab()<CR>', desc = "Session Save Tab" },
     },
     opts = {
       buf_filter = function(bufnr)
@@ -116,22 +119,14 @@ return {
   {
     "ThePrimeagen/harpoon",
     keys = wrap_keys {
-      { "<leader>fa", ":lua require('harpoon.mark').add_file()<CR>", desc = "Harpoon Add File" },
-      {
-        "<leader>fc",
-        ":lua require('harpoon.mark').clear_all()<CR>",
-        desc = "Harpoon Clear Files",
-      },
-      { "<leader>fj", ":lua require('harpoon.ui').nav_prev()<CR>", desc = "Harpoon Previous" },
-      { "<leader>fk", ":lua require('harpoon.ui').nav_next()<CR>", desc = "Harpoon Next" },
-      { "<leader>fm", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = "Harpoon Menu" },
-      { "<leader>fn", ":lua require('harpoon.ui').nav_next()<CR>", desc = "Harpoon Next" },
-      { "<leader>fp", ":lua require('harpoon.ui').nav_prev()<CR>", desc = "Harpoon Previous" },
-      {
-        "<leader>ft",
-        ":lua require('harpoon.mark').toggle_file()<CR>",
-        desc = "Harpoon Toggle File",
-      },
+      { "<leader>ha", harpoon("mark", "add_file"), desc = "Harpoon Add File" },
+      { "<leader>hc", harpoon("mark", "clear_all"), desc = "Harpoon Clear Files" },
+      { "<leader>hj", harpoon("ui", "nav_prev"), desc = "Harpoon Previous" },
+      { "<leader>hk", harpoon("ui", "nav_next"), desc = "Harpoon Next" },
+      { "<leader>hm", harpoon("ui", "toggle_quick_menu"), desc = "Harpoon Menu" },
+      { "<leader>hn", harpoon("ui", "nav_next"), desc = "Harpoon Next" },
+      { "<leader>hp", harpoon("ui", "nav_prev"), desc = "Harpoon Previous" },
+      { "<leader>ht", harpoon("mark", "toggle_file"), desc = "Harpoon Toggle File" },
     },
   }, -- pinning files and quickly moving between them
 

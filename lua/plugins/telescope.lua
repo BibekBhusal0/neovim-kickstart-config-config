@@ -1,15 +1,15 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
-local searchInLazy = function()
+local findInLazy = function()
   require("telescope.builtin").find_files { cwd = vim.fs.joinpath(vim.fn.stdpath "data", "lazy") }
 end
 
-local searchInConfig = function()
+local findInConfig = function()
   require("telescope.builtin").find_files { cwd = vim.fn.stdpath "config" }
 end
 
-local searchInCurrentBufferDir = function()
+local findInCurrentBufferDir = function()
   local current_file = vim.api.nvim_buf_get_name(0)
   if current_file == "" then
     require("telescope.builtin").find_files { cwd = vim.loop.cwd() }
@@ -18,44 +18,43 @@ local searchInCurrentBufferDir = function()
   end
 end
 
-local searchOpenFiles =
+local findOpenFiles =
   ":Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>"
 
-map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Search in current buffer")
-map("<leader>:", ":Telescope command_history<CR>", "Search Commands history")
+map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
+map("<leader>:", ":Telescope command_history<CR>", "Find Commands history")
 map("<leader>i", ":Telescope spell_suggest<CR>", "Spell suggestion")
-map("<leader>s.", ":Telescope oldfiles<CR>", "Search recent Files")
-map("<leader>s/", searchOpenFiles, "Search in Open Files")
-map("<leader>s:", ":Telescope commands<CR>", "Search Commands")
-map("<leader>sA", ":Telescope autocommands<CR>", "Search Autocommands")
-map("<leader>sb", ":Telescope buffers<CR>", "Search buffers in current tab")
-map("<leader>sB", ":Telescope scope buffers layout_strategy=vertical<CR>", "Search All Buffers ")
-map("<leader>sC", searchInConfig, "Search All Neovim Config")
-map("<leader>sd", ":Telescope diagnostics<CR>", "Search Diagnostics")
-map("<leader>sf", ":Telescope find_files<CR>", "Search Files")
-map("<leader>sg/", ":Telescope git_stash<CR>", "Search Git Stash")
-map("<leader>sgb", ":Telescope git_branches<CR>", "Search Git Branches")
-map("<leader>sgC", ":Telescope git_bcommits<CR>", "Search Git Commits of current buffer")
-map("<leader>sgc", ":Telescope git_commits<CR>", "Search Git Commits")
-map("<leader>sgf", ":Telescope git_files<CR>", "Search Git Files")
-map("<leader>sgm", ":Telescope marks mark_type=gloabl<CR>", "Search marks global")
-map("<leader>sgs", ":Telescope git_status<CR>", "Search Git Status")
-map("<leader>sh", ":Telescope harpoon marks layout_strategy=vertical<CR>", "Search Harpoon Marks")
-map("<leader>sH", ":Telescope help_tags<CR>", "Search Help Tags")
-map("<leader>sj", searchInCurrentBufferDir, "Telescope search in current buffer directory")
-map("<leader>sK", ":Telescope keymaps<CR>", "Search Keymaps")
-map("<leader>sL", searchInLazy, "Search Lazy Plugins Files")
-map("<leader>sM", ":Telescope marks mark_type=all<CR>", "Search marks all")
-map("<leader>sm", ":Telescope marks mark_type=local<CR>", "Search marks")
-map("<leader>sq", ":Telescope quickfix<CR>", "Search Quickfix list")
-map("<leader>sr", ":Telescope resume<CR>", "Search Resume")
-map("<leader>ss", ":Telescope builtin<CR>", "Search Telescope")
-map("<leader>sT", ":Telescope treesitter<CR>", "Search Treesitter")
-map("<leader>sv", ":Telescope vim_options<CR>", "Search Files in split")
-map("<leader>sW", ":Telescope grep_string<CR>", "Search current Word")
-map("<leader>sw", ":Telescope live_grep<CR>", "Search by Grep")
-map("<leader>sy", ":Telescope registers<CR>", "Search registers")
-map("<leader>sz", ":Telescope spell_suggest<CR>", "Spell suggestion")
+map("<leader>f.", ":Telescope oldfiles<CR>", "Find recent Files")
+map("<leader>f/", findOpenFiles, "Find in Open Files")
+map("<leader>f:", ":Telescope commands<CR>", "Find Commands")
+map("<leader>fA", ":Telescope autocommands<CR>", "Find Autocommands")
+map("<leader>fb", ":Telescope buffers<CR>", "Find buffers in current tab")
+map("<leader>fB", ":Telescope scope buffers layout_strategy=vertical<CR>", "Find All Buffers ")
+map("<leader>fC", findInConfig, "Find All Neovim Config")
+map("<leader>fd", ":Telescope diagnostics<CR>", "Find Diagnostics")
+map("<leader>ff", ":Telescope find_files<CR>", "Find Files")
+map("<leader>fg/", ":Telescope git_stash<CR>", "Find Git Stash")
+map("<leader>fgb", ":Telescope git_branches<CR>", "Find Git Branches")
+map("<leader>fgC", ":Telescope git_bcommits<CR>", "Find Git Commits of current buffer")
+map("<leader>fgc", ":Telescope git_commits<CR>", "Find Git Commits")
+map("<leader>fgf", ":Telescope git_files<CR>", "Find Git Files")
+map("<leader>fgm", ":Telescope marks mark_type=gloabl<CR>", "Find marks global")
+map("<leader>fgs", ":Telescope git_status<CR>", "Find Git Status")
+map("<leader>fh", ":Telescope harpoon marks layout_strategy=vertical<CR>", "Find Harpoon Marks")
+map("<leader>fH", ":Telescope help_tags<CR>", "Find Help Tags")
+map("<leader>fj", findInCurrentBufferDir, "Telescope Find in current buffer directory")
+map("<leader>fK", ":Telescope keymaps<CR>", "Find Keymaps")
+map("<leader>fL", findInLazy, "Find Lazy Plugins Files")
+map("<leader>fM", ":Telescope marks mark_type=all<CR>", "Find marks all")
+map("<leader>fm", ":Telescope marks mark_type=local<CR>", "Find marks")
+map("<leader>fq", ":Telescope quickfix<CR>", "Find Quickfix list")
+map("<leader>fr", ":Telescope resume<CR>", "Find Resume")
+map("<leader>fs", ":Telescope builtin<CR>", "Find Telescope")
+map("<leader>fT", ":Telescope treesitter<CR>", "Find Treesitter")
+map("<leader>fv", ":Telescope vim_options<CR>", "Find Files in split")
+map("<leader>fW", ":Telescope grep_string<CR>", "Find current Word")
+map("<leader>fw", ":Telescope live_grep<CR>", "Find by Grep")
+map("<leader>fy", ":Telescope registers<CR>", "Find registers")
 
 return {
   {
@@ -375,7 +374,7 @@ return {
   {
     "zongben/proot.nvim",
     opts = {},
-    keys = wrap_keys { { "<Leader>sp", ":Proot<CR>", desc = "Search Directories" } },
+    keys = wrap_keys { { "<Leader>fp", ":Proot<CR>", desc = "Find Directories" } },
     cmd = { "Proot" },
   },
 
@@ -395,11 +394,11 @@ return {
       "PickSymbolsYank",
     },
     keys = wrap_keys {
-      { "<leader>se", ":PickEmoji<CR>", desc = "Icon Picker Emoji" },
-      { "<leader>sE", ":PickEmojiYank emoji<CR>", desc = "Icon Picker Emoji Yank" },
-      { "<leader>si", ":PickIcons<CR>", desc = "Icon Picker" },
-      { "<leader>sI", ":PickIconsYank<CR>", desc = "Icon Picker Yank" },
-      { "<leader>sS", ":PickSymbols<CR>", desc = "Icon Picker Unicode Symbols" },
+      { "<leader>fe", ":PickEmoji<CR>", desc = "Icon Picker Emoji" },
+      { "<leader>fE", ":PickEmojiYank emoji<CR>", desc = "Icon Picker Emoji Yank" },
+      { "<leader>fi", ":PickIcons<CR>", desc = "Icon Picker" },
+      { "<leader>fI", ":PickIconsYank<CR>", desc = "Icon Picker Yank" },
+      { "<leader>fS", ":PickSymbols<CR>", desc = "Icon Picker Unicode Symbols" },
     },
     config = function()
       require "dressing"
@@ -409,15 +408,15 @@ return {
 
   {
     "tsakirist/telescope-lazy.nvim",
-    keys = wrap_keys { { "<leader>sl", ":Telescope lazy<CR>", desc = "Search Lazy Plugins Doc" } },
+    keys = wrap_keys { { "<leader>fl", ":Telescope lazy<CR>", desc = "Find Lazy Plugins Doc" } },
   }, -- search lazy plugins readme file
 
   {
     "nvim-telescope/telescope-file-browser.nvim",
     keys = wrap_keys {
-      { "<leader>so", ":Telescope file_browser<CR>", desc = "Telescope file browser" },
+      { "<leader>fo", ":Telescope file_browser<CR>", desc = "Telescope file browser" },
       {
-        "<leader>sJ",
+        "<leader>fJ",
         ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
         desc = "Telescope file browser crr",
       },

@@ -150,7 +150,7 @@ return {
   {
     "folke/twilight.nvim",
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    keys = wrap_keys { { "<leader>F", ":Twilight<CR>", desc = "Toggle Twilight" } },
+    keys = wrap_keys { { "<leader>T", ":Twilight<CR>", desc = "Toggle Twilight" } },
     opts = { context = 10 },
   }, -- dim inactive code
 }

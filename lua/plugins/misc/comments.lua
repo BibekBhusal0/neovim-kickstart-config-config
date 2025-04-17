@@ -60,7 +60,7 @@ return {
       event = { "BufNewFile", "BufReadPost" },
       keys = wrap_keys {
         {
-          "<leader>sc",
+          "<leader>fc",
           ":TodoTelescope layout_strategy=vertical<CR>",
           desc = "Todo Search Telescope",
         },

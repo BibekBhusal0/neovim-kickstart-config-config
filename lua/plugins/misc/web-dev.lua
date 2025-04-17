@@ -41,7 +41,7 @@ return {
         conceal = { enabled = true, symbol = "…" },
         server = { settings = { experimental = { classRegex = patterns } } },
       }
-      map("<leader>st", ":Telescope tailwind classes<CR>", "Search Tailwind Classes")
+      map("<leader>ft", ":Telescope tailwind classes<CR>", "Find Tailwind Classes")
       map("<leader>tc", ":TailwindColorToggle<CR>", "Tailwind Color Toggle")
       map("<leader>tf", ":TailwindConcealToggle<CR>", "Tailwind Fold Toggle")
       map("<leader>TS", ":TailwindSort<CR>", "Tailwind search")
