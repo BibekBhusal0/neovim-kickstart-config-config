@@ -1,12 +1,12 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
-map("<leader>M", ":e C:/users/bibek/.config/mcphub/servers.json<CR>", "MCP config")
+map("<leader>mc", ":e C:/users/bibek/.config/mcphub/servers.json<CR>", "MCP config")
 
 return {
   "ravitemer/mcphub.nvim",
   keys = wrap_keys {
-    { "<leader>m", ":MCPHub<CR>", desc = "MCP hub Open" },
+    { "<leader>M", ":MCPHub<CR>", desc = "MCP hub Open" },
   },
   cmd = "MCPHub",
   build = "npm install -g mcp-hub@latest",

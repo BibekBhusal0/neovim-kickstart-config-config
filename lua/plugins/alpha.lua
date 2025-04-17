@@ -167,12 +167,7 @@ local function render()
           button("f", "", "Find file", ":Telescope find_files<CR>"),
           button("r", "", "Recent Files", ":Telescope oldfiles<CR>"),
           button("e", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>"),
-          button(
-            "h",
-            "",
-            "Harpoon Marks",
-            ": lua require('harpoon.ui').toggle_quick_menu()<CR>"
-          ),
+          button("m", require("utils.icons").others.ai, "MCp", ":MCPHub<CR>"),
         },
         opts = { spacing = 1 },
       },
@@ -188,7 +183,6 @@ local function render()
       button("l", "", "Leetcode Dashboard", ":Leet<CR>"),
       button("d", "󰾶", "Change Directory", ":Proot<CR>"),
       button("s", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>'),
-      button("c", "󱙓", "Cheat Sheet", ':lua  require("nvcheatsheet").toggle()<CR>'),
       button("q", "󰅙", "Quit", ":qa<CR>", "DiagnosticError"),
     },
     opts = { spacing = 1 },
