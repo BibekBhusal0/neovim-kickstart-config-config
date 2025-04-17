@@ -8,54 +8,29 @@ local function prettifyFooterText(icon, text)
   end
 end
 
+-- stylua: ignore
 local quotes = {
   { "6 hours of debugging can save you 5 minutes of reading documentation.", "Random Reddit post" },
   { "An idiot admires complexity, a genius admires simplicity.", "Terry Davis" },
   { "Before software can be reusable it first has to be usable.", "Ralph Johnson" },
   { "Deleted code is debugged code.", "Jeff Sickel" },
   { "Good Artists copy; Great artist steal.", "Pablo Picasso" },
-  {
-    "Gotta concentrate, against the clock I rase,got no time to waste, I am already late, I got a marathon pased",
-    "Eminiem",
-  },
-  {
-    "In theory there is no difference between theory and practice. In practice there is.",
-    "Yogi Berra",
-  },
+  { "Gotta concentrate, against the clock I rase,got no time to waste, I am already late, I got a marathon pased", "Eminiem" },
+  { "In theory there is no difference between theory and practice. In practice there is.", "Yogi Berra" },
   { "It is not a bug, it is a feature.", "Me" },
   { "It works on my machine.", "Every Developer Ever" },
-  {
-    "Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.",
-    "Random Reddit post",
-  },
+  { "Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.", "Random Reddit post" },
   { "Nothing is as permanent as a temporary solution that works", "Random Reddit Post" },
-  {
-    "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.",
-    "Albert Einstein",
-  },
+  { "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.", "Albert Einstein" },
   { "The best error message is the one that never shows up.", "Thomas Fuchs" },
-  {
-    "There are three things programmers struggle withㅤㅤㅤㅤ  1. Naming variabls, 2. Off by one errors",
-    "Fireship video comment",
-  },
-  {
-    "There are two ways to write error-free programs; only the third one works.",
-    "Alan J. Perlis",
-  },
-  {
-    "Think of how stupid the average person is, and realize half of them are stupider than that.",
-    "George Carlin",
-  },
+  { "There are three things programmers struggle withㅤㅤㅤㅤ  1. Naming variabls, 2. Off by one errors", "Fireship video comment" },
+  { "There are two ways to write error-free programs; only the third one works.", "Alan J. Perlis" },
+  { "Think of how stupid the average person is, and realize half of them are stupider than that.", "George Carlin" },
   { "Time is free but somehow priceless, so whatch how you spend it wisely", "Central Cee" },
-  {
-    "To replace programmers with bots, clients will have to accurately describe what they want, We are safe.",
-    "Random Reddit post",
-  },
-  {
-    "You know the bug is serous when you pause your Spotify music to focus.",
-    "Random Reddit post",
-  },
+  { "To replace programmers with bots, clients will have to accurately describe what they want, We are safe.", "Random Reddit post" },
+  { "You know the bug is serous when you pause your Spotify music to focus.", "Random Reddit post" },
 }
+-- stylua: end
 
 local function get_random_quote()
   local current_time = os.time()
@@ -154,42 +129,54 @@ local function render()
 
   local buttons_divider = {
     type = "text",
-    val = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-    opts = { position = "center", hl = "Comment" },
+    val = "───────────────────────────────────────────────────",
+    opts = { position = "center", hl = "comment" },
   }
 
-  local buttonGroup1 = {
-    type = "group",
-    val = {
-      {
-        type = "group",
-        val = {
-          button("f", "", "Find file", ":Telescope find_files<CR>"),
-          button("r", "", "Recent Files", ":Telescope oldfiles<CR>"),
-          button("e", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>"),
-          button("m", require("utils.icons").others.ai, "MCp", ":MCPHub<CR>"),
-        },
-        opts = { spacing = 1 },
-      },
-      button("g", "󰊢", "Git File Changes", ":Neotree float git_status <CR>"),
-    },
+  local function create_button_group(buttons, divider)
+    local group = { type = "group", val = {} }
+    local num_buttons = #buttons
+    if num_buttons > 1 then
+      local inner_group = { type = "group", val = {}, opts = { spacing = 1 } }
+      for i = 1, num_buttons - 1 do
+        table.insert(inner_group.val, button(unpack(buttons[i])))
+      end
+      table.insert(group.val, inner_group)
+    end
+    if num_buttons > 0 then
+      table.insert(group.val, button(unpack(buttons[num_buttons])))
+    end
+    if divider then
+      table.insert(group.val, buttons_divider)
+    end
+    return group
+  end
+
+  local file_buttons = create_button_group({
+    { "f", "", "Find file", ":Telescope find_files<CR>" },
+    { "r", "", "Recent Files", ":Telescope oldfiles<CR>" },
+    { "e", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>" },
+    { "g", "󰊢", "Git File Changes", ":Neotree float git_status <CR>" },
+  }, true)
+
+  local popup_buttons = create_button_group({
+    { "p", "", "Plugins", ":Lazy<CR>" },
+    { "m", require("utils.icons").others.ai, "MCp", ":MCPHub<CR>", "@constructor" },
+  }, true)
+
+  local project_buttons = create_button_group({
+    { "d", "󰾶", "Change Directory", ":Proot<CR>" },
+    { "s", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>' },
+  }, true)
+
+  local other_buttons = create_button_group {
+    { "b", "", "Search Browser Bookmarks", ":BrowserBookmarks<CR>" },
+    { "l", "", "Leetcode Dashboard", ":Leet<CR>" },
+    { "q", "󰅙", "Quit", ":qa<CR>", "DiagnosticError" },
   }
 
-  local buttonGroup2 = {
-    type = "group",
-    val = {
-      button("p", "", "Plugins", ":Lazy<CR>"),
-      button("b", "", "Search Browser Bookmarks", ":BrowserBookmarks<CR>"),
-      button("l", "", "Leetcode Dashboard", ":Leet<CR>"),
-      button("d", "󰾶", "Change Directory", ":Proot<CR>"),
-      button("s", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>'),
-      button("q", "󰅙", "Quit", ":qa<CR>", "DiagnosticError"),
-    },
-    opts = { spacing = 1 },
-  }
-
-  local buttons = { type = "group", val = { buttonGroup1, buttons_divider, buttonGroup2 } }
-
+  local buttons =
+    { type = "group", val = { file_buttons, popup_buttons, project_buttons, other_buttons } }
   local function getFooter(val)
     return { type = "text", val = val, opts = { position = "center", hl = "Ignore" } }
   end
@@ -211,7 +198,7 @@ local function render()
     layout = {
       { type = "padding", val = 1 },
       { type = "text", val = header, opts = { position = "center", hl = "Type" } },
-      { type = "padding", val = 2 },
+      { type = "padding", val = 3 },
       buttons,
       { type = "padding", val = 2 },
       footer,
