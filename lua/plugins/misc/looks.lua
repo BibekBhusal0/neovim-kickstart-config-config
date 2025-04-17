@@ -21,6 +21,12 @@ return {
   }, -- Color picker
 
   {
+    "wsdjeg/scrollbar.nvim",
+    opts = { shape = { head = "", tail = "" }, highlight = { body = "Comment" } },
+    event = { "BufReadPost", "BufNewFile" },
+  },
+
+  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufNewFile", "BufReadPost" },
