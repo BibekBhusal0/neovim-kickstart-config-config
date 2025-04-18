@@ -47,14 +47,14 @@ return {
   {
     "lalitmee/browse.nvim",
     keys = wrap_keys {
-      { "<leader>rf", searchFiletype, desc = "Search DevDocs for this" },
-      { "<leader>rF", ":lua require('browse.devdocs').search()<CR>", desc = "Search DevDocs" },
-      { "<leader>ry", searchYoutube, desc = "Search Youtube" },
-      { "<leader>rm", searchYTMusic, desc = "Search Youtube Music" },
-      { "<leader>rg", open_github, desc = "Open Github" },
-      { "<leader>rj", ":lua require('browse').browse()<CR>", desc = "Search any" },
-      { "<leader>rb", ":lua require('browse').open_bookmarks()<CR>", desc = "Search Bookmarks" },
-      { "<leader>ri", ":lua require('browse').input_search()<CR>", desc = "Search" },
+      { "<leader>gO", open_github, desc = "Open Github" },
+      { "<leader>sb", ":lua require('browse').open_bookmarks()<CR>", desc = "Search Bookmarks" },
+      { "<leader>sF", ":lua require('browse.devdocs').search()<CR>", desc = "Search DevDocs" },
+      { "<leader>sf", searchFiletype, desc = "Search DevDocs for this" },
+      { "<leader>si", ":lua require('browse').input_search()<CR>", desc = "Search" },
+      { "<leader>sj", ":lua require('browse').browse()<CR>", desc = "Search any" },
+      { "<leader>sm", searchYTMusic, desc = "Search Youtube Music" },
+      { "<leader>sy", searchYoutube, desc = "Search Youtube" },
     },
 
     config = function()

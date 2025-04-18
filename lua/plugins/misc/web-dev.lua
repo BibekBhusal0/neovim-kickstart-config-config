@@ -44,8 +44,7 @@ return {
       map("<leader>ft", ":Telescope tailwind classes<CR>", "Find Tailwind Classes")
       map("<leader>tc", ":TailwindColorToggle<CR>", "Tailwind Color Toggle")
       map("<leader>tf", ":TailwindConcealToggle<CR>", "Tailwind Fold Toggle")
-      map("<leader>TS", ":TailwindSort<CR>", "Tailwind search")
-      map("<leader>ts", ":Telescope tailwind classes<CR>", "Tailwind search")
+      map("<leader>ts", ":TailwindSort<CR>", "Tailwind search")
     end,
   }, -- tailwind color highlights folds and more
 
@@ -56,7 +55,7 @@ return {
   }, -- Autoclose HTML tags
 
   {
-    dir = "D:/github/react-comp-gen.nvim",
+    dir = "D:/github/nvim/react-comp-gen.nvim",
     cmd = { "CreateComponent" },
     keys = wrap_keys {
       {

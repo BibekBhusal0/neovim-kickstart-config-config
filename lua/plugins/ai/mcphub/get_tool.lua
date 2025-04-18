@@ -141,7 +141,6 @@ local get_tool = function(name, system_prompt, auto_approve)
 
     system_prompt = function(schema)
       local action_instructions = ""
-      print(system_prompt)
       for _, server in ipairs(State.server_state.servers or {}) do
         local server_name = server.name
         if type(name) == "table" then

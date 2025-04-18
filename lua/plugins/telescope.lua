@@ -23,7 +23,7 @@ local findOpenFiles =
 
 map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
 map("<leader>:", ":Telescope command_history<CR>", "Find Commands history")
-map("<leader>i", ":Telescope spell_suggest<CR>", "Spell suggestion")
+map("<leader>I", ":Telescope spell_suggest<CR>", "Spell suggestion")
 map("<leader>f.", ":Telescope oldfiles<CR>", "Find recent Files")
 map("<leader>f/", findOpenFiles, "Find in Open Files")
 map("<leader>f:", ":Telescope commands<CR>", "Find Commands")

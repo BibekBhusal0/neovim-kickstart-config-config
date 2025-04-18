@@ -161,7 +161,8 @@ local function render()
 
   local popup_buttons = create_button_group({
     { "p", "", "Plugins", ":Lazy<CR>" },
-    { "m", require("utils.icons").others.ai, "MCp", ":MCPHub<CR>", "@constructor" },
+    { "m", "󰐻", "Mason (LSP, linter, DAP)", ":Mason<CR>" },
+    { "a", require("utils.icons").others.ai, "MCP hub", ":MCPHub<CR>", "@constructor" },
   }, true)
 
   local project_buttons = create_button_group({
@@ -198,7 +199,7 @@ local function render()
     layout = {
       { type = "padding", val = 1 },
       { type = "text", val = header, opts = { position = "center", hl = "Type" } },
-      { type = "padding", val = 3 },
+      { type = "padding", val = 2 },
       buttons,
       { type = "padding", val = 2 },
       footer,

@@ -58,6 +58,7 @@ return {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-y>"] = cmp.mapping.confirm { select = true },
+        ["<a-y>"] = cmp.mapping.confirm { select = true },
         ["<CR>"] = cmp.mapping.confirm { select = true },
         ["<A-b>"] = cmp.mapping.complete {},
         ["<C-S-l>"] = cmp.mapping(function()

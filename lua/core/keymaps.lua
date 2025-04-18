@@ -5,8 +5,8 @@ vim.g.maplocalleader = " "
 map("n", "<ESC>", "Normal Mode", "v")
 
 -- navigation in insert mode
-map("<C-b>", "<ESC>^i", "Move to Begining of line", "i")
-map("<C-e>", "<End>", "Move to End of line", "i")
+map("<A-h>", "<ESC>^i", "Move to Begining of line", "i")
+map("<A-l>", "<End>", "Move to End of line", "i")
 map("<C-h>", "<Left>", "Move left", "i")
 map("<C-l>", "<Right>", "Move right", "i")
 map("<C-j>", "<Down>", "Move down", "i")
@@ -15,8 +15,15 @@ map("jj", "<ESC>", "Normal Mode", "i")
 map("<C-c>", "<Esc>", "Normal Mode", "i")
 map("<C-o>", "<Esc>o", "Move to New Line", "i")
 map("<C-]>", "<Esc>ldbi", "Delete Word", "i")
+map("<leader>i", "`^", "Goto Last Insert")
 
 map("<C-s>", ": w <CR>", "Save File")
+
+-- Opening file explorer
+map("<leader>O", ':silent !explorer.exe "%:p:h"<CR>', "Open Explorer")
+map("<leader>P", function()
+  vim.cmd("silent !explorer.exe " .. vim.fn.getcwd())
+end, "Open Explorer")
 
 -- Move and duplicate lines
 map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", "v")
@@ -35,7 +42,7 @@ map("<leader>xX", ": q!<CR>", "Quit File force")
 map("<leader>xa", ":qa<CR>", "Quit all Files")
 map("<leader>xA", ":qa!<CR>", "Quit all Files force")
 map("<leader>xt", ":tabclose<CR>", "Quit Tab")
-map("<leader>xs", ":close<CR>", "Quit Split")
+map("<leader>xs", ":wincmd q<CR>", "Quit Split")
 
 -- center while navigation
 map("N", "Nzzzv", "Previous and center")

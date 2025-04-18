@@ -15,11 +15,6 @@ return {
     "echasnovski/mini.trailspace",
     keys = wrap_keys {
       { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
-      {
-        "<leader>T",
-        ':lua require("mini.trailspace").trim() vim.api.nvim_feedkeys("ggVG=","n",false)<CR>',
-        desc = "Simple format",
-      },
     },
   }, -- Simple ways to train whitespace useful when formatter is not working
 
@@ -113,16 +108,24 @@ return {
   }, -- Toggle between true and false ; more
 
   {
-    "gregorias/coerce.nvim",
-    event = { "BufNewFile", "BufReadPost" },
-    tag = "v4.1.0",
-    config = true,
-  }, -- Changing case easily
+    "johmsalas/text-case.nvim",
+    opts = {},
+    keys = {
+      "ga",
+      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" },
+    },
+    cmd = {
+      "Subs",
+      "TextCaseOpenTelescope",
+      "TextCaseOpenTelescopeQuickChange",
+      "TextCaseOpenTelescopeLSPChange",
+      "TextCaseStartReplacingCommand",
+    },
+  },
 
   {
     "christoomey/vim-sort-motion",
-    event = { "BufNewFile", "BufReadPost" },
-    -- keys = { { 'gs', mode = { 'n', 'o', 'x' }, 'Sort' } },
+    keys = { { "gs", mode = { "n", "o", "x" }, desc = "Sort" } },
     config = function()
       vim.g.sort_motion_flags = "i"
     end,
@@ -131,10 +134,16 @@ return {
   {
     "Wansmer/treesj",
     keys = wrap_keys {
-      { "ga", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
+      { "gi", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
       { "gj", ":TSJJoin<CR>", desc = "Join the object under cursor" },
       { "gk", ":TSJSplit<CR>", desc = "Split the object under cursor" },
     },
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split
+
+  {
+    "abecodes/tabout.nvim",
+    event = "InsertCharPre",
+    opts = {},
+  }, -- easy jumping between start and end brackets in insert mode
 }

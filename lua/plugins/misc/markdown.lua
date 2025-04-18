@@ -8,6 +8,7 @@ return {
     ft = { "markdown" },
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_auto_close = 0
     end,
   },
 
@@ -22,6 +23,7 @@ return {
           custom = {
             wikipedia = { pattern = "wikiwand%.org", icon = "󰖬 " },
             twitter = { pattern = "twitter%.com", icon = " " },
+            header = { pattern = "^#.+", icon = "# " },
             linkedin = { pattern = "linkedin%.com", icon = " " },
           },
         },

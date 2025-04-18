@@ -93,7 +93,7 @@ return {
   {
     "stevearc/resession.nvim",
     keys = wrap_keys {
-      { "<leader>sd", ':lua require("resession").delete()<CR>', desc = "Session Delete" },
+      { "<leader>sz", ':lua require("resession").delete()<CR>', desc = "Session Delete" },
       { "<leader>sl", ':lua require("resession").load()<CR>', desc = "Session Load" },
       { "<leader>ss", ':lua require("resession").save()<CR>', desc = "Session Save" },
       { "<leader>sS", ':lua require("resession").save_tab()<CR>', desc = "Session Save Tab" },

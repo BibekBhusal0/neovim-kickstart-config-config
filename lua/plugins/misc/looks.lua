@@ -21,6 +21,11 @@ return {
   }, -- Color picker
 
   {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
     "wsdjeg/scrollbar.nvim",
     opts = { shape = { head = "", tail = "" }, highlight = { body = "Comment" } },
     event = { "BufReadPost", "BufNewFile" },
@@ -156,7 +161,7 @@ return {
   {
     "folke/twilight.nvim",
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    keys = wrap_keys { { "<leader>T", ":Twilight<CR>", desc = "Toggle Twilight" } },
+    keys = wrap_keys { { "<leader>TT", ":Twilight<CR>", desc = "Toggle Twilight" } },
     opts = { context = 10 },
   }, -- dim inactive code
 }

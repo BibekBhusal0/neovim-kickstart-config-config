@@ -16,6 +16,7 @@ local save_to_desktop = function()
     output = os.getenv "USERPROFILE" .. "/Desktop/code/" .. get_file_name_and_timestamp() .. ".png",
   }
 end
+local sate_to_clipboard = ":lua require('nvim-silicon').clip()<CR>"
 
 return {
 
@@ -41,14 +42,9 @@ return {
     main = "nvim-silicon",
 
     keys = wrap_keys {
-      { "<leader>cc", ":Silicon<CR>", desc = "Screenshot to Root directory", mode = { "n", "v" } },
-      {
-        "<leader>cC",
-        ":lua require('nvim-silicon').clip()<CR>",
-        desc = "Screenshot to clipboard",
-        mode = { "n", "v" },
-      },
-      { "<leader>cd", save_to_desktop, desc = "Screenshot to Desktop", mode = { "n", "v" } },
+      { "<leader>sc", ":Silicon<CR>", desc = "Screenshot to Root directory", mode = { "n", "v" } },
+      { "<leader>sC", sate_to_clipboard, desc = "Screenshot to clipboard", mode = { "n", "v" } },
+      { "<leader>sd", save_to_desktop, desc = "Screenshot to Desktop", mode = { "n", "v" } },
     },
 
     opts = {
