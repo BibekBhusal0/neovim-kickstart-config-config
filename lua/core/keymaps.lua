@@ -17,7 +17,7 @@ map("<C-o>", "<Esc>o", "Move to New Line", "i")
 map("<C-]>", "<Esc>ldbi", "Delete Word", "i")
 map("<leader>i", "`^", "Goto Last Insert")
 
-map("<C-s>", ": w <CR>", "Save File")
+-- map("<C-s>", ": w <CR>", "Save File")
 
 -- Opening file explorer
 map("<leader>O", ':silent !explorer.exe "%:p:h"<CR>', "Open Explorer")

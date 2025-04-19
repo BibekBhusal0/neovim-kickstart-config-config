@@ -25,7 +25,7 @@ return {
     "jim-fx/sudoku.nvim",
     lazy = true,
     cmd = { "Sudoku" },
-    keys = wrap_keys { { "<leader>zs", ":Sudoku<CR>", desc = "Game Sudoku" } },
+    keys = wrap_keys { { "<leader>zS", ":Sudoku<CR>", desc = "Game Sudoku" } },
     opts = {},
   },
 
@@ -69,5 +69,12 @@ return {
     keys = wrap_keys {
       { "<leader>zt", ":Tetris<CR>", desc = "Game Tetris" },
     },
+  },
+
+  {
+    "marco-souza/snake.nvim",
+    opts = {},
+    cmd = "Snake",
+    keys = wrap_keys { { "<leader>zs", ":Sudoku<CR>", desc = "Game Sudoku" } },
   },
 }

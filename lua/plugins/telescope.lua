@@ -447,4 +447,9 @@ return {
       }
     end,
   },
+  --
+  -- {
+  --   dir = "D:/github/nvim/telescope-launcher.nvim",
+  --   opts = {},
+  -- },
 }

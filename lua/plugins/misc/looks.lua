@@ -21,11 +21,6 @@ return {
   }, -- Color picker
 
   {
-    "folke/edgy.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
-  {
     "wsdjeg/scrollbar.nvim",
     opts = { shape = { head = "", tail = "" }, highlight = { body = "Comment" } },
     event = { "BufReadPost", "BufNewFile" },

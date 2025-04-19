@@ -41,27 +41,23 @@ return {
     "m4xshen/hardtime.nvim",
     event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys { { "<leader>th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
-    opts = {
-      restriction_mode = "hint",
-      disabled_keys = {
-        ["<Up>"] = {},
-        ["<Down>"] = {},
-        ["<Left>"] = {},
-        ["<Right>"] = {},
-      },
-      disable_mouse = false,
-      disabled_filetypes = {
-        "qf",
-        "netrw",
-        "neo-tree",
-        "NvimTree",
-        "lazy",
-        "mason",
-        "oil",
-        "mcphub",
-        "codecompanion",
-      },
-    },
+    config = function()
+      require("hardtime").setup {
+        restriction_mode = "hint",
+        disabled_keys = {
+          ["<Up>"] = {},
+          ["<Down>"] = {},
+          ["<Left>"] = {},
+          ["<Right>"] = {},
+        },
+        disable_mouse = false,
+        disabled_filetypes = vim.tbl_deep_extend(
+          "force",
+          require("hardtime.config").config.disabled_filetypes,
+          { "mcphub", "codecompanion" }
+        ),
+      }
+    end,
   },
 
   {
