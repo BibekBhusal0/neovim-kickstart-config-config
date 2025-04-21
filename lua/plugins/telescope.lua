@@ -83,10 +83,10 @@ return {
       },
       "prochri/telescope-all-recent.nvim",
       "kkharji/sqlite.lua",
+      "stevearc/dressing.nvim",
     },
 
     config = function()
-      require "dressing"
       local open_with_trouble = function(...)
         require("trouble.sources.telescope").open(...)
       end
@@ -405,10 +405,8 @@ return {
       { "<leader>fI", ":PickIconsYank<CR>", desc = "Icon Picker Yank" },
       { "<leader>fS", ":PickSymbols<CR>", desc = "Icon Picker Unicode Symbols" },
     },
-    config = function()
-      require "dressing"
-      require("icon-picker").setup {}
-    end,
+    dependencies = { "stevearc/dressing.nvim" },
+    opts = {},
   }, -- icon picker with telescope
 
   {

@@ -35,8 +35,8 @@ return {
     "dhruvmanila/browser-bookmarks.nvim",
     keys = wrap_keys { { "<leader>B", ":BrowserBookmarks<CR>", desc = "Search Browser Bookmarks" } },
     cmd = { "BrowserBookmarks" },
+    dependencies = { "stevearc/dressing.nvim" },
     config = function()
-      require "dressing"
       require("browser_bookmarks").setup {
         profile_name = "Bibek",
         url_open_command = 'start ""',
@@ -57,8 +57,8 @@ return {
       { "<leader>sy", searchYoutube, desc = "Search Youtube" },
     },
 
+    dependencies = { "stevearc/dressing.nvim" },
     config = function()
-      require "dressing"
       require("browse").setup {
         bookmarks = {
           ["github"] = {
