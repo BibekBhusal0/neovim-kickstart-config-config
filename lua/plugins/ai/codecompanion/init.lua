@@ -5,7 +5,7 @@ local inline_command = function()
   require "utils.input"("  Command to AI  ", function(text)
     vim.cmd "normal! gv"
     vim.cmd(
-      "CodeCompanion /buffer "
+      "CodeCompanion #buffer "
         .. text
         .. " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
     )
@@ -123,7 +123,7 @@ return {
             window = { height = 1 },
             intro_message = require("utils.icons").others.ai .. "  Ask me anything",
           },
-          diff = { enabled = true },
+          diff = { enabled = true, provider = "mini_diff" },
         },
 
         strategies = {
@@ -166,6 +166,14 @@ return {
           opts = { show_defaults = false },
         },
       }
+    end,
+  },
+
+  {
+    "echasnovski/mini.diff",
+    config = function()
+      local diff = require "mini.diff"
+      diff.setup { source = diff.gen_source.none() }
     end,
   },
 }
