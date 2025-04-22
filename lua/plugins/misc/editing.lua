@@ -36,17 +36,17 @@ return {
   }, -- Preview of line from command mode
 
   {
-    "altermo/ultimate-autopair.nvim",
+    "windwp/nvim-autopairs",
     keys = {
-      { "{", mode = { "i", "c" } },
-      { "[", mode = { "i", "c" } },
-      { "(", mode = { "i", "c" } },
-      { '"', mode = { "i", "c" } },
-      { "'", mode = { "i", "c" } },
-      { "`", mode = { "i", "c" } },
-      { "}", mode = { "i", "c" } },
-      { "]", mode = { "i", "c" } },
-      { ")", mode = { "i", "c" } },
+      { "{", mode = { "i" } },
+      { "[", mode = { "i" } },
+      { "(", mode = { "i" } },
+      { '"', mode = { "i" } },
+      { "'", mode = { "i" } },
+      { "`", mode = { "i" } },
+      { "}", mode = { "i" } },
+      { "]", mode = { "i" } },
+      { ")", mode = { "i" } },
     },
     config = true,
   }, -- Autoclose parentheses, brackets, quotes, etc. also work on command mode
