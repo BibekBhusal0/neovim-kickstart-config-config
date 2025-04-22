@@ -2,15 +2,6 @@ local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 return {
-  {
-    "chrisgrieser/nvim-chainsaw",
-    keys = wrap_keys {
-      { "<leader>lp", ':lua require("chainsaw").objectLog()<CR>', desc = "Log Object" },
-      { "<leader>lP", ':lua require("chainsaw").typeLog()<CR>', desc = "Log Type" },
-      { "<leader>lv", ':lua require("chainsaw").variableLog()<CR>', desc = "Log Variable" },
-    },
-    opts = { marker = "🌟", visuals = { icon = "🌟" } },
-  }, -- Easy printing
 
   {
     "Weissle/persistent-breakpoints.nvim",

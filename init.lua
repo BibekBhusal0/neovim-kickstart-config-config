@@ -30,6 +30,7 @@ require("lazy").setup {
   require "plugins.misc", -- Miscellaneous utility plugins
   require "plugins.neotree", -- File explorer for Neovim
   require "plugins.none-ls", -- External tools integration (formatters, linters)
+  require "plugins.refactoring", -- Code refactoring moving to function file and print
   require "plugins.statuscol", -- Changing status column
   require "plugins.telescope", -- Fuzzy finder for searching
   require "plugins.test", -- Running tests

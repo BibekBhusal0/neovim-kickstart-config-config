@@ -16,7 +16,7 @@ return {
     "thinca/vim-quickrun",
     keys = wrap_keys {
       { "<leader>rr", ":QuickRun<CR>", desc = "Run" },
-      { "<leader>rt", ":w<CR> :QuickRun<CR>", desc = "Save and run" },
+      { "<leader>rR", ":w<CR> :QuickRun<CR>", desc = "Save and run" },
     },
     cmd = { "QuickRun" },
     config = function()
