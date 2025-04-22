@@ -5,8 +5,8 @@ vim.hl.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitt
 -- Appearance of diagnostics
 vim.diagnostic.config {
   virtual_lines = { current_line = true },
-  underline = false,
-  update_in_insert = true,
+  underline = true,
+  update_in_insert = false,
   float = { source = "always" },
 }
 

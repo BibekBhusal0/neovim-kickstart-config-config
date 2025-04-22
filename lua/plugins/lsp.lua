@@ -242,12 +242,12 @@ return {
     "rachartier/tiny-code-action.nvim",
     config = function()
       require("tiny-code-action").setup {
-        telescope_opts = vim.tbl_extend("force", require("telescope.themes").get_cursor(), {
+        telescope_opts = require("telescope.themes").get_cursor {
           default_index = 1,
           initial_mode = "normal",
           layout_config = { width = 60, height = 15, preview_cutoff = 200 }, -- only way to disable preview
           -- layout_config = { width = 90, height = 15, preview_width = 30 },  -- this is also fine i guess
-        }),
+        },
       }
     end,
     keys = wrap_keys {

@@ -59,16 +59,11 @@ vim.opt.fillchars:append "fold: "
 vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
 
 local icons = require("utils.icons").diagnostics
-local signs = {
-  text = {},
-  linehl = {},
-}
+local signs = { text = {} }
 
 for type, icon in pairs(icons) do
   local severity = vim.diagnostic.severity[type:upper()]
-  local hl = "DiagnosticSign" .. type:sub(1, 1):upper() .. type:sub(2)
   signs.text[severity] = icon
-  signs.linehl[severity] = hl
 end
 
 vim.diagnostic.config { signs = signs }
