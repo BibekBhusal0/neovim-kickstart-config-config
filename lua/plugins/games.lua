@@ -52,7 +52,7 @@ return {
     cmd = { "CellularAutomaton" },
     keys = wrap_keys {
       { "<leader>zr", ":CellularAutomaton make_it_rain<CR>", desc = "Game Make it rain" },
-      { "<leader>zg", ":CellularAutomaton game_of_life<CR>", desc = "Game of life" },
+      { "<leader>zG", ":CellularAutomaton game_of_life<CR>", desc = "Game of life" },
     },
   },
 
@@ -77,5 +77,16 @@ return {
     opts = {},
     cmd = "Snake",
     keys = wrap_keys { { "<leader>zs", ":Sudoku<CR>", desc = "Game Sudoku" } },
+  },
+
+  {
+    "vuciv/golf",
+    cmd = { "Golf", "GolfToday" },
+    keys = wrap_keys {
+      { "<leader>zgt", ":GolfToday<CR>", desc = "Game Golf Today" },
+      { "<leader>zge", ":Golf easy<CR>", desc = "Game Golf Easy" },
+      { "<leader>zgm", ":Golf medium<CR>", desc = "Game Golf Medium" },
+      { "<leader>zgh", ":Golf hard<CR>", desc = "Game Golf Hard" },
+    },
   },
 }
