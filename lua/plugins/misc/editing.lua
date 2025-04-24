@@ -125,11 +125,15 @@ return {
   },
 
   {
-    "christoomey/vim-sort-motion",
-    keys = { { "gs", mode = { "n", "o", "x" }, desc = "Sort" } },
-    config = function()
-      vim.g.sort_motion_flags = "i"
-    end,
+    "echasnovski/mini.operators",
+    keys = {
+      { "g=", mode = { "n", "o", "x" }, desc = "Evaluate" },
+      { "gm", mode = { "n", "o", "x" }, desc = "Multiply" },
+      { "gr", mode = { "n", "o", "x" }, desc = "Replace" },
+      { "gs", mode = { "n", "o", "x" }, desc = "Sort" },
+      { "gx", mode = { "n", "o", "x" }, desc = "Exchange" },
+    },
+    opts = {},
   }, -- sorting with motion
 
   {
