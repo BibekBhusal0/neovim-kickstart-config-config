@@ -31,7 +31,7 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
         if post_defer then
           post_defer(vim.fn.argv())
         end
-      end, dfr or 5)
+      end, dfr or 1)
     end
   end
 end
@@ -43,7 +43,24 @@ end, function()
   vim.cmd "normal! zR"
 end, function()
   vim.api.nvim_set_current_dir(vim.fn.stdpath "config")
-end, 1)
+end)
+
+starting_command(function(args)
+  return args == "ahk"
+end, function()
+  vim.cmd "edit script.ahk"
+  vim.cmd "normal! zR"
+end, function()
+  vim.api.nvim_set_current_dir "C:\\Users\\bibek\\Desktop\\New folder\\ahk"
+end)
+
+starting_command(function(args)
+  return args == "zen"
+end, function()
+  vim.cmd "Alpha"
+end, function()
+  vim.api.nvim_set_current_dir "C:\\Users\\bibek\\AppData\\Roaming\\zen\\Profiles\\krw1z2ua.Default (alpha)\\chrome"
+end)
 
 starting_command(function(args)
   return string.sub(args, 1, 1) == ":"

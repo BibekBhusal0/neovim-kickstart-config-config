@@ -101,6 +101,7 @@ return {
           ["neo-vim"] = "vs-code",
           ["0"] = "1",
           show = "hide",
+          best = "worst",
         },
         remove_default_keybinds = true,
       }

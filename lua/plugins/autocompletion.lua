@@ -136,5 +136,9 @@ return {
         end,
       },
     }
+
+    cmp.setup.filetype({ "autohotkey" }, {
+      sources = { { name = "autohotkey" } },
+    })
   end,
 }

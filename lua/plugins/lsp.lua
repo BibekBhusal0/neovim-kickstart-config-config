@@ -150,6 +150,22 @@ return {
             },
           },
         },
+        emmet_ls = {
+          filetypes = {
+            "css",
+            "eruby",
+            "html",
+            "javascript",
+            "javascriptreact",
+            "less",
+            "sass",
+            "scss",
+            "svelte",
+            "pug",
+            "typescriptreact",
+            "vue",
+          },
+        },
         html = { filetypes = { "html", "twig", "hbs" } },
         cssls = {},
         tailwindcss = {},
@@ -181,28 +197,6 @@ return {
               vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
             require("lspconfig")[server_name].setup(server)
           end,
-        },
-      }
-      -- setting up emmit  https://github.com/aca/emmet-ls
-      local lspconfig = require "lspconfig"
-      local capabilities_ = vim.lsp.protocol.make_client_capabilities()
-      capabilities_.textDocument.completion.completionItem.snippetSupport = true
-
-      lspconfig.emmet_ls.setup {
-        capabilities = capabilities_,
-        filetypes = {
-          "css",
-          "eruby",
-          "html",
-          "javascript",
-          "javascriptreact",
-          "less",
-          "sass",
-          "scss",
-          "svelte",
-          "pug",
-          "typescriptreact",
-          "vue",
         },
       }
     end,
