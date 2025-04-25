@@ -21,12 +21,6 @@ return {
   }, -- Color picker
 
   {
-    "wsdjeg/scrollbar.nvim",
-    opts = { shape = { head = "", tail = "" }, highlight = { body = "Comment" } },
-    event = { "BufReadPost", "BufNewFile" },
-  },
-
-  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufNewFile", "BufReadPost" },
@@ -127,30 +121,31 @@ return {
   },
 
   {
-    -- 'petertriho/nvim-scrollbar',
-    -- event = { 'BufNewFile', 'BufReadPost' },
-    --
-    -- dependencies = {
-    --   'kevinhwang91/nvim-hlslens',
-    --   config = function()
-    --     require('scrollbar.handlers.search').setup { calm_down = true, nearest_only = true }
-    --     local cmd = ":lua require('neoscroll').zz({half_win_duration = 100}) require('hlslens').start()<CR>"
-    --     map('n', ":execute('normal! ' . v:count1 . 'n')<CR>" .. cmd, 'Find Next')
-    --     map('N', ":execute('normal! ' . v:count1 . 'N')<CR>" .. cmd, 'Find Previous')
-    --     map('*', '*' .. cmd, 'Find Word Under Cursor')
-    --     map('#', '#' .. cmd, 'Find Word Before Cursor')
-    --     map('g*', 'g*' .. cmd, 'Find Word Under Cursor')
-    --     map('g#', 'g#' .. cmd, 'Find Word Before Cursor')
-    --   end,
-    -- },
-    --
-    -- opts = {
-    --   handle = { blend = 0 },
-    --   marks = { Cursor = { color = '#00ff00' } },
-    --   show_in_active_only = true,
-    --   hide_if_all_visible = true,
-    --   handlers = { gitsigns = true },
-    -- },
+    "petertriho/nvim-scrollbar",
+    event = { "BufNewFile", "BufReadPost" },
+
+    dependencies = {
+      "kevinhwang91/nvim-hlslens",
+      config = function()
+        require("scrollbar.handlers.search").setup { calm_down = true, nearest_only = true }
+        -- vim.api.nvim_feedkeys("zz", "n", false) -- center
+        local cmd = ":lua vim.api.nvim_feedkeys('zz','n',false)<CR>"
+        map("n", ":execute('normal! ' . v:count1 . 'n')<CR>" .. cmd, "Find Next")
+        map("N", ":execute('normal! ' . v:count1 . 'N')<CR>" .. cmd, "Find Previous")
+        map("*", "*" .. cmd, "Find Word Under Cursor")
+        map("#", "#" .. cmd, "Find Word Before Cursor")
+        map("g*", "g*" .. cmd, "Find Word Under Cursor")
+        map("g#", "g#" .. cmd, "Find Word Before Cursor")
+      end,
+    },
+
+    opts = {
+      handle = { blend = 0 },
+      marks = { Cursor = { color = "#00ff00" } },
+      show_in_active_only = true,
+      hide_if_all_visible = true,
+      handlers = { gitsigns = true },
+    },
   }, -- scrollbar showing gitsigns and diagnostics
 
   {

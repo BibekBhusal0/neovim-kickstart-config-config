@@ -45,8 +45,6 @@ map("<leader>xt", ":tabclose<CR>", "Quit Tab")
 map("<leader>xs", ":wincmd q<CR>", "Quit Split")
 
 -- center while navigation
-map("N", "Nzzzv", "Previous and center")
-map("n", "nzzzv", "next and center")
 map("<C-d>", "<C-d>zz", "Scroll down")
 map("<C-u>", "<C-u>zz", "Scroll up")
 
