@@ -51,7 +51,7 @@ end, function()
   vim.cmd "edit script.ahk"
   vim.cmd "normal! zR"
 end, function()
-  vim.api.nvim_set_current_dir "C:\\Users\\bibek\\Desktop\\New folder\\ahk"
+  vim.api.nvim_set_current_dir "~\\Desktop\\New folder\\ahk"
 end)
 
 starting_command(function(args)
@@ -59,7 +59,17 @@ starting_command(function(args)
 end, function()
   vim.cmd "Alpha"
 end, function()
-  vim.api.nvim_set_current_dir "C:\\Users\\bibek\\AppData\\Roaming\\zen\\Profiles\\krw1z2ua.Default (alpha)\\chrome"
+  vim.api.nvim_set_current_dir "~\\AppData\\Roaming\\zen\\Profiles\\krw1z2ua.Default (alpha)\\chrome"
+end)
+
+local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
+
+starting_command(function(args)
+  return args == "obsidian"
+end, function()
+  vim.cmd "ObsidianQuickSwitch"
+end, function()
+  vim.api.nvim_set_current_dir(obsidian_dir)
 end)
 
 starting_command(function(args)

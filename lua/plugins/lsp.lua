@@ -63,7 +63,6 @@ return {
 
           map("<leader>lD", vim.lsp.buf.declaration, "LSP goto Declaration")
           map("<leader>lh", vim.lsp.buf.hover, "LSP Hover")
-          map("L", vim.lsp.buf.hover, "LSP Hover")
 
           -- The following two autoCommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.

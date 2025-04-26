@@ -63,7 +63,7 @@ return {
         ":TSHighlightCapturesUnderCursor<CR>",
         desc = "Highlight Captures Under Cursor",
       },
-      { "<leader>pt", ":TSPlaygroundToggle<CR>", desc = "Toggle Treesiter Playground" },
+      { "<leader>pC", ":TSPlaygroundToggle<CR>", desc = "Toggle Treesiter Playground" },
     },
     cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
   },

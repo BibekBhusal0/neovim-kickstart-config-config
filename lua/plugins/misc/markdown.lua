@@ -39,7 +39,7 @@ return {
     config = function()
       require("mkdnflow").setup {
         mappings = {
-          MkdnEnter = { { "n", "v", "i" }, "<CR>" },
+          MkdnEnter = { { "i" }, "<CR>" },
           MkdnTab = false,
           MkdnSTab = false,
           MkdnNextLink = { "n", "]l" },
@@ -68,12 +68,12 @@ return {
           MkdnTablePrevCell = { "i", "[C" },
           MkdnTableNextRow = false,
           MkdnTablePrevRow = { "i", "<M-CR>" },
-          MkdnTableNewRowBelow = { "n", "<C-i>r" },
-          MkdnTableNewRowAbove = { "n", "<C-i>R" },
-          MkdnTableNewColAfter = { "n", "<C-i>c" },
-          MkdnTableNewColBefore = { "n", "<C-i>C" },
-          MkdnFoldSection = { "n", "gf" },
-          MkdnUnfoldSection = { "n", "gF" },
+          MkdnTableNewRowBelow = { "n", "Zr" },
+          MkdnTableNewRowAbove = { "n", "ZR" },
+          MkdnTableNewColAfter = { "n", "Zc" },
+          MkdnTableNewColBefore = { "n", "ZC" },
+          MkdnFoldSection = { "n", "<leader>zO" },
+          MkdnUnfoldSection = { "n", "<leader>zo" },
         },
         foldtext = { object_count_icon_set = "nerdfont" },
       }

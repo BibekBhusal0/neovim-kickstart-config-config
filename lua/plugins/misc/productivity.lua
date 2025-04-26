@@ -1,5 +1,7 @@
 local transparency_enabled = false
 local wrap_keys = require "utils.wrap_keys"
+local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
+vim.opt.conceallevel = 1
 
 return {
   {
@@ -121,5 +123,66 @@ return {
     },
     keys = wrap_keys { { "<leader>zz", ":ZenMode<CR>", desc = "Zen Mode" } },
     cmd = { "ZenMode" },
+  },
+
+  {
+    "epwalsh/obsidian.nvim",
+    keys = wrap_keys {
+      { "<leader>pq", ":ObsidianQuickSwitch<CR>", desc = "Obsidian Quick Switch" },
+      { "<leader>pn", ":ObsidianNew<CR>", desc = "Obsidian New" },
+      { "<leader>pt", ":ObsidianToday<CR>", desc = "Obsidian Today" },
+      { "<leader>py", ":ObsidianYesterday<CR>", desc = "Obsidian Yesterday" },
+      { "<leader>pT", ":ObsidianTomorrow<CR>", desc = "Obsidian Tomorrow" },
+      { "<leader>pl", ":ObsidianLinks<CR>", desc = "Obsidian Links" },
+    },
+    cmd = {
+      "ObsidianOpen",
+      "ObsidianNew",
+      "ObsidianQuickSwitch",
+      "ObsidianTags",
+      "ObsidianToday",
+      "ObdisianBacklinks",
+      "ObsidianSearch",
+      "ObsidianLink",
+      "ObsidianYesterday",
+      "ObsidianTomorrow",
+      "ObsidianLinks",
+      "ObsidianLinkNew",
+    },
+    event = {
+      "BufReadPre " .. obsidian_dir .. "/*.md",
+      "BufNewFile " .. obsidian_dir .. "/*.md",
+    },
+    opts = {
+      workspaces = { { name = "main", path = obsidian_dir } },
+      mappings = {
+        ["gf"] = {
+          action = function()
+            return require("obsidian").util.gf_passthrough()
+          end,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
+        ["<cr>"] = {
+          action = function()
+            return require("obsidian").util.smart_action()
+          end,
+          opts = { buffer = true, expr = true },
+        },
+      },
+      daily_notes = {
+        folder = "daily",
+        alias_format = "%B %-d, %Y",
+        default_tags = { "daily-note" },
+        template = nil,
+      },
+      ui = {
+        enabled = false,
+        checkboxes = {
+          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+          ["-"] = { char = "󰥔", hl_group = "ObsidianImportant" },
+          ["x"] = { char = "󰱒", hl_group = "ObsidianDone" },
+        },
+      },
+    },
   },
 }
