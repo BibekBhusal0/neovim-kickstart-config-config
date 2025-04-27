@@ -151,4 +151,17 @@ return {
     event = "InsertCharPre",
     opts = {},
   }, -- easy jumping between start and end brackets in insert mode
+
+  {
+    "y3owk1n/time-machine.nvim",
+    cmd = { "TimeMachineToggle", "TimeMachinePurgeBuffer", "TimeMachinePurgeAll" },
+    opts = {},
+    version = "*",
+    keys = wrap_keys {
+      { "<leader>tm", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
+      { "<leader>tM", ":TimeMachinePurgeBuffer<CR>", desc = "Time Machine Purge current" },
+      { "<leader>tX", ":TimeMachinePurgeAll", desc = "Time Machine Purge all" },
+      { "<leader>u", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
+    },
+  }, -- similar to undo tree
 }
