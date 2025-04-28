@@ -126,35 +126,31 @@ return {
   },
 
   {
-    "epwalsh/obsidian.nvim",
+    "obsidian-nvim/obsidian.nvim",
     keys = wrap_keys {
-      { "<leader>pq", ":ObsidianQuickSwitch<CR>", desc = "Obsidian Quick Switch" },
-      { "<leader>pn", ":ObsidianNew<CR>", desc = "Obsidian New" },
-      { "<leader>pt", ":ObsidianToday<CR>", desc = "Obsidian Today" },
-      { "<leader>py", ":ObsidianYesterday<CR>", desc = "Obsidian Yesterday" },
-      { "<leader>pT", ":ObsidianTomorrow<CR>", desc = "Obsidian Tomorrow" },
-      { "<leader>pl", ":ObsidianLinks<CR>", desc = "Obsidian Links" },
+      { "<leader>nc", ":Obsidian toc<CR>", desc = "Obsidian Table of contents" },
+      { "<leader>nD", ":Obsidian dailies<CR>", desc = "Obsidian Dailies" },
+      { "<leader>nb", ":Obsidian backlinks<CR>", desc = "Obsidian Backlinks" },
+      { "<leader>nd", ":Obsidian today<CR>", desc = "Obsidian Today" },
+      { "<leader>nj", ":Obsidian yesterday<CR>", desc = "Obsidian Yesterday" },
+      { "<leader>nk", ":Obsidian tomorrow<CR>", desc = "Obsidian Tomorrow" },
+      { "<leader>no", ":Obsidian new<CR>", desc = "Obsidian New" },
+      { "<leader>nO", ":Obsidian new_from_template<CR>", desc = "Obsidian New with Tempalte" },
+      { "<leader>nq", ":Obsidian quick_switch<CR>", desc = "Obsidian Quick Switch" },
+      { "<leader>ns", ":Obsidian search<CR>", desc = "Obsidian Search" },
+      { "<leader>nT", ":Obsidian tags<CR>", desc = "Obsidian Tags" },
+      { "<leader>nl", ":Obsidian links<CR>", desc = "Obsidian Links" },
+      { "<leader>nt", ":Obsidian template<CR>", desc = "Obsidian Insert template" },
+      { "<leader>nv", ":Obsidian followlink vsplit<CR>", desc = "Obsidian Open in split" },
     },
-    cmd = {
-      "ObsidianOpen",
-      "ObsidianNew",
-      "ObsidianQuickSwitch",
-      "ObsidianTags",
-      "ObsidianToday",
-      "ObdisianBacklinks",
-      "ObsidianSearch",
-      "ObsidianLink",
-      "ObsidianYesterday",
-      "ObsidianTomorrow",
-      "ObsidianLinks",
-      "ObsidianLinkNew",
-    },
+    cmd = { "Obsidian" },
     event = {
       "BufReadPre " .. obsidian_dir .. "/*.md",
       "BufNewFile " .. obsidian_dir .. "/*.md",
     },
     opts = {
       workspaces = { { name = "main", path = obsidian_dir } },
+      log_level = vim.log.levels.OFF,
       mappings = {
         ["gf"] = {
           action = function()
@@ -169,14 +165,21 @@ return {
           opts = { buffer = true, expr = true },
         },
       },
+      templates = {
+        folder = "templates/main",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+        substitutions = {},
+      },
       daily_notes = {
-        folder = "daily",
+        folder = "1 raw/daily",
+        date_format = "%Y/%m/%d",
         alias_format = "%B %-d, %Y",
         default_tags = { "daily-note" },
-        template = nil,
+        template = "daily",
       },
       ui = {
-        enabled = false,
+        enabled = true,
         checkboxes = {
           [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
           ["-"] = { char = "󰥔", hl_group = "ObsidianImportant" },

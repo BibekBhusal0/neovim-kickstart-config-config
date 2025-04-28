@@ -67,7 +67,7 @@ local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
 starting_command(function(args)
   return args == "obsidian"
 end, function()
-  vim.cmd "ObsidianQuickSwitch"
+  vim.cmd "Obsidian quick_switch"
 end, function()
   vim.api.nvim_set_current_dir(obsidian_dir)
 end)
