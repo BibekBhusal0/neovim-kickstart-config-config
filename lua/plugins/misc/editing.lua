@@ -102,6 +102,7 @@ return {
           ["0"] = "1",
           show = "hide",
           best = "worst",
+          pre_defer = "post_defer",
         },
         remove_default_keybinds = true,
       }

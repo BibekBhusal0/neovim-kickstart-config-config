@@ -36,44 +36,77 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
   end
 end
 
-starting_command(function(args)
-  return args == "config"
-end, function()
-  vim.cmd("edit " .. vim.fn.stdpath "config" .. "/init.lua")
-  vim.cmd "normal! zR"
-end, function()
-  vim.api.nvim_set_current_dir(vim.fn.stdpath "config")
-end)
-
-starting_command(function(args)
-  return args == "ahk"
-end, function()
-  vim.cmd "edit script.ahk"
-  vim.cmd "normal! zR"
-end, function()
-  vim.api.nvim_set_current_dir "~\\Desktop\\New folder\\ahk"
-end)
-
-starting_command(function(args)
-  return args == "zen"
-end, function()
-  vim.cmd "Alpha"
-end, function()
-  vim.api.nvim_set_current_dir "~\\AppData\\Roaming\\zen\\Profiles\\krw1z2ua.Default (alpha)\\chrome"
-end)
-
 local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
 
-starting_command(function(args)
-  return args == "obsidian"
-end, function()
-  vim.cmd "Obsidian quick_switch"
-end, function()
-  vim.api.nvim_set_current_dir(obsidian_dir)
-end)
+local function is_arg(expected_arg)
+  return function(args)
+    return args == expected_arg
+  end
+end
 
-starting_command(function(args)
-  return string.sub(args, 1, 1) == ":"
-end, function(args)
-  vim.cmd(string.sub(table.concat(args, " "), 2))
-end)
+local commands = {
+  {
+    condition = is_arg "config",
+    post_defer = function()
+      vim.cmd("edit " .. vim.fn.stdpath "config" .. "/init.lua")
+      vim.cmd "normal! zR"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir(vim.fn.stdpath "config")
+    end,
+  },
+
+  {
+    condition = is_arg "ahk",
+    post_defer = function()
+      vim.cmd "edit script.ahk"
+      vim.cmd "normal! zR"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir "~\\Desktop\\New folder\\ahk"
+    end,
+  },
+
+  {
+    condition = is_arg "zen",
+    post_defer = function()
+      vim.cmd "Alpha"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir "~\\AppData\\Roaming\\zen\\Profiles\\krw1z2ua.Default (alpha)\\chrome"
+    end,
+  },
+
+  {
+    condition = is_arg "obsidian",
+    post_defer = function()
+      vim.cmd "Obsidian quick_switch"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir(obsidian_dir)
+    end,
+  },
+
+  {
+    condition = is_arg "obsidianConfig",
+    post_defer = function()
+      vim.cmd "e .obsidian.vimrc"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir(obsidian_dir)
+    end,
+  },
+
+  {
+    condition = function(args)
+      return string.sub(args, 1, 1) == ":"
+    end,
+    post_defer = function(args)
+      vim.cmd(string.sub(table.concat(args, " "), 2))
+    end,
+  },
+}
+
+for _, cmd in ipairs(commands) do
+  starting_command(cmd.condition, cmd.post_defer, cmd.pre_defer, cmd.dfr)
+end
