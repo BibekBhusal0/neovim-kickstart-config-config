@@ -165,4 +165,15 @@ return {
       { "<leader>u", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
     },
   }, -- similar to undo tree
+
+  {
+    "gbprod/substitute.nvim",
+    opts = {},
+    keys = wrap_keys {
+      { "s", ":lua require('substitute').operator()<CR>" },
+      { "ss", ":lua require('substitute').line()<CR>" },
+      { "S", ":lua require('substitute').eol()<CR>" },
+      { "s", ":lua require('substitute').visual()<CR>", mode = "x" },
+    },
+  },
 }
