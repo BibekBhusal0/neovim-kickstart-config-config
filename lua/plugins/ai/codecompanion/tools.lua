@@ -49,4 +49,8 @@ return {
     callback = require "plugins.ai.mcphub.get_tool" "browser-control",
     description = "MCP: Browser Control",
   },
+  ["obsidian"] = {
+    callback = require "plugins.ai.mcphub.get_tool" "obsidian",
+    description = "MCP: obsidian",
+  },
 }
