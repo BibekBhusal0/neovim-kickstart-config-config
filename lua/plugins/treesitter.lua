@@ -34,6 +34,15 @@ return {
           additional_vim_regex_highlighting = { "ruby" },
         },
         indent = { enable = true },
+        -- incremental_selection = {
+        --   enable = true,
+        --   keymaps = {
+        --     init_selection = "<C-p>",
+        --     node_incremental = "<c-p>",
+        --     scope_incremental = false,
+        --     node_decremental = "<bs>",
+        --   },
+        -- },
       }
       vim.treesitter.language.register("markdown", "vimwiki")
     end,
@@ -53,19 +62,6 @@ return {
         "Go to context"
       )
     end,
-  },
-
-  {
-    "nvim-treesitter/playground",
-    keys = wrap_keys {
-      {
-        "<leader>pc",
-        ":TSHighlightCapturesUnderCursor<CR>",
-        desc = "Highlight Captures Under Cursor",
-      },
-      { "<leader>pC", ":TSPlaygroundToggle<CR>", desc = "Toggle Treesiter Playground" },
-    },
-    cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
   },
 
   {
