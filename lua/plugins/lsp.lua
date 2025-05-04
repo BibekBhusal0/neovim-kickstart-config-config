@@ -172,7 +172,6 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              diagnostics = { globals = { "vim" } },
               format = { enable = false },
             },
           },
@@ -249,6 +248,14 @@ return {
         ':lua require("tiny-code-action").code_action()<CR>',
         desc = "LSP code actions",
       },
+    },
+  },
+
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {},
     },
   },
 }
