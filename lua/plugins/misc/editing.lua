@@ -16,7 +16,7 @@ return {
     keys = wrap_keys {
       { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
     },
-  }, -- Simple ways to train whitespace useful when formatter is not working
+  }, -- Simple ways to trail whitespace useful when formatter is not working
 
   {
     "nacro90/numb.nvim",
@@ -161,7 +161,7 @@ return {
     keys = wrap_keys {
       { "<leader>tm", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
       { "<leader>tM", ":TimeMachinePurgeBuffer<CR>", desc = "Time Machine Purge current" },
-      { "<leader>tX", ":TimeMachinePurgeAll", desc = "Time Machine Purge all" },
+      { "<leader>tX", ":TimeMachinePurgeAll<CR>", desc = "Time Machine Purge all" },
       { "<leader>u", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
     },
   }, -- similar to undo tree

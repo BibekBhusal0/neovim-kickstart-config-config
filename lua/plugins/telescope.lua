@@ -12,7 +12,7 @@ end
 local findInCurrentBufferDir = function()
   local current_file = vim.api.nvim_buf_get_name(0)
   if current_file == "" then
-    require("telescope.builtin").find_files { cwd = vim.loop.cwd() }
+    require("telescope.builtin").find_files { cwd = vim.fn.getcwd() }
   else
     require("telescope.builtin").find_files { cwd = vim.fn.fnamemodify(current_file, ":h") }
   end
