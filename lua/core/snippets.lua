@@ -7,7 +7,7 @@ vim.diagnostic.config {
   virtual_lines = { current_line = true },
   underline = true,
   update_in_insert = false,
-  float = { source = "always" },
+  float = { source = true },
 }
 
 -- Highlight on yank
