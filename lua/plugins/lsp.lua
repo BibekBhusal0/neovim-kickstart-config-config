@@ -236,12 +236,18 @@ return {
   {
     "rachartier/tiny-code-action.nvim",
     config = function()
-      require("tiny-code-action").setup {
-        telescope_opts = require("telescope.themes").get_cursor {
-          default_index = 1,
-          initial_mode = "normal",
-          layout_config = { width = 60, height = 15, preview_cutoff = 200 }, -- only way to disable preview
-          -- layout_config = { width = 90, height = 15, preview_width = 30 },  -- this is also fine i guess
+      local code_action = require "tiny-code-action"
+      code_action.config.picker.opts.layout_config.preview_height = nil
+
+      code_action.setup {
+        picker = {
+          picker = "telescope",
+          opts = require("telescope.themes").get_cursor {
+            default_index = 1,
+            initial_mode = "normal",
+            -- layout_config = { width = 60, height = 15, preview_cutoff = 200 }, -- only way to disable preview
+            layout_config = { width = 90, height = 15, preview_width = 30 }, -- this is also fine i guess
+          },
         },
       }
     end,
