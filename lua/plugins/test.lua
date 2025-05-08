@@ -3,12 +3,12 @@ return {
   "nvim-neotest/neotest",
   dependencies = {
     "nvim-neotest/nvim-nio",
-    "nvim-neotest/neotest-python",
-    "nvim-neotest/neotest-jest",
-    "MarkEmmons/neotest-deno",
-
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
+
+    -- adapters
+    "nvim-neotest/neotest-python",
+    "nvim-neotest/neotest-jest",
   },
 
   keys = wrap_keys {
@@ -25,14 +25,30 @@ return {
       desc = "Test Run File",
     },
     { "<leader>Ts", ':lua require("neotest").run.stop()<CR>', desc = "Test Stop" },
+    { "<leader>To", ':lua require("neotest").output.open()<CR>', desc = "Test Ouput" },
+    { "<leader>Tp", ':lua require("neotest").output_panel.toggle()<CR>', desc = "Test Panel" },
+    { "<leader>Tv", ':lua require("neotest").summary.toggle()<CR>', desc = "Test Summary" },
   },
 
   config = function()
     require("neotest").setup {
       adapters = {
-        require "neotest-python",
-        require "neotest-deno",
-        require "neotest-jest",
+        require "neotest-python" {
+          dap = { justMyCode = false },
+          args = { "--log-level", "DEBUG" },
+          runner = "pytest",
+          python = "python",
+          pytest_discover_instances = true,
+        },
+
+        require "neotest-jest" {
+          jestCommand = "npm test --",
+          jestConfigFile = "custom.jest.config.ts",
+          env = { CI = true },
+          cwd = function()
+            return vim.fn.getcwd()
+          end,
+        },
       },
     }
   end,
