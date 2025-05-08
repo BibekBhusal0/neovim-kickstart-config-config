@@ -66,13 +66,12 @@ return {
 
     local noice_info = {
       function()
-        return ""
-        -- if not package.loaded['noice'] then
-        --   return ''
-        -- end
-        -- local cmd = require('noice').api.status.command.get() or ''
-        -- local get = require('noice').api.status.mode.get() or ''
-        -- return get .. '  ' .. cmd
+        if not package.loaded["noice"] then
+          return ""
+        end
+        local cmd = require("noice").api.status.command.get() or ""
+        local get = require("noice").api.status.mode.get() or ""
+        return get .. "  " .. cmd
       end,
     }
 
