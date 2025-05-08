@@ -68,12 +68,12 @@ return {
       map("<A-j>", function()
         noice.redirect(vim.fn.getcmdline())
       end, "Redirect Cmdline", "c")
-      map("<leader>nr", ":Noice dismiss<CR>", "Noice remove")
-      map("<leader>nl", ":Noice last<CR>", "Noice last")
-      map("<leader>nh", ":Noice history<CR>", "Noice history")
-      map("<leader>ns", ":Telescope noice<CR>", "Noice Telescope")
-      map("<leader>nS", ":Telescope notify<CR>", "Notify Telescope")
-      map("<leader>nT", function()
+      map("<leader>Nr", ":Noice dismiss<CR>", "Noice remove")
+      map("<leader>Nl", ":Noice last<CR>", "Noice last")
+      map("<leader>Nh", ":Noice history<CR>", "Noice history")
+      map("<leader>Ns", ":Telescope noice<CR>", "Noice Telescope")
+      map("<leader>NS", ":Telescope notify<CR>", "Notify Telescope")
+      map("<leader>Nt", function()
         local running = require("noice.config")._running
         if running then
           noice.disable()
