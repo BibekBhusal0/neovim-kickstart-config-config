@@ -168,8 +168,8 @@ return {
       local mappings = {
         ["<a-a>"] = actions.select_all,
         ["<a-h>"] = actions.preview_scrolling_left,
-        ["<a-j>"] = actions.preview_scrolling_up,
-        ["<a-k>"] = actions.preview_scrolling_down,
+        ["<a-k>"] = actions.preview_scrolling_up,
+        ["<a-j>"] = actions.preview_scrolling_down,
         ["<a-l>"] = actions.preview_scrolling_right,
         ["<a-t>"] = actions.select_tab,
         ["<c-g>"] = open_with_trouble,
