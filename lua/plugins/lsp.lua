@@ -43,22 +43,23 @@ return {
           )
           map("<leader>lw", ":Telescope lsp_dynamic_workspace_symbols<CR>", "LSP Workspace Symbols")
 
-          local rename = function()
-            local var = vim.fn.expand "<cword>"
-            local callback = function(text)
-              local params = vim.lsp.util.make_position_params()
-              params.newName = text
-              vim.lsp.buf_request(0, "textDocument/rename", params)
-            end
-            require "utils.input"(
-              " Rename ",
-              callback,
-              var,
-              nil,
-              require("utils.icons").symbols.Variable .. "  "
-            )
-          end
-          map("<leader>ln", rename, "LSP Rename variable")
+          -- local rename = function()
+          --   local var = vim.fn.expand "<cword>"
+          --   local callback = function(text)
+          --     local params = vim.lsp.util.make_position_params()
+          --     params.newName = text
+          --     vim.lsp.buf_request(0, "textDocument/rename", params)
+          --   end
+          --   require "utils.input"(
+          --     " Rename ",
+          --     callback,
+          --     var,
+          --     nil,
+          --     require("utils.icons").symbols.Variable .. "  "
+          --   )
+          -- end
+          -- map("<leader>ln", rename, "LSP Rename variable")
+          map("<leader>ln", vim.lsp.buf.rename, "Lsp Rename variable")
           -- map('<leader>ca', vim.lsp.buf.code_action, 'LSP code action', { 'n', 'x' })
 
           map("<leader>lD", vim.lsp.buf.declaration, "LSP goto Declaration")
@@ -129,10 +130,12 @@ return {
         require("cmp_nvim_lsp").default_capabilities(),
         require("lsp-file-operations").default_capabilities()
       )
+      capabilities.textDocument.formatting = { enabled = false }
+      capabilities.textDocument.rangeFormatting = { enabled = false }
 
       local servers = {
-        ts_ls = {},
-        ruff = {},
+        ts_ls = { format = { enable = false } },
+        ruff = { format = { enable = false } },
         pylsp = {
           settings = {
             pylsp = {
@@ -171,9 +174,7 @@ return {
         jsonls = {},
         lua_ls = {
           settings = {
-            Lua = {
-              format = { enable = false },
-            },
+            Lua = { format = { enable = false } },
           },
         },
       }
@@ -184,6 +185,8 @@ return {
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
       require("mason-lspconfig").setup {
+        ensure_installed = ensure_installed,
+        automatic_enable = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
