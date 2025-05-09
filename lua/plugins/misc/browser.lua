@@ -57,7 +57,6 @@ return {
       { "<leader>sy", searchYoutube, desc = "Search Youtube" },
     },
 
-    dependencies = { "stevearc/dressing.nvim" },
     config = function()
       require("browse").setup {
         bookmarks = {

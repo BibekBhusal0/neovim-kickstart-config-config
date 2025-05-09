@@ -432,7 +432,7 @@ return {
     config = function()
       require("dressing").setup {
         input = {
-          enabled = true,
+          enabled = false,
           title_pos = "center",
           start_mode = "insert",
           border = "rounded",
@@ -440,7 +440,9 @@ return {
         },
         select = {
           enabled = true,
-          telescope = require("telescope.themes").get_dropdown(),
+          telescope = require("telescope.themes").get_cursor {
+            layout_config = { width = 60, height = 15, preview_cutoff = 200 },
+          },
         },
       }
     end,

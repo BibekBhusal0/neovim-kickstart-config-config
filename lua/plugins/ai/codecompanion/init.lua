@@ -113,7 +113,6 @@ return {
       },
     },
 
-    dependencies = { "stevearc/dressing.nvim" },
     config = function()
       require("plugins.ai.loader"):init()
       require("codecompanion").setup {

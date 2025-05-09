@@ -60,7 +60,10 @@ return {
           -- end
           -- map("<leader>ln", rename, "LSP Rename variable")
           map("<leader>ln", vim.lsp.buf.rename, "Lsp Rename variable")
-          -- map('<leader>ca', vim.lsp.buf.code_action, 'LSP code action', { 'n', 'x' })
+          map("<leader>ca", function()
+            require "dressing"
+            vim.lsp.buf.code_action()
+          end, "LSP code action", { "n", "x" })
 
           map("<leader>lD", vim.lsp.buf.declaration, "LSP goto Declaration")
           map("<leader>lh", vim.lsp.buf.hover, "LSP Hover")
@@ -234,30 +237,30 @@ return {
   },
 
   {
-    "rachartier/tiny-code-action.nvim",
-    config = function()
-      local code_action = require "tiny-code-action"
-      code_action.config.picker.opts.layout_config.preview_height = nil
-
-      code_action.setup {
-        picker = {
-          picker = "telescope",
-          opts = require("telescope.themes").get_cursor {
-            default_index = 1,
-            initial_mode = "normal",
-            -- layout_config = { width = 60, height = 15, preview_cutoff = 200 }, -- only way to disable preview
-            layout_config = { width = 90, height = 15, preview_width = 30 }, -- this is also fine i guess
-          },
-        },
-      }
-    end,
-    keys = wrap_keys {
-      {
-        "<leader>ca",
-        ':lua require("tiny-code-action").code_action()<CR>',
-        desc = "LSP code actions",
-      },
-    },
+    -- "rachartier/tiny-code-action.nvim",
+    -- config = function()
+    --   local code_action = require "tiny-code-action"
+    --   code_action.config.picker.opts.layout_config.preview_height = nil
+    --
+    --   code_action.setup {
+    --     picker = {
+    --       picker = "telescope",
+    --       opts = require("telescope.themes").get_cursor {
+    --         default_index = 1,
+    --         initial_mode = "normal",
+    --         -- layout_config = { width = 60, height = 15, preview_cutoff = 200 }, -- only way to disable preview
+    --         layout_config = { width = 90, height = 15, preview_width = 30 }, -- this is also fine i guess
+    --       },
+    --     },
+    --   }
+    -- end,
+    -- keys = wrap_keys {
+    --   {
+    --     "<leader>ca",
+    --     ':lua require("tiny-code-action").code_action()<CR>',
+    --     desc = "LSP code actions",
+    --   },
+    -- },
   },
 
   {
