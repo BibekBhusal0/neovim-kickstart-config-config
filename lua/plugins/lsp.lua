@@ -133,8 +133,6 @@ return {
         require("cmp_nvim_lsp").default_capabilities(),
         require("lsp-file-operations").default_capabilities()
       )
-      capabilities.textDocument.formatting = { enabled = false }
-      capabilities.textDocument.rangeFormatting = { enabled = false }
 
       local servers = {
         ts_ls = { format = { enable = false } },
@@ -199,6 +197,8 @@ return {
             -- certain features of an LSP (for example, turning off formatting for tsServer)
             server.capabilities =
               vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            server.capabilities.textDocument.formatting = { enabled = false }
+            server.capabilities.textDocument.rangeFormatting = { enabled = false }
             require("lspconfig")[server_name].setup(server)
           end,
         },
