@@ -156,13 +156,17 @@ return {
               },
             },
           },
-          inline = { adapter = "gemini" },
+          inline = { adapter = "gemini", model = "gemini-1.5-flash" },
         },
 
         prompt_library = require "plugins.ai.codecompanion.prompts",
         adapters = {
-          gemini = "gemini",
-          opts = { show_defaults = false },
+          gemini = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              name = "gemini",
+              schema = { model = { default = "gemini-2.0-flash" } },
+            })
+          end,
         },
       }
     end,

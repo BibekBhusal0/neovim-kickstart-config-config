@@ -5,7 +5,7 @@ return {
   require "plugins.misc.browser",
   require "plugins.misc.comments",
   require "plugins.misc.editing",
-  require "plugins.misc.hints",
+  -- require "plugins.misc.hints",
   require "plugins.misc.looks",
   require "plugins.misc.markdown",
   require "plugins.misc.productivity",

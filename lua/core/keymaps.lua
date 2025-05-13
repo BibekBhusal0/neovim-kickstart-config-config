@@ -37,8 +37,8 @@ map("<C-A-j>", ":copy '<-1<CR>gv=gv", "Duplicate Lines Below", "v")
 map("<C-A-k>", ":copy '><CR>gv=gv", "Duplicate Lines Above", "v")
 map("<C-A-k>", ":copy .-1<CR>", "Duplicate Line Above")
 map("<C-A-j>", ":copy .<CR>", "Duplicate Line Below")
-map("K", ":m .-2<CR>==", "Move Line Up")
-map("J", ":m .+1<CR>==", "Move Line Down")
+map("K", "<cmd>m .-2<CR>==", "Move Line Up")
+map("J", "<cmd>m .+1<CR>==", "Move Line Down")
 
 -- quit
 map("<leader>sn", ":noautocmd w <CR>", "Save File Without formatting")
@@ -115,7 +115,9 @@ map("<leader>bl", toggle_tabline, "Toggle Tab Line")
 
 local function toggle_virtual_lines()
   local current_config = vim.diagnostic.config()
-  if current_config == nil then return end
+  if current_config == nil then
+    return
+  end
   local is_currently_enabled = current_config.underline == true
   local new_state_enabled = not is_currently_enabled
   local new_underline_state = new_state_enabled

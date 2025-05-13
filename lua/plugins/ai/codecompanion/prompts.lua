@@ -155,6 +155,10 @@ You are a smart code paste agent within Neovim.
       short_name = "commit",
       auto_submit = true,
       ignore_system_prompt = true,
+      adapter = {
+        name = "gemini",
+        model = "gemini-1.5-flash", -- supposed to be fast
+      },
     },
     prompts = {
       {
