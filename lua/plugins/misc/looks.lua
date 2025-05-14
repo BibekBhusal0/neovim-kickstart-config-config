@@ -6,8 +6,8 @@ return {
     "uga-rosa/ccc.nvim",
     -- event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys {
-      { "<leader>cP", ":CccPick<CR>", desc = "Color Picker" },
-      { "<leader>cm", ":CccConvert<CR>", desc = "Color Convert" },
+      { "<leader>cP", ":CccPick<CR>",              desc = "Color Picker" },
+      { "<leader>cm", ":CccConvert<CR>",           desc = "Color Convert" },
       { "<leader>cH", ":CccHighlighterToggle<CR>", desc = "Color Highlighter Toggle" },
     },
     config = function()
@@ -48,7 +48,8 @@ return {
 
   {
     "folke/noice.nvim",
-    event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
+    -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
+    event = { "BufReadPost", "BufNewFile", },
     dependencies = {
       {
         "rcarriga/nvim-notify",
