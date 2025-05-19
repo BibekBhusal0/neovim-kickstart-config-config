@@ -1,87 +1,26 @@
-local maxChar = 25
-local function prettifyFooterText(icon, text)
-  local str = icon .. "  " .. text
-  if #str > maxChar then
-    return str:sub(1, maxChar)
-  else
-    return str .. string.rep(" ", maxChar - #str)
-  end
-end
-
--- stylua: ignore
-local quotes = {
-  { "6 hours of debugging can save you 5 minutes of reading documentation.", "Random Reddit post" },
+--[[ local short_quotes = {
   { "An idiot admires complexity, a genius admires simplicity.", "Terry Davis" },
   { "Before software can be reusable it first has to be usable.", "Ralph Johnson" },
   { "Deleted code is debugged code.", "Jeff Sickel" },
-  { "Good Artists copy; Great artist steal.", "Pablo Picasso" },
-  { "Gotta concentrate, against the clock I rase,got no time to waste, I am already late, I got a marathon pased", "Eminiem" },
-  { "In theory there is no difference between theory and practice. In practice there is.", "Yogi Berra" },
   { "It is not a bug, it is a feature.", "Me" },
   { "It works on my machine.", "Every Developer Ever" },
+  { "The best error message is the one that never shows up.", "Thomas Fuchs" },
+  { "You know the bug is serous when you pause your Spotify music to focus.", "Random Reddit post" },
+  { "6 hours of debugging can save you 5 minutes of reading documentation.", "Random Reddit post" },
+  { "Good Artists copy; Great artist steal.", "Pablo Picasso" },
+  { "Gotta concentrate, against the clock I rase,got no time to waste, I am already late, I got a marathon pased", "Eminiem" },
+}
+local long_quotes = {
+  { "In theory there is no difference between theory and practice. In practice there is.", "Yogi Berra" },
   { "Never spend 6 minutes doing somthing by hand when you can spend 6 hours failing to automate it.", "Random Reddit post" },
   { "Nothing is as permanent as a temporary solution that works", "Random Reddit Post" },
   { "Only 2 things are infinite, the universe and human stupidity, and I'm not sure about the universe.", "Albert Einstein" },
-  { "The best error message is the one that never shows up.", "Thomas Fuchs" },
   { "There are three things programmers struggle withㅤㅤㅤㅤ  1. Naming variabls, 2. Off by one errors", "Fireship video comment" },
   { "There are two ways to write error-free programs; only the third one works.", "Alan J. Perlis" },
   { "Think of how stupid the average person is, and realize half of them are stupider than that.", "George Carlin" },
   { "Time is free but somehow priceless, so whatch how you spend it wisely", "Central Cee" },
   { "To replace programmers with bots, clients will have to accurately describe what they want, We are safe.", "Random Reddit post" },
-  { "You know the bug is serous when you pause your Spotify music to focus.", "Random Reddit post" },
-}
--- stylua: end
-
-local function get_random_quote()
-  local current_time = os.time()
-  local current_date = os.date("*t", current_time)
-  local seed = current_date.month * 100 + current_date.day
-  math.randomseed(seed)
-  return quotes[math.random(#quotes)]
-end
-
-local function get_quote_for_footer()
-  local maxChars = 60
-  local quote_data = get_random_quote()
-
-  local quote = quote_data[1]
-  local author = quote_data[2]
-
-  local formatted_lines = {}
-  local words = {}
-
-  for word in quote:gmatch "%S+" do
-    table.insert(words, word)
-  end
-
-  local current_line = ""
-
-  for _, word in ipairs(words) do
-    if #current_line + #word + 1 > maxChars then
-      table.insert(formatted_lines, current_line .. string.rep(" ", maxChars - #current_line))
-      current_line = word
-    else
-      if #current_line > 0 then
-        current_line = current_line .. " " .. word
-      else
-        current_line = word
-      end
-    end
-  end
-
-  if #current_line > 0 then
-    table.insert(formatted_lines, current_line .. string.rep(" ", maxChars - #current_line))
-  end
-
-  if #formatted_lines > 0 then
-    local author_line = string.rep(" ", maxChars - #author - 3) .. " - " .. author
-    table.insert(formatted_lines, author_line)
-  end
-
-  return formatted_lines
-end
-
-local quote = get_quote_for_footer()
+} ]]
 
 local function render()
   local alpha = require "alpha"
@@ -178,26 +117,21 @@ local function render()
 
   local buttons =
     { type = "group", val = { file_buttons, popup_buttons, project_buttons, other_buttons } }
-  local function getFooter(val)
-    return { type = "text", val = val, opts = { position = "center", hl = "Ignore" } }
+
+  local function get_fortune()
+    local fortune = require("fortune").get_fortune()
+    local items = {}
+    for _, val in ipairs(fortune) do
+      local item = { type = "text", val = val, opts = { position = "center", hl = "Ignore" } }
+      table.insert(items, item)
+    end
+    return items
   end
 
-  local function getPrettifiedFooter(icon, string)
-    return getFooter(prettifyFooterText(icon, string))
-  end
-
-  local footer = {
-    type = "group",
-    val = {
-      getPrettifiedFooter("", string.format("Today: %s", os.date "%Y-%m-%d")),
-      { type = "padding", val = 1 },
-      getFooter(quote),
-    },
-  }
+  local footer = { type = "group", val = get_fortune() }
 
   local content = {
     layout = {
-      { type = "padding", val = 1 },
       { type = "text", val = header, opts = { position = "center", hl = "Type" } },
       { type = "padding", val = 2 },
       buttons,
@@ -212,6 +146,10 @@ end
 
 return {
   "goolord/alpha-nvim",
+  dependencies = {
+    "rubiin/fortune.nvim",
+    opts = { display_format = "long", content_type = "quotes" },
+  },
   config = render,
   lazy = "" ~= vim.fn.argv(0, -1),
   cmd = "Alpha",
