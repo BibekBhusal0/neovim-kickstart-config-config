@@ -50,6 +50,9 @@ return {
   {
     "eandrju/cellular-automaton.nvim",
     cmd = { "CellularAutomaton" },
+    config = function()
+      vim.opt.spell = false
+    end,
     keys = wrap_keys {
       { "<leader>zr", ":CellularAutomaton make_it_rain<CR>", desc = "Game Make it rain" },
       { "<leader>zG", ":CellularAutomaton game_of_life<CR>", desc = "Game of life" },
@@ -88,5 +91,13 @@ return {
       { "<leader>zgm", ":Golf medium<CR>", desc = "Game Golf Medium" },
       { "<leader>zgh", ":Golf hard<CR>", desc = "Game Golf Hard" },
     },
+  },
+
+  {
+    "letieu/hacker.nvim",
+    config = function()
+      vim.opt.spell = false
+    end,
+    cmd = { "Hack", "HackAuto", "HackFollow", "HackFollowAuto" },
   },
 }
