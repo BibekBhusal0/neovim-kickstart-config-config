@@ -57,6 +57,8 @@ map("<C-u>", "<C-u>zz", "Scroll up")
 -- system clipboard with leader y
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard")
+map("<leader>d", '"_d', "Delete to Black hole", "v")
+map("p", [["_dP]], "paste", "x")
 
 -- yank all
 map("<leader>k", "ggVGy", "Yank all")
