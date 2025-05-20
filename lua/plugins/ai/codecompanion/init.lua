@@ -1,9 +1,14 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
-local inline_command_visual = function()
-  require "utils.input" ("  Command to AI  ", function(text)
-    vim.cmd "normal! gv"
+local inline_command = function()
+  local select_command = "normal! gv"
+  if vim.api.nvim_get_mode().mode == "n" then
+    select_command = "normal! ggVG"
+  end
+
+  local input_callback = function(text)
+    vim.cmd(select_command)
     vim.cmd(
       "CodeCompanion #buffer "
       .. text
@@ -13,15 +18,16 @@ local inline_command_visual = function()
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
     end, 2)
-  end, "", 80, require("utils.icons").others.ai .. "  ")
+  end
+  require "utils.input" (
+    "  Command to AI  ",
+    input_callback,
+    "",
+    80,
+    require("utils.icons").others.ai .. "  "
+  )
 end
 
-local inline_command_normal = function()
-  vim.api.nvim_feedkeys("ggVG", "n", false)
-  vim.defer_fn(function()
-    inline_command_visual()
-  end, 2)
-end
 
 local commit_callback = function()
   local executed = false
@@ -77,8 +83,7 @@ end
 
 map("<leader>aa", actions, "CodeCompanion Inline command", { "v", "n" })
 map("<leader>ag", commit_with_message, "Add changes and get commit message")
-map("<leader>ai", inline_command_visual, "CodeCompanion Inline command", { "v" })
-map("<leader>ai", inline_command_normal, "CodeCompanion Inline command")
+map("<leader>ai", inline_command, "CodeCompanion Inline command", { "v", "n" })
 
 return {
   {
