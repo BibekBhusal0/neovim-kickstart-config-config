@@ -6,8 +6,8 @@ return {
     "uga-rosa/ccc.nvim",
     -- event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys {
-      { "<leader>cP", ":CccPick<CR>",              desc = "Color Picker" },
-      { "<leader>cm", ":CccConvert<CR>",           desc = "Color Convert" },
+      { "<leader>cP", ":CccPick<CR>", desc = "Color Picker" },
+      { "<leader>cm", ":CccConvert<CR>", desc = "Color Convert" },
       { "<leader>cH", ":CccHighlighterToggle<CR>", desc = "Color Highlighter Toggle" },
     },
     config = function()
@@ -49,7 +49,7 @@ return {
   {
     "folke/noice.nvim",
     -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
-    event = { "BufReadPost", "BufNewFile", },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       {
         "rcarriga/nvim-notify",
@@ -73,7 +73,9 @@ return {
       map("<leader>Nl", ":Noice last<CR>", "Noice last")
       map("<leader>Nh", ":Noice history<CR>", "Noice history")
       map("<leader>Ns", ":Telescope noice<CR>", "Noice Telescope")
+      map("<leader>fn", ":Telescope noice<CR>", "Noice Telescope")
       map("<leader>NS", ":Telescope notify<CR>", "Notify Telescope")
+      map("<leader>fN", ":Telescope notify<CR>", "Notify Telescope")
       map("<leader>Nt", function()
         local running = require("noice.config")._running
         if running then
