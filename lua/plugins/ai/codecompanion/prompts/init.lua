@@ -33,6 +33,19 @@ return {
     },
   },
 
+  ["New chat"] = {
+    strategy = "chat",
+    description = "new",
+    opts = { short_name = "new", modes = {'v'} },
+    prompts = {
+      {
+        role = "user",
+        content = "",
+        opts = { auto_submit = false },
+      },
+    },
+  },
+
   ["Smart Paste"] = {
     strategy = "inline",
     description = "Paste code smartly",

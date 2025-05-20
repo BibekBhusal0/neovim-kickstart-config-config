@@ -2,12 +2,13 @@ local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 local inline_command_visual = function()
-  require "utils.input"("  Command to AI  ", function(text)
+  require "utils.input" ("  Command to AI  ", function(text)
     vim.cmd "normal! gv"
     vim.cmd(
       "CodeCompanion #buffer "
-        .. text
-        .. " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
+      .. text
+      ..
+      " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
     )
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
@@ -35,7 +36,7 @@ local commit_callback = function()
     end
     local last_message = messages[#messages] and messages[#messages].content
     if type(last_message) == "string" and string.len(last_message) < 100 then
-      require "utils.input"(
+      require "utils.input" (
         " Commit Message ",
         function(text)
           vim.cmd("Git commit -a -m '" .. text .. "'")
@@ -51,7 +52,7 @@ end
 
 local commit_with_message = function()
   vim.cmd "Git add ."
-  local m = require "plugins.ai.diff"()
+  local m = require "plugins.ai.diff" ()
   if not m.ok then
     vim.notify(m.message, vim.log.levels.WARN)
     return
@@ -98,6 +99,12 @@ return {
         mode = { "v" },
       },
       {
+        "<leader>an",
+        ":CodeCompanion /new<CR>",
+        desc = "CodeCompanion New",
+        mode = { "v" },
+      },
+      {
         "<leader>af",
         ":CodeCompanion /fix<CR>",
         desc = "CodeCompanion Fix Errors",
@@ -115,7 +122,7 @@ return {
         desc = "CodeCompanion Make Code Readable",
         mode = { "v" },
       },
-      { "<leader>aG", ":CodeCompanion /commit<CR>", desc = "CodeCompanion get commit message" },
+      { "<leader>aG", ":CodeCompanion /commit<CR>",    desc = "CodeCompanion get commit message" },
       {
         "<leader>aj",
         ":CodeCompanion /straight<CR>",
