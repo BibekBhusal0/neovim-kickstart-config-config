@@ -1,6 +1,5 @@
 return {
-  readable =
-  "only change code according to user command and make sure you complete code and if you are not able to make change just give user's code as it is",
+  readable = "only change code according to user command and make sure you complete code and if you are not able to make change just give user's code as it is",
   straight = {
     content = [[
     You are a super straight forward model which will provide code to user or solve user problem based on user input.

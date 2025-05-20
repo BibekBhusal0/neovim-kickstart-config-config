@@ -12,6 +12,6 @@ return {
     local llx = require("lualine.config").get_config().sections.lualine_x
     table.insert(llx, 1, require "mcphub.extensions.lualine")
     require("lualine").setup { sections = { lualine_x = llx } }
-    require("mcphub").setup ({auto_approve= true})
+    require("mcphub").setup { auto_approve = true }
   end,
 }

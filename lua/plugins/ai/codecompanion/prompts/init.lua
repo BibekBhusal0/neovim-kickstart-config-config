@@ -51,7 +51,7 @@ return {
 
           if context.is_visual then
             selection_info =
-                string.format("Currently selected lines: %d-%d", context.start_line, context.end_line)
+              string.format("Currently selected lines: %d-%d", context.start_line, context.end_line)
           else
             selection_info = string.format(
               "Current cursor line: %d and Current cursor column is %d",
@@ -77,7 +77,7 @@ return {
     strategy = "chat",
     description = "Generate a commit message",
     condition = function()
-      return require "plugins.ai.diff" ().ok
+      return require "plugins.ai.diff"().ok
     end,
     opts = {
       index = 10,
@@ -97,11 +97,10 @@ return {
       {
         role = "user",
         content = function()
-          local m = require "plugins.ai.diff" ()
+          local m = require "plugins.ai.diff"()
           if not m.ok then
-            return
-                "Git diff is not available, please help to user by providing step by step instructions what they need to do. The reason why git diff is not available is "
-                .. m.message
+            return "Git diff is not available, please help to user by providing step by step instructions what they need to do. The reason why git diff is not available is "
+              .. m.message
           end
           local diff = m.message
           local commit_messages = vim.fn.system "git log -n 5 --pretty=format:%s"
@@ -110,7 +109,7 @@ return {
           if not error_found then
             if commit_messages ~= "" then
               formatted_commit_messages = "Fore more context I will provide you last 5 commit messages:\n"
-                  .. commit_messages
+                .. commit_messages
             end
           end
           return string.format(
