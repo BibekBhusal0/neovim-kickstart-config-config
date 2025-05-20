@@ -1,7 +1,7 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
-local inline_command = function()
+local inline_command_visual = function()
   require "utils.input"("  Command to AI  ", function(text)
     vim.cmd "normal! gv"
     vim.cmd(
@@ -9,15 +9,31 @@ local inline_command = function()
         .. text
         .. " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
     )
+    vim.defer_fn(function()
+      vim.api.nvim_feedkeys("", "n", false)
+    end, 2)
   end, "", 80, require("utils.icons").others.ai .. "  ")
+end
+
+local inline_command_normal = function()
+  vim.api.nvim_feedkeys("ggVG", "n", false)
+  vim.defer_fn(function()
+    inline_command_visual()
+  end, 2)
 end
 
 local commit_callback = function()
   local executed = false
   if not executed then
     local chat = require("codecompanion.strategies.chat").last_chat()
+    if not chat then
+      return
+    end
     local messages = chat.agents.messages
-    local last_message = messages[#messages].content
+    if not messages or #messages == 0 then
+      return
+    end
+    local last_message = messages[#messages] and messages[#messages].content
     if type(last_message) == "string" and string.len(last_message) < 100 then
       require "utils.input"(
         " Commit Message ",
@@ -60,7 +76,8 @@ end
 
 map("<leader>aa", actions, "CodeCompanion Inline command", { "v", "n" })
 map("<leader>ag", commit_with_message, "Add changes and get commit message")
-map("<leader>ai", inline_command, "CodeCompanion Inline command", { "v" })
+map("<leader>ai", inline_command_visual, "CodeCompanion Inline command", { "v" })
+map("<leader>ai", inline_command_normal, "CodeCompanion Inline command")
 
 return {
   {
@@ -68,7 +85,12 @@ return {
     cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat" },
     keys = wrap_keys {
       { "<leader>ac", ":CodeCompanionChat toggle<CR>", desc = "CodeCompanion Chat" },
-      { "<leader>ac", ":CodeCompanionChat Add<CR>", desc = "CodeCompanion Chat", mode = { "v" } },
+      {
+        "<leader>ac",
+        ":CodeCompanionChat Add<CR>",
+        desc = "CodeCompanion Chat",
+        mode = { "v" },
+      },
       {
         "<leader>ae",
         ":CodeCompanion /explain<CR>",

@@ -1,7 +1,3 @@
-local export = function(context)
-  return context
-end
-
 return {
 
   ["Make more readable"] = {
@@ -9,7 +5,6 @@ return {
     opts = { modes = { "v" }, shortname = "readable" },
     description = "Make Code more readable",
     prompts = {
-      { role = "system", content = export, opts = { visible = false } },
       {
         role = "system",
         content = "only change code according to user command and make sure you complete code and if you are not able to make change just give user's code as it is",
@@ -33,7 +28,7 @@ return {
     prompts = {
       {
         role = "system",
-        content = [[ 
+        content = [[
 You are a super straight forward model which will provide code to user or solve user problem based on user input.
 Currently you are trapped in Neovim in user's machine, your task is to solve user's problem.
 Aside from coading you will not be able to do anything else.
@@ -51,7 +46,7 @@ You must:
 Your reply must:
 - Contain code unelss specified by user.
 - Only show code you have modified.
-- Explain changes if you have made 
+- Explain changes if you have made
 
 You must not:
 - Give very long response.
@@ -168,8 +163,8 @@ You are a smart code paste agent within Neovim.
         content = [[
       # you are export in creating git commit Message based on git diff provided
       if user has not provided git diff than you should help user with their problem
-      you will provide short and to the point commit message 
-      while generating commit message you should use emoji if and make sure used emoji make sense
+      you will provide short and to the point commit message
+      while generating commit message are encouraged use emoji if and only use them if it make sense
       while generating commit message you will only return commit message nothing else not even discription or explanation of changes
       generated commit message should be less than 60 characters in any case
       and don't return commit message in markdown code block
