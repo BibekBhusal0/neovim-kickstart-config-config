@@ -9,10 +9,6 @@ end
 
 return {
 
-  ["mcp"] = {
-    callback = require "mcphub.extensions.codecompanion",
-    description = "Call all MCP tools and resources",
-  },
   ["github"] = {
     callback = require "plugins.ai.mcphub.get_tool"(
       "github",

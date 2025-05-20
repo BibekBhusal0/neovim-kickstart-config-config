@@ -150,7 +150,7 @@ return {
         strategies = {
           chat = {
             adapter = "gemini",
-            tools = require "plugins.ai.codecompanion.tools",
+            -- tools = require "plugins.ai.codecompanion.tools",
             keymaps = {
               next_chat = {
                 modes = { n = ">" },
