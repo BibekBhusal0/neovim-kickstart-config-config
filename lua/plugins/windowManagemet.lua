@@ -13,7 +13,7 @@ map("<leader>bb", ":enew<CR>", "Buffer New")
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split window vertically")
 map("<leader>V", ":vsplit | ter<CR>", "Split Terminal vertically")
-map("<leader><leader>s", ":vert ba<CR>", "Split all")
+map("<leader>wj", ":vert ba<CR>", "Split all")
 map("<leader>S", ":split | ter<CR>", "Split Terminal horizontally")
 map("<leader>br", ":e!<CR>", "Buffer Reset")
 
