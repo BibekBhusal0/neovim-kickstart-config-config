@@ -1,52 +1,120 @@
-local git_repo = function()
-  local repo_url = vim.fn.system "git config --get remote.origin.url"
-  if repo_url and repo_url ~= "" then
-    repo_url = vim.fn.trim(repo_url)
-    return "Currently user is editing github repo: " .. repo_url
-  end
-  return ""
-end
+local M = {}
+local utils = require "mcphub.extensions.codecompanion.utils"
 
-return {
-
-  ["github"] = {
-    callback = require "plugins.ai.mcphub.get_tool"(
-      "github",
-      "You can access tools regarding github. User's github id is bibekbhusal0. " .. git_repo()
-    ),
-    description = "MCP: Github actions",
-  },
-  ["figma"] = {
-    callback = require "plugins.ai.mcphub.get_tool"(
-      { "figma", "TalkToFigma" },
-      "You can change figma design with TalkToFigma and get figma data and download images with figma MCP server"
-    ),
-    description = "MCP: Figma downloader and talk to figma",
-  },
-  ["duck"] = {
-    callback = require "plugins.ai.mcphub.get_tool"(
-      "duckduckgo",
-      "if user asks you something you do not know feel free to search it change max results as required"
-    ),
-    description = "MCP: DuckDuckGo search",
-  },
-  ["notion"] = {
-    callback = require "plugins.ai.mcphub.get_tool"(
-      { "notion", "notion-page" },
-      "If user says to run multiple commands or to taks all at once follow the user. Follow the user if user says to run multiple commands at once"
-    ),
-    description = "MCP: Notion",
-  },
-  ["chess"] = {
-    callback = require "plugins.ai.mcphub.get_tool" "chess",
-    description = "MCP: Chess",
-  },
-  ["browser"] = {
-    callback = require "plugins.ai.mcphub.get_tool" "browser-control",
-    description = "MCP: Browser Control",
-  },
-  ["obsidian"] = {
-    callback = require "plugins.ai.mcphub.get_tool" "obsidian",
-    description = "MCP: obsidian",
+local schema = {
+  type = "function",
+  ["function"] = {
+    name = "use_mcp_tool",
+    description = "calls tools on MCP servers.",
+    parameters = {
+      type = "object",
+      properties = {
+        server_name = {
+          description = "Name of the server to call the tool on. Must be from one of the available servers.",
+          type = "string",
+        },
+        tool_name = {
+          description = "Name of the tool to call.",
+          type = "string",
+        },
+        tool_input = {
+          description = "Input object for the tool call",
+          type = "object",
+        },
+      },
+      required = {
+        "server_name",
+        "tool_name",
+        "tool_input",
+      },
+      additionalProperties = false,
+    },
+    strict = false,
   },
 }
+
+local opts =
+  { enabled = true, make_slash_commands = true, make_vars = true, show_result_in_chat = true }
+local has_function_calling = true
+
+function M.get_tool(name, all_servers)
+  local tools = {
+    groups = {
+      [name] = {
+        description = "MCP Servers Tool for " .. name,
+        system_prompt = function()
+          local hub = require("mcphub").get_hub_instance()
+          local prompt_utils = require "mcphub.utils.prompt"
+          if not hub then
+            vim.notify("MCP Hub is not initialized", vim.log.levels.WARN)
+            return ""
+          end
+          local prompt = ""
+          local mcp_servers = hub:get_servers(true)
+          local servers_needed = {}
+          local servers = all_servers or { name }
+          for _, n in ipairs(servers) do
+            for _, server in ipairs(mcp_servers) do
+              if server.name == n then
+                table.insert(servers_needed, server)
+                if server.status == "disabled" then
+                  hub:start_mcp_server(server.name)
+                end
+              end
+            end
+          end
+          prompt = prompt .. prompt_utils.get_active_servers_prompt(servers_needed, true, true)
+          return prompt
+        end,
+        tools = {},
+      },
+    },
+  }
+
+  local action_name = "use_mcp_tool"
+  tools[action_name] = {
+    description = schema["function"].description,
+    visible = false,
+    callback = {
+      name = action_name,
+      cmds = { utils.create_handler(action_name, has_function_calling, opts) },
+      system_prompt = function()
+        return string.format(
+          "You can use the %s tool to %s\n",
+          action_name,
+          schema["function"].description
+        )
+      end,
+      output = utils.create_output_handlers(action_name, has_function_calling, opts),
+      schema = schema,
+    },
+  }
+  table.insert(tools.groups[name].tools, action_name)
+  return tools
+end
+
+function M.setup()
+  local ok, cc_config = pcall(require, "codecompanion.config")
+  if not ok then
+    return
+  end
+
+  local all_tools = {
+    { name = "duck", args = { "duckduckgo" } },
+    { name = "figma", args = { "figma", "TalkToFigma" } },
+    { name = "notion", args = { "notion", "notion-page" } },
+    { name = "chess" },
+    { name = "github" },
+    { name = "obsidian" },
+  }
+
+  for _, tool_config in ipairs(all_tools) do
+    cc_config.strategies.chat.tools = vim.tbl_deep_extend(
+      "force",
+      cc_config.strategies.chat.tools,
+      M.get_tool(tool_config.name, tool_config.args)
+    )
+  end
+end
+
+return M

@@ -204,6 +204,7 @@ return {
         },
 
         extensions = {
+          custom_tools = { callback = "plugins.ai.codecompanion.tools" },
           mcphub = {
             callback = "mcphub.extensions.codecompanion",
             opts = {
