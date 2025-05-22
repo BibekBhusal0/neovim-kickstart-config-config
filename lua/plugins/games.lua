@@ -16,7 +16,7 @@ return {
 
   {
     "seandewar/nvimesweeper",
-    dependencies = { "stevearc/dressing.nvim" },
+    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
     lazy = true,
     cmd = { "Nvimesweeper" },
     keys = wrap_keys { { "<leader>zm", ":Nvimesweeper <CR>", desc = "Game MineSweeper" } },

@@ -35,7 +35,7 @@ return {
     "dhruvmanila/browser-bookmarks.nvim",
     keys = wrap_keys { { "<leader>B", ":BrowserBookmarks<CR>", desc = "Search Browser Bookmarks" } },
     cmd = { "BrowserBookmarks" },
-    dependencies = { "stevearc/dressing.nvim" },
+    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
     config = function()
       require("browser_bookmarks").setup {
         profile_name = "Bibek",
@@ -50,10 +50,18 @@ return {
       { "<leader>gO", open_github, desc = "Open Github" },
       { "<leader>sb", ":lua require('browse').open_bookmarks()<CR>", desc = "Search Bookmarks" },
       { "<leader>sF", ":lua require('browse.devdocs').search()<CR>", desc = "Search DevDocs" },
-      { "<leader>sf", searchFiletype, desc = "Search DevDocs for this" },
+      {
+        "<leader>sf",
+        searchFiletype,
+        desc = "Search DevDocs for this",
+      },
       { "<leader>si", ":lua require('browse').input_search()<CR>", desc = "Search" },
       { "<leader>sj", ":lua require('browse').browse()<CR>", desc = "Search any" },
-      { "<leader>sm", searchYTMusic, desc = "Search Youtube Music" },
+      {
+        "<leader>sm",
+        searchYTMusic,
+        desc = "Search Youtube Music",
+      },
       { "<leader>sy", searchYoutube, desc = "Search Youtube" },
     },
 

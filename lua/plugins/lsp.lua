@@ -61,7 +61,7 @@ return {
           -- map("<leader>ln", rename, "LSP Rename variable")
           map("<leader>ln", vim.lsp.buf.rename, "Lsp Rename variable")
           map("<leader>ca", function()
-            require "dressing"
+            require "telescope"
             vim.lsp.buf.code_action()
           end, "LSP code action", { "n", "x" })
 

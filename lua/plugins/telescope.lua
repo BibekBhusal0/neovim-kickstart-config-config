@@ -133,7 +133,7 @@ return {
       },
       "prochri/telescope-all-recent.nvim",
       "kkharji/sqlite.lua",
-      "stevearc/dressing.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
     },
 
     config = function()
@@ -387,6 +387,7 @@ return {
         extensions = {
           git_diffs = { enable_preview_diff = false },
           lazy = { theme = "dropdown", previewer = false },
+          ["ui-select"] = get_dropdown(),
           file_browser = {
             layout_strategy = "vertical",
             select_buffer = true,
@@ -455,7 +456,7 @@ return {
       { "<leader>fI", ":PickIconsYank<CR>", desc = "Icon Picker Yank" },
       { "<leader>fS", ":PickSymbols<CR>", desc = "Icon Picker Unicode Symbols" },
     },
-    dependencies = { "stevearc/dressing.nvim" },
+    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
     opts = {},
   }, -- icon picker with telescope
 
@@ -477,6 +478,13 @@ return {
   }, -- uses telescope for vim.input
 
   {
+    "nvim-telescope/telescope-ui-select.nvim",
+    config = function()
+      require("telescope").load_extension "ui-select"
+    end,
+  },
+
+  --[[ {
     "stevearc/dressing.nvim",
     lazy = true,
     config = function()
@@ -497,7 +505,7 @@ return {
       }
     end,
   },
-  --
+]]
   -- {
   --   dir = "D:/github/nvim/telescope-launcher.nvim",
   --   opts = {},
