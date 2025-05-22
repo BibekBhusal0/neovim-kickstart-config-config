@@ -3,6 +3,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   "monkoose/neocodeium",
+  version = 'v1.9.1',
   cmd = { "NeoCodeium" },
 
   keys = wrap_keys {

@@ -40,6 +40,7 @@ local symbols = {
   Unit = "󰑭",
   Value = "󰎠",
   Variable = "󰆧",
+  codeium = '󰅩'
 }
 
 local dap = {

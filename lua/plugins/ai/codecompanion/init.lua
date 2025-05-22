@@ -29,8 +29,8 @@ local inline_command = function()
 end
 
 
+local executed = false
 local commit_callback = function()
-  local executed = false
   if not executed then
     local chat = require("codecompanion.strategies.chat").last_chat()
     if not chat then
@@ -57,6 +57,7 @@ local commit_callback = function()
 end
 
 local commit_with_message = function()
+executed = false
   vim.cmd "Git add ."
   local m = require "plugins.ai.diff" ()
   if not m.ok then

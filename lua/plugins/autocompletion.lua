@@ -103,6 +103,7 @@ return {
       },
 
       sources = {
+        { name = "codeium" },
         { name = "nvim_lsp" },
         { name = "lazydev", group_index = 0 },
         { name = "luasnip" },
@@ -131,6 +132,7 @@ return {
             emoji = "",
             lorem_ipsum = "󰎞 ",
             calc = " ",
+            codeium = require("utils.icons").others.ai .. "  ",
           })[entry.source.name]
           return vim_item
         end,
