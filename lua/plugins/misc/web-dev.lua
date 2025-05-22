@@ -74,6 +74,5 @@ return {
   {
     "mawkler/jsx-element.nvim",
     ft = { "typescriptreact", "javascriptreact", "javascript" },
-    opts = { enabled = false }, -- enabled in treesitter textObjects
   },
 }

@@ -61,7 +61,7 @@ return {
       keys = wrap_keys {
         {
           "<leader>fc",
-          ":TodoTelescope layout_strategy=vertical<CR>",
+          ":TodoTelescope<CR>",
           desc = "Todo Search Telescope",
         },
         { "<leader>cT", ":Trouble todo<CR>", desc = "Todo Loc List" },
