@@ -57,18 +57,18 @@ local live_multigrep = function(opts)
     cwd = opts.cwd,
   }
   pickers
-    .new(opts, {
-      debounce = 100,
-      prompt_title = "Multi Grep",
-      finder = finder,
-      previewer = conf.grep_previewer(opts),
-      sorter = require("telescope.sorters").empty(),
-    })
-    :find()
+      .new(opts, {
+        debounce = 100,
+        prompt_title = "Multi Grep",
+        finder = finder,
+        previewer = conf.grep_previewer(opts),
+        sorter = require("telescope.sorters").empty(),
+      })
+      :find()
 end
 
 local findOpenFiles =
-  ":Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>"
+":Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>"
 
 map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
 map("<leader>:", ":Telescope command_history<CR>", "Find Commands history")
@@ -148,7 +148,7 @@ return {
         local picker_type = picker.prompt_title or ""
 
         local is_codecompanion = string.find(picker_type, "Select file%(s%)")
-          or string.find(picker_type, "Select buffer%(s%)")
+            or string.find(picker_type, "Select buffer%(s%)")
 
         if is_codecompanion then
           require("telescope.actions").select_default(prompt_bufnr)
@@ -450,11 +450,11 @@ return {
       "PickSymbolsYank",
     },
     keys = wrap_keys {
-      { "<leader>fe", ":PickEmoji<CR>", desc = "Icon Picker Emoji" },
+      { "<leader>fe", ":PickEmoji<CR>",           desc = "Icon Picker Emoji" },
       { "<leader>fE", ":PickEmojiYank emoji<CR>", desc = "Icon Picker Emoji Yank" },
-      { "<leader>fi", ":PickIcons<CR>", desc = "Icon Picker" },
-      { "<leader>fI", ":PickIconsYank<CR>", desc = "Icon Picker Yank" },
-      { "<leader>fS", ":PickSymbols<CR>", desc = "Icon Picker Unicode Symbols" },
+      { "<leader>fi", ":PickIcons<CR>",           desc = "Icon Picker" },
+      { "<leader>fI", ":PickIconsYank<CR>",       desc = "Icon Picker Yank" },
+      { "<leader>fS", ":PickSymbols<CR>",         desc = "Icon Picker Unicode Symbols" },
     },
     dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
     opts = {},
@@ -479,6 +479,7 @@ return {
 
   {
     "nvim-telescope/telescope-ui-select.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension "ui-select"
     end,

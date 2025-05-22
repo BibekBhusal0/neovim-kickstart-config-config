@@ -2,13 +2,13 @@ local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 local function commit_with_message()
-  require "utils.input"(" Commit Message ", function(text)
+  require "utils.input" (" Commit Message ", function(text)
     vim.cmd("Git commit -m '" .. text .. "'")
   end, "", 40, require("utils.icons").others.github .. "  ")
 end
 
 local function commit_all_with_message()
-  require "utils.input"(" Commit Message ", function(text)
+  require "utils.input" (" Commit Message ", function(text)
     vim.cmd "Git add ."
     vim.cmd("Git commit -am'" .. text .. "'")
   end, "", 50, require("utils.icons").others.github .. "  ")
@@ -25,7 +25,7 @@ local function change_last_commit_message()
   if not m then
     return
   end
-  require "utils.input"("Commit Message", function(title)
+  require "utils.input" ("Commit Message", function(title)
     local cmd = "Git commit --amend -m '" .. title .. "'"
     vim.cmd(cmd)
   end, m, 60, require("utils.icons").others.github .. "  ")
@@ -103,7 +103,7 @@ local function diffViewTelescopeCompareBranches()
           return
         end
         local old = #selections == 0 and action_state.get_selected_entry().ordinal
-          or selections[1].value
+            or selections[1].value
         if #selections == 2 then
           local new = string.sub(selections[2].value, 1, 8)
           vim.cmd(string.format("DiffviewOpen %s..%s", old, new))
@@ -181,9 +181,9 @@ return {
     },
     keys = wrap_keys {
       { "<leader>gdf", ":DiffviewFileHistory %<CR>", desc = "Diffview file history Current File" },
-      { "<leader>gdh", ":DiffviewFileHistory<CR>", desc = "Diffview file history" },
-      { "<leader>gdo", ":DiffviewOpen<CR>", desc = "DiffView Open" },
-      { "<leader>gdx", ":DiffviewClose<CR>", desc = "Diffview close" },
+      { "<leader>gdh", ":DiffviewFileHistory<CR>",   desc = "Diffview file history" },
+      { "<leader>gdo", ":DiffviewOpen<CR>",          desc = "DiffView Open" },
+      { "<leader>gdx", ":DiffviewClose<CR>",         desc = "Diffview close" },
     },
   },
 
@@ -203,7 +203,7 @@ return {
       {
         "<leader>gws",
         function()
-          require "utils.input"("Worktree Name", function(text)
+          require "utils.input" ("Worktree Name", function(text)
             require("git-worktree").switch_worktree(text)
           end, "", 50, require("utils.icons").others.github .. "  ")
         end,

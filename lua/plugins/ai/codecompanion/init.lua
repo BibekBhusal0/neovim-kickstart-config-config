@@ -11,15 +11,14 @@ local inline_command = function()
     vim.cmd(select_command)
     vim.cmd(
       "CodeCompanion #buffer "
-      .. text
-      ..
-      " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
+        .. text
+        .. " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
     )
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
     end, 2)
   end
-  require "utils.input" (
+  require "utils.input"(
     "  Command to AI  ",
     input_callback,
     "",
@@ -27,7 +26,6 @@ local inline_command = function()
     require("utils.icons").others.ai .. "  "
   )
 end
-
 
 local executed = false
 local commit_callback = function()
@@ -42,7 +40,7 @@ local commit_callback = function()
     end
     local last_message = messages[#messages] and messages[#messages].content
     if type(last_message) == "string" and string.len(last_message) < 100 then
-      require "utils.input" (
+      require "utils.input"(
         " Commit Message ",
         function(text)
           vim.cmd("Git commit -a -m '" .. text .. "'")
@@ -57,9 +55,9 @@ local commit_callback = function()
 end
 
 local commit_with_message = function()
-executed = false
+  executed = false
   vim.cmd "Git add ."
-  local m = require "plugins.ai.diff" ()
+  local m = require "plugins.ai.diff"()
   if not m.ok then
     vim.notify(m.message, vim.log.levels.WARN)
     return
@@ -128,7 +126,7 @@ return {
         desc = "CodeCompanion Make Code Readable",
         mode = { "v" },
       },
-      { "<leader>aG", ":CodeCompanion /commit<CR>",    desc = "CodeCompanion get commit message" },
+      { "<leader>aG", ":CodeCompanion /commit<CR>", desc = "CodeCompanion get commit message" },
       {
         "<leader>aj",
         ":CodeCompanion /straight<CR>",
@@ -221,6 +219,7 @@ return {
 
   {
     "echasnovski/mini.diff",
+    lazy = true,
     config = function()
       local diff = require "mini.diff"
       diff.setup { source = diff.gen_source.none() }
