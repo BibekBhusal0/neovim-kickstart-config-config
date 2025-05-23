@@ -13,7 +13,7 @@ return {
       { "<leader>Gd", ':lua require("gitsigns").toggle_deleted()<CR>', desc = "Git deleted diff" },
       { "<leader>gH", ":Gitsigns preview_hunk<CR>", desc = "Git Preview hunk" },
       { "<leader>gh", ":Gitsigns preview_hunk_inline<CR>", desc = "Git Preview hunk inline" },
-      { "<leader>gl", ":Gitsigns toggle_current_line_blame<CR>", desc = "Git toggle current line blame" },
+      { "<leader>gL", ":Gitsigns toggle_current_line_blame<CR>", desc = "Git toggle current line blame" },
       { "<leader>gQ", ":Gitsigns setqflist all<CR>", desc = "Git quick fix list All" },
       { "<leader>gq", ":Gitsigns setqflist<CR>", desc = "Git quick fix list" },
       { "<leader>gR", ":Gitsigns reset_buffer<CR>", desc = "Git Reset buffer" },
