@@ -3,7 +3,6 @@ return {
   {
     "folke/which-key.nvim",
     cmd = "WhichKey",
-    keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     -- event = "VeryLazy",
   }, -- Hints keybinds
 
@@ -37,7 +36,7 @@ return {
     },
   },
 
-  {
+  --[[ {
     "m4xshen/hardtime.nvim",
     event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys { { "<leader>th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
@@ -58,7 +57,7 @@ return {
         ),
       }
     end,
-  },
+  }, ]]
 
   {
     "meznaric/key-analyzer.nvim",
