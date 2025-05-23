@@ -1,4 +1,3 @@
-local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 local findInLazy = function()
@@ -57,18 +56,18 @@ local live_multigrep = function(opts)
     cwd = opts.cwd,
   }
   pickers
-      .new(opts, {
-        debounce = 100,
-        prompt_title = "Multi Grep",
-        finder = finder,
-        previewer = conf.grep_previewer(opts),
-        sorter = require("telescope.sorters").empty(),
-      })
-      :find()
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "Multi Grep",
+      finder = finder,
+      previewer = conf.grep_previewer(opts),
+      sorter = require("telescope.sorters").empty(),
+    })
+    :find()
 end
 
 local findOpenFiles =
-":Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>"
+  ":Telescope live_grep theme=dropdown grep_open_files=true prompt_title=Search<CR>"
 
 map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
 map("<leader>:", ":Telescope command_history<CR>", "Find Commands history")
@@ -148,7 +147,7 @@ return {
         local picker_type = picker.prompt_title or ""
 
         local is_codecompanion = string.find(picker_type, "Select file%(s%)")
-            or string.find(picker_type, "Select buffer%(s%)")
+          or string.find(picker_type, "Select buffer%(s%)")
 
         if is_codecompanion then
           require("telescope.actions").select_default(prompt_bufnr)
@@ -420,95 +419,4 @@ return {
       }
     end,
   },
-
-  {
-    "debugloop/telescope-undo.nvim",
-    keys = wrap_keys { { "<leader>U", ":Telescope undo<CR>", desc = "Undo Tree" } },
-    cmd = { "Telescope undo" },
-  },
-
-  {
-    "zongben/proot.nvim",
-    opts = {},
-    keys = wrap_keys { { "<Leader>fp", ":Proot<CR>", desc = "Find Directories" } },
-    cmd = { "Proot" },
-  },
-
-  {
-    "ziontee113/icon-picker.nvim",
-    cmd = {
-      "IconPickerInsert",
-      "IconPickerNormal",
-      "IconPickerYank",
-      "PickEmoji",
-      "PickEmojiYank",
-      "PickEverything",
-      "PickEverythingYank",
-      "PickIcons",
-      "PickIconsYank",
-      "PickSymbols",
-      "PickSymbolsYank",
-    },
-    keys = wrap_keys {
-      { "<leader>fe", ":PickEmoji<CR>",           desc = "Icon Picker Emoji" },
-      { "<leader>fE", ":PickEmojiYank emoji<CR>", desc = "Icon Picker Emoji Yank" },
-      { "<leader>fi", ":PickIcons<CR>",           desc = "Icon Picker" },
-      { "<leader>fI", ":PickIconsYank<CR>",       desc = "Icon Picker Yank" },
-      { "<leader>fS", ":PickSymbols<CR>",         desc = "Icon Picker Unicode Symbols" },
-    },
-    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
-    opts = {},
-  }, -- icon picker with telescope
-
-  {
-    "tsakirist/telescope-lazy.nvim",
-    keys = wrap_keys { { "<leader>fl", ":Telescope lazy<CR>", desc = "Find Lazy Plugins Doc" } },
-  }, -- search lazy plugins readme file
-
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    keys = wrap_keys {
-      { "<leader>fo", ":Telescope file_browser<CR>", desc = "Telescope file browser" },
-      {
-        "<leader>fJ",
-        ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-        desc = "Telescope file browser crr",
-      },
-    },
-  }, -- uses telescope for vim.input
-
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    lazy = true,
-    config = function()
-      require("telescope").load_extension "ui-select"
-    end,
-  },
-
-  --[[ {
-    "stevearc/dressing.nvim",
-    lazy = true,
-    config = function()
-      require("dressing").setup {
-        input = {
-          enabled = false,
-          title_pos = "center",
-          start_mode = "insert",
-          border = "rounded",
-          relative = "win",
-        },
-        select = {
-          enabled = true,
-          telescope = require("telescope.themes").get_cursor {
-            layout_config = { width = 60, height = 15, preview_cutoff = 200 },
-          },
-        },
-      }
-    end,
-  },
-]]
-  -- {
-  --   dir = "D:/github/nvim/telescope-launcher.nvim",
-  --   opts = {},
-  -- },
 }
