@@ -79,7 +79,7 @@ return {
     "marco-souza/snake.nvim",
     opts = {},
     cmd = "Snake",
-    keys = wrap_keys { { "<leader>zs", ":Sudoku<CR>", desc = "Game Sudoku" } },
+    keys = wrap_keys { { "<leader>zs", ":Snake<CR>", desc = "Game Snake" } },
   },
 
   {
