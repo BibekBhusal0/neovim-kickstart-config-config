@@ -1,5 +1,5 @@
 return {
-  require "plugins.telescope.dressing",
+  -- require "plugins.telescope.dressing",
   require "plugins.telescope.file-browser",
   require "plugins.telescope.icon-picker",
   require "plugins.telescope.lazy",

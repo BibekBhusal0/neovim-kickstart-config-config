@@ -67,7 +67,7 @@ return {
       {
         "<leader>tk",
         function()
-          require "utils.input"("Key", function(text)
+          require "utils.input" ("Key", function(text)
             vim.cmd("KeyAnalyzer " .. text)
           end, "<leader>", 22, "   ")
         end,
