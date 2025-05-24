@@ -157,39 +157,37 @@ return {
           },
           diff = { enabled = true, provider = "mini_diff" },
         },
+        opts = {
+          system_prompt = require("plugins.ai.codecompanion.prompts.system").main,
+        },
 
         strategies = {
           chat = {
             adapter = "gemini",
-            -- tools = require "plugins.ai.codecompanion.tools",
             keymaps = {
               next_chat = {
                 modes = { n = ">" },
-                index = 11,
                 callback = "keymaps.next_chat",
                 description = "Next Chat",
               },
               previous_chat = {
                 modes = { n = "<" },
-                index = 12,
                 callback = "keymaps.previous_chat",
                 description = "Previous Chat",
               },
               next_header = {
-                modes = { n = "]r" },
-                index = 13,
+                modes = { n = "]h" },
                 callback = "keymaps.next_header",
                 description = "Next Header",
               },
               previous_header = {
-                modes = { n = "[r" },
-                index = 14,
+                modes = { n = "[h" },
                 callback = "keymaps.previous_header",
                 description = "Previous Header",
               },
             },
           },
-          inline = { adapter = "gemini", model = "gemini-1.5-flash" },
+          inline = { adapter = "gemini" },
         },
 
         prompt_library = require "plugins.ai.codecompanion.prompts",
