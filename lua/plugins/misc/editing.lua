@@ -128,13 +128,13 @@ return {
   {
     "echasnovski/mini.operators",
     keys = {
-      { "g=", mode = { "n", "o", "x" }, desc = "Evaluate" },
-      { "gm", mode = { "n", "o", "x" }, desc = "Multiply" },
-      { "gr", mode = { "n", "o", "x" }, desc = "Replace" },
-      { "gs", mode = { "n", "o", "x" }, desc = "Sort" },
-      { "gx", mode = { "n", "o", "x" }, desc = "Exchange" },
+      { "g=", mode = { "n", "o", "x" }, desc = "Minit Evaluate" },
+      { "gm", mode = { "n", "o", "x" }, desc = "Minit Multiply" },
+      { "<leader>rl", mode = { "n", "o", "x" }, desc = "Minit Replace" },
+      { "gs", mode = { "n", "o", "x" }, desc = "Minit Sort" },
+      { "gx", mode = { "n", "o", "x" }, desc = "Minit Exchange" },
     },
-    opts = {},
+    opts = {replace = {prefix = '<leader>rl' }},
   }, -- sorting with motion
 
   {

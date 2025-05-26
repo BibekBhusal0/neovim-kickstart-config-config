@@ -58,14 +58,12 @@ map("<C-u>", "<C-u>zz", "Scroll up")
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard")
 map("<leader>d", '"_d', "Delete to Black hole", "v")
-map("p", [["_dP]], "paste", "x")
-
--- yank all
 map("<leader>k", "ggVGy", "Yank all")
 map("<leader>K", 'ggVG"+y', "Yank all to System Clipboard")
+map("p", [["_dP]], "paste", "x")
 
 -- select all
-map("<C-a>", "ggVG", "Yank all")
+map("<A-a>", "ggVG", "Select all")
 
 -- use black hole register
 map("zc", '"_c', "Change to black hole register", { "n", "v" })
