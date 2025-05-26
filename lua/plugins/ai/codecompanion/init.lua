@@ -3,7 +3,11 @@ local map = require "utils.map"
 
 local inline_command = function()
   local select_command = "normal! gv"
-  if vim.api.nvim_get_mode().mode == "n" then
+  local initial_mode = vim.api.nvim_get_mode().mode
+  local mark = "p"
+
+  if initial_mode == "n" then
+    vim.cmd ( "normal! m" .. mark )
     select_command = "normal! ggVG"
   end
 
@@ -16,6 +20,9 @@ local inline_command = function()
     )
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
+      if initial_mode == "n" then
+        vim.cmd("normal! `" .. mark)
+      end
     end, 2)
   end
   require "utils.input"(
