@@ -102,6 +102,7 @@ return {
         disabled_filetypes = {
           "alpha",
           "codecompanion",
+          "avante",
           "neo-tree",
           "noice",
           "qf",

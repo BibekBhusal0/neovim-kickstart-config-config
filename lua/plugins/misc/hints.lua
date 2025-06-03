@@ -54,7 +54,7 @@ return {
         disabled_filetypes = vim.tbl_deep_extend(
           "force",
           require("hardtime.config").config.disabled_filetypes,
-          { "mcphub", "codecompanion" }
+          { "mcphub", "codecompanion", "alpha", "avante" }
         ),
       }
     end,
