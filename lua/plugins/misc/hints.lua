@@ -36,8 +36,9 @@ return {
     },
   },
 
-  --[[ {
+  {
     "m4xshen/hardtime.nvim",
+    -- enabled = false,
     event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys { { "<leader>th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
     config = function()
@@ -57,7 +58,7 @@ return {
         ),
       }
     end,
-  }, ]]
+  },
 
   {
     "meznaric/key-analyzer.nvim",

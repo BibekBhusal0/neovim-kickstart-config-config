@@ -2,6 +2,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   "kdheepak/lazygit.nvim",
+  enabled = false,
   cmd = {
     "LazyGit",
     "LazyGitConfig",

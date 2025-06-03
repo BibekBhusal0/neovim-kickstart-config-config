@@ -70,6 +70,7 @@ return {
   {
     "alec-gibson/nvim-tetris",
     cmd = { "Tetris" },
+    enabled = false,
     keys = wrap_keys {
       { "<leader>zt", ":Tetris<CR>", desc = "Game Tetris" },
     },

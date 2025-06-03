@@ -2,6 +2,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   "polarmutex/git-worktree.nvim",
+  enabled = false,
   keys = wrap_keys {
     {
       "<leader>gwn",

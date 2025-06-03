@@ -21,7 +21,7 @@ require("lazy").setup {
   require "plugins.bufferline", -- Line showing tabs and buffer
   require "plugins.colortheme", -- Color scheme setup
   require "plugins.debugging", -- Debugger
-  -- require "plugins.games", -- Fun games
+  require "plugins.games", -- Fun games
   require "plugins.git", -- Git stuff like lazyGit, gitsigns
   require "plugins.leetcode", -- solving leetcode problems
   require "plugins.lsp", -- Language Server Protocol setup

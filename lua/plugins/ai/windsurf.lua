@@ -3,6 +3,7 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   "Exafunction/windsurf.nvim",
   cmd = { "Codeium" },
+  enabled = false,
   keys = wrap_keys {
     { "<leader>a<leader>", ":Codeium toggle<CR>", desc = "Codeium Start" },
     { "<leader>aC", ":Codeium chat<CR>", desc = "Codeium Chat" },
