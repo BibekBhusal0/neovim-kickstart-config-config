@@ -13,11 +13,7 @@ local inline_command = function()
 
   local input_callback = function(text)
     vim.cmd(select_command)
-    vim.cmd(
-      "CodeCompanion #buffer "
-        .. text
-        .. " **Make sure to give complete code and only make changes according to commands change nothing else, If you are not able to make changes just give code as it is**"
-    )
+    vim.cmd("CodeCompanion #buffer " .. text)
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
       if initial_mode == "n" then
