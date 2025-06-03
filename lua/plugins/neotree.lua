@@ -100,16 +100,17 @@ return {
           ["C"] = "close_node",
           ["c"] = "copy",
           ["d"] = "delete",
-          ["e"] = lsp_operations "rename_basename",
+          ["e"] = "lsp_rename_basename",
           ["h"] = "open_split",
           ["i"] = "show_file_details",
           ["l"] = "open",
-          ["m"] = lsp_operations "move",
-          ["p"] = lsp_operations "paste_from_clipboard",
+          ["m"] = "lsp_move",
+          ["oa"] = "avante_add_files",
+          ["p"] = "lsp_paste_from_clipboard",
           ["P"] = { "toggle_preview", config = { use_float = true } },
           ["q"] = "close_window",
           ["R"] = "refresh",
-          ["r"] = lsp_operations "rename",
+          ["r"] = "lsp_rename",
           ["T"] = "open_tab_drop",
           ["t"] = "open_tabnew",
           ["v"] = "open_vsplit",
@@ -123,6 +124,27 @@ return {
       nesting_rules = {},
 
       filesystem = {
+        commands = {
+          lsp_rename = lsp_operations "rename",
+          lsp_move = lsp_operations "move",
+          lsp_paste_from_clipboard = lsp_operations "paste_from_clipboard",
+          lsp_rename_basename = lsp_operations "rename_basename",
+          avante_add_files = function(state)
+            local node = state.tree:get_node()
+            local filepath = node:get_id()
+            local relative_path = require("avante.utils").relative_path(filepath)
+            local sidebar = require("avante").get()
+            local open = sidebar:is_open()
+            if not open then
+              require("avante.api").ask()
+              sidebar = require("avante").get()
+            end
+            sidebar.file_selector:add_selected_file(relative_path)
+            if not open then
+              sidebar.file_selector:remove_selected_file "neo-tree filesystem [1]"
+            end
+          end,
+        },
         filtered_items = {
           visible = false, -- when true, they will just be displayed differently than normal items
           hide_dotfiles = false,
