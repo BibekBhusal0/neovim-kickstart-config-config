@@ -90,6 +90,7 @@ map("<leader>ai", inline_command, "CodeCompanion Inline command", { "v", "n" })
 return {
   {
     "olimorris/codecompanion.nvim",
+    dependencies = { "ravitemer/codecompanion-history.nvim" },
     cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat" },
     keys = wrap_keys {
       { "<leader>ac", ":CodeCompanionChat toggle<CR>", desc = "CodeCompanion Chat" },
@@ -211,6 +212,26 @@ return {
               show_result_in_chat = true,
               make_vars = true,
               make_slash_commands = true,
+            },
+          },
+          history = {
+            enabled = true,
+            opts = {
+              keymap = "gh",
+              save_chat_keymap = "sc",
+              auto_save = false,
+              expiration_days = 0,
+              picker = "telescope",
+              auto_generate_title = true,
+              title_generation_opts = {
+                adapter = "gemini",
+                model = "gemini-1.5-flash",
+                refresh_every_n_prompts = 0,
+                max_refreshes = 3,
+              },
+              continue_last_chat = false,
+              delete_on_clearing_chat = false,
+              enable_logging = false,
             },
           },
         },
