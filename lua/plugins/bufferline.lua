@@ -94,6 +94,7 @@ return {
             text_aligh = "center",
             separator = true,
           },
+          { filetype = "Avante" },
           {
             filetype = "neo-tree",
             text = "File Explorer",

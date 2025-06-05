@@ -30,49 +30,6 @@ local inline_command = function()
   )
 end
 
-local executed = false
-local commit_callback = function()
-  if not executed then
-    local chat = require("codecompanion.strategies.chat").last_chat()
-    if not chat then
-      return
-    end
-    local messages = chat.agents.messages
-    if not messages or #messages == 0 then
-      return
-    end
-    local last_message = messages[#messages] and messages[#messages].content
-    if type(last_message) == "string" and string.len(last_message) < 100 then
-      require "utils.input"(
-        " Commit Message ",
-        function(text)
-          vim.cmd("Git commit -a -m '" .. text .. "'")
-        end,
-        last_message,
-        nil,
-        require("utils.icons").others.ai .. " " .. require("utils.icons").others.github .. "  "
-      )
-    end
-    executed = true
-  end
-end
-
-local commit_with_message = function()
-  executed = false
-  vim.cmd "Git add ."
-  local m = require "plugins.ai.diff"()
-  if not m.ok then
-    vim.notify(m.message, vim.log.levels.WARN)
-    return
-  end
-  vim.cmd "CodeCompanion /commit"
-  local au_group = vim.api.nvim_create_augroup("codecompanion_commit", { clear = true })
-  vim.api.nvim_create_autocmd({ "User" }, {
-    group = au_group,
-    pattern = "CodeCompanionRequestFinished",
-    callback = commit_callback,
-  })
-end
 
 local function actions()
   require("codecompanion").actions {
@@ -84,7 +41,6 @@ local function actions()
 end
 
 map("<leader>aa", actions, "CodeCompanion Inline command", { "v", "n" })
-map("<leader>ag", commit_with_message, "Add changes and get commit message")
 map("<leader>ai", inline_command, "CodeCompanion Inline command", { "v", "n" })
 
 return {
@@ -130,7 +86,6 @@ return {
         desc = "CodeCompanion Make Code Readable",
         mode = { "v" },
       },
-      { "<leader>aG", ":CodeCompanion /commit<CR>", desc = "CodeCompanion get commit message" },
       {
         "<leader>aj",
         ":CodeCompanion /straight<CR>",
@@ -232,6 +187,27 @@ return {
               continue_last_chat = false,
               delete_on_clearing_chat = false,
               enable_logging = false,
+            },
+          },
+        },
+      }
+    end,
+  },
+
+  {
+    "jinzhongjia/codecompanion-gitcommit.nvim",
+    keys = wrap_keys {
+      { "<leader>ag", ":CCGitCommit<CR>", desc = "Git get commit message" },
+    },
+    cmd = { "CodeCompanionGitCommit", "CCGitCommit" },
+    config = function()
+      require("codecompanion").setup {
+        extensions = {
+          gitcommit = {
+            callback = "codecompanion._extensions.gitcommit",
+            opts = {
+              add_slash_command = false,
+              buffer = { enabled = false, keymap = "<leader>gc" },
             },
           },
         },

@@ -30,15 +30,6 @@ return {
     - Give very long response.
     - Talk about anything except programming.
             ]],
-  commit = [[
-          # you are export in creating git commit Message based on git diff provided
-          if user has not provided git diff than you should help user with their problem
-          you will provide short and to the point commit message
-          while generating commit message are encouraged use emoji if and only use them if it make sense
-          while generating commit message you will only return commit message nothing else not even discription or explanation of changes
-          generated commit message should be less than 60 characters in any case
-          and don't return commit message in markdown code block
-          ]],
   paste = [[
 You are a smart code paste agent within Neovim.
 

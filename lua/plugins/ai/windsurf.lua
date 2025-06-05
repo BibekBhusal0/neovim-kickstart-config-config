@@ -34,7 +34,8 @@ return {
       },
       filetypes = {
         codecompanion = false,
-        avante = false,
+        Avante = false,
+        AvanteInput = false,
         quickrun = false,
         trouble = false,
         qf = false,

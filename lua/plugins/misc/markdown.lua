@@ -17,7 +17,7 @@ return {
     ft = { "markdown", "codecompanion", "vimwiki" },
     config = function()
       require("render-markdown").setup {
-        file_type = { "markdown", "codecompanion", "vimwiki", "avante" },
+        file_type = { "markdown", "codecompanion", "vimwiki", "Avante" },
         sign = { enabled = false },
         link = {
           custom = {

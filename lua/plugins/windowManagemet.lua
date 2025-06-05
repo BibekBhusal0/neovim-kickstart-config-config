@@ -153,7 +153,7 @@ return {
       { "<leader>wt", ":WindowsToggleAutowidth<CR>", desc = "Window Toggle Autowidth" },
       { "<leader>wv", ":WindowsMaximizeVertically<CR>", desc = "Window Maximize Vertically" },
     }, -- autoWidth is disabled so this is not needed
-    event = { "BufNewFile", "BufReadPost" },
+    -- event = { "BufNewFile", "BufReadPost" },
     cmd = {
       "WindowsEqualize",
       "WindowsMaximize",

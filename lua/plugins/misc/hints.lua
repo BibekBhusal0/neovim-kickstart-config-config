@@ -54,7 +54,7 @@ return {
         disabled_filetypes = vim.tbl_deep_extend(
           "force",
           require("hardtime.config").config.disabled_filetypes,
-          { "mcphub", "codecompanion", "alpha", "avante" }
+          { "mcphub", "codecompanion", "alpha", "Avante", "AvanteInput" }
         ),
       }
     end,
@@ -67,7 +67,7 @@ return {
       {
         "<leader>tk",
         function()
-          require "utils.input" ("Key", function(text)
+          require "utils.input"("Key", function(text)
             vim.cmd("KeyAnalyzer " .. text)
           end, "<leader>", 22, "   ")
         end,

@@ -2,7 +2,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   "yetone/avante.nvim",
-  event = "VeryLazy",
+  dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
   cmd = {
     "AvanteAsk",
     "AvanteBuild",
@@ -32,9 +32,16 @@ return {
   opts = {
     provider = "gemini",
     behaviour = {
+      auto_suggestions = false,
+      auto_set_highlight_group = true,
       auto_set_keymaps = false,
+      auto_apply_diff_after_generation = true,
+      support_paste_from_clipboard = true,
+      minimize_diff = true,
+      enable_token_counting = true,
     },
+    windows = { width = 40 },
+    ask = { floating = true },
   },
   build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false",
-  -- dependencies = { "zbirenbaum/copilot.lua" },
 }
