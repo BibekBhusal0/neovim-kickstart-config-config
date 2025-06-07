@@ -13,7 +13,7 @@ local inline_command = function()
 
   local input_callback = function(text)
     vim.cmd(select_command)
-    vim.cmd("CodeCompanion #buffer " .. text)
+    vim.cmd("CodeCompanion " .. text)
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
       if initial_mode == "n" then
@@ -105,7 +105,8 @@ return {
     },
 
     config = function()
-      require("plugins.ai.loader"):init()
+      require("plugins.ai.codecompanion.spinner.loader"):init()
+      require("plugins.ai.codecompanion.spinner.visual_loader").setup()
       require("codecompanion").setup {
 
         display = {
@@ -123,6 +124,14 @@ return {
           chat = {
             adapter = "gemini",
             keymaps = {
+              send = {
+                callback = function(chat)
+                  vim.cmd "stopinsert"
+                  chat:submit()
+                end,
+                index = 1,
+                description = "Send",
+              },
               next_chat = {
                 modes = { n = ">" },
                 callback = "keymaps.next_chat",
