@@ -30,7 +30,6 @@ local inline_command = function()
   )
 end
 
-
 local function actions()
   require("codecompanion").actions {
     provider = {
@@ -197,21 +196,28 @@ return {
   {
     "jinzhongjia/codecompanion-gitcommit.nvim",
     keys = wrap_keys {
-      { "<leader>ag", ":CCGitCommit<CR>", desc = "Git get commit message" },
+      {
+        "<leader>ag",
+        function()
+          vim.cmd "Git add ."
+          vim.cmd "Git commit -m 'AI will change this message'"
+          vim.cmd "CCGitCommit"
+        end,
+        desc = "Git get commit message",
+      },
+      { "<leader>aG", ":CCGitCommit<CR>", desc = "Git get commit message" },
     },
     cmd = { "CodeCompanionGitCommit", "CCGitCommit" },
     config = function()
-      require("codecompanion").setup {
-        extensions = {
-          gitcommit = {
-            callback = "codecompanion._extensions.gitcommit",
-            opts = {
-              add_slash_command = false,
-              buffer = { enabled = false, keymap = "<leader>gc" },
-            },
-          },
+      local gitcommit = require "codecompanion._extensions.gitcommit"
+      require("codecompanion").register_extension("gitcommit", {
+        setup = gitcommit.setup,
+        exports = gitcommit.exports,
+        opts = {
+          add_slash_command = false,
+          buffer = { enabled = false, keymap = "<leader>gc" },
         },
-      }
+      })
     end,
   },
 }
