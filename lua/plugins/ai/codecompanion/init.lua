@@ -13,7 +13,7 @@ local inline_command = function()
 
   local input_callback = function(text)
     vim.cmd(select_command)
-    vim.cmd("CodeCompanion " .. text)
+    vim.cmd("CodeCompanion #buffer " .. text)
     vim.defer_fn(function()
       vim.api.nvim_feedkeys("", "n", false)
       if initial_mode == "n" then
