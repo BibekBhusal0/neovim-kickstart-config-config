@@ -168,6 +168,7 @@ return {
         },
 
         extensions = {
+          vectorcode = { opts = { add_tool = true, add_slash_command = true } },
           custom_tools = { callback = "plugins.ai.codecompanion.tools" },
           mcphub = {
             callback = "mcphub.extensions.codecompanion",
