@@ -41,11 +41,12 @@ end
 
 map("<leader>aa", actions, "CodeCompanion Inline command", { "v", "n" })
 map("<leader>ai", inline_command, "CodeCompanion Inline command", { "v", "n" })
+map("<leader>ah", ":CodeCompanionHistory<CR>", "CodeCompanion History")
 
 return {
   {
     "olimorris/codecompanion.nvim",
-    dependencies = { "ravitemer/codecompanion-history.nvim" },
+    dependencies = { { "ravitemer/codecompanion-history.nvim", cmd = "CodeCompanionHistory" } },
     cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat" },
     keys = wrap_keys {
       { "<leader>ac", ":CodeCompanionChat toggle<CR>", desc = "CodeCompanion Chat" },
@@ -113,6 +114,8 @@ return {
           chat = {
             window = { height = 1 },
             intro_message = require("utils.icons").others.ai .. "  Ask me anything",
+            show_header_separator = true,
+            separator = "─",
           },
           diff = { enabled = true, provider = "mini_diff" },
         },
@@ -153,6 +156,16 @@ return {
                 description = "Previous Header",
               },
             },
+            slash_commands = {
+              ["save_history"] = {
+                callback = function(chat)
+                  local history = require("codecompanion").extensions.history
+                  history.save_chat(chat)
+                end,
+                description = 'Save Current Chat',
+                opts = { contains_code = false },
+              },
+            }
           },
           inline = { adapter = "gemini" },
         },
@@ -182,7 +195,7 @@ return {
             enabled = true,
             opts = {
               keymap = "gh",
-              save_chat_keymap = "sc",
+              save_chat_keymap = "<leader>sh",
               auto_save = false,
               expiration_days = 0,
               picker = "telescope",
