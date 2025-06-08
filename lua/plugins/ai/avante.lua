@@ -40,8 +40,21 @@ return {
       minimize_diff = true,
       enable_token_counting = true,
     },
-    windows = { width = 40 },
-    ask = { floating = true },
+    windows = {
+      width = 40,
+      edit = {
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      },
+      ask = {
+        floating = true,
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      },
+    },
+    hints = { enabled = false },
+    repo_map = {
+      ignore_patterns = { "%.git", "%.worktree", "__pycache__", "node_modules", "dist", "build" },
+    },
+    selector = { provider = "telescope" },
   },
   build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false",
 }
