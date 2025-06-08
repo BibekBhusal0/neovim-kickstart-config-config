@@ -56,10 +56,16 @@ map("<C-u>", "<C-u>zz", "Scroll up")
 -- copy/paste to
 -- system clipboard with leader y
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
-map("<leader>Y", '"+Y', "Yank line to system clipboard")
-map("<leader>d", '"_d', "Delete to Black hole", "v")
+map("<leader>Y", '"+Y', "Yank line to system clipboard", { "n", "v" })
+
+-- paste from system clipboard
+map("<C-v>", '"+p', "Paste From System Clipboard", { "n", "v" })
+map("<C-v>", "<MiddleMouse>", "Paste From System Clipboard", "i")
+
+-- yank all
 map("<leader>k", "ggVGy", "Yank all")
 map("<leader>K", 'ggVG"+y', "Yank all to System Clipboard")
+
 map("p", [["_dP]], "paste", "x")
 
 -- select all
