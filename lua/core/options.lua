@@ -44,7 +44,7 @@ vim.o.mousemoveevent = true
 vim.opt.hlsearch = true
 -- spell
 vim.opt.spelllang = "en_us"
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelloptions = "camel"
 vim.cmd [[
   autocmd FileType telescope,mason,lazygit,nvcheatsheet setlocal nospell

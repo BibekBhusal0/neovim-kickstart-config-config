@@ -1,7 +1,13 @@
+local map = require "utils.map"
 local transparency_enabled = false
 local wrap_keys = require "utils.wrap_keys"
 local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
 vim.opt.conceallevel = 1
+local findNotes = function()
+  require("telescope.builtin").find_files { cwd = vim.fn.stdpath "data" .. '/global-note' }
+end
+
+map("<leader>fgn", findNotes, "Find Global Notes")
 
 return {
   {

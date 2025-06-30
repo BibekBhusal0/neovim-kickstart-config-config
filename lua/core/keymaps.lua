@@ -25,10 +25,10 @@ map("g.", "<cmd>norm A.<CR>", "Append a period")
 map("g;", "<cmd>norm A;<CR>", "APPEND a simiconlan")
 
 -- Opening file explorer
-map("<leader>O", ':silent !explorer.exe "%:p:h"<CR>', "Open Explorer")
+map("<leader>O", ':silent !explorer.exe "%:p:h"<CR>', "Open Explorer (current file)")
 map("<leader>P", function()
   vim.cmd("silent !explorer.exe " .. vim.fn.getcwd())
-end, "Open Explorer")
+end, "Open Explorer(current directory)")
 
 -- Move and duplicate lines
 map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", "v")
