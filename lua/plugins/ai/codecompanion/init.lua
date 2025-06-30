@@ -106,8 +106,8 @@ return {
     },
 
     config = function()
-      require("plugins.ai.codecompanion.spinner.loader"):init()
-      require("plugins.ai.codecompanion.spinner.visual_loader").setup()
+      -- require("plugins.ai.codecompanion.spinner.loader"):init()
+      -- require("plugins.ai.codecompanion.spinner.visual_loader").setup()
       require("codecompanion").setup {
 
         display = {
@@ -162,10 +162,10 @@ return {
                   local history = require("codecompanion").extensions.history
                   history.save_chat(chat)
                 end,
-                description = 'Save Current Chat',
+                description = "Save Current Chat",
                 opts = { contains_code = false },
               },
-            }
+            },
           },
           inline = { adapter = "gemini" },
         },
@@ -181,7 +181,32 @@ return {
         },
 
         extensions = {
-          vectorcode = { opts = { add_tool = true, add_slash_command = true } },
+          vectorcode = {
+            opts = {
+              tool_group = {
+                enabled = true,
+                extras = {},
+                collapse = false,
+              },
+              tool_opts = {
+                ls = {},
+                vectorise = {},
+                query = {
+                  max_num = { chunk = -1, document = -1 },
+                  default_num = { chunk = 50, document = 10 },
+                  include_stderr = false,
+                  use_lsp = true,
+                  no_duplicate = true,
+                  chunk_mode = false,
+                  summarise = {
+                    enabled = false,
+                    adapter = nil,
+                    query_augmented = true,
+                  },
+                },
+              },
+            },
+          },
           custom_tools = { callback = "plugins.ai.codecompanion.tools" },
           mcphub = {
             callback = "mcphub.extensions.codecompanion",
