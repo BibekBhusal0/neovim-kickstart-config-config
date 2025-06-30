@@ -216,6 +216,13 @@ return {
               make_slash_commands = true,
             },
           },
+          ['live-edit'] = {
+            callback = "plugins.ai.codecompanion.tools.live-edit",
+            opts = {
+              keymap_picker = "gE",
+              keymap_quick = "gO",
+            },
+          },
           history = {
             enabled = true,
             opts = {
