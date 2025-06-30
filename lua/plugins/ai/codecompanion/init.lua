@@ -262,8 +262,19 @@ return {
         setup = gitcommit.setup,
         exports = gitcommit.exports,
         opts = {
-          add_slash_command = false,
-          buffer = { enabled = false, keymap = "<leader>gc" },
+          languages = { "English" },
+
+          buffer = {
+            enabled = false,
+            auto_generate = false,
+          },
+
+          add_slash_command = true,
+          add_git_tool = true,
+          enable_git_read = true,
+          enable_git_edit = true,
+          enable_git_bot = true,
+          add_git_commands = true,
         },
       })
     end,
