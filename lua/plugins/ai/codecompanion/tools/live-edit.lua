@@ -1,5 +1,3 @@
--- https://gist.github.com/arnm/27f732be70a337c491688ebae22b6de4
-
 -- ── DEBUG (opt-in) ────────────────────────────────────────────────────────────
 local DEBUG = false
 local function dbg(tag, payload)
@@ -167,6 +165,12 @@ end
 
 -- picker variant ---------------------------------------------------------------
 local function remove_chat_messages(chat)
+  local pickers = require "telescope.pickers"
+  local finders = require "telescope.finders"
+  local conf = require("telescope.config").values
+  local actions = require "telescope.actions"
+  local action_state = require "telescope.actions.state"
+
   local messages, items = chat.messages or {}, {}
 
   for i, msg in ipairs(messages) do
@@ -180,6 +184,7 @@ local function remove_chat_messages(chat)
     end
   end
 
+  -- Add debug to show the picker items
   dbg("picker items built", items)
 
   if #items == 0 then
@@ -187,80 +192,45 @@ local function remove_chat_messages(chat)
     return
   end
 
-  local function confirm(picker)
-    local sel = picker:selected { fallback = true }
-    dbg("confirm ‑ selection raw", sel)
-    if #sel == 0 then
-      return
-    end
-
-    local cut = 0
-    for _, v in ipairs(sel) do
-      local item
-      if type(v) == "table" and v._select_key then
-        dbg("Looking for _select_key", v._select_key)
-        -- Find the original item by matching the _select_key (which is the text field)
-        for _, original_item in ipairs(items) do
-          dbg("Checking against", original_item.text)
-          if original_item.text == v._select_key then
-            item = original_item
-            dbg("Found matching item", item)
-            break
-          end
-        end
-      else
-        -- Fallback: treat v as index into items array
-        item = type(v) == "table" and v or items[v]
-        dbg("Using fallback item", item)
-      end
-
-      if item and item.msg_idx and item.msg_idx > cut then
-        cut = item.msg_idx
-      end
-    end
-    dbg("confirm ‑ cut", cut)
-    if cut == 0 then
-      return
-    end
-
-    local kept = build_kept(messages, cut)
-
-    -- Get the current cycle from the chat object
-    local current_cycle = chat.cycle or 1
-    ensure_trailing_empty(messages, kept, current_cycle)
-
-    apply(chat, kept)
-    picker:close()
-  end
-
-  require("telescope.pickers")
+  pickers
       .new({}, {
         prompt_title = "Remove Chat Messages",
-        finder = require("telescope.finders").new_table {
+        finder = finders.new_table {
           results = items,
-          entry_maker = function(item)
+          entry_maker = function(entry)
             return {
-              value = item,
-              display = item.label,
-              ordinal = item.label,
+              value = entry,
+              display = entry.label,
+              ordinal = entry.label,
             }
           end,
         },
-        sorter = require("telescope.config").values.generic_sorter {},
-        attach_mappings = function(_, map)
-          map("n", "<CR>", function(prompt_bufnr, prompt_action)
-            local selection = require("telescope.actions.state").get_selected_entry()
-            if selection then
-              confirm {
-                selected = function()
-                  return { selection.value }
-                end,
-                close = function()
-                  prompt_action.close(prompt_bufnr)
-                end,
-              }
+        sorter = conf.generic_sorter {},
+        attach_mappings = function(prompt_bufnr)
+          actions.select_default:replace(function()
+            local selection = action_state.get_selected_entry()
+            actions.close(prompt_bufnr)
+
+            if not selection then
+              return
             end
-            return true
+
+            local item = selection.value
+            dbg("confirm ‑ selection", item)
+
+            local cut = item.msg_idx
+            dbg("confirm ‑ cut", cut)
+            if cut == 0 then
+              return
+            end
+
+            local kept = build_kept(messages, cut)
+
+            -- Get the current cycle from the chat object
+            local current_cycle = chat.cycle or 1
+            ensure_trailing_empty(messages, kept, current_cycle)
+
+            apply(chat, kept)
           end)
           return true
         end,
@@ -325,8 +295,6 @@ end
 ---@param opts? { keymap_picker?: string, keymap_quick?: string }
 local function setup(opts)
   register_strategy_keymaps(opts and opts.keymap_picker or "gE", opts and opts.keymap_quick or "gO")
-  -- __AUTO_GENERATED_PRINTF_START__
-  print([==[setup 1]==]) -- __AUTO_GENERATED_PRINTF_END__
 end
 
 return {
