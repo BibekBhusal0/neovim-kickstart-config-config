@@ -181,7 +181,8 @@ return {
         },
 
         extensions = {
-          vectorcode = {
+
+          --[[ vectorcode = {
             opts = {
               tool_group = {
                 enabled = true,
@@ -206,7 +207,8 @@ return {
                 },
               },
             },
-          },
+          } , ]]
+
           custom_tools = { callback = "plugins.ai.codecompanion.tools" },
           mcphub = {
             callback = "mcphub.extensions.codecompanion",
