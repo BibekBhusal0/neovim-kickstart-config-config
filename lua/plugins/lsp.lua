@@ -15,7 +15,7 @@ end, "LSP Stop")
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "williamboman/mason.nvim", config = true, cmd = "Mason" },
       "williamboman/mason-lspconfig.nvim",
