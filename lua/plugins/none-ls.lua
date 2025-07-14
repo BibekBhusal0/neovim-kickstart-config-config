@@ -1,3 +1,10 @@
+local wrap_keys = require "utils.wrap_keys"
+
+local format = function()
+  vim.lsp.buf.format { async = true }
+end
+-- require "utils.map"("<leader>F", format, "Format file using LSP")
+
 return {
   "nvimtools/none-ls.nvim",
   event = "InsertEnter",
@@ -5,6 +12,9 @@ return {
     "nvimtools/none-ls-extras.nvim",
     "jayp0521/mason-null-ls.nvim",
   },
+    keys = wrap_keys {
+      { "<leader>F", format, desc = "Format Using LSP" },
+    },
   config = function()
     local null_ls = require "null-ls"
     local formatting = null_ls.builtins.formatting -- to setup formatters
@@ -43,11 +53,6 @@ return {
               vim.lsp.buf.format { async = false }
             end,
           })
-
-          local format = function()
-            vim.lsp.buf.format { async = true }
-          end
-          require "utils.map"("<leader>F", format, "Format file using LSP")
         end
       end,
     }
