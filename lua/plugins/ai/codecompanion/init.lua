@@ -288,6 +288,13 @@ return {
           enable_git_edit = true,
           enable_git_bot = true,
           add_git_commands = true,
+          git_tool_auto_submit_errors = true,
+          git_tool_auto_submit_success = true,
+          gitcommit_select_count = 100,
+
+          use_commit_history = true,
+          commit_history_count = 10,
+
         },
       })
     end,
