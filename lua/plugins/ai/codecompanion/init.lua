@@ -209,15 +209,18 @@ return {
             },
           } , ]]
 
-          -- custom_tools = { callback = "plugins.ai.codecompanion.tools" },
-          -- mcphub = {
-          --   callback = "mcphub.extensions.codecompanion",
-          --   opts = {
-          --     show_result_in_chat = true,
-          --     make_vars = true,
-          --     make_slash_commands = true,
-          --   },
-          -- },
+          mcphub = {
+            callback = "mcphub.extensions.codecompanion",
+            opts = {
+              make_tools = true,
+              show_server_tools_in_chat = true,
+              add_mcp_prefix_to_tool_names = true,
+              show_result_in_chat = true,
+              format_tool = nil,
+              make_vars = true,
+              make_slash_commands = true,
+            },
+          },
           ['live-edit'] = {
             callback = "plugins.ai.codecompanion.tools.live-edit",
             opts = {
