@@ -1,6 +1,16 @@
-
 local M = {}
-local utils = require "mcphub.extensions.codecompanion.utils"
+local core = require "mcphub.extensions.codecompanion.core"
+
+local function create_static_handler(action_name, has_function_calling, opts)
+  return function(agent, args, _, output_handler)
+    local context = {
+      tool_display_name = action_name,
+      is_individual_tool = false,
+      action = action_name,
+    }
+    core.execute_mcp_tool(args, agent, output_handler, context)
+  end
+end
 
 local schema = {
   type = "function",
@@ -78,7 +88,7 @@ function M.get_tool(name, all_servers)
     visible = false,
     callback = {
       name = action_name,
-      cmds = { utils.create_handler(action_name, has_function_calling, opts) },
+      cmds = { create_static_handler(action_name, has_function_calling, opts) },
       system_prompt = function()
         return string.format(
           "You can use the %s tool to %s\n",
@@ -86,7 +96,7 @@ function M.get_tool(name, all_servers)
           schema["function"].description
         )
       end,
-      output = utils.create_output_handlers(action_name, has_function_calling, opts),
+      output = core.create_output_handlers(action_name, has_function_calling, opts),
       schema = schema,
     },
   }

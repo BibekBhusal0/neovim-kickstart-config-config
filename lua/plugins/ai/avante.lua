@@ -31,6 +31,11 @@ return {
   version = "*",
   opts = {
     provider = "gemini",
+    providers = {
+      gemini = {
+        model = "gemini-2.5-pro",
+      },
+    },
     behaviour = {
       auto_suggestions = false,
       auto_set_highlight_group = true,
