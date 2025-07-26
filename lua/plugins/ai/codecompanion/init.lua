@@ -106,7 +106,7 @@ return {
     },
 
     config = function()
-      -- require("plugins.ai.codecompanion.spinner.loader"):init()
+      require("plugins.ai.codecompanion.spinner.loader"):init()
       -- require("plugins.ai.codecompanion.spinner.visual_loader").setup()
       require("codecompanion").setup {
 
@@ -131,6 +131,7 @@ return {
                 callback = function(chat)
                   vim.cmd "stopinsert"
                   chat:submit()
+                  chat:add_buf_message({ role = "llm", content = "" })
                 end,
                 index = 1,
                 description = "Send",

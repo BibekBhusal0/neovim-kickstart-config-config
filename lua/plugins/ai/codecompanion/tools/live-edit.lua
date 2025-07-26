@@ -1,3 +1,4 @@
+-- https://gist.github.com/arnm/27f732be70a337c491688ebae22b6de4
 -- ── DEBUG (opt-in) ────────────────────────────────────────────────────────────
 local DEBUG = false
 local function dbg(tag, payload)
