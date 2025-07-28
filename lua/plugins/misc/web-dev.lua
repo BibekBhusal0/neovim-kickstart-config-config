@@ -55,7 +55,7 @@ return {
   }, -- Autoclose HTML tags
 
   {
-    dir = "D:/github/nvim/react-comp-gen.nvim",
+    "TiagoMDG/react-comp-gen.nvim",
     cmd = { "CreateComponent" },
     keys = wrap_keys {
       {
