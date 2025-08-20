@@ -1,13 +1,6 @@
-local map = require "utils.map"
 local transparency_enabled = false
 local wrap_keys = require "utils.wrap_keys"
 local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
--- vim.opt.conceallevel = 1
-local findNotes = function()
-  require("telescope.builtin").find_files { cwd = vim.fn.stdpath "data" .. "/global-note" }
-end
-
-map("<leader>fgn", findNotes, "Find Global Notes")
 
 return {
   {
@@ -37,41 +30,6 @@ return {
       breaks_before_long = 4,
     },
   }, -- Simple pomodoro timer
-
-  {
-    "backdround/global-note.nvim",
-    keys = wrap_keys {
-      { "<leader>ng", ":GlobalNote<CR>", desc = "Global Note" },
-      { "<leader>np", ":ProjectNote<CR>", desc = "Project Note" },
-    },
-    config = function()
-      local gloabl_note = require "global-note"
-      local get_project_name = function()
-        local project_directory, err = vim.loop.cwd()
-        if project_directory == nil then
-          vim.notify(err, vim.log.levels.WARN)
-          return nil
-        end
-        local project_name = vim.fs.basename(project_directory)
-        if project_name == nil then
-          vim.notify("Unable to get the project name", vim.log.levels.WARN)
-          return nil
-        end
-        return project_name
-      end
-      gloabl_note.setup {
-        additional_presets = {
-          project_local = {
-            command_name = "ProjectNote",
-            filename = function()
-              return get_project_name() .. ".md"
-            end,
-            title = "Project note",
-          },
-        },
-      }
-    end,
-  }, -- note taking
 
   {
     "folke/zen-mode.nvim",
