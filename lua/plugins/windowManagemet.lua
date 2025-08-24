@@ -65,6 +65,18 @@ local function harpoon(a, b)
   return string.format(":lua require('harpoon.%s').%s()<CR>", a, b)
 end
 
+vim.api.nvim_create_user_command("Qs", function()
+  require("resession").save("auto-session", { notify = false })
+  vim.cmd("qa!")
+end, {})
+
+vim.api.nvim_create_user_command("Load", function()
+  require("resession").load("auto-session", { silence_errors = true })
+end, {})
+
+vim.cmd("cnoreabbrev <expr> qs ((getcmdtype() == ':' && getcmdline() ==# 'qs') ? 'Qs' : 'qs')")
+vim.cmd("cnoreabbrev <expr> load ((getcmdtype() == ':' && getcmdline() ==# 'load') ? 'Load' : 'load')")
+
 return {
 
   {
