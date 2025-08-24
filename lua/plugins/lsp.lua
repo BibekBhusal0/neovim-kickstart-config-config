@@ -1,24 +1,13 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
-vim.g.lsp_autostart = true
-map("<leader>Lt", function()
-  vim.g.lsp_autostart = true
-  vim.cmd.LspStart()
-end, "LSP Start")
-
-map("<leader>LT", function()
-  vim.g.lsp_autostart = false
-  vim.cmd.LspStop()
-end, "LSP Stop")
-
 return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "williamboman/mason.nvim", config = true, cmd = "Mason" },
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", config = true, cmd = "Mason" },
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", opts = {} },
     },
@@ -113,15 +102,6 @@ return {
         end,
       })
 
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufNew" }, {
-        group = vim.api.nvim_create_augroup("lsp_autostart", { clear = true }),
-        callback = function()
-          if vim.g.lsp_autostart then
-            vim.schedule(vim.cmd.LspStart)
-          end
-        end,
-      })
-
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luaSnip, etc. Neovim now has *more* capabilities.
@@ -175,7 +155,7 @@ return {
         jsonls = {},
         lua_ls = {
           settings = {
-            Lua = { format = { enable = false } },
+            Lua = { format = { enable = false } }
           },
         },
       }
@@ -185,24 +165,11 @@ return {
       vim.list_extend(ensure_installed, {})
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
-      require("mason-lspconfig").setup {
-        ensure_installed = ensure_installed,
-        automatic_enable = true,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.autostart = false
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsServer)
-            server.capabilities =
-              vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            server.capabilities.textDocument.formatting = { enabled = false }
-            server.capabilities.textDocument.rangeFormatting = { enabled = false }
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
-      }
+      for server, cfg in pairs(servers) do
+        cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+        vim.lsp.config(server, cfg)
+        vim.lsp.enable(server)
+      end
     end,
   },
 
