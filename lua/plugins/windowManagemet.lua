@@ -112,7 +112,10 @@ return {
         end
         return true
       end,
-      extensions = { scope = {} },
+      extensions = {
+        scope = {},
+        cd = {},
+      },
     },
   }, -- session management
 
