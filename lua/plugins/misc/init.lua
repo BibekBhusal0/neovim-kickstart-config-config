@@ -35,4 +35,20 @@ return {
       { "<leader>lU", "<cmd>LazyUrlBuild<CR>", desc = "Update plugin under cursor" },
     },
   },
+
+
+  {
+    "piersolenski/import.nvim",
+    opts = { picker = "telescope" },
+    cmd = {"Import"},
+    keys = wrap_keys{
+      {
+        "<leader>fi",
+        function()
+          require("import").pick()
+        end,
+        desc = "Import",
+      } 
+    },
+  }
 }
