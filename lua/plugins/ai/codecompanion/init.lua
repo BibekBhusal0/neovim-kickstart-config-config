@@ -126,6 +126,7 @@ return {
         strategies = {
           chat = {
             adapter = "gemini",
+            model = "gemini-2.0-flash",
             keymaps = {
               send = {
                 callback = function(chat)
@@ -172,14 +173,6 @@ return {
         },
 
         prompt_library = require "plugins.ai.codecompanion.prompts",
-        adapters = {
-          gemini = function()
-            return require("codecompanion.adapters").extend("gemini", {
-              name = "gemini",
-              schema = { model = { default = "gemini-2.0-flash" } },
-            })
-          end,
-        },
 
         extensions = {
 
