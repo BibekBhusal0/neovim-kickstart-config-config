@@ -126,7 +126,7 @@ return {
         strategies = {
           chat = {
             adapter = "gemini",
-            model = "gemini-2.0-flash",
+            model = "gemini-2.5-flash",
             keymaps = {
               send = {
                 callback = function(chat)

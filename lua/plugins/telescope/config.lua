@@ -130,7 +130,7 @@ return function()
         git_icons = require("utils.icons").git,
       },
       builtin = {},
-      picekrs = {},
+      pickers = {},
       planets = {},
       symbols = {},
       commands = get_dropdown {
