@@ -134,7 +134,7 @@ return {
       { "gs", mode = { "n", "o", "x" }, desc = "Minit Sort" },
       { "gx", mode = { "n", "o", "x" }, desc = "Minit Exchange" },
     },
-    opts = {replace = {prefix = '<leader>rl' }},
+    opts = { replace = { prefix = "<leader>rl" } },
   }, -- sorting with motion
 
   {

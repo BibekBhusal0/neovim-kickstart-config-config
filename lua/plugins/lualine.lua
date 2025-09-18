@@ -141,7 +141,7 @@ return {
               -- Show spinner when executing, starting, or restarting
               if executing or status == "starting" or status == "restarting" then
                 local frames =
-                { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+                  { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
                 local frame = math.floor(vim.loop.now() / 100) % #frames + 1
                 return "󰐻 " .. frames[frame]
               end

@@ -12,9 +12,9 @@ return {
     "nvimtools/none-ls-extras.nvim",
     "jayp0521/mason-null-ls.nvim",
   },
-    keys = wrap_keys {
-      { "<leader>F", format, desc = "Format Using LSP" },
-    },
+  keys = wrap_keys {
+    { "<leader>F", format, desc = "Format Using LSP" },
+  },
   config = function()
     local null_ls = require "null-ls"
     local formatting = null_ls.builtins.formatting -- to setup formatters

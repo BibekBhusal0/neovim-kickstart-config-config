@@ -194,49 +194,49 @@ local function remove_chat_messages(chat)
   end
 
   pickers
-      .new({}, {
-        prompt_title = "Remove Chat Messages",
-        finder = finders.new_table {
-          results = items,
-          entry_maker = function(entry)
-            return {
-              value = entry,
-              display = entry.label,
-              ordinal = entry.label,
-            }
-          end,
-        },
-        sorter = conf.generic_sorter {},
-        attach_mappings = function(prompt_bufnr)
-          actions.select_default:replace(function()
-            local selection = action_state.get_selected_entry()
-            actions.close(prompt_bufnr)
-
-            if not selection then
-              return
-            end
-
-            local item = selection.value
-            dbg("confirm ‑ selection", item)
-
-            local cut = item.msg_idx
-            dbg("confirm ‑ cut", cut)
-            if cut == 0 then
-              return
-            end
-
-            local kept = build_kept(messages, cut)
-
-            -- Get the current cycle from the chat object
-            local current_cycle = chat.cycle or 1
-            ensure_trailing_empty(messages, kept, current_cycle)
-
-            apply(chat, kept)
-          end)
-          return true
+    .new({}, {
+      prompt_title = "Remove Chat Messages",
+      finder = finders.new_table {
+        results = items,
+        entry_maker = function(entry)
+          return {
+            value = entry,
+            display = entry.label,
+            ordinal = entry.label,
+          }
         end,
-      })
-      :find()
+      },
+      sorter = conf.generic_sorter {},
+      attach_mappings = function(prompt_bufnr)
+        actions.select_default:replace(function()
+          local selection = action_state.get_selected_entry()
+          actions.close(prompt_bufnr)
+
+          if not selection then
+            return
+          end
+
+          local item = selection.value
+          dbg("confirm ‑ selection", item)
+
+          local cut = item.msg_idx
+          dbg("confirm ‑ cut", cut)
+          if cut == 0 then
+            return
+          end
+
+          local kept = build_kept(messages, cut)
+
+          -- Get the current cycle from the chat object
+          local current_cycle = chat.cycle or 1
+          ensure_trailing_empty(messages, kept, current_cycle)
+
+          apply(chat, kept)
+        end)
+        return true
+      end,
+    })
+    :find()
 end
 
 -- quick variant ----------------------------------------------------------------

@@ -155,7 +155,7 @@ return {
         jsonls = {},
         lua_ls = {
           settings = {
-            Lua = { format = { enable = false } }
+            Lua = { format = { enable = false } },
           },
         },
       }

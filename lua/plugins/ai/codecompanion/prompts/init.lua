@@ -36,7 +36,7 @@ return {
   ["New chat"] = {
     strategy = "chat",
     description = "new",
-    opts = { short_name = "new", modes = {'v'} },
+    opts = { short_name = "new", modes = { "v" } },
     prompts = {
       {
         role = "user",
@@ -69,7 +69,7 @@ return {
 
           if context.is_visual then
             selection_info =
-                string.format("Currently selected lines: %d-%d", context.start_line, context.end_line)
+              string.format("Currently selected lines: %d-%d", context.start_line, context.end_line)
           else
             selection_info = string.format(
               "Current cursor line: %d and Current cursor column is %d",

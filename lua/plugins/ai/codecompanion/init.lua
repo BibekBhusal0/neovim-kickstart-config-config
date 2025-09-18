@@ -7,7 +7,7 @@ local inline_command = function()
   local mark = "p"
 
   if initial_mode == "n" then
-    vim.cmd ( "normal! m" .. mark )
+    vim.cmd("normal! m" .. mark)
     select_command = "normal! ggVG"
   end
 
@@ -132,7 +132,7 @@ return {
                 callback = function(chat)
                   vim.cmd "stopinsert"
                   chat:submit()
-                  chat:add_buf_message({ role = "llm", content = "" })
+                  chat:add_buf_message { role = "llm", content = "" }
                 end,
                 index = 1,
                 description = "Send",
@@ -215,7 +215,7 @@ return {
               make_slash_commands = true,
             },
           },
-          ['live-edit'] = {
+          ["live-edit"] = {
             callback = "plugins.ai.codecompanion.tools.live-edit",
             opts = {
               keymap_picker = "gE",
@@ -287,7 +287,6 @@ return {
 
           use_commit_history = true,
           commit_history_count = 10,
-
         },
       })
     end,

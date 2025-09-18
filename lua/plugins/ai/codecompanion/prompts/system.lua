@@ -1,5 +1,5 @@
 return {
-  readable =  [[
+  readable = [[
   Only change code according to user command and make sure you complete code and if you are not able to make change just give user's code as it is.readable. 
   Your task is to make given code readable. Here are some steps you can take to make code more readable. 
   - Make variable naming more clear. 
