@@ -27,6 +27,29 @@ return {
             linkedin = { pattern = "linkedin%.com", icon = " " },
           },
         },
+        checkbox = {
+          custom = {
+            canceled = { raw = '[-]', rendered = '--', highlight = 'Comment', scope_highlight = nil },
+            incomplete = {raw = '[/]', rendered= '󱎖 ', highlight = "RenderMarkdownTodo"},
+            forwarded = {raw= '[>]', rendered= ' ', highlight = 'Comment'},
+            scheduling = {raw= '[<]', rendered= ' ', highlight = 'Comment'},
+            question = {raw= '[?]', rendered= ' ' },
+            important = {raw= '[!]', rendered= ' ', highlight = 'javaScriptFunction'},
+            star = {raw= '[*]', rendered= ' ', highlight = 'javaScriptFunction'},
+            quote = {raw= '["]', rendered= ' ', highlight = 'function'},
+            location = {raw= '[l]', rendered= ' ', highlight = 'boolean'},
+            bookmark = {raw= '[b]', rendered= ' ', highlight = 'javaScriptFunction'},
+            information = {raw= '[i]', rendered= '󰋼 ', highlight = 'function'},
+            idea = {raw= '[I]', rendered= ' ', highlight = 'javaScriptFunction'},
+            pros = {raw= '[p]', rendered= ' ', highlight = 'function'},
+            cons = {raw= '[c]', rendered= ' ', highlight = 'javaScriptFunction'},
+            fire = {raw= '[f]', rendered= ' ', highlight = 'boolean'},
+            key = {raw= '[k]', rendered= ' '},
+            up = {raw= '[u]', rendered= '󰔵 ', highlight = 'function'},
+            down = {raw= '[d]', rendered= '󰔳 ', highlight = 'boolean'},
+          },
+        },
+
       }
       map("<leader>mm", ":RenderMarkdown toggle<CR>", "Markdown Render Toggle")
       map("<leader>mM", ":RenderMarkdown buf_toggle<CR>", "Markdown Render Buffer Toggle")
@@ -36,8 +59,14 @@ return {
   {
     "jakewvincent/mkdnflow.nvim",
     ft = "markdown",
-    config = function()
-      require("mkdnflow").setup {
+    config = {
+        to_do = {
+          symbols = {' ', '/', 'x', '-', '>', '<', '?', '!', '"', 'l', 'b', 'i', 'I', 'p', 'c','f', 'k', 'u', 'd'},
+          update_parents = true,
+          not_started = ' ',
+          in_progress = '/',
+          complete = 'x'
+        },
         mappings = {
           MkdnEnter = { { "i" }, "<CR>" },
           MkdnTab = false,
@@ -77,6 +106,5 @@ return {
         },
         foldtext = { object_count_icon_set = "nerdfont" },
       }
-    end,
   }, -- Better editing in markdown
 }

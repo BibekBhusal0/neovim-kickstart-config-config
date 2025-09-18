@@ -46,7 +46,10 @@ map("<leader>ah", ":CodeCompanionHistory<CR>", "CodeCompanion History")
 return {
   {
     "olimorris/codecompanion.nvim",
-    dependencies = { { "ravitemer/codecompanion-history.nvim", cmd = "CodeCompanionHistory" } },
+    dependencies = {
+      { "ravitemer/codecompanion-history.nvim", cmd = "CodeCompanionHistory" },
+      { "lalitmee/codecompanion-spinners.nvim", }
+    },
     cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat" },
     keys = wrap_keys {
       { "<leader>ac", ":CodeCompanionChat toggle<CR>", desc = "CodeCompanion Chat" },
@@ -106,8 +109,6 @@ return {
     },
 
     config = function()
-      require("plugins.ai.codecompanion.spinner.loader"):init()
-      -- require("plugins.ai.codecompanion.spinner.visual_loader").setup()
       require("codecompanion").setup {
 
         display = {
@@ -128,15 +129,6 @@ return {
             adapter = "gemini",
             model = "gemini-2.5-flash",
             keymaps = {
-              send = {
-                callback = function(chat)
-                  vim.cmd "stopinsert"
-                  chat:submit()
-                  chat:add_buf_message { role = "llm", content = "" }
-                end,
-                index = 1,
-                description = "Send",
-              },
               next_chat = {
                 modes = { n = ">" },
                 callback = "keymaps.next_chat",
@@ -215,6 +207,7 @@ return {
               make_slash_commands = true,
             },
           },
+
           ["live-edit"] = {
             callback = "plugins.ai.codecompanion.tools.live-edit",
             opts = {
@@ -222,6 +215,7 @@ return {
               keymap_quick = "gO",
             },
           },
+
           history = {
             enabled = true,
             opts = {
@@ -242,6 +236,27 @@ return {
               enable_logging = false,
             },
           },
+
+          spinner = {
+            style = "fidget",
+            default_icon = require("utils.icons").others.ai,
+            content = {
+              thinking = { icon = "⚛", message = "Thinking...", spacing = "  " },
+              receiving = { icon = "", message = "Receiving...", spacing = "  " },
+              done = { icon = "", message = "Done!", spacing = "  " },
+              stopped = { icon = "", message = "Stopped", spacing = "  " },
+              cleared = { icon = "", message = "Chat cleared", spacing = "  " },
+              tools_started = { icon = "", message = "Running tools...", spacing = "  " },
+              tools_finished = { icon = "⤷", message = "Processing tool output...", spacing = "  " },
+              diff_attached = { icon = "", message = "Review changes", spacing = "  " },
+              diff_accepted = { icon = "", message = "Change accepted", spacing = "  " },
+              diff_rejected = { icon = "", message = "Change rejected", spacing = "  " },
+              chat_ready = { icon = "", message = "Chat ready", spacing = "  " },
+              chat_opened = { icon = "", message = "Chat opened", spacing = "  " },
+              chat_hidden = { icon = "", message = "Chat hidden", spacing = "  " },
+              chat_closed = { icon = "", message = "Chat closed", spacing = "  " },
+            },
+          }
         },
       }
     end,
