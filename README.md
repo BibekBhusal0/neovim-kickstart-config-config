@@ -26,6 +26,13 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 - [monkoose/neocodeium](https://dotfyle.com/plugins/monkoose/neocodeium)
 - [olimorris/codecompanion.nvim](https://dotfyle.com/plugins/olimorris/codecompanion.nvim)
+- [yetone/avante.nvim](https://dotfyle.com/plugins/yetone/avante.nvim)
+- [Davidyz/VectorCode](https://dotfyle.com/plugins/Davidyz/VectorCode)
+
+### animation
+
+- [rachartier/tiny-glimmer.nvim](https://dotfyle.com/plugins/rachartier/tiny-glimmer.nvim)
+- [sphamba/smear-cursor.nvim](https://dotfyle.com/plugins/sphamba/smear-cursor.nvim)
 
 ### bars-and-lines
 
@@ -60,9 +67,12 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 - [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
 - [Weissle/persistent-breakpoints.nvim](https://dotfyle.com/plugins/Weissle/persistent-breakpoints.nvim)
-- [chrisgrieser/nvim-chainsaw](https://dotfyle.com/plugins/chrisgrieser/nvim-chainsaw)
 - [theHamsta/nvim-dap-virtual-text](https://dotfyle.com/plugins/theHamsta/nvim-dap-virtual-text)
 - [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
+
+### dependency-management
+
+- [piersolenski/import.nvim](https://dotfyle.com/plugins/piersolenski/import.nvim)
 
 ### diagnostics
 
@@ -72,18 +82,24 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 - [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
 - [nacro90/numb.nvim](https://dotfyle.com/plugins/nacro90/numb.nvim)
+- [windwp/nvim-autopairs](https://dotfyle.com/plugins/windwp/nvim-autopairs)
+- [johmsalas/text-case.nvim](https://dotfyle.com/plugins/johmsalas/text-case.nvim)
 - [folke/zen-mode.nvim](https://dotfyle.com/plugins/folke/zen-mode.nvim)
 - [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
-- [gregorias/coerce.nvim](https://dotfyle.com/plugins/gregorias/coerce.nvim)
 - [echasnovski/mini.trailspace](https://dotfyle.com/plugins/echasnovski/mini.trailspace)
 - [debugloop/telescope-undo.nvim](https://dotfyle.com/plugins/debugloop/telescope-undo.nvim)
 - [Wansmer/treesj](https://dotfyle.com/plugins/Wansmer/treesj)
-- [altermo/ultimate-autopair.nvim](https://dotfyle.com/plugins/altermo/ultimate-autopair.nvim)
+- [echasnovski/mini.operators](https://dotfyle.com/plugins/echasnovski/mini.operators)
 
 ### file-explorer
 
 - [echasnovski/mini.files](https://dotfyle.com/plugins/echasnovski/mini.files)
 - [nvim-neo-tree/neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim)
+
+### fun
+
+- [rubiin/fortune.nvim](https://dotfyle.com/plugins/rubiin/fortune.nvim)
+- [letieu/hacker.nvim](https://dotfyle.com/plugins/letieu/hacker.nvim)
 
 ### fuzzy-finder
 
@@ -103,8 +119,14 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 ### git
 
 - [kdheepak/lazygit.nvim](https://dotfyle.com/plugins/kdheepak/lazygit.nvim)
+- [echasnovski/mini.diff](https://dotfyle.com/plugins/echasnovski/mini.diff)
 - [sindrets/diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim)
 - [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
+
+### github
+
+- [pwntester/octo.nvim](https://dotfyle.com/plugins/pwntester/octo.nvim)
+- [topaxi/pipeline.nvim](https://dotfyle.com/plugins/topaxi/pipeline.nvim)
 
 ### icon
 
@@ -125,11 +147,8 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 - [SmiteshP/nvim-navbuddy](https://dotfyle.com/plugins/SmiteshP/nvim-navbuddy)
 - [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
 - [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
+- [rachartier/tiny-code-action.nvim](https://dotfyle.com/plugins/rachartier/tiny-code-action.nvim)
 - [nvimtools/none-ls.nvim](https://dotfyle.com/plugins/nvimtools/none-ls.nvim)
-
-### lsp-installer
-
-- [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
 
 ### markdown-and-latex
 
@@ -142,16 +161,17 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 ### motion
 
-- [sphamba/smear-cursor.nvim](https://dotfyle.com/plugins/sphamba/smear-cursor.nvim)
+- [abecodes/tabout.nvim](https://dotfyle.com/plugins/abecodes/tabout.nvim)
 
 ### note-taking
 
 - [jakewvincent/mkdnflow.nvim](https://dotfyle.com/plugins/jakewvincent/mkdnflow.nvim)
-- [backdround/global-note.nvim](https://dotfyle.com/plugins/backdround/global-note.nvim)
+- [obsidian-nvim/obsidian.nvim](https://dotfyle.com/plugins/obsidian-nvim/obsidian.nvim)
 
 ### nvim-dev
 
 - [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
+- [folke/lazydev.nvim](https://dotfyle.com/plugins/folke/lazydev.nvim)
 - [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
 - [kkharji/sqlite.lua](https://dotfyle.com/plugins/kkharji/sqlite.lua)
 - [anuvyklack/animation.nvim](https://dotfyle.com/plugins/anuvyklack/animation.nvim)
@@ -185,6 +205,7 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 - [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
 - [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
+- [dnnr1/lorem-ipsum.nvim](https://dotfyle.com/plugins/dnnr1/lorem-ipsum.nvim)
 - [TobinPalmer/rayso.nvim](https://dotfyle.com/plugins/TobinPalmer/rayso.nvim)
 
 ### split-and-window
@@ -223,14 +244,18 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 - [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
 - [BibekBhusal0/bufstack.nvim](https://dotfyle.com/plugins/BibekBhusal0/bufstack.nvim)
+- [athar-qadri/weather.nvim](https://dotfyle.com/plugins/athar-qadri/weather.nvim)
 - [michaelrommel/nvim-silicon](https://dotfyle.com/plugins/michaelrommel/nvim-silicon)
-- [rachartier/tiny-glimmer.nvim](https://dotfyle.com/plugins/rachartier/tiny-glimmer.nvim)
+- [y3owk1n/time-machine.nvim](https://dotfyle.com/plugins/y3owk1n/time-machine.nvim)
+- [cxwx/lazyUrlUpdate.nvim](https://dotfyle.com/plugins/cxwx/lazyUrlUpdate.nvim)
 - [NvChad/ui](https://dotfyle.com/plugins/NvChad/ui)
 - [nguyenvukhang/nvim-toggler](https://dotfyle.com/plugins/nguyenvukhang/nvim-toggler)
+- [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
 - [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
 
 ### web-development
 
+- [TiagoMDG/react-comp-gen.nvim](https://dotfyle.com/plugins/TiagoMDG/react-comp-gen.nvim)
 - [BibekBhusal0/nvim-shadcn](https://dotfyle.com/plugins/BibekBhusal0/nvim-shadcn)
 - [mawkler/jsx-element.nvim](https://dotfyle.com/plugins/mawkler/jsx-element.nvim)
 - [luckasRanarison/tailwind-tools.nvim](https://dotfyle.com/plugins/luckasRanarison/tailwind-tools.nvim)
@@ -239,5 +264,11 @@ NVIM_APPNAME=BibekBhusal0/neovim-kickstart-config-config/ nvim
 
 - [m4xshen/hardtime.nvim](https://dotfyle.com/plugins/m4xshen/hardtime.nvim)
 - [fredehoey/tardis.nvim](https://dotfyle.com/plugins/fredehoey/tardis.nvim)
+
+## Language Servers
+
+- html
+- svelte
+- zk
 
 This readme was generated by [Dotfyle](https://dotfyle.com)
