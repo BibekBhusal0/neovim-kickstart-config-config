@@ -48,7 +48,7 @@ return {
     "olimorris/codecompanion.nvim",
     dependencies = {
       { "ravitemer/codecompanion-history.nvim", cmd = "CodeCompanionHistory" },
-      { "lalitmee/codecompanion-spinners.nvim", }
+      { "lalitmee/codecompanion-spinners.nvim" },
     },
     cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat" },
     keys = wrap_keys {
@@ -247,7 +247,11 @@ return {
               stopped = { icon = "", message = "Stopped", spacing = "  " },
               cleared = { icon = "", message = "Chat cleared", spacing = "  " },
               tools_started = { icon = "", message = "Running tools...", spacing = "  " },
-              tools_finished = { icon = "⤷", message = "Processing tool output...", spacing = "  " },
+              tools_finished = {
+                icon = "⤷",
+                message = "Processing tool output...",
+                spacing = "  ",
+              },
               diff_attached = { icon = "", message = "Review changes", spacing = "  " },
               diff_accepted = { icon = "", message = "Change accepted", spacing = "  " },
               diff_rejected = { icon = "", message = "Change rejected", spacing = "  " },
@@ -256,7 +260,7 @@ return {
               chat_hidden = { icon = "", message = "Chat hidden", spacing = "  " },
               chat_closed = { icon = "", message = "Chat closed", spacing = "  " },
             },
-          }
+          },
         },
       }
     end,
