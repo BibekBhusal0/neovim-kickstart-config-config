@@ -195,7 +195,7 @@ return {
             },
           } , ]]
 
-          mcphub = {
+          --[[ mcphub = {
             callback = "mcphub.extensions.codecompanion",
             opts = {
               make_tools = true,
@@ -206,7 +206,7 @@ return {
               make_vars = true,
               make_slash_commands = true,
             },
-          },
+          }, ]]
 
           ["live-edit"] = {
             callback = "plugins.ai.codecompanion.tools.live-edit",
