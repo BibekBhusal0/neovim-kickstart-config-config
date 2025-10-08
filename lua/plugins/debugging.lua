@@ -32,7 +32,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
-      { "mfussenegger/nvim-dap-python", lazy = true },
+      -- { "mfussenegger/nvim-dap-python", lazy = true },
     },
     keys = wrap_keys {
       { "<leader>dc", ":lua require('dap').continue() <CR>", desc = "Debugger Continue" },
@@ -42,7 +42,7 @@ return {
       local dap, dapui = require "dap", require "dapui"
       local mason = vim.fn.stdpath "data" .. "/mason/packages"
       local virtual_text = require "nvim-dap-virtual-text"
-      require("dap-python").setup(mason .. "/debugpy/venv/Scripts/python.exe")
+      -- require("dap-python").setup(mason .. "/debugpy/venv/Scripts/python.exe")
       virtual_text.setup()
 
       dapui.setup {
