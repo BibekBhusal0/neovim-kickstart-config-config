@@ -78,6 +78,16 @@ local commands = {
   },
 
   {
+    condition = is_arg "zen2",
+    post_defer = function()
+      vim.cmd "Alpha"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir "C:\\Users\\bibek\\AppData\\Roaming\\zen\\Profiles\\xxbw6p4k.new\\chrome\\JS\\custom"
+    end,
+  },
+
+  {
     condition = is_arg "obsidian",
     post_defer = function()
       vim.cmd "Obsidian quick_switch"
