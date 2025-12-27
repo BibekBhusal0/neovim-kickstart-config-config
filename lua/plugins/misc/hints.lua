@@ -6,20 +6,20 @@ return {
     event = "VeryLazy",
   }, -- Hints keybinds
 
---  {
---    "smartinellimarco/nvcheatsheet.nvim",
---    lazy = true,
---    keys = wrap_keys {
---      {
---        "<leader>CH",
---        ':lua require("nvcheatsheet").toggle()<CR>',
---        desc = "Toggle Cheatsheet",
---      },
---    },
---    config = function()
---      require("nvcheatsheet").setup(require "utils.cheatsheet")
---    end,
---  }, --  cheatsheet
+  --  {
+  --    "smartinellimarco/nvcheatsheet.nvim",
+  --    lazy = true,
+  --    keys = wrap_keys {
+  --      {
+  --        "<leader>CH",
+  --        ':lua require("nvcheatsheet").toggle()<CR>',
+  --        desc = "Toggle Cheatsheet",
+  --      },
+  --    },
+  --    config = function()
+  --      require("nvcheatsheet").setup(require "utils.cheatsheet")
+  --    end,
+  --  }, --  cheatsheet
 
   {
     "nvzone/showkeys",
