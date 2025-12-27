@@ -9,7 +9,6 @@ return {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.install").compilers = { "zig" }
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "bash",
