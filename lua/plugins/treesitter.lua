@@ -146,50 +146,37 @@ return {
         P = "parameter",
         r = "return",
       }
-      local keymaps = {}
-      local goto_next_start = {}
-      local goto_previous_start = {}
-      -- local swap_next = {}
-      -- local swap_previous = {}
-      -- local goto_next_end = {}
-      -- local goto_previous_end = {}
+      local select_mod = require "nvim-treesitter-textobjects.select"
+      local move_mod = require "nvim-treesitter-textobjects.move"
 
-      for k, v in pairs(keys) do
-        keymaps["i" .. k] = { query = "@" .. v .. ".inner", desc = "Inner " .. v }
-        keymaps["a" .. k] = { query = "@" .. v .. ".outer", desc = "Outer " .. v }
-        goto_next_start["]" .. k] = { query = "@" .. v .. ".outer", desc = "Jump Next " .. v }
-        goto_previous_start["[" .. k] =
-          { query = "@" .. v .. ".outer", desc = "Jump Previous " .. v }
-        -- swap_next['<leader>m' .. k] = { query = '@' .. v .. '.outer', desc = 'Swap Next ' .. v }
-        -- swap_previous['<leader>M' .. k] = { query = '@' .. v .. '.outer', desc = 'Swap Previous ' .. v }
-        -- goto_previous_end['(' .. k] = { query = '@' .. v .. '.outer', desc = 'Jump Previous ' .. v .. ' End' }
-        -- goto_next_end[')' .. k] = { query = '@' .. v .. '.outer', desc = 'Jump Next ' .. v .. ' End' }
+      for k, obj in pairs(keys) do
+        local inner = "@" .. obj .. ".inner"
+        local outer = "@" .. obj .. ".outer"
+
+        map("i" .. k, function()
+          select_mod.select_textobject(inner, "textobjects")
+        end, "Select inner " .. obj, { "x", "o" })
+
+        map("a" .. k, function()
+          select_mod.select_textobject(outer, "textobjects")
+        end, "Select outer " .. obj, { "x", "o" })
+
+        map("]" .. k, function()
+          move_mod.goto_next_start(outer, "textobjects")
+        end, "Go to next " .. obj, mode)
+
+        map("[" .. k, function()
+          move_mod.goto_previous_start(outer, "textobjects")
+        end, "Go to previous " .. obj, mode)
       end
-      goto_next_start["]z"] = { query = "@fold", query_group = "folds", desc = "Jump next fold" }
-      goto_next_start["[z"] = { query = "@fold", query_group = "folds", desc = "Prev next fold" }
 
-      require("nvim-treesitter").setup {
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = keymaps,
-          },
-          swap = {
-            -- enable = true,
-            -- swap_next = swap_next,
-            -- swap_previous = swap_previous,
-          },
-          move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = goto_next_start,
-            goto_previous_start = goto_previous_start,
-            -- goto_next_end = goto_next_end,
-            -- goto_previous_end = goto_previous_end,
-          },
-        },
-      }
+      map("]z", function()
+        move_mod.goto_next_start("@fold", "folds")
+      end, "Next fold", mode)
+
+      map("[z", function()
+        move_mod.goto_previous_start("@fold", "folds")
+      end, "Prev fold", mode)
     end,
   },
 }
