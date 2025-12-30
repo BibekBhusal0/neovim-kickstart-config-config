@@ -36,7 +36,7 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
   end
 end
 
-local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
+local obsidian_dir = "/home/bibek/Documents/obsidian.md"
 
 local function is_arg(expected_arg)
   return function(args)
@@ -53,17 +53,6 @@ local commands = {
     end,
     pre_defer = function()
       vim.api.nvim_set_current_dir(vim.fn.stdpath "config")
-    end,
-  },
-
-  {
-    condition = is_arg "ahk",
-    post_defer = function()
-      vim.cmd "edit script.ahk"
-      vim.cmd "normal! zR"
-    end,
-    pre_defer = function()
-      vim.api.nvim_set_current_dir "~\\Desktop\\New folder\\ahk"
     end,
   },
 

@@ -25,9 +25,9 @@ map("g.", "<cmd>norm A.<CR>", "Append a period")
 map("g;", "<cmd>norm A;<CR>", "APPEND a simiconlan")
 
 -- Opening file explorer
-map("<leader>O", ':silent !explorer.exe "%:p:h"<CR>', "Open Explorer (current file)")
+map("<leader>O", ':silent !nautilus "%:p:h" &<CR>', "Open Explorer (current file)")
 map("<leader>P", function()
-  vim.cmd("silent !explorer.exe " .. vim.fn.getcwd())
+  vim.cmd('silent !nautilus "' .. vim.fn.getcwd() .. '" &')
 end, "Open Explorer(current directory)")
 
 -- Move and duplicate lines
@@ -88,9 +88,6 @@ map("<leader>lW", ":set wrap!<CR>", "Toggle line wrapping")
 map("<", "<gv", "Indent left", "v")
 map(">", ">gv", "Indent right", "v")
 
--- Diagnostic keymaps
-map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
-
 -- line numbers
 map("<leader>nn", ":set nu!<CR>", "Toggle Line Number")
 map("<leader>rn", ":set rnu!<CR>", "Toggle Relative Line Number")
@@ -118,6 +115,11 @@ end
 
 map("<leader>ll", toggle_statusline, "Toggle Status Line")
 map("<leader>bl", toggle_tabline, "Toggle Tab Line")
+
+-- Diagnostic keymaps
+map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
+map("<leader>]d", function () vim.diagnostic.goto_next{ float = false } end, "Jump next Diagnostic")
+map("<leader>[d", function () vim.diagnostic.goto_prev{ float = false } end, "Jump Previous Diagnostic")
 
 local function toggle_virtual_lines()
   local current_config = vim.diagnostic.config()

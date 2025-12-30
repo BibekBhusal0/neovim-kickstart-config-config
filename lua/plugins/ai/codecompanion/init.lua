@@ -108,9 +108,7 @@ return {
       },
     },
 
-    config = function()
-      require("codecompanion").setup {
-
+     opts = {
         display = {
           chat = {
             window = { height = 1 },
@@ -208,14 +206,6 @@ return {
             },
           }, ]]
 
-          ["live-edit"] = {
-            callback = "plugins.ai.codecompanion.tools.live-edit",
-            opts = {
-              keymap_picker = "gE",
-              keymap_quick = "gO",
-            },
-          },
-
           history = {
             enabled = true,
             opts = {
@@ -227,7 +217,7 @@ return {
               auto_generate_title = true,
               title_generation_opts = {
                 adapter = "gemini",
-                model = "gemini-1.5-flash",
+                model = "gemini-2.5-flash",
                 refresh_every_n_prompts = 0,
                 max_refreshes = 3,
               },
@@ -263,7 +253,6 @@ return {
           },
         },
       }
-    end,
   },
 
   {

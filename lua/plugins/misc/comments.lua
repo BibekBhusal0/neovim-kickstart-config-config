@@ -1,3 +1,4 @@
+local map = require "utils.map"
 local wrap_keys = require "utils.wrap_keys"
 
 return {
@@ -68,6 +69,26 @@ return {
       },
       config = function()
         require("todo-comments").setup { signs = false }
+
+      local todos = {
+        t = {},
+        -- T = { 'TODO' },
+        -- F = { 'FIX' },
+        -- W = { 'WARN', 'WARNING' },
+        -- H = { 'HACK' },
+        -- N = { 'NOTE' },
+      }
+      for k, p in pairs(todos) do
+        local prev = function ()
+          require("todo-comments").jump_prev{keywords = p}
+        end
+        local next = function ()
+          require("todo-comments").jump_next{keywords = p}
+        end
+        local name = #p == 0 and "todo comment" or p[1]
+        map("]" .. k, next, "Jump Next " .. name, { "n", "x", "o" })
+        map("[" .. k, prev, "Jump Prev " .. name, { "n", "x", "o" })
+      end
       end,
     }, -- WARNING: Highlights todo, notes, etc in comments
   },

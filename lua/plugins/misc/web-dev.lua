@@ -45,6 +45,8 @@ return {
       map("<leader>tc", ":TailwindColorToggle<CR>", "Tailwind Color Toggle")
       map("<leader>tf", ":TailwindConcealToggle<CR>", "Tailwind Fold Toggle")
       map("<leader>ts", ":TailwindSort<CR>", "Tailwind search")
+      map("<leader>]t", ":TailwindNextClass<CR>", "Jump Next Tailwind Cllass")
+      map("<leader>[t", ":TailwindPrevClass<CR>", "Jump Prev Tailwind Cllass")
     end,
   }, -- tailwind color highlights folds and more
 

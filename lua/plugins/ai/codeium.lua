@@ -41,3 +41,4 @@ return {
     map("<A-w>", neocodeium.accept_word, "Codeium Accept Word", "i")
   end,
 }
+

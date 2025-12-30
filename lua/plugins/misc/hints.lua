@@ -38,7 +38,7 @@ return {
 
   {
     "m4xshen/hardtime.nvim",
-    enabled = false,
+    enabled = true,
     event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys { { "<leader>th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
     config = function()

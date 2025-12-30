@@ -59,7 +59,6 @@ return function()
     vim.cmd((i > 1 and "edit " or "tabnew ") .. val)
   end)
 
-  vim.g.sqlite_clib_path = "C:/ProgramData/sqlite/sqlite3.dll"
   require("telescope-all-recent").setup {
     default = { sorting = "frecency" },
   }

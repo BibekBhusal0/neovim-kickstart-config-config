@@ -13,7 +13,7 @@ end
 
 local save_to_desktop = function()
   require "utils.screenshot" {
-    output = os.getenv "USERPROFILE" .. "/Desktop/code/" .. get_file_name_and_timestamp() .. ".png",
+    output = "/home/bibek/Code/Screenshots/" .. get_file_name_and_timestamp() .. ".png",
   }
 end
 local sate_to_clipboard = ":lua require('nvim-silicon').clip()<CR>"

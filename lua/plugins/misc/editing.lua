@@ -165,4 +165,19 @@ return {
       { "<leader>u", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
     },
   }, -- similar to undo tree
+
+  {
+    "piersolenski/import.nvim",
+    opts = { picker = "telescope" },
+    cmd = { "Import" },
+    keys = wrap_keys {
+      {
+        "<leader>fi",
+        function()
+          require("import").pick()
+        end,
+        desc = "Import",
+      },
+    },
+  },
 }

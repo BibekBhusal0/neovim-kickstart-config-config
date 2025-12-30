@@ -26,6 +26,8 @@ return {
       { "<leader>gs", ":Gitsigns stage_hunk<CR>", desc = "Git Stage hunk", mode = { "n", "v" } },
       { "<leader>gt", ":Gitsigns toggle_signs<CR>", desc = "Gitsigns toggle" },
       { "<leader>gu", ":Gitsigns undo_stage_hunk<CR>", desc = "Git Undu hunk" },
+      { "[g", ":Gitsigns prev_hunk<CR>", desc = "Git Previous Hunk" },
+      { "]g", ":Gitsigns next_hunk<CR>", desc = "Git Next hunk" },
       {
         "<leader>gW",
         ':lua require("gitsigns").toggle_word_diff()<CR>',

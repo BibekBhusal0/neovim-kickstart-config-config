@@ -52,7 +52,7 @@ return {
     opts = {
       index = 12,
       short_name = "paste",
-      adapter = { name = "gemini", model = "gemini-1.5-flash" },
+      adapter = { name = "gemini", model = "gemini-2.5-flash" },
     },
     prompts = {
       { role = "user", content = system_prompts.paste },

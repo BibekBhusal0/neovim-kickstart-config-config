@@ -9,7 +9,7 @@ return {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup {
+      require("nvim-treesitter").setup {
         ensure_installed = {
           "bash",
           "css",
@@ -133,6 +133,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = { "BufReadPost", "BufNewFile" },
+    branch = "main",
     config = function()
       local keys = {
         ["/"] = "comment",
@@ -167,7 +168,7 @@ return {
       goto_next_start["]z"] = { query = "@fold", query_group = "folds", desc = "Jump next fold" }
       goto_next_start["[z"] = { query = "@fold", query_group = "folds", desc = "Prev next fold" }
 
-      require("nvim-treesitter.configs").setup {
+      require("nvim-treesitter").setup {
         textobjects = {
           select = {
             enable = true,
@@ -189,86 +190,6 @@ return {
           },
         },
       }
-
-      local function call_require(module_name, call_function, parameter)
-        return function()
-          require(module_name)[call_function](parameter)
-        end
-      end
-
-      local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
-
-      local scroll_center = function()
-        vim.api.nvim_feedkeys("zz", "n", false) -- center
-        -- require('neoscroll').zz { half_win_duration = 10, hide_cursor = true }
-      end
-
-      local orignal_set = ts_repeat_move.set_last_move
-      ts_repeat_move.set_last_move = function(...)
-        local success = orignal_set(...)
-        if success then
-          vim.defer_fn(scroll_center, 5)
-        end
-        return success
-      end
-
-      local orignal_repeat = ts_repeat_move.repeat_last_move
-      ts_repeat_move.repeat_last_move = function(...)
-        local r = orignal_repeat(...)
-        vim.defer_fn(scroll_center, 5)
-        return r
-      end
-
-      local get_pair = ts_repeat_move.make_repeatable_move_pair
-      local next_hunk, prev_hunk = get_pair(function()
-        if vim.wo.diff then
-          vim.cmd.normal { "]c", bang = true }
-        else
-          require("gitsigns").nav_hunk "next"
-        end
-      end, function()
-        if vim.wo.diff then
-          vim.cmd.normal { "[c", bang = true }
-        else
-          require("gitsigns").nav_hunk "prev"
-        end
-      end)
-      local next_dig, prev_dig = get_pair(function()
-        vim.diagnostic.goto_next { float = false }
-      end, function()
-        vim.diagnostic.goto_prev { float = false }
-      end)
-      local tw_next, tw_prev = get_pair(function()
-        vim.cmd "TailwindNextClass"
-      end, function()
-        vim.cmd "TailwindPrevClass"
-      end)
-
-      local todos = {
-        t = {},
-        -- T = { 'TODO' },
-        -- F = { 'FIX' },
-        -- W = { 'WARN', 'WARNING' },
-        -- H = { 'HACK' },
-        -- N = { 'NOTE' },
-      }
-      for k, p in pairs(todos) do
-        local next, prev = get_pair(
-          call_require("todo-comments", "jump_next", { keywords = p }),
-          call_require("todo-comments", "jump_prev", { keywords = p })
-        )
-        local name = #p == 0 and "todo comment" or p[1]
-        map("]" .. k, next, "Jump Next " .. name, mode)
-        map("[" .. k, prev, "Jump Prev " .. name, mode)
-      end
-      map("]g", next_hunk, "Jump Next hunk", mode)
-      map("[g", prev_hunk, "Jump Previous hunk", mode)
-      map("]d", next_dig, "Jump Next Diagnostic", mode)
-      map("[d", prev_dig, "Jump Previous Diagnostic", mode)
-      map("]n", tw_next, "Jump Next Tailwind Class", mode)
-      map("[n", tw_prev, "Jump Previous Tailwind Class", mode)
-      map("<A-j>", ts_repeat_move.repeat_last_move_next, "Repeat last Jump Next")
-      map("<A-k>", ts_repeat_move.repeat_last_move_previous, "Repat last Jump Previous")
     end,
   },
 }

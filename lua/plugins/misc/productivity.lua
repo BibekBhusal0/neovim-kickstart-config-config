@@ -1,6 +1,6 @@
 local transparency_enabled = false
 local wrap_keys = require "utils.wrap_keys"
-local obsidian_dir = "~/OneDrive - dafdodsakjf/Documents/Obsidian Vault"
+local obsidian_dir = "/home/bibek/Documents/obsidian.md"
 
 return {
   {
