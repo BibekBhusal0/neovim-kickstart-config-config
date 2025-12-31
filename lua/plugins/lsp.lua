@@ -232,7 +232,7 @@ return {
 
   {
     "folke/lazydev.nvim",
-    enabled = false,
+    enabled = true,
     ft = "lua",
     opts = {
       library = {},
