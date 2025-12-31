@@ -35,5 +35,4 @@ return {
       { "<leader>lU", "<cmd>LazyUrlBuild<CR>", desc = "Update plugin under cursor" },
     },
   },
-
 }

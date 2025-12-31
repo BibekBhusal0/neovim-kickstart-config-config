@@ -118,8 +118,12 @@ map("<leader>bl", toggle_tabline, "Toggle Tab Line")
 
 -- Diagnostic keymaps
 map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
-map("<leader>]d", function () vim.diagnostic.goto_next{ float = false } end, "Jump next Diagnostic")
-map("<leader>[d", function () vim.diagnostic.goto_prev{ float = false } end, "Jump Previous Diagnostic")
+map("<leader>]d", function()
+  vim.diagnostic.goto_next { float = false }
+end, "Jump next Diagnostic")
+map("<leader>[d", function()
+  vim.diagnostic.goto_prev { float = false }
+end, "Jump Previous Diagnostic")
 
 local function toggle_virtual_lines()
   local current_config = vim.diagnostic.config()

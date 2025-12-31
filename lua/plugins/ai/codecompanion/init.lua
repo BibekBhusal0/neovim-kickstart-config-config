@@ -108,65 +108,65 @@ return {
       },
     },
 
-     opts = {
-        display = {
-          chat = {
-            window = { height = 1 },
-            intro_message = require("utils.icons").others.ai .. "  Ask me anything",
-            show_header_separator = true,
-            separator = "─",
-          },
-          diff = { enabled = true, provider = "mini_diff" },
+    opts = {
+      display = {
+        chat = {
+          window = { height = 1 },
+          intro_message = require("utils.icons").others.ai .. "  Ask me anything",
+          show_header_separator = true,
+          separator = "─",
         },
-        opts = {
-          system_prompt = require("plugins.ai.codecompanion.prompts.system").main,
-        },
+        diff = { enabled = true, provider = "mini_diff" },
+      },
+      opts = {
+        system_prompt = require("plugins.ai.codecompanion.prompts.system").main,
+      },
 
-        strategies = {
-          chat = {
-            adapter = "gemini",
-            model = "gemini-2.5-flash",
-            keymaps = {
-              next_chat = {
-                modes = { n = ">" },
-                callback = "keymaps.next_chat",
-                description = "Next Chat",
-              },
-              previous_chat = {
-                modes = { n = "<" },
-                callback = "keymaps.previous_chat",
-                description = "Previous Chat",
-              },
-              next_header = {
-                modes = { n = "]h" },
-                callback = "keymaps.next_header",
-                description = "Next Header",
-              },
-              previous_header = {
-                modes = { n = "[h" },
-                callback = "keymaps.previous_header",
-                description = "Previous Header",
-              },
+      strategies = {
+        chat = {
+          adapter = "gemini",
+          model = "gemini-2.5-flash",
+          keymaps = {
+            next_chat = {
+              modes = { n = ">" },
+              callback = "keymaps.next_chat",
+              description = "Next Chat",
             },
-            slash_commands = {
-              ["save_history"] = {
-                callback = function(chat)
-                  local history = require("codecompanion").extensions.history
-                  history.save_chat(chat)
-                end,
-                description = "Save Current Chat",
-                opts = { contains_code = false },
-              },
+            previous_chat = {
+              modes = { n = "<" },
+              callback = "keymaps.previous_chat",
+              description = "Previous Chat",
+            },
+            next_header = {
+              modes = { n = "]h" },
+              callback = "keymaps.next_header",
+              description = "Next Header",
+            },
+            previous_header = {
+              modes = { n = "[h" },
+              callback = "keymaps.previous_header",
+              description = "Previous Header",
             },
           },
-          inline = { adapter = "gemini" },
+          slash_commands = {
+            ["save_history"] = {
+              callback = function(chat)
+                local history = require("codecompanion").extensions.history
+                history.save_chat(chat)
+              end,
+              description = "Save Current Chat",
+              opts = { contains_code = false },
+            },
+          },
         },
+        inline = { adapter = "gemini" },
+      },
 
-        prompt_library = require "plugins.ai.codecompanion.prompts",
+      prompt_library = require "plugins.ai.codecompanion.prompts",
 
-        extensions = {
+      extensions = {
 
-          --[[ vectorcode = {
+        --[[ vectorcode = {
             opts = {
               tool_group = {
                 enabled = true,
@@ -193,7 +193,7 @@ return {
             },
           } , ]]
 
-          --[[ mcphub = {
+        --[[ mcphub = {
             callback = "mcphub.extensions.codecompanion",
             opts = {
               make_tools = true,
@@ -206,53 +206,53 @@ return {
             },
           }, ]]
 
-          history = {
-            enabled = true,
-            opts = {
-              keymap = "gh",
-              save_chat_keymap = "<leader>sh",
-              auto_save = false,
-              expiration_days = 0,
-              picker = "telescope",
-              auto_generate_title = true,
-              title_generation_opts = {
-                adapter = "gemini",
-                model = "gemini-2.5-flash",
-                refresh_every_n_prompts = 0,
-                max_refreshes = 3,
-              },
-              continue_last_chat = false,
-              delete_on_clearing_chat = false,
-              enable_logging = false,
+        history = {
+          enabled = true,
+          opts = {
+            keymap = "gh",
+            save_chat_keymap = "<leader>sh",
+            auto_save = false,
+            expiration_days = 0,
+            picker = "telescope",
+            auto_generate_title = true,
+            title_generation_opts = {
+              adapter = "gemini",
+              model = "gemini-2.5-flash",
+              refresh_every_n_prompts = 0,
+              max_refreshes = 3,
             },
-          },
-
-          spinner = {
-            style = "fidget",
-            default_icon = require("utils.icons").others.ai,
-            content = {
-              thinking = { icon = "⚛", message = "Thinking...", spacing = "  " },
-              receiving = { icon = "", message = "Receiving...", spacing = "  " },
-              done = { icon = "", message = "Done!", spacing = "  " },
-              stopped = { icon = "", message = "Stopped", spacing = "  " },
-              cleared = { icon = "", message = "Chat cleared", spacing = "  " },
-              tools_started = { icon = "", message = "Running tools...", spacing = "  " },
-              tools_finished = {
-                icon = "⤷",
-                message = "Processing tool output...",
-                spacing = "  ",
-              },
-              diff_attached = { icon = "", message = "Review changes", spacing = "  " },
-              diff_accepted = { icon = "", message = "Change accepted", spacing = "  " },
-              diff_rejected = { icon = "", message = "Change rejected", spacing = "  " },
-              chat_ready = { icon = "", message = "Chat ready", spacing = "  " },
-              chat_opened = { icon = "", message = "Chat opened", spacing = "  " },
-              chat_hidden = { icon = "", message = "Chat hidden", spacing = "  " },
-              chat_closed = { icon = "", message = "Chat closed", spacing = "  " },
-            },
+            continue_last_chat = false,
+            delete_on_clearing_chat = false,
+            enable_logging = false,
           },
         },
-      }
+
+        spinner = {
+          style = "fidget",
+          default_icon = require("utils.icons").others.ai,
+          content = {
+            thinking = { icon = "⚛", message = "Thinking...", spacing = "  " },
+            receiving = { icon = "", message = "Receiving...", spacing = "  " },
+            done = { icon = "", message = "Done!", spacing = "  " },
+            stopped = { icon = "", message = "Stopped", spacing = "  " },
+            cleared = { icon = "", message = "Chat cleared", spacing = "  " },
+            tools_started = { icon = "", message = "Running tools...", spacing = "  " },
+            tools_finished = {
+              icon = "⤷",
+              message = "Processing tool output...",
+              spacing = "  ",
+            },
+            diff_attached = { icon = "", message = "Review changes", spacing = "  " },
+            diff_accepted = { icon = "", message = "Change accepted", spacing = "  " },
+            diff_rejected = { icon = "", message = "Change rejected", spacing = "  " },
+            chat_ready = { icon = "", message = "Chat ready", spacing = "  " },
+            chat_opened = { icon = "", message = "Chat opened", spacing = "  " },
+            chat_hidden = { icon = "", message = "Chat hidden", spacing = "  " },
+            chat_closed = { icon = "", message = "Chat closed", spacing = "  " },
+          },
+        },
+      },
+    },
   },
 
   {
