@@ -1,7 +1,7 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
-map("<leader>mc", ":e C:/users/bibek/.config/mcphub/servers.json<CR>", "MCP config")
+map("<leader>mc", ":e ~/.config/mcphub/servers.json<CR>", "MCP config")
 
 return {
   "ravitemer/mcphub.nvim",

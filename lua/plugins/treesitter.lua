@@ -50,7 +50,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     keys = wrap_keys {
-      { "<leader>tC", ":TSContextToggle<CR>", desc = "Toggle Treesitter Context" },
+      { "<leader>tC", ":TSContext toggle<CR>", desc = "Toggle Treesitter Context" },
     },
     event = { "BufReadPost", "BufNewFile" },
     config = function()
@@ -66,6 +66,7 @@ return {
   {
     "ziontee113/syntax-tree-surfer",
     opts = {},
+    enabled = false,
     keys = {
       { "<A-j>", "<cmd>STSSwapNextVisual<CR>", desc = "Swap Next", mode = "x" },
       { "<A-k>", "<cmd>STSSwapPrevVisual<CR>", desc = "Swap Previous", mode = "x" },

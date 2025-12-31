@@ -62,17 +62,7 @@ local commands = {
       vim.cmd "Alpha"
     end,
     pre_defer = function()
-      vim.api.nvim_set_current_dir "~\\AppData\\Roaming\\zen\\Profiles\\krw1z2ua.Default (alpha)\\chrome"
-    end,
-  },
-
-  {
-    condition = is_arg "zen2",
-    post_defer = function()
-      vim.cmd "Alpha"
-    end,
-    pre_defer = function()
-      vim.api.nvim_set_current_dir "C:\\Users\\bibek\\AppData\\Roaming\\zen\\Profiles\\xxbw6p4k.new\\chrome\\JS\\custom"
+      vim.api.nvim_set_current_dir "/home/bibek/.zen/pf761izm.Default Profile/chrome"
     end,
   },
 
