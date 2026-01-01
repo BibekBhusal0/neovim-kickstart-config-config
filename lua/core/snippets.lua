@@ -56,6 +56,17 @@ local commands = {
     end,
   },
 
+{
+    condition = is_arg "hypr",
+    post_defer = function()
+      vim.cmd("edit overwrite/hyprland.overwrite.conf")
+      vim.cmd "normal! zR"
+    end,
+    pre_defer = function()
+      vim.api.nvim_set_current_dir("/home/bibek/Code/omarchy-overrides")
+    end,
+  },
+
   {
     condition = is_arg "zen",
     post_defer = function()
