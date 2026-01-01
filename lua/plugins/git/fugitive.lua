@@ -26,8 +26,7 @@ local function change_last_commit_message()
     return
   end
   require "utils.input"("Commit Message", function(title)
-    local cmd = "Git commit --amend -m "
-    vim.fn.shellescape(title)
+    local cmd = "Git commit --amend -m " ..   vim.fn.shellescape(title)
     vim.cmd(cmd)
   end, m, 60, require("utils.icons").others.github .. "  ")
 end
