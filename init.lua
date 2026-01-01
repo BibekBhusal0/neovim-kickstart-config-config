@@ -37,5 +37,4 @@ require("lazy").setup {
   require "plugins.treesitter", -- syntax highlighting
   require "plugins.trouble", -- provides better references diagnostics
   require "plugins.windowManagemet", -- Buffer Tab and Session Management
-  -- require "plugins.weather"
 }
