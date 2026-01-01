@@ -121,8 +121,12 @@ return {
           local filetype = vim.bo.filetype
           local is_webdev_file = vim.tbl_contains(webDev, filetype)
           if is_webdev_file then
-            vim_item = require("tailwind-tools.cmp").lspkind_format(entry, vim_item)
+            local status, lspkind_format = pcall(require, "tailwind-tools.cmp")
+            if status then
+              vim_item = lspkind_format(entry, vim_item)
+            end
           end
+
           vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
           vim_item.menu = ({
             luasnip = " ",

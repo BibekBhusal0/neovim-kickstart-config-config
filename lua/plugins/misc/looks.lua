@@ -48,7 +48,7 @@ return {
 
   {
     "folke/noice.nvim",
-    enabled = false,
+    enabled = true,
     -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
