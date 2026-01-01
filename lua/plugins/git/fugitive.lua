@@ -3,14 +3,14 @@ local map = require "utils.map"
 
 local function commit_with_message()
   require "utils.input"(" Commit Message ", function(text)
-    vim.cmd("Git commit -m '" .. text .. "'")
+    vim.cmd("Git commit -m " .. vim.fn.shellescape(text))
   end, "", 40, require("utils.icons").others.github .. "  ")
 end
 
 local function commit_all_with_message()
   require "utils.input"(" Commit Message ", function(text)
     vim.cmd "Git add ."
-    vim.cmd("Git commit -am'" .. text .. "'")
+    vim.cmd("Git commit -m " .. vim.fn.shellescape(text))
   end, "", 50, require("utils.icons").others.github .. "  ")
 end
 
@@ -26,7 +26,7 @@ local function change_last_commit_message()
     return
   end
   require "utils.input"("Commit Message", function(title)
-    local cmd = "Git commit --amend -m '" .. title .. "'"
+    local cmd = "Git commit --amend -m " vim.fn.shellescape(title)
     vim.cmd(cmd)
   end, m, 60, require("utils.icons").others.github .. "  ")
 end
