@@ -18,10 +18,6 @@ map("<leader>S", ":split | ter<CR>", "Split Terminal horizontally")
 map("<leader>br", ":e!<CR>", "Buffer Reset")
 
 -- Navigate between splits
-map("<C-k>", ":wincmd k<CR>", "Window up")
-map("<C-j>", ":wincmd j<CR>", "Window down")
-map("<C-h>", ":wincmd h<CR>", "Window left")
-map("<C-l>", ":wincmd l<CR>", "Window right")
 map("<C-p>", ":wincmd p<CR>", "Window Floating")
 
 -- Tabs
@@ -232,4 +228,23 @@ return {
     },
     opts = { hint = "floating-big-letter" },
   }, -- picking window
+
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+      "TmuxNavigatorProcessList",
+    },
+    keys = wrap_keys {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>", desc = "Window Left" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>", desc = "Window Down" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" , desc = "Window Up"},
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" , desc = "Window Right"},
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" , desc = "WIndow Previous"},
+    },
+  }
 }
