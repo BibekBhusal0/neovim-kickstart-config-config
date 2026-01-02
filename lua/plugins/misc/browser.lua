@@ -33,6 +33,7 @@ local searchFiletype = ":lua require('browse.devdocs').search_with_filetype()<CR
 return {
   {
     "dhruvmanila/browser-bookmarks.nvim",
+    enabled = false,
     keys = wrap_keys { { "<leader>B", ":BrowserBookmarks<CR>", desc = "Search Browser Bookmarks" } },
     cmd = { "BrowserBookmarks" },
     dependencies = { "nvim-telescope/telescope-ui-select.nvim" },

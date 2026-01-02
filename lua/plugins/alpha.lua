@@ -22,19 +22,67 @@ local long_quotes = {
   { "To replace programmers with bots, clients will have to accurately describe what they want, We are safe.", "Random Reddit post" },
 } ]]
 
+-- Logic to hide lualine and bufferline dynimically when alpha opens
+-- UI state memory
+local ui_state = {
+  laststatus = nil,
+  showtabline = nil,
+}
+
+local function hide_ui()
+  if ui_state.laststatus == nil then
+    ui_state.laststatus = vim.o.laststatus
+  end
+  if ui_state.showtabline == nil then
+    ui_state.showtabline = vim.o.showtabline
+  end
+
+  vim.o.laststatus = 0
+  vim.o.showtabline = 0
+end
+
+local function restore_ui()
+  if ui_state.laststatus ~= nil then
+    vim.o.laststatus = ui_state.laststatus
+    ui_state.laststatus = nil
+  end
+  if ui_state.showtabline ~= nil then
+    vim.o.showtabline = ui_state.showtabline
+    ui_state.showtabline = nil
+  end
+end
+
+-- Hide when Alpha is ready
+vim.api.nvim_create_autocmd("User", {
+  pattern = "AlphaReady",
+  callback = hide_ui,
+})
+
+-- Restore when leaving Alpha filetype
+vim.api.nvim_create_autocmd("BufLeave", {
+  callback = function()
+    if vim.bo.filetype == "alpha" then
+      restore_ui()
+    end
+  end,
+})
+
+
 local function render()
   local alpha = require "alpha"
 
   local header = {
-    [[                                                                     ]],
-    [[       ████ ██████           █████      ██                     ]],
-    [[      ███████████             █████                             ]],
-    [[      █████████ ███████████████████ ███   ███████████   ]],
-    [[     █████████  ███    █████████████ █████ ██████████████   ]],
-    [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-    [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-    [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-  }
+      [[                                                                   ]],
+      [[ ███▄▄▄▄      ▄████████  ▄██████▄   ▄█    █▄   ▄█    ▄▄▄▄███▄▄▄▄   ]],
+      [[ ███▀▀▀██▄   ███    ███ ███    ███ ███    ███ ███  ▄██▀▀▀███▀▀▀██▄ ]],
+      [[ ███   ███   ███    █▀  ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
+      [[ ███   ███  ▄███▄▄▄     ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
+      [[ ███   ███ ▀▀███▀▀▀     ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
+      [[ ███   ███   ███    █▄  ███    ███ ███    ███ ███  ███   ███   ███ ]],
+      [[ ███   ███   ███    ███ ███    ███ ███    ███ ███  ███   ███   ███ ]],
+      [[  ▀█   █▀    ██████████  ▀██████▀   ▀██████▀  █▀    ▀█   ███   █▀  ]],
+      [[                                                                   ]],
+    }
 
   local function button(sc, icon, txt, keybind, hl)
     local leader = "SPC"
@@ -104,19 +152,15 @@ local function render()
     { "a", require("utils.icons").others.ai, "MCP hub", ":MCPHub<CR>", "@constructor" },
   }, true)
 
-  local project_buttons = create_button_group({
+    local other_buttons = create_button_group {
     { "d", "󰾶", "Change Directory", ":Proot<CR>" },
     { "s", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>' },
-  }, true)
-
-  local other_buttons = create_button_group {
-    { "b", "", "Search Browser Bookmarks", ":BrowserBookmarks<CR>" },
     { "l", "", "Leetcode Dashboard", ":Leet<CR>" },
     { "q", "󰅙", "Quit", ":qa<CR>", "DiagnosticError" },
   }
 
   local buttons =
-    { type = "group", val = { file_buttons, popup_buttons, project_buttons, other_buttons } }
+    { type = "group", val = { file_buttons, popup_buttons, other_buttons } }
 
   local function get_fortune()
     local fortune = require("fortune").get_fortune()

@@ -50,7 +50,7 @@ return {
     "folke/noice.nvim",
     enabled = true,
     -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
-    event = { "BufReadPost", "BufNewFile" },
+    event = {"VeryLazy"},
     dependencies = {
       {
         "rcarriga/nvim-notify",
