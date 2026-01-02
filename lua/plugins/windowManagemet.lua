@@ -70,6 +70,38 @@ vim.api.nvim_create_user_command("Load", function()
   require("resession").load("auto-session", { silence_errors = true })
 end, {})
 
+vim.api.nvim_create_user_command('SessionSave', function(opts)
+  if opts.args ~= "" then
+    require("resession").save(opts.args, { notify = true })
+  else
+    require("resession").save(nil, { notify = true })
+  end
+end, { nargs = '?' })
+
+vim.api.nvim_create_user_command('SessionLoad', function(opts)
+  if opts.args ~= "" then
+    require("resession").load(opts.args, { attach = true, silence_errors = false })
+  else
+    require("resession").load(nil, { attach = true, silence_errors = false })
+  end
+end, { nargs = '?' })
+
+vim.api.nvim_create_user_command('SessionSaveTab', function(opts)
+  if opts.args ~= "" then
+    require("resession").save_tab(opts.args, { notify = true })
+  else
+    require("resession").save_tab(nil, { notify = true })
+  end
+end, { nargs = '?' })
+
+vim.api.nvim_create_user_command('SessionDelete', function(opts)
+  if opts.args ~= "" then
+    require("resession").delete(opts.args, { notify = true })
+  else
+    require("resession").delete(nil, { notify = true })
+  end
+end, { nargs = '?' })
+
 vim.cmd "cnoreabbrev <expr> qs ((getcmdtype() == ':' && getcmdline() ==# 'qs') ? 'Qs' : 'qs')"
 vim.cmd "cnoreabbrev <expr> load ((getcmdtype() == ':' && getcmdline() ==# 'load') ? 'Load' : 'load')"
 
@@ -101,10 +133,10 @@ return {
   {
     "stevearc/resession.nvim",
     keys = wrap_keys {
-      { "<leader>sz", ':lua require("resession").delete()<CR>', desc = "Session Delete" },
-      { "<leader>sl", ':lua require("resession").load()<CR>', desc = "Session Load" },
-      { "<leader>ss", ':lua require("resession").save()<CR>', desc = "Session Save" },
-      { "<leader>sS", ':lua require("resession").save_tab()<CR>', desc = "Session Save Tab" },
+      { "<leader>sz", ':SessionDelete<CR>', desc = "Session Delete" },
+      { "<leader>sl", ':SessionRestore<CR>', desc = "Session Load" },
+      { "<leader>ss", ':SessionSave<CR>', desc = "Session Save" },
+      { "<leader>sS", ':SessionSaveTab<CR>', desc = "Session Save Tab" },
     },
     opts = {
       buf_filter = function(bufnr)
