@@ -5,6 +5,7 @@ local obsidian_dir = "/home/bibek/Documents/obsidian.md"
 return {
   {
     "quentingruber/pomodoro.nvim",
+    enabled = false,
     cmd = {
       "PomodoroDelayBreak",
       "PomodoroForceBreak",

@@ -1,5 +1,16 @@
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    {
+      enabled =false,
+      "vimpostor/vim-tpipeline",
+      config = function()
+        vim.g.tpipeline_autoembed = 1
+        vim.g.tpipeline_restore = 1
+        vim.g.tpipeline_clearstl = 1
+      end,
+    },
+  },
   event = "VimEnter",
   config = function()
     local mode = {
@@ -81,15 +92,15 @@ return {
         return (string.format(" %d/%d", stats.loaded, stats.count))
       end,
     }
-    local pomodoro = {
-      function()
-        if not package.loaded["pomodoro"] then
-          return " 0:0"
-        end
-        return require("pomodoro").get_pomodoro_status("", "", "")
-      end,
-      cond = hide_in_width,
-    }
+    -- local pomodoro = {
+    --   function()
+    --     if not package.loaded["pomodoro"] then
+    --       return " 0:0"
+    --     end
+    --     return require("pomodoro").get_pomodoro_status("", "", "")
+    --   end,
+    --   cond = hide_in_width,
+    -- }
 
     require("lualine").setup {
       options = {
@@ -116,7 +127,7 @@ return {
       sections = {
         lualine_a = { mode },
         lualine_b = { "branch" },
-        lualine_c = { diff, pomodoro },
+        lualine_c = { diff },
         lualine_x = {
           noice_info,
           diagnostics,
