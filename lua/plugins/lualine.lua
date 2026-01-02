@@ -2,7 +2,7 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     {
-      enabled =false,
+      enabled = false,
       "vimpostor/vim-tpipeline",
       config = function()
         vim.g.tpipeline_autoembed = 1
