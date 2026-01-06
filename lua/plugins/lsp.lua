@@ -158,6 +158,7 @@ return {
             Lua = { format = { enable = false } },
           },
         },
+        bashls = { filetypes = { "sh", "zsh" } }
       }
       require("mason").setup()
 
