@@ -1,4 +1,5 @@
 local wrap_keys = require "utils.wrap_keys"
+-- TODO: this might work on linux need to test
 
 return {
   "polarmutex/git-worktree.nvim",

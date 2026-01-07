@@ -29,9 +29,8 @@ return {
       desc = "Trouble Diagnostics Toggle Buffer",
     },
     { "<leader>ce", ":Trouble diagnostics toggle<CR>", desc = "Trouble Diagnostics Toggle" },
-    { "<leader>cL", ":Trouble loclist toggle<CR>", desc = "Trouble LocList Toggle" },
     {
-      "<leader>cl",
+      "<leader>cL",
       ":Trouble lsp toggle focus=false win.position=right<CR>",
       desc = "Trouble LSP Toggle",
     },

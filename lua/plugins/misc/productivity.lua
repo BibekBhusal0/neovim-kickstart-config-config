@@ -4,35 +4,6 @@ local obsidian_dir = "/home/bibek/Documents/obsidian.md"
 
 return {
   {
-    "quentingruber/pomodoro.nvim",
-    enabled = false,
-    cmd = {
-      "PomodoroDelayBreak",
-      "PomodoroForceBreak",
-      "PomodoroSkipBreak",
-      "PomodoroStart",
-      "PomodoroStop",
-      "PomodoroUI",
-    },
-    keys = wrap_keys {
-      { "<Leader>pb", ":PomodoroForceBreak<CR>", desc = "Pomodoro Force Break" },
-      { "<Leader>pB", ":PomodoroSkipBreak<CR>", desc = "Pomodoro Skip Break" },
-      { "<Leader>pd", ":PomodoroDelayBreak<CR>", desc = "Pomodoro Delay Break" },
-      { "<leader>ps", ":PomodoroStart<CR>", desc = "Pomodoro Start" },
-      { "<Leader>pS", ":PomodoroStop<CR>", desc = "Pomodoro Stop" },
-      { "<Leader>pu", ":PomodoroUI<CR>", desc = "Pomodoro UI" },
-    },
-    opts = {
-      start_at_launch = false,
-      work_duration = 25,
-      break_duration = 5,
-      delay_duration = 1,
-      long_break_duration = 15,
-      breaks_before_long = 4,
-    },
-  }, -- Simple pomodoro timer
-
-  {
     "folke/zen-mode.nvim",
     opts = {
       window = {
@@ -65,7 +36,6 @@ return {
           { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
         transparency_enabled = require("utils.transparency").bg_transparent
         require("utils.transparency").disable_transparency "#000000"
-        vim.cmd "PomodoroSkipBreak"
       end,
 
       on_close = function()
@@ -83,7 +53,6 @@ return {
         else
           require("utils.transparency").disable_transparency()
         end
-        vim.cmd "PomodoroUI"
       end,
     },
     keys = wrap_keys { { "<leader>zz", ":ZenMode<CR>", desc = "Zen Mode" } },
@@ -91,6 +60,7 @@ return {
   },
 
   {
+    -- FIX: Gives warning which need fixing
     "obsidian-nvim/obsidian.nvim",
     version = "*",
     keys = wrap_keys {

@@ -19,23 +19,6 @@ end
 local sate_to_clipboard = ":lua require('nvim-silicon').clip()<CR>"
 
 return {
-
-  {
-    "TobinPalmer/rayso.nvim",
-    cmd = { "Rayso" },
-    keys = wrap_keys {
-      { "<leader>rs", ":Rayso<CR>", desc = "Screenshot with rayso", mode = { "n", "v" } },
-    },
-    opts = {
-      open_cmd = "zen",
-      options = {
-        background = false,
-        padding = 16,
-        theme = "prisma",
-      },
-    },
-  },
-
   {
     "michaelrommel/nvim-silicon",
     cmd = "Silicon",

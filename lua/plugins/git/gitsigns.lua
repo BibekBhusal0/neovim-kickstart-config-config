@@ -22,17 +22,11 @@ return {
       { "<leader>gq", ":Gitsigns setqflist<CR>", desc = "Git quick fix list" },
       { "<leader>gR", ":Gitsigns reset_buffer<CR>", desc = "Git Reset buffer" },
       { "<leader>gr", ":Gitsigns reset_hunk<CR>", desc = "Git Reset hunk", mode = { "n", "v" } },
-      { "<leader>gS", ":Gitsigns stage_buffer<CR>", desc = "Git Stage buffer" },
       { "<leader>gs", ":Gitsigns stage_hunk<CR>", desc = "Git Stage hunk", mode = { "n", "v" } },
       { "<leader>gt", ":Gitsigns toggle_signs<CR>", desc = "Gitsigns toggle" },
       { "<leader>gu", ":Gitsigns undo_stage_hunk<CR>", desc = "Git Undu hunk" },
       { "[g", ":Gitsigns prev_hunk<CR>", desc = "Git Previous Hunk" },
       { "]g", ":Gitsigns next_hunk<CR>", desc = "Git Next hunk" },
-      {
-        "<leader>gW",
-        ':lua require("gitsigns").toggle_word_diff()<CR>',
-        desc = "Git Toggle word diff",
-      },
       {
         "ag",
         ':lua require("gitsigns").select_hunk()<CR>',

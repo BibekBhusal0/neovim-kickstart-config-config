@@ -19,23 +19,6 @@ return {
   }, -- Simple ways to trail whitespace useful when formatter is not working
 
   {
-    "nacro90/numb.nvim",
-    opts = {},
-    keys = {
-      { "0", mode = "c" },
-      { "1", mode = "c" },
-      { "2", mode = "c" },
-      { "3", mode = "c" },
-      { "4", mode = "c" },
-      { "5", mode = "c" },
-      { "6", mode = "c" },
-      { "7", mode = "c" },
-      { "8", mode = "c" },
-      { "9", mode = "c" },
-    },
-  }, -- Preview of line from command mode
-
-  {
     "windwp/nvim-autopairs",
     keys = {
       { "{", mode = { "i" } },
@@ -110,6 +93,7 @@ return {
   }, -- Toggle between true and false ; more
 
   {
+    -- TODO: maybe keyboard keybard shortcut for this can be changed.
     "johmsalas/text-case.nvim",
     opts = {},
     keys = {
@@ -130,6 +114,7 @@ return {
     keys = {
       { "g=", mode = { "n", "o", "x" }, desc = "Minit Evaluate" },
       { "gm", mode = { "n", "o", "x" }, desc = "Minit Multiply" },
+      -- TODO: this keyboard shortcut needs to be chagned this is must used
       { "<leader>rl", mode = { "n", "o", "x" }, desc = "Minit Replace" },
       { "gs", mode = { "n", "o", "x" }, desc = "Minit Sort" },
       { "gx", mode = { "n", "o", "x" }, desc = "Minit Exchange" },
@@ -148,12 +133,6 @@ return {
   }, -- advanced join and split
 
   {
-    "abecodes/tabout.nvim",
-    event = "InsertCharPre",
-    opts = {},
-  }, -- easy jumping between start and end brackets in insert mode
-
-  {
     "y3owk1n/time-machine.nvim",
     cmd = { "TimeMachineToggle", "TimeMachinePurgeBuffer", "TimeMachinePurgeAll" },
     opts = {},
@@ -170,14 +149,6 @@ return {
     "piersolenski/import.nvim",
     opts = { picker = "telescope" },
     cmd = { "Import" },
-    keys = wrap_keys {
-      {
-        "<leader>fi",
-        function()
-          require("import").pick()
-        end,
-        desc = "Import",
-      },
-    },
+    keys = wrap_keys { { "<leader>fi", ":lua require('import').pick()<CR>", desc = "Import" } },
   },
 }

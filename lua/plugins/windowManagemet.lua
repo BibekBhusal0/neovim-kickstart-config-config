@@ -57,10 +57,6 @@ end
 
 map("<leader>bq", close_all_saved_buffers, "Buffer close all saved")
 
-local function harpoon(a, b)
-  return string.format(":lua require('harpoon.%s').%s()<CR>", a, b)
-end
-
 return {
 
   {
@@ -85,20 +81,6 @@ return {
       end, "Move Buffer")
     end,
   }, -- only show buffer from current tag
-
-  {
-    "ThePrimeagen/harpoon",
-    keys = wrap_keys {
-      { "<leader>ha", harpoon("mark", "add_file"), desc = "Harpoon Add File" },
-      { "<leader>hc", harpoon("mark", "clear_all"), desc = "Harpoon Clear Files" },
-      { "<leader>hj", harpoon("ui", "nav_prev"), desc = "Harpoon Previous" },
-      { "<leader>hk", harpoon("ui", "nav_next"), desc = "Harpoon Next" },
-      { "<leader>hm", harpoon("ui", "toggle_quick_menu"), desc = "Harpoon Menu" },
-      { "<leader>hn", harpoon("ui", "nav_next"), desc = "Harpoon Next" },
-      { "<leader>hp", harpoon("ui", "nav_prev"), desc = "Harpoon Previous" },
-      { "<leader>ht", harpoon("mark", "toggle_file"), desc = "Harpoon Toggle File" },
-    },
-  }, -- pinning files and quickly moving between them
 
   {
     "BibekBhusal0/bufstack.nvim",
@@ -164,29 +146,6 @@ return {
       { "<leader>wm", ":lua require'winmove'.start_mode('move')<CR>", desc = "Window Move mode" },
     },
   }, -- Easy move and swap split windows
-
-  {
-    "jyscao/ventana.nvim",
-    cmd = { "VentanaTranspose", "VentanaShift", "VentanaShiftMaintailLinear" },
-    keys = wrap_keys {
-      { "<leader>wr", ":VentanaTranspose<CR>", desc = "Window Rotate(transpose)" },
-      { "<leader>ww", ":VentanaShift<CR>", desc = "Window Shift" },
-    },
-  }, -- easy change layout of split window
-
-  {
-    "s1n7ax/nvim-window-picker",
-    main = "window-picker",
-    lazy = true,
-    keys = wrap_keys {
-      {
-        "<leader>wp",
-        ":lua vim.api.nvim_set_current_win(require'window-picker'.pick_window())<CR>",
-        desc = "Window pick",
-      },
-    },
-    opts = { hint = "floating-big-letter" },
-  }, -- picking window
 
   {
     "christoomey/vim-tmux-navigator",

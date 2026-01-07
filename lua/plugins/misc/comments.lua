@@ -5,6 +5,7 @@ return {
   {
     {
       "numToStr/Comment.nvim",
+      -- TODO: optimize this this not needs to load for all files
       dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
       keys = {
         { "gcc", mode = "n", desc = "Comment toggle current line" },
@@ -69,7 +70,6 @@ return {
       },
       config = function()
         require("todo-comments").setup { signs = false }
-
         local todos = {
           t = {},
           -- T = { 'TODO' },

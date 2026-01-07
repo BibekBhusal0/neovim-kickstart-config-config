@@ -32,6 +32,7 @@ return {
   },
 
   {
+    -- FIX: not working with latest version of treesitter.
     "luckasRanarison/tailwind-tools.nvim",
     enabled = false,
     build = ":UpdateRemotePlugins",
@@ -56,23 +57,6 @@ return {
     opts = {},
     ft = webDev,
   }, -- Autoclose HTML tags
-
-  {
-    "TiagoMDG/react-comp-gen.nvim",
-    cmd = { "CreateComponent" },
-    keys = wrap_keys {
-      {
-        "<leader>CC",
-        function()
-          require "utils.input"("Name", function(text)
-            vim.cmd("CreateComponent " .. text)
-          end, "", 20, "󰜈 ")
-        end,
-        desc = "Add component",
-      },
-    },
-    opts = { defult_path = "/src/components/", generate_css_file = false },
-  },
 
   {
     "mawkler/jsx-element.nvim",

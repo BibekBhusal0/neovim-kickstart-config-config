@@ -64,6 +64,7 @@ return {
   },
 
   {
+    -- FIX: not working for latest version of treesitter need replacement
     "ziontee113/syntax-tree-surfer",
     opts = {},
     enabled = false,

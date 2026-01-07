@@ -95,13 +95,4 @@ return {
       }
     end,
   },
-
-  {
-    "echasnovski/mini.diff",
-    lazy = true,
-    config = function()
-      local diff = require "mini.diff"
-      diff.setup { source = diff.gen_source.none() }
-    end,
-  },
 }

@@ -92,15 +92,6 @@ return {
         return (string.format(" %d/%d", stats.loaded, stats.count))
       end,
     }
-    -- local pomodoro = {
-    --   function()
-    --     if not package.loaded["pomodoro"] then
-    --       return " 0:0"
-    --     end
-    --     return require("pomodoro").get_pomodoro_status("", "", "")
-    --   end,
-    --   cond = hide_in_width,
-    -- }
 
     require("lualine").setup {
       options = {
@@ -132,48 +123,6 @@ return {
           noice_info,
           diagnostics,
           { "filetype", cond = hide_in_width },
-          {
-            -- https://ravitemer.github.io/mcphub.nvim/extensions/lualine.html
-            function()
-              -- Check if MCPHub is loaded
-              if not vim.g.loaded_mcphub then
-                return "󰐻 -"
-              end
-
-              local count = vim.g.mcphub_servers_count or 0
-              local status = vim.g.mcphub_status or "stopped"
-              local executing = vim.g.mcphub_executing
-
-              -- Show "-" when stopped
-              if status == "stopped" then
-                return "󰐻 -"
-              end
-
-              -- Show spinner when executing, starting, or restarting
-              if executing or status == "starting" or status == "restarting" then
-                local frames =
-                  { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-                local frame = math.floor(vim.loop.now() / 100) % #frames + 1
-                return "󰐻 " .. frames[frame]
-              end
-
-              return "󰐻 " .. count
-            end,
-            color = function()
-              if not vim.g.loaded_mcphub then
-                return { fg = "#6c7086" } -- Gray for not loaded
-              end
-
-              local status = vim.g.mcphub_status or "stopped"
-              if status == "ready" or status == "restarted" then
-                return { fg = "#50fa7b" } -- Green for connected
-              elseif status == "starting" or status == "restarting" then
-                return { fg = "#ffb86c" } -- Orange for connecting
-              else
-                return { fg = "#ff5555" } -- Red for error/stopped
-              end
-            end,
-          },
         },
         lualine_y = { codeium_status, plugins },
         lualine_z = { getFileName },

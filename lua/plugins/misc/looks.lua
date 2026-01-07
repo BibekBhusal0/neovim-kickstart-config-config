@@ -3,24 +3,6 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
-    "uga-rosa/ccc.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    keys = wrap_keys {
-      { "<leader>cP", ":CccPick<CR>", desc = "Color Picker" },
-      { "<leader>cm", ":CccConvert<CR>", desc = "Color Convert" },
-      { "<leader>cH", ":CccHighlighterToggle<CR>", desc = "Color Highlighter Toggle" },
-    },
-    config = function()
-      local ccc = require "ccc"
-      ccc.setup {
-        default_color = "#c6c8d1",
-        point_char = "░",
-        highlighter = { auto_enable = false, lsp = true },
-      }
-    end,
-  }, -- Color picker
-
-  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufNewFile", "BufReadPost" },
@@ -53,6 +35,7 @@ return {
     event = {"VeryLazy"},
     dependencies = {
       {
+        -- TODO: might replace this with mini notify
         "rcarriga/nvim-notify",
         opts = {
           icons = require("utils.icons").diagnostics,
@@ -127,22 +110,6 @@ return {
   {
     "petertriho/nvim-scrollbar",
     event = { "BufNewFile", "BufReadPost" },
-
-    dependencies = {
-      "kevinhwang91/nvim-hlslens",
-      config = function()
-        require("scrollbar.handlers.search").setup { calm_down = true, nearest_only = true }
-        -- vim.api.nvim_feedkeys("zz", "n", false) -- center
-        local cmd = ":lua vim.api.nvim_feedkeys('zz','n',false)<CR>"
-        map("n", ":execute('normal! ' . v:count1 . 'n')<CR>" .. cmd, "Find Next")
-        map("N", ":execute('normal! ' . v:count1 . 'N')<CR>" .. cmd, "Find Previous")
-        map("*", "*" .. cmd, "Find Word Under Cursor")
-        map("#", "#" .. cmd, "Find Word Before Cursor")
-        map("g*", "g*" .. cmd, "Find Word Under Cursor")
-        map("g#", "g#" .. cmd, "Find Word Before Cursor")
-      end,
-    },
-
     opts = {
       handle = { blend = 0 },
       marks = { Cursor = { color = "#00ff00" } },

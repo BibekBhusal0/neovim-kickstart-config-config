@@ -3,7 +3,7 @@ return function()
     require("trouble.sources.telescope").open(...)
   end
 
-  local multi_selection_codecompanion = function(prompt_bufnr)
+  local multi_selection = function(prompt_bufnr)
     local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
     local multi = picker:get_multi_selection()
 
@@ -80,7 +80,7 @@ return function()
     ["<a-t>"] = actions.select_tab,
     ["<c-g>"] = open_with_trouble,
     ["<c-y>"] = yank_selected,
-    ["<cr>"] = multi_selection_codecompanion,
+    ["<cr>"] = multi_selection,
   }
 
   require("telescope").setup {

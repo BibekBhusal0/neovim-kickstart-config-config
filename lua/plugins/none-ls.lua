@@ -3,7 +3,6 @@ local wrap_keys = require "utils.wrap_keys"
 local format = function()
   vim.lsp.buf.format { async = true }
 end
--- require "utils.map"("<leader>F", format, "Format file using LSP")
 
 return {
   "nvimtools/none-ls.nvim",

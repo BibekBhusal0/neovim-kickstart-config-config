@@ -35,7 +35,6 @@ return {
   require "plugins.git.gitsigns",
   require "plugins.git.pipeline",
   require "plugins.git.octo",
-  require "plugins.git.lazygit",
   require "plugins.git.tardis",
   require "plugins.git.worktree",
 }
