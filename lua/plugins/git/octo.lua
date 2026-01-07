@@ -16,11 +16,11 @@ return {
     mappings = {
       pull_request = {
         merge_pr = { lhs = "<leader>pm", desc = "Merge PR" },
-        notification = {
-          read = { lhs = "<leader>nr", desc = "mark notification as read" },
-          done = { lhs = "<leader>nd", desc = "mark notification as done" },
-          unsubscribe = { lhs = "<leader>nu", desc = "unsubscribe from notifications" },
-        },
+      },
+      notification = {
+        read = { lhs = "<leader>nr", desc = "mark notification as read" },
+        done = { lhs = "<leader>nd", desc = "mark notification as done" },
+        unsubscribe = { lhs = "<leader>nu", desc = "unsubscribe from notifications" },
       },
     },
   },
