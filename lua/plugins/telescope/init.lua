@@ -4,4 +4,5 @@ return {
   require "plugins.telescope.lazy",
   require "plugins.telescope.telescope",
   require "plugins.telescope.ui-select",
+  require "plugins.telescope.zoxide",
 }
