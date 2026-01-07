@@ -2,17 +2,6 @@ local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 local webDev =
   { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" }
-local patterns = {
-  "tw`([^`]*)",
-  'tw="([^"]*)',
-  'tw={"([^"}]*)',
-  "tw\\.\\w+`([^`]*)",
-  "tw\\(.*?\\)`([^`]*)",
-  { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-  { "classnames\\(([^)]*)\\)", "'([^']*)'" },
-  { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-  { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-}
 
 return {
   {

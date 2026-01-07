@@ -1,5 +1,25 @@
 local kind_icons = require("utils.icons").symbols
 
+-- Source: https://www.reddit.com/r/neovim/comments/1g68lsy/easiest_way_to_add_tailwindcss_support_for/
+local format_tailwind = function(entry, item)
+  local entryItem = entry:get_completion_item()
+  local color = entryItem.documentation
+
+  -- check if color is hexcolor
+  if color and type(color) == "string" and color:match "^#%x%x%x%x%x%x$" then
+    local hl = "hex-" .. color:sub(2)
+
+    if #vim.api.nvim_get_hl(0, { name = hl }) == 0 then
+      vim.api.nvim_set_hl(0, hl, { fg = color })
+    end
+
+    item.kind = " "
+    item.kind_hl_group = hl
+  end
+
+  return item
+end
+
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -110,26 +130,13 @@ return {
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-          local webDev =
-            { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" }
-          local filetype = vim.bo.filetype
-          local is_webdev_file = vim.tbl_contains(webDev, filetype)
-          if is_webdev_file then
-            local status, lspkind_format = pcall(require, "tailwind-tools.cmp")
-            if status then
-              vim_item = lspkind_format(entry, vim_item)
-            end
-          end
-
           vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+          vim_item = format_tailwind(entry, vim_item)
           vim_item.menu = ({
             luasnip = " ",
             nvim_lsp = " ",
             buffer = " ",
             path = " ",
-            emoji = "",
-            lorem_ipsum = "󰎞 ",
-            calc = " ",
             codeium = require("utils.icons").others.ai .. "  ",
           })[entry.source.name]
           return vim_item
