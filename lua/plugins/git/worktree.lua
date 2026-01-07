@@ -1,9 +1,7 @@
 local wrap_keys = require "utils.wrap_keys"
--- TODO: this might work on linux need to test
 
 return {
   "polarmutex/git-worktree.nvim",
-  enabled = false,
   keys = wrap_keys {
     {
       "<leader>gwn",
@@ -13,18 +11,10 @@ return {
     {
       "<leader>gww",
       ":lua require('telescope').extensions.git_worktree.git_worktree()<CR>",
-      desc = "Git Worktree (no)",
-    },
-    {
-      "<leader>gws",
-      function()
-        require "utils.input"("Worktree Name", function(text)
-          require("git-worktree").switch_worktree(text)
-        end, "", 50, require("utils.icons").others.github .. "  ")
-      end,
-      desc = "Git Work tree switch",
+      desc = "Git Worktree Switch",
     },
   },
+
   config = function()
     local Hooks = require "git-worktree.hooks"
     local config = require "git-worktree.config"

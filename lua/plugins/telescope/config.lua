@@ -211,9 +211,9 @@ return function()
       lsp_document_symbols = {},
       lsp_workspace_symbols = {},
       lsp_dynamic_workspace_symbols = {},
-      diagnostics = {
-        prompt_prefix = " ",
-      },
+      diagnostics = { prompt_prefix = " " },
+      git_worktree = get_dropdown { prompt_prefix = git_icon },
+      create_git_worktree = get_dropdown { prompt_prefix = git_icon },
     },
 
     defaults = {
