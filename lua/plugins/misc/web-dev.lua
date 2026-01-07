@@ -32,25 +32,18 @@ return {
   },
 
   {
-    -- FIX: not working with latest version of treesitter.
-    "luckasRanarison/tailwind-tools.nvim",
-    enabled = false,
-    build = ":UpdateRemotePlugins",
+    "razak17/tailwind-fold.nvim",
+    event = "VeryLazy",
     ft = webDev,
     config = function()
-      require("tailwind-tools").setup {
-        document_color = { enabled = true },
-        conceal = { enabled = true, symbol = "…" },
-        server = { settings = { experimental = { classRegex = patterns } } },
+      require("tailwind-fold").setup {
+        enabled = true,
+        symbol = "…", -- 󱏿
+        ft = webDev,
       }
-      map("<leader>ft", ":Telescope tailwind classes<CR>", "Find Tailwind Classes")
-      map("<leader>tc", ":TailwindColorToggle<CR>", "Tailwind Color Toggle")
-      map("<leader>tf", ":TailwindConcealToggle<CR>", "Tailwind Fold Toggle")
-      map("<leader>ts", ":TailwindSort<CR>", "Tailwind search")
-      map("<leader>]t", ":TailwindNextClass<CR>", "Jump Next Tailwind Cllass")
-      map("<leader>[t", ":TailwindPrevClass<CR>", "Jump Prev Tailwind Cllass")
+      map("<leader>tf", ":TailwindFoldToggle<CR>", "Tailwind Fold Toggle")
     end,
-  }, -- tailwind color highlights folds and more
+  },
 
   {
     "windwp/nvim-ts-autotag",
