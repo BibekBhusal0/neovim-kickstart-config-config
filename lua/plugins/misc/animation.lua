@@ -1,5 +1,4 @@
 local map = require "utils.map"
-local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
@@ -29,29 +28,4 @@ return {
     },
     opts = { hide_cursor = true },
   }, -- Smooth scrolling
-
-  {
-    "rachartier/tiny-glimmer.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      enabled = true,
-      overwrite = {
-        yank = { enabled = true },
-        search = { enabled = false },
-        paste = { enabled = true },
-        undo = { enabled = true },
-        redo = { enabled = true },
-      },
-      animations = {
-        fade = { from_color = "#c4841d" },
-        reverse_fade = { from_color = "#312107" },
-      },
-      virt_text = {
-        priority = 2048,
-      },
-    },
-    keys = wrap_keys {
-      { "<leader>tG", ":lua require('tiny-glimmer').toggle()<CR>", desc = "Toggle Glimmer" },
-    },
-  }, -- highlight not while yanking pasting
 }
