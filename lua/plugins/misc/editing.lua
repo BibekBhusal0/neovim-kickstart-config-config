@@ -76,7 +76,7 @@ return {
   {
     "nguyenvukhang/nvim-toggler",
     keys = wrap_keys {
-      { "<leader>tt", ':lua require("nvim-toggler").toggle() <CR>', desc = "Toggle Value" },
+      { "gt", ':lua require("nvim-toggler").toggle() <CR>', desc = "Toggle Value" },
     },
     config = function()
       require("nvim-toggler").setup {
@@ -93,7 +93,6 @@ return {
   }, -- Toggle between true and false ; more
 
   {
-    -- TODO: maybe keyboard keybard shortcut for this can be changed.
     "johmsalas/text-case.nvim",
     opts = {},
     keys = {
@@ -112,14 +111,13 @@ return {
   {
     "echasnovski/mini.operators",
     keys = {
-      { "g=", mode = { "n", "o", "x" }, desc = "Minit Evaluate" },
-      { "gm", mode = { "n", "o", "x" }, desc = "Minit Multiply" },
-      -- TODO: this keyboard shortcut needs to be chagned this is must used
-      { "<leader>rl", mode = { "n", "o", "x" }, desc = "Minit Replace" },
-      { "gs", mode = { "n", "o", "x" }, desc = "Minit Sort" },
-      { "gx", mode = { "n", "o", "x" }, desc = "Minit Exchange" },
+      { "g=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
+      { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
+      { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
+      { "gs", mode = { "n", "o", "x" }, desc = "Mini Sort" },
+      { "gx", mode = { "n", "o", "x" }, desc = "Mini Exchange" },
     },
-    opts = { replace = { prefix = "<leader>rl" } },
+    opts = { replace = { prefix = "cr" } },
   }, -- sorting with motion
 
   {

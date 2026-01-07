@@ -5,19 +5,24 @@ return {
   {
     {
       "numToStr/Comment.nvim",
-      -- TODO: optimize this this not needs to load for all files
-      dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+      dependencies = {
+        {
+          "JoosepAlviste/nvim-ts-context-commentstring",
+          ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, -- Specify file types for loading
+          config = function()
+            local ts_context_commentstring =
+              require "ts_context_commentstring.integrations.comment_nvim"
+            require("Comment").setup { pre_hook = ts_context_commentstring.create_pre_hook() }
+          end,
+        },
+      },
       keys = {
         { "gcc", mode = "n", desc = "Comment toggle current line" },
         { "gc", mode = { "n", "o", "x" }, desc = "Comment toggle" },
         { "gbc", mode = "n", desc = "Comment toggle current block" },
         { "gb", mode = { "n", "o", "x" }, desc = "Comment toggle blockwise" },
       },
-      config = function()
-        require("Comment").setup {
-          pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-        }
-      end,
+      opts = {},
     }, -- Easily comment visual regions/lines
 
     {

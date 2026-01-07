@@ -32,21 +32,7 @@ return {
     "folke/noice.nvim",
     enabled = true,
     -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
-    event = {"VeryLazy"},
-    dependencies = {
-      {
-        -- TODO: might replace this with mini notify
-        "rcarriga/nvim-notify",
-        opts = {
-          icons = require("utils.icons").diagnostics,
-          render = "wrapped-default",
-          stages = "slide",
-          max_width = 35,
-          max_height = 50,
-          top_down = false,
-        },
-      },
-    },
+    event = { "VeryLazy" },
 
     config = function()
       local noice = require "noice"
@@ -55,11 +41,10 @@ return {
       end, "Redirect Cmdline", "c")
       map("<leader>Nr", ":Noice dismiss<CR>", "Noice remove")
       map("<leader>Nl", ":Noice last<CR>", "Noice last")
+      map("<leader>nN", ":Noice<CR>", "Noice")
       map("<leader>Nh", ":Noice history<CR>", "Noice history")
       map("<leader>Ns", ":Telescope noice<CR>", "Noice Telescope")
       map("<leader>fn", ":Telescope noice<CR>", "Noice Telescope")
-      map("<leader>NS", ":Telescope notify<CR>", "Notify Telescope")
-      map("<leader>fN", ":Telescope notify<CR>", "Notify Telescope")
       map("<leader>Nt", function()
         local running = require("noice.config")._running
         if running then
@@ -71,6 +56,7 @@ return {
 
       noice.setup {
         level = { icons = require("utils.icons").diagnostics },
+        notify = { enabled = false },
         messages = { view_search = false },
         lsp = {
           override = {
@@ -78,8 +64,8 @@ return {
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true,
           },
-          progress = { enabled = true },
-          hover = { enabled = false, silent = true },
+          progress = { enabled = false },
+          hover = { enabled = true, silent = true },
         },
         presets = {
           inc_rename = true,

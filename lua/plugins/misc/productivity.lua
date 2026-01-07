@@ -60,7 +60,6 @@ return {
   },
 
   {
-    -- FIX: Gives warning which need fixing
     "obsidian-nvim/obsidian.nvim",
     version = "*",
     keys = wrap_keys {
@@ -109,7 +108,7 @@ return {
       },
       ui = { enable = false },
       attachments = {
-        img_folder = "files",
+        folder = "files",
         img_name_func = function()
           return string.format("Pasted image %s", os.date "%Y%m%d%H%M%S")
         end,

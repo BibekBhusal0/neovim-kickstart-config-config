@@ -9,7 +9,6 @@ return {
       { "mason-org/mason.nvim", config = true, cmd = "Mason" },
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -32,22 +31,6 @@ return {
           )
           map("<leader>lw", ":Telescope lsp_dynamic_workspace_symbols<CR>", "LSP Workspace Symbols")
 
-          -- local rename = function()
-          --   local var = vim.fn.expand "<cword>"
-          --   local callback = function(text)
-          --     local params = vim.lsp.util.make_position_params()
-          --     params.newName = text
-          --     vim.lsp.buf_request(0, "textDocument/rename", params)
-          --   end
-          --   require "utils.input"(
-          --     " Rename ",
-          --     callback,
-          --     var,
-          --     nil,
-          --     require("utils.icons").symbols.Variable .. "  "
-          --   )
-          -- end
-          -- map("<leader>ln", rename, "LSP Rename variable")
           map("<leader>ln", vim.lsp.buf.rename, "Lsp Rename variable")
           map("<leader>ca", function()
             require "telescope"
@@ -57,11 +40,6 @@ return {
           map("<leader>lD", vim.lsp.buf.declaration, "LSP goto Declaration")
           map("<leader>lh", vim.lsp.buf.hover, "LSP Hover")
 
-          -- The following two autoCommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autoCommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if
             client
@@ -175,7 +153,6 @@ return {
   },
 
   {
-    -- WARN: I might remove this
     "SmiteshP/nvim-navbuddy",
     dependencies = {
       "SmiteshP/nvim-navic",
@@ -210,5 +187,11 @@ return {
     enabled = true,
     ft = "lua",
     opts = { library = {} },
+  },
+
+  {
+    "nvim-mini/mini.notify",
+    event = { "LspAttach" },
+    opts = { "nvim-mini/mini.notify", opts = { lsp_progress = { enable = true } } },
   },
 }
