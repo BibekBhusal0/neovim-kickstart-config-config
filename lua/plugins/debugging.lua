@@ -42,7 +42,7 @@ return {
       local dap, dapui = require "dap", require "dapui"
       local virtual_text = require "nvim-dap-virtual-text"
       require("dap-python").setup()
-      virtual_text.setup({})
+      virtual_text.setup {}
 
       dapui.setup {
         icons = { collapsed = "", current_frame = "", expanded = "" },
@@ -68,13 +68,13 @@ return {
         },
       }
 
-      dap.adapters["pwa-node"] = {  --- yay -Sy --noconfirm --needed vscode-js-debug-bin
+      dap.adapters["pwa-node"] = { --- yay -Sy --noconfirm --needed vscode-js-debug-bin
         type = "server",
         host = "localhost",
         port = "${port}",
         executable = {
           command = "js-debug-dap",
-          args = {  "${port}" },
+          args = { "${port}" },
         },
       }
 

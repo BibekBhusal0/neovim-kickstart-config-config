@@ -24,7 +24,7 @@ local long_quotes = {
 
 -- Logic to hide lualine and bufferline dynimically when alpha opens
 
-local ui = require("utils.ui_state")
+local ui = require "utils.ui_state"
 vim.api.nvim_create_autocmd("User", {
   pattern = "AlphaReady",
   callback = ui.hide_ui,
