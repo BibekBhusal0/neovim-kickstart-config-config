@@ -17,7 +17,7 @@ map("<C-o>", "<Esc>o", "Move to New Line", "i")
 map("<C-]>", "<Esc>ldbi", "Delete Word", "i")
 map("<leader>i", "`^", "Goto Last Insert")
 
--- simple keymaps
+-- Editing
 map("H", "_", "Start of line")
 map("L", "$", "End of line")
 map("g,", "<cmd>norm A,<CR>", "Append a comma")
@@ -33,10 +33,10 @@ end, "Open Explorer(current directory)")
 -- Move and duplicate lines
 map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", "v")
 map("J", ":m '>+1<CR>gv=gv", "Move Lines Down", "v")
-map("<C-A-j>", ":copy '<-1<CR>gv=gv", "Duplicate Lines Below", "v")
-map("<C-A-k>", ":copy '><CR>gv=gv", "Duplicate Lines Above", "v")
-map("<C-A-k>", ":copy .-1<CR>", "Duplicate Line Above")
-map("<C-A-j>", ":copy .<CR>", "Duplicate Line Below")
+map("<A-j>", ":copy '<-1<CR>gv=gv", "Duplicate Lines Below", "v")
+map("<A-k>", ":copy '><CR>gv=gv", "Duplicate Lines Above", "v")
+map("<A-k>", ":copy .-1<CR>", "Duplicate Line Above")
+map("<A-j>", ":copy .<CR>", "Duplicate Line Below")
 map("K", "<cmd>m .-2<CR>==", "Move Line Up")
 map("J", "<cmd>m .+1<CR>==", "Move Line Down")
 
@@ -58,7 +58,7 @@ map("<C-u>", "<C-u>zz", "Scroll up")
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard", { "n", "v" })
 
--- paste from system clipboard
+-- paste from system clipboard/ i am still used to windows
 map("<C-v>", '"+p', "Paste From System Clipboard", { "n", "v" })
 map("<C-v>", "<MiddleMouse>", "Paste From System Clipboard", "i")
 
@@ -119,10 +119,10 @@ map("<leader>bl", toggle_tabline, "Toggle Tab Line")
 -- Diagnostic keymaps
 map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
 map("<leader>]d", function()
-  vim.diagnostic.goto_next { float = false }
+  vim.diagnostic.jump { count = 1, float = true }
 end, "Jump next Diagnostic")
 map("<leader>[d", function()
-  vim.diagnostic.goto_prev { float = false }
+  vim.diagnostic.jump { count = -1, float = true }
 end, "Jump Previous Diagnostic")
 
 local function toggle_virtual_lines()

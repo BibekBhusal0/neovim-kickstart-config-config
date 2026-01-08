@@ -9,13 +9,14 @@ map("<Right>", ":vertical resize +2<CR>", "Resize window right")
 
 -- Buffers
 map("<leader>bb", ":enew<CR>", "Buffer New")
+map("<leader>br", ":e!<CR>", "Buffer Reset")
 
 -- Window management
-map("<leader>v", ":vsplit<CR>", "Split window vertically")
-map("<leader>V", ":vsplit | ter<CR>", "Split Terminal vertically")
+map("<leader>v", ":vsplit<CR>", "Split Window Vertically")
+map("<leader>V", ":vsplit | ter<CR>", "Split Terminal Vertically")
+map("<leader>h", ":split<CR>", "Split Window Horizontally")
+map("<leader>H", ":split | ter<CR>", "Split Terminal Horizontally")
 map("<leader>wj", ":vert ba<CR>", "Split all")
-map("<leader>S", ":split | ter<CR>", "Split Terminal horizontally")
-map("<leader>br", ":e!<CR>", "Buffer Reset")
 
 -- Navigate between splits
 map("<C-p>", ":wincmd p<CR>", "Window Floating")
