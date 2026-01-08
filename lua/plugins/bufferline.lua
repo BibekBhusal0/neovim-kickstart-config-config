@@ -124,7 +124,7 @@ return {
     local function renameTab()
       require "utils.input"("Tab name", function(text)
         bufferline.rename_tab { text }
-      end, "", 15, "󰓩 ")
+      end,vim.api.nvim_tabpage_get_var(0, "name"), 25, "󰓩 ")
     end
     map("<leader>bc", ":BufferLinePick<CR>", "Buffer Pick")
     map("<leader>bC", bufferline.close_with_pick, "Buffer Pick and close")
