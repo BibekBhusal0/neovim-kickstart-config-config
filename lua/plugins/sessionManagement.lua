@@ -69,6 +69,7 @@ return {
     extensions = {
       scope = {},
       cd = {},
+      tabname = {},
     },
   },
 }
