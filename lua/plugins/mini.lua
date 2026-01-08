@@ -1,5 +1,9 @@
 local wrap_keys = require "utils.wrap_keys"
 
+vim.api.nvim_create_user_command("NotifyHistory", function()
+  require("mini.notify").show_history()
+end, {})
+
 return {
   {
     "echasnovski/mini.trailspace",
@@ -12,6 +16,7 @@ return {
     "nvim-mini/mini.notify",
     event = { "LspAttach" },
     opts = { "nvim-mini/mini.notify", opts = { lsp_progress = { enable = true } } },
+    keys = wrap_keys { { "<leader>nh", ":NotifyHistory<CR>", desc = "Notify history" } },
   },
 
   {
