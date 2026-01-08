@@ -67,22 +67,21 @@ vim.api.nvim_create_autocmd("BufLeave", {
   end,
 })
 
-
 local function render()
   local alpha = require "alpha"
 
   local header = {
-      [[                                                                   ]],
-      [[ ███▄▄▄▄      ▄████████  ▄██████▄   ▄█    █▄   ▄█    ▄▄▄▄███▄▄▄▄   ]],
-      [[ ███▀▀▀██▄   ███    ███ ███    ███ ███    ███ ███  ▄██▀▀▀███▀▀▀██▄ ]],
-      [[ ███   ███   ███    █▀  ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
-      [[ ███   ███  ▄███▄▄▄     ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
-      [[ ███   ███ ▀▀███▀▀▀     ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
-      [[ ███   ███   ███    █▄  ███    ███ ███    ███ ███  ███   ███   ███ ]],
-      [[ ███   ███   ███    ███ ███    ███ ███    ███ ███  ███   ███   ███ ]],
-      [[  ▀█   █▀    ██████████  ▀██████▀   ▀██████▀  █▀    ▀█   ███   █▀  ]],
-      [[                                                                   ]],
-    }
+    [[                                                                   ]],
+    [[ ███▄▄▄▄      ▄████████  ▄██████▄   ▄█    █▄   ▄█    ▄▄▄▄███▄▄▄▄   ]],
+    [[ ███▀▀▀██▄   ███    ███ ███    ███ ███    ███ ███  ▄██▀▀▀███▀▀▀██▄ ]],
+    [[ ███   ███   ███    █▀  ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
+    [[ ███   ███  ▄███▄▄▄     ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
+    [[ ███   ███ ▀▀███▀▀▀     ███    ███ ███    ███ ███▌ ███   ███   ███ ]],
+    [[ ███   ███   ███    █▄  ███    ███ ███    ███ ███  ███   ███   ███ ]],
+    [[ ███   ███   ███    ███ ███    ███ ███    ███ ███  ███   ███   ███ ]],
+    [[  ▀█   █▀    ██████████  ▀██████▀   ▀██████▀  █▀    ▀█   ███   █▀  ]],
+    [[                                                                   ]],
+  }
 
   local function button(sc, icon, txt, keybind, hl)
     local leader = "SPC"
@@ -152,15 +151,14 @@ local function render()
     -- { "a", require("utils.icons").others.ai, "MCP hub", ":MCPHub<CR>", "@constructor" },
   }, true)
 
-    local other_buttons = create_button_group {
+  local other_buttons = create_button_group {
     { "d", "󰾶", "Change Directory", ":Proot<CR>" },
     { "s", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>' },
     { "l", "", "Leetcode Dashboard", ":Leet<CR>" },
     { "q", "󰅙", "Quit", ":qa<CR>", "DiagnosticError" },
   }
 
-  local buttons =
-    { type = "group", val = { file_buttons, popup_buttons, other_buttons } }
+  local buttons = { type = "group", val = { file_buttons, popup_buttons, other_buttons } }
 
   local function get_fortune()
     local fortune = require("fortune").get_fortune()

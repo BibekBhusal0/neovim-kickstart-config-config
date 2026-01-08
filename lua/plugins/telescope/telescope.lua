@@ -66,7 +66,6 @@ local live_multigrep = function(opts)
     :find()
 end
 
-
 map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
 map("<leader>:", ":Telescope command_history<CR>", "Find Commands history")
 map("<leader>I", ":Telescope spell_suggest<CR>", "Spell suggestion")
