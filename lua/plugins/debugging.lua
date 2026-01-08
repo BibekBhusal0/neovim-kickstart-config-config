@@ -1,7 +1,6 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
--- TODO: debugging needs testing
 return {
 
   {
@@ -33,7 +32,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
-      -- { "mfussenegger/nvim-dap-python", lazy = true },
+      { "mfussenegger/nvim-dap-python", lazy = true }, -- pacman -S python-debugpy
     },
     keys = wrap_keys {
       { "<leader>dc", ":lua require('dap').continue() <CR>", desc = "Debugger Continue" },
@@ -41,10 +40,9 @@ return {
 
     config = function()
       local dap, dapui = require "dap", require "dapui"
-      local mason = vim.fn.stdpath "data" .. "/mason/packages"
       local virtual_text = require "nvim-dap-virtual-text"
-      -- require("dap-python").setup(mason .. "/debugpy/venv/Scripts/python.exe")
-      virtual_text.setup()
+      require("dap-python").setup()
+      virtual_text.setup({})
 
       dapui.setup {
         icons = { collapsed = "", current_frame = "", expanded = "" },
@@ -70,13 +68,13 @@ return {
         },
       }
 
-      dap.adapters["pwa-node"] = {
+      dap.adapters["pwa-node"] = {  --- yay -Sy --noconfirm --needed vscode-js-debug-bin
         type = "server",
         host = "localhost",
         port = "${port}",
         executable = {
-          command = "node",
-          args = { mason .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+          command = "js-debug-dap",
+          args = {  "${port}" },
         },
       }
 
@@ -84,11 +82,8 @@ return {
         type = "pwa-node",
         request = "launch",
         name = "Launch file",
-        runtimeExecutable = "deno",
-        runtimeArgs = { "run", "--inspect-wait", "--allow-all" },
         program = "${file}",
         cwd = "${workspaceFolder}",
-        attachSimplePort = 9229,
       }
 
       dap.configurations.typescript = { ts_config }
