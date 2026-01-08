@@ -1,16 +1,28 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
+local function parse(text)
+  local handle = io.popen("devmoji --text " .. vim.fn.shellescape(text))
+  if handle then
+    local emojified_text = handle:read "*a"
+    handle:close()
+    emojified_text = emojified_text:match "^%s*(.-)%s*$" -- trim whitespace
+    return vim.fn.shellescape(emojified_text)
+  else
+    return vim.fn.shellescape(text)
+  end
+end
+
 local function commit_with_message()
   require "utils.input"(" Commit Message ", function(text)
-    vim.cmd("Git commit -m " .. vim.fn.shellescape(text))
+    vim.cmd("Git commit -m " .. parse(text))
   end, "", 40, require("utils.icons").others.github .. "  ")
 end
 
 local function commit_all_with_message()
   require "utils.input"(" Commit Message ", function(text)
     vim.cmd "Git add ."
-    vim.cmd("Git commit -m " .. vim.fn.shellescape(text))
+    vim.cmd("Git commit -m " .. parse(text))
   end, "", 50, require("utils.icons").others.github .. "  ")
 end
 
@@ -26,7 +38,7 @@ local function change_last_commit_message()
     return
   end
   require "utils.input"("Commit Message", function(title)
-    local cmd = "Git commit --amend -m " .. vim.fn.shellescape(title)
+    local cmd = "Git commit --amend -m " .. parse(title)
     vim.cmd(cmd)
   end, m, 60, require("utils.icons").others.github .. "  ")
 end
