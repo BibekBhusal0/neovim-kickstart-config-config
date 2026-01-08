@@ -12,13 +12,6 @@ return {
   }, -- change brackets, quotes and surrounds
 
   {
-    "echasnovski/mini.trailspace",
-    keys = wrap_keys {
-      { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
-    },
-  }, -- Simple ways to trail whitespace useful when formatter is not working
-
-  {
     "windwp/nvim-autopairs",
     keys = {
       { "{", mode = { "i" } },
@@ -73,18 +66,6 @@ return {
       "TextCaseStartReplacingCommand",
     },
   },
-
-  {
-    "echasnovski/mini.operators",
-    keys = {
-      { "g=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
-      { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
-      { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
-      { "gs", mode = { "n", "o", "x" }, desc = "Mini Sort" },
-      { "gx", mode = { "n", "o", "x" }, desc = "Mini Exchange" },
-    },
-    opts = { replace = { prefix = "cr" } },
-  }, -- sorting with motion
 
   {
     "Wansmer/treesj",

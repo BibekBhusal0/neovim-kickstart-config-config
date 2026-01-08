@@ -188,10 +188,4 @@ return {
     ft = "lua",
     opts = { library = {} },
   },
-
-  {
-    "nvim-mini/mini.notify",
-    event = { "LspAttach" },
-    opts = { "nvim-mini/mini.notify", opts = { lsp_progress = { enable = true } } },
-  },
 }

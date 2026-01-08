@@ -26,7 +26,7 @@ require("lazy").setup {
   require "plugins.leetcode", -- solving leetcode problems
   require "plugins.lsp", -- Language Server Protocol setup
   require "plugins.lualine", -- StatusLine
-  require "plugins.mini_file", -- Yet another file explorer
+  require "plugins.mini", -- Yet another file explorer
   require "plugins.misc", -- Miscellaneous utility plugins
   require "plugins.neotree", -- File explorer for Neovim
   require "plugins.none-ls", -- External tools integration (formatters, linters)
