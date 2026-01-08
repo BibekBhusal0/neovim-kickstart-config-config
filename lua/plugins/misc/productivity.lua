@@ -1,6 +1,7 @@
 local transparency_enabled = false
 local wrap_keys = require "utils.wrap_keys"
 local obsidian_dir = "/home/bibek/Documents/obsidian.md"
+local ui = require "utils.ui_state"
 
 return {
   {
@@ -23,31 +24,13 @@ return {
       },
 
       on_open = function()
-        pcall(function()
-          require("tiny-glimmer").disable()
-        end)
-        pcall(function()
-          require("noice").disable()
-        end)
-        pcall(function()
-          require("smear_cursor").enabled = false
-        end)
-        vim.opt.fillchars =
-          { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
+        ui.hide_ui()
         transparency_enabled = require("utils.transparency").bg_transparent
         require("utils.transparency").disable_transparency "#000000"
       end,
 
       on_close = function()
-        pcall(function()
-          require("tiny-glimmer").enable()
-        end)
-        pcall(function()
-          require("noice").enable()
-        end)
-        pcall(function()
-          require("smear_cursor").enabled = true
-        end)
+        ui.restore_ui()
         if transparency_enabled then
           require("utils.transparency").enable_transparency()
         else
