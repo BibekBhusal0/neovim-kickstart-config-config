@@ -15,6 +15,29 @@ return {
   },
 
   {
+    "nvim-mini/mini.splitjoin",
+    keys = wrap_keys {
+      { "gi", desc = "Toggle split object" },
+      { "gj", desc = "Join the object" },
+      { "gk", desc = "Split the object" },
+    },
+    opts = { mappings = { toggle = "gi", split = "gk", join = "gj" } },
+  }, -- advanced join and split
+
+  {
+    "nvim-mini/mini.pairs",
+    keys = {
+      { "{", mode = { "i", "t", "c" } },
+      { "[", mode = { "i", "t", "c" } },
+      { "(", mode = { "i", "t", "c" } },
+      { '"', mode = { "i", "t", "c" } },
+      { "'", mode = { "i", "t", "c" } },
+      { "`", mode = { "i", "t", "c" } },
+    },
+    config = { modes = { insert = true, command = true, terminal = false } },
+  },
+
+  {
     "echasnovski/mini.operators",
     keys = {
       { "g=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
@@ -25,6 +48,25 @@ return {
     },
     opts = { replace = { prefix = "cr" } },
   }, -- sorting with motion
+
+  {
+    "nvim-mini/mini.comment",
+    dependencies = { { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true } },
+    keys = {
+      { "gcc", mode = "n", desc = "Comment toggle current line" },
+      { "gc", mode = { "n", "o", "x" }, desc = "Comment toggle" },
+      { "gbc", mode = "n", desc = "Comment toggle current block" },
+      { "gb", mode = { "n", "o", "x" }, desc = "Comment toggle blockwise" },
+    },
+    opts = {
+      {
+        custom_commentstring = function()
+          return require("ts_context_commentstring").calculate_commentstring()
+            or vim.bo.commentstring
+        end,
+      },
+    },
+  },
 
   {
     "echasnovski/mini.files",

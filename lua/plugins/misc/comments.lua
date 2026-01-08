@@ -4,7 +4,9 @@ local wrap_keys = require "utils.wrap_keys"
 function RemoveAllComments()
   local bufnr = 0
   local parser = vim.treesitter.get_parser(bufnr)
-  if (not parser) then return end
+  if not parser then
+    return
+  end
   local tree = parser:parse()[1]
   local root = tree:root()
 
@@ -45,27 +47,6 @@ map("<leader>rc", RemoveAllComments, "Remove all comments")
 
 return {
   {
-    {
-      "numToStr/Comment.nvim",
-      dependencies = {
-        {
-          "JoosepAlviste/nvim-ts-context-commentstring",
-          ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, -- Specify file types for loading
-          config = function()
-            local ts_context_commentstring =
-              require "ts_context_commentstring.integrations.comment_nvim"
-            require("Comment").setup { pre_hook = ts_context_commentstring.create_pre_hook() }
-          end,
-        },
-      },
-      keys = {
-        { "gcc", mode = "n", desc = "Comment toggle current line" },
-        { "gc", mode = { "n", "o", "x" }, desc = "Comment toggle" },
-        { "gbc", mode = "n", desc = "Comment toggle current block" },
-        { "gb", mode = { "n", "o", "x" }, desc = "Comment toggle blockwise" },
-      },
-      opts = {},
-    }, -- Easily comment visual regions/lines
 
     {
       "LudoPinelli/comment-box.nvim",

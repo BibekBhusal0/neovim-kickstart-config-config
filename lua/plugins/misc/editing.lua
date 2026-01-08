@@ -12,22 +12,6 @@ return {
   }, -- change brackets, quotes and surrounds
 
   {
-    "windwp/nvim-autopairs",
-    keys = {
-      { "{", mode = { "i" } },
-      { "[", mode = { "i" } },
-      { "(", mode = { "i" } },
-      { '"', mode = { "i" } },
-      { "'", mode = { "i" } },
-      { "`", mode = { "i" } },
-      { "}", mode = { "i" } },
-      { "]", mode = { "i" } },
-      { ")", mode = { "i" } },
-    },
-    config = true,
-  }, -- Autoclose parentheses, brackets, quotes, etc. also work on command mode
-
-  {
     "mg979/vim-visual-multi",
     keys = { "<C-n>", "<C-Up>", "<C-Down>", "<S-Left>", "<S-Right>" },
   }, -- multi line editing
@@ -37,18 +21,16 @@ return {
     keys = wrap_keys {
       { "gt", ':lua require("nvim-toggler").toggle() <CR>', desc = "Toggle Value" },
     },
-    config = function()
-      require("nvim-toggler").setup {
-        inverses = {
-          ["neo-vim"] = "vs-code",
-          ["0"] = "1",
-          show = "hide",
-          best = "worst",
-          pre_defer = "post_defer",
-        },
-        remove_default_keybinds = true,
-      }
-    end,
+    opts = {
+      inverses = {
+        ["neo-vim"] = "vs-code",
+        ["0"] = "1",
+        show = "hide",
+        best = "worst",
+        pre_defer = "post_defer",
+      },
+      remove_default_keybinds = true,
+    },
   }, -- Toggle between true and false ; more
 
   {
@@ -66,16 +48,6 @@ return {
       "TextCaseStartReplacingCommand",
     },
   },
-
-  {
-    "Wansmer/treesj",
-    keys = wrap_keys {
-      { "gi", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
-      { "gj", ":TSJJoin<CR>", desc = "Join the object under cursor" },
-      { "gk", ":TSJSplit<CR>", desc = "Split the object under cursor" },
-    },
-    opts = { use_default_keymaps = false, max_join_length = 10000 },
-  }, -- advanced join and split
 
   {
     "y3owk1n/time-machine.nvim",
