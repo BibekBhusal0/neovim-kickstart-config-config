@@ -131,7 +131,9 @@ local copy_diagnostic = function()
   local lnum, col = pos[1] - 1, pos[2]
 
   local diagnostics = vim.diagnostic.get(bufnr, { lnum = lnum })
-  if #diagnostics == 0 then return end
+  if #diagnostics == 0 then
+    return
+  end
 
   -- Find the closest diagnostic on the current line
   local closest_diagnostic
