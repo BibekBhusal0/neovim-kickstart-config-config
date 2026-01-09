@@ -11,6 +11,7 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
+      vim.cmd [[ autocmd BufNewFile,BufRead hyprland.overwrite.conf set filetype=hyprlang ]]
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
@@ -136,7 +137,12 @@ return {
             Lua = { format = { enable = false } },
           },
         },
-        bashls = { filetypes = { "sh", "zsh" } },
+        bashls = {},
+        hyprls = {
+          preferIgnoreFile = false,
+          filetype = { "hyprlang", "conf" },
+          ignore = { "hyprlock.conf", "hypridle.conf" },
+        },
       }
       require("mason").setup()
 
