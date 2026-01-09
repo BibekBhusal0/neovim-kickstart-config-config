@@ -16,12 +16,30 @@ return {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
           map("<leader>la", ":Telescope lsp_document_symbols<CR>", "LSP Document Symbols")
-          map("<leader>ld", ":Telescope lsp_definitions<CR>", "LSP goto Definition")
-          map(
-            "<leader>le",
-            ":Telescope lsp_definitions jump_type=vsplit<CR>",
-            "LSP goto Definition In Split"
-          )
+
+          local function goto_definition(split)
+            local ft = vim.bo.filetype
+            local jump_type = split and "vsplit" or "edit"
+
+            if ft == "hyprlang" then
+              local line = vim.api.nvim_get_current_line()
+              local filepath = line:match "source%s*=%s*([^%s]+)"
+
+              if filepath then
+                filepath = vim.fn.fnamemodify(filepath, ":p") -- absolute path
+                if vim.fn.filereadable(filepath) == 1 then
+                  vim.cmd(jump_type .. " " .. vim.fn.fnameescape(filepath))
+                end
+              end
+            else
+              vim.cmd("Telescope lsp_definitions jump_type=" .. jump_type)
+            end
+          end
+
+          map("<leader>ld", goto_definition, "LSP goto Definition")
+          map("<leader>le", function()
+            goto_definition(true)
+          end, "LSP goto Definition In Split")
           map("<leader>li", ":Telescope lsp_implementations<CR>", "LSP Goto Implementation")
           map("<leader>lr", ":Telescope lsp_references<CR>", "LSP goto References")
           map("<leader>ls", ":Telescope lsp_type_definitions<CR>", "LSP Type Definition")
