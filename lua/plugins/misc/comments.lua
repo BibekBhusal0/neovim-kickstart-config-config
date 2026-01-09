@@ -51,8 +51,8 @@ return {
     {
       "LudoPinelli/comment-box.nvim",
       keys = wrap_keys {
-        { "<leader>CB", ":CBlcbox<CR>", desc = "Comment box" },
-        { "<leader>CL", ":CBlcline<CR>", desc = "Comment Line" },
+        { "<leader>CB", ":CBlcbox<CR>", desc = "Comment box", mode = { "n", "v" } },
+        { "<leader>CL", ":CBlcline<CR>", desc = "Comment Line", mode = { "n", "v" } },
       },
       cmd = {
         "CBllbox",
