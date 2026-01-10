@@ -52,6 +52,8 @@ return {
     local luasnip = require "luasnip"
     luasnip.config.setup {}
 
+    vim.api.nvim_set_hl(0, "PmenuSel", { fg = "NONE" , background= "#333333"})
+
     local winhighlight = {
       winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
     }
@@ -64,8 +66,14 @@ return {
       },
       completion = { completeopt = "menu,menuone,noinsert" },
       window = {
-        completion = cmp.config.window.bordered(winhighlight),
-        documentation = cmp.config.window.bordered(winhighlight),
+        completion = cmp.config.window.bordered {
+          border = "single",
+          winhighlight = winhighlight.winhighlight,
+        },
+        documentation = cmp.config.window.bordered {
+          border = "single",
+          winhighlight = winhighlight.winhighlight,
+        },
       },
 
       mapping = cmp.mapping.preset.insert {
