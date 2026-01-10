@@ -209,7 +209,10 @@ return {
   {
     "folke/lazydev.nvim",
     enabled = true,
-    ft = "lua",
     opts = { library = {} },
+    event = {
+      "BufReadPre " .. vim.fn.expand "$HOME" .. "/.config/nvim/*.lua",
+      "BufNewFile " .. vim.fn.expand "$HOME" .. "/.config/nvim/*.lua",
+    },
   },
 }
