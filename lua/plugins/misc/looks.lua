@@ -33,6 +33,19 @@ return {
     enabled = true,
     -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
     event = { "VeryLazy" },
+    dependencies = {
+      {
+        -- TODO: might replace this with mini notify
+        "rcarriga/nvim-notify",
+        opts = {
+          render = "wrapped-compact",
+          stages = "slide",
+          max_width = 35,
+          max_height = 50,
+          top_down = true,
+        },
+      },
+    },
 
     config = function()
       local noice = require "noice"
@@ -44,6 +57,8 @@ return {
       map("<leader>nh", ":Noice history<CR>", "Noice history")
       map("<leader>Ns", ":Telescope noice<CR>", "Noice Telescope")
       map("<leader>fn", ":Telescope noice<CR>", "Noice Telescope")
+      map("<leader>NS", ":Telescope notify<CR>", "Notify Telescope")
+      map("<leader>fN", ":Telescope notify<CR>", "Notify Telescope")
       map("<leader>Nt", function()
         local running = require("noice.config")._running
         if running then
@@ -55,7 +70,6 @@ return {
 
       noice.setup {
         level = { icons = require("utils.icons").diagnostics },
-        notify = { enabled = false },
         messages = { view_search = false },
         lsp = {
           override = {
@@ -64,7 +78,7 @@ return {
             ["cmp.entry.get_documentation"] = true,
           },
           progress = { enabled = false },
-          hover = { enabled = true, silent = true },
+          hover = { enabled = false, silent = true },
         },
         presets = {
           inc_rename = true,
@@ -125,3 +139,4 @@ return {
     opts = { context = 10 },
   }, -- dim inactive code
 }
+

@@ -24,6 +24,22 @@ M.apply_transparency = function(color)
     "TelescopePromptBorder",
     "TelescopeResultsBorder",
     "TelescopePreviewBorder",
+    "NotifyERRORBorder",
+    "NotifyWARNBorder",
+    "NotifyINFOBorder",
+    "NotifyDEBUGBorder",
+    "NotifyTRACEBorder",
+    "NotifyERRORIcon",
+    "NotifyWARNIcon",
+    "NotifyINFOIcon",
+    "NotifyDEBUGIcon",
+    "NotifyTRACEIcon",
+    "NotifyERRORTitle",
+    "NotifyWARNTitle",
+    "NotifyINFOTitle",
+    "NotifyDEBUGTitle",
+    "NotifyTRACETitle",
+    "NotifyBackground",
   }
   for _, hl in pairs(allHighlights) do
     vim.api.nvim_set_hl(0, hl, { bg = bg })
