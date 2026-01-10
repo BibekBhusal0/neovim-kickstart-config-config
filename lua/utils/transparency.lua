@@ -20,6 +20,10 @@ M.apply_transparency = function(color)
     "NvimTreeNormalFloat",
     "MatchWordCur",
     "FoldColumn",
+    "TelescopeBorder",
+    "TelescopePromptBorder",
+    "TelescopeResultsBorder",
+    "TelescopePreviewBorder",
   }
   for _, hl in pairs(allHighlights) do
     vim.api.nvim_set_hl(0, hl, { bg = bg })

@@ -170,7 +170,6 @@ return function()
       reloader = {},
       buffers = {
         sort_lastused = true,
-        initial_mode = "normal",
         layout_strategy = "vertical",
       },
       colorscheme = {
@@ -196,17 +195,16 @@ return function()
       autocommands = {},
       spell_suggest = theme.get_cursor {
         prompt_prefix = "󰓆  ",
-        initial_mode = "normal",
         layout_config = { width = 30 },
         prompt_title = "Spell",
       },
       tagstack = {},
       jumplist = {},
-      lsp_references = get_dropdown { initial_mode = "normal" },
+      lsp_references = get_dropdown {},
       lsp_incomming_calls = {},
       lsp_outgoing_calls = {},
-      lsp_definitions = get_dropdown { initial_mode = "normal" },
-      lsp_type_definitions = get_dropdown { initial_mode = "normal" },
+      lsp_definitions = get_dropdown {},
+      lsp_type_definitions = get_dropdown {},
       lsp_implementations = {},
       lsp_document_symbols = {},
       lsp_workspace_symbols = {},
@@ -217,6 +215,7 @@ return function()
     },
 
     defaults = {
+      borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
       path_display = { "truncate", truncate = 2 },
       file_ignore_patterns = { "^node_modules", "^.git", "^.github", "^dist", "^build" },
       prompt_prefix = " ",
