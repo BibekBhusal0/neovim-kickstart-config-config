@@ -181,4 +181,18 @@ return {
       end, "Prev fold", mode)
     end,
   },
+
+  {
+    "bibekbhusal0/tree-hierarchy.nvim",
+    dir = "~/Code/tree-hierarchy.nvim",
+    keys = {
+      { "m", mode = { "x" } },
+      { "v", mode = { "x" } },
+      { "<leader>sk", mode = { "x", "n" } },
+      { "<leader>mk", mode = { "x", "n" } },
+      { "<leader>mj", mode = { "x", "n" } },
+      { "<leader>ms", mode = { "x", "n" } },
+    },
+    opts = {},
+  },
 }
