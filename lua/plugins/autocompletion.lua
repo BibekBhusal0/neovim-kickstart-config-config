@@ -52,7 +52,7 @@ return {
     local luasnip = require "luasnip"
     luasnip.config.setup {}
 
-    vim.api.nvim_set_hl(0, "PmenuSel", { fg = "NONE" , background= "#333333"})
+    vim.api.nvim_set_hl(0, "PmenuSel", { fg = "NONE", background = "#333333" })
 
     local winhighlight = {
       winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",

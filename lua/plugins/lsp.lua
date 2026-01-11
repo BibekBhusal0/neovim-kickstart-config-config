@@ -210,6 +210,6 @@ return {
     "folke/lazydev.nvim",
     enabled = true,
     opts = { library = {} },
-    ft = {"lua"}
+    ft = { "lua" },
   },
 }

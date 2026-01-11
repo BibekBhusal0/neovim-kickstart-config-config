@@ -139,4 +139,3 @@ return {
     opts = { context = 10 },
   }, -- dim inactive code
 }
-

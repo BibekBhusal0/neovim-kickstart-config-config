@@ -4,7 +4,6 @@ vim.api.nvim_create_user_command("MiniNotifyHistory", function()
   require("mini.notify").show_history()
 end, {})
 
-
 return {
   {
     "echasnovski/mini.trailspace",
