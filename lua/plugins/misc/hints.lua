@@ -1,4 +1,5 @@
 local wrap_keys = require "utils.wrap_keys"
+
 return {
   {
     "folke/which-key.nvim",
@@ -9,7 +10,7 @@ return {
   {
     "nvzone/showkeys",
     cmd = "ShowkeysToggle",
-    keys = wrap_keys { { "<leader>sk", ":ShowkeysToggle<CR>", desc = "Toggle Showkeys" } },
+    keys = wrap_keys { { "<leader>Sk", ":ShowkeysToggle<CR>", desc = "Toggle Showkeys" } },
     opts = {
       timeout = 1,
       maxkeys = 5,
@@ -39,7 +40,7 @@ return {
         disabled_filetypes = vim.tbl_deep_extend(
           "force",
           require("hardtime.config").config.disabled_filetypes,
-          { "mcphub", "codecompanion", "alpha", "Avante", "AvanteInput" }
+          { "mcphub", "codecompanion", "alpha", "Avante", "AvanteInput", "time-machine-list" }
         ),
       }
     end,

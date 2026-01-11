@@ -52,7 +52,10 @@ return {
   {
     "y3owk1n/time-machine.nvim",
     cmd = { "TimeMachineToggle", "TimeMachinePurgeBuffer", "TimeMachinePurgeAll" },
-    opts = {},
+    opts = {
+      split_opts = { width = 30 },
+      float_opts = { winblend = 1,},
+    },
     version = "*",
     keys = wrap_keys {
       { "<leader>tm", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
