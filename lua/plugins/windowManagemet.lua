@@ -88,11 +88,11 @@ return {
     dir = "~/Code/bufstack.nvim",
     event = { "BufNewFile", "BufReadPost" },
     config = function()
-      require("bufstack").setup { max_tracked = 400, shorten_path = true }
+      require("bufstack").setup { max_tracked = 400, shorten_path = false }
       map("gl", ":BufStackNext<CR>", "Buffer Next Recent")
       map("gh", ":BufStackPrev<CR>", "Buffer Prevevious Recent")
       map("<leader>bu", ":BufStackList<CR>", "Buffer Open List")
-      map("<leader>bh", ":BufClosedList<CR>", "Buffer Closed List")
+      map("<leader>bh", ":BufStackTelescope<CR>", "Buffer Closed List")
       map("<leader>ba", ":BufReopen<CR>", "Buffer Repoen")
     end,
   }, -- Reopen closed buffer and cycle through recently closed buffer

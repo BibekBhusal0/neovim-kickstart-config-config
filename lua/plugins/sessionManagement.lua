@@ -48,7 +48,7 @@ return {
   "stevearc/resession.nvim",
   keys = wrap_keys {
     { "<leader>sz", ":SessionDelete<CR>", desc = "Session Delete" },
-    { "<leader>sl", ":SessionRestore<CR>", desc = "Session Load" },
+    { "<leader>sl", ":SessionLoad<CR>", desc = "Session Load" },
     { "<leader>ss", ":SessionSave<CR>", desc = "Session Save" },
     { "<leader>sS", ":SessionSaveTab<CR>", desc = "Session Save Tab" },
   },
@@ -70,6 +70,8 @@ return {
       scope = {},
       cd = {},
       tabname = {},
+      bufstack = {},
     },
   },
 }
+
