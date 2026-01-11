@@ -54,7 +54,7 @@ return {
     cmd = { "TimeMachineToggle", "TimeMachinePurgeBuffer", "TimeMachinePurgeAll" },
     opts = {
       split_opts = { width = 30 },
-      float_opts = { winblend = 1,},
+      float_opts = { winblend = 1 },
     },
     version = "*",
     keys = wrap_keys {
