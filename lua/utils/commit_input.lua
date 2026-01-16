@@ -18,7 +18,7 @@ local function parse(text)
   end
 end
 
-local function commit_input(_, callback, initial_value)
+local function commit_input(title, callback, initial_value)
   local initial_title = ""
   local initial_body = ""
 
@@ -39,7 +39,6 @@ local function commit_input(_, callback, initial_value)
   vim.bo[title_buf].swapfile = false
   vim.bo[title_buf].bufhidden = "wipe"
   vim.bo[title_buf].filetype = "gitcommit"
-  vim.bo[title_buf].textarea = 0
   vim.bo[title_buf].completefunc = ""
   vim.bo[title_buf].omnifunc = ""
 
@@ -57,7 +56,7 @@ local function commit_input(_, callback, initial_value)
   local title_popup = Popup({
     border = {
       style = "single",
-      text = { top = " Commit Title ", top_align = "center" },
+      text = { top = title, top_align = "center" },
     },
     enter = true,
     focusable = true,
@@ -67,7 +66,7 @@ local function commit_input(_, callback, initial_value)
   local body_popup = Popup({
     border = {
       style = "single",
-      text = { top = " Commit Body (Markdown) ", top_align = "center" },
+      text = { top = " Commit Body ", top_align = "center" },
     },
     enter = false,
     focusable = true,
@@ -186,18 +185,17 @@ local function commit_input(_, callback, initial_value)
   vim.api.nvim_buf_set_var(body_buf, "commit_submit_func", submit)
   vim.api.nvim_buf_set_var(title_buf, "commit_submit_func", submit)
 
-  local function map(buf, modes, lhs, rhs, desc)
-    modes = modes or { "n" }
-    vim.keymap.set(modes, lhs, rhs, { buffer = buf, silent = true, nowait = true, desc = desc })
+  local function map(buf, lhs, rhs, desc, mode)
+    vim.keymap.set(mode or "n", lhs, rhs, { buffer = buf, silent = true, nowait = true, desc = desc })
   end
 
   for _, buf in ipairs({ title_buf, body_buf }) do
-    map(buf, "n", "<Esc>", close, "Close")
-    map(buf, { "n", "i" }, "<Tab>", toggle_focus, "Toggle focus")
+    map(buf, "<Esc>", close, "Close")
+    map(buf, "<Tab>", toggle_focus, "Toggle focus")
   end
 
-  map(title_buf, { "n", "i" }, "<CR>", submit, "Submit commit")
-  map(body_buf, "n", "<CR>", submit, "Submit commit")
+  map(title_buf, "<CR>", submit, "Submit commit", { "n", "i" })
+  map(body_buf, "<CR>", submit, "Submit commit", "n")
 
   layout:mount()
 

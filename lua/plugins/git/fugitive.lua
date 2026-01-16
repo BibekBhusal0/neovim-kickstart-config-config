@@ -7,22 +7,22 @@ local function parse(text)
     local emojified_text = handle:read "*a"
     handle:close()
     emojified_text = emojified_text:match "^%s*(.-)%s*$"
-    return emojified_text
+    return vim.fn.shellescape(emojified_text)
   else
-    return text
+    return vim.fn.shellescape(text)
   end
 end
 
 local function commit_with_message()
-  require "utils.commit_input"(" Commit Message ", function(text)
-    vim.cmd("Git commit -m " .. vim.fn.shellescape(parse(text)))
+  require "utils.commit_input"(" Commit Changes ", function(text)
+    vim.cmd("Git commit -m " .. parse(text))
   end)
 end
 
 local function commit_all_with_message()
-  require "utils.commit_input"(" Commit Message ", function(text)
+  require "utils.commit_input"(" Add and Commit ", function(text)
     vim.cmd "Git add ."
-    vim.cmd("Git commit -m " .. vim.fn.shellescape(parse(text)))
+    vim.cmd("Git commit -m " .. parse(text))
   end)
 end
 
@@ -37,8 +37,8 @@ local function change_last_commit_message()
   if not m then
     return
   end
-  require "utils.commit_input"("Commit Message", function(text)
-    vim.cmd("Git commit --amend -m " .. vim.fn.shellescape(parse(text)))
+  require "utils.commit_input"(" Change Commit Message ", function(text)
+    vim.cmd("Git commit --amend -m " .. parse(text))
   end, m)
 end
 
