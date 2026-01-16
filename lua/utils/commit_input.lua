@@ -1,22 +1,7 @@
 local Popup = require "nui.popup"
 local Layout = require "nui.layout"
-local event = require("nui.utils.autocmd").event
-local icons = require "utils.icons"
 
 local TITLE_MAX_LENGTH = 72
-local TITLE_SOFT_LIMIT = 50
-
-local function parse(text)
-  local handle = io.popen("devmoji --text " .. vim.fn.shellescape(text))
-  if handle then
-    local emojified_text = handle:read "*a"
-    handle:close()
-    emojified_text = emojified_text:match "^%s*(.-)%s*$"
-    return vim.fn.shellescape(emojified_text)
-  else
-    return vim.fn.shellescape(text)
-  end
-end
 
 local function commit_input(title, callback, initial_value)
   local initial_title = ""
@@ -99,16 +84,11 @@ local function commit_input(title, callback, initial_value)
 
     local line = lines[1] or ""
     local count = #line
-    local hl = "Comment"
-    if count > TITLE_MAX_LENGTH then
-      hl = "ErrorMsg"
-    elseif count > TITLE_SOFT_LIMIT then
-      hl = "WarningMsg"
-    end
+    local hl = count > TITLE_MAX_LENGTH and "ErrorMsg" or "Comment"
 
     vim.api.nvim_buf_clear_namespace(title_buf, ns_id, 0, -1)
     vim.api.nvim_buf_set_extmark(title_buf, ns_id, 0, 0, {
-      virt_text = { { string.format(" [%d/%d]", count, TITLE_MAX_LENGTH), hl } },
+      virt_text = { { string.format(" %d/%d ", count, TITLE_MAX_LENGTH), hl } },
       virt_text_pos = "right_align",
       hl_mode = "combine",
     })
@@ -184,7 +164,7 @@ local function commit_input(title, callback, initial_value)
       full_message = title_text
     end
 
-    callback(parse(full_message))
+    callback(full_message)
     close()
   end
 
