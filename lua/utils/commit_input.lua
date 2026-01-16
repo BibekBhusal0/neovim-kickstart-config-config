@@ -19,7 +19,18 @@ local function commit_input(title, callback, initial_value)
     end
   end
 
+  if vim.o.columns < 60 or vim.o.lines < 12 then
+    vim.notify("Terminal too small for commit input", vim.log.levels.WARN)
+    return
+  end
+
   local prev_win = vim.api.nvim_get_current_win()
+
+  local columns = vim.o.columns
+  local lines = vim.o.lines
+
+  local width = math.min(80, math.max(60, columns - 10))
+  local height = math.min(16, math.max(12, lines - 6))
 
   local title_buf = vim.api.nvim_create_buf(false, true)
   vim.bo[title_buf].buftype = "nofile"
@@ -103,7 +114,7 @@ local function commit_input(title, callback, initial_value)
     {
       relative = "editor",
       position = "50%",
-      size = { width = 80, height = 16 },
+      size = { width = width, height = height },
     },
     Layout.Box({
       Layout.Box(title_popup, { size = 3 }),
@@ -128,7 +139,6 @@ local function commit_input(title, callback, initial_value)
     vim.api.nvim_set_current_win(title_popup.winid)
     if insert_mode then
       vim.cmd "startinsert"
-      local lines = vim.api.nvim_buf_get_lines(title_buf, 0, -1, false)
       local line = lines[1] or ""
       vim.api.nvim_win_set_cursor(0, { 1, #line })
     end
@@ -138,7 +148,6 @@ local function commit_input(title, callback, initial_value)
     vim.api.nvim_set_current_win(body_popup.winid)
     if insert_mode then
       vim.cmd "startinsert"
-      local lines = vim.api.nvim_buf_get_lines(body_buf, 0, -1, false)
       local last_line = lines[#lines] or ""
       vim.api.nvim_win_set_cursor(0, { #lines, #last_line })
     end
