@@ -18,9 +18,28 @@ function RemoveAllComments()
   )
 
   local comments = {}
+  local is_visual = vim.fn.mode():find "[vV]"
+
+  local start_row, end_row
+  if is_visual then
+    local visual_start = vim.fn.getpos "'<"
+    local visual_end = vim.fn.getpos "'>"
+    start_row = visual_start[2] - 1
+    end_row = visual_end[2] - 1
+    if end_row < start_row then
+      start_row, end_row = end_row, start_row
+    end
+  end
+
   for _, node in query:iter_captures(root, bufnr) do
-    local start_row, start_col, end_row, end_col = node:range()
-    table.insert(comments, { start_row, start_col, end_row, end_col })
+    local node_start_row, node_start_col, node_end_row, node_end_col = node:range()
+    if is_visual then
+      if node_start_row >= start_row and node_end_row <= end_row then
+        table.insert(comments, { node_start_row, node_start_col, node_end_row, node_end_col })
+      end
+    else
+      table.insert(comments, { node_start_row, node_start_col, node_end_row, node_end_col })
+    end
   end
 
   table.sort(comments, function(a, b)
@@ -31,19 +50,27 @@ function RemoveAllComments()
   end)
 
   for _, range in ipairs(comments) do
-    local start_row, start_col, end_row, end_col = range[1], range[2], range[3], range[4]
+    local range_start_row, range_start_col, range_end_row, range_end_col =
+      range[1], range[2], range[3], range[4]
 
-    if start_row == end_row then
-      local line = vim.api.nvim_buf_get_lines(bufnr, start_row, start_row + 1, false)[1]
-      local new_line = line:sub(1, start_col) .. line:sub(end_col + 1)
-      vim.api.nvim_buf_set_lines(bufnr, start_row, start_row + 1, false, { new_line })
+    if range_start_row == range_end_row then
+      local line = vim.api.nvim_buf_get_lines(bufnr, range_start_row, range_start_row + 1, false)[1]
+      local new_line = line:sub(1, range_start_col) .. line:sub(range_end_col + 1)
+      vim.api.nvim_buf_set_lines(bufnr, range_start_row, range_start_row + 1, false, { new_line })
     else
-      vim.api.nvim_buf_set_text(bufnr, start_row, start_col, end_row, end_col, {})
+      vim.api.nvim_buf_set_text(
+        bufnr,
+        range_start_row,
+        range_start_col,
+        range_end_row,
+        range_end_col,
+        {}
+      )
     end
   end
 end
 
-map("<leader>rc", RemoveAllComments, "Remove all comments")
+map("<leader>rc", RemoveAllComments, "Remove comments", { "n", "v" })
 
 return {
   {
