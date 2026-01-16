@@ -11,9 +11,9 @@ local function commit_input(title, callback, initial_value)
     local split_idx = initial_value:find "\n"
     if split_idx then
       initial_title = initial_value:sub(1, split_idx - 1)
-      initial_body = initial_value:sub(split_idx + 1)
+      initial_body = initial_value:sub(split_idx + 1) or ""
     else
-      initial_title = initial_value
+      initial_title = initial_value or ""
     end
   end
 
@@ -41,7 +41,7 @@ local function commit_input(title, callback, initial_value)
     0,
     -1,
     false,
-    vim.split(initial_body, "\n", { plain = true })
+    initial_body ~= "" and vim.split(initial_body, "\n", { plain = true }) or { "" }
   )
 
   local title_popup = Popup {
@@ -124,21 +124,28 @@ local function commit_input(title, callback, initial_value)
     end
   end
 
-  local function focus_title()
+  local function focus_title(insert_mode)
     vim.api.nvim_set_current_win(title_popup.winid)
+    if insert_mode then
+      vim.cmd "startinsert"
+    end
   end
 
-  local function focus_body()
+  local function focus_body(insert_mode)
     vim.api.nvim_set_current_win(body_popup.winid)
+    if insert_mode then
+      vim.cmd "startinsert"
+    end
   end
 
   local function toggle_focus()
-    vim.cmd "stopinsert"
     local cur = vim.api.nvim_get_current_win()
+    local mode = vim.api.nvim_get_mode().mode == "i"
+
     if cur == title_popup.winid then
-      focus_body()
+      focus_body(mode)
     else
-      focus_title()
+      focus_title(mode)
     end
   end
 
@@ -196,8 +203,7 @@ local function commit_input(title, callback, initial_value)
   end
 
   update_title()
-  focus_title()
-  vim.cmd "startinsert"
+  focus_title(true)
 end
 
 return commit_input
