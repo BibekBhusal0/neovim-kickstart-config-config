@@ -88,9 +88,12 @@ map("<leader>lW", ":set wrap!<CR>", "Toggle line wrapping")
 map("<", "<gv", "Indent left", "v")
 map(">", ">gv", "Indent right", "v")
 
--- line numbers
-map("<leader>nn", ":set nu!<CR>", "Toggle Line Number")
-map("<leader>rn", ":set rnu!<CR>", "Toggle Relative Line Number")
+local function toggle_line_numbers()
+  local nu = vim.o.nu or vim.o.rnu
+  vim.o.rnu = not nu
+  vim.o.nu = not nu
+end
+map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
 map("zo", "za", "Toggle fold")
 map("<Esc>", ":noh<CR>", "Clear Highlight")
