@@ -3,6 +3,8 @@ local Layout = require "nui.layout"
 
 local TITLE_MAX_LENGTH = 72
 
+vim.api.nvim_set_hl(0, "CommitTitleOverLimit", { fg = "#ff5f5f", default = true })
+
 local function commit_input(title, callback, initial_value)
   local initial_title = ""
   local initial_body = ""
@@ -24,16 +26,14 @@ local function commit_input(title, callback, initial_value)
   vim.bo[title_buf].swapfile = false
   vim.bo[title_buf].bufhidden = "wipe"
   vim.bo[title_buf].filetype = "gitcommit"
-  vim.bo[title_buf].completefunc = ""
-  vim.bo[title_buf].omnifunc = ""
+  vim.b[title_buf].cmp_enabled = false
 
   local body_buf = vim.api.nvim_create_buf(false, true)
   vim.bo[body_buf].buftype = "nofile"
   vim.bo[body_buf].swapfile = false
   vim.bo[body_buf].bufhidden = "wipe"
   vim.bo[body_buf].filetype = "markdown"
-  vim.bo[body_buf].completefunc = ""
-  vim.bo[body_buf].omnifunc = ""
+  vim.b[body_buf].cmp_enabled = false
 
   vim.api.nvim_buf_set_lines(title_buf, 0, -1, false, { initial_title })
   vim.api.nvim_buf_set_lines(
@@ -84,7 +84,7 @@ local function commit_input(title, callback, initial_value)
 
     local line = lines[1] or ""
     local count = #line
-    local hl = count > TITLE_MAX_LENGTH and "ErrorMsg" or "Comment"
+    local hl = count > TITLE_MAX_LENGTH and "CommitTitleOverLimit" or "Comment"
 
     vim.api.nvim_buf_clear_namespace(title_buf, ns_id, 0, -1)
     vim.api.nvim_buf_set_extmark(title_buf, ns_id, 0, 0, {
@@ -128,6 +128,9 @@ local function commit_input(title, callback, initial_value)
     vim.api.nvim_set_current_win(title_popup.winid)
     if insert_mode then
       vim.cmd "startinsert"
+      local lines = vim.api.nvim_buf_get_lines(title_buf, 0, -1, false)
+      local line = lines[1] or ""
+      vim.api.nvim_win_set_cursor(0, { 1, #line })
     end
   end
 
@@ -135,6 +138,9 @@ local function commit_input(title, callback, initial_value)
     vim.api.nvim_set_current_win(body_popup.winid)
     if insert_mode then
       vim.cmd "startinsert"
+      local lines = vim.api.nvim_buf_get_lines(body_buf, 0, -1, false)
+      local last_line = lines[#lines] or ""
+      vim.api.nvim_win_set_cursor(0, { #lines, #last_line })
     end
   end
 

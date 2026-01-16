@@ -15,14 +15,16 @@ end
 
 local function commit_with_message()
   require "utils.commit_input"(" Commit Changes ", function(text)
-    vim.fn.system { "git", "commit", "-m", parse(text) }
+    local parsed = parse(text)
+    vim.system { "git", "commit", "-m", parsed }:wait()
   end)
 end
 
 local function commit_all_with_message()
   require "utils.commit_input"(" Add and Commit ", function(text)
-    vim.fn.system { "git", "add", "." }
-    vim.fn.system { "git", "commit", "-m", parse(text) }
+    vim.system { "git", "add", "." }:wait()
+    local parsed = parse(text)
+    vim.system { "git", "commit", "-m", parsed }:wait()
   end)
 end
 
@@ -38,7 +40,8 @@ local function change_last_commit_message()
     return
   end
   require "utils.commit_input"(" Change Commit Message ", function(text)
-    vim.fn.system { "git", "commit", "--amend", "-m", parse(text) }
+    local parsed = parse(text)
+    vim.system { "git", "commit", "--amend", "-m", parsed }:wait()
   end, m)
 end
 
