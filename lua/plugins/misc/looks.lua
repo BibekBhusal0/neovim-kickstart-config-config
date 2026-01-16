@@ -35,14 +35,13 @@ return {
     event = { "VeryLazy" },
     dependencies = {
       {
-        -- TODO: might replace this with mini notify
         "rcarriga/nvim-notify",
         opts = {
           render = "wrapped-compact",
           stages = "slide",
           max_width = 35,
           max_height = 50,
-          top_down = true,
+          top_down = false,
         },
       },
     },
