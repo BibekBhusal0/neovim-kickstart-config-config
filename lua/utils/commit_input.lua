@@ -1,0 +1,214 @@
+local Popup = require "nui.popup"
+local Layout = require "nui.layout"
+local event = require("nui.utils.autocmd").event
+local icons = require "utils.icons"
+
+local TITLE_MAX_LENGTH = 72
+local TITLE_SOFT_LIMIT = 50
+
+local function parse(text)
+  local handle = io.popen("devmoji --text " .. vim.fn.shellescape(text))
+  if handle then
+    local emojified_text = handle:read "*a"
+    handle:close()
+    emojified_text = emojified_text:match "^%s*(.-)%s*$"
+    return vim.fn.shellescape(emojified_text)
+  else
+    return vim.fn.shellescape(text)
+  end
+end
+
+local function commit_input(_, callback, initial_value)
+  local initial_title = ""
+  local initial_body = ""
+
+  if initial_value then
+    local split_idx = initial_value:find("\n")
+    if split_idx then
+      initial_title = initial_value:sub(1, split_idx - 1)
+      initial_body = initial_value:sub(split_idx + 1)
+    else
+      initial_title = initial_value
+    end
+  end
+
+  local prev_win = vim.api.nvim_get_current_win()
+
+  local title_buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[title_buf].buftype = "nofile"
+  vim.bo[title_buf].swapfile = false
+  vim.bo[title_buf].bufhidden = "wipe"
+  vim.bo[title_buf].filetype = "gitcommit"
+  vim.bo[title_buf].textarea = 0
+  vim.bo[title_buf].completefunc = ""
+  vim.bo[title_buf].omnifunc = ""
+
+  local body_buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[body_buf].buftype = "nofile"
+  vim.bo[body_buf].swapfile = false
+  vim.bo[body_buf].bufhidden = "wipe"
+  vim.bo[body_buf].filetype = "markdown"
+  vim.bo[body_buf].completefunc = ""
+  vim.bo[body_buf].omnifunc = ""
+
+  vim.api.nvim_buf_set_lines(title_buf, 0, -1, false, { initial_title })
+  vim.api.nvim_buf_set_lines(body_buf, 0, -1, false, vim.split(initial_body, "\n", { plain = true }))
+
+  local title_popup = Popup({
+    border = {
+      style = "single",
+      text = { top = " Commit Title ", top_align = "center" },
+    },
+    enter = true,
+    focusable = true,
+    bufnr = title_buf,
+  })
+
+  local body_popup = Popup({
+    border = {
+      style = "single",
+      text = { top = " Commit Body (Markdown) ", top_align = "center" },
+    },
+    enter = false,
+    focusable = true,
+    bufnr = body_buf,
+  })
+
+  local ns_id = vim.api.nvim_create_namespace("commitpad_counter")
+
+  local function update_title()
+    if not vim.api.nvim_buf_is_valid(title_buf) then
+      return
+    end
+
+    local lines = vim.api.nvim_buf_get_lines(title_buf, 0, -1, false)
+
+    if #lines > 1 then
+      local joined = table.concat(lines, " ")
+      vim.api.nvim_buf_set_lines(title_buf, 0, -1, false, { joined })
+      if vim.api.nvim_get_mode().mode == "i" then
+        vim.api.nvim_win_set_cursor(0, { 1, #joined })
+      end
+      lines = { joined }
+    end
+
+    local line = lines[1] or ""
+    local count = #line
+    local hl = "Comment"
+    if count > TITLE_MAX_LENGTH then
+      hl = "ErrorMsg"
+    elseif count > TITLE_SOFT_LIMIT then
+      hl = "WarningMsg"
+    end
+
+    vim.api.nvim_buf_clear_namespace(title_buf, ns_id, 0, -1)
+    vim.api.nvim_buf_set_extmark(title_buf, ns_id, 0, 0, {
+      virt_text = { { string.format(" [%d/%d]", count, TITLE_MAX_LENGTH), hl } },
+      virt_text_pos = "right_align",
+      hl_mode = "combine",
+    })
+  end
+
+  vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+    buffer = title_buf,
+    callback = update_title,
+  })
+
+  local layout = Layout(
+    {
+      relative = "editor",
+      position = "50%",
+      size = { width = 80, height = 16 },
+    },
+    Layout.Box({
+      Layout.Box(title_popup, { size = 3 }),
+      Layout.Box(body_popup, { grow = 1 }),
+    }, { dir = "col" })
+  )
+
+  local function close()
+    layout:unmount()
+    if vim.api.nvim_buf_is_valid(title_buf) then
+      pcall(vim.api.nvim_buf_delete, title_buf, { force = true })
+    end
+    if vim.api.nvim_buf_is_valid(body_buf) then
+      pcall(vim.api.nvim_buf_delete, body_buf, { force = true })
+    end
+    if prev_win and vim.api.nvim_win_is_valid(prev_win) then
+      pcall(vim.api.nvim_set_current_win, prev_win)
+    end
+  end
+
+  local function focus_title()
+    vim.api.nvim_set_current_win(title_popup.winid)
+  end
+
+  local function focus_body()
+    vim.api.nvim_set_current_win(body_popup.winid)
+  end
+
+  local function toggle_focus()
+    vim.cmd("stopinsert")
+    local cur = vim.api.nvim_get_current_win()
+    if cur == title_popup.winid then
+      focus_body()
+    else
+      focus_title()
+    end
+  end
+
+  local function submit()
+    local title_lines = vim.api.nvim_buf_get_lines(title_buf, 0, -1, false)
+    local title_text = (title_lines[1] or "")
+
+    local body_lines = vim.api.nvim_buf_get_lines(body_buf, 0, -1, false)
+    while #body_lines > 0 and body_lines[#body_lines] == "" do
+      table.remove(body_lines)
+    end
+    local body_text = table.concat(body_lines, "\n")
+
+    if title_text == "" and body_text == "" then
+      close()
+      return
+    end
+
+    local full_message
+    if body_text and body_text ~= "" then
+      full_message = title_text .. "\n\n" .. body_text
+    else
+      full_message = title_text
+    end
+
+    callback(parse(full_message))
+    close()
+  end
+
+  vim.api.nvim_buf_set_var(body_buf, "commit_submit_func", submit)
+  vim.api.nvim_buf_set_var(title_buf, "commit_submit_func", submit)
+
+  local function map(buf, modes, lhs, rhs, desc)
+    modes = modes or { "n" }
+    vim.keymap.set(modes, lhs, rhs, { buffer = buf, silent = true, nowait = true, desc = desc })
+  end
+
+  for _, buf in ipairs({ title_buf, body_buf }) do
+    map(buf, "n", "<Esc>", close, "Close")
+    map(buf, { "n", "i" }, "<Tab>", toggle_focus, "Toggle focus")
+  end
+
+  map(title_buf, { "n", "i" }, "<CR>", submit, "Submit commit")
+  map(body_buf, "n", "<CR>", submit, "Submit commit")
+
+  layout:mount()
+
+  if vim.go.spell then
+    pcall(vim.api.nvim_set_option_value, "spell", true, { win = title_popup.winid })
+    pcall(vim.api.nvim_set_option_value, "spell", true, { win = body_popup.winid })
+  end
+
+  update_title()
+  focus_title()
+  vim.cmd("startinsert")
+end
+
+return commit_input
