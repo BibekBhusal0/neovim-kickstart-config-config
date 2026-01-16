@@ -27,10 +27,10 @@ local function commit_input(title, callback, initial_value)
   local prev_win = vim.api.nvim_get_current_win()
 
   local columns = vim.o.columns
-  local lines = vim.o.lines
+  local terminal_lines = vim.o.lines
 
   local width = math.min(80, math.max(60, columns - 10))
-  local height = math.min(16, math.max(12, lines - 6))
+  local height = math.min(16, math.max(12, terminal_lines - 6))
 
   local title_buf = vim.api.nvim_create_buf(false, true)
   vim.bo[title_buf].buftype = "nofile"
@@ -139,7 +139,8 @@ local function commit_input(title, callback, initial_value)
     vim.api.nvim_set_current_win(title_popup.winid)
     if insert_mode then
       vim.cmd "startinsert"
-      local line = lines[1] or ""
+      local buf_lines = vim.api.nvim_buf_get_lines(title_buf, 0, -1, false)
+      local line = buf_lines[1] or ""
       vim.api.nvim_win_set_cursor(0, { 1, #line })
     end
   end
@@ -148,8 +149,9 @@ local function commit_input(title, callback, initial_value)
     vim.api.nvim_set_current_win(body_popup.winid)
     if insert_mode then
       vim.cmd "startinsert"
-      local last_line = lines[#lines] or ""
-      vim.api.nvim_win_set_cursor(0, { #lines, #last_line })
+      local buf_lines = vim.api.nvim_buf_get_lines(body_buf, 0, -1, false)
+      local last_line = buf_lines[#buf_lines] or ""
+      vim.api.nvim_win_set_cursor(0, { #buf_lines, #last_line })
     end
   end
 
