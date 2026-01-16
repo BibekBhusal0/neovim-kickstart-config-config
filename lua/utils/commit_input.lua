@@ -23,7 +23,7 @@ local function commit_input(title, callback, initial_value)
   local initial_body = ""
 
   if initial_value then
-    local split_idx = initial_value:find("\n")
+    local split_idx = initial_value:find "\n"
     if split_idx then
       initial_title = initial_value:sub(1, split_idx - 1)
       initial_body = initial_value:sub(split_idx + 1)
@@ -51,9 +51,15 @@ local function commit_input(title, callback, initial_value)
   vim.bo[body_buf].omnifunc = ""
 
   vim.api.nvim_buf_set_lines(title_buf, 0, -1, false, { initial_title })
-  vim.api.nvim_buf_set_lines(body_buf, 0, -1, false, vim.split(initial_body, "\n", { plain = true }))
+  vim.api.nvim_buf_set_lines(
+    body_buf,
+    0,
+    -1,
+    false,
+    vim.split(initial_body, "\n", { plain = true })
+  )
 
-  local title_popup = Popup({
+  local title_popup = Popup {
     border = {
       style = "single",
       text = { top = title, top_align = "center" },
@@ -61,9 +67,9 @@ local function commit_input(title, callback, initial_value)
     enter = true,
     focusable = true,
     bufnr = title_buf,
-  })
+  }
 
-  local body_popup = Popup({
+  local body_popup = Popup {
     border = {
       style = "single",
       text = { top = " Commit Body ", top_align = "center" },
@@ -71,9 +77,9 @@ local function commit_input(title, callback, initial_value)
     enter = false,
     focusable = true,
     bufnr = body_buf,
-  })
+  }
 
-  local ns_id = vim.api.nvim_create_namespace("commitpad_counter")
+  local ns_id = vim.api.nvim_create_namespace "commitpad_counter"
 
   local function update_title()
     if not vim.api.nvim_buf_is_valid(title_buf) then
@@ -147,7 +153,7 @@ local function commit_input(title, callback, initial_value)
   end
 
   local function toggle_focus()
-    vim.cmd("stopinsert")
+    vim.cmd "stopinsert"
     local cur = vim.api.nvim_get_current_win()
     if cur == title_popup.winid then
       focus_body()
@@ -186,12 +192,17 @@ local function commit_input(title, callback, initial_value)
   vim.api.nvim_buf_set_var(title_buf, "commit_submit_func", submit)
 
   local function map(buf, lhs, rhs, desc, mode)
-    vim.keymap.set(mode or "n", lhs, rhs, { buffer = buf, silent = true, nowait = true, desc = desc })
+    vim.keymap.set(
+      mode or "n",
+      lhs,
+      rhs,
+      { buffer = buf, silent = true, nowait = true, desc = desc }
+    )
   end
 
-  for _, buf in ipairs({ title_buf, body_buf }) do
+  for _, buf in ipairs { title_buf, body_buf } do
     map(buf, "<Esc>", close, "Close")
-    map(buf, "<Tab>", toggle_focus, "Toggle focus")
+    map(buf, "<Tab>", toggle_focus, "Toggle focus", { "n", "i" })
   end
 
   map(title_buf, "<CR>", submit, "Submit commit", { "n", "i" })
@@ -206,7 +217,7 @@ local function commit_input(title, callback, initial_value)
 
   update_title()
   focus_title()
-  vim.cmd("startinsert")
+  vim.cmd "startinsert"
 end
 
 return commit_input
