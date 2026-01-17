@@ -29,11 +29,14 @@ local function run_git(cmd, args, action)
     )
     return true
   else
-    local error_msg = result.stderr:match("[^\r\n]+") or ""
+    local error_msg = result.stderr:match "[^\r\n]+" or ""
     if error_msg == "" then
       vim.notify(string.format("%s %s failed", icons.others.github, action), vim.log.levels.ERROR)
     else
-      vim.notify(string.format("%s %s failed: %s", icons.others.github, action, error_msg), vim.log.levels.ERROR)
+      vim.notify(
+        string.format("%s %s failed: %s", icons.others.github, action, error_msg),
+        vim.log.levels.ERROR
+      )
     end
     return false
   end
