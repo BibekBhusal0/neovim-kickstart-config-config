@@ -58,7 +58,7 @@ local function commit_input(title, callback, initial_value)
   local title_popup = Popup {
     border = {
       style = "single",
-      text = { top = title, top_align = "center" },
+      text = { title, top_align = "center" },
     },
     enter = true,
     focusable = true,
@@ -132,6 +132,7 @@ local function commit_input(title, callback, initial_value)
     end
     if prev_win and vim.api.nvim_win_is_valid(prev_win) then
       pcall(vim.api.nvim_set_current_win, prev_win)
+      pcall(vim.api.nvim_feedkeys, vim.keycode "<Esc>", "n", false)
     end
   end
 
