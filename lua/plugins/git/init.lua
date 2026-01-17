@@ -1,4 +1,5 @@
 local map = require "utils.map"
+local icons = require "utils.icons"
 
 local function parse(text)
   local handle = io.popen("devmoji --text " .. vim.fn.shellescape(text))
@@ -12,16 +13,55 @@ local function parse(text)
   end
 end
 
+local function get_title_from_message(message)
+  local title = message:match "^([^\n]*)"
+  return title or ""
+end
+
 local function commit_with_message()
   require "utils.commit_input"(" Commit Changes ", function(text)
-    vim.system({ "git", "commit", "-m", parse(text) }):wait()
+    local commit_message = parse(text)
+    local result = vim.system({ "git", "commit", "-m", commit_message }):wait()
+    if result.code == 0 then
+      local title = get_title_from_message(commit_message)
+      vim.notify(string.format("%s Committed: %s", icons.others.github, title), vim.log.levels.INFO)
+    else
+      local error_msg = result.stderr:match "[^\r\n]+"
+      if error_msg and error_msg ~= "" then
+        vim.notify(string.format("Commit failed: %s", error_msg), vim.log.levels.ERROR)
+      else
+        vim.notify(string.format "Commit failed", vim.log.levels.ERROR)
+      end
+    end
   end)
 end
 
 local function commit_all_with_message()
+  local add_result = vim.system({ "git", "add", "." }):wait()
+  if add_result.code ~= 0 then
+    local error_msg = add_result.stderr:match "[^\r\n]+"
+    if error_msg then
+      vim.notify(string.format("Failed to add: %s", error_msg), vim.log.levels.ERROR)
+    else
+      vim.notify(string.format "Failed to add", vim.log.levels.ERROR)
+    end
+    return
+  end
+
   require "utils.commit_input"(" Add and Commit ", function(text)
-    vim.system({ "git", "add", "." }):wait()
-    vim.system({ "git", "commit", "-m", parse(text) }):wait()
+    local commit_message = parse(text)
+    local result = vim.system({ "git", "commit", "-m", commit_message }):wait()
+    if result.code == 0 then
+      local title = get_title_from_message(text)
+      vim.notify(string.format("%s Committed: %s", icons.others.github, title), vim.log.levels.INFO)
+    else
+      local error_msg = result.stderr:match "[^\r\n]+"
+      if error_msg then
+        vim.notify(string.format("Commit failed: %s", error_msg), vim.log.levels.ERROR)
+      else
+        vim.notify(string.format "Commit failed", vim.log.levels.ERROR)
+      end
+    end
   end)
 end
 
@@ -37,7 +77,19 @@ local function change_last_commit_message()
     return
   end
   require "utils.commit_input"(" Change Commit Message ", function(text)
-    vim.system({ "git", "commit", "--amend", "-m", parse(text) }):wait()
+    local commit_message = parse(text)
+    local result = vim.system({ "git", "commit", "--amend", "-m", commit_message }):wait()
+    if result.code == 0 then
+      local title = get_title_from_message(text)
+      vim.notify(string.format("%s Amended: %s", icons.others.github, title), vim.log.levels.INFO)
+    else
+      local error_msg = result.stderr:match "[^\r\n]+"
+      if error_msg then
+        vim.notify(string.format("Amend failed: %s", error_msg), vim.log.levels.ERROR)
+      else
+        vim.notify(string.format "Amend failed", vim.log.levels.ERROR)
+      end
+    end
   end, m)
 end
 
