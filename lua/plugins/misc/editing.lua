@@ -69,6 +69,6 @@ return {
     "piersolenski/import.nvim",
     opts = { picker = "telescope" },
     cmd = { "Import" },
-    keys = wrap_keys { { "<leader>fi", ":lua require('import').pick()<CR>", desc = "Import" } },
+    keys = wrap_keys { { "<leader>fi", "Import", desc = "Import" } },
   },
 }
