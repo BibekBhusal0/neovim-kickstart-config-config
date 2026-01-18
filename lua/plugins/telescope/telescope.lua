@@ -17,55 +17,6 @@ local findInCurrentBufferDir = function()
   end
 end
 
-local live_multigrep = function(opts)
-  local pickers = require "telescope.pickers"
-  local finders = require "telescope.finders"
-  local make_entry = require "telescope.make_entry"
-  local conf = require("telescope.config").values
-  opts = opts or {}
-  opts.cwd = opts.cwd or vim.uv.cwd()
-  local finder = finders.new_async_job {
-    command_generator = function(prompt)
-      if not prompt or prompt == "" then
-        return nil
-      end
-      local pieces = vim.split(prompt, "  ")
-      local args = { "rg" }
-      if pieces[1] then
-        table.insert(args, "-e")
-        table.insert(args, pieces[1])
-      end
-      if pieces[2] then
-        table.insert(args, "-g")
-        table.insert(args, pieces[2])
-      end
-      ---@diagnostic disable-next-line: deprecated
-      return vim.tbl_flatten {
-        args,
-        {
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-        },
-      }
-    end,
-    entry_maker = make_entry.gen_from_vimgrep(opts),
-    cwd = opts.cwd,
-  }
-  pickers
-    .new(opts, {
-      debounce = 100,
-      prompt_title = "Multi Grep",
-      finder = finder,
-      previewer = conf.grep_previewer(opts),
-      sorter = require("telescope.sorters").empty(),
-    })
-    :find()
-end
-
 map("<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
 map("<leader>:", ":Telescope command_history<CR>", "Find Commands history")
 map("<leader>I", ":Telescope spell_suggest<CR>", "Spell suggestion")
@@ -85,7 +36,6 @@ map("<leader>fgc", ":Telescope git_commits<CR>", "Find Git Commits")
 map("<leader>fgf", ":Telescope git_files<CR>", "Find Git Files")
 map("<leader>fgm", ":Telescope marks mark_type=gloabl<CR>", "Find marks global")
 map("<leader>fgs", ":Telescope git_status<CR>", "Find Git Status")
-map("<leader>fgw", live_multigrep, "Find Multi Grep")
 map("<leader>fh", ":Telescope help_tags<CR>", "Find Help Tags")
 map("<leader>fj", findInCurrentBufferDir, "Telescope Find in current buffer directory")
 map("<leader>fk", ":Telescope keymaps<CR>", "Find Keymaps")
