@@ -7,16 +7,6 @@ return function()
     local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
     local multi = picker:get_multi_selection()
 
-    local picker_type = picker.prompt_title or ""
-
-    local is_codecompanion = string.find(picker_type, "Select file%(s%)")
-      or string.find(picker_type, "Select buffer%(s%)")
-
-    if is_codecompanion then
-      require("telescope.actions").select_default(prompt_bufnr)
-      return
-    end
-
     if not vim.tbl_isempty(multi) then
       require("telescope.actions").close(prompt_bufnr)
       for _, j in pairs(multi) do
@@ -143,8 +133,13 @@ return function()
     ["<a-t>"] = actions.select_tab,
     ["<c-g>"] = open_with_trouble,
     ["<c-y>"] = yank_selected,
+  }
+
+  local k = {
+    ["<a-g>"] = open_all_in_new_tab,
     ["<cr>"] = multi_selection,
   }
+  local file_mappings = { i = k, n = k }
 
   require("telescope").setup {
     pickers = {
@@ -153,10 +148,7 @@ return function()
       find_files = {
         prompt_prefix = "󰈔 ",
         layout_config = { preview_width = 0.6 },
-        mappings = {
-          i = { ["<a-g>"] = open_all_in_new_tab },
-          n = { ["<a-g>"] = open_all_in_new_tab },
-        },
+        mappings = file_mappings,
       },
       treesitter = {
         prompt_prefix = " ",
@@ -172,6 +164,7 @@ return function()
       git_files = {
         prompt_prefix = git_icon,
         layout_config = { preview_width = 0.6 },
+        mappings = file_mappings,
       },
       git_commits = {
         prompt_prefix = git_icon,
@@ -205,6 +198,7 @@ return function()
       },
       loclist = {},
       oldfiles = {
+        mappings = file_mappings,
         prompt_prefix = " ",
       },
       command_history = get_dropdown {
@@ -279,7 +273,7 @@ return function()
     defaults = {
       borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
       path_display = { "truncate", truncate = 2 },
-      file_ignore_patterns = { "^node_modules", "^.git", "^.github", "^dist", "^build" },
+      file_ignore_patterns = { "^node_modules", "^.git", "^dist", "^build" },
       prompt_prefix = " ",
       entry_prefix = " ",
       selection_caret = " ",
