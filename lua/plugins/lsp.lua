@@ -57,6 +57,15 @@ return {
           end, "LSP code action", { "n", "x" })
 
           map("<leader>lD", vim.lsp.buf.declaration, "LSP goto Declaration")
+          vim.lsp.util.open_floating_preview = (function(orig)
+            return function(contents, syntax, opts, ...)
+              opts = opts or {}
+              opts.border = opts.border or "rounded"
+              opts.focusable = opts.focusable or false
+              return orig(contents, syntax, opts, ...)
+            end
+          end)(vim.lsp.util.open_floating_preview)
+
           map("<leader>lh", vim.lsp.buf.hover, "LSP Hover")
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
