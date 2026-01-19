@@ -35,6 +35,23 @@ return {
   },
 
   {
+    "dmmulroy/ts-error-translator.nvim",
+    opts = {
+      auto_attach = true,
+      ft = webDev,
+      servers = {
+        "astro",
+        "svelte",
+        "ts_ls",
+        "tsserver",
+        "typescript-tools",
+        "volar",
+        "vtsls",
+      },
+    },
+  },
+
+  {
     "windwp/nvim-ts-autotag",
     opts = {},
     ft = webDev,
