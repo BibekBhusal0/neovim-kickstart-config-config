@@ -206,12 +206,15 @@ return {
     event = "LspAttach",
     config = function()
       require("tiny-inline-diagnostic").setup {
-        preset = "simple",
+        preset = "ghost",
         transparent_bg = false,
         options = {
-          show_source = { enabled = true },
-          add_messages = { display_count = true },
+          throttle = 200,
+          show_source = { enabled = false },
+          add_messages = { display_count = true, show_multiple_glyphs = false },
           multilines = { enabled = true },
+          break_line = { enabled = true, after = 40 },
+          enable_on_select = false,
         },
       }
       vim.diagnostic.config {
