@@ -202,6 +202,28 @@ return {
   }, -- Free up resources by stooping unused LSP clients
 
   {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "LspAttach",
+    config = function()
+      require("tiny-inline-diagnostic").setup {
+        preset = "simple",
+        transparent_bg = false,
+        options = {
+          show_source = { enabled = true },
+          add_messages = { display_count = true },
+          multilines = { enabled = true },
+        },
+      }
+      vim.diagnostic.config {
+        virtual_text = false,
+        signs = false,
+        underline = true,
+      }
+      map("<leader>dt", ":TinyInlineDiag toggle<cr>", "Toggle Diagnostic")
+    end,
+  }, -- Better diagnostic messages
+
+  {
     "antosha417/nvim-lsp-file-operations",
     lazy = true,
   },

@@ -45,7 +45,7 @@ local function toggle_foldcolumn()
   end
   set_dynamic_number_width()
 end
-map("<leader>zi", toggle_foldcolumn, "Toggle fold column")
+map("zi", toggle_foldcolumn, "Toggle fold column")
 
 vim.o.foldcolumn = "0"
 vim.o.foldlevelstart = 99
@@ -58,15 +58,14 @@ vim.opt.foldtext = ""
 vim.opt.fillchars:append "fold: "
 vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
 
-local icons = require("utils.icons").diagnostics
-local signs = { text = {} }
+-- local diag_icons = require("utils.icons").diagnostics
+-- local signs = { text = {} }
+-- vim.diagnostic.config { signs = signs }
+-- for type, icon in pairs(diag_icons) do
+--   local severity = vim.diagnostic.severity[type:upper()]
+--   signs.text[severity] = icon
+-- end
 
-for type, icon in pairs(icons) do
-  local severity = vim.diagnostic.severity[type:upper()]
-  signs.text[severity] = icon
-end
-
-vim.diagnostic.config { signs = signs }
 for type, icon in pairs(require("utils.icons").dap) do
   local hl = "Dap" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl })

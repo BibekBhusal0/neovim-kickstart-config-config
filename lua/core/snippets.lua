@@ -4,10 +4,13 @@ vim.hl.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitt
 
 -- Appearance of diagnostics
 vim.diagnostic.config {
-  virtual_lines = { current_line = true },
-  underline = true,
-  update_in_insert = false,
-  float = { source = true },
+  float = {
+    border = "rounded",
+    source = "if_many",
+    focusable = true,
+    severity_sort = true,
+    header = "",
+  },
 }
 
 -- Highlight on yank

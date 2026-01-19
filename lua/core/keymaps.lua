@@ -160,20 +160,4 @@ local copy_diagnostic = function()
   vim.fn.setreg("+", closest_diagnostic.message)
 end
 
-local function toggle_virtual_lines()
-  local current_config = vim.diagnostic.config()
-  if current_config == nil then
-    return
-  end
-  local is_currently_enabled = current_config.underline == true
-  local new_state_enabled = not is_currently_enabled
-  local new_underline_state = new_state_enabled
-  local new_virtual_lines_state = new_state_enabled and { current_line = true } or false
-  vim.diagnostic.config {
-    virtual_lines = new_virtual_lines_state,
-    underline = new_underline_state,
-  }
-end
-
-map("<leader>dt", toggle_virtual_lines, "Toggle diagnostic virtual lines")
 map("<leader>dy", copy_diagnostic, "Yank diagnostic message")
