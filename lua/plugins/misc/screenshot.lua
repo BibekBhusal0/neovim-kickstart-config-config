@@ -11,12 +11,24 @@ local get_file_name_and_timestamp = function()
   return get_file_name() .. "_" .. get_time_stamp()
 end
 
+local function take(opts)
+  local sil = require "nvim-silicon"
+  local options = vim.tbl_deep_extend("force", sil.options, opts)
+  sil.shoot(options)
+end
+
 local save_to_desktop = function()
-  require "utils.screenshot" {
+  take {
     output = "/home/bibek/Code/Screenshots/" .. get_file_name_and_timestamp() .. ".png",
   }
 end
-local sate_to_clipboard = ":lua require('nvim-silicon').clip()<CR>"
+
+local sate_to_clipboard = function()
+  take {
+    output = nil,
+    to_clipboard = true,
+  }
+end
 
 return {
   {
