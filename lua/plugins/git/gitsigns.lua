@@ -8,13 +8,12 @@ return {
     opts = { numhl = true },
     keys = wrap_keys {
       { "<leader>gb", ":Gitsigns blame<CR>", desc = "Git Blame" },
-      { "<leader>gB", ":Gitsigns blame_line<CR>", desc = "Git Toggle line blame" },
       { "<leader>gD", ':lua require("gitsigns").diffthis("~")<CR>', desc = "Git Diff this" },
       { "<leader>Gd", ':lua require("gitsigns").toggle_deleted()<CR>', desc = "Git deleted diff" },
       { "<leader>gH", ":Gitsigns preview_hunk<CR>", desc = "Git Preview hunk" },
       { "<leader>gh", ":Gitsigns preview_hunk_inline<CR>", desc = "Git Preview hunk inline" },
       {
-        "<leader>gL",
+        "<leader>gB",
         ":Gitsigns toggle_current_line_blame<CR>",
         desc = "Git toggle current line blame",
       },
