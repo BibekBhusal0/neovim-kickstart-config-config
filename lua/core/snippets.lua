@@ -39,7 +39,7 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
   end
 end
 
-local obsidian_dir = "/home/bibek/Documents/obsidian.md"
+local obsidian_dir = "~/Documents/vault"
 
 local function is_arg(expected_arg)
   return function(args)

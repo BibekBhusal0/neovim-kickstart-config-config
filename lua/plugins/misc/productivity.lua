@@ -1,6 +1,6 @@
 local transparency_enabled = false
 local wrap_keys = require "utils.wrap_keys"
-local obsidian_dir = "/home/bibek/Documents/obsidian.md"
+local obsidian_dir = "~/Documents/vault"
 local ui = require "utils.ui_state"
 
 return {
