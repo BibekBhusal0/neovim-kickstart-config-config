@@ -36,6 +36,7 @@ return {
 
   {
     "dmmulroy/ts-error-translator.nvim",
+    ft = webDev,
     opts = {
       auto_attach = true,
       ft = webDev,
