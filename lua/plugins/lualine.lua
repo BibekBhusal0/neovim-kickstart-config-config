@@ -17,8 +17,9 @@ return {
       "mode",
       fmt = function(str)
         return " " .. str
+        -- .. str:sub(1, 1) -- displays only the first character of the mode
       end,
-      -- .. str:sub(1, 1) -- displays only the first character of the mode
+      separator = { left = "" },
     }
 
     local hide_in_width = function()
@@ -96,10 +97,10 @@ return {
     require("lualine").setup {
       options = {
         icons_enabled = true,
-        theme = "onedark",
+        theme = "moonfly",
         --          
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
 
         disabled_filetypes = {
           "alpha",
@@ -125,7 +126,7 @@ return {
           { "filetype", cond = hide_in_width },
         },
         lualine_y = { codeium_status, plugins },
-        lualine_z = { getFileName },
+        lualine_z = { { getFileName, separator = { right = "" }, bg = "NONE", fg= "#ff0000" } },
       },
       inactive_sections = {
         lualine_a = {},
