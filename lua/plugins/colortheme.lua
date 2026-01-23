@@ -7,6 +7,10 @@ return {
     vim.g.moonflyWinSeparator = 2
     vim.cmd [[colorscheme moonfly]]
 
+    vim.api.nvim_set_hl(0, "WinSeparator", {
+      fg = "#999999",
+      bg = "NONE",
+    })
     require("utils.transparency").apply_transparency()
   end,
 }

@@ -56,7 +56,20 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- ref: https://github.com/neovim/neovim/pull/20750
 vim.opt.foldtext = ""
 vim.opt.fillchars:append "fold: "
-vim.opt.fillchars = { fold = " ", eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
+vim.opt.fillchars = {
+  vert = "┃",
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vertleft = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
+  fold = " ",
+  eob = " ",
+  foldopen = "",
+  foldsep = " ",
+  foldclose = "",
+}
 
 -- local diag_icons = require("utils.icons").diagnostics
 -- local signs = { text = {} }

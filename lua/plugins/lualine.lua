@@ -135,6 +135,7 @@ return {
 
     require("lualine").setup {
       options = {
+        globalstatus = true,
         icons_enabled = true,
         theme = moonfly_transparent,
         --          
