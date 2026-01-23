@@ -8,6 +8,7 @@ return {
         vim.g.tpipeline_autoembed = 1
         vim.g.tpipeline_restore = 0
         vim.g.tpipeline_clearstl = 1
+        vim.g.tpipeline_focuslost = 0
       end,
     },
   },
@@ -94,10 +95,48 @@ return {
       end,
     }
 
+    vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+    vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+
+    local colors = {
+      color3 = "#303030",
+      color6 = "#9e9e9e",
+      color7 = "#80a0ff",
+      color8 = "#ae81ff",
+      color0 = "#1c1c1c",
+      color1 = "#ff5189",
+      color2 = "#c6c6c6",
+    }
+
+    local moonfly_transparent = {
+      replace = {
+        a = { fg = colors.color0, bg = colors.color1, gui = "bold" },
+        b = { fg = colors.color2, bg = colors.color3 },
+      },
+      inactive = {
+        a = { fg = colors.color6, bg = colors.color3, gui = "bold" },
+        b = { fg = colors.color6, bg = colors.color3 },
+        c = { fg = colors.color6, bg = "NONE" },
+      },
+      normal = {
+        a = { fg = colors.color0, bg = colors.color7, gui = "bold" },
+        b = { fg = colors.color2, bg = colors.color3 },
+        c = { fg = colors.color2, bg = "NONE" },
+      },
+      visual = {
+        a = { fg = colors.color0, bg = colors.color8, gui = "bold" },
+        b = { fg = colors.color2, bg = colors.color3 },
+      },
+      insert = {
+        a = { fg = colors.color0, bg = colors.color2, gui = "bold" },
+        b = { fg = colors.color2, bg = colors.color3 },
+      },
+    }
+
     require("lualine").setup {
       options = {
         icons_enabled = true,
-        theme = "moonfly",
+        theme = moonfly_transparent,
         --          
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
@@ -126,7 +165,7 @@ return {
           { "filetype", cond = hide_in_width },
         },
         lualine_y = { codeium_status, plugins },
-        lualine_z = { { getFileName, separator = { right = "" }, bg = "NONE", fg= "#ff0000" } },
+        lualine_z = { { getFileName, separator = { right = "" } } },
       },
       inactive_sections = {
         lualine_a = {},
@@ -140,8 +179,7 @@ return {
       extensions = { "fugitive" },
     }
 
-    local in_tmux = os.getenv "TMUX"
-    if in_tmux ~= nil then
+    if os.getenv "TMUX" ~= nil then
       vim.o.laststatus = 0
     end
   end,
