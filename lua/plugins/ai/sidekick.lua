@@ -7,33 +7,19 @@ return {
   keys = wrap_keys {
     {
       "<c-.>",
-      function()
-        require("sidekick.cli").toggle()
-      end,
+      "<Cmd>Sidekick cli toggle<cr>",
       desc = "Sidekick Toggle",
       mode = { "n", "t", "i", "x" },
     },
-    {
-      "<leader>aa",
-      function()
-        require("sidekick.cli").toggle()
-      end,
-      desc = "Sidekick Toggle CLI",
-    },
+    { "<leader>aa", "<Cmd>Sidekick cli toggle<cr>", desc = "Sidekick Toggle CLI" },
     {
       "<leader>as",
       function()
-        require("sidekick.cli").select()
+        require("sidekick.cli").select { filter = { installed = true } }
       end,
-      -- Or to select only installed tools:
-      -- require("sidekick.cli").select({ filter = { installed = true } })
       desc = "Select CLI",
     },
-    {
-      "<leader>ad",
-      ":Sidekick cli close <Cr>",
-      desc = "Sidekick Detach a CLI Session",
-    },
+    { "<leader>ad", ":Sidekick cli close<Cr>", desc = "Sidekick Detach a CLI Session" },
     {
       "<leader>at",
       function()
