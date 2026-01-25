@@ -23,16 +23,26 @@ return {
       separator = { left = "" },
     }
 
-    local hide_in_width = function()
-      return vim.fn.winwidth(0) > 100
+    local is_wide = function()
+      return vim.o.columns >= 100
     end
 
     local getFileName = function()
-      if hide_in_width() then
-        return vim.fn.fnamemodify(vim.fn.expand "%:p", ":.")
-      else
+      if vim.bo.buftype == "terminal" then
+        return "terminal"
+      end
+      if not is_wide() then
         return vim.fn.expand "%:t"
       end
+
+      local relative_path = vim.fn.fnamemodify(vim.fn.expand "%:p", ":.")
+      local home = vim.fn.expand "~"
+      relative_path = relative_path:gsub("^" .. vim.pesc(home), "~")
+      if #relative_path > 30 then
+        local plenary_path = require "plenary.path"
+        relative_path = plenary_path:new(relative_path):shorten(1)
+      end
+      return relative_path
     end
 
     local diagnostics = {
@@ -42,13 +52,13 @@ return {
       symbols = require("utils.icons").get_padded_icon "diagnostics",
       update_in_insert = false,
       always_visible = false,
-      cond = hide_in_width,
+      cond = is_wide,
     }
 
     local diff = {
       "diff",
       symbols = require("utils.icons").get_padded_icon "git",
-      cond = hide_in_width,
+      cond = is_wide,
     }
 
     local codeium_status = {
@@ -74,7 +84,7 @@ return {
         local status, serverStatus = require("neocodeium").get_status()
         return symbols.status[status] .. symbols.server_status[serverStatus]
       end,
-      cond = hide_in_width,
+      cond = is_wide,
     }
 
     local noice_info = {
@@ -163,7 +173,6 @@ return {
         lualine_x = {
           noice_info,
           diagnostics,
-          { "filetype", cond = hide_in_width },
         },
         lualine_y = { codeium_status, plugins },
         lualine_z = { { getFileName, separator = { right = "" } } },
