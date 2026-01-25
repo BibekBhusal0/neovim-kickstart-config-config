@@ -18,8 +18,9 @@ local function take(opts)
 end
 
 local save_to_desktop = function()
+  local home = vim.fn.expand "~"
   take {
-    output = "/home/bibek/Code/Screenshots/" .. get_file_name_and_timestamp() .. ".png",
+    output = home .. "/Code/Screenshots/" .. get_file_name_and_timestamp() .. ".png",
   }
 end
 
