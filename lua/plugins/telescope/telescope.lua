@@ -57,6 +57,8 @@ return {
     cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      require "plugins.telescope.all-recents",
+      require "plugins.telescope.fzf-native",
       {
         "nvim-tree/nvim-web-devicons",
         lazy = true,
@@ -76,10 +78,7 @@ return {
           },
         },
       },
-      -- "prochri/telescope-all-recent.nvim",
-      -- "kkharji/sqlite.lua",
       "nvim-telescope/telescope-ui-select.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
 
     config = require "plugins.telescope.config",

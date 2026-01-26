@@ -1,6 +1,7 @@
 local wrap_keys = require "utils.wrap_keys"
 
 return {
+  enabled = false,
   "nvim-telescope/telescope-file-browser.nvim",
   keys = wrap_keys {
     { "<leader>fo", ":Telescope file_browser<CR>", desc = "Telescope file browser" },
@@ -42,6 +43,5 @@ return {
         },
       },
     }
-    require("telescope").load_extension "git_diffs"
   end,
 }
