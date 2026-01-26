@@ -124,7 +124,7 @@ local function render()
   }, true)
 
   local other_buttons = create_button_group {
-    { "d", "󰾶", "Change Directory", ":Proot<CR>" },
+    { "d", "󰾶", "Change Directory", ":lua require('telescope').extensions.zoxide.list()<CR>" },
     { "s", "", "Sessions", ':lua require("telescope") require("resession").load()<CR>' },
     { "l", "", "Leetcode Dashboard", ":Leet<CR>" },
     { "q", "󰅙", "Quit", ":qa<CR>", "DiagnosticError" },
