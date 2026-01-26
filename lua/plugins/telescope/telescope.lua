@@ -76,9 +76,10 @@ return {
           },
         },
       },
-      "prochri/telescope-all-recent.nvim",
-      "kkharji/sqlite.lua",
+      -- "prochri/telescope-all-recent.nvim",
+      -- "kkharji/sqlite.lua",
       "nvim-telescope/telescope-ui-select.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
 
     config = require "plugins.telescope.config",

@@ -49,7 +49,7 @@ return function()
     vim.cmd((i > 1 and "edit " or "tabnew ") .. val)
   end)
 
-  require "plugins.telescope.all-recents"
+  -- require "plugins.telescope.all-recents"
   local theme = require "telescope.themes"
   local get_dropdown = theme.get_dropdown
   local git_icon = require("utils.icons").others.git .. " "
@@ -226,5 +226,14 @@ return function()
         }),
       },
     },
+    extensions = {
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case",
+      },
+    },
   }
+  require("telescope").load_extension "fzf"
 end
