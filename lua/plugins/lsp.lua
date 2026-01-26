@@ -161,7 +161,14 @@ return {
         jsonls = {},
         lua_ls = {
           settings = {
-            Lua = { format = { enable = false } },
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+                library = vim.api.nvim_get_runtime_file("", true),
+              },
+              diagnostics = { globals = { "vim" }, disable = { "missing-fields" } },
+              format = { enable = false },
+            },
           },
         },
         bashls = {},
