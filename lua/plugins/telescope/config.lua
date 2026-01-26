@@ -49,72 +49,7 @@ return function()
     vim.cmd((i > 1 and "edit " or "tabnew ") .. val)
   end)
 
-  require("telescope-all-recent").setup {
-    vim_ui_select = { kinds = {}, prompts = {} },
-    database = {
-      folder = vim.fn.stdpath "data",
-      file = "telescope-all-recent.sqlite3",
-      max_timestamps = 20,
-    },
-    debug = false,
-    scoring = { boost_factor = 0.0001 },
-    default = {
-      disable = true,
-      use_cwd = true,
-      sorting = "frecency",
-    },
-    pickers = {
-      man_pages = {
-        disable = false,
-        use_cwd = false,
-        sorting = "frecency",
-      },
-      live_grep = { disable = true },
-      grep_string = { disable = true },
-      treesitter = { disable = true },
-      current_buffer_fuzzy_find = { disable = true },
-      tags = { disable = true },
-      git_commits = { disable = true },
-      git_bcommits = { disable = true },
-      git_stash = { disable = true },
-      planets = { disable = true },
-      pickers = { disable = true },
-      symbols = { disable = true },
-      quickfix = { disable = true },
-      quickfixhistory = { disable = true },
-      loclist = { disable = true },
-      oldfiles = { disable = true },
-      command_history = { disable = true },
-      search_history = { disable = true },
-      reloader = { disable = true },
-      buffers = { disable = true },
-      colorscheme = { disable = true },
-      marks = { disable = true },
-      registers = { disable = true },
-      filetypes = { disable = true },
-      highlights = { disable = true },
-      autocommands = { disable = true },
-      spell_suggest = { disable = true },
-      tagstack = { disable = true },
-      jumplist = { disable = true },
-      lsp_references = { disable = true },
-      lsp_incomming_calls = { disable = true },
-      lsp_outgoing_calls = { disable = true },
-      lsp_type_definitions = { disable = true },
-      lsp_implementations = { disable = true },
-      lsp_workspace_symbols = { disable = true },
-      lsp_dynamic_workspace_symbols = { disable = true },
-      diagnostics = { disable = true },
-      keymaps = { disable = false, sorting = "frecency" },
-      help_tags = { disable = false, sorting = "frecency" },
-      vim_options = { disable = false, sorting = "frecency" },
-      commands = { disable = false, sorting = "frecency" },
-      builtin = { disable = false, sorting = "frecency" },
-      git_branches = { disable = false, sorting = "frecency" },
-      git_files = { disable = false, sorting = "frecency" },
-      find_files = { disable = false, sorting = "frecency" },
-    },
-  }
+  require "plugins.telescope.all-recents"
   local theme = require "telescope.themes"
   local get_dropdown = theme.get_dropdown
   local git_icon = require("utils.icons").others.git .. " "
