@@ -162,10 +162,6 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              workspace = {
-                checkThirdParty = false,
-                library = vim.api.nvim_get_runtime_file("", true),
-              },
               diagnostics = { globals = { "vim" }, disable = { "missing-fields" } },
               format = { enable = false },
             },
@@ -177,6 +173,7 @@ return {
           filetype = { "hyprlang", "conf" },
           ignore = { "hyprlock.conf", "hypridle.conf" },
         },
+        harper_ls = { filetypes = { "markdown" } },
       }
       require("mason").setup()
 
