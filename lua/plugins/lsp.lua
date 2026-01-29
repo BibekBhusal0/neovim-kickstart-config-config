@@ -178,7 +178,7 @@ return {
       require("mason").setup()
 
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {})
+      vim.list_extend(ensure_installed, { "debugpy" })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
       for server, cfg in pairs(servers) do

@@ -2,7 +2,6 @@ local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 return {
-
   {
     "Weissle/persistent-breakpoints.nvim",
     opts = {},
@@ -32,7 +31,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
-      { "mfussenegger/nvim-dap-python", lazy = true }, -- pacman -S python-debugpy
+      { "mfussenegger/nvim-dap-python", lazy = true },
     },
     keys = wrap_keys {
       { "<leader>dc", ":lua require('dap').continue() <CR>", desc = "Debugger Continue" },
@@ -41,7 +40,8 @@ return {
     config = function()
       local dap, dapui = require "dap", require "dapui"
       local virtual_text = require "nvim-dap-virtual-text"
-      require("dap-python").setup()
+      local mason = vim.fn.stdpath "data" .. "/mason/packages"
+      require("dap-python").setup(mason .. "/debugpy/venv/bin/python")
       virtual_text.setup {}
 
       dapui.setup {
