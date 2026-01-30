@@ -19,9 +19,12 @@ return {
     },
     cmd = { "QuickRun" },
     config = function()
-      vim.g.quickrun_config = {}
-      vim.g.quickrun_config.js = { command = "deno run" }
-      vim.g.quickrun_config.ts = { command = "deno run --allow-all" }
+      vim.g.quickrun_config = {
+        javascript = { command = "bun" },
+        javascriptreact = { command = "bun" },
+        typescript = { command = "bun" },
+        typescriptreact = { command = "bun" },
+      }
     end,
   },
 
