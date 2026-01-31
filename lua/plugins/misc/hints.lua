@@ -4,6 +4,10 @@ return {
   {
     "folke/which-key.nvim",
     cmd = "WhichKey",
+    opts = {
+      preset = "helix",
+      win = { padding = { 0, 0 }, title_pos = "right" },
+    },
     event = "VeryLazy",
   }, -- Hints keybinds
 
