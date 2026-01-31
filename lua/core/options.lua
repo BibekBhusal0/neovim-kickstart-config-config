@@ -37,7 +37,6 @@ vim.o.undofile = true
 vim.o.completeopt = "menuone,noselect"
 vim.opt.shortmess:append "c"
 vim.opt.iskeyword:append "-" -- Hyphenated words recognized by searches (default: does not include "-")
-vim.opt.formatoptions:remove { "c", "r", "o" } -- Don"t insert the current comment leader automatically for auto-wrapping comments using "textWidth", hitting <Enter> in insert mode, or hitting "o" or "O" in normal mode. (default: "croql')
 vim.opt.runtimepath:remove "/usr/share/vim/vimfiles" -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
 vim.o.mousemoveevent = true
 
@@ -46,6 +45,13 @@ vim.opt.hlsearch = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = false
 vim.opt.spelloptions = "camel"
+
+-- Hiding scroll bar in those filetypes
 vim.cmd [[
   autocmd FileType telescope,mason,lazygit,nvcheatsheet setlocal nospell
+]]
+
+-- Don't insert the current comment leader automatically for auto-wrapping <Enter> in insert mode, or hitting "o" or "O" in normal mode.
+vim.cmd [[
+  autocmd FileType * setlocal formatoptions-=o formatoptions-=r
 ]]
