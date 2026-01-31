@@ -70,10 +70,31 @@ function RemoveAllComments()
   end
 end
 
-map("<leader>rc", RemoveAllComments, "Remove comments", { "n", "v" })
+map("<leader>rc", RemoveAllComments, "Remove comments", { "n", "x" })
 
 return {
   {
+    {
+      "numToStr/Comment.nvim",
+      dependencies = {
+        {
+          "JoosepAlviste/nvim-ts-context-commentstring",
+          ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, -- Specify file types for loading
+          config = function()
+            local ts_context_commentstring =
+              require "ts_context_commentstring.integrations.comment_nvim"
+            require("Comment").setup { pre_hook = ts_context_commentstring.create_pre_hook() }
+          end,
+        },
+      },
+      keys = {
+        { "gcc", mode = "n", desc = "Comment toggle current line" },
+        { "gc", mode = { "n", "o", "x" }, desc = "Comment toggle" },
+        { "gbc", mode = "n", desc = "Comment toggle current block" },
+        { "gb", mode = { "n", "o", "x" }, desc = "Comment toggle blockwise" },
+      },
+      opts = {},
+    }, -- Easily comment visual regions/lines
 
     {
       "LudoPinelli/comment-box.nvim",

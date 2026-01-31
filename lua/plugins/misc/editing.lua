@@ -12,6 +12,38 @@ return {
   }, -- change brackets, quotes and surrounds
 
   {
+    "windwp/nvim-autopairs",
+    keys = {
+      { "{", mode = { "i" } },
+      { "[", mode = { "i" } },
+      { "(", mode = { "i" } },
+      { '"', mode = { "i" } },
+      { "'", mode = { "i" } },
+      { "`", mode = { "i" } },
+      { "}", mode = { "i" } },
+      { "]", mode = { "i" } },
+      { ")", mode = { "i" } },
+    },
+    config = function()
+      local npairs = require "nvim-autopairs"
+      npairs.setup { fast_wrap = { map = "<A-e>", manual_position = false } }
+      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      local cmp = require "cmp"
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
+  }, -- Autoclose parentheses, brackets, quotes, etc. also work on command mode,
+
+  {
+    "Wansmer/treesj",
+    keys = wrap_keys {
+      { "gi", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
+      { "gj", ":TSJJoin<CR>", desc = "Join the object under cursor" },
+      { "gk", ":TSJSplit<CR>", desc = "Split the object under cursor" },
+    },
+    opts = { use_default_keymaps = false, max_join_length = 10000 },
+  }, -- advanced join and split
+
+  {
     "mg979/vim-visual-multi",
     keys = { "<C-n>", "<C-Up>", "<C-Down>", "<S-Left>", "<S-Right>" },
   }, -- multi line editing

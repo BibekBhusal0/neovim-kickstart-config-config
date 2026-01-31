@@ -79,13 +79,13 @@ return {
       mapping = cmp.mapping.preset.insert {
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-i>"] = cmp.mapping.abort(),
+        ["<A-i>"] = cmp.mapping.abort(),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-y>"] = cmp.mapping.confirm { select = true },
-        ["<a-y>"] = cmp.mapping.confirm { select = true },
-        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<A-y>"] = cmp.mapping.confirm { select = true },
         ["<A-b>"] = cmp.mapping.complete {},
+        ["<A-p>"] = cmp.mapping.complete {},
         ["<C-S-l>"] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
