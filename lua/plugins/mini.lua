@@ -6,7 +6,7 @@ end, {})
 
 return {
   {
-    "echasnovski/mini.trailspace",
+    "nvim-mini/mini.trailspace",
     keys = wrap_keys {
       { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
     },
@@ -25,7 +25,7 @@ return {
   },
 
   {
-    "echasnovski/mini.operators",
+    "nvim-mini/mini.operators",
     keys = {
       { "g=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
       { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
@@ -37,7 +37,7 @@ return {
   }, -- sorting with motion
 
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     keys = wrap_keys {
       { "<leader>o", ':lua require("mini.files").open()<CR>', desc = "Open Mini Files" },
     },
