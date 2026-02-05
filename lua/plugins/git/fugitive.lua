@@ -11,14 +11,14 @@ map("<leader>gj", ":Git commit -a --amend --no-edit<CR>", "Git add and commit to
 map("<leader>gP", ":Git pull<CR>", "Git pull")
 map("<leader>gp", ":Git push<CR>", "Git push")
 
-local function newBranch()
+local function changeBranch()
   require "utils.input"("Branch Name", function(text)
     local safe = vim.fn.shellescape(vim.trim(text))
     vim.cmd("Git checkout -b " .. safe)
   end, "", 20, require("utils.icons").others.git .. " ")
 end
 
-map("<leader>Gb", newBranch, "Git New Branch")
+map("<leader>Gb", changeBranch, "Git Change Branch")
 
 return {
   {
