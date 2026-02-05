@@ -21,13 +21,7 @@ local save_to_desktop = function()
   local home = vim.fn.expand "~"
   take {
     output = home .. "/Code/Screenshots/" .. get_file_name_and_timestamp() .. ".png",
-  }
-end
-
-local sate_to_clipboard = function()
-  take {
-    output = nil,
-    to_clipboard = true,
+    to_clipboard = false,
   }
 end
 
@@ -38,9 +32,8 @@ return {
     main = "nvim-silicon",
 
     keys = wrap_keys {
-      { "<leader>sc", ":Silicon<CR>", desc = "Screenshot to Root directory", mode = { "n", "v" } },
-      { "<leader>sC", sate_to_clipboard, desc = "Screenshot to clipboard", mode = { "n", "v" } },
-      { "<leader>sd", save_to_desktop, desc = "Screenshot to Desktop", mode = { "n", "v" } },
+      { "<leader>sc", ":Silicon<CR>", desc = "Screenshot to clipboard", mode = { "n", "v" } },
+      { "<leader>sC", save_to_desktop, desc = "Screenshot to clipboard", mode = { "n", "v" } },
     },
 
     opts = {
@@ -55,15 +48,13 @@ return {
       theme = "DarkNeon",
       -- background = '#f76161',
       shadow_blur_radius = 14,
+      to_clipboard = true,
       shadow_offset_x = 20,
       shadow_offset_y = 20,
       shadow_color = "#27272a",
       background_image = vim.fn.stdpath "config" .. "/gradient.png",
       num_separator = "\u{258f}",
-
-      output = function()
-        return "./" .. get_file_name_and_timestamp() .. ".png"
-      end,
+      output = nil,
 
       window_title = function()
         local repo_url = vim.fn.system "git config --get remote.origin.url"
