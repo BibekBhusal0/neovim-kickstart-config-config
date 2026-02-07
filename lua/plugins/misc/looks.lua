@@ -107,6 +107,7 @@ return {
 
   {
     "kevinhwang91/nvim-hlslens",
+    keys = { "n", "N", "*", "#", "g*", "g#" },
     config = function()
       require("hlslens").setup { nearest_only = true, calm_down = true }
       local cmd = ":lua require('hlslens').start()<CR>"

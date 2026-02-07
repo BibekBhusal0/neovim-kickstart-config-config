@@ -22,7 +22,6 @@ return {
 
   {
     "razak17/tailwind-fold.nvim",
-    event = "VeryLazy",
     ft = webDev,
     config = function()
       require("tailwind-fold").setup {
