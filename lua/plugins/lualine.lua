@@ -1,5 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = { "mattmorgis/git-statusline.nvim" },
   event = "VimEnter",
   config = function()
     local mode = {
@@ -52,7 +53,7 @@ return {
     local codeium_status = {
       function()
         if not package.loaded["neocodeium"] then
-          return " "
+          return ""
         end
         local symbols = {
           status = {
@@ -156,7 +157,11 @@ return {
       },
       sections = {
         lualine_a = { mode },
-        lualine_b = { "branch" },
+        lualine_b = {
+          function()
+            return require("git_statusline").get(0)
+          end,
+        },
         lualine_c = { diff },
         lualine_x = {
           noice_info,
@@ -174,7 +179,6 @@ return {
         lualine_z = {},
       },
       tabline = {},
-      extensions = { "fugitive" },
     }
 
     if os.getenv "TMUX" ~= nil then
