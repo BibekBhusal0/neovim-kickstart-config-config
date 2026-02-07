@@ -148,23 +148,4 @@ return {
       { "<leader>wm", ":lua require'winmove'.start_mode('move')<CR>", desc = "Window Move mode" },
     },
   }, -- Easy move and swap split windows
-
-  {
-    "christoomey/vim-tmux-navigator",
-    cmd = {
-      "TmuxNavigateLeft",
-      "TmuxNavigateDown",
-      "TmuxNavigateUp",
-      "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-      "TmuxNavigatorProcessList",
-    },
-    keys = wrap_keys {
-      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>", desc = "Window Left" },
-      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>", desc = "Window Down" },
-      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>", desc = "Window Up" },
-      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>", desc = "Window Right" },
-      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", desc = "WIndow Previous" },
-    },
-  },
 }

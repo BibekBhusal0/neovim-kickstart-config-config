@@ -34,6 +34,7 @@ require("lazy").setup {
   require "plugins.statuscol", -- Changing status column
   require "plugins.telescope", -- Fuzzy finder for searching
   require "plugins.test", -- Running tests
+  require "plugins.tmux", -- Tmux Stuff
   require "plugins.treesitter", -- syntax highlighting
   require "plugins.trouble", -- provides better references diagnostics
   require "plugins.windowManagemet", -- Buffer Tab and Session Management
