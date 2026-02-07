@@ -159,7 +159,11 @@ return {
         lualine_a = { mode },
         lualine_b = {
           function()
-            return require("git_statusline").get(0)
+            local status = require("git_statusline").get(0)
+            if status == "" then
+              return "-"
+            end
+            return " " .. status
           end,
         },
         lualine_c = { diff },
