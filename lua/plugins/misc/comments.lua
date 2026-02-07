@@ -79,7 +79,7 @@ return {
       dependencies = {
         {
           "JoosepAlviste/nvim-ts-context-commentstring",
-          ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, -- Specify file types for loading
+          ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
           config = function()
             local ts_context_commentstring =
               require "ts_context_commentstring.integrations.comment_nvim"
@@ -168,4 +168,15 @@ return {
       end,
     }, -- WARNING: Highlights todo, notes, etc in comments
   },
+
+  {
+    "jeangiraldoo/codedocs.nvim",
+    keys = wrap_keys {
+      {
+        "<Leader>CD",
+        ":Codedocs<CR>",
+        desc = "Toggle comment docs",
+      },
+    },
+  }, -- Easy to add Doc comments in different languages
 }
