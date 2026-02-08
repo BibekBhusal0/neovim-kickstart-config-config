@@ -207,7 +207,7 @@ return function()
     defaults = {
       borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
       path_display = { "truncate", truncate = 2 },
-      file_ignore_patterns = { "^node_modules", "^.git", "^dist", "^build" },
+      file_ignore_patterns = { "^node_modules/", "^.git/", "^dist/", "^build/" },
       prompt_prefix = " ",
       entry_prefix = " ",
       selection_caret = " ",
