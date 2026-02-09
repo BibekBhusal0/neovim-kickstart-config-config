@@ -96,7 +96,7 @@
       pre#snap .code-line {
         margin: 0;
         padding: 0;
-        padding-left: 3em;
+        padding-left: calc({{data.line_number_width}}em);
         line-height: {{fontSettings.line_height}}pt;
         display: block;
         margin-bottom: -{{fontSettings.line_height}}px;
@@ -108,7 +108,7 @@
         content: counter(line-number);
         position: absolute;
         left: 0;
-        width: 2.5em;
+        width: calc({{data.line_number_width}}em - 1.5em);
         text-align: right;
         color: rgba(255, 255, 255, 0.3);
         user-select: none;

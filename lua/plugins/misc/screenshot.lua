@@ -30,10 +30,23 @@ local function get_start_line()
   return 0
 end
 
+local function get_line_number_width()
+  local mode = vim.api.nvim_get_mode().mode
+  local end_line = vim.fn.line "$"
+
+  if mode:match "^v" or mode:match "^V" then
+    end_line = vim.fn.line "'>"
+  end
+
+  local digits = #tostring(end_line)
+  return digits
+end
+
 local function get_template_data()
   return {
     title = get_window_title(),
     start_line = get_start_line(),
+    line_number_width = get_line_number_width(),
   }
 end
 
@@ -77,6 +90,11 @@ return {
       save_to_disk = { image = true },
       output_dir = screenshotFolder,
       filename_pattern = "%file_name.%file_extension-%t",
+      additional_template_data = {
+        title = "",
+        start_line = 0,
+        line_number_width = 3,
+      },
     },
   },
 }
