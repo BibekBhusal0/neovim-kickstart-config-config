@@ -21,14 +21,19 @@ local function get_window_title()
   return "   " .. get_file_name()
 end
 
-local function get_template_data()
-  local background = "#000000"
-  if require("utils.transparency").bg_transparent then
-    background = "transparent"
+local function get_start_line()
+  local mode = vim.api.nvim_get_mode().mode
+  if mode:match "^v" or mode:match "^V" then
+    local start_line = vim.fn.line "'<"
+    return start_line - 1
   end
+  return 0
+end
+
+local function get_template_data()
   return {
     title = get_window_title(),
-    background = background,
+    start_line = get_start_line(),
   }
 end
 

@@ -83,17 +83,29 @@
         font-variant-numeric: tabular-nums;
         font-feature-settings: "tnum";
         tab-size: {{tabstop}};
-        /* Tab width in spaces */
+        counter-reset: line-number {{data.start_line}};
       }
 
       pre#snap .code-line {
         margin: 0;
         padding: 0;
-
+        padding-left: 3em;
         line-height: {{fontSettings.line_height}}pt;
         display: block;
+        margin-bottom: -{{fontSettings.line_height}}px;
+        counter-increment: line-number;
+        position: relative;
+      }
 
-        margin-bottom: - {{fontSettings.line_height}}px;
+      pre#snap .code-line::before {
+        content: counter(line-number);
+        position: absolute;
+        left: 0;
+        width: 2.5em;
+        text-align: right;
+        color: rgba(255, 255, 255, 0.3);
+        user-select: none;
+        pointer-events: none;
       }
 
       pre#snap .code-line i {
