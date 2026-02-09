@@ -61,4 +61,11 @@ return {
     "mawkler/jsx-element.nvim",
     ft = { "typescriptreact", "javascriptreact", "javascript" },
   },
+
+  {
+    "barrett-ruth/live-server.nvim",
+    build = "npm install -g live-server",
+    cmd = { "LiveServerStart" },
+    opts = {},
+  },
 }
