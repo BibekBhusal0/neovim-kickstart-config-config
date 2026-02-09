@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Code screenshot</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 50%, #c44569 100%);
+      }
+
+      body {
+        padding: 40px;
+        width: calc({{minWidth}}px + 80px);
+      }
+
+      #container {
+        backdrop-filter: blur(10px);
+        background: rgba(30, 20, 20, 0.75);
+        overflow: hidden;
+        outline: 0.4px solid rgba(20, 20, 20, 0.6);
+        border: 1px solid rgba(200, 200, 200, 0.5);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .close {
+        background-color: #ff5f56;
+      }
+
+      .minimize {
+        background-color: #ffbd2e;
+      }
+
+      .maximize {
+        background-color: #27c93f;
+      }
+
+      .title-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 48px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 0 16px;
+        position: relative;
+      }
+
+      .window-controls {
+        position: absolute;
+        left: 16px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .title-text {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 13px;
+        font-weight: 500;
+        font-family: '{{fontSettings.fonts.default.name}}', monospace;
+      }
+
+      pre#snap {
+        margin: 0;
+        background: transparent;
+        color: {{theme.fgColor}};
+        display: block;
+        font-family: '{{fontSettings.fonts.default.name}}', monospace;
+        font-size: {{fontSettings.size}}pt;
+        padding: 24px;
+        white-space: pre;
+        word-break: keep-all;
+        letter-spacing: 0;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+        tab-size: {{tabstop}};
+        /* Tab width in spaces */
+      }
+
+      pre#snap .code-line {
+        margin: 0;
+        padding: 0;
+
+        line-height: {{fontSettings.line_height}}pt;
+        display: block;
+
+        margin-bottom: - {{fontSettings.line_height}}px;
+      }
+
+      pre#snap .code-line i {
+        font-family: '{{fontSettings.fonts.italic.name}}', monospace;
+        letter-spacing: 0;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+      }
+
+      pre#snap .code-line b {
+        font-family: '{{fontSettings.fonts.bold.name}}', monospace;
+        letter-spacing: 0;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+      }
+
+      pre#snap .code-line i b {
+        font-family: '{{fontSettings.fonts.bold_italic.name}}', monospace;
+        letter-spacing: 0;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+      }
+
+      [style*="background-color: #000000"] {
+        background-color: transparent !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="title-bar">
+        <div class="window-controls">
+          <div class="dot close"></div>
+          <div class="dot minimize"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <span class="title-text">{{data.title}}</span>
+      </div>
+      <pre id="snap">{{{code}}}</pre>
+    </div>
+  </body>
+</html>
