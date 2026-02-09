@@ -15,10 +15,10 @@ local function get_window_title()
     local username, repo_name = repo_url:match "https://github.com/([^/]+)/([^/]+)"
     if username and repo_name then
       repo_name = repo_name:gsub("%.git$", "")
-      return ("  " .. username .. "/" .. repo_name)
+      return (" " .. username .. "/" .. repo_name)
     end
   end
-  return "   " .. get_file_name()
+  return get_file_name()
 end
 
 local function get_start_line()
