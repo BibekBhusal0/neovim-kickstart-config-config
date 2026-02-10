@@ -57,7 +57,9 @@ local function snap(config)
   require("snap.config").set(config)
   local mode = vim.api.nvim_get_mode().mode
   if mode:match "^v" or mode:match "^V" then
-    vim.cmd "'<,'>Snap"
+    local s = vim.fn.getpos "v"
+    local e = vim.fn.getpos "."
+    vim.cmd(string.format("%d,%dSnap", s[2], e[2]))
     return
   end
   vim.cmd "Snap"
