@@ -1,7 +1,13 @@
 local Input = require "nui.input"
 local event = require("nui.utils.autocmd").event
 
-return function(title, callback, val, width, prompt)
+--- Open popup input to do anything
+---@param title string title of input
+---@param callback function callback to be called after user press enter
+---@param val string? default vaule of input
+---@param width number? width of input
+---@param prompt string? starting prompt
+local function inp(title, callback, val, width, prompt)
   local initalVal = val or ""
   local input = Input({
     position = "50%",
@@ -40,3 +46,5 @@ return function(title, callback, val, width, prompt)
     input:unmount()
   end)
 end
+
+return inp
