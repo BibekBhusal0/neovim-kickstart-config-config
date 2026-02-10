@@ -1,4 +1,5 @@
 local wrap_keys = require "utils.wrap_keys"
+
 return {
   {
     "seandewar/nvimesweeper",

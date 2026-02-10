@@ -1,14 +1,15 @@
 local wrap_keys = require "utils.wrap_keys"
 
 return {
-  -- require "plugins.misc.animation",
   require "plugins.misc.comments",
   require "plugins.misc.editing",
+  require "plugins.misc.games",
   require "plugins.misc.hints",
-  require "plugins.misc.looks",
+  require "plugins.misc.leetcode",
   require "plugins.misc.markdown",
   require "plugins.misc.productivity",
   require "plugins.misc.screenshot",
+  require "plugins.misc.tmux",
   require "plugins.misc.web-dev",
 
   {
