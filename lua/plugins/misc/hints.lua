@@ -30,7 +30,7 @@ return {
     "m4xshen/hardtime.nvim",
     enabled = true,
     event = { "BufReadPost", "BufNewFile" },
-    keys = wrap_keys { { "<leader>th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
+    keys = wrap_keys { { "<leader>Th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
     config = function()
       require("hardtime").setup {
         restriction_mode = "hint",

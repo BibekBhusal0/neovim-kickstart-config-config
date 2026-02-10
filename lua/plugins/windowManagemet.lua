@@ -13,9 +13,7 @@ map("<leader>br", ":e!<CR>", "Buffer Reset")
 
 -- Window management
 map("<leader>v", ":vsplit<CR>", "Split Window Vertically")
-map("<leader>V", ":vsplit | ter<CR>", "Split Terminal Vertically")
 map("<leader>h", ":split<CR>", "Split Window Horizontally")
-map("<leader>H", ":split | ter<CR>", "Split Terminal Horizontally")
 map("<leader>wj", ":vert ba<CR>", "Split all")
 
 -- Navigate between splits
@@ -148,4 +146,18 @@ return {
       { "<leader>wm", ":lua require'winmove'.start_mode('move')<CR>", desc = "Window Move mode" },
     },
   }, -- Easy move and swap split windows
+
+  {
+    "2kabhishek/termim.nvim",
+    opts = {},
+    cmd = { "Fterm", "FTerm", "Sterm", "STerm", "Tterm", "TTerm", "Vterm", "VTerm" },
+    keys = wrap_keys {
+      { "<leader>V", ":Vterm<CR>", desc = "Vertical Split terminal" },
+      { "<leader>tv", ":Vterm<CR>", desc = "Vertical Split terminal" },
+      { "<leader>H", ":Sterm<CR>", desc = "Horizontal split terminal" },
+      { "<leader>th", ":Sterm<CR>", desc = "Horizontal split terminal" },
+      { "<leader>tf", ":Fterm<CR>", desc = "Floating terminal" },
+      { "<leader>tt", ":Tterm<CR>", desc = "New Tab terminal" },
+    },
+  },
 }
