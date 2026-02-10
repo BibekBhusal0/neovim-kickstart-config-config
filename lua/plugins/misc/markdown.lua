@@ -64,11 +64,7 @@ return {
     "jakewvincent/mkdnflow.nvim",
     ft = "markdown",
     config = {
-      filetypes = {
-        md = true,
-        rmd = true,
-        markdown = true,
-      },
+      filetypes = { rmd = true, markdown = true },
       to_do = { status_propagation = { up = true } },
       mappings = {
         MkdnEnter = { { "i" }, "<CR>" },
