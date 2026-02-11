@@ -59,8 +59,6 @@ vim.opt.fillchars:append "fold: "
 vim.opt.fillchars = {
   vert = "┃",
   horiz = "━",
-  stl = "━",
-  stlnc = "━",
   horizup = "┻",
   horizdown = "┳",
   vertleft = "┫",

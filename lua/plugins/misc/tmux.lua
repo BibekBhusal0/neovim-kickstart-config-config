@@ -11,6 +11,7 @@ return {
       vim.g.tpipeline_restore = 0
       vim.g.tpipeline_clearstl = 1
       vim.g.tpipeline_focuslost = 1
+      vim.opt.fillchars:append { stl = "━", stlnc = "━" }
     end,
   }, -- Merge Status line of neovim and tmux
 
