@@ -21,48 +21,35 @@ local function get_window_title()
   return get_file_name()
 end
 
-local function get_start_line()
+--- Get start and end line numbers for current selection or for entire file.
+-- @treturn { start: number, ["end"]: number }.
+local function get_start_end_line()
   local mode = vim.api.nvim_get_mode().mode
-  if mode:match "^v" or mode:match "^V" then
-    local start_line = vim.fn.line "'<"
-    return start_line - 1
-  end
-  return 0
-end
-
-local function get_line_number_width()
-  local mode = vim.api.nvim_get_mode().mode
-  local end_line = vim.fn.line "$"
-
-  if mode:match "^v" or mode:match "^V" then
-    end_line = vim.fn.line "'>"
+  if mode:match "^v" or mode:match "^V" or mode == "\22" then
+    local s = vim.fn.getpos("v")[2]
+    local e = vim.fn.getpos(".")[2]
+    if s > e then
+      return { start = e, ["end"] = s }
+    end
+    return { start = s, ["end"] = e }
   end
 
-  local digits = #tostring(end_line)
-  return digits
-end
-
-local function get_template_data()
-  return {
-    title = get_window_title(),
-    start_line = get_start_line(),
-    line_number_width = get_line_number_width(),
-  }
+  return { start = 1, ["end"] = vim.fn.line "$" }
 end
 
 ---Take Screenshot after setting up snap's config
 ---@param config SnapUserConfig to overwrite
 local function snap(config)
-  require("snap.config").set { additional_template_data = get_template_data() }
+  local s = get_start_end_line()
+  require("snap.config").set {
+    additional_template_data = {
+      title = get_window_title(),
+      start_line = s.start - 1,
+      line_number_width = #tostring(s["end"]),
+    },
+  }
   require("snap.config").set(config)
-  local mode = vim.api.nvim_get_mode().mode
-  if mode:match "^v" or mode:match "^V" then
-    local s = vim.fn.getpos "v"
-    local e = vim.fn.getpos "."
-    vim.cmd(string.format("%d,%dSnap", s[2], e[2]))
-    return
-  end
-  vim.cmd "Snap"
+  vim.cmd(string.format("%d,%dSnap", s.start, s["end"]))
 end
 
 local function snap_to_desktop()
