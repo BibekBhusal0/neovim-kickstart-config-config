@@ -6,10 +6,11 @@ return {
     enabled = os.getenv "TMUX" ~= nil,
     "vimpostor/vim-tpipeline",
     config = function()
+      vim.o.laststatus = 0
       vim.g.tpipeline_autoembed = 1
       vim.g.tpipeline_restore = 0
       vim.g.tpipeline_clearstl = 1
-      vim.g.tpipeline_focuslost = 0
+      vim.g.tpipeline_focuslost = 1
     end,
   }, -- Merge Status line of neovim and tmux
 

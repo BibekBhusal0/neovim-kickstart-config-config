@@ -184,9 +184,5 @@ return {
       },
       tabline = {},
     }
-
-    if os.getenv "TMUX" ~= nil then
-      vim.o.laststatus = 0
-    end
   end,
 }
