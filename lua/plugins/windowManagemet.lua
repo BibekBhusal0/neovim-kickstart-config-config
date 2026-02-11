@@ -149,7 +149,6 @@ return {
 
   {
     "2kabhishek/termim.nvim",
-    opts = {},
     cmd = { "Fterm", "FTerm", "Sterm", "STerm", "Tterm", "TTerm", "Vterm", "VTerm" },
     keys = wrap_keys {
       { "<leader>V", ":Vterm<CR>", desc = "Vertical Split terminal" },

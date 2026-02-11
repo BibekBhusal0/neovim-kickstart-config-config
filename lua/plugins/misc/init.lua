@@ -3,6 +3,7 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   require "plugins.misc.comments",
   require "plugins.misc.editing",
+  require "plugins.misc.exercism",
   require "plugins.misc.games",
   require "plugins.misc.hints",
   require "plugins.misc.leetcode",
