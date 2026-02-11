@@ -11,7 +11,7 @@ return {
   },
   dependencies = {
     "2kabhishek/utils.nvim",
-    "nvim-telescope/telescope.nvim"
+    "nvim-telescope/telescope.nvim",
   },
   config = function()
     require("exercism").setup {
