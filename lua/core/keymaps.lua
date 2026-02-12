@@ -118,9 +118,11 @@ map("<C-x>", "<C-\\><C-N>", "terminal escape terminal mode", "t")
 -- Toggle line wrapping
 map("<leader>lW", ":set wrap!<CR>", "Toggle line wrapping")
 
--- Stay in indent mode
-map("<", "<gv", "Indent left", "v")
-map(">", ">gv", "Indent right", "v")
+-- Alt keys to indent
+map("<A-h>", "<gv", "Indent left", "v")
+map("<A-l>", ">gv", "Indent right", "v")
+map("<A-l>", ">>", "Indent right")
+map("<A-h>", "<<", "Indent right")
 
 local function toggle_line_numbers()
   local nu = vim.o.nu or vim.o.rnu
