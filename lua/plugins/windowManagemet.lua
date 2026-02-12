@@ -155,7 +155,7 @@ return {
       { "<leader>tv", ":Vterm<CR>", desc = "Vertical Split terminal" },
       { "<leader>H", ":Sterm<CR>", desc = "Horizontal split terminal" },
       { "<leader>th", ":Sterm<CR>", desc = "Horizontal split terminal" },
-      { "<leader>tf", ":Fterm<CR>", desc = "Floating terminal" },
+      { "<leader>tF", ":Fterm<CR>", desc = "Floating terminal" },
       { "<leader>tt", ":Tterm<CR>", desc = "New Tab terminal" },
     },
   },
