@@ -30,7 +30,7 @@ local function get_repo()
     local username, repo_name = repo_url:match "https://github.com/([^/]+)/([^/]+)"
     if username and repo_name then
       repo_name = repo_name:gsub("%.git$", "")
-      return (" " .. username .. "/" .. repo_name)
+      return (require("utils.icons").others.github .. " /" .. username .. "/" .. repo_name)
     end
   end
 end

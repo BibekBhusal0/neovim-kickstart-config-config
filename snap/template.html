@@ -4,82 +4,124 @@
     <meta charset="utf-8" />
     <title>Code screenshot</title>
     <style>
-      html{
+      html {
         margin: 0;
         padding: 0;
+
+        body {
+          margin: 0;
+          padding: 40px;
+          width: max-content;
+          font-family: '{{fontSettings.fonts.default.name}}',
+          monospace;
+
+          background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%);
+          /* Crimson */
+          /* background : linear-gradient(135deg, #9F8AF5 0%, #E1B8F0 100%);  /* Candy */
+          /* background : linear-gradient(135deg, #C83494 0%, #663EE4 100%);  /* Brooze */
+          /* background: linear-gradient(135deg, #FFCE72 0%, #FE7833 100%); /* Sunset */
+          /* background : linear-gradient(135deg, #57CD93 0%, #998331 100%);  /* Meadow */
+          /* background: url('https://images.pexels.com/photos/11139225/pexels-photo-11139225.jpeg') center/cover no-repeat; /* Grin bubbly pattern */
+        }
       }
+
       :root{
         --show-line-numbers: {{data.line_number.width}};
         --git: "{{data.git}}";
-      }
-
-      body {
-        margin: 0;
-        padding: 40px;
-        width: max-content;
-        font-family: '{{fontSettings.fonts.default.name}}', monospace;
-
-        background : linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%);  /* Crimson */
-        /* background : linear-gradient(135deg, #9F8AF5 0%, #E1B8F0 100%);  /* Candy */
-        /* background : linear-gradient(135deg, #C83494 0%, #663EE4 100%);  /* Brooze */
-        /* background: linear-gradient(135deg, #FFCE72 0%, #FE7833 100%); /* Sunset */
-        /* background : linear-gradient(135deg, #57CD93 0%, #998331 100%);  /* Meadow */
-        /* background: url('https://images.pexels.com/photos/11139225/pexels-photo-11139225.jpeg') center/cover no-repeat; /* Grin bubbly pattern */
+        --file: "{{data.file_name.name}}";
       }
 
       #container {
-        backdrop-filter: blur(20px);
-        background: rgba(30, 20, 20, 0.75);
         overflow: hidden;
-        outline: 0.4px solid rgba(20, 20, 20, 0.6);
-        border: 1px solid rgba(200, 200, 200, 0.5);
-        border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-        min-width:550px;
-        margin-bottom: if(style(--git: ""): unset; else:  30px);
-      }
+        min-width: 550px;
 
-      .dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-      }
+        .title-bar {
+          display: flex;
+          align-items: stretch;
+          height: 48px;
+          position: relative;
 
-      .close {
-        background-color: #ff5f56;
-      }
+          .header-segment {
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
 
-      .minimize {
-        background-color: #ffbd2e;
-      }
+            .window-controls {
+              display: flex;
+              gap: 8px;
+              align-items: center;
 
-      .maximize {
-        background-color: #27c93f;
-      }
+              .dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
 
-      .title-bar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 48px;
-        background: rgba(0, 0, 0, 0.2);
-        padding: 0 16px;
-        position: relative;
-      }
+                &.close {
+                  background-color: #ff5f56;
+                }
 
-      .window-controls {
-        position: absolute;
-        left: 16px;
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
+                &.minimize {
+                  background-color: #ffbd2e;
+                }
 
-      .title-text {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 13px;
-        font-weight: 500;
-        font-family: '{{fontSettings.fonts.default.name}}', monospace;
+                &.maximize {
+                  background-color: #27c93f;
+                }
+              }
+            }
+
+            &.header-left {
+              padding-left: 16px;
+              padding-right: 12px;
+              flex-shrink: 0;
+            }
+
+            &.header-right {
+              flex-grow: 1;
+            }
+          }
+
+          .tab-group {
+            display: if(style(--file: ""): none; else: flex);
+            align-items: stretch;
+
+            .tab-curve {
+              width: 20px;
+              fill: rgba(0, 0, 0, 0.3);
+            }
+
+            .tab-main {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              padding: 12px 10px 0 10px;
+              position: relative;
+
+              &::before {
+                content: "";
+                height: 8px;
+                width: 100%;
+                right: 0;
+                top: 0;
+                background: rgba(0, 0, 0, 0.3);
+                position: absolute;
+              }
+
+              .tab-icon {
+                font-size: 20px;
+                color: {{data.file_name.color}};
+              }
+
+              .tab-text {
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 16px;
+                font-weight: 500;
+                font-family: '{{fontSettings.fonts.default.name}}', monospace;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
       }
 
       pre#snap {
@@ -97,62 +139,69 @@
         font-feature-settings: "tnum";
         tab-size: {{tabstop}};
         counter-reset: if(style(--show-line-numbers: 0): unset; else : line-number {{data.line_number.start}});
+
+        .code-line {
+          margin: 0;
+          padding: 0;
+          padding-left: if(style(--show-line-numbers: 0): unset; else: calc({{data.line_number.width}}em));
+          line-height: {{fontSettings.line_height}}pt;
+          display: block;
+          margin-bottom: -{{fontSettings.line_height}}px;
+          counter-increment: if(style(--show-line-numbers: 0): unset; else: line-number);
+          position: relative;
+
+          &::before {
+            content: if(style(--show-line-numbers: 0): unset; else: counter(line-number));
+            position: absolute;
+            left: 0;
+            width: if(style(--show-line-numbers: 0): unset; else: calc({{data.line_number.width}}em - 1.5em));
+            text-align: right;
+            color: rgba(255, 255, 255, 0.3);
+            user-select: none;
+            pointer-events: none;
+          }
+
+          b {
+            font-family: '{{fontSettings.fonts.bold.name}}', monospace;
+            letter-spacing: 0;
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+          }
+
+          i {
+            font-family: '{{fontSettings.fonts.italic.name}}', monospace;
+            letter-spacing: 0;
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+
+            b {
+              font-family: '{{fontSettings.fonts.bold_italic.name}}', monospace;
+            }
+          }
+
+        }
       }
 
-      pre#snap .code-line {
-        margin: 0;
-        padding: 0;
-        padding-left: if(style(--show-line-numbers: 0): unset; else: calc({{data.line_number.width}}em));
-        line-height: {{fontSettings.line_height}}pt;
-        display: block;
-        margin-bottom: -{{fontSettings.line_height}}px;
-        counter-increment: if(style(--show-line-numbers: 0): unset; else: line-number);
-        position: relative;
+      .git,
+      #container {
+        backdrop-filter: blur(20px);
+        background: rgba(30, 20, 20, 0.75);
+        outline: 0.4px solid rgba(20, 20, 20, 0.6);
+        border: 1px solid rgba(200, 200, 200, 0.5);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
       }
 
-      pre#snap .code-line::before {
-        content: if(style(--show-line-numbers: 0): unset; else: counter(line-number));
-        position: absolute;
-        left: 0;
-        width: if(style(--show-line-numbers: 0): unset; else: calc({{data.line_number.width}}em - 1.5em));
-        text-align: right;
-        color: rgba(255, 255, 255, 0.3);
-        user-select: none;
-        pointer-events: none;
-      }
-
-      pre#snap .code-line i {
-        font-family: '{{fontSettings.fonts.italic.name}}', monospace;
-        letter-spacing: 0;
-        font-variant-numeric: tabular-nums;
-        font-feature-settings: "tnum";
-      }
-
-      pre#snap .code-line b {
-        font-family: '{{fontSettings.fonts.bold.name}}', monospace;
-        letter-spacing: 0;
-        font-variant-numeric: tabular-nums;
-        font-feature-settings: "tnum";
-      }
-
-      pre#snap .code-line i b {
-        font-family: '{{fontSettings.fonts.bold_italic.name}}', monospace;
-        letter-spacing: 0;
-        font-variant-numeric: tabular-nums;
-        font-feature-settings: "tnum";
-      }
-
-      .git{
-        display: if(style(--git: ""): none; else: unset);
+      .git {
+        display: if(style(--git: ""): none; else: block);
         font-family: '{{fontSettings.fonts.default.name}}', monospace;
         color:white;
         font-size: 20px;
         font-weight: 600;
         letter-spacing: 0.5px;
-        position: absolute;
-        right:10px;
-        bottom: 20px;
-        filter: drop-shadow(0 0 4px rgba(90, 214, 255, 0.4)) drop-shadow(0 0 8px rgba(90, 214, 255, 0.25)) drop-shadow(0 0 12px rgba(164, 231, 255, 0.15));
+        padding: 10px 15px;
+        margin: 35px 0 4px auto;
+        width: fit-content;
       }
 
       [style*="background-color: #000000"] {
@@ -164,12 +213,32 @@
   <body>
     <div id="container">
       <div class="title-bar">
-        <div class="window-controls">
-          <div class="dot close"></div>
-          <div class="dot minimize"></div>
-          <div class="dot maximize"></div>
+        <div class="header-segment header-left">
+          <div class="window-controls">
+            <div class="dot close"></div>
+            <div class="dot minimize"></div>
+            <div class="dot maximize"></div>
+          </div>
         </div>
-        <span class="title-text">{{data.file_name.name}}</span>
+
+        <div class="tab-group">
+          <svg class="tab-curve" viewBox="0 0 20 48">
+            <path
+              d="M 20,0 H 0 V 48 H 5 C 12,48 12,42 12,34 V 18 C 12,10 14,8 20,8 Z"
+            />
+          </svg>
+          <div class="tab-main">
+            <span class="tab-icon">{{data.file_name.icon}}</span>
+            <span class="tab-text">{{data.file_name.name}}</span>
+          </div>
+          <svg class="tab-curve" viewBox="0 0 20 48">
+            <path
+              d="M 0,0 H 20 V 48 H 15 C 8,48 8,42 8,34 V 18 C 8,10 6,8 0,8 Z"
+            />
+          </svg>
+        </div>
+
+        <div class="header-segment header-right"></div>
       </div>
       <pre id="snap">{{{code}}}</pre>
     </div>
