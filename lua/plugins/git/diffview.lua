@@ -14,7 +14,7 @@ return {
         end,
       },
       icons = require("utils.icons").folder,
-      show_help_hints =false,
+      show_help_hints = false,
     },
     keys = wrap_keys {
       { "<leader>gdf", ":DiffviewFileHistory %<CR>", desc = "Diffview file history Current File" },

@@ -40,7 +40,6 @@ map("<A-j>", ":copy .<CR>", "Duplicate Line Below")
 map("K", "<cmd>m .-2<CR>==", "Move Line Up")
 map("J", "<cmd>m .+1<CR>==", "Move Line Down")
 
-
 -- quit
 map("<leader>sn", ":noautocmd w <CR>", "Save File Without formatting")
 map("<leader>xx", ": q <CR>", "Quit File")
