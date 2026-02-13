@@ -4,11 +4,26 @@ local config_path = vim.fn.stdpath "config"
 local template = config_path .. "/snap/template.html"
 local screenshotFolder = "~/Code/Screenshots/"
 
+local defaultTemplate = {
+  line_number = {
+    start = 0,
+    width = 0,
+  },
+  file_name = {
+    name = "",
+    icon = "",
+    color = "",
+  },
+  git = "",
+}
+
 local get_file_name = function()
-  return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
+  local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
+  local icon, color = require("nvim-web-devicons").get_icon_color(name)
+  return { name = name, icon = icon, color = color }
 end
 
-local function get_window_title()
+local function get_repo()
   local repo_url = vim.fn.system "git config --get remote.origin.url"
   if repo_url and repo_url ~= "" then
     repo_url = vim.fn.trim(repo_url)
@@ -18,7 +33,6 @@ local function get_window_title()
       return (" " .. username .. "/" .. repo_name)
     end
   end
-  return get_file_name()
 end
 
 --- Get start and end line numbers for current selection or for entire file.
@@ -43,9 +57,13 @@ local function snap(config)
   local s = get_start_end_line()
   require("snap.config").set {
     additional_template_data = {
-      title = get_window_title(),
-      start_line = s.start - 1,
-      line_number_width = #tostring(s["end"]),
+      line_number = {
+        start = s.start - 1,
+        width = #tostring(s["end"]),
+        show = true,
+      },
+      file_name = get_file_name(),
+      git = get_repo(),
     },
   }
   require("snap.config").set(config)
@@ -79,11 +97,7 @@ return {
       save_to_disk = { image = true },
       output_dir = screenshotFolder,
       filename_pattern = "%file_name.%file_extension-%t",
-      additional_template_data = {
-        title = "",
-        start_line = 0,
-        line_number_width = 3,
-      },
+      additional_template_data = defaultTemplate,
     },
   },
 }

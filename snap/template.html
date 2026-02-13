@@ -8,11 +8,17 @@
         margin: 0;
         padding: 0;
       }
+      :root{
+        --show-line-numbers: {{data.line_number.width}};
+        --git: "{{data.git}}";
+      }
 
       body {
         margin: 0;
         padding: 40px;
         width: max-content;
+        font-family: '{{fontSettings.fonts.default.name}}', monospace;
+
         background : linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%);  /* Crimson */
         /* background : linear-gradient(135deg, #9F8AF5 0%, #E1B8F0 100%);  /* Candy */
         /* background : linear-gradient(135deg, #C83494 0%, #663EE4 100%);  /* Brooze */
@@ -30,6 +36,7 @@
         border-radius: 12px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
         min-width:550px;
+        margin-bottom: if(style(--git: ""): unset; else:  30px);
       }
 
       .dot {
@@ -89,25 +96,25 @@
         font-variant-numeric: tabular-nums;
         font-feature-settings: "tnum";
         tab-size: {{tabstop}};
-        counter-reset: line-number {{data.start_line}};
+        counter-reset: if(style(--show-line-numbers: 0): unset; else : line-number {{data.line_number.start}});
       }
 
       pre#snap .code-line {
         margin: 0;
         padding: 0;
-        padding-left: calc({{data.line_number_width}}em);
+        padding-left: if(style(--show-line-numbers: 0): unset; else: calc({{data.line_number.width}}em));
         line-height: {{fontSettings.line_height}}pt;
         display: block;
         margin-bottom: -{{fontSettings.line_height}}px;
-        counter-increment: line-number;
+        counter-increment: if(style(--show-line-numbers: 0): unset; else: line-number);
         position: relative;
       }
 
       pre#snap .code-line::before {
-        content: counter(line-number);
+        content: if(style(--show-line-numbers: 0): unset; else: counter(line-number));
         position: absolute;
         left: 0;
-        width: calc({{data.line_number_width}}em - 1.5em);
+        width: if(style(--show-line-numbers: 0): unset; else: calc({{data.line_number.width}}em - 1.5em));
         text-align: right;
         color: rgba(255, 255, 255, 0.3);
         user-select: none;
@@ -135,6 +142,19 @@
         font-feature-settings: "tnum";
       }
 
+      .git{
+        display: if(style(--git: ""): none; else: unset);
+        font-family: '{{fontSettings.fonts.default.name}}', monospace;
+        color:white;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        position: absolute;
+        right:10px;
+        bottom: 20px;
+        filter: drop-shadow(0 0 4px rgba(90, 214, 255, 0.4)) drop-shadow(0 0 8px rgba(90, 214, 255, 0.25)) drop-shadow(0 0 12px rgba(164, 231, 255, 0.15));
+      }
+
       [style*="background-color: #000000"] {
         background-color: transparent !important;
       }
@@ -149,9 +169,10 @@
           <div class="dot minimize"></div>
           <div class="dot maximize"></div>
         </div>
-        <span class="title-text">{{data.title}}</span>
+        <span class="title-text">{{data.file_name.name}}</span>
       </div>
       <pre id="snap">{{{code}}}</pre>
     </div>
+    <div class="git">{{data.git}}</div>
   </body>
 </html>
