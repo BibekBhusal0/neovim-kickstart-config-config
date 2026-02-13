@@ -1,9 +1,5 @@
 local wrap_keys = require "utils.wrap_keys"
 
-local config_path = vim.fn.stdpath "config"
-local template = config_path .. "/snap/template.html"
-local screenshotFolder = "~/Code/Screenshots/"
-
 local defaultTemplate = {
   line_number = {
     start = 0,
@@ -68,6 +64,10 @@ local function snap(config)
   }
   require("snap.config").set(config)
   vim.cmd(string.format("%d,%dSnap", s.start, s["end"]))
+  -- Reset the config for snap
+  vim.defer_fn(function()
+    require("snap.config").set { additional_template_data = defaultTemplate }
+  end, 2000)
 end
 
 local function snap_to_desktop()
@@ -93,9 +93,9 @@ return {
       { "<leader>sC", snap_to_desktop, desc = "Screenshot to desktop", mode = { "n", "v" } },
     },
     opts = {
-      templateFilepath = template,
+      templateFilepath = vim.fn.stdpath "config" .. "/snap/template.html",
       save_to_disk = { image = true },
-      output_dir = screenshotFolder,
+      output_dir = "~/Code/Screenshots/",
       filename_pattern = "%file_name.%file_extension-%t",
       additional_template_data = defaultTemplate,
     },
