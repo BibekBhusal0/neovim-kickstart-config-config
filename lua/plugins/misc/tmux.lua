@@ -16,11 +16,6 @@ return {
       vim.g.tpipeline_restore = 0
       vim.g.tpipeline_focuslost = 1
       vim.g.tpipeline_clearstl = 1
-
-      vim.api.nvim_create_autocmd(
-        { "BufEnter", "FileType", "WinEnter" },
-        { callback = hide_lualine }
-      )
     end,
   }, -- Merge Status line of neovim and tmux
 

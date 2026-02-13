@@ -4,6 +4,7 @@ local ui_state = {
   showtabline = nil,
 }
 
+local inTmux = os.getenv "TMUX" ~= nil
 local function hide_ui()
   if ui_state.laststatus == nil then
     ui_state.laststatus = vim.o.laststatus
@@ -17,7 +18,7 @@ local function hide_ui()
 end
 
 local function restore_ui()
-  if ui_state.laststatus ~= nil then
+  if ui_state.laststatus ~= nil and not inTmux then
     vim.o.laststatus = ui_state.laststatus
     ui_state.laststatus = nil
   end
