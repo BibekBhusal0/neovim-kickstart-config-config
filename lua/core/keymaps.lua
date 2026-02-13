@@ -30,55 +30,16 @@ map("<leader>P", function()
   vim.cmd('silent !nautilus "' .. vim.fn.getcwd() .. '" &')
 end, "Open Explorer(current directory)")
 
--- Duplicate Lines
+-- Move and duplicate lines
+map("K", ":m '<-2<CR>gv=gv", "Move Lines Up", "v")
+map("J", ":m '>+1<CR>gv=gv", "Move Lines Down", "v")
 map("<A-j>", ":copy '<-1<CR>gv=gv", "Duplicate Lines Below", "v")
 map("<A-k>", ":copy '><CR>gv=gv", "Duplicate Lines Above", "v")
 map("<A-k>", ":copy .-1<CR>", "Duplicate Line Above")
 map("<A-j>", ":copy .<CR>", "Duplicate Line Below")
+map("K", "<cmd>m .-2<CR>==", "Move Line Up")
+map("J", "<cmd>m .+1<CR>==", "Move Line Down")
 
--- Move Lines
-local function moveLine(dir)
-  local count = vim.v.count1
-  local mode = vim.api.nvim_get_mode().mode
-
-  if mode:match "^v" or mode:match "^V" or mode == "\22" then
-    local start = vim.fn.line "v"
-    local finish = vim.fn.line "."
-    if start > finish then
-      start, finish = finish, start
-    end
-
-    local size = finish - start
-
-    if dir == "up" then
-      vim.cmd(start .. "," .. finish .. "m " .. (start - count - 1))
-      start = start - count
-    else
-      vim.cmd(start .. "," .. finish .. "m " .. (finish + count))
-      start = start + count
-    end
-
-    finish = start + size
-    vim.fn.setpos("'<", { 0, start, 1, 0 })
-    vim.fn.setpos("'>", { 0, finish, 1, 0 })
-    vim.cmd "normal! gv"
-  else
-    if dir == "up" then
-      vim.cmd("m .-" .. (count + 1))
-    else
-      vim.cmd("m .+" .. count)
-    end
-    vim.cmd "normal! =="
-  end
-end
-
-map("K", function()
-  moveLine "up"
-end, "Move Line Up", { "n", "v" })
-
-map("J", function()
-  moveLine "down"
-end, "Move Line Down", { "n", "v" })
 
 -- quit
 map("<leader>sn", ":noautocmd w <CR>", "Save File Without formatting")
