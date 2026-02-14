@@ -105,7 +105,7 @@ return {
       { "<leader>wt", ":WindowsToggleAutowidth<CR>", desc = "Window Toggle Autowidth" },
       { "<leader>wv", ":WindowsMaximizeVertically<CR>", desc = "Window Maximize Vertically" },
     }, -- autoWidth is disabled so this is not needed
-    -- event = { "BufNewFile", "BufReadPost" },
+    event = { "BufNewFile", "BufReadPost" },
     cmd = {
       "WindowsEqualize",
       "WindowsMaximize",
@@ -116,11 +116,11 @@ return {
       "WindowsDisableAutowidth",
     },
     config = function()
-      vim.o.winwidth = 20
-      vim.o.winminwidth = 15
+      vim.o.winwidth = 5
+      vim.o.winminwidth = 5
       vim.o.equalalways = false
       require("windows").setup {
-        autowidth = { enable = false },
+        autowidth = { enable = true },
         ignore = {
           buftype = { "quickfix" },
           filetype = {
@@ -133,6 +133,8 @@ return {
             "neo-tree",
             "undotree",
             "gundo",
+            "DiffviewFiles",
+            "terminal"
           },
         },
       }
