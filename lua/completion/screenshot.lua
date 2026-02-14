@@ -9,7 +9,7 @@ local themes = { "crimson", "candy", "brooze", "sunset", "meadow", "bubbly", "ra
 ---@return string candidates_string
 M.complete_args = function(argLead, cmdLine)
   local candidates = {}
-  if argLead == theme_prefix then
+  if string.find(argLead, theme_prefix, 1, true) then
     for _, theme in ipairs(themes) do
       table.insert(candidates, theme_prefix .. theme)
     end
