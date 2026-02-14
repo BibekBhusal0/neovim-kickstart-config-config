@@ -18,7 +18,7 @@ M.defaultTemplate = {
 function M.get_file_name()
   local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
   local icon, color = require("nvim-web-devicons").get_icon_color(name)
-  return { name = name, icon = icon or  "", color = color or "#ffffff" }
+  return { name = name, icon = icon or "", color = color or "#ffffff" }
 end
 
 ---Get current github repo
