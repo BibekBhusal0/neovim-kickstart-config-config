@@ -132,6 +132,7 @@ vim.api.nvim_create_user_command("S", function(o)
 end, {
   nargs = "*",
   range = true,
+  complete = "custom,v:lua.require'completion.screenshot'.complete_args",
 })
 
 vim.api.nvim_create_user_command("RemoveComments", RemoveAllComments, { range = true })
