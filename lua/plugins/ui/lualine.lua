@@ -151,6 +151,8 @@ return {
           "qf",
           "quickrun",
           "terminal",
+          "undotree",
+          "time-machine-list",
           "trouble",
         },
         always_divide_middle = true,

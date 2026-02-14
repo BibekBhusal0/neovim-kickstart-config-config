@@ -134,6 +134,7 @@ return {
             "NvimTree",
             "neo-tree",
             "undotree",
+            "time-machine-list",
             "gundo",
             "DiffviewFiles",
             "terminal"
