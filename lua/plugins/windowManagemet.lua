@@ -137,7 +137,7 @@ return {
             "time-machine-list",
             "gundo",
             "DiffviewFiles",
-            "terminal"
+            "terminal",
           },
         },
       }
