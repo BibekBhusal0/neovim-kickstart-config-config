@@ -88,7 +88,7 @@ vim.api.nvim_create_user_command("S", function(o)
   else
     range = { start_line = 1, end_line = vim.fn.line "$" }
   end
-  local snapConfig = { additional_template_data = {} }
+  local snapConfig = { additional_template_data = { theme = opts.theme or "crimson" } }
 
   if opts.html then
     type = "html"

@@ -15,13 +15,16 @@
           font-family: '{{fontSettings.fonts.default.name}}',
           monospace;
 
-          background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%);
-          /* Crimson */
-          /* background : linear-gradient(135deg, #9F8AF5 0%, #E1B8F0 100%);  /* Candy */
-          /* background : linear-gradient(135deg, #C83494 0%, #663EE4 100%);  /* Brooze */
-          /* background: linear-gradient(135deg, #FFCE72 0%, #FE7833 100%); /* Sunset */
-          /* background : linear-gradient(135deg, #57CD93 0%, #998331 100%);  /* Meadow */
-          /* background: url('https://images.pexels.com/photos/11139225/pexels-photo-11139225.jpeg') center/cover no-repeat; /* Grin bubbly pattern */
+        background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%); /* Default theme Crimson */
+        background: if(
+          style(--theme: "crimson"): linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%);
+          style(--theme: "candy"): linear-gradient(135deg, #9F8AF5 0%, #E1B8F0 100%);
+          style(--theme: "brooze"): linear-gradient(135deg, #C83494 0%, #663EE4 100%);
+          style(--theme: "sunset"): linear-gradient(135deg, #FFCE72 0%, #FE7833 100%);
+          style(--theme: "meadow"): linear-gradient(135deg, #57CD93 0%, #998331 100%);
+          style(--theme: "bubbly"): url('https://images.pexels.com/photos/11139225/pexels-photo-11139225.jpeg') center/cover no-repeat;
+          else: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 50%, #C44569 100%)
+        );
         }
       }
 
@@ -29,6 +32,7 @@
         --show-line-numbers: {{data.line_number.width}};
         --git: "{{data.git}}";
         --file: "{{data.file_name.name}}";
+        --theme: "{{data.theme}}";
       }
 
       #container {
