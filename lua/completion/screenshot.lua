@@ -2,7 +2,7 @@ M = {}
 
 local theme_prefix = "theme="
 local commands = { "html", "clip", "disk", "hide_line_numbers", "hide_tabs", theme_prefix }
-local themes = { "crimson", "candy", "brooze", "sunset", "meadow", "bubbly" }
+local themes = { "crimson", "candy", "brooze", "sunset", "meadow", "bubbly", "rainddop", "mono" }
 
 ---@param argLead string
 ---@param cmdLine string
