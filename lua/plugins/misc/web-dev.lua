@@ -6,6 +6,7 @@ local webDev =
 return {
   {
     "BibekBhusal0/nvim-shadcn",
+    dir = "~/Code/nvim-plugins/nvim-shadcn",
     opts = {
       format = { solid = "npx shadcn-solid@latest add %s" },
       keys = {

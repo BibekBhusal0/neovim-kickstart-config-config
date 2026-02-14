@@ -115,7 +115,7 @@ return {
 
   {
     "BibekBhusal0/tree-hierarchy.nvim",
-    dir = "~/Code/tree-hierarchy.nvim",
+    dir = "~/Code/nvim-plugins/tree-hierarchy.nvim",
     keys = {
       { "m", mode = { "x" } },
       { "v", mode = { "x" } },

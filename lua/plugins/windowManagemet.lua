@@ -83,7 +83,7 @@ return {
 
   {
     "BibekBhusal0/bufstack.nvim",
-    dir = "~/Code/bufstack.nvim",
+    dir = "~/Code/nvim-plugins/bufstack.nvim",
     event = { "BufNewFile", "BufReadPost" },
     config = function()
       require("bufstack").setup { max_tracked = 400, shorten_path = true }

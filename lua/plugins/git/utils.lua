@@ -2,7 +2,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   "BibekBhusal0/nvim-git-utils",
-  dir = "~/Code/nvim-git-utils",
+  dir = "~/Code/nvim-plugins/nvim-git-utils",
   opts = { commit_input = { hints = false } },
   cmd = {
     "GitAddCommit",
