@@ -61,4 +61,11 @@ return {
     keys = wrap_keys { { "<leader>TT", ":Twilight<CR>", desc = "Toggle Twilight" } },
     opts = { context = 10 },
   }, -- dim inactive code
+
+  {
+    "aikhe/wrapped.nvim",
+    dependencies = { "nvzone/volt", "nvim-lua/plenary.nvim" },
+    cmd = { "NvimWrapped" },
+    opts = {},
+  },
 }

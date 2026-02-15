@@ -43,4 +43,12 @@ return {
     end,
     cmd = { "Hack", "HackAuto", "HackFollow", "HackFollowAuto" },
   },
+
+  {
+    "gisketch/triforce.nvim",
+    dependencies = { "nvzone/volt" },
+    keys = wrap_keys { { "<leader>tp", ":Triforce profile<CR>", desc = "Triforce Profile" } },
+    lazy = false,
+    opts = {},
+  },
 }
