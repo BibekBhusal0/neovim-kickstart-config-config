@@ -47,7 +47,7 @@ return {
   {
     "gisketch/triforce.nvim",
     dependencies = { "nvzone/volt" },
-    keys = wrap_keys { { "<leader>tp", ":Triforce profile<CR>", desc = "Triforce Profile" } },
+    keys = wrap_keys { { "<leader>tP", ":Triforce profile<CR>", desc = "Triforce Profile" } },
     lazy = false,
     opts = {},
   },
