@@ -65,7 +65,81 @@ return {
     ft = "markdown",
     config = {
       filetypes = { rmd = true, markdown = true },
-      to_do = { status_propagation = { up = true } },
+      to_do = {
+        highlight = false,
+        statuses = {
+          {
+            name = "not_started",
+            marker = " ",
+            sort = { section = 2, position = "top" },
+            skip_on_toggle = false,
+            propagate = {
+              up = function(host_list)
+                local no_items_started = true
+                for _, item in ipairs(host_list.items) do
+                  if item.status.name ~= "not_started" then
+                    no_items_started = false
+                  end
+                end
+                if no_items_started then
+                  return "not_started"
+                else
+                  return "in_progress"
+                end
+              end,
+              down = function(child_list)
+                local target_statuses = {}
+                for _ = 1, #child_list.items, 1 do
+                  table.insert(target_statuses, "not_started")
+                end
+                return target_statuses
+              end,
+            },
+          },
+          {
+            name = "in_progress",
+            marker = { "/", "-" },
+            sort = { section = 1, position = "bottom" },
+            skip_on_toggle = false,
+            propagate = {
+              up = function()
+                return "in_progress"
+              end,
+              down = function() end,
+            },
+          },
+          {
+            name = "complete",
+            marker = { "X", "x" },
+            sort = { section = 3, position = "top" },
+            skip_on_toggle = false,
+            propagate = {
+              up = function(host_list)
+                local all_items_complete = true
+                for _, item in ipairs(host_list.items) do
+                  if item.status.name ~= "complete" then
+                    all_items_complete = false
+                  end
+                end
+                if all_items_complete then
+                  return "complete"
+                else
+                  return "in_progress"
+                end
+              end,
+              down = function(child_list)
+                local target_statuses = {}
+                for _ = 1, #child_list.items, 1 do
+                  table.insert(target_statuses, "complete")
+                end
+                return target_statuses
+              end,
+            },
+          },
+        },
+        status_propagation = { up = true, down = true },
+        sort = { on_status_change = false, recursive = false, cursor_behavior = { track = true } },
+      },
       mappings = {
         MkdnEnter = { { "i" }, "<CR>" },
         MkdnTab = false,
