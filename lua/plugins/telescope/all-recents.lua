@@ -2,7 +2,7 @@ return {
   "prochri/telescope-all-recent.nvim",
 
   lazy = true,
-  enabled = true,
+  enabled = false,
   opts = {
     vim_ui_select = { kinds = {}, prompts = {} },
     database = {
