@@ -1,5 +1,6 @@
 return {
   "bluz71/vim-moonfly-colors",
+  -- event = { "BufNewFile", "BufReadPost" },
   lazy = false,
   config = function()
     vim.g.moonflyCursorColor = false

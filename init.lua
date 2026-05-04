@@ -18,6 +18,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require "plugins"
+
 require("lazy").setup {
   require "plugins.ai", -- AI Autocompletion and chat
   require "plugins.debugging", -- Debugger
@@ -26,6 +27,7 @@ require("lazy").setup {
   require "plugins.lsp", -- Every thing Lsp related
   require "plugins.mini", -- Yet another file explorer
   require "plugins.misc", -- Miscellaneous utility plugins
+  require "plugins.neotree", -- File explorer for Neovim
   require "plugins.refactoring", -- Code refactoring moving to function file and print
   require "plugins.sessionManagement", -- management of sessions
   require "plugins.telescope", -- Fuzzy finder for searching
