@@ -156,4 +156,10 @@ local copy_diagnostic = function()
   vim.fn.setreg("+", closest_diagnostic.message)
 end
 
+local function undotree()
+  vim.cmd("packadd nvim.undotree")
+  vim.cmd("Undotree")
+end
+
+map("<leader>u", undotree, "Undo Tree")
 map("<leader>dy", copy_diagnostic, "Yank diagnostic message")

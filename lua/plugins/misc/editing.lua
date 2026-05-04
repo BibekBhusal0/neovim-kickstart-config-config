@@ -59,22 +59,6 @@ return {
   },
 
   {
-    "y3owk1n/time-machine.nvim",
-    cmd = { "TimeMachineToggle", "TimeMachinePurgeBuffer", "TimeMachinePurgeAll" },
-    opts = {
-      split_opts = { width = 30 },
-      float_opts = { winblend = 1 },
-    },
-    version = "*",
-    keys = wrap_keys {
-      { "<leader>tm", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
-      { "<leader>tM", ":TimeMachinePurgeBuffer<CR>", desc = "Time Machine Purge current" },
-      { "<leader>tX", ":TimeMachinePurgeAll<CR>", desc = "Time Machine Purge all" },
-      { "<leader>u", ":TimeMachineToggle<CR>", desc = "Time Machine Toggle Tree" },
-    },
-  }, -- similar to undo tree
-
-  {
     "piersolenski/import.nvim",
     opts = { picker = "telescope" },
     cmd = { "Import" },
