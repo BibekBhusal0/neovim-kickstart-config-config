@@ -157,8 +157,8 @@ local copy_diagnostic = function()
 end
 
 local function undotree()
-  vim.cmd("packadd nvim.undotree")
-  vim.cmd("Undotree")
+  vim.cmd "packadd nvim.undotree"
+  vim.cmd "Undotree"
 end
 
 map("<leader>u", undotree, "Undo Tree")
