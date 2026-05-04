@@ -45,13 +45,3 @@ vim.opt.hlsearch = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = false
 vim.opt.spelloptions = "camel"
-
--- Hiding scroll bar in those filetypes
-vim.cmd [[
-  autocmd FileType telescope,mason,lazygit,nvcheatsheet setlocal nospell
-]]
-
--- Don't insert the current comment leader automatically for auto-wrapping <Enter> in insert mode, or hitting "o" or "O" in normal mode.
-vim.cmd [[
-  autocmd FileType * setlocal formatoptions-=o formatoptions-=r
-]]

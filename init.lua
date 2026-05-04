@@ -1,4 +1,6 @@
 require "core.options"
+require "core.autocmd"
+require "core.startingCommand"
 require "core.keymaps"
 require "core.commands"
 require "core.snippets"
