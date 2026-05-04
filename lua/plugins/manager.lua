@@ -175,7 +175,11 @@ function pm.add_plugin(plugin, lazy)
 
   if plugin.dependencies then
     for _, dep in ipairs(plugin.dependencies) do
-      pm.add_plugin(dep, true)
+      if type(plugin.dependencies == "string") then
+        pm.add_plugin({ dep }, true)
+      else
+        pm.add_plugin(dep, true)
+      end
     end
   end
 
@@ -192,9 +196,12 @@ function pm.add_plugin(plugin, lazy)
     load_on_filetype(plugin.ft, plugin)
   end
 
-  local is_lazy = plugin.lazy
+  local is_lazy = lazy
   if is_lazy == nil then
-    is_lazy = plugin.lazy or plugin.cmd or plugin.event or plugin.keys or plugin.ft
+    is_lazy = plugin.lazy
+  end
+  if is_lazy == nil then
+    is_lazy = plugin.cmd or plugin.event or plugin.keys or plugin.ft
   end
   if not is_lazy then
     print("is lazy", is_lazy)
@@ -206,10 +213,14 @@ end
 function pm.add_plugins(list)
   vim.validate { list = { list, "table" } }
   for _, plugin in ipairs(list) do
-    if type(plugin[1]) == "string" then
-      pm.add_plugin(plugin)
-    elseif type(plugin[1] == "table") then
-      pm.add_plugins(plugin)
+    if type(plugin) == "string" then
+      pm.add_plugin { plugin }
+    elseif type(plugin) == "table" then
+      if type(plugin[1]) == "string" then
+        pm.add_plugin(plugin)
+      elseif type(plugin[1] == "table") then
+        pm.add_plugins(plugin)
+      end
     end
   end
 end
