@@ -43,23 +43,6 @@ return {
   }, -- multi line editing
 
   {
-    "nguyenvukhang/nvim-toggler",
-    keys = wrap_keys {
-      { "gt", ':lua require("nvim-toggler").toggle() <CR>', desc = "Toggle Value" },
-    },
-    opts = {
-      inverses = {
-        ["neo-vim"] = "vs-code",
-        ["0"] = "1",
-        show = "hide",
-        best = "worst",
-        pre_defer = "post_defer",
-      },
-      remove_default_keybinds = true,
-    },
-  }, -- Toggle between true and false ; more
-
-  {
     "johmsalas/text-case.nvim",
     opts = {},
     keys = {

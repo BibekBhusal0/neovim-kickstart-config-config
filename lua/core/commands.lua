@@ -135,7 +135,33 @@ end, {
   complete = "custom,v:lua.require'completion.screenshot'.complete_args",
 })
 
+-- toggle boolean
+local function toggle_bool()
+  local word = vim.fn.expand "<cword>"
+  local pairs = {
+    { "true", "false" },
+    { "True", "False" },
+    { "TRUE", "FALSE" },
+    { "on", "off" },
+    { "0", "1" },
+  }
+
+  for _, pair in ipairs(pairs) do
+    if word == pair[1] then
+      return vim.cmd("normal! ciw" .. pair[2])
+    end
+    if word == pair[2] then
+      return vim.cmd("normal! ciw" .. pair[1])
+    end
+  end
+
+  print "Not a boolean!"
+end
+
 vim.api.nvim_create_user_command("RemoveComments", RemoveAllComments, { range = true })
+vim.api.nvim_create_user_command("ToggleBool", toggle_bool, {})
+
+map("gt", ":ToggleBool<Cr>", "Toogle Boolean")
 map("<leader>rc", ":RemoveComments<Cr>", "Remove comments", { "n", "x" })
 map("<leader>sc", ":S clip<Cr>", "Screenshot to clipboard", { "n", "x" })
 map("<leader>sC", ":S<Cr>", "Screenshot to disk", { "n", "x" })
