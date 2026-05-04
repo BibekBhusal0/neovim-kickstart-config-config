@@ -1,6 +1,3 @@
-local map = require "utils.map"
-map("<leader>gg", ":GitChanges<CR>", "Git open changes")
-
 return {
   require "plugins.git.diffview",
   require "plugins.git.fugitive",

@@ -33,15 +33,6 @@ return {
           additional_vim_regex_highlighting = { "ruby" },
         },
         indent = { enable = true },
-        -- incremental_selection = {
-        --   enable = true,
-        --   keymaps = {
-        --     init_selection = "<C-p>",
-        --     node_incremental = "<c-p>",
-        --     scope_incremental = false,
-        --     node_decremental = "<bs>",
-        --   },
-        -- },
       }
       vim.treesitter.language.register("markdown", "vimwiki")
     end,
@@ -111,19 +102,5 @@ return {
         move_mod.goto_previous_start("@fold", "folds")
       end, "Prev fold", mode)
     end,
-  },
-
-  {
-    "BibekBhusal0/tree-hierarchy.nvim",
-    dir = "~/Code/nvim-plugins/tree-hierarchy.nvim",
-    keys = {
-      { "m", mode = { "x" } },
-      { "v", mode = { "x" } },
-      { "<leader>sk", mode = { "x", "n" } },
-      { "<leader>mk", mode = { "x", "n" } },
-      { "<leader>mj", mode = { "x", "n" } },
-      { "<leader>ms", mode = { "x", "n" } },
-    },
-    opts = {},
   },
 }

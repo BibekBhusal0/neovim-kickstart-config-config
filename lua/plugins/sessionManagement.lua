@@ -1,15 +1,16 @@
 local wrap_keys = require "utils.wrap_keys"
 
-vim.api.nvim_create_user_command("Qs", function()
+local command = vim.api.nvim_create_user_command
+command("Qs", function()
   require("resession").save("auto-session", { notify = false })
   vim.cmd "qa!"
 end, {})
 
-vim.api.nvim_create_user_command("Load", function()
+command("Load", function()
   require("resession").load("auto-session", { silence_errors = true })
 end, {})
 
-vim.api.nvim_create_user_command("SessionSave", function(opts)
+command("SessionSave", function(opts)
   if opts.args ~= "" then
     require("resession").save(opts.args, { notify = true })
   else
@@ -17,7 +18,7 @@ vim.api.nvim_create_user_command("SessionSave", function(opts)
   end
 end, { nargs = "?" })
 
-vim.api.nvim_create_user_command("SessionLoad", function(opts)
+command("SessionLoad", function(opts)
   if opts.args ~= "" then
     require("resession").load(opts.args, { attach = true, silence_errors = false })
   else
@@ -25,7 +26,7 @@ vim.api.nvim_create_user_command("SessionLoad", function(opts)
   end
 end, { nargs = "?" })
 
-vim.api.nvim_create_user_command("SessionSaveTab", function(opts)
+command("SessionSaveTab", function(opts)
   if opts.args ~= "" then
     require("resession").save_tab(opts.args, { notify = true })
   else
@@ -33,7 +34,7 @@ vim.api.nvim_create_user_command("SessionSaveTab", function(opts)
   end
 end, { nargs = "?" })
 
-vim.api.nvim_create_user_command("SessionDelete", function(opts)
+command("SessionDelete", function(opts)
   if opts.args ~= "" then
     require("resession").delete(opts.args, { notify = true })
   else
