@@ -174,7 +174,7 @@ return {
         },
         harper_ls = { filetypes = { "markdown" } },
       }
-      require("mason").setup()
+      require("mason").setup({PATH = "append"})
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, { "debugpy" })
