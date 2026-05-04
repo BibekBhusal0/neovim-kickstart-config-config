@@ -111,7 +111,7 @@ local function render()
   end
 
   local file_buttons = create_button_group({
-    { "f", "", "Find file", ":Telescope find_files<CR>" },
+    { "f", "", "Find file", ":lua require('fff').find_files()<CR>" },
     { "r", "", "Recent Files", ":Telescope oldfiles<CR>" },
     { "e", "󰙅", "File Explorer", ":Neotree toggle position=left <CR>" },
     { "g", "󰊢", "Git File Changes", ":Neotree float git_status <CR>" },
