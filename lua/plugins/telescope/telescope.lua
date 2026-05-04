@@ -34,8 +34,6 @@ return {
     cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      require "plugins.telescope.all-recents",
-      require "plugins.telescope.fzf-native",
       {
         "nvim-tree/nvim-web-devicons",
         lazy = true,
