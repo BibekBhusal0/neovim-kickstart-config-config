@@ -6,13 +6,6 @@ return {
     lazy = true,
     cmd = { "Diffview", "DiffviewOpen", "DiffviewFileHistory" },
     opts = {
-      hooks = {
-        view_post_layout = function()
-          if package.loaded["windows"] then
-            vim.cmd "WindowsDisableAutowidth"
-          end
-        end,
-      },
       icons = require("utils.icons").folder,
       show_help_hints = false,
     },

@@ -98,53 +98,6 @@ return {
   }, -- Reopen closed buffer and cycle through recently closed buffer
 
   {
-    "anuvyklack/windows.nvim",
-    dependencies = { "anuvyklack/middleclass", "anuvyklack/animation.nvim" },
-    keys = wrap_keys {
-      { "<leader>w=", ":WindowsEqualize<CR>", desc = "Window Equalize" },
-      { "<leader>wf", ":WindowsMaximize<CR>", desc = "Window Maximize" },
-      { "<leader>wh", ":WindowsMaximizeHorizontally<CR>", desc = "Window Maximize Horizontally" },
-      { "<leader>wt", ":WindowsToggleAutowidth<CR>", desc = "Window Toggle Autowidth" },
-      { "<leader>wv", ":WindowsMaximizeVertically<CR>", desc = "Window Maximize Vertically" },
-    }, -- autoWidth is disabled so this is not needed
-    event = { "BufNewFile", "BufReadPost" },
-    cmd = {
-      "WindowsEqualize",
-      "WindowsMaximize",
-      "WindowsMaximizeHorizontally",
-      "WindowsMaximizeVertically",
-      "WindowsToggleAutowidth",
-      "WindowsEnableAutowidth",
-      "WindowsDisableAutowidth",
-    },
-    config = function()
-      vim.o.winwidth = 5
-      vim.o.winminwidth = 5
-      vim.o.equalalways = false
-      require("windows").setup {
-        autowidth = { enable = true },
-        ignore = {
-          buftype = { "quickfix" },
-          filetype = {
-            "codecompanion",
-            "quickrun",
-            "trouble",
-            "qf",
-            "noice",
-            "NvimTree",
-            "neo-tree",
-            "undotree",
-            "time-machine-list",
-            "gundo",
-            "DiffviewFiles",
-            "terminal",
-          },
-        },
-      }
-    end,
-  }, -- split window autosize with better animations
-
-  {
     "MisanthropicBit/winmove.nvim",
     keys = wrap_keys {
       { "<leader>ws", ":lua require'winmove'.start_mode('swap')<CR>", desc = "Window Swap mode" },
