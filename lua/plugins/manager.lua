@@ -42,6 +42,30 @@ local function execute(command)
   end
 end
 
+local function load_on_key(keys, pkg)
+  for _, map in ipairs(keys) do
+    local lhs, rhs = map[1], map[2]
+    local mode = map.mode or "n"
+
+    vim.keymap.set(mode, lhs, function()
+      pm.load_plugin(pkg.name)
+      local m = type(mode) == "table" and mode[1] or mode
+      if rhs then
+        if type(rhs) == "function" then
+          rhs()
+        elseif type(rhs) == "string" then
+          local feed = vim.api.nvim_replace_termcodes(rhs, true, false, true)
+          vim.api.nvim_feedkeys(feed, m, false)
+        end
+      else
+        vim.keymap.del(mode, lhs)
+        local feed = vim.api.nvim_replace_termcodes(lhs, true, false, true)
+        vim.api.nvim_feedkeys(feed, m, false)
+      end
+    end, { desc = map.desc })
+  end
+end
+
 local function build(pkg)
   if not pkg.build then
     return
@@ -60,7 +84,7 @@ local function build(pkg)
 end
 
 function pm.load_plugin(name)
-  print "loading ..."
+  -- print "loading ..."
   local plugin = plugins[name]
   if not plugin then
     return
@@ -87,7 +111,7 @@ function pm.load_plugin(name)
     vim.cmd.packadd(name)
   end
 
-  print "pack add done"
+  -- print "pack add done"
   if type(plugin.config) == "function" then
     plugin.config()
   elseif plugin.opts then
@@ -147,7 +171,7 @@ function pm.add_plugin(plugin, lazy)
       end
 
       if not is_lazy then
-        print("is lazy", is_lazy)
+        -- print("is lazy", is_lazy)
         pm.load_plugin(plugin.name)
         return
       end
@@ -177,6 +201,10 @@ function pm.add_plugin(plugin, lazy)
             pm.load_plugin(plugin.name)
           end,
         })
+      end
+
+      if plugin.keys then
+        load_on_key(plugin.keys, plugin)
       end
     end,
   })
