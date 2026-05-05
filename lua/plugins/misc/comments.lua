@@ -4,6 +4,7 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   {
     {
+      enabled= false,
       "numToStr/Comment.nvim",
       dependencies = {
         {

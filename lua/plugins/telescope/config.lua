@@ -1,4 +1,5 @@
 return function()
+  print("telescope config being called")
   local open_with_trouble = function(...)
     require("trouble.sources.telescope").open(...)
   end

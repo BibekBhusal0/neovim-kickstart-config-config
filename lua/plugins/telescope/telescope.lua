@@ -32,30 +32,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      {
-        "nvim-tree/nvim-web-devicons",
-        lazy = true,
-        opts = {
-          override = {
-            deb = { icon = "", name = "Deb" },
-            lock = { icon = "󰌾", name = "Lock" },
-            mp3 = { icon = "󰎆", name = "Mp3" },
-            mp4 = { icon = "", name = "Mp4" },
-            ["robots.txt"] = { icon = "󰚩", name = "Robots" },
-            ttf = { icon = "", name = "TrueTypeFont" },
-            rpm = { icon = "", name = "Rpm" },
-            woff = { icon = "", name = "WebOpenFontFormat" },
-            woff2 = { icon = "", name = "WebOpenFontFormat2" },
-            xz = { icon = "", name = "Xz" },
-            zip = { icon = "", name = "Zip" },
-          },
-        },
-      },
-      "nvim-telescope/telescope-ui-select.nvim",
-    },
-
+    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
     config = require "plugins.telescope.config",
   },
 }

@@ -28,14 +28,4 @@ return {
       }
     end,
   },
-
-  {
-    "cxwx/lazyUrlUpdate.nvim",
-    opts = {},
-    cmd = { "LazyUrlUpdate", "LazyUrlBuild", "LazyUrlOpen" },
-    keys = wrap_keys {
-      { "<leader>lu", "<cmd>LazyUrlUpdate<CR>", desc = "Update plugin under cursor" },
-      { "<leader>lU", "<cmd>LazyUrlBuild<CR>", desc = "Update plugin under cursor" },
-    },
-  },
 }

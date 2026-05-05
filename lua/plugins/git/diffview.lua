@@ -1,15 +1,15 @@
-local wrap_keys = require "utils.wrap_keys"
-
 return {
   {
     "sindrets/diffview.nvim",
-    lazy = true,
+  dependencies = {
+        "nvim-tree/nvim-web-devicons",
+  },
     cmd = { "Diffview", "DiffviewOpen", "DiffviewFileHistory" },
     opts = {
       icons = require("utils.icons").folder,
       show_help_hints = false,
     },
-    keys = wrap_keys {
+    keys = {
       { "<leader>gdf", ":DiffviewFileHistory %<CR>", desc = "Diffview file history Current File" },
       { "<leader>gdh", ":DiffviewFileHistory<CR>", desc = "Diffview file history" },
       { "<leader>gdo", ":DiffviewOpen<CR>", desc = "DiffView Open" },
@@ -19,7 +19,7 @@ return {
 
   {
     "paopaol/telescope-git-diffs.nvim",
-    keys = wrap_keys {
+    keys = {
       {
         "<leader>gdc",
         ":Telescope git_diffs  diff_commits previewer=false<CR>",

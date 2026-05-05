@@ -1,8 +1,6 @@
-local wrap_keys = require "utils.wrap_keys"
-
 return {
   "polarmutex/git-worktree.nvim",
-  keys = wrap_keys {
+  keys = {
     {
       "<leader>gwn",
       ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
@@ -14,6 +12,9 @@ return {
       desc = "Git Worktree Switch",
     },
   },
+    dependencies = {
+    "nvim-telescope/telescope.nvim",
+    },
 
   config = function()
     local Hooks = require "git-worktree.hooks"

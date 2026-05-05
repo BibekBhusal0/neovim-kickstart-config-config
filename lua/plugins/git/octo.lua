@@ -3,6 +3,9 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   "pwntester/octo.nvim",
   cmd = { "Octo" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   keys = wrap_keys {
     { "<leader>gn", ":Octo notification list<CR>", desc = "Github Notifications" },
     { "<leader>gln", ":Octo notification list<CR>", desc = "Github Notifications" },

@@ -3,6 +3,11 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   "BibekBhusal0/nvim-git-utils",
   dir = "~/Code/nvim-plugins/nvim-git-utils",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
   opts = { commit_input = { hints = false } },
   cmd = {
     "GitAddCommit",
