@@ -73,6 +73,54 @@ local function load_on_key(keys, pkg)
   end
 end
 
+local function load_on_command(commands, plugin)
+  for _, cmd in ipairs(commands) do
+    vim.api.nvim_create_user_command(cmd, function(event)
+      local command = {
+        cmd = cmd,
+        bang = event.bang or nil,
+        mods = event.smods,
+        args = event.fargs,
+        count = event.count >= 0 and event.range == 0 and event.count or nil,
+      }
+
+      if event.range == 1 then
+        command.range = { event.line1 }
+      elseif event.range == 2 then
+        command.range = { event.line1, event.line2 }
+      end
+
+      pm.load_plugin(plugin.name)
+
+      local info = vim.api.nvim_get_commands({})[cmd] or vim.api.nvim_buf_get_commands(0, {})[cmd]
+      if not info then
+        vim.schedule(function()
+          vim.print("Command " .. cmd .. " not found after loading " .. plugin.name)
+        end)
+
+        return
+      end
+
+      command.nargs = info.nargs
+
+      if event.args and event.args ~= "" and info.nargs and info.nargs:find "[1?]" then
+        command.args = { event.args }
+      end
+
+      vim.cmd(command)
+    end, {
+      bang = true,
+      range = true,
+      nargs = "*",
+      complete = function(_, line)
+        vim.api.nvim_del_user_command(cmd)
+        -- NOTE: return the newly loaded command completion
+        return vim.fn.getcompletion(line, "cmdline")
+      end,
+    })
+  end
+end
+
 local function build(pkg)
   if not pkg.build then
     return
@@ -212,6 +260,10 @@ function pm.add_plugin(plugin, lazy)
 
       if plugin.keys then
         load_on_key(plugin.keys, plugin)
+      end
+
+      if plugin.cmd then
+        load_on_command(plugin.cmd, plugin)
       end
     end,
   })
