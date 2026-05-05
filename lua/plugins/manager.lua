@@ -78,9 +78,14 @@ function pm.load_plugin(name)
     end
   end
 
-  local src = normalize_src(plugin.src)
-  print(src)
-  vim.cmd.packadd(name)
+  if plugin._install_dir then
+    vim.opt.runtimepath:append(plugin._install_dir)
+    for _, f in ipairs(vim.fn.glob(plugin._install_dir .. "/plugin/**/*.{vim,lua}", false, true)) do
+      vim.cmd("source " .. vim.fn.fnameescape(f))
+    end
+  else
+    vim.cmd.packadd(name)
+  end
 
   print "pack add done"
   if type(plugin.config) == "function" then
@@ -94,7 +99,6 @@ function pm.load_plugin(name)
 end
 
 function pm.add_plugin(plugin, lazy)
-  -- print(vim.inspect(plugin))
   vim.validate {
     plugin = { plugin, "table" },
     src = { plugin[1], "string" },
@@ -141,10 +145,19 @@ function pm.add_plugin(plugin, lazy)
       if is_lazy == nil then
         is_lazy = plugin.cmd or plugin.event or plugin.keys or plugin.ft
       end
+
       if not is_lazy then
         print("is lazy", is_lazy)
         pm.load_plugin(plugin.name)
         return
+      end
+
+      for _, pp in ipairs(vim.opt.packpath:get()) do
+        local dirs = vim.fn.glob(pp .. "/pack/*/opt/" .. plugin.name, false, true)
+        if #dirs > 0 then
+          plugin._install_dir = dirs[1]
+          break
+        end
       end
 
       if plugin.event then
