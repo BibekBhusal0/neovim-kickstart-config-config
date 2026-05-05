@@ -47,22 +47,29 @@ local function load_on_key(keys, pkg)
     local lhs, rhs = map[1], map[2]
     local mode = map.mode or "n"
 
-    vim.keymap.set(mode, lhs, function()
+    if not rhs then
+      -- :TODO: Loading plugin right away for now
+      -- it should load plugin and only on keymap
       pm.load_plugin(pkg.name)
-      local m = type(mode) == "table" and mode[1] or mode
-      if rhs then
+    else
+      vim.keymap.set(mode, lhs, function()
+        pm.load_plugin(pkg.name)
         if type(rhs) == "function" then
           rhs()
         elseif type(rhs) == "string" then
-          local feed = vim.api.nvim_replace_termcodes(rhs, true, false, true)
-          vim.api.nvim_feedkeys(feed, m, false)
+          local cmd = rhs:match "^:(.+)<[Cc][Rr]>$"
+          if cmd then
+            vim.cmd(cmd)
+          else
+            vim.api.nvim_feedkeys(
+              vim.api.nvim_replace_termcodes(rhs, true, false, true),
+              "t",
+              false
+            )
+          end
         end
-      else
-        vim.keymap.del(mode, lhs)
-        local feed = vim.api.nvim_replace_termcodes(lhs, true, false, true)
-        vim.api.nvim_feedkeys(feed, m, false)
-      end
-    end, { desc = map.desc })
+      end, { desc = map.desc })
+    end
   end
 end
 
