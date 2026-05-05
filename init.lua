@@ -20,7 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 require "plugins"
 
 require("lazy").setup {
-  require "plugins.git", -- Git stuff like gitsigns, fugitive
   require "plugins.lsp", -- Every thing Lsp related
   require "plugins.misc", -- Miscellaneous utility plugins
   require "plugins.sessionManagement", -- management of sessions

@@ -294,4 +294,63 @@ function pm.add_plugins(list)
   end
 end
 
+function pm.stats()
+  local total, loaded = 0, 0
+  for _, p in pairs(plugins) do
+    total = total + 1
+    if p.is_loaded then loaded = loaded + 1 end
+  end
+  return { total = total, loaded = loaded }
+end
+
+function pm.show()
+  local groups = { loaded = {}, not_loaded = {}, disabled = {} }
+  for _, p in pairs(plugins) do
+    if p.enabled == false then
+      table.insert(groups.disabled, p.name)
+    elseif p.is_loaded then
+      table.insert(groups.loaded, p.name)
+    else
+      table.insert(groups.not_loaded, p.name)
+    end
+  end
+
+  local lines = {}
+  local function add_group(label, list)
+    table.sort(list)
+    table.insert(lines, label .. " (" .. #list .. ")")
+    for _, name in ipairs(list) do
+      table.insert(lines, "  " .. name)
+    end
+    table.insert(lines, "")
+  end
+
+  add_group("loaded", groups.loaded)
+  add_group("not loaded", groups.not_loaded)
+  add_group("disabled", groups.disabled)
+
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.bo[buf].modifiable = false
+
+  local width = 40
+  local height = math.min(#lines, vim.o.lines - 4)
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = height,
+    row = math.floor((vim.o.lines - height) / 2),
+    col = math.floor((vim.o.columns - width) / 2),
+    style = "minimal",
+    border = "rounded",
+    title = " plugins ",
+    title_pos = "center",
+  })
+
+  vim.keymap.set("n", "q", function()
+    vim.api.nvim_win_close(win, true)
+  end, { buffer = buf })
+end
+
+vim.api.nvim_create_user_command("Plugins", pm.show, {})
 return pm
