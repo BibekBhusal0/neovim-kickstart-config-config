@@ -74,6 +74,9 @@ local function load_on_key(keys, pkg)
 end
 
 local function load_on_command(commands, plugin)
+  if type(commands) == "string" then
+    commands = { commands }
+  end
   for _, cmd in ipairs(commands) do
     vim.api.nvim_create_user_command(cmd, function(event)
       local command = {
