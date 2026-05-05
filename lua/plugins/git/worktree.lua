@@ -12,9 +12,9 @@ return {
       desc = "Git Worktree Switch",
     },
   },
-    dependencies = {
+  dependencies = {
     "nvim-telescope/telescope.nvim",
-    },
+  },
 
   config = function()
     local Hooks = require "git-worktree.hooks"

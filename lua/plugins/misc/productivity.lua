@@ -44,7 +44,7 @@ return {
 
   {
     "obsidian-nvim/obsidian.nvim",
-    enabled =false,
+    enabled = false,
     version = "*",
     keys = wrap_keys {
       { "<leader>nD", ":Obsidian dailies<CR>", desc = "Obsidian Dailies" },

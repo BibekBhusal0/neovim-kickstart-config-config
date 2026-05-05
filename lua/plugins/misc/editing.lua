@@ -39,7 +39,7 @@ return {
 
   {
     "johmsalas/text-case.nvim",
-      enabled= false,
+    enabled = false,
     opts = {},
     keys = {
       "ga",

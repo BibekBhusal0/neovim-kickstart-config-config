@@ -298,7 +298,9 @@ function pm.stats()
   local total, loaded = 0, 0
   for _, p in pairs(plugins) do
     total = total + 1
-    if p.is_loaded then loaded = loaded + 1 end
+    if p.is_loaded then
+      loaded = loaded + 1
+    end
   end
   return { total = total, loaded = loaded }
 end
