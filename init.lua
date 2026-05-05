@@ -20,9 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 require "plugins"
 
 require("lazy").setup {
-  require "plugins.ai", -- AI Autocompletion and chat
-  require "plugins.debugging", -- Debugger
-  require "plugins.fff", -- Fricking fast finder
   require "plugins.git", -- Git stuff like gitsigns, fugitive
   require "plugins.lsp", -- Every thing Lsp related
   require "plugins.mini", -- Yet another file explorer

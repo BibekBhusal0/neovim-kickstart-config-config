@@ -1,12 +1,11 @@
 local map = require "utils.map"
-local wrap_keys = require "utils.wrap_keys"
 
 return {
   "monkoose/neocodeium",
   -- version = 'v1.9.1',
   cmd = { "NeoCodeium" },
 
-  keys = wrap_keys {
+  keys = {
     { "<leader>a<leader>", ":NeoCodeium enable<CR>", desc = "Codeium Start" },
     { "<leader>ab", ":NeoCodeium toggle_buffer<CR>", desc = "Codeium Toggle Buffer" },
     { "<leader>aC", ":NeoCodeium chat<CR>", desc = "Codeium Chat" },

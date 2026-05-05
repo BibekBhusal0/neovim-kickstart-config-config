@@ -1,5 +1,3 @@
-local wrap_keys = require "utils.wrap_keys"
-
 local findInLazy = function()
   require("fff").find_files { cwd = vim.fs.joinpath(vim.fn.stdpath "data", "lazy") }
 end
@@ -28,7 +26,7 @@ return {
     git = { status_text_color = true },
     debug = { enabled = false, show_scores = true },
   },
-  keys = wrap_keys {
+  keys = {
     { "<Leader>ff", ":lua require('fff').find_files()<CR>", desc = "Find files" },
     { "<Leader>fw", ":lua require('fff').live_grep()<Cr>", desc = "Live grep" },
     {

@@ -1,10 +1,8 @@
-local wrap_keys = require "utils.wrap_keys"
-
 return {
   "folke/sidekick.nvim",
   cmd = "Sidekick",
   opts = {},
-  keys = wrap_keys {
+  keys = {
     {
       "<c-.>",
       "<Cmd>Sidekick cli toggle<cr>",

@@ -1,5 +1,25 @@
 {
   "plugins": {
+    "comment-box": {
+      "rev": "06bb771690bc9df0763d14769b779062d8f12bc5",
+      "src": "https://github.com/LudoPinelli/comment-box.nvim"
+    },
+    "fff": {
+      "rev": "bb4f337a786ded8f91fc5ac5809ba54386c10605",
+      "src": "https://github.com/dmtrKovalenko/fff.nvim"
+    },
+    "import": {
+      "rev": "7f6116ce53a9176f8e7aaf3e41cc60be11c7d8ee",
+      "src": "https://github.com/piersolenski/import.nvim"
+    },
+    "markdown-preview": {
+      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
+      "src": "https://github.com/iamcco/markdown-preview.nvim"
+    },
+    "mkdnflow": {
+      "rev": "f20732686f70f60f18f09f4befe984ae63a99201",
+      "src": "https://github.com/jakewvincent/mkdnflow.nvim"
+    },
     "neo-tree": {
       "rev": "ff84e6e1608b24773f1b73cd4182e0bcf2b3d637",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
@@ -8,17 +28,77 @@
       "rev": "84c75e7a7e443586f60508d12fc50f90d9aee14e",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
     },
+    "neocodeium": {
+      "rev": "b176a109e37298d9489860b94badbfb2e4677ac2",
+      "src": "https://github.com/monkoose/neocodeium"
+    },
+    "noice": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
+    },
     "nui": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-dap": {
+      "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
+      "src": "https://github.com/mfussenegger/nvim-dap"
+    },
+    "nvim-dap-python": {
+      "rev": "1808458eba2b18f178f990e01376941a42c7f93b",
+      "src": "https://github.com/mfussenegger/nvim-dap-python"
+    },
+    "nvim-dap-ui": {
+      "rev": "1a66cabaa4a4da0be107d5eda6d57242f0fe7e49",
+      "src": "https://github.com/rcarriga/nvim-dap-ui"
+    },
+    "nvim-dap-virtual-text": {
+      "rev": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6",
+      "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
+    },
+    "nvim-nio": {
+      "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
+      "src": "https://github.com/nvim-neotest/nvim-nio"
+    },
+    "nvim-notify": {
+      "rev": "8701bece920b38ea289b457f902e2ad184131a5d",
+      "src": "https://github.com/rcarriga/nvim-notify"
+    },
+    "nvim-surround": {
+      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "src": "https://github.com/kylechui/nvim-surround"
+    },
+    "nvimesweeper": {
+      "rev": "a75828943e4279cd850ad6a6cff4c49238997573",
+      "src": "https://github.com/seandewar/nvimesweeper"
+    },
+    "persistent-breakpoints": {
+      "rev": "d1656221836207787b8a7969cc2dc72668c4742a",
+      "src": "https://github.com/Weissle/persistent-breakpoints.nvim"
     },
     "plenary": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "render-markdown": {
+      "rev": "3f3eea97b80839f629c951ca660ffd125bfa5b34",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
+    "sidekick": {
+      "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
+      "src": "https://github.com/folke/sidekick.nvim"
+    },
     "statuscol": {
       "rev": "c46172d0911aa5d49ba5f39f4351d1bb7aa289cc",
       "src": "https://github.com/luukvbaal/statuscol.nvim"
+    },
+    "text-case": {
+      "rev": "e898cfd46fa6cde0e83abb624a16e67d2ffc6457",
+      "src": "https://github.com/johmsalas/text-case.nvim"
+    },
+    "treesj": {
+      "rev": "5fa4e7ba3517f8fe743bb4488f9e9c7ce83330fc",
+      "src": "https://github.com/Wansmer/treesj"
     },
     "vim-moonfly-colors": {
       "rev": "4ed07bc0c6083cdd547c63f5c245e02c068b0c45",

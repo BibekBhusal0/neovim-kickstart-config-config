@@ -1,27 +1,34 @@
-local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 return {
   {
     "Weissle/persistent-breakpoints.nvim",
-    opts = {},
-    keys = wrap_keys {
+    dependencies = { "mfussenegger/nvim-dap" },
+    config = function()
+      require("persistent-breakpoints").setup()
+      require("persistent-breakpoints.api").load_breakpoints()
+    end,
+    keys = {
       {
         "<leader>db",
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBToggleBreakpoint<CR>",
+        ":lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>",
         desc = "Debuger Toggle BreakPoint",
       },
       {
         "<leader>dC",
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBSetConditionalBreakpoint<CR>",
+        ":lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>",
         desc = "Debuger Toggle Conditional BreakPoint",
       },
       {
         "<leader>dl",
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBSetLogPoint<CR>",
+        ":lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>",
         desc = "Debuger Toggle Log BreakPoint",
       },
-      { "<leader>dB", ":PBClearAllBreakpoints<CR>", desc = "Debuger Clear All BreakPoint" },
+      {
+        "<leader>dB",
+        ":lua require('persistent-breakpoints.api').set_log_point()<cr>",
+        desc = "Debuger Clear All BreakPoint",
+      },
     },
   }, -- BreakPoint data is not lost
 
@@ -31,9 +38,9 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
-      { "mfussenegger/nvim-dap-python", lazy = true },
+      "mfussenegger/nvim-dap-python",
     },
-    keys = wrap_keys {
+    keys = {
       { "<leader>dc", ":lua require('dap').continue() <CR>", desc = "Debugger Continue" },
     },
 
