@@ -142,7 +142,7 @@ local function build(pkg)
 end
 
 function pm.load_plugin(name)
-  -- print "loading ..."
+  name = resolve_name(name) or name
   local plugin = plugins[name]
   if not plugin then
     return
@@ -156,20 +156,16 @@ function pm.load_plugin(name)
 
   if plugin.dependencies then
     for _, dep in ipairs(plugin.dependencies) do
-      pm.load_plugin(dep)
+      pm.load_plugin(type(dep) == "table" and (dep.name or dep[1]) or dep)
     end
   end
 
   if plugin._install_dir then
     vim.opt.runtimepath:append(plugin._install_dir)
-    for _, f in ipairs(vim.fn.glob(plugin._install_dir .. "/plugin/**/*.{vim,lua}", false, true)) do
-      vim.cmd("source " .. vim.fn.fnameescape(f))
-    end
   else
     vim.cmd.packadd(name)
   end
 
-  -- print "pack add done"
   if type(plugin.config) == "function" then
     plugin.config()
   elseif plugin.opts then
@@ -205,7 +201,7 @@ function pm.add_plugin(plugin, lazy)
 
   if plugin.dependencies then
     for _, dep in ipairs(plugin.dependencies) do
-      if type(plugin.dependencies == "string") then
+      if type(dep) == "string" then
         pm.add_plugin({ dep }, true)
       else
         pm.add_plugin(dep, true)
