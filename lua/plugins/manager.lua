@@ -242,6 +242,13 @@ function pm.add_plugin(plugin, lazy)
       end
 
       if plugin.event then
+        local event = plugin.event
+        if event == "VeryLazy" or (type(event) == "table" and event[1] == "VeryLazy") then
+          vim.defer_fn(function()
+            pm.load_plugin(plugin.name)
+          end, 2)
+          return
+        end
         vim.api.nvim_create_autocmd(plugin.event, {
           once = true,
           callback = function()
