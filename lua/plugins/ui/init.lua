@@ -5,6 +5,6 @@ return {
   require "plugins.ui.lualine", -- Line that appears at bottom
   require "plugins.ui.others", -- Other stuffs
   require "plugins.ui.statuscol", -- Changing status column (left side)
-  -- require "plugins.ui.noice", -- Floating command bar and better notification
+  require "plugins.ui.noice", -- Floating command bar and better notification
   -- require "plugins.ui.animation",
 }

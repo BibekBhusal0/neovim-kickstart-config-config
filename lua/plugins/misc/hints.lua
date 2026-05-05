@@ -60,6 +60,9 @@ return {
 
   {
     "meznaric/key-analyzer.nvim",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+  },
     cmd = "KeyAnalyzer",
     keys = wrap_keys {
       {

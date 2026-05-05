@@ -2,6 +2,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
+    enabled = false,
     "kylechui/nvim-surround",
     keys = {
       { "ys", mode = { "n", "o", "x" }, desc = "Surround Text" },
@@ -30,9 +31,9 @@ return {
   {
     "Wansmer/treesj",
     keys = wrap_keys {
-      { "gi", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
-      { "gj", ":TSJJoin<CR>", desc = "Join the object under cursor" },
-      { "gk", ":TSJSplit<CR>", desc = "Split the object under cursor" },
+      { "gi", "<cmd>TSJToggle<CR>", desc = "Toggle split object under cursor" },
+      { "gj", "<cmd>TSJJoin<CR>", desc = "Join the object under cursor" },
+      { "gk", "<cmd>TSJSplit<CR>", desc = "Split the object under cursor" },
     },
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split

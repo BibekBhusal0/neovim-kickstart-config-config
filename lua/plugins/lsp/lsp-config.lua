@@ -14,6 +14,7 @@ return {
     },
     config = function()
       vim.cmd [[ autocmd BufNewFile,BufRead hyprland.overwrite.conf set filetype=hyprlang ]]
+      print("lsp active")
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
@@ -118,7 +119,7 @@ return {
       capabilities = vim.tbl_deep_extend(
         "force",
         capabilities,
-        require("cmp_nvim_lsp").default_capabilities(),
+        -- require("cmp_nvim_lsp").default_capabilities(),
         require("lsp-file-operations").default_capabilities()
       )
 

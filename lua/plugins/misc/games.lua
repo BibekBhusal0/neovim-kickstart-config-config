@@ -28,15 +28,6 @@ return {
   },
 
   {
-    "alec-gibson/nvim-tetris",
-    cmd = { "Tetris" },
-    enabled = true,
-    keys = wrap_keys {
-      { "<leader>zt", ":Tetris<CR>", desc = "Game Tetris" },
-    },
-  },
-
-  {
     "letieu/hacker.nvim",
     config = function()
       vim.opt.spell = false

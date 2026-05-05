@@ -3,7 +3,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
-    enabled = false,
+    enabled = true,
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufNewFile", "BufReadPost" },

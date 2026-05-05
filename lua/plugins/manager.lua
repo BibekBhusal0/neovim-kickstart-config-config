@@ -172,7 +172,7 @@ function pm.load_plugin(name)
   if type(plugin.config) == "function" then
     plugin.config()
   elseif plugin.opts then
-    require(plugin.name).setup(plugin.opts)
+    require(plugin.main  or plugin.name).setup(plugin.opts)
   end
 
   plugin.is_loading = false
@@ -218,7 +218,7 @@ function pm.add_plugin(plugin, lazy)
     name = plugin.name,
     version = plugin.version,
   } }, {
-    load = function()
+    load = function(p)
       local is_lazy = lazy
       if is_lazy == nil then
         is_lazy = plugin.lazy
@@ -228,28 +228,32 @@ function pm.add_plugin(plugin, lazy)
       end
 
       if not is_lazy then
-        -- print("is lazy", is_lazy)
         pm.load_plugin(plugin.name)
         return
       end
 
-      for _, pp in ipairs(vim.opt.packpath:get()) do
-        local dirs = vim.fn.glob(pp .. "/pack/*/opt/" .. plugin.name, false, true)
-        if #dirs > 0 then
-          plugin._install_dir = dirs[1]
-          break
-        end
+      if (p.path) then 
+        plugin._install_dir = p.path
+        -- vim.opt.runtimepath:append(plugin._install_dir)
       end
+
+      -- for _, pp in ipairs(vim.opt.packpath:get()) do
+      --   local dirs = vim.fn.glob(pp .. "/pack/*/opt/" .. plugin.name, false, true)
+      --   if #dirs > 0 then
+      --     plugin._install_dir = dirs[1]
+      --     break
+      --   end
+      -- end
 
       if plugin.event then
         local event = plugin.event
-        if event == "VeryLazy" or (type(event) == "table" and event[1] == "VeryLazy") then
+        if event == "VeryLazy" or (type(event) == "table" and vim.tbl_contains(event, "VeryLazy")) then
           vim.defer_fn(function()
             pm.load_plugin(plugin.name)
-          end, 2)
+          end, 100)
           return
         end
-        vim.api.nvim_create_autocmd(plugin.event, {
+        vim.api.nvim_create_autocmd(event, {
           once = true,
           callback = function()
             pm.load_plugin(plugin.name)
@@ -287,7 +291,7 @@ function pm.add_plugins(list)
     elseif type(plugin) == "table" then
       if type(plugin[1]) == "string" then
         pm.add_plugin(plugin)
-      elseif type(plugin[1] == "table") then
+      elseif type(plugin[1]) == "table" then
         pm.add_plugins(plugin)
       end
     end
@@ -355,4 +359,9 @@ function pm.show()
 end
 
 vim.api.nvim_create_user_command("Plugins", pm.show, {})
+
+vim.api.nvim_create_user_command("PackUpdate", function()
+  vim.pack.update {}
+end, {})
+
 return pm

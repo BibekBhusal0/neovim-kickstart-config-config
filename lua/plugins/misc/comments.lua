@@ -4,19 +4,7 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   {
     {
-      enabled = false,
       "numToStr/Comment.nvim",
-      dependencies = {
-        {
-          "JoosepAlviste/nvim-ts-context-commentstring",
-          ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-          config = function()
-            local ts_context_commentstring =
-              require "ts_context_commentstring.integrations.comment_nvim"
-            require("Comment").setup { pre_hook = ts_context_commentstring.create_pre_hook() }
-          end,
-        },
-      },
       keys = {
         { "gcc", mode = "n", desc = "Comment toggle current line" },
         { "gc", mode = { "n", "o", "x" }, desc = "Comment toggle" },
@@ -25,6 +13,20 @@ return {
       },
       opts = {},
     }, -- Easily comment visual regions/lines
+
+    {
+      dependencies = {
+        "numToStr/Comment.nvim",
+      },
+
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+      config = function()
+        local ts_context_commentstring =
+        require "ts_context_commentstring.integrations.comment_nvim"
+        require("Comment").setup { pre_hook = ts_context_commentstring.create_pre_hook() }
+      end,
+    },
 
     {
       "LudoPinelli/comment-box.nvim",

@@ -20,6 +20,5 @@ vim.opt.rtp:prepend(lazypath)
 require "plugins"
 
 require("lazy").setup {
-  require "plugins.lsp", -- Every thing Lsp related
   require "plugins.sessionManagement", -- management of sessions
 }
