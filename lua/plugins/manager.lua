@@ -80,11 +80,8 @@ function pm.load_plugin(name)
 
   local src = normalize_src(plugin.src)
   print(src)
-  vim.pack.add { {
-    src = src,
-    name = plugin.name,
-    version = plugin.version,
-  } }
+  vim.cmd.packadd(name)
+
   print "pack add done"
   if type(plugin.config) == "function" then
     plugin.config()
@@ -130,18 +127,36 @@ function pm.add_plugin(plugin, lazy)
     end
   end
 
-  local is_lazy = lazy
-  if is_lazy == nil then
-    is_lazy = plugin.lazy
-  end
-  if is_lazy == nil then
-    is_lazy = plugin.cmd or plugin.event or plugin.keys or plugin.ft
-  end
-  if not is_lazy then
-    print("is lazy", is_lazy)
-    pm.load_plugin(plugin.name)
-    return
-  end
+  local src = normalize_src(plugin.src)
+  vim.pack.add({ {
+    src = src,
+    name = plugin.name,
+    version = plugin.version,
+  } }, {
+    load = function()
+      local is_lazy = lazy
+      if is_lazy == nil then
+        is_lazy = plugin.lazy
+      end
+      if is_lazy == nil then
+        is_lazy = plugin.cmd or plugin.event or plugin.keys or plugin.ft
+      end
+      if not is_lazy then
+        print("is lazy", is_lazy)
+        pm.load_plugin(plugin.name)
+        return
+      end
+
+      if plugin.event then
+        vim.api.nvim_create_autocmd(plugin.event, {
+          once = true,
+          callback = function()
+            pm.load_plugin(plugin.name)
+          end,
+        })
+      end
+    end,
+  })
 end
 
 --- @param list table[]
