@@ -59,59 +59,6 @@ local function build(pkg)
   })
 end
 
-local function command_stub(command, name)
-  vim.api.nvim_create_user_command(command, function()
-    vim.api.nvim_del_user_command(command)
-    pm.load_plugin(name)
-    vim.cmd(command)
-  end, { desc = "Lazy-load trigger for: " .. command })
-end
-
-local function load_on_command(cmd, pkg)
-  for _, _cmd in ipairs(cmd) do
-    command_stub(_cmd, pkg.name)
-  end
-end
-
-local function load_on_event(events, pkg)
-  vim.api.nvim_create_autocmd(events, {
-    once = true,
-    callback = function()
-      pm.load_plugin(pkg.name)
-    end,
-  })
-end
-
-local function load_on_key(keys, pkg)
-  for _, map in ipairs(keys) do
-    local lhs, rhs = map[1], map[2]
-    local mode = map.mode or "n"
-
-    vim.keymap.set(mode, lhs, function()
-      pm.load_plugin(pkg.name)
-
-      if rhs then
-        execute(rhs)
-      else
-        -- remove stub so plugin's own keymap takes over, then replay
-        vim.keymap.del(mode, lhs)
-        local feed = vim.api.nvim_replace_termcodes(lhs, true, false, true)
-        vim.api.nvim_feedkeys(feed, mode, false)
-      end
-    end, { desc = map.desc })
-  end
-end
-
-local function load_on_filetype(fts, pkg)
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = fts,
-    once = true,
-    callback = function()
-      pm.load_plugin(pkg.name)
-    end,
-  })
-end
-
 function pm.load_plugin(name)
   print "loading ..."
   local plugin = plugins[name]
@@ -183,19 +130,6 @@ function pm.add_plugin(plugin, lazy)
     end
   end
 
-  if plugin.cmd then
-    load_on_command(plugin.cmd, plugin)
-  end
-  if plugin.event then
-    load_on_event(plugin.event, plugin)
-  end
-  if plugin.keys then
-    load_on_key(plugin.keys, plugin)
-  end
-  if plugin.ft then
-    load_on_filetype(plugin.ft, plugin)
-  end
-
   local is_lazy = lazy
   if is_lazy == nil then
     is_lazy = plugin.lazy
@@ -206,6 +140,7 @@ function pm.add_plugin(plugin, lazy)
   if not is_lazy then
     print("is lazy", is_lazy)
     pm.load_plugin(plugin.name)
+    return
   end
 end
 
