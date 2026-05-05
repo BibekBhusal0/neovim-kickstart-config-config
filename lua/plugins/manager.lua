@@ -168,6 +168,16 @@ function pm.add_plugin(plugin, lazy)
           end,
         })
       end
+
+      if plugin.ft then
+        vim.api.nvim_create_autocmd({ "FileType" }, {
+          pattern = plugin.ft,
+          once = true,
+          callback = function()
+            pm.load_plugin(plugin.name)
+          end,
+        })
+      end
     end,
   })
 end
