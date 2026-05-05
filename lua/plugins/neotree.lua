@@ -13,6 +13,7 @@ map("<leader>q", ":Neotree toggle position=left<CR>", "Neotree on Left")
 local lsp_operations = function(name)
   return function(...)
     local params = { ... }
+    require("plugins.manager").load_plugin "nvim-lsp-file-operations"
     require("lsp-file-operations").setup()
     params[1].commands[name](..., function()
       params[1].commands.refresh(unpack(params))
@@ -22,7 +23,7 @@ end
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  version = "v3.x",
+  -- version = "v3.x",
   cmd = { "Neotree" },
 
   dependencies = {

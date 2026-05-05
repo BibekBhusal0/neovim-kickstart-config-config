@@ -1,13 +1,7 @@
-local wrap_keys = require "utils.wrap_keys"
-
-vim.api.nvim_create_user_command("MiniNotifyHistory", function()
-  require("mini.notify").show_history()
-end, {})
-
 return {
   {
     "nvim-mini/mini.trailspace",
-    keys = wrap_keys {
+    keys = {
       { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
     },
   }, -- Simple ways to trail whitespace useful when formatter is not working
@@ -27,9 +21,9 @@ return {
   {
     "nvim-mini/mini.operators",
     keys = {
+      { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
       { "g=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
       { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
-      { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
       { "gs", mode = { "n", "o", "x" }, desc = "Mini Sort" },
       { "gx", mode = { "n", "o", "x" }, desc = "Mini Exchange" },
     },
@@ -38,7 +32,7 @@ return {
 
   {
     "nvim-mini/mini.files",
-    keys = wrap_keys {
+    keys = {
       { "<leader>o", ':lua require("mini.files").open()<CR>', desc = "Open Mini Files" },
     },
     config = function()
@@ -59,6 +53,7 @@ return {
         group = au_group,
         desc = "LSP Rename file",
         callback = function(event)
+          require("plugins.manager").load_plugin "nvim-lsp-file-operations"
           local ok, rename = pcall(require, "lsp-file-operations.did-rename")
           if not ok then
             return

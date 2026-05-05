@@ -52,8 +52,6 @@ return {
     end,
   }, -- Better diagnostic messages
 
-  { "antosha417/nvim-lsp-file-operations", lazy = true },
-
   {
     "folke/lazydev.nvim",
     enabled = true,

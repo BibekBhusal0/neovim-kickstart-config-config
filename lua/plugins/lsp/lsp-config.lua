@@ -4,8 +4,11 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    -- lazy = true,
     dependencies = {
-      { "mason-org/mason.nvim", config = true, cmd = "Mason" },
+      { "mason-org/mason.nvim", opts = {}, cmd = "Mason" },
+      "nvimtools/none-ls.nvim",
+      "antosha417/nvim-lsp-file-operations",
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },

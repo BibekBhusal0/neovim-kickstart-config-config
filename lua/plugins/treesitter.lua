@@ -1,4 +1,3 @@
-local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 local mode = { "n", "x", "o" }
 
@@ -40,12 +39,10 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-context",
-    keys = wrap_keys {
-      { "<leader>tC", ":TSContext toggle<CR>", desc = "Toggle Treesitter Context" },
-    },
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("treesitter-context").setup { max_lines = 5 }
+      map("<leader>tC", ":TSContext toggle<CR>", "Toggle Treesitter Context")
       map(
         "<leader><CR>",
         ':lua require("treesitter-context").go_to_context(vim.v.count1)<CR>',
@@ -57,7 +54,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = { "BufReadPost", "BufNewFile" },
-    branch = "main",
+    version = "main",
     config = function()
       local keys = {
         ["/"] = "comment",

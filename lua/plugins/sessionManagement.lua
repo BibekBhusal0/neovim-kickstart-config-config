@@ -10,7 +10,12 @@ command("Load", function()
   require("resession").load("auto-session", { silence_errors = true })
 end, {})
 
+local function load()
+  require("plugins.manager").load_plugin "resession"
+end
+
 command("SessionSave", function(opts)
+  load()
   if opts.args ~= "" then
     require("resession").save(opts.args, { notify = true })
   else
@@ -19,6 +24,7 @@ command("SessionSave", function(opts)
 end, { nargs = "?" })
 
 command("SessionLoad", function(opts)
+  load()
   if opts.args ~= "" then
     require("resession").load(opts.args, { attach = true, silence_errors = false })
   else
@@ -27,6 +33,7 @@ command("SessionLoad", function(opts)
 end, { nargs = "?" })
 
 command("SessionSaveTab", function(opts)
+  load()
   if opts.args ~= "" then
     require("resession").save_tab(opts.args, { notify = true })
   else
@@ -35,6 +42,7 @@ command("SessionSaveTab", function(opts)
 end, { nargs = "?" })
 
 command("SessionDelete", function(opts)
+  load()
   if opts.args ~= "" then
     require("resession").delete(opts.args, { notify = true })
   else

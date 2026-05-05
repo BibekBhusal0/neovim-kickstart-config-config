@@ -3,6 +3,7 @@ local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
+    enabled = false,
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufNewFile", "BufReadPost" },
@@ -46,6 +47,7 @@ return {
   {
     "petertriho/nvim-scrollbar",
     event = { "BufNewFile", "BufReadPost" },
+    enabled = false,
     opts = {
       handle = { blend = 0 },
       marks = { Cursor = { color = "#00ff00" } },
