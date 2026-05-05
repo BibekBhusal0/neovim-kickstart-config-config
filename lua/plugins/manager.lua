@@ -162,6 +162,9 @@ function pm.load_plugin(name)
 
   if plugin._install_dir then
     vim.opt.runtimepath:append(plugin._install_dir)
+    for _, f in ipairs(vim.fn.glob(plugin._install_dir .. "/plugin/**/*.{vim,lua}", false, true)) do
+      vim.cmd("source " .. vim.fn.fnameescape(f))
+    end
   else
     vim.cmd.packadd(name)
   end
