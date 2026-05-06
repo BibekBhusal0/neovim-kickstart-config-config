@@ -5,17 +5,7 @@ require "core.keymaps"
 require "core.commands"
 require "core.snippets"
 
--- Set up the Lazy plugin manager
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out =
-    vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error("Error cloning lazy.nvim:\n" .. out)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
+vim.pack.add { "https://github.com/folke/lazy.nvim" }
 
 require("lazy").setup {
   require "plugins.ai", -- AI Autocompletion and chat
