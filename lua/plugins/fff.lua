@@ -32,12 +32,17 @@ return {
     { "<Leader>ff", ":lua require('fff').find_files()<CR>", desc = "Find files" },
     { "<Leader>fw", ":lua require('fff').live_grep()<Cr>", desc = "Live grep" },
     {
+      "<Leader>fG",
+      ":lua require('fff').live_grep({grep={modes={'fuzzy','plain'}}})<cr>",
+      desc = "Live grep (fuzzy)",
+    },
+    {
       "<Leader>fW",
       ":lua require('fff').live_grep { query = vim.fn.expand '<cword>' }<Cr>",
       desc = "Find current word",
     },
-    { "<Leader>fj", findInCurrentBufferDir, "Find files in current buffer directory" },
-    { "<Leader>fC", findInConfig, "Find Files in config directory" },
-    { "<Leader>fL", findInLazy, "Find Files in Lazy directory" },
+    { "<Leader>fj", findInCurrentBufferDir, desc = "Find files in current buffer directory" },
+    { "<Leader>fC", findInConfig, desc = "Find Files in config directory" },
+    { "<Leader>fL", findInLazy, desc = "Find Files in Lazy directory" },
   },
 }
