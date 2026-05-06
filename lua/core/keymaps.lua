@@ -58,6 +58,12 @@ map("<C-u>", "<C-u>zz", "Scroll up")
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard", { "n", "v" })
 
+--When pasting don't yank and indent
+map("p", "]p", "Paste")
+map("P", "]P", "Paste before")
+map("p", "\"_dP=']", "Paste", "x")
+map("P", "\"_dP=']", "Paste before", "x")
+
 -- yank all
 map("<leader>k", "ggVGy", "Yank all")
 map("<leader>K", 'ggVG"+y', "Yank all to System Clipboard")
