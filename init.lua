@@ -16,7 +16,6 @@ require("lazy").setup {
   require "plugins.mini", -- Yet another file explorer
   require "plugins.misc", -- Miscellaneous utility plugins
   require "plugins.neotree", -- File explorer for Neovim
-  require "plugins.refactoring", -- Code refactoring moving to function file and print
   require "plugins.sessionManagement", -- management of sessions
   require "plugins.telescope", -- Fuzzy finder for searching
   require "plugins.test", -- Running tests
