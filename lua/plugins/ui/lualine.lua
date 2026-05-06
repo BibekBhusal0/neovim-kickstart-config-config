@@ -76,15 +76,15 @@ return {
       cond = is_wide,
     }
 
-    local noice_info = {
+    local macro = {
       function()
-        if not package.loaded["noice"] then
+        local reg = vim.fn.reg_recording()
+        if reg == "" then
           return ""
         end
-        local cmd = require("noice").api.status.command.get() or ""
-        local get = require("noice").api.status.mode.get() or ""
-        return get .. "  " .. cmd
+        return "recording @" .. reg
       end,
+      color = { fg = "#ff9e64" },
     }
 
     local plugins = {
@@ -170,7 +170,7 @@ return {
         },
         lualine_c = { diff },
         lualine_x = {
-          noice_info,
+          macro,
           diagnostics,
         },
         lualine_y = { codeium_status, plugins },
@@ -186,5 +186,11 @@ return {
       },
       tabline = {},
     }
+
+    vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+      callback = function()
+        require("lualine").refresh { place = { "statusline" } }
+      end,
+    })
   end,
 }
