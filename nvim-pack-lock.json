@@ -4,7 +4,15 @@
       "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
       "src": "https://github.com/numToStr/Comment.nvim"
     },
+    "Comment.nvim": {
+      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+      "src": "https://github.com/numToStr/Comment.nvim"
+    },
     "FixCursorHold": {
+      "rev": "1900f89dc17c603eec29960f57c00bd9ae696495",
+      "src": "https://github.com/antoinemadec/FixCursorHold.nvim"
+    },
+    "FixCursorHold.nvim": {
       "rev": "1900f89dc17c603eec29960f57c00bd9ae696495",
       "src": "https://github.com/antoinemadec/FixCursorHold.nvim"
     },
@@ -68,6 +76,10 @@
       "rev": "1f559ff20b295b083c73c96bf935cad12c72ddca",
       "src": "https://github.com/rubiin/fortune.nvim"
     },
+    "fortune.nvim": {
+      "rev": "1f559ff20b295b083c73c96bf935cad12c72ddca",
+      "src": "https://github.com/rubiin/fortune.nvim"
+    },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
@@ -77,6 +89,10 @@
       "src": "https://github.com/Zeioth/garbage-day.nvim"
     },
     "git-statusline": {
+      "rev": "a3306b51e5883e49ce3c4d68baff16e644764c81",
+      "src": "https://github.com/mattmorgis/git-statusline.nvim"
+    },
+    "git-statusline.nvim": {
       "rev": "a3306b51e5883e49ce3c4d68baff16e644764c81",
       "src": "https://github.com/mattmorgis/git-statusline.nvim"
     },
@@ -393,9 +409,17 @@
       "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",
       "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
     },
+    "telescope-ui-select.nvim": {
+      "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",
+      "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+    },
     "telescope-zoxide": {
       "rev": "54bfe630bad08dc9891ec78c7cf8db38dd725c97",
       "src": "https://github.com/jvgrootveld/telescope-zoxide"
+    },
+    "telescope.nvim": {
+      "rev": "f04ab730b8f9c6bf3f54a206d0dcddfd70c52d59",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "text-case": {
       "rev": "e898cfd46fa6cde0e83abb624a16e67d2ffc6457",
@@ -444,6 +468,10 @@
     "vim-rhubarb": {
       "rev": "5496d7c94581c4c9ad7430357449bb57fc59f501",
       "src": "https://github.com/tpope/vim-rhubarb"
+    },
+    "vim-tpipeline": {
+      "rev": "9c1fc6a9aed96a6ff5f5cb0420e3760e95dfb1c1",
+      "src": "https://github.com/vimpostor/vim-tpipeline"
     },
     "vim-visual-multi": {
       "rev": "a6975e7c1ee157615bbc80fc25e4392f71c344d4",
