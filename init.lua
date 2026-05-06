@@ -3,7 +3,7 @@ require "core.autocmd"
 require "core.startingCommand"
 require "core.keymaps"
 require "core.commands"
-require "core.snippets"
+require "core.ui"
 
 vim.pack.add { "https://github.com/folke/lazy.nvim" }
 

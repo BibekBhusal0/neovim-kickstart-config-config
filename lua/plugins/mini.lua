@@ -1,9 +1,5 @@
 local wrap_keys = require "utils.wrap_keys"
 
-vim.api.nvim_create_user_command("MiniNotifyHistory", function()
-  require("mini.notify").show_history()
-end, {})
-
 return {
   {
     "nvim-mini/mini.trailspace",
@@ -11,18 +7,6 @@ return {
       { "<leader>tw", ':lua require("mini.trailspace").trim() <CR>', desc = "Trim Whitespace" },
     },
   }, -- Simple ways to trail whitespace useful when formatter is not working
-
-  {
-    "nvim-mini/mini.notify",
-    event = { "LspAttach" },
-    config = function()
-      local notify_orig = vim.notify
-      require("mini.notify").setup {
-        lsp_progress = { enable = true },
-      }
-      vim.notify = notify_orig
-    end,
-  },
 
   {
     "nvim-mini/mini.operators",

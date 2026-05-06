@@ -27,7 +27,6 @@ vim.o.pumheight = 10 -- Pop up menu height (default: 0)
 vim.o.conceallevel = 0 -- So that `` is visible in markdown files (default: 1)
 vim.wo.signcolumn = "yes"
 vim.o.fileencoding = "utf-8"
-vim.o.cmdheight = 1
 vim.o.breakindent = true
 vim.o.updatetime = 250
 vim.o.timeoutlen = 800 -- Time to wait for a mapped sequence to complete (in milliseconds) (default: 1000)

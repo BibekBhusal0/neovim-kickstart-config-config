@@ -46,3 +46,31 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.cmd [[
   autocmd FileType telescope,mason,lazygit,nvcheatsheet setlocal nospell
 ]]
+
+-- Lsp progress
+vim.api.nvim_create_autocmd("LspProgress", {
+  callback = function(ev)
+    local value = ev.data.params.value
+    vim.api.nvim_echo({ { value.message or "done" } }, false, {
+      id = "lsp." .. ev.data.client_id,
+      kind = "progress",
+      source = "vim.lsp",
+      title = value.title,
+      status = value.kind ~= "end" and "running" or "success",
+      percent = value.percentage,
+    })
+  end,
+})
+
+-- Commandline hiding automotically
+vim.opt.cmdheight = 0
+vim.api.nvim_create_autocmd({ "CmdlineEnter", "CmdlineLeave" }, {
+  group = vim.api.nvim_create_augroup("cmdline-auto-hide", { clear = true }),
+  callback = function(args)
+    local target_height = args.event == "CmdlineEnter" and 1 or 0
+    if vim.opt_local.cmdheight:get() ~= target_height then
+      vim.opt_local.cmdheight = target_height
+      vim.cmd.redrawstatus()
+    end
+  end,
+})
