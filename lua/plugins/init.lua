@@ -1,13 +1,13 @@
--- dependencies not lazy loading them
-require("plugins.manager").add_plugins {
+require("lazypack").add_plugins {
+  -- dependencies not lazy loading them
   "nvim-lua/plenary.nvim",
   "MunifTanjim/nui.nvim",
   "nvim-tree/nvim-web-devicons",
+  require "plugins.ai", -- AI Autocompletion and chat
+  require "plugins.debugging", -- Debugger
 }
 
 require("plugins.manager").add_plugins {
-  require "plugins.ai", -- AI Autocompletion and chat
-  require "plugins.debugging", -- Debugger
   require "plugins.fff", -- Fricking fast finder
   require "plugins.git", -- Git stuff like gitsigns, fugitive
   -- require "plugins.lsp", -- All stuff related to LSP

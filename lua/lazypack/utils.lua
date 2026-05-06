@@ -8,6 +8,16 @@ function M.to_list(value)
   return type(value) == 'table' and value or { value }
 end
 
+--- @param plugin table
+--- @return bool
+function M.is_lazy(plugin)
+  local is_lazy = plugin.lazy
+  if is_lazy == nil then
+    is_lazy = plugin.cmd or plugin.event or plugin.keys or plugin.ft
+  end
+  return not not is_lazy
+end
+
 --- @param source string
 --- @return string
 function M.normalize_source(source)

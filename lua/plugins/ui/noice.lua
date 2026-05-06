@@ -2,7 +2,7 @@ local map = require "utils.map"
 
 return {
   "folke/noice.nvim",
-  enabled = true,
+  enabled = false,
   -- event = { "BufReadPost", "BufNewFile", "CmdLineEnter" },
   event = { "VeryLazy" },
   dependencies = {
