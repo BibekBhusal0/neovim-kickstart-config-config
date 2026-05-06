@@ -24,7 +24,7 @@ function M.clean(opts)
       active[name] = plugin.active
     elseif not warned_missing_name then
       warned_missing_name = true
-      vim.notify('Skipping plugin without `spec.name` in pack_clean()', vim.log.levels.WARN)
+      vim.notify("Skipping plugin without `spec.name` in pack_clean()", vim.log.levels.WARN)
     end
   end
 
@@ -36,12 +36,12 @@ function M.clean(opts)
   end
 
   if #unused == 0 then
-    print('No unused plugins.')
+    print "No unused plugins."
     return
   end
 
   local force = opts and opts.force
-  local choice = force and 1 or vim.fn.confirm('Remove unused plugins?', '&Yes\n&No', 2)
+  local choice = force and 1 or vim.fn.confirm("Remove unused plugins?", "&Yes\n&No", 2)
   if choice == 1 then
     vim.pack.del(unused)
   end

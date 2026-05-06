@@ -34,7 +34,7 @@ return {
     cmd = "Telescope",
     dependencies = {
       "nvim-telescope/telescope-ui-select.nvim",
-  "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim",
     },
     config = require "plugins.telescope.config",
   },

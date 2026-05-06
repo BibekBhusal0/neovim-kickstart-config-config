@@ -1,5 +1,5 @@
 local M = {}
-local utils = require('lazypack.utils')
+local utils = require "lazypack.utils"
 
 --- @param p table
 local function ensure_plugin_loaded(p)
@@ -20,11 +20,14 @@ function M.is_enabled(plugin)
     return true
   end
 
-  if type(enabled) == 'function' then
+  if type(enabled) == "function" then
     local ok, result = pcall(enabled)
     if not ok then
       vim.notify(
-        ('Skipping plugin `%s`: enabled() failed: %s'):format(plugin.name or 'unknown plugin', result),
+        ("Skipping plugin `%s`: enabled() failed: %s"):format(
+          plugin.name or "unknown plugin",
+          result
+        ),
         vim.log.levels.WARN
       )
       return false
@@ -51,7 +54,7 @@ function M.run_config_once_factory(p, data)
 
       local module_name = utils.resolve_name(p.spec.name)
       local opts = data.opts
-      if type(opts) == 'function' then
+      if type(opts) == "function" then
         opts = opts()
       end
 
@@ -61,12 +64,15 @@ function M.run_config_once_factory(p, data)
         require(module_name).setup()
       end
       configured = true
-    elseif type(data.config) == 'function' then
+    elseif type(data.config) == "function" then
       ensure_plugin_loaded(p)
 
       local ok, err = pcall(data.config)
       if not ok then
-        vim.notify(('Config failed for `%s`: %s'):format(p.spec.name or 'unknown plugin', err), vim.log.levels.WARN)
+        vim.notify(
+          ("Config failed for `%s`: %s"):format(p.spec.name or "unknown plugin", err),
+          vim.log.levels.WARN
+        )
       end
       configured = true
     end

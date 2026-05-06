@@ -19,7 +19,7 @@ return {
 
   {
     "paopaol/telescope-git-diffs.nvim",
-    enabled= false,
+    enabled = false,
     keys = {
       {
         "<leader>gdc",

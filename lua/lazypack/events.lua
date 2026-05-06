@@ -1,4 +1,4 @@
-local utils = require('lazypack.utils')
+local utils = require "lazypack.utils"
 
 local M = {}
 local events_bridged = false
@@ -28,7 +28,7 @@ function M.register_event_lazy_load(p, data, run_config_once, augroup)
       group = augroup,
       once = true,
       pattern = pattern,
-      desc = ('Lazy load %s on %s'):format(p.spec.name, event),
+      desc = ("Lazy load %s on %s"):format(p.spec.name, event),
       callback = function()
         vim.cmd.packadd(p.spec.name)
         run_config_once()

@@ -85,7 +85,7 @@ return {
 
   {
     "BibekBhusal0/bufstack.nvim",
-    enabled= false,
+    enabled = false,
     dependencies = { "nvim-telescope/telescope.nvim" },
     dir = "~/Code/nvim-plugins/bufstack.nvim",
     event = { "BufNewFile", "BufReadPost" },

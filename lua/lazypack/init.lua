@@ -1,13 +1,15 @@
-local config = require('lazypack.config')
-local cmd = require('lazypack.cmd')
-local events = require('lazypack.events')
-local build = require('lazypack.build')
-local pack = require('lazypack.pack')
-local utils = require('lazypack.utils')
+local config = require "lazypack.config"
+local cmd = require "lazypack.cmd"
+local events = require "lazypack.events"
+local build = require "lazypack.build"
+local pack = require "lazypack.pack"
+local utils = require "lazypack.utils"
 
 local function load_on_key(plugin, run_config_once)
-  if not plugin.keys then return end
-  print("loading if key pressed")
+  if not plugin.keys then
+    return
+  end
+  print "loading if key pressed"
   for _, map in ipairs(plugin.keys) do
     local lhs, rhs = map[1], map[2]
     local mode = map.mode or "n"
@@ -39,7 +41,7 @@ local function load_on_key(plugin, run_config_once)
 end
 
 local M = {}
-local augroup = vim.api.nvim_create_augroup('lazypack', { clear = false })
+local augroup = vim.api.nvim_create_augroup("lazypack", { clear = false })
 
 --- @alias AddOpts string|PluginSpec|(string | PluginSpec)[]
 
@@ -66,9 +68,9 @@ function M.add_plugin(plugins)
   local list = utils.normalize_plugins_input(plugins)
 
   for _, plugin in ipairs(list) do
-    if type(plugin) == 'string' then
-      vim.pack.add({ utils.normalize_source(plugin) })
-    elseif type(plugin) == 'table' then
+    if type(plugin) == "string" then
+      vim.pack.add { utils.normalize_source(plugin) }
+    elseif type(plugin) == "table" then
       if config.is_enabled(plugin) then
         plugin.src = plugin[1]
         local normalized_src = utils.normalize_source(plugin.src)
@@ -76,12 +78,12 @@ function M.add_plugin(plugins)
         if plugin.dependencies then
           local dependencies = utils.to_list(plugin.dependencies)
           for _, dependency in ipairs(dependencies) do
-            if type(dependency) == 'string' then
-              vim.pack.add({ utils.normalize_source(dependency) })
+            if type(dependency) == "string" then
+              vim.pack.add { utils.normalize_source(dependency) }
             else
               vim.notify(
-                ('Skipping dependency for `%s`: expected string, got %s'):format(
-                  plugin.name or 'unknown plugin',
+                ("Skipping dependency for `%s`: expected string, got %s"):format(
+                  plugin.name or "unknown plugin",
                   type(dependency)
                 ),
                 vim.log.levels.WARN
@@ -103,7 +105,7 @@ function M.add_plugin(plugins)
               cmd = plugin.cmd,
               build = plugin.build,
               lazy = plugin.lazy,
-              keys = plugin.keys
+              keys = plugin.keys,
             },
           },
         }, {
@@ -111,7 +113,7 @@ function M.add_plugin(plugins)
             local data = p.spec.data or {}
             local run_config_once = config.run_config_once_factory(p, data)
 
-            if type(data.init) == 'function' then
+            if type(data.init) == "function" then
               data.init()
             end
 

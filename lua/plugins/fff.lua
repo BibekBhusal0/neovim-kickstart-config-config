@@ -29,7 +29,11 @@ return {
   keys = {
     { "<Leader>ff", ":lua require('fff').find_files()<CR>", desc = "Find files" },
     { "<Leader>fw", ":lua require('fff').live_grep()<Cr>", desc = "Live grep" },
-    { "<Leader>fG", ":lua require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain' } } })<Cr>", desc = "Live grep" },
+    {
+      "<Leader>fG",
+      ":lua require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain' } } })<Cr>",
+      desc = "Live grep",
+    },
     {
       "<Leader>fW",
       ":lua require('fff').live_grep { query = vim.fn.expand '<cword>' }<Cr>",

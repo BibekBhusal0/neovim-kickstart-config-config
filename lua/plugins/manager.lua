@@ -172,7 +172,7 @@ function pm.load_plugin(name)
   if type(plugin.config) == "function" then
     plugin.config()
   elseif plugin.opts then
-    require(plugin.main  or plugin.name).setup(plugin.opts)
+    require(plugin.main or plugin.name).setup(plugin.opts)
   end
 
   plugin.is_loading = false
@@ -232,7 +232,7 @@ function pm.add_plugin(plugin, lazy)
         return
       end
 
-      if (p.path) then 
+      if p.path then
         plugin._install_dir = p.path
         -- vim.opt.runtimepath:append(plugin._install_dir)
       end
@@ -247,7 +247,9 @@ function pm.add_plugin(plugin, lazy)
 
       if plugin.event then
         local event = plugin.event
-        if event == "VeryLazy" or (type(event) == "table" and vim.tbl_contains(event, "VeryLazy")) then
+        if
+          event == "VeryLazy" or (type(event) == "table" and vim.tbl_contains(event, "VeryLazy"))
+        then
           vim.defer_fn(function()
             pm.load_plugin(plugin.name)
           end, 100)

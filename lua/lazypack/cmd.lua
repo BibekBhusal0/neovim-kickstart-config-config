@@ -1,4 +1,4 @@
-local utils = require('lazypack.utils')
+local utils = require "lazypack.utils"
 
 local M = {}
 
@@ -37,13 +37,16 @@ function M.register_cmd_lazy_load(p, data, run_config_once)
       local info = vim.api.nvim_get_commands({})[cmd] or vim.api.nvim_buf_get_commands(0, {})[cmd]
       if not info then
         vim.schedule(function()
-          vim.notify(('Command `%s` not found after loading `%s`'):format(cmd, p.spec.name), vim.log.levels.ERROR)
+          vim.notify(
+            ("Command `%s` not found after loading `%s`"):format(cmd, p.spec.name),
+            vim.log.levels.ERROR
+          )
         end)
         return
       end
 
       command.nargs = info.nargs
-      if event.args and event.args ~= '' and info.nargs and info.nargs:find('[1?]') then
+      if event.args and event.args ~= "" and info.nargs and info.nargs:find "[1?]" then
         command.args = { event.args }
       end
 
@@ -51,20 +54,20 @@ function M.register_cmd_lazy_load(p, data, run_config_once)
     end, {
       bang = true,
       range = true,
-      nargs = '*',
-      desc = ('Lazy load %s on %s'):format(p.spec.name, cmd),
+      nargs = "*",
+      desc = ("Lazy load %s on %s"):format(p.spec.name, cmd),
       complete = function(_, line)
         vim.cmd.packadd(p.spec.name)
         run_config_once()
         pcall(vim.api.nvim_del_user_command, cmd)
-        return vim.fn.getcompletion(line, 'cmdline')
+        return vim.fn.getcompletion(line, "cmdline")
       end,
     })
 
     if not ok then
       vim.schedule(function()
         vim.notify(
-          ('Skipping lazy command `%s` for `%s`: %s'):format(cmd, p.spec.name, err),
+          ("Skipping lazy command `%s` for `%s`: %s"):format(cmd, p.spec.name, err),
           vim.log.levels.WARN
         )
       end)
