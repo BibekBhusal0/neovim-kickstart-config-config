@@ -41,7 +41,7 @@ require("vim._core.ui2").enable {
       wmsg = "msg",
       typed_cmd = "cmd",
     },
-    msg = { height = 0.3, timeout = 1000 },
+    msg = { height = 0.3, timeout = 1000, max_width = 80, wrap = true },
     pager = { height = 0.5 },
   },
 }
@@ -51,13 +51,16 @@ local msgs = require "vim._core.ui2.messages"
 local orig_set_pos = msgs.set_pos
 msgs.set_pos = function(tgt)
   orig_set_pos(tgt)
-  if (tgt == "msg" or tgt == nil) and vim.api.nvim_win_is_valid(ui2.wins.msg) then
-    pcall(vim.api.nvim_win_set_config, ui2.wins.msg, {
-      relative = "editor",
-      anchor = "NE",
-      row = vim.o.lines - 2,
-      col = vim.o.columns - 2,
-      border = "rounded",
-    })
-  end
+  pcall(vim.api.nvim_win_set_config, ui2.wins.msg, {
+    relative = "editor",
+    anchor = "NE",
+    row = vim.o.lines - 2,
+    col = vim.o.columns - 2,
+    border = "rounded",
+  })
+  pcall(
+    vim.api.nvim_win_set_config,
+    ui2.wins.pager,
+    { border = { "", "─", "", "", "", "", "", "" } }
+  )
 end
