@@ -10,7 +10,6 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
-      vim.cmd [[ autocmd BufNewFile,BufRead hyprland.overwrite.conf set filetype=hyprlang ]]
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)

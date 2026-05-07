@@ -23,29 +23,33 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- open help in vertical split
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "help",
-  command = "wincmd L",
-})
-
 -- auto resize splits when the terminal's window is resized
 vim.api.nvim_create_autocmd("VimResized", {
   command = "wincmd =",
 })
 
--- no auto continue comments on new line
 vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("no_auto_comment", {}),
-  callback = function()
+  group = vim.api.nvim_create_augroup("FileTypeConfig", { clear = true }),
+  callback = function(args)
+    if args.file == "hyprland.overwrite.conf" then
+      vim.cmd "set filetype=hyprlang"
+    end
+
+    -- Pressing enter in commnet don't make another line comment
     vim.opt_local.formatoptions:remove { "c", "r", "o" }
+    -- Opening help in v split
+    if args.filetype == "help" then
+      vim.cmd "wincmd L"
+      -- Enabling line wrap in markdown file
+    elseif args.filetype == "markdown" then
+      print "disapling line wrap"
+      vim.opt_local.wrap = true
+      -- Hiding scrollbar
+    elseif vim.tbl_contains({ "telescope", "mason", "lazy" }, args.filetype) then
+      vim.opt_local.spell = false
+    end
   end,
 })
-
--- Hiding scroll bar in those filetypes
-vim.cmd [[
-  autocmd FileType telescope,mason,lazygit,nvcheatsheet setlocal nospell
-]]
 
 -- Lsp progress
 vim.api.nvim_create_autocmd("LspProgress", {
