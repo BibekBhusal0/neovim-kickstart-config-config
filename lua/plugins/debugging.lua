@@ -3,6 +3,39 @@ local map = require "utils.map"
 
 return {
   {
+    "andrewferrier/debugprint.nvim",
+    version = "*",
+    opts = {
+      keymaps = {
+        normal = {
+          plain_below = "gpJ",
+          plain_above = "gpK",
+          variable_below = "gpj",
+          variable_above = "gpk",
+          variable_below_alwaysprompt = "",
+          variable_above_alwaysprompt = "",
+          surround_plain = "gps",
+          surround_variable = "",
+          surround_variable_alwaysprompt = "",
+          textobj_below = "gpo",
+          textobj_above = "gpO",
+          textobj_surround = "",
+          toggle_comment_debug_prints = "",
+          delete_debug_prints = "gpx",
+        },
+        insert = { plain = "", variable = "" },
+        visual = { variable_below = "gpj", variable_above = "gpk" },
+      },
+    },
+    keys = {
+      "gp",
+      { "gpt", ":Debugprint search<Cr>", "Search debug prints" },
+      { "gpt", ":Debugprint qflist<Cr>", "Add debugs to quickfix list" },
+    },
+    cmd = { "Debugprint" },
+  },
+
+  {
     "Weissle/persistent-breakpoints.nvim",
     opts = {},
     keys = wrap_keys {
