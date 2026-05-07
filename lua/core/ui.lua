@@ -63,4 +63,9 @@ msgs.set_pos = function(tgt)
     ui2.wins.pager,
     { border = { "", "─", "", "", "", "", "", "" } }
   )
+  pcall(
+    vim.api.nvim_win_set_config,
+    ui2.wins.dialog,
+    { border = { "", "─", "", "", "", "", "", "" } }
+  )
 end
