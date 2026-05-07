@@ -22,12 +22,6 @@ return {
   }, -- Easy navigation within lsp Symbols
 
   {
-    "Zeioth/garbage-day.nvim",
-    event = "LspAttach",
-    opts = {},
-  }, -- Free up resources by stooping unused LSP clients
-
-  {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach",
     config = function()
