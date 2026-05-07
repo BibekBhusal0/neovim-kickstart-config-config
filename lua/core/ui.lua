@@ -55,8 +55,8 @@ msgs.set_pos = function(tgt)
     pcall(vim.api.nvim_win_set_config, ui2.wins.msg, {
       relative = "editor",
       anchor = "NE",
-      row = 1,
-      col = vim.o.columns - 1,
+      row = vim.o.lines - 2,
+      col = vim.o.columns - 2,
       border = "rounded",
     })
   end
