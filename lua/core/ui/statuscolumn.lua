@@ -4,7 +4,7 @@ local foldcol_enabled = false
 local numcol_enabled = true
 
 local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree", "nvim-undotree", "alpha" }
-local bt_ignore = { "terminal", "nofile" }
+local bt_ignore = { "terminal", "nofile" , "prompt" }
 
 local function set_dynamic_number_width()
   local line_count = vim.fn.line "$"

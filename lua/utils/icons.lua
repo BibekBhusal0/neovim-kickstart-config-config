@@ -87,6 +87,14 @@ local pad_icons = function(inp)
   return icons
 end
 
+local ui = {
+  sep_l = "",
+  sep_r = "",
+  sep_thin = "│",
+  arrow_l = "",
+  arrow_r = "",
+}
+
 local icons = {
   git = git,
   folder = folder,
@@ -94,6 +102,7 @@ local icons = {
   symbols = symbols,
   dap = dap,
   others = others,
+  ui = ui,
 }
 
 local get_padded_icon = function(name)

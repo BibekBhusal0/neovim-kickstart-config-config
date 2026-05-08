@@ -4,10 +4,7 @@ local icons = require "utils.icons"
 local git_icons = icons.pad_icons(icons.git)
 local diag_icons = icons.pad_icons(icons.diagnostics)
 
-local SL = {
-  sep_l = "",
-  sep_r = "",
-}
+local SL = icons.ui
 
 local function is_wide()
   return vim.o.columns >= 100
@@ -174,40 +171,8 @@ function M.statusline()
   return table.concat(left_section) .. "%=" .. table.concat(right_section)
 end
 
-function M.apply_colors()
-  local colors = {
-    active_fg = "#1e1e2e",
-    active_bg = "#cba6f7",
-    inactive_fg = "#cdd6f4",
-    inactive_bg = "#45475a",
-    orange = "#ff9e64",
-  }
-
-  local function hl(name, val)
-    if val.bg == nil then
-      val.bg = "NONE"
-    end
-    vim.api.nvim_set_hl(0, name, val)
-  end
-
-  hl("StatusLine", { fg = colors.inactive_fg })
-  hl("StatusLineNC", { fg = colors.inactive_fg })
-  hl("StatusLineActive", { fg = colors.active_fg, bg = colors.active_bg, bold = true })
-  hl("StatusLineActiveSep", { fg = colors.active_bg })
-  hl("StatusLineInactive", { fg = colors.inactive_fg, bg = colors.inactive_bg })
-  hl("StatusLineInactiveSep", { fg = colors.inactive_bg })
-  hl("StatusLineMacro", { fg = colors.orange })
-end
-
 function M.setup()
   vim.o.laststatus = 3
-
-  M.apply_colors()
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-      M.apply_colors()
-    end,
-  })
 
   vim.opt.statusline = "%!v:lua.require'core.ui.statusline'.statusline()"
 
