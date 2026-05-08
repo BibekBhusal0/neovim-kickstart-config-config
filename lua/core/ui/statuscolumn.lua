@@ -1,4 +1,8 @@
 local M = {}
+
+local foldcol_enabled = false
+local numcol_enabled = true
+
 local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree" }
 local bt_ignore = { "terminal", "nofile" }
 
@@ -11,13 +15,14 @@ local function set_dynamic_number_width()
   vim.wo.numberwidth = width
 end
 
-function M.setup()
-  vim.api.nvim_create_augroup("DynamicNumberWidth", { clear = true })
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    group = "DynamicNumberWidth",
-    callback = set_dynamic_number_width,
-  })
+local function update_cols()
+  vim.wo.number = numcol_enabled
+  vim.wo.relativenumber = numcol_enabled
+  vim.wo.foldcolumn = foldcol_enabled and "1" or "0"
+  set_dynamic_number_width()
+end
 
+function M.setup()
   -- DAP signs and other icons
   local icons = require "utils.icons"
   local dap_icons = icons.dap
@@ -27,9 +32,8 @@ function M.setup()
   end
 
   -- Folding settings
-  vim.o.foldcolumn = "0"
   vim.o.foldlevelstart = 99
-  vim.o.foldenable = false
+  vim.o.foldenable = true
   vim.opt.foldmethod = "expr"
   vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
   vim.opt.foldtext = ""
@@ -50,24 +54,14 @@ function M.setup()
 
   local map = require "utils.map"
   local function toggle_foldcolumn()
-    if vim.o.foldcolumn == "0" then
-      vim.o.foldcolumn = "1"
-    else
-      vim.o.foldcolumn = "0"
-    end
-    set_dynamic_number_width()
+    foldcol_enabled = not foldcol_enabled
+    update_cols()
   end
   map("zi", toggle_foldcolumn, "Toggle fold column")
 
   local function toggle_line_numbers()
-    if vim.wo.relativenumber then
-      vim.wo.relativenumber = false
-      vim.wo.number = false
-    else
-      vim.wo.relativenumber = true
-      vim.wo.number = true
-    end
-    set_dynamic_number_width()
+    numcol_enabled = not numcol_enabled
+    update_cols()
   end
   map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
@@ -79,15 +73,19 @@ function M.setup()
         vim.tbl_contains(ft_ignore, vim.bo.filetype) or vim.tbl_contains(bt_ignore, vim.bo.buftype)
       then
         vim.wo.statuscolumn = ""
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+        vim.wo.foldcolumn = "0"
       else
         vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
+        update_cols()
       end
     end,
   })
 end
 
 function M.foldfunc()
-  if vim.o.foldcolumn == "0" then
+  if not foldcol_enabled then
     return ""
   end
   local lnum = vim.v.lnum
@@ -114,11 +112,11 @@ end
 
 function M.lnumfunc()
   local left_pad = ""
-  if vim.o.foldcolumn == "1" then
+  if foldcol_enabled then
     left_pad = " "
   end
 
-  if not vim.wo.relativenumber then
+  if not numcol_enabled then
     return left_pad
   end
 
