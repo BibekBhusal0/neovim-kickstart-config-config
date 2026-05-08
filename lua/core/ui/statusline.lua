@@ -1,7 +1,6 @@
 local M = {}
 
 local icons = require "utils.icons"
--- Get padded icons from the utility
 local git_icons = icons.pad_icons(icons.git)
 local diag_icons = icons.pad_icons(icons.diagnostics)
 
@@ -12,6 +11,10 @@ local SL = {
 
 local function is_wide()
   return vim.o.columns >= 100
+end
+
+local function join(res)
+  return #res == 0 and "" or table.concat(res, " ") .. " "
 end
 
 local function mode()
@@ -58,7 +61,7 @@ local function diff()
     table.insert(res, "%#GitSignsDelete#" .. git_icons.removed .. dict.removed)
   end
 
-  return #res == 0 and "" or table.concat(res, " ") .. " "
+  return join(res)
 end
 
 local function macro()
@@ -73,17 +76,16 @@ local function diagnostics()
   local count = vim.diagnostic.count(0)
   local res = {}
 
-  if count[vim.diagnostic.severity.ERROR] and count[vim.diagnostic.severity.ERROR] > 0 then
-    table.insert(
-      res,
-      "%#DiagnosticError#" .. diag_icons.error .. count[vim.diagnostic.severity.ERROR]
-    )
+  local e = count[vim.diagnostic.severity.ERROR]
+  local w = count[vim.diagnostic.severity.WARN]
+  if e and e > 0 then
+    table.insert(res, "%#DiagnosticError#" .. diag_icons.error .. e)
   end
-  if count[vim.diagnostic.severity.WARN] and count[vim.diagnostic.severity.WARN] > 0 then
-    table.insert(res, "%#DiagnosticWarn#" .. diag_icons.warn .. count[vim.diagnostic.severity.WARN])
+  if w and w > 0 then
+    table.insert(res, "%#DiagnosticWarn#" .. diag_icons.warn .. w)
   end
 
-  return #res == 0 and "" or table.concat(res, " ") .. " "
+  return join(res)
 end
 
 local function codeium_status()
@@ -199,7 +201,6 @@ function M.apply_colors()
   }
 
   local function hl(name, val)
-    -- Default background to NONE if not specified
     if val.bg == nil then
       val.bg = "NONE"
     end
@@ -208,27 +209,17 @@ function M.apply_colors()
 
   hl("StatusLine", { fg = colors.inactive_fg })
   hl("StatusLineNC", { fg = colors.inactive_fg })
-
-  -- Active (Mode, Filename)
   hl("StatusLineActive", { fg = colors.active_fg, bg = colors.active_bg, bold = true })
   hl("StatusLineActiveSep", { fg = colors.active_bg })
-
-  -- Inactive (Git, Codeium, Plugins)
   hl("StatusLineInactive", { fg = colors.inactive_fg, bg = colors.inactive_bg })
   hl("StatusLineInactiveSep", { fg = colors.inactive_bg })
-
-  -- Middle / Utility
   hl("StatusLineMacro", { fg = colors.orange })
-
-  -- We reuse existing GitSigns and Diagnostic groups which should already be styled
-  -- by the colorscheme, or we can link them if they are missing.
 end
 
 function M.setup()
   vim.o.laststatus = 3
 
   M.apply_colors()
-
   vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
       M.apply_colors()
