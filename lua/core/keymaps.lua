@@ -2,8 +2,6 @@ local map = require "utils.map"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-map("n", "<ESC>", "Normal Mode", "v")
-
 -- navigation in insert mode
 map("<A-h>", "<ESC>^i", "Move to Begining of line", "i")
 map("<A-l>", "<End>", "Move to End of line", "i")
@@ -169,3 +167,15 @@ end
 
 map("<leader>u", undotree, "Undo Tree")
 map("<leader>dy", copy_diagnostic, "Yank diagnostic message")
+
+local function select(node)
+  return function()
+    require "vim.treesitter._select"["select_" .. node](vim.v.count1)
+  end
+end
+
+map("<leader>j", select "next", "Next sibling node", "x")
+map("<leader>k", select "prev", "Prev sibling node", "x")
+map("m", select "parent", "Select parent node", { "x", "o" })
+map("n", select "child", "Select child node", { "x", "o" })
+

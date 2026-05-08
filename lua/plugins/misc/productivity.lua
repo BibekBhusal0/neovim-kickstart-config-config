@@ -52,6 +52,7 @@ return {
       { "<leader>no", ":Obsidian new<CR>", desc = "Obsidian New" },
       { "<leader>nO", ":Obsidian new_from_template<CR>", desc = "Obsidian New with Tempalte" },
       { "<leader>nf", ":Obsidian quick_switch<CR>", desc = "Obsidian Find Notes" },
+      { "<leader>fn", ":Obsidian quick_switch<CR>", desc = "Obsidian Find Notes" },
       { "<leader>ns", ":Obsidian search<CR>", desc = "Obsidian Search" },
       { "<leader>nT", ":Obsidian tags<CR>", desc = "Obsidian Tags" },
       { "<leader>nt", ":Obsidian template<CR>", desc = "Obsidian Insert template" },

@@ -94,14 +94,6 @@ return {
           move_mod.goto_previous_start(outer, "textobjects")
         end, "Go to previous " .. obj, mode)
       end
-
-      map("]z", function()
-        move_mod.goto_next_start("@fold", "folds")
-      end, "Next fold", mode)
-
-      map("[z", function()
-        move_mod.goto_previous_start("@fold", "folds")
-      end, "Prev fold", mode)
     end,
   },
 }
