@@ -3,7 +3,7 @@ local M = {}
 local foldcol_enabled = false
 local numcol_enabled = true
 
-local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree" }
+local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree", "nvim-undotree", "alpha" }
 local bt_ignore = { "terminal", "nofile" }
 
 local function set_dynamic_number_width()
@@ -66,22 +66,25 @@ function M.setup()
   map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
   local group = vim.api.nvim_create_augroup("StatusColumn", { clear = true })
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    group = group,
-    callback = function()
-      if
-        vim.tbl_contains(ft_ignore, vim.bo.filetype) or vim.tbl_contains(bt_ignore, vim.bo.buftype)
-      then
-        vim.wo.statuscolumn = ""
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-        vim.wo.foldcolumn = "0"
-      else
-        vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
-        update_cols()
-      end
-    end,
-  })
+  vim.defer_fn(function()
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+      group = group,
+      callback = function()
+        if
+          vim.tbl_contains(ft_ignore, vim.bo.filetype)
+          or vim.tbl_contains(bt_ignore, vim.bo.buftype)
+        then
+          vim.wo.statuscolumn = ""
+          vim.wo.number = false
+          vim.wo.relativenumber = false
+          vim.wo.foldcolumn = "0"
+        else
+          vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
+          update_cols()
+        end
+      end,
+    })
+  end, 1)
 end
 
 function M.foldfunc()
@@ -97,14 +100,14 @@ function M.foldfunc()
   local foldclosed = vim.fn.foldclosed(lnum)
   if foldclosed ~= -1 then
     if foldclosed == lnum then
-      return "" -- foldclose icon
+      return ""
     else
       return " "
     end
   end
 
   if foldlevel > vim.fn.foldlevel(lnum - 1) then
-    return "" -- foldopen icon
+    return ""
   end
 
   return " "
