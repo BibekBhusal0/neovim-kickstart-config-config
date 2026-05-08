@@ -55,7 +55,7 @@ local function git_branch()
     return ""
   end
   local status = git_statusline.get(0)
-  return (status == "" and "" or " " .. status .. " ")
+  return (status == "" and "-" or " " .. status .. " ")
 end
 
 local function diff()
@@ -154,31 +154,28 @@ local function getFileName()
 end
 
 function M.statusline()
-  local git = git_branch()
-  local git_section = ""
-  if git ~= "" then
-    git_section = "%#StatusLineInactiveSep# " .. wrap(git, "inactive")
-  end
-
-  local right_section = ""
-  if is_wide() then
-    right_section = wrap(codeium_status() .. plugins(), "inactive") .. " "
-  end
-
-  return table.concat {
-    wrap(mode()),
-
-    git_section,
-    " ",
-    diff(),
-    "%=",
-    macro(),
-    diagnostics(),
-
-    right_section,
-
-    wrap(" " .. getFileName() .. " "),
+  local left_section = {
+    wrap(mode(), "active", "left"),
+    wrap(git_branch(), "inactive", "right"),
   }
+
+  local right_section = {}
+  if is_wide() then
+    right_section = {
+      macro(),
+      diagnostics(),
+      wrap(codeium_status() .. plugins(), "inactive", "left"),
+      wrap(getFileName(), "active", "right"),
+    }
+    table.insert(left_section, diff())
+  else
+    right_section = {
+      wrap(codeium_status() .. plugins(), "inactive", "left"),
+      wrap(getFileName(), "active", "right"),
+    }
+  end
+
+  return table.concat(left_section) .. "%=" .. table.concat(right_section)
 end
 
 function M.apply_colors()
