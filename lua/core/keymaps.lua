@@ -170,4 +170,68 @@ end
 map("<leader>j", select "next", "Next sibling node", "x")
 map("<leader>k", select "prev", "Prev sibling node", "x")
 map("m", select "parent", "Select parent node", { "x", "o" })
-map("n", select "child", "Select child node", { "x", "o" })
+
+local tabline = require "core.ui.tabline"
+
+-- Buffer & Tab Management
+local function close_others()
+  local current = vim.api.nvim_get_current_buf()
+  local bufs = tabline.get_buffers()
+  for _, bufnr in ipairs(bufs) do
+    if bufnr ~= current then
+      vim.api.nvim_buf_delete(bufnr, { force = false })
+    end
+  end
+end
+
+local function close_left()
+  local current = vim.api.nvim_get_current_buf()
+  local bufs = tabline.get_buffers()
+  for _, bufnr in ipairs(bufs) do
+    if bufnr == current then
+      break
+    end
+    vim.api.nvim_buf_delete(bufnr, { force = false })
+  end
+end
+
+local function close_right()
+  local current = vim.api.nvim_get_current_buf()
+  local bufs = tabline.get_buffers()
+  local found = false
+  for _, bufnr in ipairs(bufs) do
+    if found then
+      vim.api.nvim_buf_delete(bufnr, { force = false })
+    end
+    if bufnr == current then
+      found = true
+    end
+  end
+end
+
+map("<leader>tr", function()
+  require "utils.input"("Tab name", function(text)
+    vim.api.nvim_tabpage_set_var(0, "name", text)
+    vim.cmd "redrawtabline"
+  end, "", 25, "󰓩 ")
+end, "Rename tab")
+
+local function close_all_saved_buffers()
+  local bufnrs = vim.tbl_filter(function(bufnr)
+    return 1 == vim.fn.buflisted(bufnr)
+  end, vim.api.nvim_list_bufs())
+  for _, e in ipairs(bufnrs) do
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(e) and vim.bo[e].modified == false then
+        vim.cmd("bd " .. e)
+      end
+    end)
+  end
+end
+
+map("<leader>bo", close_others, "Buffer Close others")
+map("<leader>bH", close_left, "Buffer Close Left")
+map("<leader>bL", close_right, "Buffer Close Right")
+map("<leader>bq", close_all_saved_buffers, "Buffer Close Saved")
+map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
+map("<S-Tab>", ":bprev<CR>", "Buffer Cycle Prev")
