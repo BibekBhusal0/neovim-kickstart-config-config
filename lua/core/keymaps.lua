@@ -88,7 +88,6 @@ map("<A-l>", ">gv", "Indent right", "v")
 map("<A-l>", ">>", "Indent right")
 map("<A-h>", "<<", "Indent right")
 
-
 map("zo", "za", "Toggle fold")
 map("<Esc>", ":noh<CR>", "Clear Highlight")
 

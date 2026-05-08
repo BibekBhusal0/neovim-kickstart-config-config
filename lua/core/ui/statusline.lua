@@ -1,6 +1,6 @@
 local M = {}
 
-local icons = require("utils.icons")
+local icons = require "utils.icons"
 -- Get padded icons from the utility
 local git_icons = icons.pad_icons(icons.git)
 local diag_icons = icons.pad_icons(icons.diagnostics)
@@ -31,27 +31,33 @@ end
 
 local function git_branch()
   local ok, git_statusline = pcall(require, "git_statusline")
-  if not ok then return "" end
+  if not ok then
+    return ""
+  end
   local status = git_statusline.get(0)
   return (status == "" and "" or " " .. status .. " ")
 end
 
 local function diff()
-  if not is_wide() then return "" end
+  if not is_wide() then
+    return ""
+  end
   local dict = vim.b.gitsigns_status_dict
-  if not dict then return "" end
-  
+  if not dict then
+    return ""
+  end
+
   local res = {}
-  if dict.added and dict.added > 0 then 
-    table.insert(res, "%#GitSignsAdd#" .. git_icons.added .. dict.added) 
+  if dict.added and dict.added > 0 then
+    table.insert(res, "%#GitSignsAdd#" .. git_icons.added .. dict.added)
   end
-  if dict.changed and dict.changed > 0 then 
-    table.insert(res, "%#GitSignsChange#" .. git_icons.modified .. dict.changed) 
+  if dict.changed and dict.changed > 0 then
+    table.insert(res, "%#GitSignsChange#" .. git_icons.modified .. dict.changed)
   end
-  if dict.removed and dict.removed > 0 then 
-    table.insert(res, "%#GitSignsDelete#" .. git_icons.removed .. dict.removed) 
+  if dict.removed and dict.removed > 0 then
+    table.insert(res, "%#GitSignsDelete#" .. git_icons.removed .. dict.removed)
   end
-  
+
   return #res == 0 and "" or table.concat(res, " ") .. " "
 end
 
@@ -61,25 +67,41 @@ local function macro()
 end
 
 local function diagnostics()
-  if not is_wide() then return "" end
+  if not is_wide() then
+    return ""
+  end
   local count = vim.diagnostic.count(0)
   local res = {}
-  
+
   if count[vim.diagnostic.severity.ERROR] and count[vim.diagnostic.severity.ERROR] > 0 then
-    table.insert(res, "%#DiagnosticError#" .. diag_icons.error .. count[vim.diagnostic.severity.ERROR])
+    table.insert(
+      res,
+      "%#DiagnosticError#" .. diag_icons.error .. count[vim.diagnostic.severity.ERROR]
+    )
   end
   if count[vim.diagnostic.severity.WARN] and count[vim.diagnostic.severity.WARN] > 0 then
     table.insert(res, "%#DiagnosticWarn#" .. diag_icons.warn .. count[vim.diagnostic.severity.WARN])
   end
-  
+
   return #res == 0 and "" or table.concat(res, " ") .. " "
 end
 
 local function codeium_status()
-  if not is_wide() then return "" end
-  if not package.loaded["neocodeium"] then return "" end
+  if not is_wide() then
+    return ""
+  end
+  if not package.loaded["neocodeium"] then
+    return ""
+  end
   local symbols = {
-    status = { [0] = "󰚩 ", [1] = "󱚧 ", [2] = "󱙻 ", [3] = "󱙺 ", [4] = "󱙺 ", [5] = "󱚠 " },
+    status = {
+      [0] = "󰚩 ",
+      [1] = "󱚧 ",
+      [2] = "󱙻 ",
+      [3] = "󱙺 ",
+      [4] = "󱙺 ",
+      [5] = "󱚠 ",
+    },
     server_status = { [0] = "󰣺 ", [1] = "󰣻 ", [2] = "󰣽 " },
   }
   local status, serverStatus = require("neocodeium").get_status()
@@ -92,13 +114,17 @@ local function plugins()
 end
 
 local function getFileName()
-  if vim.bo.buftype == "terminal" then return "terminal" end
-  if not is_wide() then return vim.fn.expand("%:t") end
+  if vim.bo.buftype == "terminal" then
+    return "terminal"
+  end
+  if not is_wide() then
+    return vim.fn.expand "%:t"
+  end
 
-  local relative_path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
-  local home = vim.fn.expand("~")
+  local relative_path = vim.fn.fnamemodify(vim.fn.expand "%:p", ":.")
+  local home = vim.fn.expand "~"
   relative_path = relative_path:gsub("^" .. vim.pesc(home), "~")
-  
+
   if #relative_path > 30 then
     local ok, plenary_path = pcall(require, "plenary.path")
     if ok then
@@ -112,39 +138,55 @@ function M.statusline()
   local git = git_branch()
   local git_section = ""
   if git ~= "" then
-    git_section = table.concat({
-      "%#StatusLineInactiveSep# ", SL.sep_l,
-      "%#StatusLineInactive#", git,
-      "%#StatusLineInactiveSep#", SL.sep_r,
-    })
+    git_section = table.concat {
+      "%#StatusLineInactiveSep# ",
+      SL.sep_l,
+      "%#StatusLineInactive#",
+      git,
+      "%#StatusLineInactiveSep#",
+      SL.sep_r,
+    }
   end
 
   local right_section = ""
   if is_wide() then
-    right_section = table.concat({
-      "%#StatusLineInactiveSep#", SL.sep_l,
-      "%#StatusLineInactive# ", codeium_status(), plugins(),
-      "%#StatusLineInactiveSep#", SL.sep_r,
+    right_section = table.concat {
+      "%#StatusLineInactiveSep#",
+      SL.sep_l,
+      "%#StatusLineInactive# ",
+      codeium_status(),
+      plugins(),
+      "%#StatusLineInactiveSep#",
+      SL.sep_r,
       " ",
-    })
+    }
   end
 
-  return table.concat({
-    "%#StatusLineActiveSep#", SL.sep_l,
-    "%#StatusLineActive#", mode(),
-    "%#StatusLineActiveSep#", SL.sep_r,
-    
+  return table.concat {
+    "%#StatusLineActiveSep#",
+    SL.sep_l,
+    "%#StatusLineActive#",
+    mode(),
+    "%#StatusLineActiveSep#",
+    SL.sep_r,
+
     git_section,
-    " ", diff(),
+    " ",
+    diff(),
     "%=",
-    macro(), diagnostics(),
-    
+    macro(),
+    diagnostics(),
+
     right_section,
-    
-    "%#StatusLineActiveSep#", SL.sep_l,
-    "%#StatusLineActive# ", getFileName(), " ",
-    "%#StatusLineActiveSep#", SL.sep_r,
-  })
+
+    "%#StatusLineActiveSep#",
+    SL.sep_l,
+    "%#StatusLineActive# ",
+    getFileName(),
+    " ",
+    "%#StatusLineActiveSep#",
+    SL.sep_r,
+  }
 end
 
 function M.apply_colors()
@@ -158,7 +200,9 @@ function M.apply_colors()
 
   local function hl(name, val)
     -- Default background to NONE if not specified
-    if val.bg == nil then val.bg = "NONE" end
+    if val.bg == nil then
+      val.bg = "NONE"
+    end
     vim.api.nvim_set_hl(0, name, val)
   end
 
@@ -175,8 +219,8 @@ function M.apply_colors()
 
   -- Middle / Utility
   hl("StatusLineMacro", { fg = colors.orange })
-  
-  -- We reuse existing GitSigns and Diagnostic groups which should already be styled 
+
+  -- We reuse existing GitSigns and Diagnostic groups which should already be styled
   -- by the colorscheme, or we can link them if they are missing.
 end
 
@@ -192,9 +236,11 @@ function M.setup()
   })
 
   vim.opt.statusline = "%!v:lua.require'core.ui.statusline'.statusline()"
-  
+
   vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
-    callback = function() vim.cmd("redrawstatus") end,
+    callback = function()
+      vim.cmd "redrawstatus"
+    end,
   })
 end
 
