@@ -94,10 +94,10 @@ map("<Esc>", ":noh<CR>", "Clear Highlight")
 
 local function toggle_statusline()
   local current_status = vim.o.laststatus
-  if current_status == 2 then
+  if current_status == 3 then
     vim.o.laststatus = 0
   else
-    vim.o.laststatus = 2
+    vim.o.laststatus = 3
   end
 end
 
