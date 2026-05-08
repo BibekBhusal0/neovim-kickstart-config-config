@@ -170,10 +170,10 @@ end
 map("<leader>j", select "next", "Next sibling node", "x")
 map("<leader>k", select "prev", "Prev sibling node", "x")
 map("m", select "parent", "Select parent node", { "x", "o" })
-
-local tabline = require "core.ui.tabline"
+map("n", select "child", "Select parent node", { "x", "o" })
 
 -- Buffer & Tab Management
+local tabline = require "core.ui.tabline"
 local function close_others()
   local current = vim.api.nvim_get_current_buf()
   local bufs = tabline.get_buffers()
@@ -210,10 +210,12 @@ local function close_right()
 end
 
 map("<leader>tr", function()
+  local ok, name = pcall(vim.api.nvim_tabpage_get_var, 0, "name")
+  if not ok then name = "" end
   require "utils.input"("Tab name", function(text)
     vim.api.nvim_tabpage_set_var(0, "name", text)
     vim.cmd "redrawtabline"
-  end, "", 25, "󰓩 ")
+  end, name, 25, "󰓩 ")
 end, "Rename tab")
 
 local function close_all_saved_buffers()
