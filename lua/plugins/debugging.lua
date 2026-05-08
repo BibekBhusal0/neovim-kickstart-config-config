@@ -37,23 +37,18 @@ return {
 
   {
     "Weissle/persistent-breakpoints.nvim",
-    opts = {},
+    config = function()
+      require("persistent-breakpoints").setup()
+      require("persistent-breakpoints.api").load_breakpoints()
+    end,
     keys = wrap_keys {
-      {
-        "<leader>db",
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBToggleBreakpoint<CR>",
-        desc = "Debuger Toggle BreakPoint",
-      },
+      { "<leader>db", ":PBToggleBreakpoint<CR>", desc = "Debuger Toggle BreakPoint" },
       {
         "<leader>dC",
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBSetConditionalBreakpoint<CR>",
+        ":PBSetConditionalBreakpoint<CR>",
         desc = "Debuger Toggle Conditional BreakPoint",
       },
-      {
-        "<leader>dl",
-        ":lua require('persistent-breakpoints.api').load_breakpoints()<CR>:PBSetLogPoint<CR>",
-        desc = "Debuger Toggle Log BreakPoint",
-      },
+      { "<leader>dl", ":PBSetLogPoint<CR>", desc = "Debuger Toggle Log BreakPoint" },
       { "<leader>dB", ":PBClearAllBreakpoints<CR>", desc = "Debuger Clear All BreakPoint" },
     },
   }, -- BreakPoint data is not lost
