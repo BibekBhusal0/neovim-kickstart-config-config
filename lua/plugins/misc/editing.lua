@@ -38,11 +38,6 @@ return {
   }, -- advanced join and split
 
   {
-    "mg979/vim-visual-multi",
-    keys = { "<C-n>", "<C-Up>", "<C-Down>", "<S-Left>", "<S-Right>" },
-  }, -- multi line editing
-
-  {
     "johmsalas/text-case.nvim",
     opts = {},
     keys = {

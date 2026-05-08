@@ -2,7 +2,6 @@ local map = require "utils.map"
 local wrap_keys = require "utils.wrap_keys"
 
 return {
-  {
     {
       "numToStr/Comment.nvim",
       dependencies = {
@@ -96,7 +95,6 @@ return {
         end
       end,
     }, -- WARNING: Highlights todo, notes, etc in comments
-  },
 
   {
     "jeangiraldoo/codedocs.nvim",

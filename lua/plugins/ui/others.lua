@@ -1,5 +1,4 @@
 local map = require "utils.map"
-local wrap_keys = require "utils.wrap_keys"
 
 return {
   {
@@ -54,11 +53,4 @@ return {
       handlers = { gitsigns = true },
     },
   }, -- scrollbar showing gitsigns and diagnostics
-
-  {
-    "folke/twilight.nvim",
-    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    keys = wrap_keys { { "<leader>TT", ":Twilight<CR>", desc = "Toggle Twilight" } },
-    opts = { context = 10 },
-  }, -- dim inactive code
 }

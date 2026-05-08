@@ -28,7 +28,7 @@ return {
 
   {
     "m4xshen/hardtime.nvim",
-    enabled = true,
+    enabled = false,
     event = { "BufReadPost", "BufNewFile" },
     keys = wrap_keys { { "<leader>Th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
     config = function()
@@ -51,7 +51,8 @@ return {
             "Avante",
             "AvanteInput",
             "undotree",
-            "time-machine-list",
+            "nvim-undotree",
+            "pager"
           }
         ),
       }
