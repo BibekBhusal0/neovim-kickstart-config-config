@@ -46,7 +46,6 @@ function M.setup()
     foldclose = "",
   }
 
-  -- Keymap for toggling foldcolumn
   local map = require "utils.map"
   local function toggle_foldcolumn()
     if vim.o.foldcolumn == "0" then
@@ -70,8 +69,7 @@ function M.setup()
   end
   map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
-  -- Set statuscolumn
-  vim.opt.statuscolumn = "%!v:lua.require'core.statuscolumn'.statuscolumn()"
+  vim.opt.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
 end
 
 function M.foldfunc()
@@ -133,15 +131,17 @@ local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree" }
 local bt_ignore = { "terminal", "nofile" }
 
 function M.statuscolumn()
-  if vim.tbl_contains(ft_ignore, vim.bo.filetype) or vim.tbl_contains(bt_ignore, vim.bo.buftype) then
+  if
+    vim.tbl_contains(ft_ignore, vim.bo.filetype) or vim.tbl_contains(bt_ignore, vim.bo.buftype)
+  then
     return ""
   end
 
-  return table.concat({
+  return table.concat {
     M.foldfunc(),
     M.lnumfunc(),
     "%s",
-  })
+  }
 end
 
 return M
