@@ -52,7 +52,7 @@ return {
             "AvanteInput",
             "undotree",
             "nvim-undotree",
-            "pager"
+            "pager",
           }
         ),
       }
