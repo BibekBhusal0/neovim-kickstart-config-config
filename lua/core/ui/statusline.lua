@@ -13,6 +13,23 @@ local function is_wide()
   return vim.o.columns >= 100
 end
 
+local function wrap(component, color, side)
+  color = color or "active"
+  side = side or "both"
+  local hl_base = color == "active" and "%#StatusLineActive#" or "%#StatusLineInactive#"
+  local hl_sep = color == "active" and "%#StatusLineActiveSep#" or "%#StatusLineInactiveSep#"
+
+  local res = ""
+  if side == "left" or side == "both" then
+    res = res .. hl_sep .. SL.sep_l
+  end
+  res = res .. hl_base .. component
+  if side == "right" or side == "both" then
+    res = res .. hl_sep .. SL.sep_r
+  end
+  return res
+end
+
 local function join(res)
   return #res == 0 and "" or table.concat(res, " ") .. " "
 end
@@ -140,37 +157,16 @@ function M.statusline()
   local git = git_branch()
   local git_section = ""
   if git ~= "" then
-    git_section = table.concat {
-      "%#StatusLineInactiveSep# ",
-      SL.sep_l,
-      "%#StatusLineInactive#",
-      git,
-      "%#StatusLineInactiveSep#",
-      SL.sep_r,
-    }
+    git_section = "%#StatusLineInactiveSep# " .. wrap(git, "inactive")
   end
 
   local right_section = ""
   if is_wide() then
-    right_section = table.concat {
-      "%#StatusLineInactiveSep#",
-      SL.sep_l,
-      "%#StatusLineInactive# ",
-      codeium_status(),
-      plugins(),
-      "%#StatusLineInactiveSep#",
-      SL.sep_r,
-      " ",
-    }
+    right_section = wrap(codeium_status() .. plugins(), "inactive") .. " "
   end
 
   return table.concat {
-    "%#StatusLineActiveSep#",
-    SL.sep_l,
-    "%#StatusLineActive#",
-    mode(),
-    "%#StatusLineActiveSep#",
-    SL.sep_r,
+    wrap(mode()),
 
     git_section,
     " ",
@@ -181,13 +177,7 @@ function M.statusline()
 
     right_section,
 
-    "%#StatusLineActiveSep#",
-    SL.sep_l,
-    "%#StatusLineActive# ",
-    getFileName(),
-    " ",
-    "%#StatusLineActiveSep#",
-    SL.sep_r,
+    wrap(" " .. getFileName() .. " "),
   }
 end
 
