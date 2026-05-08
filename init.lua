@@ -22,5 +22,6 @@ require("lazy").setup {
   require "plugins.treesitter", -- syntax highlighting
   require "plugins.ui", -- Other stuffs like Home page, Status bar
   require "plugins.windowManagemet", -- Buffer, Tab, terminal management
-  "mattmorgis/git-statusline.nvim",
+
+  { "mattmorgis/git-statusline.nvim", lazy = true }, -- for statusline
 }

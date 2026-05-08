@@ -11,7 +11,7 @@ return {
     "vimpostor/vim-tpipeline",
     config = function()
       hide_lualine()
-      -- vim.opt.fillchars:append { stl = "━", stlnc = "━" }
+      vim.opt.fillchars:append { stl = "━", stlnc = "━" }
       vim.g.tpipeline_autoembed = 1
       vim.g.tpipeline_restore = 0
       vim.g.tpipeline_focuslost = 1

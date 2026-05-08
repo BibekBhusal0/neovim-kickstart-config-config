@@ -21,11 +21,15 @@ local function wrap(component, color, side)
 
   local res = ""
   if side == "left" or side == "both" then
-    res = res .. hl_sep .. SL.sep_l
+    res = hl_sep .. SL.sep_l
+  else
+    res = hl_base .. " "
   end
   res = res .. hl_base .. component
   if side == "right" or side == "both" then
     res = res .. hl_sep .. SL.sep_r
+  else
+    res = res .. hl_base .. " "
   end
   return res
 end
@@ -55,13 +59,10 @@ local function git_branch()
     return ""
   end
   local status = git_statusline.get(0)
-  return (status == "" and "-" or " " .. status .. " ")
+  return (status == "" and " - " or " " .. status .. " ")
 end
 
 local function diff()
-  if not is_wide() then
-    return ""
-  end
   local dict = vim.b.gitsigns_status_dict
   if not dict then
     return ""
@@ -87,9 +88,6 @@ local function macro()
 end
 
 local function diagnostics()
-  if not is_wide() then
-    return ""
-  end
   local count = vim.diagnostic.count(0)
   local res = {}
 
@@ -106,9 +104,6 @@ local function diagnostics()
 end
 
 local function codeium_status()
-  if not is_wide() then
-    return ""
-  end
   if not package.loaded["neocodeium"] then
     return ""
   end
@@ -124,12 +119,12 @@ local function codeium_status()
     server_status = { [0] = "󰣺 ", [1] = "󰣻 ", [2] = "󰣽 " },
   }
   local status, serverStatus = require("neocodeium").get_status()
-  return symbols.status[status] .. symbols.server_status[serverStatus]
+  return symbols.status[status] .. symbols.server_status[serverStatus] .. " | "
 end
 
 local function plugins()
   local stats = require("lazy").stats()
-  return string.format("  %d/%d ", stats.loaded, stats.count)
+  return string.format(" %d/%d", stats.loaded, stats.count)
 end
 
 local function getFileName()
@@ -167,6 +162,7 @@ function M.statusline()
       wrap(codeium_status() .. plugins(), "inactive", "left"),
       wrap(getFileName(), "active", "right"),
     }
+    table.insert(left_section, "  ")
     table.insert(left_section, diff())
   else
     right_section = {
