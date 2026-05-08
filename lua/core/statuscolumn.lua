@@ -59,7 +59,7 @@ function M.setup()
   map("zi", toggle_foldcolumn, "Toggle fold column")
 
   local function toggle_line_numbers()
-    if vim.wo.relativenumber or vim.wo.number then
+    if vim.wo.relativenumber then
       vim.wo.relativenumber = false
       vim.wo.number = false
     else
@@ -101,35 +101,32 @@ function M.foldfunc()
 end
 
 function M.lnumfunc()
-  local nu = vim.wo.number
-  local rnu = vim.wo.relativenumber
-  local lnum = vim.v.lnum
-  local relnum = vim.v.relnum
-  local virtnum = vim.v.virtnum
-  local nuw = vim.wo.numberwidth
-
   local left_pad = ""
   if vim.o.foldcolumn == "1" then
     left_pad = " "
   end
 
-  if not rnu and not nu then
+  if not vim.wo.relativenumber then
     return left_pad
   end
 
-  if virtnum ~= 0 then
-    return left_pad .. "%="
-  end
+  local lnum = vim.v.lnum
+  local relnum = vim.v.relnum
+  local nuw = vim.wo.numberwidth
 
-  local lnum_n = rnu and (relnum > 0 and relnum or (nu and lnum or 0)) or lnum
-  local lnum_str = tostring(lnum_n)
-  local pad = (" "):rep(nuw - #lnum_str)
-
-  if relnum == 0 and rnu then
-    return left_pad .. lnum_str .. pad .. "%="
+  local display_str
+  if relnum == 0 then
+    -- Current line: absolute number, left-aligned in its field, pad right
+    local lnum_str = tostring(lnum)
+    local pad = (" "):rep(nuw - #lnum_str)
+    display_str = lnum_str .. pad
   else
-    return left_pad .. "%=" .. pad .. lnum_str
+    local relnum_str = tostring(relnum)
+    local pad = (" "):rep(nuw - #relnum_str)
+    display_str = pad .. relnum_str
   end
+
+  return left_pad .. display_str .. "%="
 end
 
 local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree" }
