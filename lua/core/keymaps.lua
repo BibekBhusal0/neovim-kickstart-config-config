@@ -211,7 +211,9 @@ end
 
 map("<leader>tr", function()
   local ok, name = pcall(vim.api.nvim_tabpage_get_var, 0, "name")
-  if not ok then name = "" end
+  if not ok then
+    name = ""
+  end
   require "utils.input"("Tab name", function(text)
     vim.api.nvim_tabpage_set_var(0, "name", text)
     vim.cmd "redrawtabline"
