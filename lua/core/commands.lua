@@ -160,6 +160,9 @@ end
 
 vim.api.nvim_create_user_command("RemoveComments", RemoveAllComments, { range = true })
 vim.api.nvim_create_user_command("ToggleBool", toggle_bool, {})
+vim.api.nvim_create_user_command("UpdateLazy", function()
+  vim.pack.update({ "lazy.nvim" })
+end, {})
 
 map("gt", ":ToggleBool<Cr>", "Toogle Boolean")
 map("<leader>rc", ":RemoveComments<Cr>", "Remove comments", { "n", "x" })
