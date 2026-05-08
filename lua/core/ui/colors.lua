@@ -14,7 +14,6 @@ local function hl(name, val)
   end
   vim.api.nvim_set_hl(0, name, val)
 end
-
 local function setup_highlights()
   -- Common UI Highlights
   hl("UIActive", { fg = colors.active_fg, bg = colors.active_bg, bold = true })
@@ -22,14 +21,10 @@ local function setup_highlights()
   hl("UIInactive", { fg = colors.inactive_fg, bg = colors.inactive_bg })
   hl("UIInactiveSep", { fg = colors.inactive_bg })
 
-  -- Status / Tab Specific
-  hl("UIGreen", { fg = colors.active_fg, bg = colors.green, bold = true })
-  hl("UIGreenSep", { fg = colors.green })
-  hl("UIRed", { fg = colors.red })
-  hl("UIOrange", { fg = colors.orange })
-
-  hl("StatusLine", { fg = colors.inactive_fg })
-  hl("StatusLineNC", { fg = colors.inactive_fg })
+  hl("UIRed", { fg = colors.red, bg = "NONE" })
+  hl("UIOrange", { fg = colors.orange, bg = "NONE" })
+  hl("TabLineFill", { bg = "NONE" })
+  hl("TabLine", { bg = "NONE" })
 end
 
 setup_highlights()
