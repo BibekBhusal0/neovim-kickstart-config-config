@@ -1,34 +1,12 @@
 local M = {}
 
 local icons = require "utils.icons"
+local ui_utils = require "utils.ui"
 local git_icons = icons.pad_icons(icons.git)
 local diag_icons = icons.pad_icons(icons.diagnostics)
 
-local SL = icons.ui
-
 local function is_wide()
   return vim.o.columns >= 100
-end
-
-local function wrap(component, color, side)
-  color = color or "active"
-  side = side or "both"
-  local hl_base = color == "active" and "%#StatusLineActive#" or "%#StatusLineInactive#"
-  local hl_sep = color == "active" and "%#StatusLineActiveSep#" or "%#StatusLineInactiveSep#"
-
-  local res = ""
-  if side == "left" or side == "both" then
-    res = hl_sep .. SL.sep_l
-  else
-    res = hl_base .. " "
-  end
-  res = res .. hl_base .. component
-  if side == "right" or side == "both" then
-    res = res .. hl_sep .. SL.sep_r
-  else
-    res = res .. hl_base .. " "
-  end
-  return res
 end
 
 local function join(res)
@@ -81,7 +59,7 @@ end
 
 local function macro()
   local reg = vim.fn.reg_recording()
-  return (reg == "" and "" or "%#StatusLineMacro#recording @" .. reg .. " ")
+  return (reg == "" and "" or "%#UIOrange#recording @" .. reg .. " ")
 end
 
 local function diagnostics()
@@ -147,8 +125,8 @@ end
 
 function M.statusline()
   local left_section = {
-    wrap(mode(), "active", "left"),
-    wrap(git_branch(), "inactive", "right"),
+    ui_utils.wrap(mode(), "UIActive", "left"),
+    ui_utils.wrap(git_branch(), "UIInactive", "right"),
   }
 
   local right_section = {}
@@ -156,15 +134,15 @@ function M.statusline()
     right_section = {
       macro(),
       diagnostics(),
-      wrap(codeium_status() .. plugins(), "inactive", "left"),
-      wrap(getFileName(), "active", "right"),
+      ui_utils.wrap(codeium_status() .. plugins(), "UIInactive", "left"),
+      ui_utils.wrap(getFileName(), "UIActive", "right"),
     }
     table.insert(left_section, "  ")
     table.insert(left_section, diff())
   else
     right_section = {
-      wrap(codeium_status() .. plugins(), "inactive", "left"),
-      wrap(getFileName(), "active", "right"),
+      ui_utils.wrap(codeium_status() .. plugins(), "UIInactive", "left"),
+      ui_utils.wrap(getFileName(), "UIActive", "right"),
     }
   end
 
@@ -173,7 +151,6 @@ end
 
 function M.setup()
   vim.o.laststatus = 3
-
   vim.opt.statusline = "%!v:lua.require'core.ui.statusline'.statusline()"
 
   vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
