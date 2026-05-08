@@ -1,4 +1,6 @@
 local M = {}
+local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree" }
+local bt_ignore = { "terminal", "nofile" }
 
 local function set_dynamic_number_width()
   local line_count = vim.fn.line "$"
@@ -69,7 +71,19 @@ function M.setup()
   end
   map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
-  vim.opt.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
+  local group = vim.api.nvim_create_augroup("StatusColumn", { clear = true })
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    group = group,
+    callback = function()
+      if
+        vim.tbl_contains(ft_ignore, vim.bo.filetype) or vim.tbl_contains(bt_ignore, vim.bo.buftype)
+      then
+        vim.wo.statuscolumn = ""
+      else
+        vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
+      end
+    end,
+  })
 end
 
 function M.foldfunc()
@@ -127,16 +141,7 @@ function M.lnumfunc()
   return left_pad .. display_str .. "%="
 end
 
-local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree" }
-local bt_ignore = { "terminal", "nofile" }
-
 function M.statuscolumn()
-  if
-    vim.tbl_contains(ft_ignore, vim.bo.filetype) or vim.tbl_contains(bt_ignore, vim.bo.buftype)
-  then
-    return ""
-  end
-
   return table.concat {
     M.foldfunc(),
     M.lnumfunc(),
