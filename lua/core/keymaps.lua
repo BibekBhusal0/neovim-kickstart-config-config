@@ -88,12 +88,6 @@ map("<A-l>", ">gv", "Indent right", "v")
 map("<A-l>", ">>", "Indent right")
 map("<A-h>", "<<", "Indent right")
 
-local function toggle_line_numbers()
-  local nu = vim.o.nu or vim.o.rnu
-  vim.o.rnu = not nu
-  vim.o.nu = not nu
-end
-map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
 map("zo", "za", "Toggle fold")
 map("<Esc>", ":noh<CR>", "Clear Highlight")

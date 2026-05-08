@@ -4,6 +4,7 @@ require "core.startingCommand"
 require "core.keymaps"
 require "core.commands"
 require "core.ui"
+require("core.statuscolumn").setup()
 
 vim.pack.add { "https://github.com/folke/lazy.nvim" }
 

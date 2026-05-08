@@ -4,6 +4,5 @@ return {
   require "plugins.ui.colortheme", -- Beautiful colorscheme
   require "plugins.ui.lualine", -- Line that appears at bottom
   require "plugins.ui.others", -- Startup page
-  require "plugins.ui.statuscol", -- Changing status column (left side)
   -- require "plugins.ui.animation",
 }
