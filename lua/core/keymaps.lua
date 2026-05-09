@@ -89,7 +89,6 @@ map("<A-l>", ">>", "Indent right")
 map("<A-h>", "<<", "Indent right")
 
 map("zo", "za", "Toggle fold")
-map("<Esc>", ":noh<CR>", "Clear Highlight")
 
 local function toggle_statusline()
   local current_status = vim.o.laststatus

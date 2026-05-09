@@ -1,4 +1,5 @@
 require "core.ui.colors"
+require "core.ui.searchHighlight"
 require("core.ui.statuscolumn").setup()
 require("core.ui.statusline").setup()
 require("core.ui.tabline").setup()

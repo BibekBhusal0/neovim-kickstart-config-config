@@ -2,21 +2,6 @@ local map = require "utils.map"
 
 return {
   {
-    "kevinhwang91/nvim-hlslens",
-    keys = { "n", "N", "*", "#", "g*", "g#" },
-    config = function()
-      require("hlslens").setup { nearest_only = true, calm_down = true }
-      local cmd = ":lua require('hlslens').start()<CR>"
-      map("n", ":execute('normal! ' . v:count1 . 'n')<CR>zz" .. cmd, "Next Search")
-      map("N", ":execute('normal! ' . v:count1 . 'N')<CR>zz" .. cmd, "Previous Search")
-      map("*", "*zz" .. cmd, "Next Search")
-      map("#", "#zz" .. cmd, "Previous Search")
-      map("g*", "g*zz" .. cmd, "Next Search")
-      map("g#", "g#zz" .. cmd, "Previous Search")
-    end,
-  },
-
-  {
     "petertriho/nvim-scrollbar",
     event = { "BufNewFile", "BufReadPost" },
     opts = {
