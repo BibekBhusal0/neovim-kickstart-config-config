@@ -41,7 +41,7 @@ function M.setup()
 
   -- Folding settings
   vim.o.foldlevelstart = 99
-  vim.o.foldenable = true
+  vim.o.foldenable = false
   vim.opt.foldmethod = "expr"
   vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
   vim.opt.foldtext = ""

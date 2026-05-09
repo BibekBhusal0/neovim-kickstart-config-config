@@ -39,6 +39,16 @@ vim.opt.iskeyword:append "-" -- Hyphenated words recognized by searches (default
 vim.opt.runtimepath:remove "/usr/share/vim/vimfiles" -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
 vim.o.mousemoveevent = true
 
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "▏ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+  nbsp = "░",
+  leadmultispace = "▏ ",
+}
+
 vim.opt.hlsearch = true
 -- spell
 vim.opt.spelllang = "en_us"

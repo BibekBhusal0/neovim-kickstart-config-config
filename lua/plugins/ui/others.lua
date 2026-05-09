@@ -2,32 +2,6 @@ local map = require "utils.map"
 
 return {
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    event = { "BufNewFile", "BufReadPost" },
-    opts = {
-      indent = { char = "▏" },
-      scope = {
-        show_start = false,
-        show_end = false,
-        show_exact_scope = false,
-      },
-      exclude = {
-        filetypes = {
-          "help",
-          "startify",
-          "dashboard",
-          "packer",
-          "neogitstatus",
-          "NvimTree",
-          "Trouble",
-          "alpha",
-        },
-      },
-    },
-  }, -- Better indentations
-
-  {
     "kevinhwang91/nvim-hlslens",
     keys = { "n", "N", "*", "#", "g*", "g#" },
     config = function()
