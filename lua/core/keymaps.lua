@@ -50,6 +50,10 @@ map("<leader>xs", ":wincmd q<CR>", "Quit Split")
 -- center while navigation
 map("<C-d>", "<C-d>zz", "Scroll down")
 map("<C-u>", "<C-u>zz", "Scroll up")
+map("n", "nzz", "Next search")
+map("N", "Nzz", "Previous search")
+map("*", "*zz", "Next Current term")
+map("#", "#zz", "Previous Current term")
 
 -- copy/paste to
 -- system clipboard with leader y

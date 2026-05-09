@@ -13,7 +13,6 @@ local function update_search_count()
     if count.total > 0 and count.current > 0 then
       local text = string.format("[%d/%d]", count.current, count.total)
       local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-      -- Using 'Search' to match the highlighted word color
       vim.api.nvim_buf_set_extmark(0, search_ns, lnum, 0, {
         virt_text = { { text, "Search" } },
         virt_text_pos = "eol",
@@ -22,19 +21,45 @@ local function update_search_count()
   end)
 end
 
-local function search_nav(key)
-  return function()
-    local ok, _ = pcall(vim.cmd, "normal! " .. vim.v.count1 .. key)
-    if ok then
-      vim.cmd "normal! zz"
-      update_search_count()
-    end
-  end
-end
-
--- Mappings
-map("n", search_nav "n", "Next Search")
-map("N", search_nav "N", "Prev Search")
-map("*", search_nav "*", "Search Forward")
-map("#", search_nav "#", "Search Backward")
 map("<Esc>", clear_search, "Clear Highlight")
+
+local group = vim.api.nvim_create_augroup("search_highlight_logic", { clear = true })
+
+-- Auto-hide/update on cursor move
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = group,
+  callback = function()
+    if vim.v.hlsearch == 0 then
+      return
+    end
+
+    local pattern = vim.fn.getreg "/"
+    if pattern == "" then
+      return
+    end
+
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+
+    local found = false
+    local start = 0
+    while true do
+      local m = vim.fn.matchstrpos(line, pattern, start)
+      if m[1] == "" then
+        break
+      end
+      if col > m[2] and col <= m[3] then
+        found = true
+        break
+      end
+      start = m[3]
+      if start <= m[2] then start = m[2] + 1 end
+    end
+
+    if found then
+      update_search_count()
+    else
+      vim.defer_fn(clear_search, 0)
+    end
+  end,
+})
