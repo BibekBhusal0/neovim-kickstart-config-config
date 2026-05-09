@@ -53,7 +53,9 @@ vim.api.nvim_create_autocmd("CursorMoved", {
         break
       end
       start = m[3]
-      if start <= m[2] then start = m[2] + 1 end
+      if start <= m[2] then
+        start = m[2] + 1
+      end
     end
 
     if found then

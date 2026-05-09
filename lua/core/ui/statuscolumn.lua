@@ -74,20 +74,20 @@ function M.setup()
   map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
   local group = vim.api.nvim_create_augroup("StatusColumn", { clear = true })
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-      group = group,
-      callback = function()
-        if
-          vim.tbl_contains(ft_ignore, vim.bo.filetype)
-          or vim.tbl_contains(bt_ignore, vim.bo.buftype)
-        then
-          M.hide()
-        else
-          vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
-          update_cols()
-        end
-      end,
-    })
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    group = group,
+    callback = function()
+      if
+        vim.tbl_contains(ft_ignore, vim.bo.filetype)
+        or vim.tbl_contains(bt_ignore, vim.bo.buftype)
+      then
+        M.hide()
+      else
+        vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
+        update_cols()
+      end
+    end,
+  })
 end
 
 function M.foldfunc()
