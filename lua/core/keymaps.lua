@@ -191,7 +191,7 @@ local function close_left()
     if bufnr == current then
       break
     end
-    vim.api.nvim_buf_delete(bufnr, { force = false })
+    vim.api.nvim_buf_delete(bufnr, { force = true })
   end
 end
 
@@ -201,7 +201,7 @@ local function close_right()
   local found = false
   for _, bufnr in ipairs(bufs) do
     if found then
-      vim.api.nvim_buf_delete(bufnr, { force = false })
+      vim.api.nvim_buf_delete(bufnr, { force = true })
     end
     if bufnr == current then
       found = true

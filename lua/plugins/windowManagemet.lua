@@ -45,6 +45,7 @@ return {
       { "<leader>xb", ":Bdelete<CR>", desc = "Quit Buffer" },
       { "<leader>xB", ":Bdelete!<CR>", desc = "Quit Buffer Force" },
       { "<leader>bx", ":Bdelete<CR>", desc = "Buffer Close" },
+      { "<leader>bX", ":Bdelete!<CR>", desc = "Buffer Close" },
     },
   }, -- close buffer without closing tab
 
