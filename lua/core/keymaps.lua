@@ -179,7 +179,7 @@ local function close_others()
   local bufs = tabline.get_buffers()
   for _, bufnr in ipairs(bufs) do
     if bufnr ~= current then
-      vim.api.nvim_buf_delete(bufnr, { force = false })
+      vim.api.nvim_buf_delete(bufnr, { force = true })
     end
   end
 end
