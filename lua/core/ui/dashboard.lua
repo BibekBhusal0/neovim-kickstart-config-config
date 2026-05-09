@@ -92,7 +92,6 @@ function M.open()
     for j, b in ipairs(group) do
       local sc, icon, txt, cmd, hl = unpack(b)
 
-      -- Format: "icon  > txt                sc"
       local left_icon_part = icon .. "  > "
       local left_part = left_icon_part .. txt
       local right_part = sc
@@ -220,10 +219,19 @@ function M.open()
     end
   end)
 
+  local shortcuts = {}
+  for _, group in ipairs(button_groups) do
+    for _, b in ipairs(group) do
+      shortcuts[b[1]] = true
+    end
+  end
+
   -- Prevent other movements
   local keys_to_disable = { "h", "l", "w", "b", "e", "0", "$", "^", "G", "gg" }
   for _, key in ipairs(keys_to_disable) do
-    map(key, "<Nop>")
+    if not shortcuts[key] then
+      map(key, "<Nop>")
+    end
   end
 
   -- UI restore on leave

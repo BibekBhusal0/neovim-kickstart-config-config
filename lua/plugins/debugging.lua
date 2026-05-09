@@ -1,6 +1,7 @@
 local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
+map("gp", "<Nop>")
 return {
   {
     "andrewferrier/debugprint.nvim",
@@ -14,8 +15,8 @@ return {
           variable_above = "gpk",
           variable_below_alwaysprompt = "",
           variable_above_alwaysprompt = "",
-          surround_plain = "gps",
-          surround_variable = "",
+          surround_plain = "gpS",
+          surround_variable = "gps",
           surround_variable_alwaysprompt = "",
           textobj_below = "gpo",
           textobj_above = "gpO",
@@ -28,9 +29,18 @@ return {
       },
     },
     keys = {
-      "gp",
-      { "gpt", ":Debugprint search<Cr>", "Search debug prints" },
-      { "gpt", ":Debugprint qflist<Cr>", "Add debugs to quickfix list" },
+      { "gpJ", desc = "Debugprint: Plain below" },
+      { "gpK", desc = "Debugprint: Plain above" },
+      { "gps", desc = "Debugprint: Surround Variable" },
+      { "gpS", desc = "Debugprint: Surround plain" },
+      { "gpo", desc = "Debugprint: Textobj below" },
+      { "gpO", desc = "Debugprint: Textobj above" },
+      { "gpx", desc = "Debugprint: Delete all debug prints" },
+      { "gpj", mode = { "n", "v" }, desc = "Debugprint: Variable below" },
+      { "gpk", mode = { "n", "v" }, desc = "Debugprint: Variable above" },
+      { "gpf", ":Debugprint search<Cr>", desc = "Debugprint: Search" },
+      { "gp/", ":Debugprint commenttoggle<Cr>", desc = "Debugprin: Toggle comment" },
+      { "gpt", ":Debugprint qflist<Cr>", desc = "Debugprint: Add debugs to quickfix list" },
     },
     cmd = { "Debugprint" },
   },
