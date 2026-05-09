@@ -1,5 +1,5 @@
 local M = {}
-local SL = require("utils.icons").seperators
+local wrap = require("utils.wrap")
 
 -- Global function for mouse clicks
 _G.TablineSwitchBuf = function(bufnr)
@@ -42,6 +42,29 @@ function M.get_buffers()
   end, tab_bufs)
 end
 
+local function render_items(items, switch_func_name)
+  local res = ""
+  local count = #items
+  for i, it in ipairs(items) do
+    local side = "none"
+    if count == 1 then
+      side = "both"
+    elseif i == 1 then
+      side = "left"
+    elseif i == count then
+      side = "right"
+    end
+
+    local wrapped = wrap(it.component, it.is_active, side)
+    if it.id then
+      res = res .. string.format("%%%d@v:lua.%s@%s%%X", it.id, switch_func_name, wrapped)
+    else
+      res = res .. wrapped
+    end
+  end
+  return res
+end
+
 function M.tabline()
   local bufnrs = M.get_buffers()
   local current_buf = vim.api.nvim_get_current_buf()
@@ -65,34 +88,29 @@ function M.tabline()
     local extension = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":e")
     local icon, _ = require("nvim-web-devicons").get_icon(name, extension, { default = true })
 
-    local hl_name = is_active and "UIActive" or "UIInactive"
     local display_name = name
     if vim.fn.strdisplaywidth(name) > max_name_width then
       display_name = string.sub(name, 1, max_name_width - 3) .. "..."
     end
 
-    local raw_content = string.format(" %s %s%s ", icon, display_name, modified_icon)
-    local width = vim.fn.strdisplaywidth(raw_content)
-    local content = string.format("%%#%s#%s", hl_name, raw_content)
+    local component = string.format("%s %s%s", icon, display_name, modified_icon)
     table.insert(
       buffer_items,
       {
-        item = string.format("%%%d@v:lua.TablineSwitchBuf@%s%%X", bufnr, content),
-        width = width,
+        id = bufnr,
         is_active = is_active,
+        component = component,
+        width = vim.fn.strdisplaywidth(component) + 2,
       }
     )
   end
 
   -- Calculate Tabs section first to determine available width
   local tabs = vim.api.nvim_list_tabpages()
-  local tab_res = ""
+  local tab_items = {}
   local tabs_width = 0
   if #tabs > 1 then
-    local tab_parts = {}
-    local first_tab_hl, last_tab_hl = "", ""
     local raw_tabs_content = ""
-
     for i, tabpage in ipairs(tabs) do
       local is_active = tabpage == vim.api.nvim_get_current_tabpage()
       local name = i
@@ -100,27 +118,13 @@ function M.tabline()
       if ok and tab_name and tab_name ~= "" then
         name = tab_name
       end
-      local hl_name = is_active and "UIActive" or "UIInactive"
-      if i == 1 then
-        first_tab_hl = hl_name
-      end
-      if i == #tabs then
-        last_tab_hl = hl_name
-      end
-      table.insert(
-        tab_parts,
-        string.format("%%%d@v:lua.TablineSwitchTab@%%#%s# %s %%X", tabpage, hl_name, name)
-      )
+      table.insert(tab_items, {
+        id = tabpage,
+        is_active = is_active,
+        component = tostring(name),
+      })
       raw_tabs_content = raw_tabs_content .. " " .. name .. " "
     end
-    tab_res = string.format(
-      "%%#%sSep#%s%s%%#%sSep#%s",
-      first_tab_hl,
-      SL.sep_l,
-      table.concat(tab_parts, ""),
-      last_tab_hl,
-      SL.sep_r
-    )
     tabs_width = vim.fn.strdisplaywidth(raw_tabs_content) + 4
   end
 
@@ -164,42 +168,21 @@ function M.tabline()
     end
   end
 
-  local visible_parts = {}
+  local visible_items = {}
   if start_idx > 1 then
-    table.insert(visible_parts, "%#UIInactive#... ")
+    table.insert(visible_items, { component = "...", is_active = false })
   end
   for i = start_idx, end_idx do
-    table.insert(visible_parts, buffer_items[i].item)
+    table.insert(visible_items, buffer_items[i])
   end
   if end_idx < #buffer_items then
-    table.insert(visible_parts, "%#UIInactive# ...")
+    table.insert(visible_items, { component = "...", is_active = false })
   end
 
-  local first_hl = (start_idx > 1) and "UIInactive"
-    or (
-      buffer_items[start_idx]
-        and (buffer_items[start_idx].is_active and "UIActive" or "UIInactive")
-      or "UIInactive"
-    )
-  local last_hl = (end_idx < #buffer_items) and "UIInactive"
-    or (
-      buffer_items[end_idx] and (buffer_items[end_idx].is_active and "UIActive" or "UIInactive")
-      or "UIInactive"
-    )
+  local res_buffers = render_items(visible_items, "TablineSwitchBuf")
+  local res_tabs = render_items(tab_items, "TablineSwitchTab")
 
-  local res_buffers = ""
-  if #visible_parts > 0 then
-    res_buffers = string.format(
-      "%%#%sSep#%s%s%%#%sSep#%s",
-      first_hl,
-      SL.sep_l,
-      table.concat(visible_parts, ""),
-      last_hl,
-      SL.sep_r
-    )
-  end
-
-  return " " .. res_buffers .. "%=" .. tab_res .. " "
+  return " " .. res_buffers .. "%=" .. res_tabs .. " "
 end
 
 function M.setup()

@@ -1,6 +1,7 @@
 local M = {}
 
 local icons = require "utils.icons"
+local wrap = require "utils.wrap"
 local git_icons = icons.pad_icons(icons.git)
 local diag_icons = icons.pad_icons(icons.diagnostics)
 
@@ -10,25 +11,6 @@ end
 
 local function join(res)
   return #res == 0 and "" or table.concat(res, " ") .. " "
-end
-
-local function wrap(component, hl_group, side)
-  local SL = require("utils.icons").seperators
-  local hl_base = "%#" .. hl_group .. "#"
-  local hl_sep = "%#" .. hl_group .. "Sep#"
-  local res = ""
-  if side == "left" or side == "both" then
-    res = hl_sep .. SL.sep_l
-  else
-    res = hl_base .. " "
-  end
-  res = res .. hl_base .. component
-  if side == "right" or side == "both" then
-    res = res .. hl_sep .. SL.sep_r
-  else
-    res = res .. hl_base .. " "
-  end
-  return res
 end
 
 local function mode()
@@ -143,8 +125,8 @@ end
 
 function M.statusline()
   local left_section = {
-    wrap(mode(), "UIActive", "left"),
-    wrap(git_branch(), "UIInactive", "right"),
+    wrap(mode(), true, "left"),
+    wrap(git_branch(), false, "right"),
   }
 
   local right_section = {}
@@ -152,15 +134,15 @@ function M.statusline()
     right_section = {
       macro(),
       diagnostics(),
-      wrap(codeium_status() .. plugins(), "UIInactive", "left"),
-      wrap(getFileName(), "UIActive", "right"),
+      wrap(codeium_status() .. plugins(), false, "left"),
+      wrap(getFileName(), true, "right"),
     }
     table.insert(left_section, "  ")
     table.insert(left_section, diff())
   else
     right_section = {
-      wrap(codeium_status() .. plugins(), "UIInactive", "left"),
-      wrap(getFileName(), "UIActive", "right"),
+      wrap(codeium_status() .. plugins(), false, "left"),
+      wrap(getFileName(), true, "right"),
     }
   end
 
