@@ -1,5 +1,5 @@
 local M = {}
-local wrap = require("utils.wrap")
+local wrap = require "utils.wrap"
 
 -- Global function for mouse clicks
 _G.TablineSwitchBuf = function(bufnr)
@@ -94,15 +94,12 @@ function M.tabline()
     end
 
     local component = string.format("%s %s%s", icon, display_name, modified_icon)
-    table.insert(
-      buffer_items,
-      {
-        id = bufnr,
-        is_active = is_active,
-        component = component,
-        width = vim.fn.strdisplaywidth(component) + 2,
-      }
-    )
+    table.insert(buffer_items, {
+      id = bufnr,
+      is_active = is_active,
+      component = component,
+      width = vim.fn.strdisplaywidth(component) + 2,
+    })
   end
 
   -- Calculate Tabs section first to determine available width

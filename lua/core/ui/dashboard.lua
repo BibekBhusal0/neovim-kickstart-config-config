@@ -95,7 +95,9 @@ function M.open()
       local left_icon_part = icon .. "  > "
       local left_part = left_icon_part .. txt
       local right_part = sc
-      local padding_len = button_width - vim.fn.strdisplaywidth(left_part) - vim.fn.strdisplaywidth(right_part)
+      local padding_len = button_width
+        - vim.fn.strdisplaywidth(left_part)
+        - vim.fn.strdisplaywidth(right_part)
       local padding = string.rep(" ", math.max(0, padding_len))
       local full_button_text = left_part .. padding .. right_part
 
@@ -109,7 +111,10 @@ function M.open()
 
       local button_hl = hl or "DashboardButton"
       table.insert(highlights, { button_hl, line_idx, shift, shift + #left_part })
-      table.insert(highlights, { "DashboardShortcut", line_idx, shift + #left_part + #padding, shift + #full_button_text })
+      table.insert(
+        highlights,
+        { "DashboardShortcut", line_idx, shift + #left_part + #padding, shift + #full_button_text }
+      )
 
       vim.api.nvim_buf_set_keymap(
         buf,
@@ -169,10 +174,14 @@ function M.open()
       if line_num == curr_line then
         if direction == "j" then
           target_idx = idx + 1
-          if target_idx > #button_lines then target_idx = 1 end
+          if target_idx > #button_lines then
+            target_idx = 1
+          end
         else
           target_idx = idx - 1
-          if target_idx < 1 then target_idx = #button_lines end
+          if target_idx < 1 then
+            target_idx = #button_lines
+          end
         end
         break
       end
@@ -188,7 +197,7 @@ function M.open()
   end
 
   local function map(key, fn)
-    if type(fn) == "string"  and #fn ==1 then
+    if type(fn) == "string" and #fn == 1 then
       local direction = fn
       fn = function()
         move_cursor(direction)
@@ -197,10 +206,10 @@ function M.open()
     vim.keymap.set("n", key, fn, { buffer = buf, nowait = true })
   end
 
-  map('j', 'j')
-  map('<down>', 'j')
-  map('<up>', 'k')
-  map('k', 'k')
+  map("j", "j")
+  map("<down>", "j")
+  map("<up>", "k")
+  map("k", "k")
 
   map("<CR>", function()
     local curr_line = vim.api.nvim_win_get_cursor(0)[1]

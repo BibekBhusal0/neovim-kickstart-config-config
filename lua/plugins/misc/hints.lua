@@ -53,7 +53,7 @@ return {
             "undotree",
             "nvim-undotree",
             "pager",
-            "dashboard"
+            "dashboard",
           }
         ),
       }
