@@ -15,22 +15,22 @@ local function hl(name, val)
   vim.api.nvim_set_hl(0, name, val)
 end
 local function setup_highlights()
-  -- Common UI Highlights
   hl("UIActive", { fg = colors.active_fg, bg = colors.active_bg, bold = true })
   hl("UIActiveSep", { fg = colors.active_bg })
   hl("UIInactive", { fg = colors.inactive_fg, bg = colors.inactive_bg })
   hl("UIInactiveSep", { fg = colors.inactive_bg })
 
-  hl("UIRed", { fg = colors.red, bg = "NONE" })
-  hl("UIOrange", { fg = colors.orange, bg = "NONE" })
-  hl("TabLineFill", { bg = "NONE" })
-  hl("TabLine", { bg = "NONE" })
+  hl("UIRed", { fg = colors.red })
+  hl("UIOrange", { fg = colors.orange })
+  hl("TabLineFill", {})
+  hl("TabLine", {})
 
   hl("DashboardHeader", { fg = colors.active_bg })
   hl("DashboardButton", { fg = colors.green })
   hl("DashboardShortcut", { fg = colors.orange, bold = true })
   hl("DashboardFooter", { fg = colors.active_bg, italic = true, bold = true })
   hl("DashboardDivider", { fg = colors.inactive_bg })
+  hl("WinSeparator", { fg = "#999999" })
 end
 
 setup_highlights()

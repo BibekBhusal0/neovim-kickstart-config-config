@@ -1,5 +1,3 @@
-local map = require "utils.map"
-
 return {
   {
     "petertriho/nvim-scrollbar",
