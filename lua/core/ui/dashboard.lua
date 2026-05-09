@@ -59,6 +59,7 @@ function M.open()
   vim.api.nvim_buf_set_option(buf, "modifiable", true)
 
   vim.api.nvim_set_current_buf(buf)
+  vim.opt_local.list = false
 
   local win = vim.api.nvim_get_current_win()
   local width = vim.api.nvim_win_get_width(win)

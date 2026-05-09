@@ -35,10 +35,8 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.defer_fn(function()
         vim.cmd "set filetype=hyprlang"
       end, 1)
-    elseif args.file:match ".md" then
-      vim.defer_fn(function()
-        vim.opt_local.wrap = true
-      end, 1)
+    elseif args.file:match "%.md$" then
+      vim.opt_local.wrap = true
     end
 
     -- Pressing enter in commnet don't make another line comment
@@ -46,10 +44,6 @@ vim.api.nvim_create_autocmd("FileType", {
     -- Opening help in v split
     if args.filetype == "help" then
       vim.cmd "wincmd L"
-      -- Enabling line wrap in markdown file
-    elseif args.filetype == "markdown" then
-      print "disapling line wrap"
-      vim.opt_local.wrap = true
       -- Hiding scrollbar
     elseif vim.tbl_contains({ "telescope", "mason", "lazy" }, args.filetype) then
       vim.opt_local.spell = false
