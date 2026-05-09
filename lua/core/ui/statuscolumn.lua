@@ -3,7 +3,8 @@ local M = {}
 local foldcol_enabled = false
 local numcol_enabled = true
 
-local ft_ignore = { "quickrun", "codecompanion", "terminal", "neo-tree", "nvim-undotree", "alpha" }
+local ft_ignore =
+  { "quickrun", "codecompanion", "terminal", "neo-tree", "nvim-undotree", "alpha", "dashboard" }
 local bt_ignore = { "terminal", "nofile", "prompt" }
 
 local function set_dynamic_number_width()
@@ -20,6 +21,13 @@ local function update_cols()
   vim.wo.relativenumber = numcol_enabled
   vim.wo.foldcolumn = foldcol_enabled and "1" or "0"
   set_dynamic_number_width()
+end
+
+function M.hide()
+  vim.wo.statuscolumn = ""
+  vim.wo.number = false
+  vim.wo.relativenumber = false
+  vim.wo.foldcolumn = "0"
 end
 
 function M.setup()
@@ -74,10 +82,7 @@ function M.setup()
           vim.tbl_contains(ft_ignore, vim.bo.filetype)
           or vim.tbl_contains(bt_ignore, vim.bo.buftype)
         then
-          vim.wo.statuscolumn = ""
-          vim.wo.number = false
-          vim.wo.relativenumber = false
-          vim.wo.foldcolumn = "0"
+          M.hide()
         else
           vim.wo.statuscolumn = "%!v:lua.require'core.ui.statuscolumn'.statuscolumn()"
           update_cols()

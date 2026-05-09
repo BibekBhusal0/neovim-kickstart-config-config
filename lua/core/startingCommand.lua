@@ -48,7 +48,7 @@ local commands = {
   {
     condition = is_arg "zen",
     post_defer = function()
-      vim.cmd "Alpha"
+      vim.cmd "Dashboard"
     end,
     pre_defer = function()
       vim.api.nvim_set_current_dir "/home/bibek/.zen/pf761izm.Default Profile/chrome"

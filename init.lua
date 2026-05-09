@@ -24,4 +24,9 @@ require("lazy").setup {
   require "plugins.windowManagemet", -- Buffer, Tab, terminal management
 
   { "mattmorgis/git-statusline.nvim", lazy = true }, -- for statusline
+  {
+    "rubiin/fortune.nvim",
+    opts = { display_format = "long", content_type = "quotes" },
+    lazy = true,
+  }, -- to display quote in dashboard
 }

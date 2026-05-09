@@ -25,6 +25,12 @@ local function setup_highlights()
   hl("UIOrange", { fg = colors.orange, bg = "NONE" })
   hl("TabLineFill", { bg = "NONE" })
   hl("TabLine", { bg = "NONE" })
+
+  hl("DashboardHeader", { fg = colors.active_bg })
+  hl("DashboardButton", { fg = colors.green })
+  hl("DashboardShortcut", { fg = colors.orange, bold = true })
+  hl("DashboardFooter", { fg = colors.active_bg, italic = true, bold = true })
+  hl("DashboardDivider", { fg = colors.inactive_bg })
 end
 
 setup_highlights()
@@ -32,5 +38,3 @@ setup_highlights()
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = setup_highlights,
 })
-
-return {}
