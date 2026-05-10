@@ -86,10 +86,14 @@ local function diagnostics()
 end
 
 local function codeium_status()
+  if not package.loaded["neocodeium"] then
+    return ""
+  end
   local ok, neocodeium = pcall(require, "neocodeium")
   if not ok then
     return ""
   end
+
   local symbols = {
     status = {
       [0] = "󰚩 ",
