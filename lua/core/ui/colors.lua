@@ -22,8 +22,12 @@ local function setup_highlights()
 
   hl("UIRed", { fg = colors.red })
   hl("UIOrange", { fg = colors.orange })
+
+  -- Transparent backgorund of tabline and status line
   hl("TabLineFill", {})
   hl("TabLine", {})
+  hl("StatusLine", {})
+  hl("StatusLineNC", {})
 
   hl("DashboardHeader", { fg = colors.active_bg })
   hl("DashboardButton", { fg = colors.green })
