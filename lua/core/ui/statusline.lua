@@ -44,14 +44,17 @@ local function diff()
   end
 
   local res = {}
-  if dict.added and dict.added > 0 then
-    table.insert(res, "%#GitSignsAdd#" .. git_icons.added .. dict.added)
-  end
-  if dict.changed and dict.changed > 0 then
-    table.insert(res, "%#GitSignsChange#" .. git_icons.modified .. dict.changed)
-  end
-  if dict.removed and dict.removed > 0 then
-    table.insert(res, "%#GitSignsDelete#" .. git_icons.removed .. dict.removed)
+  local items = {
+    { "added", git_icons.added, "%#GitSignsAdd#" },
+    { "changed", git_icons.modified, "%#GitSignsChange#" },
+    { "removed", git_icons.removed, "%#GitSignsDelete#" },
+  }
+
+  for _, item in ipairs(items) do
+    local val = dict[item[1]]
+    if val and val > 0 then
+      table.insert(res, item[3] .. item[2] .. val)
+    end
   end
 
   return join(res)
@@ -65,14 +68,18 @@ end
 local function diagnostics()
   local count = vim.diagnostic.count(0)
   local res = {}
+  local levels = {
+    { vim.diagnostic.severity.ERROR, diag_icons.error, "%#DiagnosticError#" },
+    { vim.diagnostic.severity.WARN, diag_icons.warn, "%#DiagnosticWarn#" },
+    { vim.diagnostic.severity.INFO, diag_icons.info, "%#DiagnosticInfo#" },
+    { vim.diagnostic.severity.HINT, diag_icons.hint, "%#DiagnosticHint#" },
+  }
 
-  local e = count[vim.diagnostic.severity.ERROR]
-  local w = count[vim.diagnostic.severity.WARN]
-  if e and e > 0 then
-    table.insert(res, "%#DiagnosticError#" .. diag_icons.error .. e)
-  end
-  if w and w > 0 then
-    table.insert(res, "%#DiagnosticWarn#" .. diag_icons.warn .. w)
+  for _, level in ipairs(levels) do
+    local n = count[level[1]]
+    if n and n > 0 then
+      table.insert(res, level[3] .. level[2] .. n)
+    end
   end
 
   return join(res)
@@ -140,29 +147,25 @@ local function getFileName()
 end
 
 function M.statusline()
-  local left_section = {
+  local left = {
     wrap(mode(), true, "left"),
     wrap(git_branch(), false, "right"),
   }
 
-  local right_section = {}
-  if is_wide() then
-    right_section = {
-      macro(),
-      diagnostics(),
-      wrap(codeium_status() .. plugins(), false, "left"),
-      wrap(getFileName(), true, "right"),
-    }
-    table.insert(left_section, "  ")
-    table.insert(left_section, diff())
-  else
-    right_section = {
-      wrap(codeium_status() .. plugins(), false, "left"),
-      wrap(getFileName(), true, "right"),
-    }
+  local wide = is_wide()
+  if wide then
+    table.insert(left, "  ")
+    table.insert(left, diff())
   end
 
-  return table.concat(left_section) .. "%=" .. table.concat(right_section)
+  local right = {
+    wide and macro() or "",
+    wide and diagnostics() or "",
+    wrap(codeium_status() .. plugins(), false, "left"),
+    wrap(getFileName(), true, "right"),
+  }
+
+  return table.concat(left) .. "%=" .. table.concat(right)
 end
 
 function M.setup()
