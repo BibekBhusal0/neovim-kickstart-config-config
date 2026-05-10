@@ -86,7 +86,8 @@ local function diagnostics()
 end
 
 local function codeium_status()
-  if not package.loaded["neocodeium"] then
+  local ok, neocodeium = pcall(require, "neocodeium")
+  if not ok then
     return ""
   end
   local symbols = {
@@ -100,12 +101,16 @@ local function codeium_status()
     },
     server_status = { [0] = "󰣺 ", [1] = "󰣻 ", [2] = "󰣽 " },
   }
-  local status, serverStatus = require("neocodeium").get_status()
+  local status, serverStatus = neocodeium.get_status()
   return symbols.status[status] .. symbols.server_status[serverStatus] .. " | "
 end
 
 local function plugins()
-  local stats = require("lazy").stats()
+  local ok, lazy = pcall(require, "lazy")
+  if not ok then
+    return ""
+  end
+  local stats = lazy.stats()
   return string.format(" %d/%d", stats.loaded, stats.count)
 end
 
