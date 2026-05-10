@@ -1,5 +1,6 @@
 local map = require "utils.map"
 local search_ns = vim.api.nvim_create_namespace "search_count"
+vim.opt.hlsearch = true
 
 local function clear_search()
   vim.cmd "nohlsearch"
@@ -14,7 +15,7 @@ local function update_search_count()
       local text = string.format("[%d/%d]", count.current, count.total)
       local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
       vim.api.nvim_buf_set_extmark(0, search_ns, lnum, 0, {
-        virt_text = { { text, "Search" } },
+        virt_text = { { text, "CurSearch" } },
         virt_text_pos = "eol",
       })
     end

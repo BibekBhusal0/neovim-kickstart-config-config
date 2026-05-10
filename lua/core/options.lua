@@ -49,7 +49,6 @@ vim.opt.listchars = {
   leadmultispace = "▏ ",
 }
 
-vim.opt.hlsearch = true
 -- spell
 vim.opt.spelllang = "en_us"
 vim.opt.spell = false
