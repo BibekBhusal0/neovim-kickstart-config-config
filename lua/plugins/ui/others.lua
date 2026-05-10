@@ -10,4 +10,13 @@ return {
       handlers = { gitsigns = true },
     },
   }, -- scrollbar showing gitsigns and diagnostics
+
+  {
+    "rachartier/tiny-cmdline.nvim",
+    init = function()
+      vim.opt.cmdheight = 0
+    end,
+    opts = { native_types = {} },
+    event = "CmdlineEnter",
+  },
 }
