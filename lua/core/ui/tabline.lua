@@ -86,7 +86,8 @@ function M.tabline()
     local is_modified = vim.api.nvim_buf_get_option(bufnr, "modified")
     local modified_icon = is_modified and " ●" or ""
     local extension = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":e")
-    local icon, _ = require("nvim-web-devicons").get_icon(all_tails[i], extension, { default = true })
+    local icon, _ =
+      require("nvim-web-devicons").get_icon(all_tails[i], extension, { default = true })
 
     local display_name = name
     if vim.fn.strdisplaywidth(name) > max_name_width then
