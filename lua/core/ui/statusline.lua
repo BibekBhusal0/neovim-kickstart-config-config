@@ -106,21 +106,37 @@ local function getFileName()
   if vim.bo.buftype == "terminal" then
     return "terminal"
   end
-  if not is_wide() then
-    return vim.fn.expand "%:t"
+
+  local name = vim.api.nvim_buf_get_name(0)
+  if name == "" then
+    return "[No Name]"
   end
 
-  local relative_path = vim.fn.fnamemodify(vim.fn.expand "%:p", ":.")
-  local home = vim.fn.expand "~"
-  relative_path = relative_path:gsub("^" .. vim.pesc(home), "~")
-
-  if #relative_path > 30 then
-    local ok, plenary_path = pcall(require, "plenary.path")
-    if ok then
-      relative_path = plenary_path:new(relative_path):shorten(1)
+  if name:match "^diffview://" then
+    local path = name:match "%.git/[a-f0-9]+/(.*)$"
+    name = path and ("DV: " .. path) or name:gsub("^diffview://", "")
+  else
+    if not is_wide() then
+      name = vim.fn.fnamemodify(name, ":t")
+    else
+      name = vim.fn.fnamemodify(name, ":.")
+      local home = vim.fn.expand "~"
+      name = name:gsub("^" .. vim.pesc(home), "~")
     end
   end
-  return relative_path == "" and "[No Name]" or relative_path
+
+  if #name > 30 then
+    local ok, plenary_path = pcall(require, "plenary.path")
+    if ok then
+      name = plenary_path:new(name):shorten(1)
+    end
+  end
+
+  if #name > 30 then
+    name = "..." .. name:sub(-27)
+  end
+
+  return name
 end
 
 function M.statusline()
