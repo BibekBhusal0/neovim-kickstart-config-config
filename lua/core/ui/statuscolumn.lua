@@ -74,7 +74,7 @@ function M.setup()
   map("<leader>nn", toggle_line_numbers, "Toggle Line Numbers")
 
   local group = vim.api.nvim_create_augroup("StatusColumn", { clear = true })
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "TermOpen" }, {
     group = group,
     callback = function()
       if
