@@ -29,8 +29,6 @@ M.on_load = function(data)
       vim.api.nvim_tabpage_set_var(tab, "name", name)
     end
   end
-
-  require("bufferline.ui").refresh()
 end
 
 return M

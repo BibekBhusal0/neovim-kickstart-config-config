@@ -135,7 +135,7 @@ return {
     opts = {
       workspaces = { { name = "main", path = obsidian_dir } },
       legacy_commands = false,
-      log_level = vim.log.levels.OFF,
+      log_level = vim.log.levels.INFO,
       templates = {
         folder = "templates/main",
         date_format = "%Y-%m-%d",
@@ -160,7 +160,7 @@ return {
           insert_tag = "<A-i>",
         },
       },
-      ui = { enable = false },
+      ui = { enable = true },
       attachments = {
         folder = "files",
         img_name_func = function()
