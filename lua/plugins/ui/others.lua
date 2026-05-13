@@ -16,7 +16,7 @@ return {
     init = function()
       vim.opt.cmdheight = 0
     end,
-    opts = { native_types = {} },
+    opts = { native_types = { "-" } },
     event = "CmdlineEnter",
   },
 }
