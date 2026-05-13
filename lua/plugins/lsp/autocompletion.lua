@@ -54,9 +54,7 @@ return {
 
     vim.api.nvim_set_hl(0, "PmenuSel", { fg = "NONE", background = "#333333" })
 
-    local winhighlight = {
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
-    }
+    local winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel"
 
     cmp.setup {
       snippet = {
@@ -68,11 +66,11 @@ return {
       window = {
         completion = cmp.config.window.bordered {
           border = "single",
-          winhighlight = winhighlight.winhighlight,
+          winhighlight = winhighlight,
         },
         documentation = cmp.config.window.bordered {
           border = "single",
-          winhighlight = winhighlight.winhighlight,
+          winhighlight = winhighlight,
         },
       },
 
