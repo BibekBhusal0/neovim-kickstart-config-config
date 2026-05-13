@@ -12,6 +12,12 @@ end
 
 local function get_buffer_name(bufnr, all_names)
   local name = vim.api.nvim_buf_get_name(bufnr)
+
+  if vim.api.nvim_get_option_value("buftype", { buf = bufnr }) == "terminal" then
+    local term_name = name:gsub(".*//", ""):gsub("^%d+:", "")
+    return vim.fn.fnamemodify(term_name, ":t")
+  end
+
   if name == "" then
     return "[No Name]"
   end
@@ -84,11 +90,15 @@ function M.tabline()
     end
     local name = get_buffer_name(bufnr, all_tails)
     local is_active = bufnr == current_buf
-    local is_modified = vim.api.nvim_buf_get_option(bufnr, "modified")
+    local is_modified = vim.api.nvim_get_option_value("modified", { buf = bufnr })
     local modified_icon = is_modified and " ●" or ""
     local extension = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":e")
     local icon = " "
-    if ok_devicons then
+    local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
+
+    if buftype == "terminal" then
+      icon = " "
+    elseif ok_devicons then
       icon = devicons.get_icon(all_tails[i], extension, { default = true })
     end
 
