@@ -160,7 +160,7 @@ return {
           insert_tag = "<A-i>",
         },
       },
-      ui = { enable = true },
+      ui = { enable = false },
       attachments = {
         folder = "files",
         img_name_func = function()
