@@ -15,7 +15,7 @@ return {
   opts = {
     mappings = {
       pull_request = {
-        merge_pr = { lhs = "<leader>pm", desc = "Merge PR" },
+        merge_pr = { lhs = "<leader>Pm", desc = "Merge PR" },
       },
       notification = {
         read = { lhs = "<leader>nr", desc = "mark notification as read" },

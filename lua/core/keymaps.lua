@@ -57,9 +57,10 @@ map("*", "*zz", "Next Current term")
 map("#", "#zz", "Previous Current term")
 
 -- copy/paste to
--- system clipboard with leader y
+-- system clipboard with leader y/p
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard", { "n", "v" })
+map("<leader>p", '"+p', "Paste from system clipboard", { "n", "v" })
 
 --When pasting don't yank and indent
 map("p", "]p", "Paste")
