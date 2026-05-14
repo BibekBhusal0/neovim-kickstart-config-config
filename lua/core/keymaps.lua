@@ -67,6 +67,8 @@ map("p", "p=']", "Paste")
 map("P", "P=']", "Paste before")
 map("p", "\"_dP=']", "Paste", "x")
 map("P", "\"_dP=']", "Paste before", "x")
+map("]p", "o<Esc>p=']", "Paste below")
+map("[p", "O<Esc>p=']", "Paste above")
 
 -- yank all
 map("<leader>k", "ggVGy", "Yank all")
