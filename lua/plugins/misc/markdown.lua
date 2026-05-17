@@ -177,7 +177,9 @@ return {
       end,
       callbacks = {
         enter_note = function(note)
-          if not note then return end
+          if not note then
+            return
+          end
           vim.keymap.set("n", "gF", ":Obsidian follow_link vsplit<cr>", {
             buffer = note.bufnr,
             desc = "Follow link vertical split",
