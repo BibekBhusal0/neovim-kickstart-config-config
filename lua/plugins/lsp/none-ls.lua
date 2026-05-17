@@ -6,7 +6,7 @@ end
 
 return {
   "nvimtools/none-ls.nvim",
-  event = "InsertEnter",
+  event = "LspAttach",
   dependencies = {
     "nvimtools/none-ls-extras.nvim",
     "jayp0521/mason-null-ls.nvim",
