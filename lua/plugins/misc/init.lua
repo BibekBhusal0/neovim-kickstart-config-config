@@ -54,6 +54,18 @@ return {
       },
       { "<leader>rj", ":Browse<CR>", desc = "Search any" },
       { "<leader>rb", ":Browse bookmarks_manual<CR>", desc = "Search Bookmarks" },
+      {
+        "<leader>ro",
+        function()
+          local file = vim.fn.expand "<cfile>"
+          if file:match "https?://" then
+            require("browse.utils").default_search(file)
+          else
+            require("browse").input_search(vim.fn.expand "<cword>")
+          end
+        end,
+        desc = "Open link or search",
+      },
       { "<leader>ri", ":Browse input<CR>", desc = "Search" },
     },
 
