@@ -61,7 +61,16 @@ return {
           if file:match "https?://" then
             require("browse.utils").default_search(file)
           else
-            require("browse").input_search(vim.fn.expand "<cword>")
+            local config = require "browse.config"
+            local provider = config.opts.provider
+            local word = vim.fn.expand "<cword>"
+            local url = string.format("https://%s.com/search?q=%s", provider, word)
+            if provider == "brave" then
+              url = string.format("https://search.%s.com/search?q=%s", provider, word)
+            elseif provider == "duckduckgo" then
+              url = string.format("https://%s.com/?q=%s", provider, word)
+            end
+            require("browse.utils").default_search(url)
           end
         end,
         desc = "Open link or search",
