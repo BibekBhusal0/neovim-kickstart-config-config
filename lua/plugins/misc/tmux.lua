@@ -7,7 +7,7 @@ end
 
 return {
   {
-    enabled = os.getenv "TMUX" ~= nil,
+    lazy = os.getenv "TMUX" == nil,
     "vimpostor/vim-tpipeline",
     config = function()
       hide_lualine()
