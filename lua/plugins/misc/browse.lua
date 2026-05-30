@@ -23,6 +23,8 @@ return {
         local file = vim.fn.expand "<cfile>"
         if file:match "https?://" then
           require("browse.utils").default_search(file)
+        elseif file:match "^[%w%.%-]+/[%w%.%-_]+$" then
+          require("browse.utils").default_search("https://github.com/" .. file)
         else
           local config = require "browse.config"
           local provider = config.opts.provider
