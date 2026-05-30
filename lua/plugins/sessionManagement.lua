@@ -6,6 +6,15 @@ command("Qs", function()
   vim.cmd "qa!"
 end, {})
 
+command("Qas", function()
+  local resession = require "resession"
+  local current = resession.get_current()
+  if current and current ~= "" then
+    resession.save(current, { notify = false })
+  end
+  vim.cmd "qa!"
+end, {})
+
 command("Load", function()
   require("resession").load("auto-session", { silence_errors = true })
 end, {})
@@ -43,6 +52,8 @@ command("SessionDelete", function(opts)
 end, { nargs = "?" })
 
 vim.cmd "cnoreabbrev <expr> qs ((getcmdtype() == ':' && getcmdline() ==# 'qs') ? 'Qs' : 'qs')"
+vim.cmd "cnoreabbrev <expr> qas ((getcmdtype() == ':' && getcmdline() ==# 'qas') ? 'Qas' : 'qas')"
+vim.cmd "cnoreabbrev <expr> qsa ((getcmdtype() == ':' && getcmdline() ==# 'qsa') ? 'Qas' : 'qsa')"
 vim.cmd "cnoreabbrev <expr> load ((getcmdtype() == ':' && getcmdline() ==# 'load') ? 'Load' : 'load')"
 
 return {
