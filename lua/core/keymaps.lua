@@ -250,15 +250,24 @@ map("<S-Tab>", ":bprev<CR>", "Buffer Cycle Prev")
 -- Command mode
 local function spltis(mod)
   local cmd = vim.fn.getcmdline()
-  return string.format("<C-\\>e'%s %s'<CR><CR>", mod, cmd)
+  if cmd == "" then
+    return ""
+  end
+
+  local action, args = cmd:match "^(%S+)%s*(.*)$"
+  local edits = { e = true, edit = true, vi = true }
+  local terms = { term = true, terminal = true }
+
+  local target = edits[action] and args or (terms[action] and ("| term " .. args) or cmd)
+  return string.format("<C-\\>e'%s %s'<CR>", mod, target:gsub("'", "''"))
 end
 
 map("<C-l>", function()
-  return spltis "vertical"
+  return spltis "vsplit"
 end, "Vertical Split Command", "c", { expr = true })
 map("<C-j>", function()
-  return spltis "horizontal"
+  return spltis "split"
 end, "Horizontal Split Command", "c", { expr = true })
 map("<C-cr>", function()
-  return spltis "tab"
+  return spltis "tabnew"
 end, "Tab Split Command", "c", { expr = true })

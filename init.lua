@@ -22,7 +22,7 @@ require("lazy").setup {
   require "plugins.debugging", -- Debugger
   require "plugins.fff", -- Fricking fast finder
   require "plugins.git", -- Git stuff like gitsigns, fugitive
-  require "plugins.lsp", -- Every thing Lsp related
+  -- require "plugins.lsp", -- Every thing Lsp related
   require "plugins.mini", -- Yet another file explorer
   require "plugins.misc", -- Miscellaneous utility plugins
   require "plugins.neotree", -- File explorer for Neovim
