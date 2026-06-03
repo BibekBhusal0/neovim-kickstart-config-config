@@ -246,3 +246,19 @@ map("<leader>bL", close_right, "Buffer Close Right")
 map("<leader>bq", close_all_saved_buffers, "Buffer Close Saved")
 map("<Tab>", ":bnext<CR>", "Buffer Cycle Next")
 map("<S-Tab>", ":bprev<CR>", "Buffer Cycle Prev")
+
+-- Command mode
+local function spltis(mod)
+  local cmd = vim.fn.getcmdline()
+  return string.format("<C-\\>e'%s %s'<CR><CR>", mod, cmd)
+end
+
+map("<C-l>", function()
+  return spltis "vertical"
+end, "Vertical Split Command", "c", { expr = true })
+map("<C-j>", function()
+  return spltis "horizontal"
+end, "Horizontal Split Command", "c", { expr = true })
+map("<C-cr>", function()
+  return spltis "tab"
+end, "Tab Split Command", "c", { expr = true })
