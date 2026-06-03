@@ -29,9 +29,9 @@ end, { nargs = "?" })
 
 command("SessionLoad", function(opts)
   if opts.args ~= "" then
-    require("resession").load(opts.args, { attach = true, silence_errors = false })
+    require("resession").load(opts.args, { attach = true, silence_errors = true })
   else
-    require("resession").load(nil, { attach = true, silence_errors = false })
+    require("resession").load(nil, { attach = true, silence_errors = true })
   end
 end, { nargs = "?" })
 
