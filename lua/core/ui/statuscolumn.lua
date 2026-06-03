@@ -94,6 +94,11 @@ function M.foldfunc()
   if not foldcol_enabled then
     return ""
   end
+
+  if vim.v.virtnum ~= 0 then
+    return ""
+  end
+
   local lnum = vim.v.lnum
   local foldlevel = vim.fn.foldlevel(lnum)
   if foldlevel <= 0 then
@@ -117,18 +122,19 @@ function M.foldfunc()
 end
 
 function M.lnumfunc()
-  local left_pad = ""
-  if foldcol_enabled then
-    left_pad = " "
-  end
+  local left_pad = foldcol_enabled and " " or ""
 
   if not numcol_enabled then
     return left_pad
   end
 
+  local nuw = vim.wo.numberwidth
+  if vim.v.virtnum ~= 0 then
+    return left_pad .. (" "):rep(nuw) .. "%="
+  end
+
   local lnum = vim.v.lnum
   local relnum = vim.v.relnum
-  local nuw = vim.wo.numberwidth
 
   local display_str
   if relnum == 0 then
