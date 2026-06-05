@@ -25,7 +25,18 @@ local function mode()
     R = "REPLACE",
     t = "TERMINAL",
   }
-  return " " .. (mode_names[m] or m) .. " "
+
+  local mode_name = mode_names[m] or m
+  local res = " " .. mode_name
+
+  if m == "v" or m == "V" or m == "\22" then
+    local vline = vim.fn.line "v"
+    local curline = vim.fn.line "."
+    local count = math.abs(curline - vline) + 1
+    res = string.format("%s (%d)", res, count)
+  end
+
+  return res .. " "
 end
 
 local function git_branch()
@@ -181,7 +192,7 @@ function M.setup()
   vim.o.laststatus = 3
   vim.opt.statusline = "%!v:lua.require'core.ui.statusline'.statusline()"
 
-  vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+  vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave", "CursorMoved", "CursorMovedI" }, {
     callback = function()
       vim.cmd "redrawstatus"
     end,
