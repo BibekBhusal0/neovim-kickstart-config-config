@@ -192,11 +192,14 @@ function M.setup()
   vim.o.laststatus = 3
   vim.opt.statusline = "%!v:lua.require'core.ui.statusline'.statusline()"
 
-  vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave", "CursorMoved", "CursorMovedI" }, {
-    callback = function()
-      vim.cmd "redrawstatus"
-    end,
-  })
+  vim.api.nvim_create_autocmd(
+    { "RecordingEnter", "RecordingLeave", "CursorMoved", "CursorMovedI" },
+    {
+      callback = function()
+        vim.cmd "redrawstatus"
+      end,
+    }
+  )
 end
 
 return M
