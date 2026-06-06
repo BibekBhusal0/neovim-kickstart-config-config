@@ -44,19 +44,26 @@ function RemoveAllComments(o)
   for _, r in ipairs(comments) do
     local range_start_row, range_start_col, range_end_row, range_end_col = r[1], r[2], r[3], r[4]
 
-    if range_start_row == range_end_row then
-      local line = vim.api.nvim_buf_get_lines(bufnr, range_start_row, range_start_row + 1, false)[1]
-      local new_line = line:sub(1, range_start_col) .. line:sub(range_end_col + 1)
-      vim.api.nvim_buf_set_lines(bufnr, range_start_row, range_start_row + 1, false, { new_line })
-    else
-      vim.api.nvim_buf_set_text(
-        bufnr,
-        range_start_row,
-        range_start_col,
-        range_end_row,
-        range_end_col,
-        {}
-      )
+    local lines = vim.api.nvim_buf_get_lines(bufnr, range_start_row, range_end_row + 1, false)
+    if #lines > 0 then
+      local first_line = lines[1]
+      local last_line = lines[#lines]
+
+      local before = first_line:sub(1, range_start_col):gsub("%s*$", "")
+      local after = last_line:sub(range_end_col + 1):gsub("^%s*", "")
+
+      if before == "" and after == "" then
+        vim.api.nvim_buf_set_lines(bufnr, range_start_row, range_end_row + 1, false, {})
+      else
+        vim.api.nvim_buf_set_text(
+          bufnr,
+          range_start_row,
+          0,
+          range_end_row,
+          #last_line,
+          { before .. after }
+        )
+      end
     end
   end
 end
