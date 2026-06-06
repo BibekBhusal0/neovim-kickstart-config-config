@@ -11,13 +11,16 @@ return {
   {
     "nvim-mini/mini.operators",
     keys = {
-      { "g=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
+      { "=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
       { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
       { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
       { "gs", mode = { "n", "o", "x" }, desc = "Mini Sort" },
       { "gx", mode = { "n", "o", "x" }, desc = "Mini Exchange" },
     },
-    opts = { replace = { prefix = "cr" } },
+    opts = {
+      replace = { prefix = "cr" },
+      evaluate = { prefix = "=" },
+    },
   }, -- sorting with motion
 
   {
