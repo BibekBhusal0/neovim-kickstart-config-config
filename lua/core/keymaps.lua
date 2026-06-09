@@ -259,7 +259,7 @@ local function spltis(mod)
   local terms = { term = true, terminal = true }
 
   local target = edits[action] and args or (terms[action] and ("| term " .. args) or cmd)
-  return string.format("<C-\\>e'%s %s'<CR>", mod, target:gsub("'", "''"))
+  return string.format("<C-\\>e'%s %s'<CR><CR>", mod, target:gsub("'", "''"))
 end
 
 map("<C-l>", function()
