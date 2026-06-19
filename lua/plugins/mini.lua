@@ -11,7 +11,7 @@ return {
   {
     "nvim-mini/mini.operators",
     keys = {
-      { "=", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
+      { "ge", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
       { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
       { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
       { "gs", mode = { "n", "o", "x" }, desc = "Mini Sort" },
@@ -19,7 +19,7 @@ return {
     },
     opts = {
       replace = { prefix = "cr" },
-      evaluate = { prefix = "=" },
+      evaluate = { prefix = "ge" },
     },
   }, -- sorting with motion
 
