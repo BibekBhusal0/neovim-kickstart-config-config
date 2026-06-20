@@ -70,6 +70,7 @@ return {
       to_do = {
         highlight = false,
         sort = { on_status_change = false, recursive = false, cursor_behavior = { track = true } },
+        statuses = { in_progress = { marker = "/" } },
       },
       mappings = {
         MkdnEnter = { { "i" }, "<CR>" },
