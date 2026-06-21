@@ -1,0 +1,21 @@
+lua/plugins/lsp/formatter.lua
+  s_63f9edf81052b0::t_7797d37136f8b8 32
+  s_63f9edf81052b0::t_bc2e871f479713 20-22
+  s_63f9edf81052b0::t_26ac9e98334124 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "682bd5ae715e7379bb8173163abc7dfcd9f3f0df",
+  "prompts": {},
+  "sessions": {
+    "s_63f9edf81052b0": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_115dc4f1fffe3FUqFdqlPfy4o7",
+        "model": "big-pickle"
+      },
+      "human_author": "Bibek Bhusal <bibekbhusal04@gmail.com>"
+    }
+  }
+}
