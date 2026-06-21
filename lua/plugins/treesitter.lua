@@ -4,12 +4,11 @@ local mode = { "n", "x", "o" }
 
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    "romus204/tree-sitter-manager.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-    build = ":TSUpdate",
+    cmd = { "TSInstall", "TSUninstall", "TSManager" },
     config = function()
-      require("nvim-treesitter").setup {
+      require("tree-sitter-manager").setup {
         ensure_installed = {
           "bash",
           "css",
@@ -28,12 +27,8 @@ return {
           "yaml",
         },
         auto_install = true,
-        highlight = {
-          enable = true,
-          use_languagetree = true,
-          additional_vim_regex_highlighting = { "ruby" },
-        },
-        indent = { enable = true },
+        highlight = true,
+        nerdfont = true,
       }
       vim.treesitter.language.register("markdown", "vimwiki")
     end,
