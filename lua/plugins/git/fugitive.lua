@@ -1,4 +1,3 @@
-local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 map("<leader>g/", ":Git stash<CR>", "Git stash")
@@ -11,38 +10,12 @@ map("<leader>gj", ":Git commit -a --amend --no-edit<CR>", "Git add and commit to
 map("<leader>gP", ":Git pull<CR>", "Git pull")
 map("<leader>gp", ":Git push<CR>", "Git push")
 
-local function changeBranch()
-  require "utils.input"("Branch Name", function(text)
-    local safe = vim.fn.shellescape(vim.trim(text))
-    vim.cmd("Git checkout -b " .. safe)
-  end, "", 20, require("utils.icons").others.git .. " ")
-end
-
-map("<leader>Gb", changeBranch, "Git Change Branch")
-
 return {
   {
-    "tpope/vim-fugitive",
-    cmd = {
-      "GBrowse",
-      "GDelete",
-      "Gdiffsplit",
-      "Gedit",
-      "Ggrep",
-      "Git",
-      "GMove",
-      "Gread",
-      "GRemove",
-      "GRename",
-      "Gwrite",
-    },
-  },
-
-  {
-    "tpope/vim-rhubarb",
-    cmd = { "GBrowse" },
-    keys = wrap_keys {
-      { "<leader>go", ":GBrowse<CR>", desc = "Git open in browser", mode = { "n", "v" } },
-    },
+    "nvim-mini/mini-git",
+    config = function()
+      require("mini.git").setup()
+    end,
+    cmd = { "Git" },
   },
 }
