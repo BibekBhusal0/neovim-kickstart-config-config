@@ -45,7 +45,6 @@ return {
       { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" },
     },
     cmd = {
-      "Subs",
       "TextCaseOpenTelescope",
       "TextCaseOpenTelescopeQuickChange",
       "TextCaseOpenTelescopeLSPChange",

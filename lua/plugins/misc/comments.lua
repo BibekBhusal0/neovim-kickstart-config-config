@@ -98,12 +98,6 @@ return {
 
   {
     "jeangiraldoo/codedocs.nvim",
-    keys = wrap_keys {
-      {
-        "<Leader>CD",
-        ":Codedocs<CR>",
-        desc = "Toggle comment docs",
-      },
-    },
+    keys = wrap_keys { { "<Leader>CD", ":Codedocs<CR>", desc = "Toggle comment docs" } },
   }, -- Easy to add Doc comments in different languages
 }

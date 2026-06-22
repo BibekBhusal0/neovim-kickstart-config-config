@@ -31,7 +31,7 @@ return {
     { "<leader>ce", ":Trouble diagnostics toggle<CR>", desc = "Trouble Diagnostics Toggle" },
     {
       "<leader>cL",
-      ":Trouble lsp toggle focus=false win.position=right<CR>",
+      ":Trouble lsp_document_symbols focus=false win.position=right<CR>",
       desc = "Trouble LSP Toggle",
     },
     { "<leader>cq", ":Trouble qflist toggle<CR>", desc = "Trouble Quickfix Toggle" },
