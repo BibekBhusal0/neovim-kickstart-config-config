@@ -68,4 +68,19 @@ return {
     build = "npm install -g live-server",
     cmd = { "LiveServerStart" },
   },
+
+  {
+    "dmmulroy/tsc.nvim",
+    opts = {
+      use_trouble_qflist = true,
+      enable_progress_notifications = true,
+      flags = { build = true, watch = true, noEmit = false, project = false },
+      hide_progress_notifications_from_history = true,
+      pretty_errors = true,
+    },
+    keys = wrap_keys {
+      { "<Leader>tt", ":TSC<CR>", desc = "Run Type check" },
+    },
+    cmd = { "TSCClose", "TSCOpen", "TSC" },
+  },
 }
