@@ -37,7 +37,7 @@ return {
       { "<C-\\>", "<C-\\><C-N><CMD>NavigatorPrevious<CR>", desc = "Window Previous", mode = modes },
     },
     config = function()
-      require("Navigator").setup({})
+      require("Navigator").setup {}
     end,
   },
 }
