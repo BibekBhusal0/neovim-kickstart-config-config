@@ -72,9 +72,9 @@ return {
           symbols = require("utils.icons").diagnostics,
         },
         file_size = { enabled = true, required_width = 64 },
-        type = { enabled = true, required_width = 122 },
-        last_modified = { enabled = true, required_width = 88 },
-        created = { enabled = true, required_width = 110 },
+        type = { enabled = false, required_width = 122 },
+        last_modified = { enabled = false, required_width = 88 },
+        created = { enabled = false, required_width = 110 },
         symlink_target = { enabled = false },
       },
       -- see `:h neo-tree-custom-commands-global`
