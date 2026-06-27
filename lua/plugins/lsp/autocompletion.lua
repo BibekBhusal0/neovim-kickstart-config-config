@@ -75,14 +75,11 @@ return {
       },
 
       mapping = cmp.mapping.preset.insert {
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<A-i>"] = cmp.mapping.abort(),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-y>"] = cmp.mapping.confirm { select = true },
         ["<A-y>"] = cmp.mapping.confirm { select = true },
-        ["<A-b>"] = cmp.mapping.complete {},
         ["<A-p>"] = cmp.mapping.complete {},
         ["<C-S-l>"] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
@@ -102,6 +99,19 @@ return {
           end
         end),
 
+
+        ["<C-n>"] = cmp.mapping(function()
+          if not cmp.visible() then
+            cmp.mapping.complete()()
+          end
+          cmp.select_next_item()
+        end),
+        ["<C-p>"] = cmp.mapping(function()
+          if not cmp.visible() then
+            cmp.mapping.complete()()
+          end
+          cmp.select_prev_item()
+        end),
         -- For more advanced LuaSnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         -- Select next/previous item with Tab / Shift + Tab
