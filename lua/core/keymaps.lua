@@ -130,34 +130,20 @@ end, "Jump Previous Diagnostic")
 
 local copy_diagnostic = function()
   local bufnr = vim.api.nvim_get_current_buf()
-  local pos = vim.api.nvim_win_get_cursor(0)
-  local lnum, col = pos[1] - 1, pos[2]
+  local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
 
   local diagnostics = vim.diagnostic.get(bufnr, { lnum = lnum })
   if #diagnostics == 0 then
     return
   end
 
-  -- Find the closest diagnostic on the current line
-  local closest_diagnostic
-  local min_distance = math.huge
+  local lines = {}
   for _, d in ipairs(diagnostics) do
-    local start_col = d.col
-    local end_col = d.end_col or start_col
-    -- Check if cursor is within the diagnostic range
-    if col >= start_col and col <= end_col then
-      closest_diagnostic = d
-      break
-    end
-    -- Otherwise, keep track of the closest one
-    local distance = math.min(math.abs(col - start_col), math.abs(col - end_col))
-    if distance < min_distance then
-      min_distance = distance
-      closest_diagnostic = d
-    end
+    local severity = vim.diagnostic.severity[d.severity] or "ERROR"
+    table.insert(lines, string.format("[%s] %s", severity, d.message))
   end
 
-  vim.fn.setreg("+", closest_diagnostic.message)
+  vim.fn.setreg("+", table.concat(lines, "\n"))
 end
 
 local function undotree()
