@@ -17,6 +17,7 @@ end
 
 return {
   "dmtrKovalenko/fff.nvim",
+  dependencies = { { "folke/snacks.nvim", lazy = true } },
   build = function()
     require("fff.download").download_or_build_binary()
   end,
