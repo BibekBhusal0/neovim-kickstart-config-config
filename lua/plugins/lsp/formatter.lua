@@ -18,7 +18,7 @@ return {
   },
 
   config = function()
-    require("mason-tool-installer").setup { ensure_installed = { "stylua", "prettier" } }
+    require("mason-tool-installer").setup { ensure_installed = { "stylua", "prettier", "rustfmt" } }
     require("conform").setup {
       formatters_by_ft = {
         lua = { "stylua" },
@@ -37,6 +37,7 @@ return {
         vue = { "prettier" },
         tsx = { "prettier" },
         yaml = { "prettier" },
+        rust = { "rustfmt" },
       },
       format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
       ["_"] = { "trim_whitespace" },
