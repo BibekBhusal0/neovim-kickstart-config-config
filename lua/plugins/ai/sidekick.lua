@@ -3,7 +3,7 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   "folke/sidekick.nvim",
   cmd = "Sidekick",
-  opts = {},
+  opts = { cli = { tools = { antigravity = { cmd = { "agy" } } } } },
   keys = wrap_keys {
     {
       "<c-.>",
