@@ -60,15 +60,15 @@ map("#", "#zz", "Previous Current term")
 -- system clipboard with leader y/p
 map("<leader>y", '"+y', "Yank to system clipboard", { "n", "v" })
 map("<leader>Y", '"+Y', "Yank line to system clipboard", { "n", "v" })
-map("<leader>p", '"+p', "Paste from system clipboard", { "n", "v" })
+-- map("<leader>p", '"+p', "Paste from system clipboard", { "n", "v" })
 
---When pasting don't yank and indent
-map("p", "p=']", "Paste")
-map("P", "P=']", "Paste before")
-map("p", "\"_dP=']", "Paste", "x")
-map("P", "\"_dP=']", "Paste before", "x")
-map("]p", "o<Esc>p=']", "Paste below")
-map("[p", "O<Esc>p=']", "Paste above")
+-- --When pasting don't yank and indent
+-- map("p", "p=']", "Paste")
+-- map("P", "P=']", "Paste before")
+-- map("p", "\"_dP=']", "Paste", "x")
+-- map("P", "\"_dP=']", "Paste before", "x")
+-- map("]p", "o<Esc>p=']", "Paste below")
+-- map("[p", "O<Esc>p=']", "Paste above")
 
 -- yank all
 map("<leader>k", "ggVGy", "Yank all")

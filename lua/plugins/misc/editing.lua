@@ -58,4 +58,25 @@ return {
     cmd = { "Import" },
     keys = wrap_keys { { "<leader>fi", ":Import<CR>", desc = "Import" } },
   },
+
+  {
+    "nemanjamalesija/smart-paste.nvim",
+    config = true,
+    keys = {
+      { "{", mode = { "n", "x" } },
+      { "p", mode = { "n", "x" } },
+      { "P", mode = { "n", "x" } },
+      { "gp", mode = { "n", "x" } },
+      { "gP", mode = { "n", "x" } },
+      { "]p", mode = { "n", "x" } },
+      { "]P", mode = { "n", "x" } },
+      {
+        "<leader>p",
+        function()
+          require("smart-paste").paste { register = "+", key = "p" }
+        end,
+        mode = { "n", "x" },
+      },
+    },
+  },
 }
