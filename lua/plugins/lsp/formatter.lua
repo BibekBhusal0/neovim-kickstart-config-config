@@ -18,7 +18,7 @@ return {
   },
 
   config = function()
-    require("mason-tool-installer").setup { ensure_installed = { "stylua", "prettier", "rustfmt" } }
+    require("mason-tool-installer").setup { ensure_installed = { "stylua", "prettier" } }
     require("conform").setup {
       formatters_by_ft = {
         lua = { "stylua" },
