@@ -14,7 +14,7 @@ return {
   {
     "nvzone/showkeys",
     cmd = "ShowkeysToggle",
-    keys = wrap_keys { { "<leader>Sk", ":ShowkeysToggle<CR>", desc = "Toggle Showkeys" } },
+    keys = wrap_keys { { "<leader>sk", ":ShowkeysToggle<CR>", desc = "Toggle Showkeys" } },
     opts = {
       timeout = 1,
       maxkeys = 5,

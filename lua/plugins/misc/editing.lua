@@ -66,8 +66,6 @@ return {
       { "{", mode = { "n", "x" } },
       { "p", mode = { "n", "x" } },
       { "P", mode = { "n", "x" } },
-      { "gp", mode = { "n", "x" } },
-      { "gP", mode = { "n", "x" } },
       { "]p", mode = { "n", "x" } },
       { "]P", mode = { "n", "x" } },
       {
@@ -75,6 +73,23 @@ return {
         function()
           require("smart-paste").paste { register = "+", key = "p" }
         end,
+        desc = "Paste from system clipboard",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>]p",
+        function()
+          require("smart-paste").paste { register = "+", key = "]p" }
+        end,
+        desc = "Paste below from system clipboard",
+        mode = { "n", "x" },
+      },
+      {
+        "<leader>[p",
+        function()
+          require("smart-paste").paste { register = "+", key = "[p" }
+        end,
+        desc = "Paste above from system clipboard",
         mode = { "n", "x" },
       },
     },

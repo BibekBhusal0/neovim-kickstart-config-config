@@ -7,6 +7,8 @@ return {
   cmd = {
     "GitAddCommit",
     "GitCommit",
+    "GitAICommit",
+    "GitAIAddCommit",
     "GitChangeLastCommit",
     "GitChanges",
     "GitOpen",
@@ -16,6 +18,8 @@ return {
   keys = wrap_keys {
     { "<leader>gc", ":GitAddCommit<CR>", desc = "Git add and commit" },
     { "<leader>gC", ":GitCommit<CR>", desc = "Git commit" },
+    { "<leader>ag", ":GitAIAddCommit<CR>", desc = "Git Add, generate commit message and commit" },
+    { "<leader>aG", ":GitAICommit<CR>", desc = "Git generate commit message and commit" },
     { "<leader>go", ":GitOpen<CR>", desc = "Git Open" },
     { "<leader>ge", ":GitChangeLastCommit<CR>", desc = "Git Change last commit message" },
     { "<leader>gg", ":GitChanges<CR>", desc = "Git open changed files" },
