@@ -121,12 +121,6 @@ map("<leader>bl", toggle_tabline, "Toggle Tab Line")
 
 -- Diagnostic keymaps
 map("<leader>dd", vim.diagnostic.open_float, "Diagnostic floating")
-map("<leader>]d", function()
-  vim.diagnostic.jump { count = 1, float = true }
-end, "Jump next Diagnostic")
-map("<leader>[d", function()
-  vim.diagnostic.jump { count = -1, float = true }
-end, "Jump Previous Diagnostic")
 
 local copy_diagnostic = function()
   local bufnr = vim.api.nvim_get_current_buf()
