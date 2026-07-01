@@ -2,6 +2,19 @@ local map = require "utils.map"
 local wrap_keys = require "utils.wrap_keys"
 local obsidian_dir = "~/Documents/vault"
 
+local function obsidian_new_zettel()
+  local input = require "utils.input"
+  input("Note Name", function(val)
+    vim.cmd(
+      string.format(
+        "Obsidian new_from_template %s %s",
+        vim.fn.fnameescape(string.format("2 zettels/%s", val)),
+        vim.fn.fnameescape "templates/main/zettels.md"
+      )
+    )
+  end, "", 20, "󱞁 ")
+end
+
 return {
   {
     "iamcco/markdown-preview.nvim",
@@ -120,6 +133,7 @@ return {
       { "<leader>nD", ":Obsidian dailies<CR>", desc = "Obsidian Dailies" },
       { "<leader>nd", ":Obsidian today<CR>", desc = "Obsidian Today" },
       { "<leader>nj", ":Obsidian yesterday<CR>", desc = "Obsidian Yesterday" },
+      { "<leader>nz", obsidian_new_zettel, desc = "Obsidian create new zettel" },
       { "<leader>no", ":Obsidian new<CR>", desc = "Obsidian New" },
       { "<leader>nO", ":Obsidian new_from_template<CR>", desc = "Obsidian New with Tempalte" },
       { "<leader>nf", ":Obsidian quick_switch<CR>", desc = "Obsidian Find Notes" },
