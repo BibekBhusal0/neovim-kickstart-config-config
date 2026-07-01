@@ -99,7 +99,6 @@ return {
           end
         end),
 
-
         ["<C-n>"] = cmp.mapping(function()
           if not cmp.visible() then
             cmp.mapping.complete()()
