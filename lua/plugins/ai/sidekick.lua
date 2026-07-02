@@ -3,7 +3,13 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   "folke/sidekick.nvim",
   cmd = "Sidekick",
-  opts = { cli = { tools = { antigravity = { cmd = { "agy" } } } } },
+  opts = {
+    cli = {
+      prompts = {},
+      picker = "telescope",
+      tools = { antigravity = { cmd = { "agy" } } },
+    },
+  },
   keys = wrap_keys {
     {
       "<c-.>",
@@ -11,7 +17,6 @@ return {
       desc = "Sidekick Toggle",
       mode = { "n", "t", "i", "x" },
     },
-    { "<leader>aa", "<Cmd>Sidekick cli toggle<cr>", desc = "Sidekick Toggle CLI" },
     {
       "<leader>as",
       function()

@@ -27,7 +27,7 @@ return {
     prompt_vim_mode = true,
     keymaps = { move_up = { "<C-k>" }, move_down = { "<C-j>" } },
     git = { status_text_color = true },
-    debug = { enabled = false, show_scores = true },
+    debug = { enabled = false, show_scores = false },
   },
   keys = wrap_keys {
     { "<Leader>ff", ":lua require('fff').find_files()<CR>", desc = "Find files" },

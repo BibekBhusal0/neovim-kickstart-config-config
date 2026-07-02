@@ -63,7 +63,6 @@ return {
         i = "conditional",
         j = "jsx_element",
         l = "loop",
-        P = "parameter",
         r = "return",
       }
       local select_mod = require "nvim-treesitter-textobjects.select"
