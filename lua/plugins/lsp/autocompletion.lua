@@ -141,6 +141,7 @@ return {
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
+        { name = "crates" },
       },
       formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -152,6 +153,7 @@ return {
             nvim_lsp = " ",
             buffer = " ",
             path = " ",
+            crates = " ",
             codeium = require("utils.icons").others.ai .. "  ",
           })[entry.source.name]
           return vim_item

@@ -41,6 +41,8 @@ local symbols = {
   Value = "󰎠",
   Variable = "󰆧",
   codeium = "󰅩",
+  ["Version"] = "",
+  ["Feature"] = "",
 }
 
 local dap = {

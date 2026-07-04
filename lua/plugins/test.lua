@@ -51,7 +51,10 @@ return {
 
   config = function()
     require("neotest").setup {
-      adapters = { require "neotest-bun" },
+      adapters = {
+        require "neotest-bun",
+        require "rustaceanvim.neotest",
+      },
       floating = { border = "rounded" },
       output = { open_on_run = false },
       summary = { open = "botright vsplit | vertical resize 30" },

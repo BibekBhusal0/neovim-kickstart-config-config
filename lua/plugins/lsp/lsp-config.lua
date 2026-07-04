@@ -155,7 +155,7 @@ return {
           ignore = { "hyprlock.conf", "hypridle.conf" },
         },
         harper_ls = { filetypes = { "markdown" } },
-        rust_analyzer = {},
+        -- rust_analyzer = {},
       }
       require("mason").setup { PATH = "append" }
 
