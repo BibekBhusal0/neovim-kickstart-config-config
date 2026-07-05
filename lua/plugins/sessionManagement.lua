@@ -6,6 +6,32 @@ command("Qs", function()
   vim.cmd "qa!"
 end, {})
 
+command("RestoreQuickRestart", function()
+  require("resession").load("quick-restart-session", {
+    silence_errors = true,
+  })
+
+  vim.defer_fn(function()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if
+        vim.api.nvim_buf_is_loaded(buf)
+        and vim.bo[buf].buftype == ""
+        and vim.bo[buf].filetype ~= ""
+      then
+        pcall(vim.treesitter.start, buf)
+      end
+    end
+  end, 100)
+end, {})
+
+command("Sr", function()
+  require("resession").save("quick-restart-session", {
+    notify = false,
+  })
+
+  vim.cmd "restart RestoreQuickRestart"
+end, {})
+
 command("Qas", function()
   local resession = require "resession"
   local current = resession.get_current()
