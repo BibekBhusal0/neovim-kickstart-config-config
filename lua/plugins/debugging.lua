@@ -141,7 +141,7 @@ return {
       map("<leader>dR", dap.run_to_cursor, "Debugger Run to Cursor")
       map("<leader>ds", ":DapTerminate<CR>", "Debugger Stop")
       map("<leader>dT", dapui.toggle, "Debugger UI Toggle")
-      map("<leader>dt", virtual_text.toggle, "Debugger Toggle Virtual Text")
+      map("<leader>dl", virtual_text.toggle, "Debugger Toggle Virtual Text")
     end,
   },
 }
