@@ -1,11 +1,12 @@
 local wrap_keys = require "utils.wrap_keys"
 
+local fix = "Can you help me fix the diagnostics in {file}?\n{diagnostics}"
 return {
   "folke/sidekick.nvim",
   cmd = "Sidekick",
   opts = {
     cli = {
-      prompts = {},
+      prompts = { fix = fix },
       picker = "telescope",
       tools = { antigravity = { cmd = { "agy" } } },
     },
@@ -39,6 +40,13 @@ return {
         require("sidekick.cli").send { msg = "{file}" }
       end,
       desc = "Sidekick Send File",
+    },
+    {
+      "<leader>aF",
+      function()
+        require("sidekick.cli").send { msg = fix }
+      end,
+      desc = "Sidekick Ask to fix",
     },
     {
       "<leader>av",
