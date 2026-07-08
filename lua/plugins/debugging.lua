@@ -5,7 +5,6 @@ map("gp", "<Nop>")
 return {
   {
     "andrewferrier/debugprint.nvim",
-    version = "*",
     opts = {
       keymaps = {
         normal = {
@@ -23,6 +22,10 @@ return {
           textobj_surround = "",
           toggle_comment_debug_prints = "",
           delete_debug_prints = "gpx",
+          jump_prev_debug_print = "[x",
+          jump_next_debug_print = "]x",
+          jump_first_debug_print = "[X",
+          jump_last_debug_print = "]X",
         },
         insert = { plain = "", variable = "" },
         visual = { variable_below = "gpj", variable_above = "gpk" },
@@ -36,12 +39,16 @@ return {
       { "gpo", desc = "Debugprint: Textobj below" },
       { "gpO", desc = "Debugprint: Textobj above" },
       { "gpx", desc = "Debugprint: Delete all debug prints" },
+      { "[x", desc = "Debugprint: Previous debug print" },
+      { "]x", desc = "Debugprint: Next debug print" },
+      { "]X", desc = "Debugprint: Last debug print" },
+      { "[X", desc = "Debugprint: First debug print" },
       { "gpj", mode = { "n", "v" }, desc = "Debugprint: Variable below" },
       { "gpk", mode = { "n", "v" }, desc = "Debugprint: Variable above" },
       { "gpf", ":Debugprint search<Cr>", desc = "Debugprint: Search" },
       { "gp/", ":Debugprint commenttoggle<Cr>", desc = "Debugprin: Toggle comment" },
       { "gpt", ":Debugprint search<Cr>", desc = "Debugprint: search in telescope" },
-      { "gpq", ":Debugprint qflist<Cr>", desc = "Debugprint: Add debugs to quickfix list" },
+      { "gpq", ":Debugprint qflist<C>", desc = "Debugprint: Add debugs to quickfix list" },
     },
     cmd = { "Debugprint" },
   },
