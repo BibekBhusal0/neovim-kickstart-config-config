@@ -14,12 +14,13 @@ return {
       { "ge", mode = { "n", "o", "x" }, desc = "Mini Evaluate" },
       { "gm", mode = { "n", "o", "x" }, desc = "Mini Multiply" },
       { "cr", mode = { "n", "o", "x" }, desc = "Mini Replace" },
-      { "gs", mode = { "n", "o", "x" }, desc = "Mini Sort" },
+      { "g'", mode = { "n", "o", "x" }, desc = "Mini Sort" },
       { "gx", mode = { "n", "o", "x" }, desc = "Mini Exchange" },
     },
     opts = {
       replace = { prefix = "cr" },
       evaluate = { prefix = "ge" },
+      sort = { prefix = "g'" },
     },
   }, -- sorting with motion
 

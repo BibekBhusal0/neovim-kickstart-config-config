@@ -1,12 +1,37 @@
 local wrap_keys = require "utils.wrap_keys"
 
+vim.g.nvim_surround_no_mappings = true
 return {
   {
     "kylechui/nvim-surround",
-    keys = {
-      { "ys", mode = { "n", "o", "x" }, desc = "Surround Text" },
-      { "ds", mode = { "n", "o", "x" }, desc = "Surround Delete" },
-      { "cs", mode = { "n", "o", "x" }, desc = "Surround Change" },
+    keys = wrap_keys {
+      { "gs", "<Plug>(nvim-surround-normal)", desc = "Add surrounding around motion" },
+      { "gss", "<Plug>(nvim-surround-normal-cur)", desc = "Add surrounding around current line" },
+      {
+        "gS",
+        "<Plug>(nvim-surround-normal-line)",
+        desc = "Add surrounding around motion on new lines",
+      },
+      {
+        "gSS",
+        "<Plug>(nvim-surround-normal-cur-line)",
+        desc = "Add surrounding around current line on new lines",
+      },
+      {
+        "gs",
+        "<Plug>(nvim-surround-visual)",
+        mode = "x",
+        desc = "Add surrounding around visual selection",
+      },
+      {
+        "gS",
+        "<Plug>(nvim-surround-visual-line)",
+        mode = "x",
+        desc = "Add surrounding around visual selection on new lines",
+      },
+      { "ds", "<Plug>(nvim-surround-delete)", desc = "Delete surrounding" },
+      { "cs", "<Plug>(nvim-surround-change)", desc = "Change surrounding" },
+      { "cS", "<Plug>(nvim-surround-change-line)", desc = "Change surrounding on new lines" },
     },
     opts = {},
   }, -- change brackets, quotes and surrounds
