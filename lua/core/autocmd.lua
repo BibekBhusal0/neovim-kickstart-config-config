@@ -39,6 +39,12 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.opt_local.wrap = true
     end
 
+    -- Force 2-space indentation
+    vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
+
     -- Pressing enter in commnet don't make another line comment
     vim.opt_local.formatoptions:remove { "c", "r", "o" }
     -- Opening help in v split
