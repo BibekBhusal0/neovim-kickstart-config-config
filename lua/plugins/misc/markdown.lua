@@ -33,6 +33,7 @@ return {
     config = function()
       require("render-markdown").setup {
         file_type = { "markdown", "codecompanion", "vimwiki", "Avante" },
+        html = { comment = { conceal = false } },
         sign = { enabled = false },
         link = {
           custom = {
