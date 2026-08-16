@@ -8,7 +8,7 @@ return {
     cli = {
       prompts = { fix = fix },
       picker = "telescope",
-      tools = { antigravity = { cmd = { "agy" } } },
+      tools = { opencode_yolo = { cmd = { "opencode", "--yolo" } } },
     },
   },
   keys = wrap_keys {
@@ -68,6 +68,13 @@ return {
         require("sidekick.cli").toggle { name = "opencode", focus = true }
       end,
       desc = "Sidekick Toggle OpenCode",
+    },
+    {
+      "<leader>ay",
+      function()
+        require("sidekick.cli").toggle { name = "opencode_yolo", focus = true }
+      end,
+      desc = "Sidekick Toggle OpenCode YOLO",
     },
   },
 }
