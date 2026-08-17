@@ -31,11 +31,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("FileTypeConfig", { clear = true }),
   callback = function(args)
-    if args.file:match "hyprland.overwrite.conf$" then
-      vim.defer_fn(function()
-        vim.cmd "set filetype=hyprlang"
-      end, 1)
-    elseif args.file:match "%.md$" then
+    if args.file:match "%.md$" then
       vim.opt_local.wrap = true
     end
 

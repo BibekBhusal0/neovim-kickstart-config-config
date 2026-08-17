@@ -149,11 +149,6 @@ return {
           },
         },
         bashls = {},
-        hyprls = {
-          preferIgnoreFile = false,
-          filetype = { "hyprlang", "conf" },
-          ignore = { "hyprlock.conf", "hypridle.conf" },
-        },
         harper_ls = { filetypes = { "markdown" } },
         -- rust_analyzer = {},
       }
