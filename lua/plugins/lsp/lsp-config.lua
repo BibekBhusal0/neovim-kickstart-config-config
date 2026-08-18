@@ -101,6 +101,21 @@ return {
         require("lsp-file-operations").default_capabilities()
       )
 
+      local qmlls_cmd = { "qmlls", "-E", "-I", "/usr/lib/qt6/qml" }
+      local shell_dir = "/usr/share/omarchy/shell"
+      if vim.fn.isdirectory(shell_dir) == 1 then
+        local qs_dir = vim.fn.stdpath "data" .. "/qml-compat/qs"
+        if vim.fn.isdirectory(qs_dir) ~= 1 then
+          vim.fn.mkdir(qs_dir, "p")
+          for _, entry in ipairs(vim.fn.readdir(shell_dir)) do
+            if vim.fn.isdirectory(shell_dir .. "/" .. entry) == 1 then
+              vim.fn.system { "ln", "-s", shell_dir .. "/" .. entry, qs_dir .. "/" .. entry }
+            end
+          end
+        end
+        vim.list_extend(qmlls_cmd, { "-I", vim.fn.stdpath "data" .. "/qml-compat" })
+      end
+
       local servers = {
         ts_ls = { format = { enable = false } },
         ruff = { format = { enable = false } },
@@ -151,6 +166,12 @@ return {
         bashls = {},
         harper_ls = { filetypes = { "markdown" } },
         -- rust_analyzer = {},
+        qmlls = {
+          cmd = qmlls_cmd,
+          filetypes = { "qml", "qmljs" },
+          root_markers = { "qmldir", "shell.qml", ".git" },
+          single_file_support = true,
+        },
       }
       require("mason").setup { PATH = "append" }
 
