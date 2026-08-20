@@ -37,7 +37,13 @@ return {
       { "<C-\\>", "<C-\\><C-N><CMD>NavigatorPrevious<CR>", desc = "Window Previous", mode = modes },
     },
     config = function()
-      require("Navigator").setup {}
+      local ok, herdr = pcall(function()
+        return require("utils.herdr_mux"):new()
+      end)
+
+      require("Navigator").setup {
+        mux = ok and herdr or "auto",
+      }
     end,
   },
 }
