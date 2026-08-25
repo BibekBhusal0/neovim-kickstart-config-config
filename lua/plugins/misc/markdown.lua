@@ -200,30 +200,13 @@ return {
           if not note then
             return
           end
-          vim.keymap.set("n", "gF", ":Obsidian follow_link vsplit<cr>", {
-            buffer = note.bufnr,
-            desc = "Follow link vertical split",
-          })
-          vim.keymap.set("n", "gf", ":Obsidian follow_link<cr>", {
-            buffer = note.bufnr,
-            desc = "Follow link ",
-          })
-          vim.keymap.set("n", "<leader>nb", ":Obsidian backlinks<cr>", {
-            buffer = note.bufnr,
-            desc = "Backlinks",
-          })
-          vim.keymap.set("n", "<leader>nc", ":Obsidian toc<cr>", {
-            buffer = note.bufnr,
-            desc = "Table of Content",
-          })
-          vim.keymap.set("n", "<leader>nl", ":Obsidian links<cr>", {
-            buffer = note.bufnr,
-            desc = "Links",
-          })
-          vim.keymap.set("v", "<leader>ne", ":Obsidian extract_note<cr>", {
-            buffer = note.bufnr,
-            desc = "Extract note",
-          })
+          local opts = { buffer = note.bufnr }
+          map("gF", ":Obsidian follow_link vsplit<cr>", "Follow link vertical split", "n", opts)
+          map("gf", ":Obsidian follow_link<cr>", "Follow link", "n", opts)
+          map("<leader>nb", ":Obsidian backlinks<cr>", "Backlinks", "n", opts)
+          map("<leader>nc", ":Obsidian toc<cr>", "Table of Content", "n", opts)
+          map("<leader>nl", ":Obsidian links<cr>", "Links", "n", opts)
+          map("<leader>ne", ":Obsidian extract_note<cr>", "Extract note", "v", opts)
         end,
       },
     },
