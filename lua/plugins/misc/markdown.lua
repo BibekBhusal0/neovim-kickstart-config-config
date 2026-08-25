@@ -84,7 +84,10 @@ return {
       to_do = {
         highlight = false,
         sort = { on_status_change = false, recursive = false, cursor_behavior = { track = true } },
-        statuses = { in_progress = { marker = "/" } },
+        statuses = {
+          in_progress = { marker = "/" },
+          complete = { marker = { "x", "X" } },
+        },
       },
       mappings = {
         MkdnEnter = { { "i" }, "<CR>" },
