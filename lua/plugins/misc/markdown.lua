@@ -1,6 +1,6 @@
 local map = require "utils.map"
 local wrap_keys = require "utils.wrap_keys"
-local obsidian_dir = "~/Documents/vault"
+local obsidian_dir = vim.loop.os_homedir() .. "/Documents/vault"
 
 local function obsidian_new_zettel()
   local input = require "utils.input"
@@ -136,7 +136,7 @@ return {
 
   {
     "obsidian-nvim/obsidian.nvim",
-    version = "*",
+    dependencies = { "nvim-telescope/telescope.nvim" },
     keys = wrap_keys {
       { "<leader>nD", ":Obsidian dailies<CR>", desc = "Obsidian Dailies" },
       { "<leader>nd", ":Obsidian today<CR>", desc = "Obsidian Today" },
@@ -168,9 +168,23 @@ return {
       daily_notes = {
         folder = "1 raw/Daily",
         date_format = "%Y/%m/%d",
-        alias_format = "%B %-d, %Y",
+        alias_format = "%Y-%m-%d",
         default_tags = { "daily-note" },
         template = "daily",
+      },
+      frontmatter = {
+        func = function(note)
+          local out = { aliases = note.aliases, tags = note.tags }
+          if note.id ~= nil and note.path ~= nil and tostring(note.id) ~= note.path.stem then
+            out.id = note.id
+          end
+          if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+            for k, v in pairs(note.metadata) do
+              out[k] = v
+            end
+          end
+          return out
+        end,
       },
       picker = {
         name = "telescope.nvim",
