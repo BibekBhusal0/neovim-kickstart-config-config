@@ -164,7 +164,10 @@ return {
           },
         },
         bashls = {},
-        harper_ls = { filetypes = { "markdown" } },
+        harper_ls = {
+          filetypes = { "markdown" },
+          settings = { ["harper-ls"] = { linters = { AvoidCurses = false } } },
+        },
         -- rust_analyzer = {},
         qmlls = {
           cmd = qmlls_cmd,
