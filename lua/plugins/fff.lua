@@ -29,6 +29,41 @@ return {
     git = { status_text_color = true },
     debug = { enabled = false, show_scores = false },
   },
+  config = function(_, opts)
+    require("fff").setup(opts)
+
+    local ok_ui, picker_ui = pcall(require, "fff.picker_ui.picker_ui")
+    local ok_state, picker_state = pcall(require, "fff.picker_ui.picker_ui_state")
+    if not ok_ui or not ok_state then
+      return
+    end
+
+    local orig_select = picker_ui.select
+    picker_ui.select = function(action)
+      local paths = {}
+      if action == nil or action == "edit" then
+        local ok, entries = pcall(picker_state.get_selected_file_entries)
+        if ok and entries then
+          for _, entry in ipairs(entries) do
+            table.insert(paths, entry.edit_path)
+          end
+        end
+      end
+
+      orig_select(action)
+
+      if #paths > 0 then
+        vim.schedule(function()
+          for _, path in ipairs(paths) do
+            local bufnr = vim.fn.bufnr(path)
+            if bufnr ~= -1 and not vim.api.nvim_buf_is_loaded(bufnr) then
+              pcall(vim.fn.bufload, bufnr)
+            end
+          end
+        end)
+      end
+    end
+  end,
   keys = wrap_keys {
     { "<Leader>ff", ":lua require('fff').find_files()<CR>", desc = "Find files" },
     { "<Leader>fw", ":lua require('fff').live_grep()<Cr>", desc = "Live grep" },
