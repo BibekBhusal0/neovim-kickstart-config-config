@@ -1,4 +1,5 @@
 -- Highlight on yank
+local map = require "utils.map"
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
@@ -49,6 +50,11 @@ vim.api.nvim_create_autocmd("FileType", {
       -- Hiding scrollbar
     elseif vim.tbl_contains({ "telescope", "mason", "lazy" }, args.filetype) then
       vim.opt_local.spell = false
+    end
+
+    if args.match == "markdown" then
+      map("<Tab>", "<C-t>", "Indent line", "i", { buffer = args.buf })
+      map("<S-Tab>", "<C-d>", "Unindent line", "i", { buffer = args.buf })
     end
   end,
 })
