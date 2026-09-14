@@ -56,8 +56,8 @@ return {
     "Wansmer/treesj",
     keys = wrap_keys {
       { "gi", ":TSJToggle<CR>", desc = "Toggle split object under cursor" },
-      { "gj", ":TSJJoin<CR>", desc = "Join the object under cursor" },
-      { "gk", ":TSJSplit<CR>", desc = "Split the object under cursor" },
+      { "gJ", ":TSJJoin<CR>", desc = "Join the object under cursor" },
+      { "gK", ":TSJSplit<CR>", desc = "Split the object under cursor" },
     },
     opts = { use_default_keymaps = false, max_join_length = 10000 },
   }, -- advanced join and split
