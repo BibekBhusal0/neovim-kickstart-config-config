@@ -55,6 +55,8 @@ vim.api.nvim_create_autocmd("FileType", {
     if args.match == "markdown" then
       map("<Tab>", "<C-t>", "Indent line", "i", { buffer = args.buf })
       map("<S-Tab>", "<C-d>", "Unindent line", "i", { buffer = args.buf })
+      local cp = require("utils.markdown").copy_codeblock
+      map("<leader>cc", cp, "Copy codeblock", "n", { buffer = args.buf })
     end
   end,
 })
