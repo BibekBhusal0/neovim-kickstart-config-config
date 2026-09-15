@@ -20,7 +20,20 @@ return {
     opts = {
       replace = { prefix = "cr" },
       evaluate = { prefix = "ge" },
-      sort = { prefix = "g'" },
+      sort = {
+        prefix = "g'",
+        func = function(content)
+          return MiniOperators.default_sort_func(content, {
+            compare_fun = function(a, b)
+              local a_lower, b_lower = a:lower(), b:lower()
+              if a_lower == b_lower then
+                return a < b
+              end
+              return a_lower < b_lower
+            end,
+          })
+        end,
+      },
     },
   }, -- sorting with motion
 
