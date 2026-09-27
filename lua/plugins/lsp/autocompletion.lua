@@ -52,6 +52,7 @@ return {
     local luasnip = require "luasnip"
     luasnip.config.setup {}
 
+    cmp.register_source("at_path", require("completion.at_path").new())
     vim.api.nvim_set_hl(0, "PmenuSel", { fg = "NONE", background = "#333333" })
 
     local winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel"
@@ -132,6 +133,7 @@ return {
         { name = "nvim_lsp" },
         { name = "lazydev", group_index = 0 },
         { name = "luasnip" },
+        { name = "at_path" },
         { name = "buffer" },
         { name = "path" },
         { name = "crates" },
@@ -146,6 +148,7 @@ return {
             nvim_lsp = " ",
             buffer = " ",
             path = " ",
+            at_path = "@ ",
             crates = " ",
             codeium = require("utils.icons").others.ai .. "  ",
           })[entry.source.name]
