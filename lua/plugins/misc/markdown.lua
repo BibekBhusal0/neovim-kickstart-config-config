@@ -47,7 +47,7 @@ return {
           custom = {
             canceled = {
               raw = "[-]",
-              rendered = "--",
+              rendered = " ",
               highlight = "Comment",
               scope_highlight = nil,
             },
