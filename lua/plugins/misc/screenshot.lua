@@ -5,7 +5,7 @@ map("<leader>Sc", ":silent !nautilus " .. screenshot_dir .. "&<CR>", "Open Scree
 
 return {
   {
-    "mistweaverco/snap.nvim",
+    "dont-be-evil-company/snap.nvim",
     cmd = "Snap",
     opts = {
       templateFilepath = vim.fn.stdpath "config" .. "/snap/template.html",
