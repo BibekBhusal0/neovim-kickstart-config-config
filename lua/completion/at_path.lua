@@ -40,7 +40,7 @@ end
 
 function M:complete(params, callback)
   local line_before = params.context.cursor_before_line or ""
-  local query = line_before:match("@([^@%s]*)$")
+  local query = line_before:match "@([^@%s]*)$"
   if query == nil then
     callback {}
     return
@@ -48,24 +48,24 @@ function M:complete(params, callback)
 
   local search_dir, label_prefix, prefix
   if query:sub(1, 1) == "/" then
-    local dir, pre = query:match("^(.*/)([^/]*)$")
+    local dir, pre = query:match "^(.*/)([^/]*)$"
     search_dir = dir or "/"
     label_prefix = dir or "/"
     prefix = pre or ""
   elseif query:sub(1, 2) == "~/" or query == "~" then
     local rest = query:sub(2)
-    local dir_rel, pre = rest:match("^(.*/)([^/]*)$")
+    local dir_rel, pre = rest:match "^(.*/)([^/]*)$"
     if dir_rel then
       search_dir = vim.fn.expand("~" .. dir_rel)
       label_prefix = "~" .. dir_rel
       prefix = pre
     else
-      search_dir = vim.fn.expand("~")
+      search_dir = vim.fn.expand "~"
       label_prefix = "~/"
       prefix = rest:sub(2)
     end
   else
-    local dir_rel, pre = query:match("^(.*/)([^/]*)$")
+    local dir_rel, pre = query:match "^(.*/)([^/]*)$"
     local base = get_base_dir(query)
     if dir_rel then
       search_dir = base .. "/" .. dir_rel
