@@ -3,7 +3,24 @@ local wrap_keys = require "utils.wrap_keys"
 return {
   "BibekBhusal0/nvim-git-utils",
   dir = "~/Code/nvim-plugins/nvim-git-utils",
-  opts = { commit_input = { hints = false } },
+  opts = {
+    commit_input = { hints = false },
+    ignore = {
+      extensions = {
+        "png",
+        "jpg",
+        "jpeg",
+        "gif",
+        "webp",
+        "bmp",
+        "ico",
+        "tif",
+        "tiff",
+        "avif",
+        "heic"
+      },
+    },
+  },
   cmd = {
     "GitAddCommit",
     "GitCommit",
