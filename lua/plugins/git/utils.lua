@@ -17,7 +17,7 @@ return {
         "tif",
         "tiff",
         "avif",
-        "heic"
+        "heic",
       },
     },
   },
