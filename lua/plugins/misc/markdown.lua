@@ -29,21 +29,23 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "codecompanion", "vimwiki" },
+    ft = { "markdown", "codecompanion", "vimwiki", "Avante" },
     config = function()
       require("render-markdown").setup {
         file_type = { "markdown", "codecompanion", "vimwiki", "Avante" },
+        injections = { gitcommit = { enabled = false } },
+        heading = { enabled = false },
+        paragraph = { enabled = false },
+        code = { border = "thin", language_icon = true },
+        dash = { enabled = true },
+        bullet = { enabled = true },
+        pipe_table = { enabled = true, border_visual = false, presets = "rounded" },
         html = { comment = { conceal = false } },
         sign = { enabled = false },
-        link = {
-          custom = {
-            wikipedia = { pattern = "wikiwand%.org", icon = "󰖬 " },
-            twitter = { pattern = "twitter%.com", icon = " " },
-            header = { pattern = "^#.+", icon = "# " },
-            linkedin = { pattern = "linkedin%.com", icon = " " },
-          },
-        },
+        link = { enabled = true },
+        quote = { enabled = true },
         checkbox = {
+          enabled = true,
           custom = {
             canceled = {
               raw = "[-]",
@@ -130,7 +132,7 @@ return {
         MkdnTableAlignCenter = false,
         MkdnTableAlignDefault = false,
       },
-      foldtext = { object_count_icon_set = "nerdfont" },
+      modules = { foldtext = false },
     },
   }, -- Better editing in markdown
 
