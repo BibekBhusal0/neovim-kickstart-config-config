@@ -2,14 +2,22 @@ local map = require "utils.map"
 local search_ns = vim.api.nvim_create_namespace "search_count"
 vim.opt.hlsearch = true
 
+local update_gen = 0
+
 local function clear_search()
+  update_gen = update_gen + 1
   vim.cmd "nohlsearch"
   vim.api.nvim_buf_clear_namespace(0, search_ns, 0, -1)
 end
 
 local function update_search_count()
-  vim.api.nvim_buf_clear_namespace(0, search_ns, 0, -1)
+  update_gen = update_gen + 1
+  local gen = update_gen
   vim.schedule(function()
+    if gen ~= update_gen then
+      return
+    end
+    vim.api.nvim_buf_clear_namespace(0, search_ns, 0, -1)
     local count = vim.fn.searchcount { maxcount = 999, timeout = 100 }
     if count.total > 0 and count.current > 0 then
       local text = string.format("[%d/%d]", count.current, count.total)
@@ -62,6 +70,7 @@ vim.api.nvim_create_autocmd("CursorMoved", {
     if found then
       update_search_count()
     else
+      update_gen = update_gen + 1
       vim.defer_fn(clear_search, 0)
     end
   end,
