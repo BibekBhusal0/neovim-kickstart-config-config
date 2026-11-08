@@ -60,7 +60,7 @@ return {
         end, "", 9, "  ")
       end, "Move Buffer")
     end,
-  }, -- only show buffer from current tag
+  }, -- only show buffer from current tab
 
   {
     "BibekBhusal0/bufstack.nvim",
