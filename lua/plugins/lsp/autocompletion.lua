@@ -46,16 +46,33 @@ return {
     },
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
   },
 
   config = function()
     local cmp = require "cmp"
     local luasnip = require "luasnip"
+    local path = require "completion.path"
+    local compare = require "cmp.config.compare"
     luasnip.config.setup {}
 
-    cmp.register_source("at_path", require("completion.at_path").new())
+    local function path_depth(entry)
+      if not entry.source or entry.source.name ~= "path" then
+        return nil
+      end
+      return select(2, (entry.completion_item.label or ""):gsub("/", ""))
+    end
+
+    -- Prefer files closer to the searched directory, then fall back to score.
+    local function compare_path_depth(entry1, entry2)
+      local depth1 = path_depth(entry1)
+      local depth2 = path_depth(entry2)
+      if depth1 and depth2 and depth1 ~= depth2 then
+        return depth1 < depth2
+      end
+    end
+
+    cmp.register_source("path", path.new())
     vim.api.nvim_set_hl(0, "PmenuSel", { fg = "NONE", background = "#333333" })
 
     local winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel"
@@ -136,10 +153,23 @@ return {
         { name = "nvim_lsp" },
         { name = "lazydev", group_index = 0 },
         { name = "luasnip" },
-        { name = "at_path" },
         { name = "buffer" },
         { name = "path" },
         { name = "crates" },
+      },
+      sorting = {
+        comparators = {
+          compare.offset,
+          compare.exact,
+          compare_path_depth,
+          compare.score,
+          compare.recently_used,
+          compare.locality,
+          compare.kind,
+          compare.sort_text,
+          compare.length,
+          compare.order,
+        },
       },
       formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -150,8 +180,7 @@ return {
             luasnip = " ",
             nvim_lsp = " ",
             buffer = " ",
-            path = " ",
-            at_path = "@ ",
+            path = kind_icons.Folder,
             crates = " ",
             codeium = require("utils.icons").others.ai .. "  ",
           })[entry.source.name]
@@ -159,5 +188,46 @@ return {
         end,
       },
     }
+
+    -- cmp skips source updates when the cursor moves backwards, so a backspace
+    -- leaves the previous path entries in the menu. Re-query while still in a
+    -- path, and close the menu once the path prefix is gone.
+    local last = { buf = -1, line = -1, col = -1 }
+    vim.api.nvim_create_autocmd({ "TextChangedI", "TextChangedP" }, {
+      callback = function()
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        local buf, line, col = vim.api.nvim_get_current_buf(), cursor[1], cursor[2]
+        local backward = last.buf == buf and last.line == line and col < last.col
+        last.buf, last.line, last.col = buf, line, col
+        if not backward then
+          return
+        end
+
+        -- Scheduled so cmp does not run its own waits inside the text change.
+        vim.schedule(function()
+          if not cmp.visible() then
+            return
+          end
+          local has_path = false
+          for _, entry in ipairs(cmp.get_entries()) do
+            if entry.source and entry.source.name == "path" then
+              has_path = true
+              break
+            end
+          end
+          if not has_path then
+            return
+          end
+
+          local now = vim.api.nvim_win_get_cursor(0)
+          local before = vim.api.nvim_get_current_line():sub(1, now[2])
+          if path.has_path_context(before) then
+            cmp.complete()
+          else
+            cmp.abort()
+          end
+        end)
+      end,
+    })
   end,
 }
