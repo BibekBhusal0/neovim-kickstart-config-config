@@ -14,8 +14,6 @@ local function starting_command(condition, post_defer, pre_defer, dfr)
   end
 end
 
-local obsidian_dir = "~/Documents/vault"
-
 local function is_arg(expected_arg)
   return function(args)
     return args == expected_arg
@@ -31,47 +29,6 @@ local commands = {
     end,
     pre_defer = function()
       vim.api.nvim_set_current_dir(vim.fn.stdpath "config")
-    end,
-  },
-
-  {
-    condition = is_arg "hypr",
-    post_defer = function()
-      vim.cmd "edit overwrite/hyprland.overwrite.conf"
-      vim.cmd "normal! zR"
-    end,
-    pre_defer = function()
-      vim.api.nvim_set_current_dir "/home/bibek/Code/omarchy-overrides"
-    end,
-  },
-
-  {
-    condition = is_arg "zen",
-    post_defer = function()
-      vim.cmd "Dashboard"
-    end,
-    pre_defer = function()
-      vim.api.nvim_set_current_dir "/home/bibek/.zen/pf761izm.Default Profile/chrome"
-    end,
-  },
-
-  {
-    condition = is_arg "obsidian",
-    post_defer = function()
-      vim.cmd "Obsidian quick_switch"
-    end,
-    pre_defer = function()
-      vim.api.nvim_set_current_dir(obsidian_dir)
-    end,
-  },
-
-  {
-    condition = is_arg "obsidianConfig",
-    post_defer = function()
-      vim.cmd "e .obsidian.vimrc"
-    end,
-    pre_defer = function()
-      vim.api.nvim_set_current_dir(obsidian_dir)
     end,
   },
 
