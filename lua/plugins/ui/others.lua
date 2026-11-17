@@ -3,11 +3,13 @@ return {
     "petertriho/nvim-scrollbar",
     event = { "BufNewFile", "BufReadPost" },
     opts = {
-      handle = { blend = 0 },
-      marks = { Cursor = { color = "#00ff00" } },
-      show_in_active_only = true,
-      hide_if_all_visible = true,
-      handlers = { gitsigns = true },
+      providers = { gitsigns = true },
+      marks = { Cursor = { highlight = { fg = "#00ff00" } } },
+      scrollbar = {
+        visibility = "active",
+        hide_if_all_visible = true,
+        thumb = { blend = 0 },
+      },
     },
   }, -- scrollbar showing gitsigns and diagnostics
 
