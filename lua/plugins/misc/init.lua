@@ -5,7 +5,6 @@ return {
   require "plugins.misc.comments",
   require "plugins.misc.editing",
   require "plugins.misc.hints",
-  require "plugins.misc.leetcode",
   require "plugins.misc.markdown",
   require "plugins.misc.screenshot",
   require "plugins.misc.tmux",

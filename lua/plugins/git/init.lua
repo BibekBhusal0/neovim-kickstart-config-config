@@ -23,7 +23,6 @@ return {
   require "plugins.git.gitsigns",
   require "plugins.git.octo",
   require "plugins.git.pipeline",
-  require "plugins.git.release",
   require "plugins.git.utils",
   require "plugins.git.worktree",
 }

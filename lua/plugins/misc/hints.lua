@@ -27,40 +27,6 @@ return {
   },
 
   {
-    "m4xshen/hardtime.nvim",
-    enabled = false,
-    event = { "BufReadPost", "BufNewFile" },
-    keys = wrap_keys { { "<leader>Th", ":Hardtime toggle<CR>", desc = "Toggle Hardtime" } },
-    config = function()
-      require("hardtime").setup {
-        restriction_mode = "hint",
-        disabled_keys = {
-          ["<Up>"] = {},
-          ["<Down>"] = {},
-          ["<Left>"] = {},
-          ["<Right>"] = {},
-        },
-        disable_mouse = false,
-        disabled_filetypes = vim.tbl_deep_extend(
-          "force",
-          require("hardtime.config").config.disabled_filetypes,
-          {
-            "mcphub",
-            "codecompanion",
-            "alpha",
-            "Avante",
-            "AvanteInput",
-            "undotree",
-            "nvim-undotree",
-            "pager",
-            "dashboard",
-          }
-        ),
-      }
-    end,
-  },
-
-  {
     "meznaric/key-analyzer.nvim",
     cmd = "KeyAnalyzer",
     keys = wrap_keys {

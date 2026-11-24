@@ -1,3 +1,4 @@
+require "core.ui.dynamicColor"
 require "core.ui.searchHighlight"
 require("core.ui.statuscolumn").setup()
 require("core.ui.statusline").setup()

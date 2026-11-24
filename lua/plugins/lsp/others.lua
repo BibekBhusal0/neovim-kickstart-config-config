@@ -1,26 +1,6 @@
-local wrap_keys = require "utils.wrap_keys"
 local map = require "utils.map"
 
 return {
-  {
-    "SmiteshP/nvim-navbuddy",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim",
-    },
-    keys = wrap_keys {
-      { "<leader>lm", ":lua require('nvim-navbuddy').open()<CR>", desc = "Open Navbuddy" },
-    },
-    config = function()
-      local navbuddy = require "nvim-navbuddy"
-      local icons = require("utils.icons").get_padded_icon "symbols"
-      navbuddy.setup {
-        lsp = { auto_attach = true },
-        icons = icons,
-      }
-    end,
-  }, -- Easy navigation within lsp Symbols
-
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach",
