@@ -1,4 +1,14 @@
 {
+  "MCL list item": {
+    "prefix": "MCL item",
+    "body": [
+      "",
+      "- ### ${1:Title}",
+      "  ${2:Content}",
+      ""
+    ],
+    "description": "Insert MCL multi-column card with 3 lists"
+  },
   "MCL 3 lists": {
     "prefix": "MCL 3 lists",
     "body": [
